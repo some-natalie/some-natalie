@@ -22,4 +22,4 @@ Heads up!
 - 🌱 I’m currently learning some Kubernetes admin and development basics.
 - 📫 How to reach me: For work related stuff, please reach out by opening a support ticket in our internal IT systems.  For personal stuff, you should probably reach out the way you normally would.
 - 😄 Pronouns: she/her
-- ❓ Looking for my résumé?  I don't keep one.  You can check out what I'm up to here.  If you must know about where else I've worked and where I went to school and all that stuff, you should just go to [LinkedIn](https://linkedin.com/in/nsomersall).  I'm not terribly active there, but will eventually check it.
+- ❓ Looking for my résumé?  You can check out what I'm up to here.  If you must know about where else I've worked and where I went to school and all that stuff, you should just go to [LinkedIn](https://linkedin.com/in/nsomersall).

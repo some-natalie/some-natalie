@@ -23,7 +23,7 @@ Heads up!
 
 - 🔭 I’m currently working on automating everything put in front of me.
 - 🌱 I’m currently learning some more in-depth Kubernetes administration.
-- 🎤 Public speaking is hard!  I talked at [DevSecOps Days Denver 2020](https://www.devsecopsdays.com/2020-devsecops-days-denver) [here](https://www.youtube.com/watch?v=ugDaAnXDp1Q).
+- 🎤 Public speaking is fun!  I talked at [DevSecOps Days Denver 2020](https://www.devsecopsdays.com/2020-devsecops-days-denver) [here](https://www.youtube.com/watch?v=ugDaAnXDp1Q).
 - 📫 How to reach me: For work related stuff, please reach out by opening a support ticket in our internal IT systems.  For personal stuff, you should probably reach out the way you normally would.
 - 😄 Pronouns: she/her
-- ❓ Looking for my résumé?  You can check out what I'm up to here.  If you must know about where else I've worked and where I went to school and all that stuff, you should just go to [LinkedIn](https://linkedin.com/in/nsomersall).
+- ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  Most of my work is in private environments that aren't reflected here.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).

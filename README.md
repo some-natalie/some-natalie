@@ -1,18 +1,18 @@
 # Hi there 👋
 
-I'm Natalie, a devops engineer experienced in developing infrastructure-as-code solutions and operations automation.  I'm also the lead admin for GitHub Enterprise at my employer, Booz Allen Hamilton.
+I'm Natalie, a devops engineer experienced in developing infrastructure-as-code solutions and operations automation.  I'm an Enterprise Solutions Engineer at [GitHub](https://github.com/github)!
 
 I work a lot with
 
 - GitHub Enterprise
-- Kubernetes
 - Linux (mostly RHEL and Ubuntu these days)
+- Kubernetes
 - Python
 - but mostly, I work with people on all of the above!  You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
 
 I play with
 
-- I play some video games on a Windows 10 VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's pretty neat and has about 5% or so performance drop (just looking at frame rates).  You should check it out [here](https://github.com/Somersall-Natalie/fedora-acs-override).
+- I play some video games on a Windows 10 VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's pretty neat and has about 5% or so performance drop (just looking at frame rates).  You should check it out [here](https://github.com/some-natalie/fedora-acs-override).
 - All sorts of handy Raspberry Pi projects, including a Kodi set up on a television for local media and a Kubernetes cluster that runs
   - [Pi-hole](https://pi-hole.net), for DNS and ad-blocking
   - Ubiquiti UniFi network application
@@ -23,7 +23,6 @@ Heads up!
 
 - 🔭 I’m currently working on automating everything put in front of me.
 - 🌱 I’m currently learning some more in-depth Kubernetes administration.
-- 🎤 Public speaking is fun!  I talked at [DevSecOps Days Denver 2020](https://www.devsecopsdays.com/2020-devsecops-days-denver) [here](https://www.youtube.com/watch?v=ugDaAnXDp1Q).
-- 📫 How to reach me: For work related stuff, please reach out by opening a support ticket in our internal IT systems.  For personal stuff, you should probably reach out the way you normally would.
+- 🎤 Public speaking is fun!  Check out what I've been up to [here](SPEAKING.md).
 - 😄 Pronouns: she/her
-- ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  Most of my work is in private environments that aren't reflected here.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).
+- ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).

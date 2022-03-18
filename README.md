@@ -1,6 +1,6 @@
 # Hi there 👋
 
-I'm Natalie, a devops engineer experienced in developing infrastructure-as-code solutions and operations automation.  I'm an Enterprise Solutions Engineer at [GitHub](https://github.com/github)!
+I'm Natalie, a devops engineer experienced in developing infrastructure-as-code solutions and operations automation.  I'm a Senior Solutions Engineer at [GitHub](https://github.com/github)!
 
 I work a lot with
 
@@ -22,7 +22,7 @@ I play with
 Heads up!
 
 - 🔭 I’m currently working on automating everything put in front of me.
-- 🌱 I’m currently learning some more in-depth Kubernetes administration.
+- 🌱 I’m currently learning some more in-depth Kubernetes administration and a bit of Go.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](SPEAKING.md).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).

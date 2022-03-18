@@ -10,7 +10,7 @@ Devops engineer experienced in developing infrastructure-as-code solutions and o
 
 ## Employment and Projects
 
-* Enterprise Solutions Engineer at [GitHub](https://github.com/github) (Nov 2021 - present)
+* Senior Solutions Engineer at [GitHub](https://github.com/github) (Nov 2021 - present)
   * I'm still figuring out what I do here ... but I'm working on a lot of cool stuff! :heart:
 * Lead Engineer at Booz Allen Hamilton (May 2015 - Oct 2021)
   * Lead internal deployment of GitHub Enterprise Server from zero to several thousand users, including administration and architecture around the system and supporting machines, regulatory compliance, user support, customizations, and integrations with a wide variety of other internal tools (covering most major project management, continuous integration and delivery, and security scanning tools) to make sure teams are getting the best experience.  Meet with customer teams, leadership, and other stakeholders to identify pain points and prioritize improvements.  Extensively document and provide cross-training of support engineers for this tool set.

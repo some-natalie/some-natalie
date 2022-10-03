@@ -1,4 +1,9 @@
-# Hi there 👋
+---
+permalink: /about/
+title: "About"
+---
+
+## Hi there 👋
 
 I'm Natalie, a devops engineer experienced in developing infrastructure-as-code solutions and operations automation.  I'm a Senior Solutions Engineer at [GitHub](https://github.com/github)!
 

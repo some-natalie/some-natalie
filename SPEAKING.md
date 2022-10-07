@@ -1,4 +1,8 @@
-# Speaking
+---
+permalink: /speaking/
+title: "Speaking"
+layout: single
+---
 
 Getting Started in DevSecOps in a Regulated Environment at [DevSecOps Days Denver 2020](https://www.devsecopsdays.com/2020-devsecops-days-denver) - [video](https://www.youtube.com/watch?v=ugDaAnXDp1Q)
 

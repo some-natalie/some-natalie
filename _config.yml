@@ -34,6 +34,7 @@ timezone: America/Denver
 include:
   - _pages
   - README.md
+  - SPEAKING.md
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -59,7 +60,7 @@ plugins:
 author:
   name: "Natalie Somersall"
   avatar: "/assets/images/bio-photo.jpg"
-  bio: "Things I'm learning, working on, or thinking about."
+  bio: "Things I'm learning, working on, or thinking about.  All opinions my own."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"

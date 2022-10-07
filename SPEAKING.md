@@ -8,7 +8,7 @@ layout: single
 
 **Linux Software Packaging, maybe in a nutshell** is a quick tour through the history of packaging software in Linux - moving from compiling it at each computer using it, to RPM and DEB packages, to snaps/flatpaks and containers on the desktop.  This was a very interactive demo/talk at about an hour, but unrecorded.
 
-- [Slides](assets/slides/2022-09-08_BLUG-Linux-Software-Packaging.pdf)
+- [Slides](https://github.com/some-natalie/some-natalie/blob/1940dbe2261d2ab9f385badc2b180659a12d6129/assets/slides/2022-09-08_BLUG-Linux-Software-Packaging.pdf)
 - [Makefile example](link)
 - [RPM file example](link)
 - [DEB file example](link)

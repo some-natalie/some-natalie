@@ -10,7 +10,7 @@ tags:
 classes: wide
 ---
 
-GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This can be frustrating if need or what to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 8 and 9 - 8.6 and 9.0 as of October 2022.
+GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This is frustrating if you need or want to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 8 and 9 - 8.6 and 9.0 as of October 2022.
 
 First, leave SELinux alone.  I know the first thing we all do when something doesn't work is disable it, but really - let it work!  I promise it isn't the problem.
 

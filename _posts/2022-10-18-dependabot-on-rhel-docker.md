@@ -10,7 +10,7 @@ tags:
 classes: wide
 ---
 
-GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This is frustrating if you need or want to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 8 and 9 - 8.6 and 9.0 as of October 2022.
+GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This is frustrating if you need or want to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 7, 8, and 9 - 7.9, 8.6, and 9.0 as of October 2022.
 
 First, leave SELinux alone.  I know the first thing we all do when something doesn't work is disable it, but really - let it work!  I promise it isn't the problem.
 
@@ -19,7 +19,7 @@ $ sudo getenforce
 Enforcing
 ```
 
-Next, let's check `firewalld` settings for what the firewall backend is.  We need it to be using `iptables`, which isn't the default - so let's change that with a little bit of `sed` magic.[^1]
+_(For RHEL 8 and 9 only)_ Next, let's check `firewalld` settings for what the firewall backend is.  We need it to be using `iptables`, which isn't the default for all versions of RHEL - so let's change that with a little bit of `sed` magic.[^1]
 
 ```shell
 $ sudo cat /etc/firewalld/firewalld.conf | grep FirewallBackend
@@ -42,7 +42,7 @@ sudo systemctl enable docker --now
 sudo usermod -aG docker azureuser
 ```
 
-> :information_source: Yes, that's the CentOS repository, not RHEL.  Docker only publishes official RPMs for RHEL for the IBM z platform (s390x CPU architecture) - which coincidentally, GitHub does not publish a runner agent for.  The x86_64 binaries work just fine in RHEL 8.6 and 9.0.
+> :information_source: Yes, that's the CentOS repository, not RHEL.  Docker only publishes official RPMs for RHEL for the IBM z platform (`s390x` CPU architecture) - which coincidentally, GitHub does not publish a runner agent for.  The `x86_64` binaries work just fine in RHEL.
 
 Now let's reboot for both the new firewall backend and for the new user group to take effect.  Log back in and test that Docker is working.
 

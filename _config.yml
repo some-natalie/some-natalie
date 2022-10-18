@@ -60,7 +60,7 @@ plugins:
 author:
   name: "Natalie Somersall"
   avatar: "/assets/images/bio-photo.jpg"
-  bio: "Things I'm learning, working on, or thinking about.  All opinions my own."
+  bio: "Things I'm learning, working on, or thinking about.  All opinions and snark my own."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"

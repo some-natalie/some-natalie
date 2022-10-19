@@ -7,6 +7,8 @@ tags:
   - security
   - dependabot
   - on-premises
+  - rhel
+  - linux
 classes: wide
 ---
 

@@ -33,7 +33,7 @@ $ sudo cat /etc/firewalld/firewalld.conf | grep FirewallBackend
 FirewallBackend=iptables
 ```
 
-Now let's install the latest version of Docker Community Edition.
+Now let's install the latest version of Docker Community Edition.  It's not feasible to use rootless Podman here.  The [github/dependabot-action](https://github.com/github/dependabot-action) creates two containers for the duration of each run that need to talk to each other and to the internet, which isn't Podman's default.  It's possible to try and intercept each run and connect them to the network successfully, but that's not automatic.  The Action assumes container networking works similar to Docker, where containers can talk to each other and outbound by default.
 
 ```shell
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo

@@ -35,7 +35,7 @@ $ sudo cat /etc/firewalld/firewalld.conf | grep FirewallBackend
 FirewallBackend=iptables
 ```
 
-Now let's install the latest version of Docker Community Edition.  It's not feasible to use rootless Podman here.  The [github/dependabot-action](https://github.com/github/dependabot-action) creates two containers for the duration of each run that need to talk to each other and to the internet, which isn't Podman's default.  It's possible to try and intercept each run and connect them to the network successfully, but that's not automatic.  The Action assumes container networking works similar to Docker, where containers can talk to each other and outbound by default.
+Now let's install the latest version of Docker Community Edition.  More about using Docker and not Podman [below](#why-not-podman).
 
 ```shell
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -96,6 +96,14 @@ Current runner version: '2.293.0'
 :tada: Now let Dependabot do its magic, taking the chore out of updating your dependencies.
 
 ![dependabot-prs](/assets/graphics/2022-10-18-dependabot-prs.png)
+
+### Why not Podman?
+
+It's not feasible to use rootless Podman here.  The [github/dependabot-action](https://github.com/github/dependabot-action) creates two containers for the duration of each run that need to talk to each other and to the internet, which isn't Podman's default.  It's possible to try and intercept each run and connect them to the network successfully, but that's not automatic.  The Action assumes container networking works similar to Docker, where containers can talk to each other and outbound by default.
+
+### Ephemerality
+
+It's possible, but not advisable, to use [ephemeral self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/autoscaling-with-self-hosted-runners#using-ephemeral-runners-for-autoscaling) for Dependabot.  The [github/dependabot-action](https://github.com/github/dependabot-action) pulls approximately 4 GB of Docker images if those images aren't already present on the runner.  This drives up your bandwidth usage and can possibly get your IP address space rate-limited.
 
 ---
 

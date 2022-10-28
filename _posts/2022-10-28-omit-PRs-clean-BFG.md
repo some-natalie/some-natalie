@@ -24,7 +24,7 @@ The repository that I was cleaning large files out of had (already merged) pull 
 
 ## How to (mostly) clean it anyways
 
-1. We'll need to _remove_ the files from the current first.
+1. We'll need to _remove_ the files first.
 
     ```shell
     # Move into that repo's directory

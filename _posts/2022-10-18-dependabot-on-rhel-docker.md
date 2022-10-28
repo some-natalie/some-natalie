@@ -10,6 +10,7 @@ tags:
   - rhel
   - linux
 classes: wide
+excerpt: "How to run Dependabot on-premises using Red Hat Enterprise Linux"
 ---
 
 GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This is frustrating if you need or want to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 7, 8, and 9 - 7.9, 8.6, and 9.0 as of October 2022.

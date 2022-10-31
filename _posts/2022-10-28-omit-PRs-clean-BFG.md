@@ -9,7 +9,7 @@ classes: wide
 excerpt: "What does the 'deny updating a hidden ref' error even mean?"
 ---
 
-A common problem in moving to git is cleaning large files (like document files, multimedia, etc.) out of a repository.  There's a tool for doing exactly this called [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) that's designed to do exactly this - it's fast and very simple.  I recently ran into a bit of a situation worth documenting, since it took an hour of searching Stack Overflow to figure out.  I thought the big files were gone, then when I pushed the now-clean repo, I got this lovely message:
+A common problem in moving to git is cleaning large files (like document files, multimedia, etc.) out of a repository.  There's a tool that's designed to do exactly this called [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) - it's fast and very simple.  I recently ran into a bit of a situation worth documenting, since it took an hour of searching Stack Overflow to figure out.  I thought the big files were gone, then when I pushed the now-clean repo, I got this lovely message:
 
 ```shell
 $ git push --force

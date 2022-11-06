@@ -7,6 +7,7 @@
   "portsAttributes": {
 		"4000": {
 		  "label": "Website"
-		},
+		}
+  },
   "postCreateCommand": "bundle && bundle exec jekyll serve --livereload"
 }

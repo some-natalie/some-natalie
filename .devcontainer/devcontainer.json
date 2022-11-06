@@ -1,0 +1,12 @@
+{
+  "name": "Jekyll website",
+  "image": "mcr.microsoft.com/vscode/devcontainers/ruby:3-bullseye",
+  "forwardPorts": [
+		4000
+	],
+  "portsAttributes": {
+		"4000": {
+		  "label": "Website"
+		},
+  "postCreateCommand": "bundle && bundle exec jekyll serve --livereload"
+}

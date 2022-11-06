@@ -9,5 +9,5 @@
 		  "label": "Website"
 		}
   },
-  "postCreateCommand": "bundle && bundle exec jekyll serve --livereload"
+  "postCreateCommand": "bundle && bundle exec jekyll serve --livereload &"
 }

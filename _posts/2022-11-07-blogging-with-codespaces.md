@@ -23,7 +23,7 @@ However, learning how to manage Ruby dependencies wasn't one of those reasons.
 
 ### Getting Started
 
-This is a webpage hosted in [GitHub Pages](https://docs.github.com/en/pages) and built with [Jekyll](https://jekyllrb.com/) - there's _nothing_ special going on here.  The content is hosted in my [profile](https://github.com/some-natalie/some-natalie) repository[^2], but it could be literally any other repository.  There's tons of guides about setting up a custom domain, picking a theme for Jekyll, etc. - so I picked a theme to start with and installed Ruby on my laptop, then went to start installing my dependencies only to get this fun error[^3]:
+This is a webpage hosted in [GitHub Pages](https://docs.github.com/en/pages) and built with [Jekyll](https://jekyllrb.com/) - there's _nothing_ special going on here.  The content is hosted in my [profile](https://github.com/some-natalie/some-natalie) repository[^2], but it could be literally any other repository.  There's tons of guides about setting up a custom domain, picking a theme for Jekyll, etc. - so I picked a theme to start with and installed Ruby on my laptop, then went to start installing my dependencies only to get this fun error:
 
 ![bundle-errors](/assets/graphics/2022-11-07-bundle-errors.png)
 

@@ -54,6 +54,10 @@ The numbers tell a different story here - if you're going to switch tasks anyway
 
 The cheapest (and from experience, least frustrating) option is to speed up the build substantially and keep the team on track.  In this case, spending an extra $4-5 on build compute saves about $40 per build for an individual developer, or a little over $200 per build for a team of 5.  Seems like a good investment to build on faster hardware.
 
+[Part 2 of 3](https://some-natalie.dev/blog/waiting-on-builds-pt-2/) - more on context switching costs for builds
+
+[Part 3 of 3](https://some-natalie.dev/blog/waiting-on-builds-pt-3/) - do we build it or do we buy it?
+
 #### Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.

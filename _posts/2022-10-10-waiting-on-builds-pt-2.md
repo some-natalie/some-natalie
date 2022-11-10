@@ -43,6 +43,8 @@ It can definitely look that way if you only look at the cost of compute.  As com
 
 I've spent most of my career self-hosting almost everything in datacenters, including build compute, so I'd like to instead pivot to all the costs that can't be accounted for in a cloud/datacenter pricing table in the next post.  It's been my experience that these are the costs that get overlooked and make the difference between project success or failure if not accounted for.
 
+[Part 3 of 3](https://some-natalie.dev/blog/waiting-on-builds-pt-3/) - do we build it or do we buy it?
+
 #### Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.

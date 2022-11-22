@@ -6,6 +6,10 @@ layout: single
 
 ## 2022
 
+**Containerized CI at an Enterprise Scale** (21 Nov) at [Colorado Kubernetes & Cloud Native](https://www.meetup.com/colorado-kubernetes-cloud-native/) summarizes what to think about as an enterprise moving continuous integration into containers - everything from the benefits and drawbacks of nested virtualization to the how and why of privileged pods - from the perspective of having done the thing a few times over!
+
+- [Slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-11-21_Cloud-Native-CO.pdf)
+
 **Linux Software Packaging, maybe in a nutshell** (8 Sept) at the [Boulder Linux/Unix User Group](https://www.meetup.com/Boulder-Linux-Unix-User-Group/) is a quick tour through the history of packaging software in Linux - moving from compiling it at each computer using it, to RPM and DEB packages, to snaps/flatpaks and containers on the desktop.  This was a very interactive demo/talk at about an hour and the conclusion changes every time, but it's sadly unrecorded.
 
 - [Slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-09-08_BLUG-Linux-Software-Packaging.pdf)

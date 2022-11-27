@@ -15,7 +15,7 @@ This post is slides + commentary from a talk I gave at Cloud Native Colorado on 
 - [Nested Virtualization](#nested-virtualization)
 - [Privileged Pods](#privileged-pods)
 - [Ephemerality](#ephemerality)
-- [Conclusion](#conclusion)
+- [Conclusion](#conclusion) - and patterns for success
 - [Resources](#resources)
 
 ![slide-01](/assets/graphics/2022-11-21-cloud-native/slide-01.jpg)
@@ -98,7 +98,7 @@ In theory, this _really_ shouldn't be as much of a problem as it is.  There's no
 
 The first is Path MTU Discovery, codified by [RFC 1191](https://datatracker.ietf.org/doc/rfc1191/).  This relies on the point along the packet's journey that it gets dropped due to excess size to send an [Internet Control Message Protocol](https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol) (ICMP) message back to the sending application saying "hey, this is too big, send me something smaller next time".  A really cool writeup of how this works from Cloudflare is [here](https://blog.cloudflare.com/path-mtu-discovery-in-practice/).  Without that message, the container (and thus the user) has no feedback or way to decrease packet size - just frustration.  The reason it often doesn't work as anticipated is that most large companies will have pretty much everything in the network configured to silently drop all ICMP messages, feeling that network security has improved through obscurity.
 
-The second is TCP MTU Probing, with the latest revision in draft with [RFC 8899](https://datatracker.ietf.org/doc/rfc8899/).  This works based on "getting the hint" that the packet is too big because it fails, then sends incrementally larger packets until the correct max size is deduced.  Red Hat's developer blog has a fantastic writeup explaining how this works and how to set it up [here](https://developers.redhat.com/articles/2022/05/23/plpmtud-delivers-better-path-mtu-discovery-sctp-linux#commands_to_set_options_for_path_mtu_discovery).  This usually works, but has the drawback of being slow - because each pod is ephemeral, each pod and each user's job goes through this process at every run.  Additionally, while some processes will tolerate this negotiation until it finds the right size, others silently hang/fail.  Since the pods are ephemeral, the process that the user wanted never gets a chance to work.
+The second is TCP MTU Probing, with the latest revision in draft with [RFC 8899](https://datatracker.ietf.org/doc/rfc8899/).  This works based on "getting the hint" that the packet is too big because it fails, then sends incrementally smaller packets until the correct max size is deduced.  Red Hat's developer blog has a fantastic writeup explaining how this works and how to set it up [here](https://developers.redhat.com/articles/2022/05/23/plpmtud-delivers-better-path-mtu-discovery-sctp-linux#commands_to_set_options_for_path_mtu_discovery).  This usually works, but has the drawback of being slow - because each pod is ephemeral, each pod and each user's job goes through this process at every run.  Additionally, while some processes will tolerate this negotiation until it finds the right size, others silently hang/fail.  Since the pods are ephemeral, the process that the user wanted never gets a chance to work.
 
 To counter this, I recommend setting the maximum MTU size explicitly in your cluster (and pod, for that matter).  I'd love to show you a simple code snippet of how to do this with the correct sizing, but there's about a million variables based on what else is in your network and what CI tool you're using.
 
@@ -148,7 +148,7 @@ Now that we're up and running, let's talk about ways the word "privilege" comes 
 
 ![slide-16](/assets/graphics/2022-11-21-cloud-native/slide-16.jpg)
 
-The first point is that a privileged pod does not always mean that a process has `root` or `sudo` access - and vice versa!  It might mean that it's easier to obtain one given the other though.  For the rest of this talk, we're going use the convention that "privileged" means the pod's security context is set to [Privileged](https://kubernetes.io/docs/concepts/security/pod-security-standards/#privileged) - meaning that system-wide trusted workloads are run by trusted users.  Likewise "rootful" will mean that the entrypoint script/command, build job, configured user, etc. either is root or has `sudo` access.
+The first point is that a privileged pod does not always mean that a process has `root` or `sudo` access inside the container - and vice versa!  It might mean that it's easier to obtain one given the other though.  For the rest of this talk, we're going use the convention that "privileged" means the pod's security context is set to [Privileged](https://kubernetes.io/docs/concepts/security/pod-security-standards/#privileged) - meaning that system-wide trusted workloads are run by trusted users.  Likewise "rootful" will mean that the entrypoint script/command, build job, configured user, etc. either is root or has `sudo` access.
 
 There's a decent amount of overlap in how these two concepts are used in practice, adding to the confusion.  To help mitigate potential escalations and untrusted workloads, it's helpful to keep [defense in depth](https://csrc.nist.gov/glossary/term/defense_in_depth) in mind, layering controls and allowing minimal permissions to prevent container escapes and other security incidents.
 
@@ -168,23 +168,60 @@ This isn't the end of the world, but our toolbox has changed compared to managin
 >
 > A "namespace" in Kubernetes is an abstraction to provide some permissions isolation and resource usage quota within a cluster (such as deployments, secrets, etc.). It's commonly used to divide a cluster among several applications.  A kernel namespace is a low-level concept that wraps system resources in such a way that they are shared but appear dedicated.
 
-:warning: This change means users migrating from VMs that _assume_ their jobs have root access might not "just work" in this new system without some changes.  This is okay - we're gaining reproducibility and more control over the software that goes into these build systems, but might have to spend some time messing with permissions and dependencies to allow their code to compile.
+:warning: This change means users migrating from VMs that _assume_ their jobs have root access might not "just work" in this new system without some changes.  Resist the temptation to just grant them privileged pods and figure out if we really need it first.  Unless you're in a huge rush to decommission the system they're moving from, it's usually okay to spend some time messing with permissions and dependencies to allow their code to compile _without_ privileged access first.
+
+Let's talk through a couple common places this comes up.
 
 ![slide-18](/assets/graphics/2022-11-21-cloud-native/slide-18.jpg)
 
-(text on d-in-d)
+The first is Docker-in-Docker - or Podman-in-Podman, or any other combination of a container running in a container.  It comes up most often when your users want to build containers, but they're in a container.
+
+Docker in Docker requires privileged mode and there's no ambiguity here.  The [official image](https://hub.docker.com/_/docker) even states it, and the links to what _exactly_ `--privileged` means are [here](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).  This is one of the places where your container tooling starts to diverge, as Buildah in Podman can be done without privileged mode, as outlined [here](https://developers.redhat.com/blog/2019/08/14/best-practices-for-running-buildah-in-a-container).  Note the trade-offs between performance and security.
+
+There's another very common use case specific to GitHub Actions.  An Action can be JavaScript, any scripting language or combination of other Actions (called "composite"), or a Docker container.  These container Actions build that container(s) on each job, then run it.  While some container Actions may work with an alternate runtime, like Podman using `podman-docker` to alias the two, it _assumes_ Docker and any deviations may mean the Action won't work as expected.
+
+There's a couple reasons building containers in CI when your CI system is containerized is weird, and these are best outlined by Jérôme Petazzoni in his blog post ["Do not use Docker in Docker for CI"](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/).  It's well worth the time to read, and then re-read.
+
+In practice, the two problems that I see most frequently are
+
+1. Inner and outer Docker don't share a build cache.  This results in about a billion image pulls all the time.  I've seen a few ways around this, including using a persistent volume to share a cache across pods (but this means we're persisting resources between pods/jobs/users, outlined [here](https://github.com/actions-runner-controller/actions-runner-controller/blob/master/docs/detailed-docs.md#docker-image-layers-caching) for actions-runner-controller) or trying to ship pod images that have some common images already cached (which results in enormous images).
+1. To avoid using a privileged pod, an administrator will bind-mount the privileged Docker socket at `/var/run/docker.sock` to share it within a container.  This lets a container spawn other containers on the same host, share a build cache, etc.  This path works great for a single team on a dedicated CI system that _isn't_ using Kubernetes or worried about other jobs sharing a privileged runtime or cache.  A couple problems with this path include the recent removal of the ability to do this from Kubernetes ([more here](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/)) and the idea of sharing a privileged socket between untrusted workloads being less-that-secure.
+
+From experience, I've found a couple practices to make this less painful.
+
+1. Use rootless Docker in Docker when you _need_ Docker inside of a container, like GitHub Actions that ship as a Dockerfile.  This still requires a privileged container, but you should be removing the ability to mess with mounts, sudo/su to root, etc.  You can also use SELinux/AppArmor/etc to lock this down more.  The tradeoff here is that an admin must have all the needed software available in the image first, as users don't have the ability to run `yum` or `apt` to modify software either.
+1. There's other neat tools to build and push container images without privileged access in Kubernetes if that's all that's required, such as using Buildah within a container as outlined earlier.
+1. Have a pull-through cache on your network and make sure the pods all use it.  It still means that your users will be pulling plenty of container images over time, but at least the bandwidth to do this is all local.  This balances the need for speed (and not getting rate-limited) with a more reasonably sized image.
 
 ![slide-19](/assets/graphics/2022-11-21-cloud-native/slide-19.jpg)
 
-(text on hardware enablement)
+Next up on the whirlwind tour of user requests is hardware enablement.  First is understanding we're _way_ into Kubernetes implementation specifics now, but there's a (beta) feature to be aware of called [device plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/) to accomplish exactly this thing.  It gives the kubelet the ability to understand specific hardware capabilities (like GPUs or special network adapters) of the host and provide pods access to it.
+
+- GPUs specifically have documentation [here](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/), but this is still experimental.
+- Anything requiring direct access to the host's network stack, such as wanting a specific NIC or run a packet capture.
+- Hardware testing, as mounting or unmounting anything in `/dev/` is a privileged task.
+- Accessing files on the host without a storage abstraction sharing it.
+
+In short, maybe these tasks shouldn't be moved to a shared Kubernetes cluster, but some of these needs can also be mitigated with additional storage shares or using a device plugin instead of relying on direct access to the host.
 
 ![slide-20](/assets/graphics/2022-11-21-cloud-native/slide-20.jpg)
 
-(text on cap_sys_admin)
+A quick note - a pod that isn't run with `privileged` but has `CAP_SYS_ADMIN` is still privileged.  This is just a subset of what this capability allows a process to do.  Don't fall into the trap of granting this, but denying `privileged`, means the cluster is any more secure.
+
+This does come up in some compilers and applications used in debugging, especially older applications.  Reconsider migrating them into containers or perhaps isolate these projects to another cluster.
 
 ![slide-21](/assets/graphics/2022-11-21-cloud-native/slide-21.jpg)
 
-(text on firecrackers)
+This is usually the point in chatting about container security where someone inevitably says, "well just use [Firecracker](https://firecracker-microvm.github.io/).  It works for AWS!"  And it does!  Hooray for them!  It's a really cool tool!  I want to play with it more.  It could be the right solution for you, but we're going back to the key anti-pattern here:
+
+:sparkles: Containers are not VMs :sparkles:
+
+Kubernetes expects to manage _containers_, not VMs.  Firecracker is a (very tiny) VM with a RESTful API.  This means that our pod's lifecycle looks like this:
+
+1. The scheduler is hanging out on the control plane and gets a request to start some sort of work.  The scheduler sees an appropriate node with resources available and asks that node's kubelet to do the thing!  Except the kubelet works off a PodSpec and thinks [this](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/) is how it manages the lifecycle of that pod.
+1. So the kubelet talks to the container runtime on the node using the language they share, the [container runtime interface](https://kubernetes.io/docs/concepts/architecture/cri/), and asks it to start a new pod with whatever is in the PodSpec.
+1. Usually, we're at the end of the story here, but now we've got some extra stuff to do.  CRI is implemented in a plugin to the runtime `containerd`, so now we're going to bridge the next gap between what Kubernetes thinks is a container and a kernel VM that Firecracker creates.
+1. w
 
 ![slide-22](/assets/graphics/2022-11-21-cloud-native/slide-22.jpg)
 

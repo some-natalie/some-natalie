@@ -32,7 +32,7 @@ I've made some pretty ~~monumental~~ fun mistakes out of hubris and I'm here to 
 
 In working as a sysadmin, my first introduction to systems that build/deploy/maintain code was a series of scripts that ran on a cron job - checking out, building, and updating code on a web server nightly.  It was fun to watch devops transform the idea of "devs make" and "ops execute" into a more unified idea of software _ownership_ - because every system I worked with that followed this pattern was terrifyingly fragile and pretty much everything that came later was an improvement on it.
 
-As these systems scaled, I found myself adjacent to a huge shared Jenkins installation kept in line by _dozens_ of Puppet modules.  In wanting to avoid tons of configuration management code in the form of Puppet with the new system using GitHub Actions, I instead went down the path of tons of environment creation code in the form of Docker files.  Still not sure how much of an improvement this represents on the code-management front, but the power of ephemeral and version controlled envirnoments saved a phenemonal amount of administration overhead (my time) and developer time by creating reproducible builds.
+As these systems scaled, I found myself adjacent to a huge shared Jenkins installation kept in line by _dozens_ of Puppet modules.  In wanting to avoid tons of configuration management code in the form of Puppet with the new system using GitHub Actions, I instead went down the path of tons of environment creation code in the form of Docker files.  Still not sure how much of an improvement this represents on the code-management front, but the power of ephemeral and version controlled environments saved a phenomenal amount of administration overhead (my time) and developer time by creating reproducible builds.
 
 ![slide-04](/assets/graphics/2022-11-21-cloud-native/slide-04.jpg)
 
@@ -87,6 +87,8 @@ What's not in this picture is equally important - what's the network path for a 
 1. Internet, maybe?
 
 Then all the way back upwards to get back, for each and every packet.
+
+#### All about maximum packet size
 
 ![slide-09](/assets/graphics/2022-11-21-cloud-native/slide-09.jpg)
 
@@ -152,9 +154,11 @@ The first point is that a privileged pod does not always mean that a process has
 
 There's a decent amount of overlap in how these two concepts are used in practice, adding to the confusion.  To help mitigate potential escalations and untrusted workloads, it's helpful to keep [defense in depth](https://csrc.nist.gov/glossary/term/defense_in_depth) in mind, layering controls and allowing minimal permissions to prevent container escapes and other security incidents.
 
+#### How Linux handles permissions (in a nutshell)
+
 ![slide-17](/assets/graphics/2022-11-21-cloud-native/slide-17.jpg)
 
-We're going to need to know a bit about how the Linux kernel handles permissions.  Containers are not a kernel primative, but a combination of a regular process and some special guardrails.  This means that Kubernetes is scheduling processes for multiple projects on shared hardware _without_ the isolation of a virtual machine because :sparkles: containers are not VMs :sparkles:.
+We're going to need to know a bit about how the Linux kernel handles permissions.  Containers are not a kernel primitive, but a combination of a regular process and some special guardrails.  This means that Kubernetes is scheduling processes for multiple projects on shared hardware _without_ the isolation of a virtual machine because :sparkles: containers are not VMs :sparkles:.
 
 This isn't the end of the world, but our toolbox has changed compared to managing virtual machines.  Let's take a quick look at some of those tools.
 
@@ -171,6 +175,8 @@ This isn't the end of the world, but our toolbox has changed compared to managin
 :warning: This change means users migrating from VMs that _assume_ their jobs have root access might not "just work" in this new system without some changes.  Resist the temptation to immediately grant them privileged pods and figure out if we really need it first.  Unless you're in a huge rush to decommission the system they're moving from, it's usually okay to spend some time messing with permissions and dependencies to allow their code to compile _without_ privileged access first.
 
 Let's talk through a couple common places this comes up.
+
+#### Docker-in-Docker
 
 ![slide-18](/assets/graphics/2022-11-21-cloud-native/slide-18.jpg)
 
@@ -209,6 +215,8 @@ In short, maybe these tasks shouldn't be moved to a shared Kubernetes cluster, b
 A quick note - a pod that isn't run with `privileged` but has `CAP_SYS_ADMIN` is still privileged.  This slide shows a small subset of what this capability allows a process to do.  Don't fall into the trap of granting this, but denying `privileged`, means the cluster is any more secure.
 
 This does come up in some compilers and applications used in debugging, especially older applications.  Reconsider migrating them into containers or perhaps isolate these projects to another cluster.
+
+#### Just use Firecracker
 
 ![slide-21](/assets/graphics/2022-11-21-cloud-native/slide-21.jpg)
 
@@ -282,7 +290,7 @@ I want to take a moment and talk about this picture, because the gasp was audibl
 
 But it looks so weird, right?  The rules weren't written for large swimming pools.
 
-This is a bit of a counter-intuitive use of containers as VMs, despite my repitition of :sparkles: containers are not VMs :sparkles:.  Containers weren't meant to be used this way, but it works well.  The controls that an administrator has are different than for VMs or physical hardware - this doesn't mean it can't be done at all!  Co-tenanting a bunch of different teams on a shared cluster provides enough economic advantages to incentivize some great cultural changes - empowering teams to move faster with ownership over their builds without having them also be solely responsible for it.
+This is a bit of a counter-intuitive use of containers as VMs, despite my repetition of :sparkles: containers are not VMs :sparkles:.  Containers weren't meant to be used this way, but it works well.  The controls that an administrator has are different than for VMs or physical hardware - this doesn't mean it can't be done at all!  Co-tenanting a bunch of different teams on a shared cluster provides enough economic advantages to incentivize some great cultural changes - empowering teams to move faster with ownership over their builds without having them also be solely responsible for it.
 
 ---
 

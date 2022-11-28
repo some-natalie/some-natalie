@@ -300,9 +300,11 @@ These are the resources linked in the slides at the end of the full deck, as wel
 
 - Antipatterns of Cloud Applications, Microsoft Azure documentation.  [link](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/)
 - Jérôme Petazzoni, "Do not use Docker in Docker for CI", September 2015, [link](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/).  There's tons of info on Docker-in-Docker from [@jpetazzo](https://github.com/jpetazzo), but this post in particular is great for outlining _why_ the `--privileged` was created and why it might not be a good use for CI.
-- Containers from Scratch, a fantastic [repo](https://github.com/lizrice/containers-from-scratch) and [talk](https://www.youtube.com/watch?v=MHv6cWjvQjM) showing how containers work without an abstraction like Docker
-- Deep Dive into firecrackerd-containerd (DockerCon 2019), [talk](https://www.youtube.com/watch?v=0wEiizErKZw)
+- Docker's blog on how [containers are not VMs](https://www.docker.com/blog/containers-are-not-vms/) from 2016
+- Containers from Scratch, a fantastic [GitHub repo](https://github.com/lizrice/containers-from-scratch) and [YouTube](https://www.youtube.com/watch?v=MHv6cWjvQjM) showing how containers work without an abstraction like Docker
+- Deep Dive into firecrackerd-containerd (DockerCon 2019), [YouTube](https://www.youtube.com/watch?v=0wEiizErKZw)
 - Ian Lewis, "The almighty pause container", October 2017, [link](https://www.ianlewis.org/en/almighty-pause-container)
+- "Should I block ICMP?", [site](http://shouldiblockicmp.com/) outlining all the reasons you shouldn't block ICMP traffic and things that break when you do.
 
 Resources specific to GitHub Actions
 

@@ -39,7 +39,7 @@ Enter [GitHub Codespaces](https://github.com/features/codespaces) and custom [de
 
 When a repository is opened in a Codespace without a pre-defined devcontainer, you'll get a default image that has tons of stuff in it.  It doesn't automatically install the dependencies and start my website though, so I had to remember the commands to do this every time I want to mess with it.  By adding a small `~/.devcontainer/devcontainer.json` file ([link](https://github.com/some-natalie/some-natalie/blob/main/.devcontainer/devcontainer.json)), I'm able to have all of this done for me in a smaller image that only contains Ruby and not the entire kitchen sink of other popular languages/frameworks.  The full file is below, with comments in-line:
 
-```json
+```jsonc
 {
   // Name this container, not very useful in a small project, but very useful if
   // you have multiple containers in a larger and more complicated project

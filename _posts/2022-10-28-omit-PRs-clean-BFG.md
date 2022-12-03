@@ -11,7 +11,7 @@ excerpt: "What does the 'deny updating a hidden ref' error even mean?"
 
 A common problem in moving to git is cleaning large files (like document files, multimedia, etc.) out of a repository.  There's a tool that's designed to do exactly this called [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) - it's fast and very simple.  I recently ran into a bit of a situation worth documenting, since it took an hour of searching Stack Overflow to figure out.  I thought the big files were gone, then when I pushed the now-clean repo, I got this lovely message:
 
-```shell
+```console
 $ git push --force
 Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
 To https://github.com/some-natalie/bookish-waffle.git
@@ -27,7 +27,7 @@ The repository that I was cleaning large files out of had (already merged) pull 
 
 1. We'll need to _remove_ the files first.
 
-    ```shell
+    ```console
     # Move into that repo's directory
     $ cd bookish-waffle
 
@@ -70,7 +70,7 @@ The repository that I was cleaning large files out of had (already merged) pull 
 
 1. Now create a bare clone of the repository.
 
-    ```shell
+    ```console
     # A bare clone we're using for BFG
     $ git clone --mirror https://github.com/some-natalie/bookish-waffle.git 
     Cloning into bare repository 'bookish-waffle.git'...
@@ -84,7 +84,7 @@ The repository that I was cleaning large files out of had (already merged) pull 
 
 1. Let's edit our `config` file to tell git to not worry about the "fake" references like pull requests.  You'll change the `fetch` and `push` refs to look roughly like this.  The `+` tells git to update it even if it isn’t a [fast-forward](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging) ([docs](https://git-scm.com/docs/git-fetch)).
 
-    ```gitconfig
+    ```config
     [core]
         repositoryformatversion = 0
         filemode = true
@@ -103,7 +103,7 @@ The repository that I was cleaning large files out of had (already merged) pull 
 
 1. Move into the bare clone and run BFG.  In this case, we're removing two PowerPoint files.  BFG prints out quite a bit of useful information by default about what's getting removed, the history that's being changed, etc.
 
-    ```shell
+    ```console
     $ bfg --delete-files *.pptx bookish-waffle.git/
 
     Using repo : /Users/some-natalie/xfer/bookish-waffle.git
@@ -171,7 +171,7 @@ The repository that I was cleaning large files out of had (already merged) pull 
 
 1. Now let's finish with what it told us to do!  While each commit is still there, the file itself is now gone.
 
-    ```shell
+    ```console
     $ cd bookish-waffle.git
     
     $ git reflog expire --expire=now --all && git gc --prune=now --aggressive

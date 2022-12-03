@@ -17,14 +17,14 @@ GitHub makes some assumptions about the container execution environment for Acti
 
 First, leave SELinux alone.  I know the first thing we all do when something doesn't work is disable it, but really - let it work!  I promise it isn't the problem.
 
-```shell
+```console
 $ sudo getenforce
 Enforcing
 ```
 
 _(For RHEL 8 and 9 only)_ Next, let's check `firewalld` settings for what the firewall backend is.  We need it to be using `iptables`, which isn't the default for all versions of RHEL - so let's change that with a little bit of `sed` magic.[^1]
 
-```shell
+```console
 $ sudo cat /etc/firewalld/firewalld.conf | grep FirewallBackend
 # FirewallBackend
 FirewallBackend=nftables
@@ -38,7 +38,7 @@ FirewallBackend=iptables
 
 Now let's install the latest version of Docker Community Edition.  More about using Docker and not Podman [below](#why-not-podman).
 
-```shell
+```console
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf install docker-ce -y
 sudo systemctl enable docker --now
@@ -49,7 +49,7 @@ sudo usermod -aG docker azureuser
 
 Now let's reboot for both the new firewall backend and for the new user group to take effect.  Log back in and test that Docker is working.
 
-```shell
+```console
 $ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -83,7 +83,7 @@ Start the GitHub runner agent with the "dependabot" label and enjoy successful w
 
 Here's how this looks if you start the agent in the foreground.  To use the runner agent as a service, follow [these directions](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service).
 
-```shell
+```console
 $ ./run.sh
 
 √ Connected to GitHub

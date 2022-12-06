@@ -13,7 +13,7 @@ excerpt: "Do we build it ourselves or do we buy it as a service?"
 
 Continuing from [part 1](https://some-natalie.dev/blog/waiting-on-bulids/) and [part 2](https://some-natalie.dev/blog/waiting-on-builds-pt-2/), there's a moment where it looks like it _might_ be cheaper to run your own build farm.  I'm not going to talk numbers here - at all.  The price of hardware and power or cloud compute varies so much by region and software and (for cloud) functionality such as ingress/egress, containers or VMs, etc. that creating a true comparison would be so specific as to be meaningless.  There's a tremendous wealth of _stuff_ written about the various levels of management or cost abstraction and all the ways different providers compare by cost and region and service.  ~~Bother~~ Leverage a business analyst for specific numbers to your business - this is what they _Excel_ at.  
 
-![i-see-what-you-did-there](https://media.giphy.com/media/CcUk4a6fkgUfu/giphy.gif)
+![i-see-what-you-did-there](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/i-see-what-you-did-there.gif)
 
 Instead, we're going to look at some of the themes I've seen in building, using, maintaining, and replacing all sorts of compute farms and software factories over my career, as well as the trends among the teams I talk to.  So ... here's the first couple things I'd consider as "non-obvious" or difficult-to-estimate-upfront costs listed within a (self-imposed) time limit of 5 minutes.
 
@@ -36,7 +36,7 @@ When I started out as an intern in a rural school district's help desk, it was c
 
 There's tremendous value in knowing how _everything_ listed above works.  This is how any individual project keeps a handle on their software and service dependencies.  As more projects get added within a company, the complexity multiplies regardless of if the team chooses to have many discrete systems for individual projects or to have fewer systems capable of many projects.  It's also good for developing an appreciation for not having to grow and fell the trees, process the wood, mine the graphite, refine the rubber, assemble the finished thing, etc. to use a pencil to write an essay[^2].
 
-![uphill-both-ways](https://media.giphy.com/media/26Ffcvq6SaqhupjC8/giphy.gif)
+![uphill-both-ways](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/uphill-both-ways.gif)
 
 :point_up: (not how I intended to sound but I learned a lot going uphill both ways ...)
 

@@ -28,7 +28,7 @@ I've made some pretty ~~monumental~~ fun mistakes out of hubris and I'm here to 
 
 ![slide-03](/assets/graphics/2022-11-21-cloud-native/slide-03.jpg)
 
-([link to the gif](https://media.giphy.com/media/JJhiRdcYfcokU/giphy.gif) that didn't survive turning the slide into a picture)
+([link to the gif](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/lego-batman-first-try.gif) that didn't survive turning the slide into a picture)
 
 In working as a sysadmin, my first introduction to systems that build/deploy/maintain code was a series of scripts that ran on a cron job - checking out, building, and updating code on a web server nightly.  It was fun to watch devops transform the idea of "devs make" and "ops execute" into a more unified idea of software _ownership_ - because every system I worked with that followed this pattern was terrifyingly fragile and pretty much everything that came later was an improvement on it.
 

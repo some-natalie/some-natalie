@@ -79,10 +79,10 @@ You'll need:
         nodeStageSecretRef:
           name: azure-secret
           namespace: devcontainers
-      mountOptions:  # give the user full access to their data
+      mountOptions: # give the user full access to their data
         - dir_mode=0777
         - file_mode=0777
-        - uid=1000. # make sure this matches the UID/GID of the container being deployed!
+        - uid=1000 # make sure this matches the UID/GID of the container being deployed!
         - gid=1000
     ```
 
@@ -137,7 +137,7 @@ You'll need:
             runAsUser: 1000
             runAsGroup: 1000
           command: [ "/bin/bash", "-c", "--" ]
-          args: [ "while true; do sleep 30; done;" ]. # keep the container running forever
+          args: [ "while true; do sleep 30; done;" ] # keep the container running forever
           volumeMounts:
             - mountPath: /home/vscode/code
               name: local-path-pvc

@@ -71,7 +71,9 @@ If you're already used to running your own enterprise-wide CI system, GitHub Act
 
 How long is this environment going to be around?  Are you kicking the tires on figuring out GitHub or if you want to self-host runners?  
 
-If the goal is to try and quickly figure out Actions, maybe try a few builds, look at policies that can be set, etc. **and** there's existing CI infrastructure in place - the simplest path forward is usually to remove the agent of the existing CI system (Jenkins, Azure Devops, etc.) and install the agent for GitHub Actions ([directions](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/adding-self-hosted-runners)) for a subset of the existing infrastructure.  This is also one of the easiest paths to migrate fully, removing a lot of the hidden "rip and replace" infrastructure costs like needing to learn a new platform or tool.
+If the goal is to try and quickly figure out Actions, maybe try a few builds, look at policies that can be set, etc. **and** there's existing CI infrastructure in place - the simplest path forward is usually to remove the agent of the existing CI system (Jenkins, Azure Devops, etc.) and install the agent for GitHub Actions ([directions](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/adding-self-hosted-runners)) for a subset of the existing infrastructure.
+
+> **:sparkles: Tip! :sparkles:** This is also one of the easiest paths to migrate fully, removing a lot of the hidden "rip and replace" infrastructure costs like needing to learn a new platform or tool.
 
 The rest of this guide is assuming that we're mostly past kicking the tires and are figuring out the best path forward for the enterprise.
 

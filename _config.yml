@@ -94,10 +94,10 @@ defaults:
     values:
       layout: single
       author_profile: true
-      read_time: false
+      read_time: true
       comments: false
       share: false
-      related: false
+      related: true
   # _pages
   - scope:
       path: "_pages"

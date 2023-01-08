@@ -6,6 +6,7 @@ categories:
 tags:
   - CI
   - git
+  - questionable-ideas
 classes: wide
 excerpt: "How to automatically roll back code changes in GitHub Actions"
 ---

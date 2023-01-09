@@ -8,7 +8,8 @@ tags:
   - github-actions
   - business
   - kubernetes
-classes: wide
+toc: true
+toc_sticky: true
 excerpt: "When you absolutely, positively have to host it yourself, here's some help."
 ---
 

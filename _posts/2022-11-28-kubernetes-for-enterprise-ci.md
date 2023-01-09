@@ -6,17 +6,14 @@ categories:
 tags:
   - CI
   - kubernetes
-classes: wide
+toc: true
+toc_sticky: true
 excerpt: "What happens to container security and reliability when continuous integration is shoved in too!"
 ---
 
-This post is slides + commentary from a talk I gave at Cloud Native Colorado on November 21st, 2022 about some of the weird ways you can blow up your cluster and your sanity once continuous integration jobs are added into Kubernetes, lessons learned in how to avoid these problems, and why it's _still_ worth all the effort to containerize your build system ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-11-21_Cloud-Native-CO.pdf)).  Kubernetes saves a ton of time and heartache maintaining a shared build infrastructure, but here's a few ways it's not your average application.  (links to skip ahead if you'd like)
+This post is slides + commentary from a talk I gave at Cloud Native Colorado on November 21st, 2022 about some of the weird ways you can blow up your cluster and your sanity once continuous integration jobs are added into Kubernetes, lessons learned in how to avoid these problems, and why it's _still_ worth all the effort to containerize your build system ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-11-21_Cloud-Native-CO.pdf)).  Kubernetes saves a ton of time and heartache maintaining a shared build infrastructure, but here's a few ways it's not your average application.
 
-- [Nested Virtualization](#nested-virtualization)
-- [Privileged Pods](#privileged-pods)
-- [Ephemerality](#ephemerality)
-- [Conclusion](#conclusion) - and patterns for success
-- [Resources](#resources)
+### Introduction
 
 ![slide-01](/assets/graphics/2022-11-21-cloud-native/slide-01.jpg)
 

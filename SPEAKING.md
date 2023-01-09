@@ -2,6 +2,7 @@
 permalink: /speaking/
 title: "Speaking"
 layout: single
+classes: wide
 ---
 
 ## 2022

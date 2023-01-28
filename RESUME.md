@@ -6,12 +6,14 @@ Boulder, CO metro area
 
 ## Summary
 
-Devops engineer experienced in developing infrastructure-as-code solutions and operations automation to meet a wide variety of client needs and scales.  I've worked extensively with most major Linux distributions, Python, shell scripting, and all manner of other things as needed by the project.  I'm getting into Kubernetes recently.  I love to build cool systems to support complex client needs.
+Devops engineer and consultant experienced in developing infrastructure-as-code solutions and operations automation to meet a wide variety of client needs and scales.  I've worked extensively with most major Linux distributions, Python, shell scripting, and all manner of other things as needed by the project.  I'm getting into Kubernetes and Go recently.  I love to build cool systems to support complex client needs.
 
 ## Employment and Projects
 
 * Senior Solutions Engineer at [GitHub](https://github.com/github) (Nov 2021 - present)
-  * I'm still figuring out what I do here ... but I'm working on a lot of cool stuff! :heart:
+  * Work with the most security-conscious customers to guide them in meeting their compliance needs within the entire GitHub Enterprise platform - spanning everything from the culture change of internal collaboration to automation and application security, all within the lens of highly regulated industries.
+  * Make custom solutions and proofs-of-concept, like [GitHub Actions](https://github.com/marketplace?type=actions&query=publisher%3Asome-natalie+) or other projects you can browse [here](https://github.com/some-natalie?tab=repositories).
+  * [Talk](https://some-natalie.dev/speaking/) and [write](https://some-natalie.dev/) about some of the cool stuff I do.
 * Lead Engineer at Booz Allen Hamilton (May 2015 - Oct 2021)
   * Lead internal deployment of GitHub Enterprise Server from zero to several thousand users, including administration and architecture around the system and supporting machines, regulatory compliance, user support, customizations, and integrations with a wide variety of other internal tools (covering most major project management, continuous integration and delivery, and security scanning tools) to make sure teams are getting the best experience.  Meet with customer teams, leadership, and other stakeholders to identify pain points and prioritize improvements.  Extensively document and provide cross-training of support engineers for this tool set.
   * Developed innovative solutions to support this project on-premises and within all appropriate compliance guidelines, including

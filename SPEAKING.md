@@ -15,7 +15,7 @@ Self-hosted GitHub Actions runners and Kubernetes are a natural fit, but there's
 </details>
 
 - Slides, with writeup and links
-- YouTube
+- [YouTube](https://youtu.be/Ax4VPm2KrqQ)
 
 ## 2022
 

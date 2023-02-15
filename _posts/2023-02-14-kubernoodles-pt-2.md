@@ -1,5 +1,5 @@
 ---
-title: "Kubernoodles Setup, part 2"
+title: "Actions Workflows to Test Custom Runners"
 date: 2023-02-14
 categories:
   - blog
@@ -8,7 +8,7 @@ tags:
   - kubernoodles
   - actions-runner-controller
 classes: wide
-excerpt: "Create a few Actions to test, scale, and debug our self-hosted runners."
+excerpt: "(Kubernoodles, part 2 of ?) - Create a few Actions to test, scale, and debug our self-hosted runners."
 ---
 
 Now that we have a working Kubernetes cluster with the new actions-runner-controller scaling set of runners using the default image ([Dockerfile](https://github.com/actions/runner/blob/main/images/Dockerfile) and [image](https://github.com/orgs/actions/packages?repo_name=runner)), let's create a couple of GitHub Actions that we'll use to test it out as we continue building our own custom images and other features within the cluster.

@@ -1,5 +1,5 @@
 ---
-title: "Kubernoodles Setup, part 1"
+title: "Kubernoodles Cluster Setup"
 date: 2023-02-10
 categories:
   - blog
@@ -8,7 +8,7 @@ tags:
   - kubernoodles
   - actions-runner-controller
 classes: wide
-excerpt: "Setup your k8s cluster, actions-runner-controller, and some default runners for later o11y."
+excerpt: "(Kubernoodles, part 1 of ?) - Setup your k8s cluster, actions-runner-controller, and some default runners for later o11y."
 ---
 
 [Kubernoodles](https://github.com/some-natalie/kubernoodles) is a reference architecture for a lot of "how to devops" things, mostly for [actions-runner-controller](https://github.com/actions/actions-runner-controller) within a larger business.  With all the new work GitHub has put into the project, the opinionated guidance is no longer valid or got totally deprecated by shiny new features.  Add in my newfound desire to explore observability in Kubernetes, I decided to rip it out and start new.

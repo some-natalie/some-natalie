@@ -9,11 +9,12 @@ permalink: /kubernoodles/
 Here's what has been done and where we're going.
 
 - [Part 1](../blog/kubernoodles-pt-1) - Initial cluster setup, [cilium](https://github.com/cilium/cilium) and [hubble](https://github.com/cilium/hubble) to power observability, [actions-runner-controller](https://github.com/actions/actions-runner-controller) and default runners with the new runner scale set architecture.
+- [Part 2](../blog/kubernoodles-pt-2) - Create a few Actions to test, scale, and debug our self-hosted runners.
 
 Coming soon:
 
-- Some basic GitHub Actions workflows to test and debug runners
 - Tetragon setup!
+- Custom images
 - Log streaming
 - Private registries
 - File caching

@@ -1,0 +1,785 @@
+🚀 process runners/defaults-xh5cc-runner-8w4hb /actions-runner/run.sh /actions-runner/run.sh
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dirname /actions-runner/run.sh
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dirname /actions-runner/run.sh 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cp -f /actions-runner/run-helper.sh.template /actions-runner/run-helper.sh
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cp -f /actions-runner/run-helper.sh.template /actions-runner/run-helper.sh 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /actions-runner/run-helper.sh /actions-runner/run-helper.sh
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -u
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -u 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dirname /actions-runner/run-helper.sh
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dirname /actions-runner/run-helper.sh 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener run
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:65255 -> 13.107.42.16:443
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 331
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:65255 -> 13.107.42.16:443 bytes 331
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 331
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:65255 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 732
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:65255 -> 13.107.42.16:443 bytes 732
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 732
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 1135
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:5352 -> 13.107.42.16:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:5352 -> 13.107.42.16:443 bytes 329
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:5352 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:5352 -> 13.107.42.16:443 bytes 1440
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:0 -> 13.107.42.16:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2720
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2354
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 2533
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2323
+🚀 process runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker spawnclient 107 110
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 331
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 2647
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2370
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 2615
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 331
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 2643
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 834
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/bash --noprofile --norc -e -o pipefail /actions-runner/_work/_temp/b36524ac-ec5e-49d3-9401-7e31853ec3ce.sh
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/printenv
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/printenv  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash --noprofile --norc -e -o pipefail /actions-runner/_work/_temp/b36524ac-ec5e-49d3-9401-7e31853ec3ce.sh 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/bash --noprofile --norc -e -o pipefail /actions-runner/_work/_temp/1dde6006-2551-4422-bf66-3b41426d99fc.sh
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/whoami
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/whoami  0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -u
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -u 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -g 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -G
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/id -G 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/groups
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/groups  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash --noprofile --norc -e -o pipefail /actions-runner/_work/_temp/1dde6006-2551-4422-bf66-3b41426d99fc.sh 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/bash -e /actions-runner/_work/_temp/063b679f-3c8a-49c6-95c9-6653a0c11677.sh
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sleep 3600
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 1061
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 1061
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 1061
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 268
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 573
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 339
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 4125
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 1658
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 331
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 158
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 2934
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 3984
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 2934
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 4125
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 3396
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 2934
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 3444
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:5864 -> 13.107.42.16:443 bytes 3772
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:39641 -> 13.107.42.16:443 bytes 3288
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:7912 -> 13.107.42.16:443 bytes 35
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "clear; (bash || ash || sh)"
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/clear
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/clear  0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/bash
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/whoami
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/whoami  0
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2370
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 2533
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/ls -la /
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/ls -la / 0
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:0 -> 13.107.42.16:443
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/mount /dev/sda2
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/mount /dev/sda2 1
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2370
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 2533
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash  127
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2370
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash  127
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt install curl
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt install curl 100
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt update
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http  100
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80 bytes 154
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80 bytes 172
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv  SIGINT
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80 bytes 162
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell MASTER_KEYRING APT::Key::MasterKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell MASTER_KEYRING APT::Key::MasterKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING APT::Key::ArchiveKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING APT::Key::ArchiveKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell REMOVED_KEYS APT::Key::RemovedKeys
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell REMOVED_KEYS APT::Key::RemovedKeys 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING_URI APT::Key::ArchiveKeyringURI
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING_URI APT::Key::ArchiveKeyringURI 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Apt::GPGV::TrustedKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Apt::GPGV::TrustedKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Dir::Etc::Trusted/f
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Dir::Etc::Trusted/f 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell GPGV Apt::Key::gpgvcommand
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell GPGV Apt::Key::gpgvcommand 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/mktemp --directory --tmpdir apt-key-gpghome.XXXXXXXXXX
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/mktemp --directory --tmpdir apt-key-gpghome.XXXXXXXXXX 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/chmod 700 /tmp/apt-key-gpghome.2TCJSMRQWi
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/chmod 700 /tmp/apt-key-gpghome.2TCJSMRQWi 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /tmp/apt-key-gpghome.2TCJSMRQWi
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /tmp/apt-key-gpghome.2TCJSMRQWi 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/touch /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/touch /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDPARTS Dir::Etc::TrustedParts/d
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDPARTS Dir::Etc::TrustedParts/d 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /etc/apt/trusted.gpg.d/
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /etc/apt/trusted.gpg.d/ 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/find /etc/apt/trusted.gpg.d -mindepth 1 -maxdepth 1 ( -name *.gpg -o -name *.asc )
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/find /etc/apt/trusted.gpg.d -mindepth 1 -maxdepth 1 ( -name *.gpg -o -name *.asc ) 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/sort
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/sort  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cp -a /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.orig.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cp -a /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.orig.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/gpgv --homedir /tmp/apt-key-gpghome.2TCJSMRQWi --keyring /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg --ignore-time-conflict --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/gpgv --homedir /tmp/apt-key-gpghome.2TCJSMRQWi --keyring /tmp/apt-key-gpghome.2TCJSMRQWi/pubring.gpg --ignore-time-conflict --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf /tmp/apt-key-gpghome.2TCJSMRQWi
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf /tmp/apt-key-gpghome.2TCJSMRQWi 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv  0
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80 bytes 242
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell MASTER_KEYRING APT::Key::MasterKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell MASTER_KEYRING APT::Key::MasterKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING APT::Key::ArchiveKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING APT::Key::ArchiveKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell REMOVED_KEYS APT::Key::RemovedKeys
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell REMOVED_KEYS APT::Key::RemovedKeys 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING_URI APT::Key::ArchiveKeyringURI
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING_URI APT::Key::ArchiveKeyringURI 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Apt::GPGV::TrustedKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Apt::GPGV::TrustedKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Dir::Etc::Trusted/f
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Dir::Etc::Trusted/f 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell GPGV Apt::Key::gpgvcommand
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell GPGV Apt::Key::gpgvcommand 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/mktemp --directory --tmpdir apt-key-gpghome.XXXXXXXXXX
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/mktemp --directory --tmpdir apt-key-gpghome.XXXXXXXXXX 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/chmod 700 /tmp/apt-key-gpghome.LlJNVNS7Yx
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/chmod 700 /tmp/apt-key-gpghome.LlJNVNS7Yx 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /tmp/apt-key-gpghome.LlJNVNS7Yx
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /tmp/apt-key-gpghome.LlJNVNS7Yx 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/touch /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/touch /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDPARTS Dir::Etc::TrustedParts/d
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDPARTS Dir::Etc::TrustedParts/d 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /etc/apt/trusted.gpg.d/
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /etc/apt/trusted.gpg.d/ 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/find /etc/apt/trusted.gpg.d -mindepth 1 -maxdepth 1 ( -name *.gpg -o -name *.asc )
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/find /etc/apt/trusted.gpg.d -mindepth 1 -maxdepth 1 ( -name *.gpg -o -name *.asc ) 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/sort
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/sort  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/store
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/store  SIGINT
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/store
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cp -a /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.orig.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cp -a /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.orig.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/gpgv --homedir /tmp/apt-key-gpghome.LlJNVNS7Yx --keyring /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg --ignore-time-conflict --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/gpgv --homedir /tmp/apt-key-gpghome.LlJNVNS7Yx --keyring /tmp/apt-key-gpghome.LlJNVNS7Yx/pubring.gpg --ignore-time-conflict --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf /tmp/apt-key-gpghome.LlJNVNS7Yx
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf /tmp/apt-key-gpghome.LlJNVNS7Yx 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv  0
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80 bytes 260
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell MASTER_KEYRING APT::Key::MasterKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell MASTER_KEYRING APT::Key::MasterKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING APT::Key::ArchiveKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING APT::Key::ArchiveKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell REMOVED_KEYS APT::Key::RemovedKeys
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell REMOVED_KEYS APT::Key::RemovedKeys 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING_URI APT::Key::ArchiveKeyringURI
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell ARCHIVE_KEYRING_URI APT::Key::ArchiveKeyringURI 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Apt::GPGV::TrustedKeyring
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Apt::GPGV::TrustedKeyring 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Dir::Etc::Trusted/f
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDFILE Dir::Etc::Trusted/f 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell GPGV Apt::Key::gpgvcommand
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell GPGV Apt::Key::gpgvcommand 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/mktemp --directory --tmpdir apt-key-gpghome.XXXXXXXXXX
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/mktemp --directory --tmpdir apt-key-gpghome.XXXXXXXXXX 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/chmod 700 /tmp/apt-key-gpghome.tqeHG0sCuD
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/chmod 700 /tmp/apt-key-gpghome.tqeHG0sCuD 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /tmp/apt-key-gpghome.tqeHG0sCuD
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /tmp/apt-key-gpghome.tqeHG0sCuD 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/touch /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/touch /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDPARTS Dir::Etc::TrustedParts/d
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-config shell TRUSTEDPARTS Dir::Etc::TrustedParts/d 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /etc/apt/trusted.gpg.d/
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/readlink -f /etc/apt/trusted.gpg.d/ 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/find /etc/apt/trusted.gpg.d -mindepth 1 -maxdepth 1 ( -name *.gpg -o -name *.asc )
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/find /etc/apt/trusted.gpg.d -mindepth 1 -maxdepth 1 ( -name *.gpg -o -name *.asc ) 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/sort
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/sort  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-bullseye-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-buster-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/cmp --silent --bytes=1 - /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cat /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/cp -a /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.orig.gpg
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/cp -a /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.orig.gpg 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sed -e s#'#'"'"'#g 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/gpgv --homedir /tmp/apt-key-gpghome.tqeHG0sCuD --keyring /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg --ignore-time-conflict --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/gpgv --homedir /tmp/apt-key-gpghome.tqeHG0sCuD --keyring /tmp/apt-key-gpghome.tqeHG0sCuD/pubring.gpg --ignore-time-conflict --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf /tmp/apt-key-gpghome.tqeHG0sCuD
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf /tmp/apt-key-gpghome.tqeHG0sCuD 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.ruIWnC /tmp/apt.data.8k29RB 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv  0
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:31980 -> 146.75.94.132:80 bytes 250
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.1Moku8 /tmp/apt.data.fK4T17 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt-key /usr/bin/apt-key --quiet --readonly verify --status-fd 3 /tmp/apt.sig.FGKRvN /tmp/apt.data.WwuRjO 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/store  SIGINT
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/gpgv  SIGINT
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http  100
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt tcp 10.0.5.240:31980 -> 146.75.94.132:80
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true" 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt update 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt update 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt install curl
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --print-foreign-architectures 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http  100
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:32492 -> 146.75.94.132:80
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:32492 -> 146.75.94.132:80 bytes 140
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:32492 -> 146.75.94.132:80 bytes 1383
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:32492 -> 146.75.94.132:80 bytes 157
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:32492 -> 146.75.94.132:80 bytes 166
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http tcp 10.0.5.240:32492 -> 146.75.94.132:80 bytes 159
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/lib/apt/methods/http  100
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt tcp 10.0.5.240:32492 -> 146.75.94.132:80
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "/usr/sbin/dpkg-preconfigure --apt || true"
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/sbin/dpkg-preconfigure -w /usr/sbin/dpkg-preconfigure --apt
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/sbin/dpkg-preconfigure -w /usr/sbin/dpkg-preconfigure --apt 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "/usr/sbin/dpkg-preconfigure --apt || true" 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --assert-multi-arch
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --assert-multi-arch 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --assert-protected-field
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --assert-protected-field 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --status-fd 15 --no-triggers --unpack --auto-deconfigure --force-remove-protected --recursive /tmp/apt-dpkg-install-v6ZLTC
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/00-libbrotli1_1.0.9-2+b2_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/01-libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/02-libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/03-libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb /var/lib/dpkg/tmp.ci
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/04-libnghttp2-14_1.43.0-1_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb /var/lib/dpkg/tmp.ci
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/05-libpsl5_0.21.0-1.2_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb /var/lib/dpkg/tmp.ci
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/06-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/07-libssh2-1_1.9.0-2_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/08-libcurl4_7.74.0-1.3+deb11u5_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb /var/lib/dpkg/tmp.ci
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/10-libldap-common_2.4.57+dfsg-3+deb11u1_all.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/09-curl_7.74.0-1.3+deb11u5_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/11-libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-split -Qao /var/lib/dpkg/reassemble.deb /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb 1
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/tar -x -f - --warning=no-timestamp 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --fsys-tarfile /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -rf -- /var/lib/dpkg/tmp.ci 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --status-fd 15 --no-triggers --unpack --auto-deconfigure --force-remove-protected --recursive /tmp/apt-dpkg-install-v6ZLTC 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --status-fd 15 --configure --pending
+🚀 process runners/defaults-xh5cc-runner-8w4hb /var/lib/dpkg/info/libsasl2-modules:amd64.postinst /var/lib/dpkg/info/libsasl2-modules:amd64.postinst configure
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --compare-versions
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --compare-versions 1
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /var/lib/dpkg/info/libsasl2-modules:amd64.postinst /var/lib/dpkg/info/libsasl2-modules:amd64.postinst configure 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /var/lib/dpkg/info/libc-bin.postinst /var/lib/dpkg/info/libc-bin.postinst triggered ldconfig
+🚀 process runners/defaults-xh5cc-runner-8w4hb /sbin/ldconfig
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /sbin/ldconfig  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /var/lib/dpkg/info/libc-bin.postinst /var/lib/dpkg/info/libc-bin.postinst triggered ldconfig 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg --status-fd 15 --configure --pending 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /var/cache/apt/archives/curl_7.74.0-1.3+deb11u5_amd64.deb /var/cache/apt/archives/libbrotli1_1.0.9-2+b2_amd64.deb /var/cache/apt/archives/libcurl4_7.74.0-1.3+deb11u5_amd64.deb /var/cache/apt/archives/libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb /var/cache/apt/archives/libldap-common_2.4.57+dfsg-3+deb11u1_all.deb /var/cache/apt/archives/libnghttp2-14_1.43.0-1_amd64.deb /var/cache/apt/archives/libpsl5_0.21.0-1.2_amd64.deb /var/cache/apt/archives/librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb /var/cache/apt/archives/libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/cache/apt/archives/libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/cache/apt/archives/libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/cache/apt/archives/libssh2-1_1.9.0-2_amd64.deb /var/cache/apt/archives/publicsuffix_20220811.1734-0+deb11u1_all.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/rm -f /var/cache/apt/archives/curl_7.74.0-1.3+deb11u5_amd64.deb /var/cache/apt/archives/libbrotli1_1.0.9-2+b2_amd64.deb /var/cache/apt/archives/libcurl4_7.74.0-1.3+deb11u5_amd64.deb /var/cache/apt/archives/libldap-2.4-2_2.4.57+dfsg-3+deb11u1_amd64.deb /var/cache/apt/archives/libldap-common_2.4.57+dfsg-3+deb11u1_all.deb /var/cache/apt/archives/libnghttp2-14_1.43.0-1_amd64.deb /var/cache/apt/archives/libpsl5_0.21.0-1.2_amd64.deb /var/cache/apt/archives/librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb /var/cache/apt/archives/libsasl2-2_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/cache/apt/archives/libsasl2-modules-db_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/cache/apt/archives/libsasl2-modules_2.1.27+dfsg-2.1+deb11u1_amd64.deb /var/cache/apt/archives/libssh2-1_1.9.0-2_amd64.deb /var/cache/apt/archives/publicsuffix_20220811.1734-0+deb11u1_all.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true" 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt install curl 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/apt install curl 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/dpkg-deb --control /tmp/apt-dpkg-install-v6ZLTC/12-publicsuffix_20220811.1734-0+deb11u1_all.deb /var/lib/dpkg/tmp.ci 0
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl -k https://gist.github.com/some-natalie/1f93e8fcac857f2acbcb970452d12c18
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/bash
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 517
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 2533
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 64
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 46
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 49
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 35
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 95
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 31
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash  2
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 35
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443 bytes 24
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:14540 -> 140.82.114.3:443
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl -k https://gist.github.com/some-natalie/1f93e8fcac857f2acbcb970452d12c18 23
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2370
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/bash
+🚀 process runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl -k https://gist.githubusercontent.com/some-natalie/1f93e8fcac857f2acbcb970452d12c18/raw/e0444194808ced485e275699fb49bcbdde3b8f17/hello-world.sh
+🔌 connect runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 517
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 64
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 46
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 49
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 35
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 145
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 31
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443 bytes 24
+🧹 close   runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl tcp 10.0.5.240:18070 -> 185.199.109.133:443
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /usr/bin/curl -k https://gist.githubusercontent.com/some-natalie/1f93e8fcac857f2acbcb970452d12c18/raw/e0444194808ced485e275699fb49bcbdde3b8f17/hello-world.sh 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/bash  0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "clear; (bash || ash || sh)" 0
+💥 exit    runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "clear; (bash || ash || sh)" 0
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:1256 -> 13.107.42.16:443 bytes 2533
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Listener tcp 10.0.5.240:62695 -> 13.107.42.16:443 bytes 2370
+📤 sendmsg runners/defaults-xh5cc-runner-8w4hb /actions-runner/bin/Runner.Worker tcp 10.0.5.240:0 -> 13.107.42.16:443 bytes 35

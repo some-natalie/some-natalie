@@ -45,7 +45,8 @@ sudo systemctl enable docker --now
 sudo usermod -aG docker azureuser
 ```
 
-> :information_source: Yes, that's the CentOS repository, not RHEL.  Docker only publishes official RPMs for RHEL for the IBM z platform (`s390x` CPU architecture) - which coincidentally, GitHub does not publish a runner agent for.  The `x86_64` binaries work just fine in RHEL.
+:information_source: Yes, that's the CentOS repository, not RHEL.  Docker only publishes official RPMs for RHEL for the IBM z platform (`s390x` CPU architecture) - which coincidentally, GitHub does not publish a runner agent for.  The `x86_64` binaries work just fine in RHEL.
+{: .notice--info}
 
 Now let's reboot for both the new firewall backend and for the new user group to take effect.  Log back in and test that Docker is working.
 

@@ -74,7 +74,8 @@ How long is this environment going to be around?  Are you kicking the tires on f
 
 If the goal is to try and quickly figure out Actions, maybe try a few builds, look at policies that can be set, etc. **and** there's existing CI infrastructure in place - the simplest path forward is usually to remove the agent of the existing CI system (Jenkins, Azure Devops, etc.) and install the agent for GitHub Actions ([directions](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/adding-self-hosted-runners)) for a subset of the existing infrastructure.
 
-> **:sparkles: Tip! :sparkles:** This is also one of the easiest paths to migrate fully, removing a lot of the hidden "rip and replace" infrastructure costs like needing to learn a new platform or tool.
+**:sparkles: Tip! :sparkles:** This is also one of the easiest paths to migrate fully, removing a lot of the hidden "rip and replace" infrastructure costs like needing to learn a new platform or tool.
+{: .notice}
 
 The rest of this guide is assuming that we're mostly past kicking the tires and are figuring out the best path forward for the enterprise.
 
@@ -99,9 +100,8 @@ What platform do you want to run on?  The runner agent for GitHub Actions works 
 
 **Kubernetes** provides a scalable and reproducible environment for containerized workloads.  Declarative deployments and the ephemeral nature of pods used as runner agents creates fewer "works on this agent and not that one" problems by not allowing configuration to drift, but there's a few anti-patterns to be aware of (discussed [here](https://some-natalie.dev/blog/kubernetes-for-enterprise-ci/)).  There are a lot of advantages to using Kubernetes (outlined [here](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)), but it is more complicated than the other options.  A managed provider removes some of that complexity.
 
-> **Note**
->
-> Some GitHub Actions ship as Dockerfiles ([documentation](https://docs.github.com/en/actions/creating-actions/about-custom-actions)), meaning the workload builds and runs in the container it defines.  Whichever path is chosen here, a container runtime should be part of the solution if these jobs are required.  This could mean Docker-in-Docker (requiring privileged pods) for Kubernetes-based solutions.
+Some GitHub Actions ship as Dockerfiles ([documentation](https://docs.github.com/en/actions/creating-actions/about-custom-actions)), meaning the workload builds and runs in the container it defines.  Whichever path is chosen here, a container runtime should be part of the solution if these jobs are required.  This could mean Docker-in-Docker (requiring privileged pods) for Kubernetes-based solutions.
+{: .notice--info}
 
 :information_desk_person: **Opinion** - Whatever is currently in use is probably the best path forward.  Doing this means every team involved (operations, security, resource management, etc) already has processes for building and maintaining things without creating exceptions or new processes.  I hesitate to recommend a total infrastructure rebuild for a few more servers in racks, or VMs, or container deployments.  Managed providers of VM infrastructure or Kubernetes clusters take away the hardware management aspect of this.
 

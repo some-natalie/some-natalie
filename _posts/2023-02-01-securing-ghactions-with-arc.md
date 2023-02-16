@@ -70,7 +70,8 @@ So we need a controller for all this magic.
 
 Enter [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source community driven project that's also now the official auto-scaling solution for self-hosting Actions runners! :tada:
 
-:warning: As a note, there's currently **a bunch** of work going on in that project right now.  This architecture diagram and the exact CRDs it implements will still be available.  However, with the additional work for a better scaling solution adding a supported path, here's a high-level overview that'll age a bit better - automatic scaling is pull-driven over APIs.  In the current implementation, that's a pretty short (but configurable) poll length.  There's also an option for push-driven scaling via webhooks.  The newer implementation will use a longer poll on a new API.
+As a note, there's currently **a bunch** of work going on in that project right now.  This architecture diagram and the exact CRDs it implements will still be available.  However, with the additional work for a better scaling solution adding a supported path, here's a high-level overview that'll age a bit better - automatic scaling is pull-driven over APIs.  In the current implementation, that's a pretty short (but configurable) poll length.  There's also an option for push-driven scaling via webhooks.  The newer implementation will use a longer poll on a new API.
+{: .notice--info}
 
 You can find an overview of the new CRDs and architecture diagram in the [documentation](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/actions-runner-controller-2/README.md).  In any case, users are responsible for much of the infrastructure - from operations to security.
 
@@ -212,7 +213,8 @@ There are two authentication methods for actions-runner-controller, [GitHub apps
 
 The reason that giving the token too much permission is so risky is at the moment, this authentication is passed to the runner to join it to GitHub and is stored as a secret in the namespace of the controller.
 
-> :warning: Authentication is changing to just-in-time authentication soon ([link](https://github.com/actions/actions-runner-controller/tree/master/docs/preview/actions-runner-controller-2)), but until we're all there, this is something to be aware of. :warning:
+Authentication is changing to just-in-time authentication soon ([link](https://github.com/actions/actions-runner-controller/tree/master/docs/preview/actions-runner-controller-2)), but until we're all there, this is something to be aware of.
+{: .notice--warning}
 
 Another important note, this authentication is **NOT** what GitHub Actions use at runtime.  That automatic token used by a running job is unique to each time the job is run.  It is granted permissions by the workflow file and the defaults are governed by repo/org policy.  You can read more about that token in the [docs](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
 
@@ -226,7 +228,8 @@ The cluster provides hardware management, ingress/egress controls, log forwardin
 
 A deployment will control the scope (who can use it - repo/org/enterprise) and a lot more about that particular type of runner.  Common settings here include which image to use and what, if any, shared mounts to set up.  It also controls horizontal scaling (how many runners to have) and vertical scaling (resource requests and limits).
 
-> See how there's no production workloads such as an application or other non-CI jobs here?  That's no accident.  Even with all the guidelines and isolation, I have a hard time trying to save a few dollars (and a little incremental extra time) for another cluster so that we can have :ring: **One Cluster To Rule Them All** :ring:
+See how there's no production workloads such as an application or other non-CI jobs here?  That's no accident.  Even with all the guidelines and isolation, I have a hard time trying to save a few dollars (and a little incremental extra time) for another cluster so that we can have :ring: **One Cluster To Rule Them All** :ring:
+{: .notice--info}
 
 ![slide-22](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide22.png)
 

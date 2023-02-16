@@ -44,10 +44,11 @@ Much of my career so far has been in a business's _cost center_ - like internal 
 ![slide-05](/assets/graphics/2022-11-21-cloud-native/slide-05.jpg)
 
 (pictured - an appropriate reaction to seeing 800 packages listed on `yum update`)
+{: .notice}
 
 Lack of investment or institutional interest doesn't mean this problem is worth ignoring.  If every company is a software company[^2], how that software is built becomes critical to the business.
 
-A build environment is like a kitchen.  You can make all sorts of food in a kitchen, not the one dish that you want at any given time.  With a simple set of tools and time, a dish can transport you anywhere in the world.  If it's you and some reasonable roommates, you can all agree to a shared standard of cleanliness.  The moment one unreasonable houseguest cooks for the team and leaves a mess, it's a bunch of work to get things back in order (broken builds).  There could also be food safety issues (code safety issues) when things are left to get fuzzy and gross.
+A build environment is like a kitchen.  You can make all sorts of food in a kitchen, not the one dish that you want at any given time.  With a simple set of tools and time, a dish can transport you anywhere in the world.  If it's you and some reasonable roommates, you can all agree to a shared standard of cleanliness.  The moment one unreasonable house guest cooks for the team and leaves a mess, it's a bunch of work to get things back in order (broken builds).  There could also be food safety issues (code safety issues) when things are left to get fuzzy and gross.
 
 Imagine being able to snap your fingers and get a brand new identical kitchen at every meal - that's the power of **ephemeral build environments**.  Now imagine being able to track changes to those tools in that kitchen to ensure the knives are sharp and produce is fresh every single time anyone walks into it - that's putting your build environment in some sort of **version-controlled, infrastructure-as-code solution**.
 
@@ -101,15 +102,14 @@ The second is TCP MTU Probing, with the latest revision in draft with [RFC 8899]
 
 To counter this, I recommend setting the maximum MTU size explicitly in your cluster (and pod, for that matter).  I'd love to show you a simple code snippet of how to do this with the correct sizing, but there's about a million variables based on what else is in your network and what CI tool you're using.
 
-> **Note**
->
-> Specific to GitHub Actions in Kubernetes, [actions-runner-controller](https://github.com/actions-runner-controller/actions-runner-controller) has some guidance on setting the MTU size explicitly [here](https://github.com/actions-runner-controller/actions-runner-controller/blob/master/TROUBLESHOOTING.md#outgoing-network-action-hangs-indefinitely).
+:information_source: Specific to GitHub Actions in Kubernetes, [actions-runner-controller](https://github.com/actions-runner-controller/actions-runner-controller) has some guidance on setting the MTU size explicitly [here](https://github.com/actions-runner-controller/actions-runner-controller/blob/master/TROUBLESHOOTING.md#outgoing-network-action-hangs-indefinitely).
+{: .notice--info}
 
 ![slide-11](/assets/graphics/2022-11-21-cloud-native/slide-11.jpg)
 
 Managed services, such as Azure's [AKS](https://azure.microsoft.com/en-us/products/kubernetes-service/) or Amazon's [EKS](https://aws.amazon.com/eks/), make a lot of these problems disappear.  Specifically, a lot of the problems related to managing your hardware, hypervisor, and VMs that host/run Kubernetes.  It also takes away resource allocation problems, allowing you to scale as needed instantly.
 
-On a self-managed cluster, if it thinks it has 100 virtual CPUs for worker nodes, but in truth, you've used some fancy hypervisor setting to overallocate - this'll be good until it actually needs to use everything it thinks it has but can't provision it.  The Kubernetes scheduler is only as smart as what it can see.  A managed service handles scaling for you invisibly.
+On a self-managed cluster, if it thinks it has 100 virtual CPUs for worker nodes, but in truth, you've used some fancy hypervisor setting to over-allocate - this'll be good until it actually needs to use everything it thinks it has but can't provision it.  The Kubernetes scheduler is only as smart as what it can see.  A managed service handles scaling for you invisibly.
 
 That's not without a cost.  Cost planning and optimization for managed services is an entirely different exercise than owning/operating datacenters.  You should contact the account team of the service(s) you're looking at for a better understanding of how charges are incurred because that's way outside the scope of this talk! :grinning:
 
@@ -165,11 +165,11 @@ This isn't the end of the world, but our toolbox has changed compared to managin
 1. [Overlayfs](https://docs.kernel.org/filesystems/overlayfs.html) is that stacking filesystem that containers use.  Important to note these are mounts and get a little weird later on in this talk.
 1. Mandatory Access Control implementations like SELinux or AppArmor play a huge part in security too, but that's a huge topic we'll have to save for another day.  (Just don't disable it, okay?)
 
-> **NOTE**
->
-> A "namespace" in Kubernetes is an abstraction to provide some permissions isolation and resource usage quota within a cluster (such as deployments, secrets, etc.). It's commonly used to divide a cluster among several applications.  A kernel namespace is a low-level concept that wraps system resources in such a way that they are shared but appear dedicated.
+:information_source: A "namespace" in Kubernetes is an abstraction to provide some permissions isolation and resource usage quota within a cluster (such as deployments, secrets, etc.). It's commonly used to divide a cluster among several applications.  A kernel namespace is a low-level concept that wraps system resources in such a way that they are shared but appear dedicated.
+{: .notice--info}
 
 :warning: This change means users migrating from VMs that _assume_ their jobs have root access might not "just work" in this new system without some changes.  Resist the temptation to immediately grant them privileged pods and figure out if we really need it first.  Unless you're in a huge rush to decommission the system they're moving from, it's usually okay to spend some time messing with permissions and dependencies to allow their code to compile _without_ privileged access first.
+{: .notice--warning}
 
 Let's talk through a couple common places this comes up.
 

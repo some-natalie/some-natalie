@@ -249,6 +249,7 @@ on:
         - "bare-metal"
         - "test"
         - "production" 
+        default: "test"
       runner_namespace:
         description: "Which namespace to deploy to?"
         type: choice
@@ -256,6 +257,7 @@ on:
         options:  # again, change this to your own namespaces
         - "runners"
         - "test-runners"
+        default: "test-runners"
 
 jobs:
   deploy:

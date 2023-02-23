@@ -130,4 +130,4 @@ The full log, if you're interested, is [here](../../assets/logs/kubernoodles-log
 
 ## Next
 
-Automating our runner deployments to make development easier.
+Automating our runner deployments to make development easier - [part 4](../kubernoodles-pt-4)

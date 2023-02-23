@@ -150,4 +150,4 @@ jobs:
 
 ## Next
 
-Next up, we're going to look into [eBPF](https://ebpf.io) and what it can tell us about our runners and users.
+Next up, we're going to look into [eBPF](https://ebpf.io) and what it can tell us about our runners and what our users are really up to - [part 3](../kubernoodles-pt-3).

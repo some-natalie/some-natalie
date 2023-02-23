@@ -121,4 +121,4 @@ Lastly, you'll dispatch jobs to this runner set using the name set at installati
 
 ## Next
 
-A quick couple of testing workflows to test and scale the default runners, then a look at what's going on inside those runners.
+A quick couple of testing workflows to test and scale the default runners ([part 2](../kubernoodles-pt-2)), then a look at what's going on inside those runners ([part 3](../kubernoodles-pt-3)).

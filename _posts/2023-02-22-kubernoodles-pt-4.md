@@ -227,6 +227,8 @@ Now that we have Kubernetes, GitHub, and actions-runner-controller all set up to
 
 Here's the workflow file:
 
+{% raw %}
+
 ```yaml
 name: 🐝 Manually deploy runners
 
@@ -285,6 +287,8 @@ jobs:
       - name: Remove kubeconfig info
         run: rm -f /tmp/config
 ```
+
+{% endraw %}
 
 And here it is deploying and removing our development runners!  :tada:
 

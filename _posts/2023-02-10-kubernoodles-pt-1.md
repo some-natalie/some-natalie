@@ -51,7 +51,7 @@ helm repo update
 
 # Install cilium and hubble into our cluster
 helm install cilium cilium/cilium \
-    --version 1.12.6 \
+    --version 1.13.0 \
     --namespace kube-system \
     --set aksbyocni.enabled=true \
     --set nodeinit.enabled=true \
@@ -98,7 +98,7 @@ Here's how to deploy the default runner image ([source](https://github.com/actio
 ```shell
 helm install defaults \
     --namespace "runners" \
-    -f helm-runner.yml
+    -f helm-runner.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/auto-scaling-runner-set \
     --version 0.2.0
 ```

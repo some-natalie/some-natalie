@@ -298,4 +298,4 @@ And here it is deploying and removing our development runners!  :tada:
 
 ## Next
 
-Streaming these logs into something ...
+Creating your own :sparkles: awesome :sparkles: custom runner image.

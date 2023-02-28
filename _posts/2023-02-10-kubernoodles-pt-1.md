@@ -51,7 +51,7 @@ helm repo update
 
 # Install cilium and hubble into our cluster
 helm install cilium cilium/cilium \
-    --version 1.12.6 \
+    --version 1.13.0 \
     --namespace kube-system \
     --set aksbyocni.enabled=true \
     --set nodeinit.enabled=true \
@@ -84,7 +84,7 @@ helm install arc \
     --namespace "${NAMESPACE}" \
     --create-namespace \
     oci://ghcr.io/actions/actions-runner-controller-charts/actions-runner-controller-2 \
-    --version 0.1.0
+    --version 0.2.0
 ```
 
 Now, let's create some namespaces for our runners to use.  Because this is a single-tenant use case, I'm only going to use one namespace for "production", but this can be broken down however you'd like.  I tend to recommend one namespace per deployment with quotas/etc set there.  This also can change and grow later on ... no commitments made here.
@@ -98,9 +98,9 @@ Here's how to deploy the default runner image ([source](https://github.com/actio
 ```shell
 helm install defaults \
     --namespace "runners" \
-    -f helm-runner.yml
+    -f helm-runner.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/auto-scaling-runner-set \
-    --version 0.1.0
+    --version 0.2.0
 ```
 
 If all has gone well, you should now see an online set of runners in GitHub, no pods in the `runners` namespace (scaled to 0 unless there's work), and a listener pod in the `arc-systems` namespace.
@@ -112,7 +112,7 @@ No resources found in runners namespace.
 $ kubectl get pods -n "arc-systems"
 NAME                                              READY   STATUS    RESTARTS   AGE
 arc-actions-runner-controller-2-8c74b6f95-z9d6w   1/1     Running   0          6h8m
-defaults-7d446b46-listener                  1/1     Running   0          30m
+defaults-7d446b46-listener                        1/1     Running   0          30m
 ```
 
 ![runners-online](/assets/graphics/2023-02-10-kubernoodles-pt-1/runner-sets.png)

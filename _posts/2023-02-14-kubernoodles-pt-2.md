@@ -72,7 +72,7 @@ on:
         required: true
 
 jobs:
-  debug info:
+  debug-info:
     runs-on: ${{ github.event.inputs.target-scale-set }}
     steps:
     - name: "Environment variable dump"
@@ -87,6 +87,19 @@ jobs:
         echo "GID: $(id -g)"
         echo "GROUPS: $(id -G)"
         echo "GROUPS: $(groups)"
+    - name: "What's in the home directory?"
+      shell: bash
+      run: |
+        ls -lah ~
+    - name: "What's in the root directory?"
+      shell: bash
+      run: |
+        ls -lah /
+    - name: "What's in the working directory?"
+      shell: bash
+      run: |
+        pwd
+        ls -lah .
 ```
 
 ## Leave the runner up for inbound connection
@@ -112,7 +125,6 @@ jobs:
         run: |
           echo "Hello world"
           sleep 3600
-
 ```
 
 ## Test container mode

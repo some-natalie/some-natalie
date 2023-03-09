@@ -34,7 +34,7 @@ First, let's setup the cluster.  I want to play with [eBPF](https://ebpf.io/) fo
 az aks create -n <cluster-name> -g <resource-group-name> -l <region-name> \
     --max-pods 250 \
     --auto-upgrade-channel rapid \
-    --kubernetes-version 1.25.5 \
+    --kubernetes-version 1.26.0 \
     --node-vm-size Standard_B4ms \
     --network-plugin none
 
@@ -83,7 +83,7 @@ NAMESPACE="arc-systems"
 helm install arc \
     --namespace "${NAMESPACE}" \
     --create-namespace \
-    oci://ghcr.io/actions/actions-runner-controller-charts/actions-runner-controller-2 \
+    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller \
     --version 0.2.0
 ```
 
@@ -99,7 +99,7 @@ Here's how to deploy the default runner image ([source](https://github.com/actio
 helm install defaults \
     --namespace "runners" \
     -f helm-runner.yml \
-    oci://ghcr.io/actions/actions-runner-controller-charts/auto-scaling-runner-set \
+    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
     --version 0.2.0
 ```
 

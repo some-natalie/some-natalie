@@ -35,8 +35,6 @@ timezone: America/Denver
 
 include:
   - _pages
-  - README.md
-  - SPEAKING.md
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

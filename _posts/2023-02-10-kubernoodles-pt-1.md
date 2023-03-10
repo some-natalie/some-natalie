@@ -84,7 +84,7 @@ helm install arc \
     --namespace "${NAMESPACE}" \
     --create-namespace \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller \
-    --version 0.2.0
+    --version 0.3.0
 ```
 
 Now, let's create some namespaces for our runners to use.  Because this is a single-tenant use case, I'm only going to use one namespace for "production", but this can be broken down however you'd like.  I tend to recommend one namespace per deployment with quotas/etc set there.  This also can change and grow later on ... no commitments made here.
@@ -100,7 +100,7 @@ helm install defaults \
     --namespace "runners" \
     -f helm-runner.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.2.0
+    --version 0.3.0
 ```
 
 If all has gone well, you should now see an online set of runners in GitHub, no pods in the `runners` namespace (scaled to 0 unless there's work), and a listener pod in the `arc-systems` namespace.

@@ -73,7 +73,7 @@ That organization isn't in my enterprise account.  It's one of the oldest existi
 
 > How I feel every time I have to use GraphQL ... nothing makes it feel normal :sweat_smile:
 
-Let's try the [list organizations](https://docs.github.com/en/graphql/reference/objects#enterpriseorganizationmembershipedge) in GraphQL.  I fired up [GraphiQL](https://github.com/graphql/graphiql) and started poking around to come up with this query.
+Let's try the [list organizations](https://docs.github.com/en/graphql/reference/objects#enterpriseorganizationmembershipedge) query in GraphQL.  I fired up [GraphiQL](https://github.com/graphql/graphiql) and started poking around to come up with this query.
 
 ```graphql
 query listEnterpriseOrganizations {
@@ -202,4 +202,4 @@ This is a weird problem to solve for _correctly_.  These scripts strung together
 - you need to _edit_ scripts in line like it's 1999 ... no fancy wrapper scripts or inputs from `stdin`
 - it uses the built-in [security manager](https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization) role, so there'd need to be some script modification to create/manage a [custom role](https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-peoples-access-to-your-organization-with-roles/about-custom-repository-roles) as well
 
-Product hears more stories and thinks further out.  The constant iteration of "why?" and "who?" was critical to figure out an approach that works for a reasonable number of people.  I hope it makes the frantic inventory to determine who needs to drop everything to fix the latest named vulnerability an easy 2-second search and - just maybe - promote developers and operations (and everyone else) working together with security folks. :heart:
+Product hears more stories and thinks further out.  The constant iteration of "why?" and "who?" was critical to figure out an approach that works for a reasonable number of people.  I hope these scripts will make the frantic inventory to determine who needs to drop everything to fix the latest named vulnerability an easy 2-second search and - just maybe - promote developers and operations (and everyone else) working together with security folks. :heart:

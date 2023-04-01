@@ -71,7 +71,7 @@ Let's turn on privileged access by following [these directions](https://github.c
 
 ```console
 # TCP network connectivity CRD
-kubectl apply -f https://raw.githubusercontent.com/cilium/tetragon/main/crds/examples/tcp-connect.yaml
+kubectl apply -f https://raw.githubusercontent.com/cilium/tetragon/main/examples/tracingpolicy/tcp-connect.yaml
 
 # Open DNS requests CRD
 kubectl apply -f https://raw.githubusercontent.com/cilium/tetragon/main/examples/tracingpolicy/open_dnsrequest.yaml

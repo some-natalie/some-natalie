@@ -93,6 +93,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
+      words_per_minute: 150
       comments: false
       share: false
       related: true

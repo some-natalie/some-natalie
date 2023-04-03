@@ -20,7 +20,7 @@ I wrote a set of Python scripts that creates and manages a team of folks that ca
 
 > :link: Here's the project - [advanced-security/enterprise-security-team](https://github.com/advanced-security/enterprise-security-team)
 
-### Where we're going
+## Where we're going
 
 - [How do you know how many organizations you even have?](#how-do-you-know-how-many-organizations-you-even-have)
 - [Owning all the organizations](#owning-all-the-organizations)
@@ -29,7 +29,7 @@ I wrote a set of Python scripts that creates and manages a team of folks that ca
 - [Finishing touches](#finishing-touches)
 - [Lessons learned](#lessons-learned)
 
-### How do you know how many organizations you even have?
+## How do you know how many organizations you even have?
 
 I spent around 6 years leading the _self-hosted_ GitHub Enterprise product as a customer - controlling so much more of the infrastructure and having access to extra administrative tools (like [SSH access](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/command-line-utilities), [database access](https://github.com/github/platform-samples/tree/master/sql), and [other silly things](https://github.com/github/platform-samples/tree/master/pre-receive-hooks) you probably shouldn't do).  I'd expected to have an [easy CSV report](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/site-admin-dashboard#reports) of all my organizations in the cloud SaaS product, just like the self-hosted product.  It's not there.  Instead, there's a lovely GUI with a count and a list by name.
 
@@ -137,7 +137,7 @@ query listEnterpriseOrganizations {
 
 Now that's a lot better!  Even though I struggled on [pagination](https://graphql.org/learn/pagination/) (and just about everything else) in GraphQL, we can get more results per query and iterate over them now get the complete list of organizations in an enterprise (full query [here](https://github.com/advanced-security/enterprise-security-team/blob/main/src/organizations.py#L36-L60)). :tada:
 
-### Owning all the organizations
+## Owning all the organizations
 
 This is remarkably simple on the self-hosted side.  The command has been baked in for years, called [`ghe-org-admin-promote`](https://docs.github.com/en/enterprise-server@latest/admin/configuration/configuring-your-enterprise/command-line-utilities#ghe-org-admin-promote).  You SSH to the admin console, run the command, and it adds you to every single organization as an owner.  It's no fun to automate and hard to build a robust system around SSH commands, but it does work.  For obvious reasons, this doesn't exist in a multi-tenant SaaS product.
 
@@ -153,7 +153,7 @@ mutation promoteEnterpriseAdminToOwner {
 }
 ```
 
-### Managing the team
+## Managing the team
 
 Creating a team and managing the members is easily done with [the REST API](https://docs.github.com/en/enterprise-cloud@latest/rest/teams/teams?apiVersion=2022-11-28) and a bit of Python for [string replacement](https://docs.python.org/3/library/stdtypes.html?highlight=replace#str.replace) and [list operations](https://docs.python.org/3/tutorial/datastructures.html).
 
@@ -161,7 +161,7 @@ The simple architecture is using boring Python functions, broken into two folder
 
 No fancy data types were used, there's nothing complicated going on, and it's all super documented because I didn't want to write much code at all.  I want to be kind to future me, debugging this or needing to add/change parts.
 
-### Putting it all together
+## Putting it all together
 
 This solution came together and was tested in a few days between my other job duties.  At around 500 lines (roughly?) of Python code, it's not at all a large project.  It came together so quickly for two reasons - simple architecture and GitHub Copilot.  I wanted to give my pair programmer some context to do all the hard work.
 
@@ -174,7 +174,7 @@ GitHub Copilot made fast work of generating functions and navigating around the 
 There is only one correct way to format your Python code and it's :sparkling_heart: [black](https://github.com/psf/black) :sparkling_heart:
 {: .notice--info}
 
-### Finishing touches
+## Finishing touches
 
 The last few items to add before releasing this to the world were all templates that only needed a tiny bit of modification.  Having a "paved path" to open sourcing a bit of code is fantastic.  It took me perhaps half an hour to track down _all_ of the community health files and such from our templates, edit as needed, and ask for approval via an Issue.  Not once was I fumbling to figure out how best to write a Code of Conduct or think through what license I really wanted to use.  Once approved, it was another few minutes to hit the big "make it public!" button. :tada:
 
@@ -187,7 +187,7 @@ The last few items to add before releasing this to the world were all templates 
   - [Stale](https://github.com/actions/stale) closes out issues and pull requests after a time of inactivity, keeping everything fresh ([workflow file](https://github.com/advanced-security/enterprise-security-team/blob/main/.github/workflows/weekly-cleanup.yml))
   - [Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates) version updates send me PRs automatically to update all my external dependencies ([config file](https://github.com/advanced-security/enterprise-security-team/blob/main/.github/dependabot.yml))
 
-### Lessons learned
+## Lessons learned
 
 When I joined GitHub, one of the product managers that I'd talked with a lot as a customer said there's a partnership between field folks like myself and the product team - but it wasn't readily obvious how that worked exactly.  I've dutifully gathered customer feedback, documenting it for later, and retelling those stories as frequently and thoroughly as possible.  It took putting this together myself - with a ton of back-and-forth ideas while iterating over each of the discoveries and design choices I made of "what is that customer story really about?" and "who are you building _for_?" for it to finally click for me.
 

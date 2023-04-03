@@ -48,6 +48,11 @@ When a repository is opened in a Codespace without a pre-defined devcontainer, y
   // Base image to use, similar to the `FROM` directive in a Dockerfile
   "image": "mcr.microsoft.com/vscode/devcontainers/ruby:3-bullseye",
 
+  // Add `git-lfs` to store PDFs of presentations, GIFs, etc.
+  "features": {
+    "git-lfs": "latest"
+  },
+
   // What ports to open (privately to me) and giving them human-readable names
   "forwardPorts": [4000],
   "portsAttributes": {

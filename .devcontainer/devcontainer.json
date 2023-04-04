@@ -10,6 +10,18 @@
       "label": "Website"
     }
   },
+  "customizations": {
+    "codespaces": {
+      "repositories": {
+        "some-natalie/work-stuff": {
+          "permissions": {
+            "contents": "write",
+            "pull_requests": "write"
+          }
+        }
+      }
+    }
+  },
   "postCreateCommand": "bundle",
   "postAttachCommand": "bundle exec jekyll serve --livereload"
 }

@@ -7,28 +7,15 @@ tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
-classes: wide
+toc: true
+toc_sticky: true
 excerpt: "(Kubernoodles, part 5 of ?) - You need your own image.  Here's how to make it ✨ awesome ✨"
 ---
 
 Now that we have [actions-runner-controller](https://github.com/actions/actions-runner-controller) up and running, we need to think through the runner image some.  This piece is all about how to build your own image(s) and whether it's a good idea to do that.
 
-:shipit: The end result of this how-to is an image based on UBI 8 that has no `sudo` rights.  This means container-y things won't work (which could be great or awful).  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi8.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi8.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/gha-runner-scale-set-controller/README.md), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi8).  We'll cover a Docker-in-Docker container build later.
+:shipit: The end result of this how-to is an image based on UBI 8 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi8.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi8.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/gha-runner-scale-set-controller/README.md), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi8).  We'll cover a Docker-in-Docker container build later.
 {: .notice--info}
-
-## Where we're going
-
-- [All about the default runner image](#all-about-the-default-runner-image)
-- [Choose your base image](#choose-your-base-image)
-- [Labels are the best](#labels-are-the-best)
-- [Making some arguments](#making-some-arguments) - put everything that changes frequently up top
-- [Basic setup](#some-basic-setup) - set those environment variables
-- [Runner agent setup](#runner-agent-setup) - the very bare minimum that must be done
-- [Customizing with software](#choose-your-own-adventure)
-- [Tagging your images](#moving-off-latest)
-- [Building and deploying manually](#building-and-deploying-manually)
-- [Finished product and next steps](#lastly)
-- [Footnotes](#footnotes)
 
 ## All about the default runner image
 

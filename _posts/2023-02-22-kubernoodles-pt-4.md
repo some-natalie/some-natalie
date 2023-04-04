@@ -300,4 +300,4 @@ And here it is deploying and removing our development runners!  :tada:
 
 ## Next
 
-Creating your own :sparkles: awesome :sparkles: custom runner image.
+In [part 5](../kubernoodles-pt-5), we create our own :sparkles: awesome :sparkles: custom runner image.

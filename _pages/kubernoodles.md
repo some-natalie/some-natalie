@@ -12,10 +12,11 @@ Here's what has been done and where we're going.
 - [Part 2](../blog/kubernoodles-pt-2) - Create a few Actions to test, scale, and debug our self-hosted runners.
 - [Part 3](../blog/kubernoodles-pt-3) - Dive into understanding what's really being run in our self-hosted GitHub Actions runners with [tetragon](https://github.com/cilium/tetragon).
 - [Part 4](../blog/kubernoodles-pt-4) - Setup the Kubernetes cluster, GitHub, and actions-runner-controller to work together, then make a GitHub Actions workflow to create and remove test deployments from a Helm chart.
+- [Part 5](../blog/kubernoodles-pt-5) - How to build your own custom images for actions-runner-controller!
 
 Coming soon:
 
-- Custom images
+- Automating the builds and testing of custom runner images
 - Log streaming
 - Private registries
 - File caching

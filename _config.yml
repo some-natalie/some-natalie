@@ -75,9 +75,9 @@ author:
     - label: "Sessionize"
       icon: "fas fa-fw fa-microphone"
       url: "https://sessionize.com/some-natalie/"
-    - label: "Twitter (not active))"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/some_natalie"
+#    - label: "Twitter (not active))"
+#      icon: "fab fa-fw fa-twitter-square"
+#      url: "https://twitter.com/some_natalie"
 
 footer:
   links:

@@ -10,6 +10,12 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ## 2023
 
+**Threat Modeling the GitHub Actions Ecosystem** (23 June) at [BSides Boulder](https://bsidesboulder.org) is a tour through the four questions outlined in the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/) to provide an enterprise-ready threat model for implementing GitHub Actions securely.
+
+- Abstract on [Sessionize](https://sessionize.com/s/some-natalie/threat-modeling-the-github-actions-ecosystem/68736)
+- Slides coming soon
+- Recording coming soon
+
 **Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller**  (1 Feb) at [CloudNativeSecurityCon North America](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) is a deep dive into the security considerations of running self-hosted GitHub Actions compute with [actions-runner-controller](https://github.com/actions/actions-runner-controller).
 
 <details>

@@ -66,7 +66,7 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://some-natalie.dev"
-    - label: "Twitter"
+    - label: "Twitter (not very active))"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/some_natalie"
     - label: "GitHub"
@@ -75,6 +75,9 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/nsomersall"
+    - label: "Sessionize"
+      icon: "fas fa-fw fa-microphone"
+      url: "https://sessionize.com/some-natalie/"
 
 footer:
   links:

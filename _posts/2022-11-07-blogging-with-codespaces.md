@@ -4,8 +4,6 @@ date: 2022-11-07
 categories:
   - blog
 tags:
-  - Jekyll
-  - dependency-mgmt
   - codespaces
 classes: wide
 excerpt: "Using devcontainers (and not developer tears) to manage dependencies for this site"

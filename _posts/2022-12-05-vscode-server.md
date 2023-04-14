@@ -4,9 +4,7 @@ date: 2022-12-05
 categories:
   - blog
 tags:
-  - devcontainers
   - kubernetes
-  - vscode
   - codespaces
 classes: wide
 excerpt: "It's like Codespaces, but much more work for much less functionality."

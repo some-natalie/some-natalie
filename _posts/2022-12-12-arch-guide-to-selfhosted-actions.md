@@ -5,7 +5,6 @@ categories:
   - blog
 tags:
   - CI
-  - github-actions
   - business
   - kubernetes
 toc: true

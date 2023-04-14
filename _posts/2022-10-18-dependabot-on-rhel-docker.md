@@ -7,7 +7,6 @@ tags:
   - security
   - dependabot
   - on-premises
-  - rhel
   - linux
 classes: wide
 excerpt: "How to run Dependabot on-premises using Red Hat Enterprise Linux"

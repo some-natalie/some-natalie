@@ -41,7 +41,7 @@ None of this is able to be correlated reliably in a programmatic way from reposi
 
 A terribly common example is the noisy “flaws” returned by static analysis tools where it _might_ be dangerous but the tool doesn’t know, so it makes you decide - a thousand times.  Commonly, it’s when you get info from a user, but the tool isn’t sure if you are using that data unsafely.  Another use case that often falls in this category are “code smells” or other bugs or stylistic concerns.  Could be a security thing, could be a buggy thing, could be a boring thing - who knows so here’s a hundred tickets to fill out. :heart_eyes:
 
-![appsec](/assets/graphics/gifs/appsec-mr-incredible.gif){: .align-center}
+![appsec](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/appsec-mr-incredible.gif){: .align-center}
 
 ### Do not correspond to ITSM events
 

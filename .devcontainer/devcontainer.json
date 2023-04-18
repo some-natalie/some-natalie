@@ -22,6 +22,6 @@
       }
     }
   },
-  "postCreateCommand": "bundle",
-  "postAttachCommand": "bundle exec jekyll serve --livereload"
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postAttachCommand": ".devcontainer/post-attach.sh"
 }

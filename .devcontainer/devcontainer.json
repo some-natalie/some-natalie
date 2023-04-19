@@ -23,6 +23,8 @@
     }
   },
   "postCreateCommand": ".devcontainer/post-create.sh",
-  "postStartCommand": "bundle exec jekyll serve --livereload",
-  "postAttachCommand": ".devcontainer/post-attach.sh"
+  "postAttachCommand": {
+    "website": "bundle exec jekyll serve --livereload",
+    "open-repos": ".devcontainer/post-attach.sh"
+  }
 }

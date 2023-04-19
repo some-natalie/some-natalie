@@ -9,6 +9,3 @@ for repo in $REPOS; do
     repo_name=$(echo "$repo" | cut -d'/' -f2) # split the repo name from owner
     git clone https://github.com/"$repo".git /workspaces/"$repo_name"
 done
-
-# Install the bundle deps
-bundle

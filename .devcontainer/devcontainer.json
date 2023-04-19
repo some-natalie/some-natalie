@@ -22,7 +22,10 @@
       }
     }
   },
-  "postCreateCommand": ".devcontainer/post-create.sh",
+  "postCreateCommand": {
+    "bundle": "bundle",
+    "clone-repos": ".devcontainer/post-create.sh"
+  },
   "postAttachCommand": {
     "website": "bundle exec jekyll serve --livereload",
     "open-repos": ".devcontainer/post-attach.sh"

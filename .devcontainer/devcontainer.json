@@ -22,12 +22,12 @@
       }
     }
   },
+  "onCreateCommand": "sudo echo '\n🌺 Run ./load-workspace.sh to add the other repositories defined in the devcontainer to VS Code. 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt",
   "postCreateCommand": {
     "bundle": "bundle",
     "clone-repos": ".devcontainer/post-create.sh"
   },
   "postAttachCommand": {
-    "website": "bundle exec jekyll serve --livereload",
-    "open-repos": ".devcontainer/post-attach.sh"
+    "open-repos": "bundle exec jekyll serve --livereload"
   }
 }

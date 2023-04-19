@@ -7,5 +7,5 @@ REPOS=$(jq -r '.customizations.codespaces.repositories' .devcontainer/devcontain
 # Clone the other repos
 for repo in $REPOS; do
     repo_name=$(echo "$repo" | cut -d'/' -f2) # split the repo name from owner
-    code --add /workspaces/"$repo_name"
+    code-insiders --add /workspaces/"$repo_name"
 done

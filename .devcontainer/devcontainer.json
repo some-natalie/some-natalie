@@ -25,7 +25,7 @@
   "postCreateCommand": {
     "bundle": "bundle",
     "clone-repos": ".devcontainer/post-create.sh",
-    "welcome": "sudo echo '\n\nRemember to run ./load-workspace.sh to open the other repositories.' >> /workspaces/.codespaces/shared/first-run-notice.txt"
+    "welcome": "sudo echo '\n🌺 Run ./load-workspace.sh to add the other repositories defined in the devcontainer to VS Code. 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
   },
   "postAttachCommand": {
     "open-repos": "bundle exec jekyll serve --livereload"

@@ -9,6 +9,3 @@ for repo in $REPOS; do
     repo_name=$(echo "$repo" | cut -d'/' -f2) # split the repo name from owner
     code-insiders --add /workspaces/"$repo_name"
 done
-
-# Start the server
-bundle exec jekyll serve --livereload

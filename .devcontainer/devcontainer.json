@@ -27,6 +27,7 @@
     "clone-repos": ".devcontainer/post-create.sh"
   },
   "postAttachCommand": {
-    "open-repos": ".devcontainer/post-attach.sh"
+    "open-repos": "bundle exec jekyll serve --livereload",
+    "reminder": "echo \"Remember to run './load-workspace.sh' to open the other repositories.\""
   }
 }

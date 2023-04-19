@@ -27,7 +27,5 @@
     "clone-repos": ".devcontainer/post-create.sh",
     "first-welcome": "sudo echo '\n🌺 Run ./load-workspace.sh to add the other repositories defined in the devcontainer to VS Code. 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
   },
-  "postAttachCommand": {
-    "start-server": "bundle exec jekyll serve --livereload"
-  }
+  "postAttachCommand": "bundle exec jekyll serve --livereload"
 }

@@ -55,7 +55,7 @@ drwxr-xr-x+  4 vscode root   4.0K Apr 06 02:15 .codespaces/
 drwxrwxrwx+ 11 vscode root   4.0K Apr 06 02:24 some-natalie/
 ```
 
-Now let's clone every repository that we give our Codespace access to.  Add a script to `~/.devcontainer/post-create.sh` that will clone each repo using the automatic git credentials that we just authorized.
+Let's automatically clone every repository that we give our Codespace access to.  Add a script to `~/.devcontainer/post-create.sh` that will clone each repo using the automatic git credentials that we just authorized.
 
 ```shell
 #!/bin/bash
@@ -71,11 +71,11 @@ for repo in $REPOS; do
 done
 ```
 
-Make sure it's executable and add it to our `devcontainer.json` file as (one of) the `postCreateCommand`.
+Make sure it's executable and add it to our `devcontainer.json` file as (one of) the `postCreateCommand` scripts.
 
 Now the repositories are cloned on creation, but not updated in the workspace - meaning I'll have to add them one by one to my workspace.  That's simply too much work.  This is where there's a bit of a compromise.  The `.code-workspace` file that works great in VSCode on a local machine doesn't load correctly in a Codespace (or regular devcontainer for that matter), so we're going to add another script to do this.
 
-Create a script called `post-attach.sh` and add the following:
+Create a script called `~/load-workspace.sh` and add the following:
 
 ```shell
 #!/bin/bash
@@ -84,27 +84,32 @@ set -e
 # Get the list of other repositories from devcontainer.json using jq
 REPOS=$(jq -r '.customizations.codespaces.repositories' .devcontainer/devcontainer.json | jq -r 'keys[]')
 
-# Clone the other repos
+# Open the other repos
 for repo in $REPOS; do
     repo_name=$(echo "$repo" | cut -d'/' -f2) # split the repo name from owner
-    code --add /workspaces/"$repo_name"
+    code-insiders --add /workspaces/"$repo_name"
 done
+
 ```
 
-Swap `code-insiders` for `code` if you want to use the insider's edition of VS Code instead.  Weirdly enough, `code` doesn't exist at the creation or starting points of the [lifecycle](https://containers.dev/implementors/spec/#lifecycle) so it must run on attach.  We also want jekyll to run on attach as well, starting our webserver.  Lucky for us, each of these lifecycle points supports parallel commands as a first class citizen.  Here's the snippet of our `devcontainer.json` file showing our finished configuration:
+Swap `code-insiders` for `code` if you want to use the insider's edition of VS Code instead.  Weirdly enough, `code` doesn't exist at the creation/start/attach points of the [lifecycle](https://containers.dev/implementors/spec/#lifecycle) so it must be run by the user after first attach.  We also want jekyll to run on _every_ attach as well, starting our webserver.  
+
+Lucky for us, each of these lifecycle points supports parallel commands as a first class citizen.  Here's the snippet of our `devcontainer.json` file showing our finished configuration:
 
 ```json
   "postCreateCommand": {
     "bundle": "bundle",
-    "clone-repos": ".devcontainer/post-create.sh"
+    "clone-repos": ".devcontainer/post-create.sh",
+    "first-welcome": "sudo echo '\n🌺 Run ./load-workspace.sh to add the other repositories defined in the devcontainer to VS Code. 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
   },
-  "postAttachCommand": {
-    "website": "bundle exec jekyll serve --livereload",
-    "open-repos": ".devcontainer/post-attach.sh"
-  }
+  "postAttachCommand": "bundle exec jekyll serve --livereload"
 ```
 
-And now, it automatically opens both repositories on launch - the public one and private one! :tada:
+And now, it automatically reminds you to load everything with a single command on first launch:
+
+![custom-welcome](/assets/graphics/2023-04-07-revising-devcontainer/custom-welcome.jpg)
+
+Running that script reloads the Codespace window with both repositories open on launch - the public one and private one! :tada:
 
 ![two-repos](/assets/graphics/2023-04-07-revising-devcontainer/two-repos-one-workspace.png)
 

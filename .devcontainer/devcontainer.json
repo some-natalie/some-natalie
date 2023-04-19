@@ -24,10 +24,10 @@
   },
   "postCreateCommand": {
     "bundle": "bundle",
-    "clone-repos": ".devcontainer/post-create.sh"
+    "clone-repos": ".devcontainer/post-create.sh",
+    "welcome": "sudo echo '\n\nRemember to run ./load-workspace.sh to open the other repositories.' >> /workspaces/.codespaces/shared/first-run-notice.txt"
   },
   "postAttachCommand": {
-    "open-repos": "bundle exec jekyll serve --livereload",
-    "reminder": "echo \"Remember to run './load-workspace.sh' to open the other repositories.\""
+    "open-repos": "bundle exec jekyll serve --livereload"
   }
 }

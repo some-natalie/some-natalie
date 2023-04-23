@@ -6,7 +6,7 @@ Boulder, CO metro area
 
 ## Summary
 
-Devops engineer and consultant experienced in developing infrastructure-as-code solutions and operations automation to meet a wide variety of client needs and scales.  I've worked extensively with most major Linux distributions, Python, shell scripting, and all manner of other things as needed by the project.  I'm getting into Kubernetes and Go recently.  I love to build cool systems to support complex client needs.
+Devops engineer and consultant experienced in developing infrastructure-as-code solutions and operations automation to meet a wide variety of client needs and scales.  I've worked extensively with most major Linux distributions, Python, shell scripting, and all manner of other things as needed by the project.  I'm getting into Kubernetes and Go recently.  I love to build cool systems and working with fun people to support complex client needs.
 
 - [Blog](https://some-natalie.dev) and [speaking](https://some-natalie.dev/speaking)
 - [GitHub](https://github.com/some-natalie)

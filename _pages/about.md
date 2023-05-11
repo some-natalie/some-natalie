@@ -32,4 +32,4 @@ Heads up!
 - 🌱 I’m currently learning some more in-depth Kubernetes administration and a bit of Go.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her
-- ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).
+- ❓ Looking for my résumé?  It's [here](https://github.com/some-natalie/some-natalie/blob/main/RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).

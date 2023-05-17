@@ -1,0 +1,147 @@
+2023-05-17T02:11:39.1175633Z Requested labels: ubuntu-latest
+2023-05-17T02:11:39.1176069Z Job defined at: some-natalie/studious-octo-meme/.github/workflows/dependency-review.yml@refs/heads/main
+2023-05-17T02:11:39.1176194Z Waiting for a runner to pick up this job...
+2023-05-17T02:11:39.7148246Z Job is waiting for a hosted runner to come online.
+2023-05-17T02:11:42.0822298Z Job is about to start running on the hosted runner: GitHub Actions 2 (hosted)
+2023-05-17T02:11:46.2539812Z Current runner version: '2.304.0'
+2023-05-17T02:11:46.2573701Z ##[group]Operating System
+2023-05-17T02:11:46.2574452Z Ubuntu
+2023-05-17T02:11:46.2574842Z 22.04.2
+2023-05-17T02:11:46.2575158Z LTS
+2023-05-17T02:11:46.2575656Z ##[endgroup]
+2023-05-17T02:11:46.2576078Z ##[group]Runner Image
+2023-05-17T02:11:46.2576808Z Image: ubuntu-22.04
+2023-05-17T02:11:46.2577247Z Version: 20230507.1
+2023-05-17T02:11:46.2577926Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20230507.1/images/linux/Ubuntu2204-Readme.md
+2023-05-17T02:11:46.2578839Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20230507.1
+2023-05-17T02:11:46.2579389Z ##[endgroup]
+2023-05-17T02:11:46.2579838Z ##[group]Runner Image Provisioner
+2023-05-17T02:11:46.2580288Z 2.0.171.1
+2023-05-17T02:11:46.2580629Z ##[endgroup]
+2023-05-17T02:11:46.2581550Z ##[group]GITHUB_TOKEN Permissions
+2023-05-17T02:11:46.2582279Z Contents: read
+2023-05-17T02:11:46.2582643Z Metadata: read
+2023-05-17T02:11:46.2583421Z ##[endgroup]
+2023-05-17T02:11:46.2588021Z Secret source: Actions
+2023-05-17T02:11:46.2588686Z Prepare workflow directory
+2023-05-17T02:11:46.3484351Z Prepare all required actions
+2023-05-17T02:11:46.3711252Z Getting action download info
+2023-05-17T02:11:46.6431584Z Download action repository 'actions/checkout@v3' (SHA:8e5e7e5ab8b370d6c329ec480221332ada57f0ab)
+2023-05-17T02:11:47.2982616Z Download action repository 'actions/dependency-review-action@v3' (SHA:f46c48ed6d4f1227fb2d9ea62bf6bcbed315589e)
+2023-05-17T02:11:48.0678376Z Complete job name: dependency-review
+2023-05-17T02:11:48.1805675Z ##[group]Run actions/checkout@v3
+2023-05-17T02:11:48.1806047Z with:
+2023-05-17T02:11:48.1806304Z   fetch-depth: 2
+2023-05-17T02:11:48.1806620Z   repository: some-natalie/studious-octo-meme
+2023-05-17T02:11:48.1807265Z   token: ***
+2023-05-17T02:11:48.1807530Z   ssh-strict: true
+2023-05-17T02:11:48.1807806Z   persist-credentials: true
+2023-05-17T02:11:48.1808090Z   clean: true
+2023-05-17T02:11:48.1808329Z   lfs: false
+2023-05-17T02:11:48.1808586Z   submodules: false
+2023-05-17T02:11:48.1808865Z   set-safe-directory: true
+2023-05-17T02:11:48.1809156Z ##[endgroup]
+2023-05-17T02:11:48.4991799Z Syncing repository: some-natalie/studious-octo-meme
+2023-05-17T02:11:48.4993915Z ##[group]Getting Git version info
+2023-05-17T02:11:48.4994588Z Working directory is '/home/runner/work/studious-octo-meme/studious-octo-meme'
+2023-05-17T02:11:48.5051105Z [command]/usr/bin/git version
+2023-05-17T02:11:48.5051415Z git version 2.40.1
+2023-05-17T02:11:48.5052736Z ##[endgroup]
+2023-05-17T02:11:48.5105682Z Temporarily overriding HOME='/home/runner/work/_temp/83242afb-5668-43a2-af56-716e5b06fc44' before making global git config changes
+2023-05-17T02:11:48.5120681Z Adding repository directory to the temporary git global config as a safe directory
+2023-05-17T02:11:48.5121574Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/studious-octo-meme/studious-octo-meme
+2023-05-17T02:11:48.5166708Z Deleting the contents of '/home/runner/work/studious-octo-meme/studious-octo-meme'
+2023-05-17T02:11:48.5167563Z ##[group]Initializing the repository
+2023-05-17T02:11:48.5168128Z [command]/usr/bin/git init /home/runner/work/studious-octo-meme/studious-octo-meme
+2023-05-17T02:11:48.5247778Z hint: Using 'master' as the name for the initial branch. This default branch name
+2023-05-17T02:11:48.5250230Z hint: is subject to change. To configure the initial branch name to use in all
+2023-05-17T02:11:48.5251557Z hint: of your new repositories, which will suppress this warning, call:
+2023-05-17T02:11:48.5252483Z hint: 
+2023-05-17T02:11:48.5253741Z hint: 	git config --global init.defaultBranch <name>
+2023-05-17T02:11:48.5254431Z hint: 
+2023-05-17T02:11:48.5256700Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2023-05-17T02:11:48.5258676Z hint: 'development'. The just-created branch can be renamed via this command:
+2023-05-17T02:11:48.5259515Z hint: 
+2023-05-17T02:11:48.5260651Z hint: 	git branch -m <name>
+2023-05-17T02:11:48.5278498Z Initialized empty Git repository in /home/runner/work/studious-octo-meme/studious-octo-meme/.git/
+2023-05-17T02:11:48.5301526Z [command]/usr/bin/git remote add origin https://github.com/some-natalie/studious-octo-meme
+2023-05-17T02:11:48.5351513Z ##[endgroup]
+2023-05-17T02:11:48.5352087Z ##[group]Disabling automatic garbage collection
+2023-05-17T02:11:48.5353867Z [command]/usr/bin/git config --local gc.auto 0
+2023-05-17T02:11:48.5391937Z ##[endgroup]
+2023-05-17T02:11:48.5392638Z ##[group]Setting up auth
+2023-05-17T02:11:48.5399953Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2023-05-17T02:11:48.5439308Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2023-05-17T02:11:48.5882339Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2023-05-17T02:11:48.5911701Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2023-05-17T02:11:48.6179470Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2023-05-17T02:11:48.6226292Z ##[endgroup]
+2023-05-17T02:11:48.6227191Z ##[group]Fetching the repository
+2023-05-17T02:11:48.6239586Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=2 origin +21053d99a37d4f512a658f3bb4b13a752ce0193f:refs/remotes/origin/main
+2023-05-17T02:11:48.9262695Z remote: Enumerating objects: 10, done.        
+2023-05-17T02:11:48.9264115Z remote: Counting objects:  10% (1/10)        
+2023-05-17T02:11:48.9266631Z remote: Counting objects:  20% (2/10)        
+2023-05-17T02:11:48.9267973Z remote: Counting objects:  30% (3/10)        
+2023-05-17T02:11:48.9269334Z remote: Counting objects:  40% (4/10)        
+2023-05-17T02:11:48.9270147Z remote: Counting objects:  50% (5/10)        
+2023-05-17T02:11:48.9270936Z remote: Counting objects:  60% (6/10)        
+2023-05-17T02:11:48.9271724Z remote: Counting objects:  70% (7/10)        
+2023-05-17T02:11:48.9272486Z remote: Counting objects:  80% (8/10)        
+2023-05-17T02:11:48.9273303Z remote: Counting objects:  90% (9/10)        
+2023-05-17T02:11:48.9274148Z remote: Counting objects: 100% (10/10)        
+2023-05-17T02:11:48.9274500Z remote: Counting objects: 100% (10/10), done.        
+2023-05-17T02:11:48.9280732Z remote: Compressing objects:  12% (1/8)        
+2023-05-17T02:11:48.9283646Z remote: Compressing objects:  25% (2/8)        
+2023-05-17T02:11:48.9314747Z remote: Compressing objects:  37% (3/8)        
+2023-05-17T02:11:48.9319121Z remote: Compressing objects:  50% (4/8)        
+2023-05-17T02:11:48.9323257Z remote: Compressing objects:  62% (5/8)        
+2023-05-17T02:11:48.9327345Z remote: Compressing objects:  75% (6/8)        
+2023-05-17T02:11:48.9331292Z remote: Compressing objects:  87% (7/8)        
+2023-05-17T02:11:48.9335341Z remote: Compressing objects: 100% (8/8)        
+2023-05-17T02:11:48.9336061Z remote: Compressing objects: 100% (8/8), done.        
+2023-05-17T02:11:48.9343440Z remote: Total 10 (delta 2), reused 0 (delta 0), pack-reused 0        
+2023-05-17T02:11:48.9439547Z From https://github.com/some-natalie/studious-octo-meme
+2023-05-17T02:11:48.9440562Z  * [new ref]         21053d99a37d4f512a658f3bb4b13a752ce0193f -> origin/main
+2023-05-17T02:11:48.9493437Z ##[endgroup]
+2023-05-17T02:11:48.9494103Z ##[group]Determining the checkout info
+2023-05-17T02:11:48.9494700Z ##[endgroup]
+2023-05-17T02:11:48.9495387Z ##[group]Checking out the ref
+2023-05-17T02:11:48.9496144Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2023-05-17T02:11:48.9550059Z Switched to a new branch 'main'
+2023-05-17T02:11:48.9554260Z branch 'main' set up to track 'origin/main'.
+2023-05-17T02:11:48.9578909Z ##[endgroup]
+2023-05-17T02:11:48.9632293Z [command]/usr/bin/git log -1 --format='%H'
+2023-05-17T02:11:48.9663900Z '21053d99a37d4f512a658f3bb4b13a752ce0193f'
+2023-05-17T02:11:49.0021320Z ##[group]Run actions/dependency-review-action@v3
+2023-05-17T02:11:49.0021657Z with:
+2023-05-17T02:11:49.0021922Z   base-ref: refs/heads/main~1
+2023-05-17T02:11:49.0022214Z   head-ref: refs/heads/main
+2023-05-17T02:11:49.0022729Z   repo-token: ***
+2023-05-17T02:11:49.0023017Z   fail-on-severity: low
+2023-05-17T02:11:49.0023303Z   fail-on-scopes: runtime
+2023-05-17T02:11:49.0023575Z ##[endgroup]
+2023-05-17T02:11:49.8823963Z ##[group]Vulnerabilities
+2023-05-17T02:11:49.8826936Z [1mpackage.json » bootstrap@4.2.0[22m – Cross-Site Scripting in bootstrap [33m(moderate severity)[39m
+2023-05-17T02:11:49.8828160Z   ↪ https://github.com/advisories/GHSA-9v3m-8fp8-mj99
+2023-05-17T02:11:49.8875102Z ##[error]Dependency review detected vulnerable packages.
+2023-05-17T02:11:49.8886183Z ##[group]Licenses
+2023-05-17T02:11:49.8886676Z ##[group]Dependency Changes
+2023-05-17T02:11:49.8887188Z File: [1mpackage.json[22m
+2023-05-17T02:11:49.8887528Z [32m+ bootstrap@4.2.0[39m
+2023-05-17T02:11:49.8887926Z [31m- bootstrap@4.2.1[39m
+2023-05-17T02:11:49.8888378Z ##[endgroup]
+2023-05-17T02:11:49.8888817Z ##[endgroup]
+2023-05-17T02:11:49.8889230Z ##[endgroup]
+2023-05-17T02:11:49.9049766Z Post job cleanup.
+2023-05-17T02:11:50.0261352Z [command]/usr/bin/git version
+2023-05-17T02:11:50.0317137Z git version 2.40.1
+2023-05-17T02:11:50.0380776Z Temporarily overriding HOME='/home/runner/work/_temp/ebe139ab-ca85-4e9e-9902-63a218c8951d' before making global git config changes
+2023-05-17T02:11:50.0386607Z Adding repository directory to the temporary git global config as a safe directory
+2023-05-17T02:11:50.0396974Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/studious-octo-meme/studious-octo-meme
+2023-05-17T02:11:50.0446739Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2023-05-17T02:11:50.0498090Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2023-05-17T02:11:50.0781553Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2023-05-17T02:11:50.0812897Z http.https://github.com/.extraheader
+2023-05-17T02:11:50.0827440Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2023-05-17T02:11:50.0876986Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2023-05-17T02:11:50.1362836Z Cleaning up orphan processes

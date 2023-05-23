@@ -1,0 +1,28 @@
+name: Update profile readme
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '_posts/**.md'
+
+jobs:
+  update-posts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Get latest 5 posts and descriptions, insert into README.md
+        run: |
+          pip3 install -r ./.github/scripts/requirements.txt
+          python3 ./.github/scripts/latest-posts.py
+      - name: Commit and push changes
+        env: 
+          CI_COMMIT_MESSAGE: update profile readme with latest posts
+          CI_COMMIT_AUTHOR: github-actions[bot]
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "username@users.noreply.github.com"
+          git add README.md
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push

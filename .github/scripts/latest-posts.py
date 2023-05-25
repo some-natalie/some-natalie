@@ -16,16 +16,17 @@ def get_posts():
     return posts
 
 
+# Get the title and blurb
 def get_post_metadata(post):
     post = frontmatter.load("_posts/" + post)
 
-    # Get the title and blurb
     title = post["title"]
     blurb = post["excerpt"]
 
     return title, blurb
 
 
+# Build the URL of the published post from the filename
 def get_post_url(post):
     post_name = post.split("-")[3:]
     post_name = "-".join(post_name).strip(".md")
@@ -37,7 +38,7 @@ if __name__ == "__main__":
     # Get the latest 3 posts
     posts = get_posts()[:3]
 
-    # For each post, get the title and blurb
+    # For each post, get the title, blurb, and URL as plain markdown
     latest_post_summaries = []
 
     for post in posts:

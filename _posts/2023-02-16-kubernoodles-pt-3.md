@@ -42,7 +42,7 @@ First, install [Tetragon](https://github.com/cilium/tetragon) into your cluster.
 
 ```console
 # Install tetragon
-helm install tetragon cilium/tetragon -n kube-system
+helm install tetragon cilium/tetragon -n kube-system --version 0.9.0
 ```
 
 ## Install the tetra CLI

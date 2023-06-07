@@ -81,6 +81,9 @@ author:
     - label: "Sessionize"
       icon: "fas fa-fw fa-microphone"
       url: "https://sessionize.com/some-natalie/"
+    - label: "Recipes"
+      icon: "fas fa-fw fa-pot-food"
+      url: "https://some-natalie.dev/recipes/" 
 #    - label: "Twitter (not active))"
 #      icon: "fab fa-fw fa-twitter-square"
 #      url: "https://twitter.com/some_natalie"
@@ -114,6 +117,13 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _recipes
+  - scope:
+      path: "_recipes"
+      type: pages
+    values:
+      layout: single
+      author_profile: true  
 
 category_archive:
   type: liquid

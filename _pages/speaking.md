@@ -43,7 +43,7 @@ She's passionate about diversity in technology and empowering engineers to build
 - [Source code](https://github.com/boozallen/goobernetes)
 
 :information_source: The above source code repository isn't maintained.  Please look to [kubernoodles](https://github.com/some-natalie/kubernoodles) for a newer take on the same problem.
-{: .notice-info}
+{: .notice--info}
 
 ## 2020
 

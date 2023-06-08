@@ -44,7 +44,8 @@ title: "Three bean chili"
 
 ## Notes
 
-- If omitting meat/tofu entirely, simmer a little longer and/or add some roux to thicken the chili.
+- If omitting meat/tofu entirely, simmer a little longer and/or add extra tomato paste in to thicken the chili.
 - If I'm making this for vegans, I use vegetable oil and don't add tofu or other meat alternatives at all.  Just the beans and vegetables are fabulous.
 - If I'm making this for folks who eat meat, I tend to use rendered bacon fat and cubed pork shoulder.
 - Sometimes it helps to use a pinch or two of baking soda in the water used to soak beans, especially if the beans are older.  Rinse all of the beans and pick them over for debris before cooking.
+- :hot_pepper: I think this is quite mild, flavorful but not at all spicy.

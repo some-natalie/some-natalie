@@ -81,7 +81,10 @@ author:
     - label: "Sessionize"
       icon: "fas fa-fw fa-microphone"
       url: "https://sessionize.com/some-natalie/"
-#    - label: "Twitter (not active))"
+    - label: "Recipes"
+      icon: "fas fa-fw fa-utensils"
+      url: "/recipes/" 
+#    - label: "Twitter (not active)"
 #      icon: "fab fa-fw fa-twitter-square"
 #      url: "https://twitter.com/some_natalie"
 
@@ -93,6 +96,11 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/nsomersall"
+
+collections:
+  recipes:
+    output: true
+    permalink: /:collection/:path/
 
 defaults:
   # _posts
@@ -111,6 +119,13 @@ defaults:
   - scope:
       path: "_pages"
       type: pages
+    values:
+      layout: single
+      author_profile: true
+  # _recipes
+  - scope:
+      path: ""
+      type: recipes
     values:
       layout: single
       author_profile: true

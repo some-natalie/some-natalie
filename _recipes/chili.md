@@ -6,9 +6,9 @@ title: "Three bean chili"
 
 ## Ingredients
 
-- 1-1.5 lbs meat or tofu, optional (pork shoulder, ground beef, cubed chicken, etc)
+- 1 to 1.5 lbs meat or tofu, optional (pork shoulder, ground beef, cubed chicken, etc)
 - 2 or 3 medium yellow onions, finely chopped
-- 2 tbsp minced garlic or about 3 fresh cloves
+- 2 tbsp minced garlic (or about 3 fresh cloves)
 - 1 (28 oz.) can of crushed fire-roasted tomatoes
 - 1 (14.5 oz.) can of tomato sauce
 - 1 (6 oz.) can of tomato paste
@@ -45,3 +45,6 @@ title: "Three bean chili"
 ## Notes
 
 - If omitting meat/tofu entirely, simmer a little longer and/or add some roux to thicken the chili.
+- If I'm making this for vegans, I use vegetable oil and don't add tofu or other meat alternatives at all.  Just the beans and vegetables are fabulous.
+- If I'm making this for folks who eat meat, I tend to use rendered bacon fat and cubed pork shoulder.
+- Sometimes it helps to use a pinch or two of baking soda in the water used to soak beans, especially if the beans are older.  Rinse all of the beans and pick them over for debris before cooking.

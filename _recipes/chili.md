@@ -1,8 +1,8 @@
-——-
-title: “Three bean chili”
-——-
+---
+title: "Three bean chili"
+---
 
-> As meaty (or vegetarian or vegan) as you’d like.  As spicy as you want it.  In the oven or on the stovetop.  It’s chili, don’t make it complicated.
+> As meaty (or vegetarian or vegan) as you’d like.  As spicy as you want it.  In the oven or on the stove top.  It’s chili, don’t make it complicated.
 
 ## Ingredients
 
@@ -44,4 +44,4 @@ title: “Three bean chili”
 
 ## Notes
 
-* If omitting meat/tofu entirely, simmer a little longer and/or add some roux to thicken the chili.
+- If omitting meat/tofu entirely, simmer a little longer and/or add some roux to thicken the chili.

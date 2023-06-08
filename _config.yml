@@ -81,10 +81,10 @@ author:
     - label: "Sessionize"
       icon: "fas fa-fw fa-microphone"
       url: "https://sessionize.com/some-natalie/"
-    - label: "Recipes"
-      icon: "fas fa-fw fa-pot-food"
-      url: "https://some-natalie.dev/recipes/" 
-#    - label: "Twitter (not active))"
+#    - label: "Recipes"
+#      icon: "fab fa-fw fa-pot-food"
+#      url: "https://some-natalie.dev/recipes/" 
+#    - label: "Twitter (not active)"
 #      icon: "fab fa-fw fa-twitter-square"
 #      url: "https://twitter.com/some_natalie"
 
@@ -96,6 +96,11 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/nsomersall"
+
+collections:
+  recipes:
+    output: true
+    permalink: /:collection/:path/
 
 defaults:
   # _posts
@@ -119,11 +124,11 @@ defaults:
       author_profile: true
   # _recipes
   - scope:
-      path: "_recipes"
-      type: pages
+      path: ""
+      type: recipes
     values:
       layout: single
-      author_profile: true  
+      author_profile: true
 
 category_archive:
   type: liquid

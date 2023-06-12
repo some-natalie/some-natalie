@@ -20,7 +20,7 @@ title: “Alfredo sauce”
 1. Add freshly cracked black pepper and stir in.
 1. Whisk in cream and allow to warm to a gentle simmer.
 1. Whisk in cheese in handfuls, allowing it to melt into the sauce before adding more.  Continue to cook to desired consistency over low heat, stirring continuously.
-1. Salt to taste - the cheeses have salt, so this is hard to measure up front. 
+1. Salt to taste - the cheeses have salt, so this is hard to measure up front.
 
 ## Variations
 
@@ -30,7 +30,7 @@ title: “Alfredo sauce”
 - Roasted garlic
 - Freshly chopped flat-leaf parsley
 - Caramelized onions
-- Sun-dried tomatoes, drained and chopped 
+- Sun-dried tomatoes, drained and chopped
 - Fresh chervil or tarragon or thyme
 
 ## Notes

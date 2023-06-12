@@ -20,15 +20,15 @@ title: “Summer crab soup”
 - 1 pound jumbo lump crabmeat
 - 1 tablespoon fresh thyme, chopped
 - 2 tablespoons fresh flat-leaf parsley, chopped
-- 1 bay leaf, optional 
+- 1 bay leaf, optional
 - Salt and pepper to taste
 
 ### Ideas for serving
- 
+
 - Scallions or chives
 - Hot sauce
 - Sourdough bread
-- Sharp cheese 
+- Sharp cheese
 
 ## Instructions
 
@@ -47,4 +47,4 @@ title: “Summer crab soup”
   - Cajun seasoning instead of Old Bay
   - A green bell pepper instead of red/yellow bell peppers
 - If you can’t find jumbo lump crab meat, use regular lump size and chop the veggies to be about the same size.
-- At the risk of heresy, high quality canned crab is alright here (even if not ideal). 
+- At the risk of heresy, high quality canned crab is alright here (even if not ideal).

@@ -3,8 +3,11 @@ title: Recipes
 layout: collection
 permalink: /recipes/
 collection: recipes
-entries_layout: grid
 classes: wide
+entries_layout: list
+show_excerpts: true
+sort_by: title
+sort_order: forward
 ---
 
 This is not a food blog.  I don't want to be a food blogger.

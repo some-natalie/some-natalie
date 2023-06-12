@@ -1,5 +1,6 @@
 ---
-title: “Alfredo sauce”
+title: "Alfredo sauce"
+classes: wide
 ---
 
 > Simple Alfredo sauce, lots of variations

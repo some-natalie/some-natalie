@@ -1,5 +1,6 @@
 ---
 title: "Sunday sauce"
+classes: wide
 ---
 
 > Pasta with red sauce is good any day of the week.  Meat optional.

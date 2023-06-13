@@ -50,7 +50,7 @@ Rolling my own script here scratched the itch to Build A Thing - even if it’s 
 
 A quick change of the site's domain in the Python script should be all you'd need to reuse this on any other Jekyll + GitHub Pages site. :heart:
 
-—-
+---
 
 ### Footnotes
 

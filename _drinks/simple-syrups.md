@@ -1,5 +1,5 @@
 ---
-title: “Simple syrups”
+title: "Simple syrups"
 classes: wide
 ---
 

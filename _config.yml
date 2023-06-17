@@ -106,7 +106,7 @@ collections:
     permalink: /:collection/:path/
   drinks:
     output: true
-    permalink: /:collections/:path/ 
+    permalink: /:collection/:path/ 
 
 defaults:
   # _posts

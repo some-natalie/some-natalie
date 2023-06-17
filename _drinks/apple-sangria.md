@@ -1,5 +1,5 @@
 ---
-title: “Apple sangria”
+title: "Apple sangria"
 classes: wide
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: “Bourbon slushy”
+title: "Bourbon slushy"
 classes: wide
 ---
 

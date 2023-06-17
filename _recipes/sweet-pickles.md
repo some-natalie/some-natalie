@@ -27,5 +27,5 @@ classes: wide
 
 - I haven't tried this one, but it's the handwritten and well-worn index card.
 
-This just doesn't look like an appropriate recipe for canning to st'ore at room temperature to me.  Consult your [local extension service](https://www.nifa.usda.gov/about-nifa/how-we-work/extension) for harvest preservation advice.
+This doesn't look like an appropriate recipe for canning to store at room temperature.  Consult your [local extension service](https://www.nifa.usda.gov/about-nifa/how-we-work/extension) for harvest preservation advice.
 {: .notice--danger}

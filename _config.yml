@@ -83,7 +83,10 @@ author:
       url: "https://sessionize.com/some-natalie/"
     - label: "Recipes"
       icon: "fas fa-fw fa-utensils"
-      url: "/recipes/" 
+      url: "/recipes/"
+    - label: "Drinks"
+      icon: "fas fa-fw fa-mug-hot"
+      url: "/drinks/" 
 #    - label: "Twitter (not active)"
 #      icon: "fab fa-fw fa-twitter-square"
 #      url: "https://twitter.com/some_natalie"
@@ -101,6 +104,9 @@ collections:
   recipes:
     output: true
     permalink: /:collection/:path/
+  drinks:
+    output: true
+    permalink: /:collections/:path/ 
 
 defaults:
   # _posts
@@ -129,6 +135,13 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _drinks
+  - scope:
+      path: ""
+      type: drinks
+    values:
+      layout: single
+      author_profile: true   
 
 category_archive:
   type: liquid

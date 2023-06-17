@@ -10,6 +10,6 @@ sort_by: title
 sort_order: forward
 —
 
-This is not a coffee or tea or cocktail blog either, but all the beverage things and components can live here instead.  Alcoholic drinks are mixed in.
+This is not a coffee or tea or cocktail blog either, but all the beverage things and components can live here instead.  Syrups, bitters, alcoholic drinks are all mixed in here.
 
 ## Drink list

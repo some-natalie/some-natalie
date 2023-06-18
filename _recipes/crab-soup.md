@@ -44,7 +44,7 @@ classes: wide
 ## Notes
 
 - For a Cajun twist, substitute
-  - 2 tbsp of dark roux in place of the butter and flour
+  - 2 tbsp of [dark roux](../roux) in place of the butter and flour
   - Cajun seasoning instead of Old Bay
   - A green bell pepper instead of red/yellow bell peppers
 - If you can’t find jumbo lump crab meat, use regular lump size and chop the veggies to be about the same size.

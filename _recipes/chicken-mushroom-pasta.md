@@ -1,5 +1,5 @@
 ---
-title: Chicken and Mushroom Pasta
+title: “Chicken and Mushroom Pasta”
 classes: wide
 ---
 

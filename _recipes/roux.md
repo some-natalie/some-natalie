@@ -1,5 +1,5 @@
 ---
-title: “Roux“
+title: "Roux"
 classes: wide
 ---
 
@@ -23,4 +23,3 @@ classes: wide
 - It stores very well in a jar in the fridge.  A batch goes a long way, since it’s usually used a tablespoon or two at a time.
 - The shade of brown you stop cooking it at determines the flavors.  Golden is more of a toasty flavor and it’s more versatile in the recipes it can go into.  The darker shades give a deep umami-rich flavor for savory dishes.  I tend to stop just short of “milk chocolate bar” colored.
 - Seriously, don’t stop stirring it.  Even the tiniest little bit of burned flour makes the whole batch smell sour and burnt.
- 

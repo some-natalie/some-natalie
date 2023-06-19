@@ -1,5 +1,5 @@
 ---
-title: “Chicken and Mushroom Pasta”
+title: "Chicken and Mushroom Pasta"
 classes: wide
 ---
 
@@ -23,7 +23,7 @@ classes: wide
 
 ## Directions
 
-1. Put the sliced mushrooms and balsamic vinegar in a skillet over medium-low heat and cook until done, stirring from time to time.  Remove from heat when done to mix into the sauce near the end. 
+1. Put the sliced mushrooms and balsamic vinegar in a skillet over medium-low heat and cook until done, stirring from time to time.  Remove from heat when done to mix into the sauce near the end.
 1. In a large pan over medium heat, saute the onion in a little olive oil until translucent and starting to brown, about 10 minutes.
 1. Add the garlic and stir until fragrant, about a minute.
 1. Add the chicken, pepper, and basil.  Stir to mix it all together.

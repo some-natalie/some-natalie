@@ -1,5 +1,5 @@
 ---
-title: “Refried beans”
+title: "Refried beans"
 classes: wide
 ---
 
@@ -31,4 +31,3 @@ classes: wide
 
 - The easy variations here is to mess with the type and amount of chili powder.  Use hatch chilis instead for a nice southwest flavor.  Ancho chilis are great and a bit more mild than the chipotle chilis.
 - No need to pre-soak the beans, but it can take most of a day to simmer.
- 

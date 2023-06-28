@@ -28,8 +28,9 @@ def get_post_metadata(post):
 
 # Build the URL of the published post from the filename
 def get_post_url(post):
-    post_name = post.split("-")[3:]
-    post_name = "-".join(post_name).strip(".md")
+    post_name = post.strip(".md")
+    post_name = post_name.split("-")[3:]
+    post_name = "-".join(post_name)
     url = "https://some-natalie.dev/blog/" + post_name
     return url
 

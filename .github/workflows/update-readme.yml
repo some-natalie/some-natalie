@@ -2,9 +2,11 @@ name: Update profile readme
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - '_posts/**.md'
+      - "_posts/**.md"
+      - ".github/scripts/latest-posts.py"
+  workflow_dispatch:
 
 jobs:
   update-posts:
@@ -17,7 +19,7 @@ jobs:
           pip3 install -r ./.github/scripts/requirements.txt
           python3 ./.github/scripts/latest-posts.py
       - name: Commit and push changes (if any)
-        env: 
+        env:
           CI_COMMIT_MESSAGE: update profile readme with latest posts
           CI_COMMIT_AUTHOR: github-actions[bot]
         run: |
@@ -33,4 +35,3 @@ jobs:
             echo "no changes to latest posts"
             exit 0
           fi
-          

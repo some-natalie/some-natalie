@@ -1,4 +1,12 @@
 <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+    let config = { 
+        startOnLoad: true,
+        theme: "dark", 
+        flowchart: { 
+            useMaxWidth: true, 
+            htmlLabels: true
+        } 
+    };
+    mermaid.initialize(config);
 </script>

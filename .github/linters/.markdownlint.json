@@ -1,4 +1,4 @@
 {
   "line-length": false,
-  "MD033": { "allowed_elements": ["br", "summary", "details"] }
+  "MD033": { "allowed_elements": ["br", "summary", "details", "div"] }
 }

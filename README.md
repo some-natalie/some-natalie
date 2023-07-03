@@ -4,9 +4,9 @@ I'm Natalie, a devops engineering consultant experienced in developing infrastru
 
 :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Threat Modeling the GitHub Actions ecosystem](https://some-natalie.dev/blog/threat-modeling-actions):  Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)
 1. [Adding Mermaid Diagrams](https://some-natalie.dev/blog/mermaid-diagrams):  Adding Mermaid (or any custom JavaScript) to a Jekyll site without a plugin
 1. [Lazy profile readme updates from my blog](https://some-natalie.dev/blog/automagic-profile-updates):  There’s a thousand profile README generators, so of course I had to roll my own instead.
-1. [Scanning your code on every single push](https://some-natalie.dev/blog/scanning-code-on-every-push):  Why it's probably not what you're wanting to do and how to do it anyways.
 <!-- END_SECTION:latest_posts -->
 
 :briefcase: I work a lot with

@@ -25,7 +25,7 @@ This post is images, expanded commentary, and resources from a talk I gave at [B
 1. [Why?](#but-why-though) - threat modeling is effort, so why bother in the first place?
 1. [What's a GitHub Action](#whats-an-action) - dig deep into what a GitHub Action is
 1. [Secrets are hard](#managing-secrets) - public service announcement about managing credentials safely in CI
-1. [To self-host or not](#i-can-do-it-myself-better) - how this model changes when you're running this yourself
+1. [To self-host or not](#rolling-your-own-changes-a-lot) - how this model changes when you're running this yourself
 1. [Governing the ungovernable](#governing-the-ungovernable) - expanding this model to the enterprise, with tons of people and processes and stakeholders, without quitting your job to become a goat farmer[^1] :goat:
 
 ## Introduction
@@ -421,7 +421,7 @@ If you’re deploying into a cloud environment, please consider setting up [OIDC
 
 ![slide-39](/assets/graphics/2023-07-03-threat-modeling/Slide39.jpeg)
 
-## I can do it myself better
+## Rolling your own changes a lot
 
 ![slide-41](/assets/graphics/2023-07-03-threat-modeling/Slide41.jpeg)
 

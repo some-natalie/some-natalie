@@ -1,5 +1,5 @@
 ---
-title: “Grill bread”
+title: Grilled bread
 classes: wide
 ---
 

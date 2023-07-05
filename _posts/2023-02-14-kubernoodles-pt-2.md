@@ -129,7 +129,7 @@ jobs:
 
 ## Test container mode
 
-By default, all jobs given to a runner will run on it.  In the context of actions-runner-controller, it means the tasks run in that pod.  This complicates tasks that require working in containers - nested containerization (eg. Docker-in-Docker) requires granting privileged access to the cluster and that's risky.  You can read about the scaling problems faced on this [here](../blog/kubernetes-for-enterprise-ci) and the security implications of this [here](../blog/securing-ghactions-with-arc).  The "paved path" to not do this allows the runner to use Kubernetes to spin up jobs in a container - more about this in the [project docs](https://github.com/actions/runner-container-hooks/blob/main/packages/k8s/README.md).
+By default, all jobs given to a runner will run on it.  In the context of actions-runner-controller, it means the tasks run in that pod.  This complicates tasks that require working in containers - nested containerization (eg. Docker-in-Docker) requires granting privileged access to the cluster and that's risky.  You can read about the scaling problems faced on this [here](../kubernetes-for-enterprise-ci) and the security implications of this [here](../securing-ghactions-with-arc).  The "paved path" to not do this allows the runner to use Kubernetes to spin up jobs in a container - more about this in the [project docs](https://github.com/actions/runner-container-hooks/blob/main/packages/k8s/README.md).
 
 This workflow simply tests that's working as expected, using `alpine:3` (or other lightweight container if preferred) to print some information to the console.
 

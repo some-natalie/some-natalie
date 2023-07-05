@@ -1,7 +1,7 @@
 ---
 title: "Hi there 👋"
 icon: fas fa-info-circle
-order: 7
+order: 8
 ---
 
 I'm Natalie, a devops engineering consultant experienced in developing infrastructure-as-code solutions and operations automation.  I work at the intersection of technology, people, and highly-regulated industries as a Senior Solutions Engineer at [GitHub](https://github.com/github)!

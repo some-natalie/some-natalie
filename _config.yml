@@ -19,10 +19,10 @@ timezone: America/Denver
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Some Natalie # the main title
+title: Some Natalie's corner of the internet # the main title
 
 tagline: >- # it will display as the sub-title
-  Some Natalie's corner of the internet.  Things I'm learning, working on, or thinking about.  All opinions and snark my own.
+  Things I'm learning, working on, or thinking about.  All opinions and snark my own.
 
 description: >- # used by seo meta and the atom feed
   Things I'm learning, working on, or thinking about.  All opinions and snark my own.

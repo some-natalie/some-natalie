@@ -24,7 +24,7 @@ There's a default runner image for use that is maintained by GitHub.  It's very 
 This could be problematic for a few reasons.
 
 1. The `runner` user has sudo rights.  This allows users the flexibility to modify the image to build their code, automate the toil, and all the other cool stuff that can be done with Actions - drastically reducing the number of bespoke images to maintain for each project.  This maintenance savings comes at the price of giving users a shell with root access in a pod.
-1. It's running Docker-in-Docker, meaning that you'll need to run it as a privileged pod (previously discussed [here](../securing-ghactions-with-arc/#cluster-settings) and [here](kubernetes-for-enterprise-ci/#privileged-pods) as to why that's probably not a good idea).
+1. It's running Docker-in-Docker, meaning that you'll need to run it as a privileged pod (previously discussed [here](../securing-ghactions-with-arc/#cluster-settings) and [here](../kubernetes-for-enterprise-ci/#privileged-pods) as to why that's probably not a good idea).
 1. It's based on Debian - this is fine for platform neutral stuff, but if you're in the Red Hat ecosystem doing things specific to that, it's less than ideal.  Ditto for other Linux ecosystems, but Red Hat is the one I see most frequently.
 1. Because the image has so few things cached and installed inside of it, at scale, running `docker pull` or `apt install` (etc) starts to _really_ eat at your network ingress budget and cause long build times by pulling/installing the same software all the time.
 

@@ -10,7 +10,7 @@ classes: wide
 excerpt: "It's like Codespaces, but much more work for much less functionality."
 ---
 
-![image-right](/assets/graphics/memes/devcontainers-kubernetes.jpg){: .align-right}
+![image-right](/assets/graphics/memes/devcontainers-kubernetes.jpg){: .w-50 .right}
 
 A [devcontainer](https://containers.dev/) lets you use an arbitrary Docker container as a development environment - leveraging the reproducible, version-controlled, and disposable nature of containers for a consistent developer experience.  There are lots of images to start from [here](https://containers.dev/templates) (with source code [here](https://github.com/devcontainers/images)). Kubernetes lets us orchestrate container workloads in a sane way.  Here's some links to jump ahead:
 
@@ -29,9 +29,8 @@ You'll need:
 - Some persistent storage that the cluster can access.  I'm using an [Azure File Share](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction) because again, it's what I have and works well.  You can do this without persistent storage, but then you're reliant on committing and pushing more often and why?  Storage is cheap.
 - [VS Code Server](https://code.visualstudio.com/docs/remote/vscode-server), which is still in private preview.  You can sign up [here](https://aka.ms/vscode-server-signup).
 
-> :warning: **Warning** :warning:
->
 > This is some random directions you found for a minimally viable concept built on a private preview.  Maybe don't run this in production, okay?
+{: .prompt-danger}
 
 1. Create a namespace for our devcontainers to isolate them some.  You _might_ want multiple, depending on if how you allocate resource quotas, etc.
 
@@ -146,7 +145,8 @@ You'll need:
             claimName: local-path-pvc
     ```
 
-    :warning: This example's `command` and `args` leave the container running _forever_.  Evaluate if that's a good idea before applying it. :smiley:
+    > This example's `command` and `args` leave the container running _forever_.  Evaluate if that's a good idea before applying it. 😀
+    {: .prompt-warning}
 
 1. Connect to the pod via VS Code's Kubernetes extension.  Note how VS Code Server installs itself in the pod automatically.
 

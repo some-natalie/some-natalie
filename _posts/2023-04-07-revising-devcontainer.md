@@ -13,9 +13,9 @@ excerpt: "Now with private drafts 🤐 - written with Obsidian and Codespaces"
 
 I can't believe I've been doing this whole blogging thing for six months now!
 
-In those six months, my [initial setup](../blogging-with-codespaces) is still working well.  I found a big pain point with how I'd set this up versus how I like to work though - because I put the site in my public [profile repo](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme), there's no such thing as a private thinking.  :scream:
+In those six months, my [initial setup](../blogging-with-codespaces) is still working well.  I found a big pain point with how I'd set this up versus how I like to work though - because I put the site in my public [profile repo](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme), there's no such thing as a private thinking. 😱
 
-I'm not comfortable enough to draft publicly - at least not for writing.  Coding as a work-in-progress feels totally normal ... weird, huh?  Since some of these posts are five or six thousand words, the lack of drafts is getting difficult to live with!  :grimacing: :sweat_smile:
+I'm not comfortable enough to draft publicly - at least not for writing.  Coding as a work-in-progress feels totally normal ... weird, huh?  Since some of these posts are five or six thousand words, the lack of drafts is getting difficult to live with!  😬 😅
 
 I want to keep the public stuff here and add another _private_ repository to my Codespace that'll hold my drafts, thoughts, and other inspirations for later.  So let’s add a private repository to our Codespace to write in, then copy over blog posts into this public repo once it’s (more or less) done.
 
@@ -25,13 +25,13 @@ Turns out this was trickier than expected.  I’d thought that with the support 
 
 I keep my drafts, notes, ideas, and other such stuff in a private repository.  It’s all things vaguely related to tech, not exclusively my current job/role/employer.  I’ve also turned it into a vault for [Obsidian](https://obsidian.md/) - a simple git repo and offline Markdown is great on any device.  Let’s add that to this blog as a private drafts store to play around with formatting, add pictures, etc., to mostly final drafts.
 
-First, give the public repo Codespace access to the private repository.  Edit the `~/.devcontainer/devcontainer.json` file to include the following.
+First, give the public repo Codespace access to the private repository.  Edit the `~/.devcontainer/devcontainer.json` file to include the following (swapping).
 
 ```json
 "customizations": {
   "codespaces": {
     "repositories": {
-      "some-natalie/work-stuff": {  # your private repository, same org as the public one!
+      "some-natalie/work-stuff": {
         "permissions": {
           "contents": "write",
           "pull_requests": "write"
@@ -39,12 +39,12 @@ First, give the public repo Codespace access to the private repository.  Edit th
       }
     }
   }
-},
+}
 ```
 
 Next, relaunch the Codespace and grant it the new permissions (the [docs](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-repository-access-for-your-codespaces), if it helps).
 
-Now it’s _available_ to clone without having to store credentials, configure git, clone it, etc.  Buuuuut, nothing is cloned by default ... so I'd have to set up git and manually clone them to the same place every time.  Not going to happen. :laughing:
+Now it’s _available_ to clone without having to store credentials, configure git, clone it, etc.  Buuuuut, nothing is cloned by default ... so I'd have to set up git and manually clone them to the same place every time.  Not going to happen. 😆
 
 ```console
 $ ls -la /workspaces/
@@ -109,7 +109,7 @@ And now, it automatically reminds you to load everything with a single command o
 
 ![custom-welcome](/assets/graphics/2023-04-07-revising-devcontainer/custom-welcome.jpg)
 
-Running that script reloads the Codespace window with both repositories open on launch - the public one and private one! :tada:
+Running that script reloads the Codespace window with both repositories open on launch - the public one and private one! 🎉
 
 ![two-repos](/assets/graphics/2023-04-07-revising-devcontainer/two-repos-one-workspace.png)
 
@@ -135,11 +135,11 @@ The repository for drafting, collecting thoughts, and other such goodness done i
 
 I add things I learned, struggled through, found inspiring, etc. to that repository.  Had I thought about this more in advance, I would have had the site public and repository private.  It'd allow for public content, private drafts in folder I exclude in the [`_config.yml`](https://github.com/some-natalie/some-natalie/blob/main/_config.yml#L42) file (but still saved in the repo), and that'd be it.
 
-:woman_shrugging: Hindsight is perfect and I'm not so mad about it to redo everything.
+🤷‍♀️ Hindsight is perfect and I'm not so mad about it to redo everything.
 
 ## Website setup note
 
-This website is a free [GitHub Pages](https://docs.github.com/en/pages) site, built with [Jekyll](https://jekyllrb.com) and a very popular theme ([Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/), if you're interested).  I mostly write in [Markdown](https://www.markdownguide.org/) anyways, so being able to mess with the site content and settings together in a [Codespace](https://github.com/features/codespaces/) is quite convenient.  It's not like writing a basic blog would ever approach the limit of the free usage entitlement, especially as there’s no want to get _too_ fancy with the site itself.  The simplicity is a feature. :heart:
+This website is a free [GitHub Pages](https://docs.github.com/en/pages) site, built with [Jekyll](https://jekyllrb.com) and a very popular theme ([Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/), if you're interested).  I mostly write in [Markdown](https://www.markdownguide.org/) anyways, so being able to mess with the site content and settings together in a [Codespace](https://github.com/features/codespaces/) is quite convenient.  It's not like writing a basic blog would ever approach the limit of the free usage entitlement, especially as there’s no want to get _too_ fancy with the site itself.  The simplicity is a feature. ♥️
 
 I want to write about some of the neat stuff I build, problems to solve, and [establish a public history](https://www.troyhunt.com/why-online-identities-are-smart-career/) of being something approaching competent.  I'm still not wanting to dive deep into static website generation or other website stuff.
 

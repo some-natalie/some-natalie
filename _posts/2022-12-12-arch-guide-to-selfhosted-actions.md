@@ -7,8 +7,6 @@ tags:
   - CI
   - business
   - kubernetes
-toc: true
-toc_sticky: true
 excerpt: "When you absolutely, positively have to host it yourself, here's some help."
 ---
 
@@ -31,7 +29,7 @@ This piece is going to take a look at what this feature is and a quick overview 
 
 ## Introduction
 
-This is written for GitHub Enterprise administrators wanting to self-host compute for GitHub Actions, especially for [Enterprise Server](https://docs.github.com/en/enterprise-server@latest) (self-hosted).  If you're not self-hosting, you're still welcome as well!  You might find helpful tips and tricks nonetheless.  :tada:
+This is written for GitHub Enterprise administrators wanting to self-host compute for GitHub Actions, especially for [Enterprise Server](https://docs.github.com/en/enterprise-server@latest) (self-hosted).  If you're not self-hosting, you're still welcome as well!  You might find helpful tips and tricks nonetheless. 🎉
 
 We're _not_ covering the details of which GitHub Enterprise version you should be on or any future roadmap items.  If that's of interest, reach out to the friendly [Sales](https://github.com/enterprise/contact) or [Support](https://enterprise.github.com/support) teams.
 
@@ -59,7 +57,7 @@ GitHub provides hosted, managed runners that you can use out of the box - but on
 - Custom software beyond what's available or installable in the hosted runners (like needing to build on Red Hat Enterprise Linux)
 - You don't have the option to use the GitHub-managed runners because you are on [GitHub Enterprise Server](https://docs.github.com/en/enterprise-server@latest).
 - Needing to run jobs in a specific environment such as "gold load" type imaged machines
-- Because you _want_ to and I'm not here to judge that :heart:
+- Because you _want_ to and I'm not here to judge that 💖
 
 This means that you, intrepid Enterprise administrator, are responsible for setting up and maintaining the compute needed for this service.  The [documentation](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/about-self-hosted-runners) to do this is a great place to start understanding what's possible.
 
@@ -73,8 +71,8 @@ How long is this environment going to be around?  Are you kicking the tires on f
 
 If the goal is to try and quickly figure out Actions, maybe try a few builds, look at policies that can be set, etc. **and** there's existing CI infrastructure in place - the simplest path forward is usually to remove the agent of the existing CI system (Jenkins, Azure Devops, etc.) and install the agent for GitHub Actions ([directions](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/adding-self-hosted-runners)) for a subset of the existing infrastructure.
 
-**:sparkles: Tip! :sparkles:** This is also one of the easiest paths to migrate fully, removing a lot of the hidden "rip and replace" infrastructure costs like needing to learn a new platform or tool.
-{: .notice}
+> ✨ **Tip!** ✨ This is also one of the easiest paths to migrate fully, removing a lot of the hidden "rip and replace" infrastructure costs like needing to learn a new platform or tool.
+{: .prompt-tip}
 
 The rest of this guide is assuming that we're mostly past kicking the tires and are figuring out the best path forward for the enterprise.
 
@@ -87,7 +85,8 @@ How do you want or need to scale up?  By using the runners provided by GitHub, t
 - **GitHub Actions encourages automation beyond your legacy CI system.**  It can do more with less code defining your pipeline, users can provide all sorts of additional things for it to do, and it can even run conditional or scheduled shell scripts and other operations-centric tasks.  These are all great things, but a project that used X minutes of runtime on Y platform may not linearly translate to the same usage.  The [GitHub Actions Importer](https://github.com/github/gh-actions-importer) has some usage forecasting built-in to consider as part of your migration as well.
 - **Migrating to GitHub Actions can be a gradual transition.**  The corollary to above is that while the end state may be more compute than right now, it's a process to get a project to migrate from one system to another and then to see their usage grow over time.  Without external pressure like "we're turning off the old system on this date", it'll take a while for users to move themselves.  Use this to your advantage to scale your infrastructure if you have long-lead tasks such as provisioning new servers or appropriating budget.
 
-:information_desk_person: **Opinion** - This is one of those cases where the balance between infrastructure costs and the time a user will spend waiting for a runner to pick up a job can really swing how they perceive the service.  Even if developer experience isn't the top priority for your enterprise team, waiting forever for jobs to execute runs the risk of creating "shadow IT"[^1] assets or doing dangerously silly things[^2] to get the job done.
+> 💁 **Opinion** - This is one of those cases where the balance between infrastructure costs and the time a user will spend waiting for a runner to pick up a job can really swing how they perceive the service.  Even if developer experience isn't the top priority for your enterprise team, waiting forever for jobs to execute runs the risk of creating "shadow IT"[^1] assets or doing dangerously silly things[^2] to get the job done.
+{: .prompt-tip}
 
 ### Platform
 
@@ -95,14 +94,15 @@ What platform do you want to run on?  The runner agent for GitHub Actions works 
 
 **Bare metal** comes with the upside of simpler management for end-user software licenses tied to hardware or supporting specialized devices.  In a diverse enterprise user base, there is always a project or two that needs a GPU cluster or specialized Mac hardware to their organization or repository.  Planning to support this at least as an edge case is a good choice for that reason.  However, it comes with the cost of owning and operating the hardware 24/7 even if it isn't in use that entire time.  Since one runner agent corresponds to one job, an agent on a beefy machine will still only run one job to completion before picking up the next one.  If the workloads are primarily targeted to the hardware needed, this isn't a problem, but it can be inefficient if not considered at an enterprise scale.
 
-**Virtual machines** are simple to manage using a wide variety of existing enterprise tooling at all stages of their lifecycle.  They can be as isolated or shared across users as you'd like.  Each runner is another VM to manage that isn't fundamentally different from existing CI build agents, web or database servers, etc.  There are some community options to scale them up or down as needed, such as [Terraform](https://github.com/philips-labs/terraform-aws-github-runner) or [Ansible](https://github.com/MonolithProjects/ansible-github_actions_runner), if that's desired.  The hypervisor that manages the VM infrastructure handles resource allocation in the datacenter or it's :sparkles: magically handled :sparkles: by a private cloud provider such as Azure or AWS.
+**Virtual machines** are simple to manage using a wide variety of existing enterprise tooling at all stages of their lifecycle.  They can be as isolated or shared across users as you'd like.  Each runner is another VM to manage that isn't fundamentally different from existing CI build agents, web or database servers, etc.  There are some community options to scale them up or down as needed, such as [Terraform](https://github.com/philips-labs/terraform-aws-github-runner) or [Ansible](https://github.com/MonolithProjects/ansible-github_actions_runner), if that's desired.  The hypervisor that manages the VM infrastructure handles resource allocation in the datacenter or it's ✨ magically handled ✨ by a private cloud provider such as Azure or AWS.
 
 **Kubernetes** provides a scalable and reproducible environment for containerized workloads.  Declarative deployments and the ephemeral nature of pods used as runner agents creates fewer "works on this agent and not that one" problems by not allowing configuration to drift, but there's a few anti-patterns to be aware of (discussed [here](https://some-natalie.dev/blog/kubernetes-for-enterprise-ci/)).  There are a lot of advantages to using Kubernetes (outlined [here](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)), but it is more complicated than the other options.  A managed provider removes some of that complexity.
 
-Some GitHub Actions ship as Dockerfiles ([documentation](https://docs.github.com/en/actions/creating-actions/about-custom-actions)), meaning the workload builds and runs in the container it defines.  Whichever path is chosen here, a container runtime should be part of the solution if these jobs are required.  This could mean Docker-in-Docker (requiring privileged pods) for Kubernetes-based solutions.
-{: .notice--info}
+> Some GitHub Actions ship as Dockerfiles ([documentation](https://docs.github.com/en/actions/creating-actions/about-custom-actions)), meaning the workload builds and runs in the container it defines.  Whichever path is chosen here, a container runtime should be part of the solution if these jobs are required.  This could mean Docker-in-Docker (requiring privileged pods) for Kubernetes-based solutions.
+{: .prompt-info}
 
-:information_desk_person: **Opinion** - Whatever is currently in use is probably the best path forward.  Doing this means every team involved (operations, security, resource management, etc) already has processes for building and maintaining things without creating exceptions or new processes.  I hesitate to recommend a total infrastructure rebuild for a few more servers in racks, or VMs, or container deployments.  Managed providers of VM infrastructure or Kubernetes clusters take away the hardware management aspect of this.
+> 💁 **Opinion** - Whatever is currently in use is probably the best path forward.  Doing this means every team involved (operations, security, resource management, etc) already has processes for building and maintaining things without creating exceptions or new processes.  I hesitate to recommend a total infrastructure rebuild for a few more servers in racks, or VMs, or container deployments.  Managed providers of VM infrastructure or Kubernetes clusters take away the hardware management aspect of this.
+{: .prompt-tip}
 
 ### Persistence
 
@@ -116,7 +116,8 @@ There's a lot to unpack here, so here's a helpful analogy:
 
 The persistence here is somewhat independent of the platform chosen.  Bare metal ephemeral runners are possible, but may require more effort than a solution based on virtual machines or containers.  The _exact_ way this gets implemented depends a lot on the other parts and pieces of your unique platform.
 
-:information_desk_person: **Opinion** - More ephemeral and version-controlled are harder to get started with for building and maintenance, but also have benefits that really shine with lots of diverse teams sharing resources.  In my experience, persistent environments tend to work well for single projects and start to have problems when the project needs change or there are more projects sharing hardware.  In my experience, maintenance of shared tooling tends to be less of an institutional priority over time - so routine patches, upgrades, etc., become overlooked.[^3]
+> 💁 **Opinion** - More ephemeral and version-controlled are harder to get started with for building and maintenance, but also have benefits that really shine with lots of diverse teams sharing resources.  In my experience, persistent environments tend to work well for single projects and start to have problems when the project needs change or there are more projects sharing hardware.  In my experience, maintenance of shared tooling tends to be less of an institutional priority over time - so routine patches, upgrades, etc., become overlooked.[^3]
+{: .prompt-tip}
 
 ### Compute design
 
@@ -127,13 +128,15 @@ This decision depends a lot on how persistent or ephemeral the compute is and th
 - **Larger environments with lots of pre-loaded software increases vulnerability area.**  If you're scanning the build environment with any sort of infrastructure security scanning tool, there's more things for it to alarm on in larger images.  The validity and volume of these alarms may vary based on tools used, software installed, etc.
 - **Smaller ephemeral images that consistently pull in dependencies at setup increases bandwidth use.**  A job that installs build dependencies every time it runs will download those every time.  This isn't necessarily a bad thing, but keep in mind your upstream software sources (such as package registries) may rate-limit the entire source IP, which affects every project in use and not just the offending project.  Installing dependencies at setup also increases your build times.  There are ways to mitigate some of this, including the use of a caching proxy and/or private registries.
 
-:information_desk_person: **Opinion** - This isn't a binary choice and can always change as the project/enterprise needs change.  I wouldn't spend too much time on this, but have tended to prefer larger images with more things in them to minimize traffic out of the corporate network at the cost of bandwidth usage internally.
+> 💁 **Opinion** - This isn't a binary choice and can always change as the project/enterprise needs change.  I wouldn't spend too much time on this, but have tended to prefer larger images with more things in them to minimize traffic out of the corporate network at the cost of bandwidth usage internally.
+{: .prompt-tip}
 
 ### Compute scope
 
 GitHub Enterprise can have runners that are only available to an individual repository, all or select repositories within an organization, or all or select organizations within the entire enterprise (detailed [here](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/about-self-hosted-runners)).  What is the ideal state for your company?
 
-:information_desk_person: **Opinion** - All of the above is likely going to happen with any sufficiently diverse user base, so let's make this as secure and easily governable as possible.  Some teams will need to bring their own hardware and not want to share, which is reasonable, so will join their compute to only accept jobs from their code repositories.  This also means that admins can do some networking shenanigans to allow only runners from X subnet to reach Y addresses to meet rules around isolation if needed.  Likewise, as an enterprise-wide administrator, I wanted to make the most commonly-used Linux compute available and usable to most users for most jobs.
+> 💁 **Opinion** - All of the above is likely going to happen with any sufficiently diverse user base, so let's make this as secure and easily governable as possible.  Some teams will need to bring their own hardware and not want to share, which is reasonable, so will join their compute to only accept jobs from their code repositories.  This also means that admins can do some networking shenanigans to allow only runners from X subnet to reach Y addresses to meet rules around isolation if needed.  Likewise, as an enterprise-wide administrator, I wanted to make the most commonly-used Linux compute available and usable to most users for most jobs.
+{: .prompt-tip}
 
 ### Policy and compliance
 
@@ -145,7 +148,8 @@ Here's some helpful links for security-related _stuff_ on self-hosted runners.  
 - [Managing access to self-hosted runners](https://docs.github.com/en/enterprise-server@latest/actions/hosting-your-own-runners/managing-access-to-self-hosted-runners-using-groups)
 - [Managing access to actions from GitHub.com](https://docs.github.com/en/enterprise-server@latest/admin/github-actions/managing-access-to-actions-from-githubcom)
 
-:information_desk_person: **Opinion** - I don't know all the policies everywhere at all times, but I've always found it very helpful to gather these requirements up front and keep them in mind.
+> 💁 **Opinion** - I don't know all the policies everywhere at all times, but I've always found it very helpful to gather these requirements up front and keep them in mind.
+{: .prompt-tip}
 
 ## Recommendations
 

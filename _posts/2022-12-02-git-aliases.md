@@ -26,7 +26,8 @@ And here's how to do the same thing:
   br = branch --sort=-committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]'
 ```
 
-:information_source:  There are no line breaks in the code block above, so you'll need to scroll sideways to see it all.  It should be one long line in your `~./gitconfig` file.
+> There are no line breaks in the code block above, so you'll need to scroll sideways to see it all.  It should be one long line in your `~./gitconfig` file.
+{: .prompt-info}
 
 If you want it to list all branches, not only ones locally, modify it to include the `-a` switch.  As I worked with teams that had way more branches on the remote than I usually worried myself with, I tended to only care about my branches.
 
@@ -62,7 +63,8 @@ Writing commit messages is hard.  Writing _meaningful_ commit messages is [even 
   yolo = commit -am "`curl -s http://whatthecommit.com/index.txt`"
 ```
 
-:information_source:  This is bordering on heresy for some, but I strongly believe that individual commits should _never_ be important, only pull requests.  Meaningful discussion about a set of code changes, reviews, tests, etc., should not happen while you're iterating over the "does it work" stage.  It should happen _before_ development begins (in an [ADR](https://adr.github.io/) document or [issue](https://docs.github.com/en/issues)) and again once the changes are actually being proposed (usually in a [pull request](https://docs.github.com/en/pull-requests)).
+> This is bordering on heresy for some, but I strongly believe that individual commits should _never_ be important, only pull requests.  Meaningful discussion about a set of code changes, reviews, tests, etc., should not happen while you're iterating over the "does it work" stage.  It should happen _before_ development begins (in an [ADR](https://adr.github.io/) document or [issue](https://docs.github.com/en/issues)) and again once the changes are actually being proposed (usually in a [pull request](https://docs.github.com/en/pull-requests)).
+{: .prompt-tip}
 
 ## Delete local branches that don't exist on the remote
 

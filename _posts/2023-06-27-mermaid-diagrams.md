@@ -49,16 +49,17 @@ Then, import the Mermaid module from the NPM CDN with a new file called `_includ
 
 This should be reasonably reusable for other JS libraries too, such as [MathJax](https://www.mathjax.org/).  Define the YAML front matter to toggle loading it in the first file, then import and configure the JavaScript in another.
 
-### :sparkles: :sparkles: Now look this readable diagram! :sparkles: :sparkles:
-{: .text-center}
+<div style="text-align:center"><p style="font-size: 20px"><b>
+✨ ✨ Now look this readable diagram! ✨ ✨
+</b></p></div>
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
     B --> C(fa:fa-server Build)
     C --> D(fa:fa-server Deploy)
     D --> E(fa:fa-user Environment)
-</div>
+```
 
 And here's how it was made in the markdown that defines this post.  There's new line characters and [FontAwesome](https://fontawesome.com/search?o%253Dr%2526m%253Dfree) icons too!
 

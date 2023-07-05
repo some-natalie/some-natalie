@@ -1,7 +1,7 @@
 ---
-permalink: /speaking/
 title: "Speaking"
-classes: wide
+order: 5
+icon: fas fa-fw fa-microphone
 ---
 
 Natalie is a senior solutions engineer at GitHub serving the public sector market. She spent years designing, building, and leading complex systems in regulated environments at a major systems integrator, but has also taken her career in many other directions - including detours into project management, systems engineering, and teaching.  
@@ -42,8 +42,8 @@ She's passionate about diversity in technology and empowering engineers to build
 - [Slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2021-10-14_Goobernetes.pdf)
 - [Source code](https://github.com/boozallen/goobernetes)
 
-:information_source: The above source code repository isn't maintained.  Please look to [kubernoodles](https://github.com/some-natalie/kubernoodles) for a newer take on the same problem.
-{: .notice--info}
+> The above source code repository isn't maintained.  Please look to [kubernoodles](https://github.com/some-natalie/kubernoodles) for a newer take on the same problem.
+{: .prompt-info }
 
 ## 2020
 

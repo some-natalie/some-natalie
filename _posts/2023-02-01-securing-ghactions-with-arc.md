@@ -8,15 +8,13 @@ tags:
   - kubernetes
   - security
   - on-premises
-toc: true
-toc_sticky: true
 excerpt: "Self-hosted GitHub Actions runners and Kubernetes are a natural fit - let's put them together securely."
 ---
 
 GitHub Actions is one of the most popular CI tools in use today.  If you need or want to run it yourself, though, there are a lot of design choices to make and not a lot of guidance.  The most popular choice is [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source project to manage and automatically scale the runner agents in Kubernetes.  That still leaves a lot of questions with security implications, outlined in this post as slides + commentary from a talk I gave at [CloudNativeSecurityCon North America 2023](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) in Seattle, WA.
 
-:movie_camera: [YouTube video](https://www.youtube.com/watch?v=Ax4VPm2KrqQ) if watching a video is more your speed!
-{: .notice--info}
+> 🎥 [YouTube video](https://www.youtube.com/watch?v=Ax4VPm2KrqQ) if watching a video is more your speed!
+{: .prompt-info}
 
 ### Introduction
 
@@ -32,7 +30,7 @@ I work with our most regulated and security focused user communities, having led
 
 This is where I’ve seen problems, weird edge cases, and security not considered as companies look to adopt actions-runner-controller across the spectrum of maturity in container adoption - from understanding why a company would choose this path, how it's different than other applications you'd consider running within Kubernetes, and guidelines to consider _in addition to_ existing best practices of container or Kubernetes security.
 
-I'm sorry to disappoint if you jumped in here with the impossible expectations of "with this 1 YAML file, you'll be totally unhackable".  That's just not how this works ... :laughing:
+I'm sorry to disappoint if you jumped in here with the impossible expectations of "with this 1 YAML file, you'll be totally unhackable".  That's just not how this works ... 😅
 
 ![slide-05](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide5.png)
 
@@ -56,7 +54,7 @@ Not everyone has the option of using a SaaS to begin with.  Here's some common r
 - Custom hardware - things like GPU or other special-use devices, CPU architectures like ARM, or testing hardware itself.
 - Custom software - GitHub's hosted runners allow users to install/modify the software on each run or run jobs within containers, but that doesn't cover everything.
 - "Gold load" type combinations of hardware and software.  It's difficult to simulate this.
-- Because you want to and :sparkles: I'm not here to judge you :sparkles:
+- Because you want to and ✨ I'm not here to judge you ✨
 
 Kubernetes is used for the same reasons as you’d containerize and orchestrate any other workload – it’s phenomenally good at it!
 
@@ -71,10 +69,10 @@ So we need a controller for all this magic.
 
 ![slide-08](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide8.png)
 
-Enter [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source community driven project that's also now the official auto-scaling solution for self-hosting Actions runners! :tada:
+Enter [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source community driven project that's also now the official auto-scaling solution for self-hosting Actions runners! 🎉
 
-As a note, there's currently **a bunch** of work going on in that project right now.  This architecture diagram and the exact CRDs it implements will still be available.  However, with the additional work for a better scaling solution adding a supported path, here's a high-level overview that'll age a bit better - automatic scaling is pull-driven over APIs.  In the current implementation, that's a pretty short (but configurable) poll length.  There's also an option for push-driven scaling via webhooks.  The newer implementation will use a longer poll on a new API.
-{: .notice--info}
+> As a note, there's currently **a bunch** of work going on in that project right now.  This architecture diagram and the exact CRDs it implements will still be available.  However, with the additional work for a better scaling solution adding a supported path, here's a high-level overview that'll age a bit better - automatic scaling is pull-driven over APIs.  In the current implementation, that's a pretty short (but configurable) poll length.  There's also an option for push-driven scaling via webhooks.  The newer implementation will use a longer poll on a new API.
+{: .prompt-info}
 
 You can find an overview of the new CRDs and architecture diagram in the [documentation](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/actions-runner-controller-2/README.md).  In any case, users are responsible for much of the infrastructure - from operations to security.
 
@@ -90,7 +88,7 @@ The next hard security challenge is the economic incentives that encourage poor 
 - **Privileged pods** - It's usually more expedient to grant a deployment the ability to run as root than it is to rewrite parts of the software build to use containers safely.
 - **Disabling or unsafely altering key security features** - Things like SELinux, AppArmor, and seccomp exist for a reason - isolating processes safely.  Just because StackOverflow says to just run `sudo setenforce 0` (putting SELinux in audit-only mode) doesn't mean it's a good idea.
 - **Using `latest` to deploy images** - Not only is it hellishly hard to track who's running what/where/when, it's impossible to accurately fill out an incident report, understand which vulnerabilities correspond to which image versions, and just ... don't ever use `latest` please.
-- **Upstream repository mirrors that are wildly out of date** - I get it, after the whole [left-pad](https://arstechnica.com/information-technology/2016/03/rage-quit-coder-unpublished-17-lines-of-javascript-and-broke-the-internet/) incident of 2016 and a bunch of other related shenanigans, running your own `<everything repository>` internally became super popular.  Understanding the dependencies of your software, in full, is a fantastic way to increase the security of your company's code.  There's a ton of other good reasons to do this, but please remember that your `<everything repository>` requires regular care and feeding to be safe and not just harbor a ton of old vulnerable dependencies. :heart:
+- **Upstream repository mirrors that are wildly out of date** - I get it, after the whole [left-pad](https://arstechnica.com/information-technology/2016/03/rage-quit-coder-unpublished-17-lines-of-javascript-and-broke-the-internet/) incident of 2016 and a bunch of other related shenanigans, running your own `<everything repository>` internally became super popular.  Understanding the dependencies of your software, in full, is a fantastic way to increase the security of your company's code.  There's a ton of other good reasons to do this, but please remember that your `<everything repository>` requires regular care and feeding to be safe and not just harbor a ton of old vulnerable dependencies. ♥️
 
 To understand why these challenges are a bit unique to using Actions within Kubernetes, let’s take a tiny detour into what GitHub Actions _really_ are.
 
@@ -120,7 +118,7 @@ That script injection concern is also relevant for composite Actions.  They asse
 
 Lastly, Docker Actions run by building and running a container ... in a container.  Apart from your normal container security concerns around image provenance, what's going on in that build, etc., Docker-in-Docker requires `--privileged` - more on that in a minute.
 
-:warning: You're not just allowing the privileged execution of arbitrary user input in your Kubernetes cluster, right?! :warning:
+⚠️ You're not just allowing the privileged execution of arbitrary user input in your Kubernetes cluster, right?! ⚠️
 
 ### Cluster settings
 
@@ -167,13 +165,13 @@ This is the point in that architecture discussion where someone in the room says
 
 The first obstacle that I see is a bit industry-specific.  There's not many managed providers in this space overall – doubly so if you need a specific compliance certification (eg, FedRAMP).  This means the team is likely running their own cluster on existing and authorized bare metal or existing VM infrastructure.  This adds cost and complexity to the project.  More importantly, it further increases how much of the platform security is on your team (again).
 
-Next thing the team faces is all the paper-cuts encountered because Kubernetes expects to manage containers and :sparkles: containers aren't VMs. :sparkles:  The most common ways in addressing these paper-cuts undermine the very isolation that drives this overall architecture.
+Next thing the team faces is all the paper-cuts encountered because Kubernetes expects to manage containers and ✨ containers aren't VMs. ✨  The most common ways in addressing these paper-cuts undermine the very isolation that drives this overall architecture.
 
 - Shared files bad, though, right?  Well sure, but many workloads rely on secrets and configMaps and service account credentials and other such things to be shared.   Volume mounts get weird and tedious and they’re used for basically everything.
 - While `firecracker-containerd` now has a CNI compatible network plugin and you can have a couple containers in a “VM pod” ([source](https://github.com/firecracker-microvm/firecracker-containerd#roadmap)), not every "pod is a VM" technology has this.  This complicates keeping isolation boundaries intact.
 - Insecure things on the admin side are still quite possible - modify or disable seccomp, drastically oversubscribe your physical resources, bridge networking between the "pod-VM" thing and the host, etc.
 
-Lastly, doing insecure things from a VM is ... :open_mouth: ... still insecure!  Common security problems here include
+Lastly, doing insecure things from a VM is ... 😮 ... still insecure!  Common security problems here include
 
 - disabling SSL verification at build (my personal pet peeve)
 - messing with software repositories or downloading non-managed dependencies on the VM
@@ -216,8 +214,8 @@ There are two authentication methods for actions-runner-controller, [GitHub apps
 
 The reason that giving the token too much permission is so risky is at the moment, this authentication is passed to the runner to join it to GitHub and is stored as a secret in the namespace of the controller.
 
-Authentication is changing to just-in-time authentication soon ([link](https://github.com/actions/actions-runner-controller/tree/master/docs/preview/actions-runner-controller-2)), but until we're all there, this is something to be aware of.
-{: .notice--warning}
+> Authentication is changing to just-in-time authentication soon ([link](https://github.com/actions/actions-runner-controller/tree/master/docs/preview/actions-runner-controller-2)), but until we're all there, this is something to be aware of.
+{: .prompt-warning}
 
 Another important note, this authentication is **NOT** what GitHub Actions use at runtime.  That automatic token used by a running job is unique to each time the job is run.  It is granted permissions by the workflow file and the defaults are governed by repo/org policy.  You can read more about that token in the [docs](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
 
@@ -225,18 +223,19 @@ Another important note, this authentication is **NOT** what GitHub Actions use a
 
 Here's what multi-tenancy for actions-runner-controller looks like in practice.  It's designed for convenience more than security outright.  This is still amazing in that by providing compute to teams, you can provide that insight and (some) governance to the supply chain of your end product (software).  Going back to my bias we started with:
 
-:sparkles: Reducing user friction reduction improves security posture. :sparkles:
+<div style="text-align:center"><p style="font-size: 20px"><b>
+✨ Reducing user friction reduction improves security posture. ✨
+</b></p></div>
 
 The cluster provides hardware management, ingress/egress controls, log forwarding, other node security settings, perhaps a shared private registry, and other resources as needed.  Namespaces provide resource quotas, secrets (not in lieu of an external secret manager), and network/pod admission policies.  I tend to recommend one namespace for ARC per organization in GitHub as a starting point, as one namespace can hold multiple deployments, but this really depends on your company and the requested workloads more than anything else.
 
 A deployment will control the scope (who can use it - repo/org/enterprise) and a lot more about that particular type of runner.  Common settings here include which image to use and what, if any, shared mounts to set up.  It also controls horizontal scaling (how many runners to have) and vertical scaling (resource requests and limits).
 
-See how there's no production workloads such as an application or other non-CI jobs here?  That's no accident.  Even with all the guidelines and isolation, I have a hard time trying to save a few dollars (and a little incremental extra time) for another cluster so that we can have :ring: **One Cluster To Rule Them All** :ring:
-{: .notice--info}
+> See how there's no production workloads such as an application or other non-CI jobs here?  That's no accident.  Even with all the guidelines and isolation, I have a hard time trying to save a few dollars (and a little incremental extra time) for another cluster so that we can have 💍 **One Cluster To Rule Them All** 💍
+{: .prompt-info}
 
 ![slide-22](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide22.png)
-
-> Pictured, a 100% factual photograph of an institutionally important and totally untouchable team being told they can't have root access in production (real citation[^3])
+_Pictured, a 100% factual photograph of an institutionally important and totally untouchable team being told they can't have root access in production (real citation[^3])_
 
 Sometimes, developer empowerment comes in the form of “no, and here’s how I’ll help you do this better” – a mentality shift for all teams involved.
 
@@ -325,21 +324,21 @@ In my time going down this path and in helping others do the same, here's a hand
 - Can we add `package` to all images?  It's helpful for everyone and I really need it to do `thing`.
 - My project needs `framework` and another team in a business unit I'd never talk to already has it.  Let's reuse it.
 - My build is failing on `runner-image:tag` - here's a PR with the fix and some tests to prevent it going forward.
-- :fire: Show me all images vulnerable to `scary CVE in the news`.  NOW! :fire:
+- 🔥 Show me all images vulnerable to `scary CVE in the news`.  NOW! 🔥
 
 In keeping everyone's images in one internally open repository, the overhead on security operations is drastically lowered.  The tradeoff in this active participation by every stakeholder is more overall chatter - but meeting needs and making sure everyone feels heard is truly worthwhile.  When the next `scary CVE` hits, it's a easy search to figure out which images are affected - not a multi-week 24/7 fire drill.
 
 Tagging images is a unique exception to common practice.  Several teams I've worked with independently came up with some combination of [semantic version](https://semver.org/) and build date/time.  The time portion bumps automatically on builds or routine rebuilds, but semver only changes when software changes.  
 
-No matter what you choose, remember there is no hell quite like trying to fill out an incident report against `latest`.  The who/what/when is impossible to prove for what's going on where.  Does your pod get pulled every time or only if not present?  Did you scale to 0 or were there “older latest” pods hanging out that might get work?  :scream: :sob:
+No matter what you choose, remember there is no hell quite like trying to fill out an incident report against `latest`.  The who/what/when is impossible to prove for what's going on where.  Does your pod get pulled every time or only if not present?  Did you scale to 0 or were there “older latest” pods hanging out that might get work? 😱 😭
 
 ### Conclusions
 
 ![slide-30](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide30.png)
 
-:question: Why does it take a month to go from user request to deployed image for adding a tiny well-known utility to an image that is only used by one team?
+❓ Why does it take a month to go from user request to deployed image for adding a tiny well-known utility to an image that is only used by one team?
 
-:question: Why are there significant numbers of people who respond to that question with "I wish it only took a month!" for this?
+❓ Why are there significant numbers of people who respond to that question with "I wish it only took a month!" for this?
 
 In my experience, everyone involved in running a CI system – from security, to operations, to developers, and everyone in between – walks a bit of an adversarial tightrope time to time.  It’s simultaneously one of the most critical business systems with the most people interested in it **and** most frequently changed.  I have seen more grown adults argue over this than anything else, more than text editor flamewars or favorite Linux distribution.  We don’t have to balance plates on sticks or “just say no” to everything.  It doesn’t have to be this way.
 
@@ -347,7 +346,9 @@ I’m fond of pushing this process through a pull request reviewed by users, adm
 
 The bigger risk to the very foundation of your software supply chain isn’t that user asking to include a small utility package or to have access to a privileged pod.  It’s that user getting frustrated waiting – process-heavy [ITSM](https://en.wikipedia.org/wiki/IT_service_management) tickets to nowhere or waiting yet another month for the next change management window – so they configure their own build server or disable SSL certificate verification or their own “bootlegged” copy of that utility that’ll never get updated, to just get things done and move on with their life.  Reducing friction makes everyone happier and safer.
 
-❤️ **Take care of your team and they’ll take care of you.** ❤️
+<div style="text-align:center"><p style="font-size: 20px"><b>
+❤️ Take care of your team and they’ll take care of you. ❤️
+</b></p></div>
 
 ---
 

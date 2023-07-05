@@ -8,6 +8,7 @@ tags:
   - linux
   - business
 classes: wide
+excerpt: "How much does it cost to wait on builds?"
 ---
 
 One of the biggest objections on providing better hardware to development teams is the cost of that hardware - regardless of if it's physical hardware in racks, managed cloud providers, or a software-as-a-service.  It's an easy cost to "feel" as a business, doubly so if it's an operational expense for a managed cloud or SaaS.  I decided to run some numbers on this, using GitHub's [larger hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-larger-runners) for ease of getting started.  The full spreadsheet is [here](https://docs.google.com/spreadsheets/d/1ostvpK8jmC13U25bdyekyBV9uS8xydLV14q2ZwaH24k) if you want to copy it and play with the numbers yourself using other costs, times for builds, salaries, etc.

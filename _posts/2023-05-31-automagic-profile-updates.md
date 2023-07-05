@@ -25,7 +25,7 @@ There's three functions that list the contents of the `~/_posts` directory, read
 
 ### Now run the thing when needed
 
-The GitHub Actions workflow in `~/.github/workflows/update-readme.yml` ([link](https://github.com/some-natalie/some-natalie/blob/main/.github/workflows/update-readme.yml)) runs whenever a push to `main` changes any of the posts to commit and push back into the repository, making the new posts visible on my profile readme. :tada:
+The GitHub Actions workflow in `~/.github/workflows/update-readme.yml` ([link](https://github.com/some-natalie/some-natalie/blob/main/.github/workflows/update-readme.yml)) runs whenever a push to `main` changes any of the posts to commit and push back into the repository, making the new posts visible on my profile readme. 🎉
 
 Since the script is only looking at filenames, this step will fail with no changes to commit/push if a file is edited but not created.  A small Bash `if` condition helps out here, exiting with a status code of `0` if there’s only edits to existing files.  This tells Actions that it succeeded with no changes when that happens.
 
@@ -48,7 +48,7 @@ There’s a million profile readme generators that do way more intricate stuff. 
 
 Rolling my own script here scratched the itch to Build A Thing - even if it’s a tiny and inconsequential thing.  It’s simple, extremely fast on page loads, and doesn’t need much fiddling or ongoing maintenance.
 
-A quick change of the site's domain in the Python script should be all you'd need to reuse this on any other Jekyll + GitHub Pages site. :heart:
+A quick change of the site's domain in the Python script should be all you'd need to reuse this on any other Jekyll + GitHub Pages site. 💖
 
 ---
 

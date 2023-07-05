@@ -14,6 +14,8 @@ excerpt: "How to run Dependabot on-premises using Red Hat Enterprise Linux"
 
 GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This is frustrating if you need or want to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 7, 8, and 9 - 7.9, 8.6, and 9.0 as of October 2022.
 
+### Setup
+
 First, leave SELinux alone.  I know the first thing we all do when something doesn't work is disable it, but really - let it work!  I promise it isn't the problem.
 
 ```console
@@ -44,8 +46,8 @@ sudo systemctl enable docker --now
 sudo usermod -aG docker azureuser
 ```
 
-:information_source: Yes, that's the CentOS repository, not RHEL.  Docker only publishes official RPMs for RHEL for the IBM z platform (`s390x` CPU architecture) - which coincidentally, GitHub does not publish a runner agent for.  The `x86_64` binaries work just fine in RHEL.
-{: .notice--info}
+> Yes, that's the CentOS repository, not RHEL.  Docker only publishes official RPMs for RHEL for the IBM z platform (`s390x` CPU architecture) - which coincidentally, GitHub does not publish a runner agent for.  The `x86_64` binaries work just fine in RHEL.
+{: .prompt-info }
 
 Now let's reboot for both the new firewall backend and for the new user group to take effect.  Log back in and test that Docker is working.
 
@@ -94,7 +96,7 @@ Current runner version: '2.293.0'
 2022-10-17 15:03:28Z: Job dependabot completed with result: Succeeded
 ```
 
-:tada: Now let Dependabot do its magic, taking the chore out of updating your dependencies.
+🎉 Now let Dependabot do its magic, taking the chore out of updating your dependencies.
 
 ![dependabot-prs](/assets/graphics/2022-10-18-dependabot-prs.png)
 

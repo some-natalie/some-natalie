@@ -17,15 +17,14 @@ One of the first questions to answer when building out GitHub Actions compute on
 In an old-school persistent-machine setup, this isn't a problem _at all_ - for Actions or any other system.  Install the company's anti-virus program, endpoint protection stuff, logging stack, etc. like literally every other machine on the network and everyone is good to go.  Likewise, if continuous integration is already a service, a lot of that risk is already handled for you by that SaaS provider.  Once we combine putting these jobs into ephemeral containers **and** self-hosting this platform, the question gets a lot harder to answer.
 
 ![dodgy-users](../../assets/graphics/2023-02-16-kubernoodles-pt-3/dodgy-users.png)
-
-> I'm far more offended by `curl -k | bash` than at any attempt of container escape.  Disabling SSL verification is never the answer.
+_I'm far more offended by `curl -k | bash` than at any attempt of container escape.  Disabling SSL verification is never the answer._
 
 This is a difficult situation for an actions-runner-controller setup due to several compounding factors.
 
 1. The jobs are run in ephemeral containers ... so they go away after each and every job.  It prevents job cross-contamination _and_ makes logs hard to gather after the fact.  Even if you capture the pod logs, it isn't a definitive source of everything that was done - only what was printed to `STDOUT` and `STDERR` from the pod.
 1. GitHub Actions isn't built for _that_ kind of observability.  It's fundamentally a tool to run jobs and will print logs out that can be used for task-level debugging, etc. but not give you deep visibility into the infrastructure that job is run on or broad understanding of all jobs being run.  Given the huge variety of stuff that an agent can be installed on, it's an impossible problem to solve for within itself.
 1. Because this is (usually) a co-tenanted Kubernetes cluster - meaning that several teams within a company are sharing resources - keeping everyone in the boundaries of their cozy pod is important for the security and integrity of the entire build system.
-1. And privileged pods are very common running build jobs in Kubernetes for reasons [covered previously](../securing-ghactions-with-arc/#cluster-settings), making it easier to escape and do silly things. :clown_face:
+1. And privileged pods are very common running build jobs in Kubernetes for reasons [covered previously](../securing-ghactions-with-arc/#cluster-settings), making it easier to escape and do silly things. 🤡
 
 Some information from our infrastructure to create a complete picture of who's doing what.  In the cluster setup ([part 1](../kubernoodles-pt-1)), we added a custom container network interface and installed [Cilium](https://cilium.io/) and Hubble to start our journey on Kubernetes observability.  Now we're going to use those, plus [Tetragon](https://github.com/cilium/tetragon), to get a customizable look at what users are really doing inside of our runners.  We can know things like
 
@@ -107,7 +106,7 @@ root@defaults-xh5cc-runner-8w4hb:/actions-runner# mount /dev/sda2
 mount: /dev/sda2: can't find in /etc/fstab.
 ```
 
-And here's what's streamed to the logs immediately - our presence has been noted! :bangbang:
+And here's what's streamed to the logs immediately - our presence has been noted!
 
 ```console
 🚀 process runners/defaults-xh5cc-runner-8w4hb /bin/sh -c "clear; (bash || ash || sh)"

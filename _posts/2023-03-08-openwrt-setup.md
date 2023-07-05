@@ -14,19 +14,19 @@ I recently replaced my Ubiquiti USG-3 security gateway ([info](https://store.ui.
 
 There's also some hardware consolidation and simplification to do.  I want to decommission a dedicated VM for the Ubiquiti management application and an original Raspberry Pi B that runs [Pi-hole](https://pi-hole.net/) for DNS ad-blocking.  Fewer hardware things is less to manage and update.
 
-![literally me](/assets/graphics/memes/build-or-buy.jpg){: .align-center}
+![literally me](/assets/graphics/memes/build-or-buy.jpg)
 
 I have written a couple times about the benefits of "just buy a fix" ([here](../waiting-on-builds-pt-3/), and for my employer [here](https://github.blog/2022-12-08-experiment-the-hidden-costs-of-waiting-on-slow-build-times/)).  Were this for business, I would have done this too - just purchase the newest model from Ubiquiti (or whoever else) and call it a day.  My time is far more valuable than any money saved in hardware and software.
 
-:money_with_wings: This makes no economic sense, but it was a ton of fun.  I needed to scratch the itch to build something, brush up on my networking knowledge, and wanted to both not _lose_ features and also gain functionality.  I'm all about an opportunity to learn new things.  Please enjoy my drastically over-engineered router build!
-{: .notice}
+> 💸 This makes no economic sense, but it was a ton of fun.  I needed to scratch the itch to build something, brush up on my networking knowledge, and wanted to both not _lose_ features and also gain functionality.  I'm all about an opportunity to learn new things.  Please enjoy my drastically over-engineered router build!
+{: .prompt-tip}
 
 ## Hardware
 
 Hardware you'll need:
 
 - [Raspberry Pi](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) and power supply - I used a model 4 with 4 GB of RAM.  Don't cheap out on the power supply, especially for things you want to run for a long time to prevent hardware damage.
-- Case for :point_up: - I used [this one](https://flirc.tv/products/flirc-raspberrypi4-silver?variant=43085036454120) for the built-in heat sink.  The Pi 4 runs quite warm compared to prior models, so the standard case gets hot enough to throttle the CPU over time.
+- Case for 👆 - I used [this one](https://flirc.tv/products/flirc-raspberrypi4-silver?variant=43085036454120) for the built-in heat sink.  The Pi 4 runs quite warm compared to prior models, so the standard case gets hot enough to throttle the CPU over time.
 - Two ethernet cables, one for WAN and another for LAN.
 - A second ethernet adapter - I used [this one](https://www.startech.com/en-us/networking-io/usb31000s), which is USB 3 to gigabit ethernet and is built on the widely-supported ASIX [AX8817](https://www.asix.com.tw/en/product/USBEthernet/Super-Speed_USB_Ethernet) chip.
 - MicroSD card - something with a couple GBs and reasonably speedy is good.
@@ -86,7 +86,7 @@ reboot
 
 I'd like OpenWRT to provide routing, firewall, and DHCP address management.  I'd like for [Pi-hole](https://pi-hole.net/) to continue managing DNS because it's so darn good at it.  It can officially run in a Docker container ([link](https://github.com/pi-hole/docker-pi-hole)), so that's allow me to retire my original model B Raspberry Pi.  I'd also like to shove the Unifi app in Docker too - helpfully, someone has already done this on [GitHub](https://github.com/jacobalberty/unifi-docker).  Routing and firewall tasks don't take much compute on a home network, so maybe putting containers at the edge would be feasible here?
 
-![containers](/assets/graphics/memes/containers.jpg){: .align-right}
+![containers](/assets/graphics/memes/containers.jpg){: .w-50 .right}
 
 OpenWRT includes the ability to run Docker containers, orchestrate (a little bit) with Docker Compose, and manage via Luci (the web UI).  The latest stable version (22.03) uses `nftables` as a firewall under the `fw4` wrapper (more on [fw4](https://openwrt.org/docs/guide-user/firewall/overview) and [nftables](https://openwrt.org/docs/guide-user/firewall/misc/nftables) within OpenWRT).  Prior to this version, it used `iptables`.  This distinction is important if you want to run Docker containers _on_ your router, as Docker doesn't play nicely without `iptables`.  I iterated over this a few times, and didn't come across an easy solution that didn't involve downgrading OpenWRT - the containers ended up on another Raspberry Pi 4 within the LAN that also hosts [Kodi](https://kodi.tv/).
 
@@ -111,18 +111,18 @@ Because I love the [Pi-hole](https://pi-hole.net/) project and have a set of hos
 
 First, DHCP needs to advertise this DNS server.  There are about 200 different options defined in the DHCP specification ([full list](https://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.xhtml) from the [IANA](https://www.iana.org/)).  We just need one in this case.  Go to the LAN interface settings and add `6,192.168.1.7` to the options list, where `6` is the option to advertise the DNS server and what's after the comma is the IP address of your local DNS server.
 
-![dns-advertisement](/assets/graphics/2023-03-08-openwrt/dns-advertisement.png){: .align-center}
+![dns-advertisement](/assets/graphics/2023-03-08-openwrt/dns-advertisement.png)
 
 Lastly, all the wayward embedded devices and other "smart" things that have hard-coded DNS servers need to be hijacked for the greater good.  This will force everything, including smart TVs and the like, to use the local DNS server instead.  Follow the directions [here](https://openwrt.org/docs/guide-user/firewall/fw3_configurations/intercept_dns#web_interface_instructions), which work for both the `iptables` and `nftables` based firewalls.
 
-![dns-hijacking](/assets/graphics/2023-03-08-openwrt/dns-hijacking.png){: .align-center}
+![dns-hijacking](/assets/graphics/2023-03-08-openwrt/dns-hijacking.png)
 
 ## Thoughts
 
-It's surprisingly simple and robust to run OpenWRT on a Pi.  I've enjoyed scratching the itch to Build A Thing - I am certainly not passionate about routing setup and :point_down: is how I feel every time I need to mess with ~~`iptables`~~ `nftables`.
+It's surprisingly simple and robust to run OpenWRT on a Pi.  I've enjoyed scratching the itch to Build A Thing - I am certainly not passionate about routing setup and 👇 is how I feel every time I need to mess with ~~`iptables`~~ `nftables`.
 
-![iptables](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/iptables.gif){: .align-center}
+![iptables](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/iptables.gif){: .w-50 .left}
 
 There's an entire new ecosystem to explore.  [Luci](https://openwrt.org/docs/guide-user/luci/start) is a neat web UI and miles easier than the [IOS](https://en.wikipedia.org/wiki/Cisco_IOS) console that I learned years ago.  There's so much available in the default `opkg` ecosystem ... maybe I should run a VPN next, or play around with Dynamic DNS to self-host stuff, or any of the other ten thousand software packages.  I could set up some real quality-of-service (QoS) services and start messing around with traffic metrics.  I'm impoverished for time more than choices here!
 
-Lastly, this is phenomenally over-engineered for a home, even one with multiple people working from home and a fair amount of other connected items.  After a week, it's still averages about 2% of RAM usage (~80 MB) and under 0.02 CPU load in use.  It seems that it could easily handle another thousand devices.  I won't be needing that, but it's nice to know that it'll be around and updated for years to come _because I own it_. :heart:
+Lastly, this is phenomenally over-engineered for a home, even one with multiple people working from home and a fair amount of other connected items.  After a week, it's still averages about 2% of RAM usage (~80 MB) and under 0.02 CPU load in use.  It seems that it could easily handle another thousand devices.  I won't be needing that, but it's nice to know that it'll be around and updated for years to come _because I own it_. 💖

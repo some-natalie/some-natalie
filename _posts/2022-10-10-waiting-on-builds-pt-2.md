@@ -8,6 +8,7 @@ tags:
   - linux
   - business
 classes: wide
+excerpt: "How much does it cost to wait on builds?  More numbers make it even clearer."
 ---
 
 Expanding on [part 1](https://some-natalie.dev/blog/waiting-on-bulids/), let's take a closer look at context switching times for developers, the effect of developer compensation on this problem, do a little math, and answer the inevitable question on self-hosting.

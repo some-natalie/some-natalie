@@ -14,9 +14,8 @@ excerpt: "Why it's probably not what you're wanting to do and how to do it anywa
 
 One of the most common questions I'm asked about GitHub, specifically around Actions and the application security features, is "how do I scan my team's code on every single push?"  While it can _technically_ be done, in my experience, it's usually not preceded by understanding the _why_ of doing so.  It provides a false sense of security, can be wasteful of compute resources, and is downright annoying to your developers.
 
-![interrupting-scanner](/assets/graphics/memes/interrupting-scanner.jpeg){: .align-center}
-
-> Just let me finish my train of thought before yelling at me! (╯°□°)╯︵ ┻━┻
+![interrupting-scanner](/assets/graphics/memes/interrupting-scanner.jpeg)
+_Just let me finish my train of thought before yelling at me! (╯°□°)╯︵ ┻━┻_
 
 The idea that no such thing as vulnerable code ever can exist misses the continual nature of software development - new vulnerabilities are always being discovered and mitigated, dependencies are always being updated, and new features are always being added, etc.  A scan today couldn't possibly identify all future problems.  Depending on how teams are working, it can also be pretty wasteful - running scans of every "try this config" commit while the team iterates over a problem before they've found something that works.  It's also frustrating to have a bunch of failed checks on code that isn't ready for review.
 
@@ -51,7 +50,7 @@ This gets your proposed changes scanned (or built or whatever you put in that `j
 
 This is done for you already if you enable [push protection](https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/protecting-pushes-with-secret-scanning).  It runs (invisibly to users) as a pre-receive hook, blocking high-confidence (or custom) secret patterns from being received and works as a one-click thing on both the cloud and self-hosted GitHub.  If you’re self-hosting a different git server, check out the OWASP Foundation’s [SEDATED](https://github.com/owasp/sedated) project - it’s another pre-receive hook shell script.  I used it for a while and found it to be quite reasonable (even if not as comprehensive) once I’d done some regex fiddling to get some additional patterns blocked.  In any case, these sorts of scripts all work by preventing the git remote server from accepting commits that contain anything that makes the script fail.
 
-![bernie-secrets](/assets/graphics/memes/bernie-secrets.png){: .align-center}
+![bernie-secrets](/assets/graphics/memes/bernie-secrets.png){: .w-50 .right}
 
 The other path to preventing secrets in code is to use a pre-commit hook.  AWS makes a great one called [git secrets](https://github.com/awslabs/git-secrets).  These run locally and prevent git from creating a commit that causes that script to fail.  It’s a good pattern to work with for a single developer project or two.  At scale, this sort of solution is extraordinarily difficult to prove coverage in an audit and makes endpoint management even more complicated.  It also only prevents _new_ problems, so it won’t catch things that are in the repository history.
 
@@ -100,7 +99,7 @@ on:
   push:
     paths:
       - "package.json"  # your manifest(s) here
-      - "pom.xml"       # all of them :)
+      - "pom.xml"       # all of them 😊
 
 permissions:
   contents: read
@@ -121,11 +120,10 @@ jobs:
         head-ref: refs/heads/main
 ```
 
-When a push to any branch would add a vulnerable dependency, here’s the outcome - a failed check! :tada:
+When a push to any branch would add a vulnerable dependency, here’s the outcome - a failed check! 🎉
 
 ![summary](/assets/graphics/2023-05-16-every-push/summary.png)
-
-> detailed summary [here](../../assets/graphics/2023-05-16-every-push/details.png) and [logs](../../assets/logs/dependency-review.txt)
+_detailed summary [here](../../assets/graphics/2023-05-16-every-push/details.png) and [logs](../../assets/logs/dependency-review.txt)_
 
 ### Other systems
 

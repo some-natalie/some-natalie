@@ -1,24 +1,23 @@
 ---
-permalink: /about/
 title: "Hi there 👋"
-layout: single
-classes: wide
+icon: fas fa-info-circle
+order: 6
 ---
 
 I'm Natalie, a devops engineering consultant experienced in developing infrastructure-as-code solutions and operations automation.  I work at the intersection of technology, people, and highly-regulated industries as a Senior Solutions Engineer at [GitHub](https://github.com/github)!
 
-:memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  You're already here! :sparkles:
+📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  You're already here! ✨
 
-:briefcase: I work a lot with
+💼 I work with
 
 - GitHub Enterprise
 - Linux (mostly RHEL and Ubuntu these days)
 - Kubernetes
 - Python
 - Bash
-- but mostly, I work with people on all of the above!  You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
+- mostly, I work with people on all of the above!  You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
 
-:space_invader: I play with
+👾 I play with
 
 - Video games on a Windows 10 VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's got about 5% or so performance drop (just looking at frame rates) over a native install.  You should check it out [here](https://github.com/some-natalie/fedora-acs-override).
 - All sorts of handy Raspberry Pi projects, including

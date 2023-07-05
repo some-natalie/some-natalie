@@ -14,8 +14,8 @@ excerpt: "(Kubernoodles, part 5 of ?) - You need your own image.  Here's how to 
 
 Now that we have [actions-runner-controller](https://github.com/actions/actions-runner-controller) up and running, we need to think through the runner image some.  This piece is all about how to build your own image(s) and whether it's a good idea to do that.
 
-:shipit: The end result of this how-to is an image based on UBI 8 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi8.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi8.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/gha-runner-scale-set-controller/README.md), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi8).  We'll cover a Docker-in-Docker container build later.
-{: .notice--info}
+> The end result of this how-to is an image based on UBI 8 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).<br><br>🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi8.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi8.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/gha-runner-scale-set-controller/README.md), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi8).  We'll cover a Docker-in-Docker container build later.
+{: .prompt-tip}
 
 ## All about the default runner image
 
@@ -28,11 +28,11 @@ This could be problematic for a few reasons.
 1. It's based on Debian - this is fine for platform neutral stuff, but if you're in the Red Hat ecosystem doing things specific to that, it's less than ideal.  Ditto for other Linux ecosystems, but Red Hat is the one I see most frequently.
 1. Because the image has so few things cached and installed inside of it, at scale, running `docker pull` or `apt install` (etc) starts to _really_ eat at your network ingress budget and cause long build times by pulling/installing the same software all the time.
 
-⚖️ There are a lot of trade-offs to consider as you design and build this for your company's infrastructure.  The _entire_ point of [Kubernoodles](https://github.com/some-natalie/kubernoodles) is minimizing the cost of building and running custom images in actions-runner-controller with a few key ingredients to achieve :rainbow: DevSecOps magic :rainbow:
+There are a lot of trade-offs to consider as you design and build this for your company's infrastructure.  The _entire_ point of [Kubernoodles](https://github.com/some-natalie/kubernoodles) is minimizing the cost of building and running custom images in actions-runner-controller with a few key ingredients to achieve 🌈 DevSecOps magic 🌈
 
-- :sparkling_heart: love and respect for your developers and security team
-- :robot: automating ALL THE THINGS
-- :money_with_wings: knowing what gets expensive
+- 💖 love and respect for your developers and security team
+- 🤖 automating ALL THE THINGS
+- 💸 knowing what gets expensive
 
 To make an _initial_ image, we're going to need a laptop or workstation with a container runtime (e.g., [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Podman Desktop](https://podman-desktop.io/)).  We'll set up GitHub Actions to build and scan and sign and ship and all that jazz for its' own runners in the next part.
 
@@ -69,7 +69,7 @@ FROM registry.access.redhat.com/ubi8/ubi-init:8.7
 
 ## Labels are the best
 
-Container labels are literally :sparkles: free glittery goodness :sparkles: bestowed upon us by our YAML overlords.  Use them liberally.  These lightweight key/value labels allow you to build all sorts of other processes out on top of these containers, such as:
+Container labels are literally ✨ free glittery goodness ✨ bestowed upon us by our YAML overlords.  Use them liberally.  These lightweight key/value labels allow you to build all sorts of other processes out on top of these containers, such as:
 
 - Documenting what the source and documentation of the image is
 - Adding authorship, licensing, and other descriptive data (if needed)
@@ -104,8 +104,8 @@ ARG RUNNER_CONTAINER_HOOKS_VERSION=0.3.1
 
 I like to bundle any other similar arguments together here too, such as versions of other software to include.  Keeping it together means I don't hunt through long Dockerfiles to update it - I want my "future me" to like "present me" as much as possible.
 
-:information_source: Get notified about new releases from repositories used upstream from your images by following [these directions](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository).
-{: .notice--info}
+> Get notified about new releases from repositories used upstream from your images by following [these directions](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository).
+{: .prompt-info}
 
 ## Some basic setup
 
@@ -162,7 +162,7 @@ RUN curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-c
 
 ## Choose your own adventure
 
-Now we're to the point of customizing everything, so less copy/paste and more thoughtful consideration of a few things. :sweat_smile:
+Now we're to the point of customizing everything, so less copy/paste and more thoughtful consideration of a few things. 😅
 
 ### To sudo or not to sudo
 
@@ -246,7 +246,7 @@ Using the `latest` tag is fine for building and testing without real users.  Let
 
 I've written [previously](../securing-ghactions-with-arc/#pod-images) about using a combination of [semantic versioning](https://semver.org) and date-based tagging for this use case.  I stand by this as a human-friendly way to keep track of two very different data points that combine for the end image - changes in software or other architecture bump the semver, but routine rebuilds bump the date.  This allows the runner to receive security updates on a more frequent basis, but also track builds that may change and require more idempotency than many (most?) software projects.
 
-At any rate, don't use `latest` for real life.  There is no torture quite like trying to respond to an audit or troubleshoot a failed build when you have no idea what was actually in use, where, and by what processes.  :sparkles: Be kind to future you. :sparkles:
+At any rate, don't use `latest` for real life.  There is no torture quite like trying to respond to an audit or troubleshoot a failed build when you have no idea what was actually in use, where, and by what processes.  ✨ Be kind to future you. ✨
 
 ## Building and deploying manually
 
@@ -307,7 +307,7 @@ ubi8-2tg6n-runner-pm7z6   1/1     Running   0          1m
 
 ## Lastly
 
-Yeah, this is 20 minutes (more? less?) in and we're using containers as VMs.  It's less than cloud native, not what containers were really designed to be doing, and it works pretty well.  :woman_shrugging:
+Yeah, this is 20 minutes (more? less?) in and we're using containers as VMs.  It's less than cloud native, not what containers were really designed to be doing, and it works pretty well. 🤷‍♀️
 
 ![gru](/assets/graphics/memes/gru-does-containers.jpg)
 

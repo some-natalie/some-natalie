@@ -15,7 +15,7 @@ I started this site for a few reasons:
 
 - I work at a weird and fun intersection of highly regulated, compliance-focused organizations and technology.  It's not uncommon for me to search Google, StackOverflow, and GitHub and come up empty-handed (or worse, with ancient unanswered posts or issues).  Maybe this will help someone else later on.
 - It gives me a reason to learn some basic "web things".  As a super backend-oriented person, this is a part of technology I don't have a lot of direct experience with.  That's why this site looks so basic - I'm still learning.
-- I want to establish a publicly-accessible history of (something approaching) competance.  My career has been shaped pretty profoundly by not _looking_ like I belong in technology / know what I'm doing / etc.  Maybe this will help me later on.[^1]
+- I want to establish a publicly-accessible history of (something approaching) competence.  My career has been shaped pretty profoundly by not _looking_ like I belong in technology / know what I'm doing / etc.  Maybe this will help me later on.[^1]
 
 However, learning how to manage Ruby dependencies wasn't one of those reasons.
 

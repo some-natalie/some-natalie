@@ -11,7 +11,7 @@ toc_sticky: true
 excerpt: "What happens to container security and reliability when continuous integration is shoved in too!"
 ---
 
-This post is slides + commentary from a talk I gave at Cloud Native Colorado on November 21st, 2022 about some of the weird ways you can blow up your cluster and your sanity once continuous integration jobs are added into Kubernetes, lessons learned in how to avoid these problems, and why it's _still_ worth all the effort to containerize your build system ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-11-21_Cloud-Native-CO.pdf)).  Kubernetes saves a ton of time and heartache maintaining a shared build infrastructure, but here's a few ways it's not your average application.
+This post is slides + commentary from a talk I gave at Cloud Native Colorado on November 21st, 2022 about some of the weird ways you can blow up your cluster and your sanity once continuous integration jobs are added into Kubernetes, lessons learned in how to avoid these problems, and why it's _still_ worth all the effort to containerize your build system ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-11-21_Cloud-Native-CO.pdf) as presented).  Kubernetes saves a ton of time and heartache maintaining a shared build infrastructure, but here's a few ways it's not your average application.
 
 ### Introduction
 
@@ -24,8 +24,7 @@ Hi!  I'm Natalie and I talk a lot about making the lives of enterprise admins ea
 I've made some pretty ~~monumental~~ fun mistakes out of hubris and I'm here to talk to you about some of them I made in my first grown-up, not-a-lab, real users are on this thing(!!!) use of Kubernetes.  I got a chance to design and build a system for [GitHub Actions](https://github.com/features/actions) for the self-hosted environment I led for thousands of users.  The problems I faced turn out to be pretty common and I see them in many other teams trying to do the same thing.
 
 ![slide-03](/assets/graphics/2022-11-21-cloud-native/slide-03.jpg)
-
-([link to the gif](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/lego-batman-first-try.gif) that didn't survive turning the slide into a picture)
+> [link to the gif](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/lego-batman-first-try.gif) that didn't survive turning the slide into a picture
 
 In working as a sysadmin, my first introduction to systems that build/deploy/maintain code was a series of scripts that ran on a cron job - checking out, building, and updating code on a web server nightly.  It was fun to watch devops transform the idea of "devs make" and "ops execute" into a more unified idea of software _ownership_ - because every system I worked with that followed this pattern was terrifyingly fragile and pretty much everything that came later was an improvement on it.
 
@@ -42,9 +41,7 @@ Next is that simple solutions are better than complex ones, but complex solution
 Much of my career so far has been in a business's _cost center_ - like internal IT departments that cost money and don't bring in any money.  As such, expenditures from software purchases to headcount is a bit of a fight to justify.  The systems I'm describing are typically the responsibility of a team empowering developers, which usually falls into that "cost center" category.  This means that avoiding toil work by automating as much as possible has an outsized impact to quality of life for administrators and for developers.
 
 ![slide-05](/assets/graphics/2022-11-21-cloud-native/slide-05.jpg)
-
-(pictured - an appropriate reaction to seeing 800 packages listed on `yum update`)
-{: .notice}
+_an appropriate reaction to seeing 800 packages listed on `yum update`_
 
 Lack of investment or institutional interest doesn't mean this problem is worth ignoring.  If every company is a software company[^2], how that software is built becomes critical to the business.
 
@@ -72,7 +69,7 @@ The same is (mostly) true of pods in Kubernetes.  Pods don't share awareness of 
 
 ![slide-08](/assets/graphics/2022-11-21-cloud-native/slide-08.jpg)
 
-This is important because in my experience, on-premises clusters tend to look like this :point_up:.  I didn't have dedicated hardware, but added this to co-tenanted VMs in a hypervisor, meaning that the architecture diagram I ended up with looked more nested than first drawn out.  It's possible that as the Kubernetes scheduler is moving pods around to balance across the nodes, the hypervisor's load-balancing logic might also be trying to do the same - moving nodes around within the servers.  I accidentally DDoS'd some other production services with [vMotion](https://www.vmware.com/products/vsphere/vmotion.html) until I learned to set the affinity correctly.  Understanding what else is sharing that hardware _outside_ of the Kubernetes cluster, how it reacts to online migrations to other hardware, and how to set things up to not interfere with each other is both important and hard.
+This is important because in my experience, on-premises clusters tend to look like this 👆.  I didn't have dedicated hardware, but added this to co-tenanted VMs in a hypervisor, meaning that the architecture diagram I ended up with looked more nested than first drawn out.  It's possible that as the Kubernetes scheduler is moving pods around to balance across the nodes, the hypervisor's load-balancing logic might also be trying to do the same - moving nodes around within the servers.  I accidentally DDoS'd some other production services with [vMotion](https://www.vmware.com/products/vsphere/vmotion.html) until I learned to set the affinity correctly.  Understanding what else is sharing that hardware _outside_ of the Kubernetes cluster, how it reacts to online migrations to other hardware, and how to set things up to not interfere with each other is both important and hard.
 
 What's not in this picture is equally important - what's the network path for a request from a container, outbound to the internet?
 
@@ -102,8 +99,8 @@ The second is TCP MTU Probing, with the latest revision in draft with [RFC 8899]
 
 To counter this, I recommend setting the maximum MTU size explicitly in your cluster (and pod, for that matter).  I'd love to show you a simple code snippet of how to do this with the correct sizing, but there's about a million variables based on what else is in your network and what CI tool you're using.
 
-:information_source: Specific to GitHub Actions in Kubernetes, [actions-runner-controller](https://github.com/actions-runner-controller/actions-runner-controller) has some guidance on setting the MTU size explicitly [here](https://github.com/actions-runner-controller/actions-runner-controller/blob/master/TROUBLESHOOTING.md#outgoing-network-action-hangs-indefinitely).
-{: .notice--info}
+> Specific to GitHub Actions in Kubernetes, [actions-runner-controller](https://github.com/actions/actions-runner-controller) has some guidance on setting the MTU size explicitly [here](https://github.com/actions/actions-runner-controller/blob/master/TROUBLESHOOTING.md#outgoing-network-action-hangs-indefinitely).
+{: .prompt-info}
 
 ![slide-11](/assets/graphics/2022-11-21-cloud-native/slide-11.jpg)
 
@@ -111,7 +108,7 @@ Managed services, such as Azure's [AKS](https://azure.microsoft.com/en-us/produc
 
 On a self-managed cluster, if it thinks it has 100 virtual CPUs for worker nodes, but in truth, you've used some fancy hypervisor setting to over-allocate - this'll be good until it actually needs to use everything it thinks it has but can't provision it.  The Kubernetes scheduler is only as smart as what it can see.  A managed service handles scaling for you invisibly.
 
-That's not without a cost.  Cost planning and optimization for managed services is an entirely different exercise than owning/operating datacenters.  You should contact the account team of the service(s) you're looking at for a better understanding of how charges are incurred because that's way outside the scope of this talk! :grinning:
+That's not without a cost.  Cost planning and optimization for managed services is an entirely different exercise than owning/operating datacenters.  You should contact the account team of the service(s) you're looking at for a better understanding of how charges are incurred because that's way outside the scope of this talk! 😀
 
 ![slide-12](/assets/graphics/2022-11-21-cloud-native/slide-12.jpg)
 
@@ -125,7 +122,7 @@ If you're using Kubernetes within a VM infrastructure, the worker nodes can be m
 
 ![slide-14](/assets/graphics/2022-11-21-cloud-native/slide-14.jpg)
 
-In summary, here's a few things to keep in mind - first is that :sparkles: containers are not VMs :sparkles: and using them like VMs sometimes reveals fun edge cases to explore in a river of user tears.
+In summary, here's a few things to keep in mind - first is that ✨ containers are not VMs ✨ and using them like VMs sometimes reveals fun edge cases to explore in a river of user tears.
 
 This guide on [anti-patterns of cloud applications](https://learn.microsoft.com/en-us/azure/architecture/antipatterns/) is helpful.  I specifically run into the following frequently:
 
@@ -141,9 +138,9 @@ The two decisions to make around audience size versus pod size - big pods or lot
 
 ![slide-15](/assets/graphics/2022-11-21-cloud-native/slide-15.jpg)
 
-Now that we're up and running, let's talk about ways the word "privilege" comes up with user requests.  As mentioned earlier, :sparkles: containers are not VMs :sparkles:, so the same security postures we had for VMs don't apply equally here.
+Now that we're up and running, let's talk about ways the word "privilege" comes up with user requests.  As mentioned earlier, ✨ containers are not VMs ✨, so the same security postures we had for VMs don't apply equally here.
 
-:lock: Kubernetes security is one of those topics we can spend _hours_ on and maybe one day, we will but today I'm going to leave you with an overview and some things to think about for this use case, as well as the amazing [documentation](https://kubernetes.io/docs/concepts/security/).
+🔒 Kubernetes security is one of those topics we can spend _hours_ on and maybe one day, we will but today I'm going to leave you with an overview and some things to think about for this use case, as well as the amazing [documentation](https://kubernetes.io/docs/concepts/security/).
 
 ![slide-16](/assets/graphics/2022-11-21-cloud-native/slide-16.jpg)
 
@@ -155,7 +152,7 @@ There's a decent amount of overlap in how these two concepts are used in practic
 
 ![slide-17](/assets/graphics/2022-11-21-cloud-native/slide-17.jpg)
 
-We're going to need to know a bit about how the Linux kernel handles permissions.  Containers are not a kernel primitive, but a combination of a regular process and some special guardrails.  This means that Kubernetes is scheduling processes for multiple projects on shared hardware _without_ the isolation of a virtual machine because :sparkles: containers are not VMs :sparkles:.
+We're going to need to know a bit about how the Linux kernel handles permissions.  Containers are not a kernel primitive, but a combination of a regular process and some special guardrails.  This means that Kubernetes is scheduling processes for multiple projects on shared hardware _without_ the isolation of a virtual machine because ✨ containers are not VMs ✨.
 
 This isn't the end of the world, but our toolbox has changed compared to managing virtual machines.  Let's take a quick look at some of those tools.
 
@@ -165,11 +162,11 @@ This isn't the end of the world, but our toolbox has changed compared to managin
 1. [Overlayfs](https://docs.kernel.org/filesystems/overlayfs.html) is that stacking filesystem that containers use.  Important to note these are mounts and get a little weird later on in this talk.
 1. Mandatory Access Control implementations like SELinux or AppArmor play a huge part in security too, but that's a huge topic we'll have to save for another day.  (Just don't disable it, okay?)
 
-:information_source: A "namespace" in Kubernetes is an abstraction to provide some permissions isolation and resource usage quota within a cluster (such as deployments, secrets, etc.). It's commonly used to divide a cluster among several applications.  A kernel namespace is a low-level concept that wraps system resources in such a way that they are shared but appear dedicated.
-{: .notice--info}
+> A "namespace" in Kubernetes is an abstraction to provide some permissions isolation and resource usage quota within a cluster (such as deployments, secrets, etc.). It's commonly used to divide a cluster among several applications.  A kernel namespace is a low-level concept that wraps system resources in such a way that they are shared but appear dedicated.
+{: .prompt-info}
 
-:warning: This change means users migrating from VMs that _assume_ their jobs have root access might not "just work" in this new system without some changes.  Resist the temptation to immediately grant them privileged pods and figure out if we really need it first.  Unless you're in a huge rush to decommission the system they're moving from, it's usually okay to spend some time messing with permissions and dependencies to allow their code to compile _without_ privileged access first.
-{: .notice--warning}
+> This change means users migrating from VMs that _assume_ their jobs have root access might not "just work" in this new system without some changes.  Resist the temptation to immediately grant them privileged pods and figure out if we really need it first.  Unless you're in a huge rush to decommission the system they're moving from, it's usually okay to spend some time messing with permissions and dependencies to allow their code to compile _without_ privileged access first.
+{: .prompt-warning}
 
 Let's talk through a couple common places this comes up.
 
@@ -219,7 +216,9 @@ This does come up in some compilers and applications used in debugging, especial
 
 This is usually the point in chatting about container security where someone inevitably says, "well just use [Firecracker](https://firecracker-microvm.github.io/).  It works for AWS!"  And it does!  Hooray for them!  It's a really cool tool!  I want to play with it more.  It could be the right solution for you, but we're going back to the key anti-pattern here:
 
-:sparkles: Containers are not VMs :sparkles:
+<div style="text-align:center"><p style="font-size: 20px"><b>
+✨ Containers are not VMs ✨
+</b></p></div>
 
 Kubernetes expects to manage _containers_, not VMs.  Firecracker creates (very tiny) VM with a RESTful API using [kernel virtual machines](https://www.linux-kvm.org/page/Main_Page).  There's a lot that doesn't need to be specified in a PodSpec and does to define a virtual machine, and vice versa.  Resource assignments and networking would be where I'd spend a ton more time if we could.  This means that our pod's lifecycle looks like this:
 
@@ -239,7 +238,7 @@ Next is all the things I'm aware of that I don't know enough about to speak to k
 - [Kata Containers](https://katacontainers.io/), on [GitHub](https://github.com/kata-containers/)
 - [Firekube](https://www.weave.works/oss/firekube/), on [GitHub](https://github.com/weaveworks)
 - [Nestybox](https://www.nestybox.com/) Sysbox, on [GitHub](https://github.com/nestybox/sysbox)
-- It seems like there's always another cool new thing in this category on Medium or Hacker News every month or two, so I'm sure to miss a few. :grinning:
+- It seems like there's always another cool new thing in this category on Medium or Hacker News every month or two, so I'm sure to miss a few. 😀
 
 ![slide-23](/assets/graphics/2022-11-21-cloud-native/slide-23.jpg)
 
@@ -263,7 +262,7 @@ It is unbelievably expensive to have hundreds or thousands of developers unable 
 
 Kubernetes allows you to have read-only volumes that can be shared across many pods simultaneously.  These read-only volumes can be mounted by pods for caching if read-only access is acceptable.  The relevant [documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) is well worth the read.  Using these volumes can help reduce image size by quite a bit.
 
-Lastly, ship your logs somewhere so you can look through them later.  It's 2022. :heart:
+Lastly, ship your logs somewhere so you can look through them later.  It's 2022. ♥️
 
 ![slide-26](/assets/graphics/2022-11-21-cloud-native/slide-26.jpg)
 
@@ -275,7 +274,7 @@ Sometimes, a read-only cache that can be safely shared between pods isn't good e
 
 ![slide-27](/assets/graphics/2022-11-21-cloud-native/slide-27.jpg)
 
-I'll never get tired of saying that :sparkles: containers are not VMs :sparkles:, yet it seems like most of this evening has been all about a "lift and shift" of legacy VM infrastructure into containers without respecting that fact.  And it has!
+I'll never get tired of saying that ✨ containers are not VMs ✨, yet it seems like most of this evening has been all about a "lift and shift" of legacy VM infrastructure into containers without respecting that fact.  And it has!
 
 In starting this migration from VMs to containers, there's a balance to find between a large number of discrete images that are purpose-built for each team and a small number of larger multi-purpose images.  This balance is never really "complete", but something that grows over time.  The pattern I see most companies succeed with is to have a couple large-ish multi-purpose images and a process to _quickly_ evaluate, approve/deny, and deploy project-specific images as needed.  Handling requests for additional privileges or images in a timely way is critical to reducing "shadow IT" and becoming an internal service that folks enjoy.  This allows admins to scale their time without compromising security.
 
@@ -287,7 +286,7 @@ I want to take a moment and talk about this picture, because the gasp was audibl
 
 But it looks so weird, right?  The rules weren't written for large swimming pools.
 
-This is a bit of a counter-intuitive use of containers as VMs, despite my repetition of :sparkles: containers are not VMs :sparkles:.  Containers weren't meant to be used this way, but it works well.  The controls that an administrator has are different than for VMs or physical hardware - this doesn't mean it can't be done at all!  Co-tenanting a bunch of different teams on a shared cluster provides enough economic advantages to incentivize some great cultural changes - empowering teams to move faster with ownership over their builds without having them also be solely responsible for it.
+This is a bit of a counter-intuitive use of containers as VMs, despite my repetition of ✨ containers are not VMs ✨.  Containers weren't meant to be used this way, but it works well.  The controls that an administrator has are different than for VMs or physical hardware - this doesn't mean it can't be done at all!  Co-tenanting a bunch of different teams on a shared cluster provides enough economic advantages to incentivize some great cultural changes - empowering teams to move faster with ownership over their builds without having them also be solely responsible for it.
 
 ---
 
@@ -305,7 +304,7 @@ These are the resources linked in the slides at the end of the full deck, as wel
 
 Resources specific to GitHub Actions
 
-- [actions-runner-controller](https://github.com/actions-runner-controller/actions-runner-controller), the community project providing a Kubernetes controller for GitHub Actions.
+- [actions-runner-controller](https://github.com/actions/actions-runner-controller), the community project providing a Kubernetes controller for GitHub Actions.
 - [kubernoodles](https://github.com/some-natalie/kubernoodles), my take on how to manage actions-runner-controller at a human scale in the enterprise.
 
 ---

@@ -1,7 +1,8 @@
 # The Site Configuration
 
 # Import the theme
-theme: jekyll-theme-chirpy
+# theme: jekyll-theme-chirpy
+remote_theme: cotes2020/jekyll-theme-chirpy
 
 # Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
 # and doesn't have a custom domain.
@@ -18,10 +19,10 @@ timezone: America/Denver
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Some Natalie's corner of the internet # the main title
+title: Some Natalie # the main title
 
 tagline: >- # it will display as the sub-title
-  Things I'm learning, working on, or thinking about.  All opinions and snark my own.
+  Some Natalie's corner of the internet.  Things I'm learning, working on, or thinking about.  All opinions and snark my own.
 
 description: >- # used by seo meta and the atom feed
   Things I'm learning, working on, or thinking about.  All opinions and snark my own.

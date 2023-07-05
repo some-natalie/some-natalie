@@ -2,7 +2,7 @@
 title: "Kubernoodles"
 classes: wide
 permalink: /kubernoodles/
-order: 2
+order: 3
 icon: fa-solid fa-user-astronaut
 ---
 

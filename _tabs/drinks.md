@@ -2,7 +2,7 @@
 layout: page
 title: Drinks
 permalink: /drinks/
-order: 4
+order: 5
 icon: fas fa-fw fa-mug-hot
 ---
 

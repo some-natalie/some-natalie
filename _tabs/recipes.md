@@ -2,7 +2,7 @@
 layout: page
 title: Recipes
 permalink: /recipes/
-order: 3
+order: 4
 icon: fas fa-fw fa-utensils
 ---
 

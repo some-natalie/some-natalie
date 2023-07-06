@@ -79,7 +79,7 @@ flowchart LR
 
 ### Some assumptions
 
-![deployment-mess](/assets/graphics/memes/deployment.png){: .align-right}
+![deployment-mess](/assets/graphics/memes/deployment.png){: .w-50 .right}
 
 We’re making some assumptions here for the sake of time.  Please **DO** include these topics in your own threat model - they are important!  But they’re also bespoke and we’re on a timeline here.
 
@@ -468,7 +468,7 @@ First, there’s an allowlist.  The screenshot is what this looks like at the en
 
 A somewhat common pattern is to bring Actions inside an internal account after approvals and such. It’s a more heavyweight process compared to scanning and pinning to a SHA, but it’s well supported.  A key risk here is when bringing things internal, it never gets updated again - even for security updates.
 
-![lots-of-tickets](/assets/graphics/memes/lots-of-tickets.jpg){: .align-right}
+![lots-of-tickets](/assets/graphics/memes/lots-of-tickets.jpg){: .w-50 .right}
 
 We’ve spent most of the past 45 minutes or so talking nuts and bolts about our threat model and figuring out ways to make the list of scary things smaller while still giving our developers tools to move faster and better.  Let’s talk about the biggest and scariest thing on that list - our people.
 

@@ -9,7 +9,7 @@ tags:
 excerpt: "It's been nearly a year and so much has changed - how much does waiting on builds cost now?"
 ---
 
-It’s been nearly a year since I first looked into the cost of waiting on builds ([series](https://some-natalie.dev/tags/business/)).  It got picked up by [GitHub’s blog](https://github.blog/2022-12-08-experiment-the-hidden-costs-of-waiting-on-slow-build-times/) and it's still tied with the time I [spoke at a CNCF conference](../blog/securing-ghactions-with-arc/) for page views every month.  Since I need some updated build benchmarks for an upcoming project, this seemed like a fabulous time to re-run the experiment and update it to account for the recent economic shifts.
+It’s been nearly a year since I first looked into the cost of waiting on builds ([series](https://some-natalie.dev/tags/business/)).  It got picked up by [GitHub’s blog](https://github.blog/2022-12-08-experiment-the-hidden-costs-of-waiting-on-slow-build-times/) and it's still tied with the time I [spoke at a CNCF conference](../securing-ghactions-with-arc/) for page views every month.  Since I need some updated build benchmarks for an upcoming project, this seemed like a fabulous time to re-run the experiment and update it to account for the recent economic shifts.
 
 I’d assumed that like every year in tech, quite a bit has changed - but I was only partially right!
 

@@ -50,6 +50,8 @@ This gave me a total of 108 data points to work with.  Producing 36 unique build
 
 Here's a walkthrough of how one of the builds is created:
 
+{% raw %}
+
 ```yaml
 jobs:
   build-fc39:
@@ -82,6 +84,8 @@ jobs:
         with:
           debug-build: ${{ matrix.debug }} # passing in the debug matrix value
 ```
+
+{% endraw %}
 
 ### Results
 

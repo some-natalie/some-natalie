@@ -469,7 +469,6 @@ First, there’s an allowlist.  The screenshot is what this looks like at the en
 A somewhat common pattern is to bring Actions inside an internal account after approvals and such. It’s a more heavyweight process compared to scanning and pinning to a SHA, but it’s well supported.  A key risk here is when bringing things internal, it never gets updated again - even for security updates.
 
 ![lots-of-tickets](/assets/graphics/memes/lots-of-tickets.jpg){: .w-50 .right}
-_Chuck E Cheese is the only place where lots of tickets is a good thing_
 
 We’ve spent most of the past 45 minutes or so talking nuts and bolts about our threat model and figuring out ways to make the list of scary things smaller while still giving our developers tools to move faster and better.  Let’s talk about the biggest and scariest thing on that list - our people.
 

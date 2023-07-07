@@ -111,7 +111,7 @@ I was surprised that it was this simple to find a job that couldn't reliably com
 
 ### Conclusions
 
-Developer time at a conservative cost of $1.50 per minute ($90/hr) still seems outright silly to waste to save a couple pennies on compute cost.  It's just as true now as it was at $75/hr.  The same is also true of laptops or noise-canceling headphones or leaving a bunch of Slack channels - saving focus time where it's most expensive is almost always a worthwhile expense.
+Developer time at a conservative cost of $1.50 per minute ($90/hr) still seems outright silly to waste to save a couple pennies on compute cost.  It's just as true now as it was at $75/hr.  The same is also true of laptops or noise-canceling headphones or leaving a bunch of Slack channels - saving focus time where it's most impactful to the business is almost always a worthwhile expense.
 
 ### Footnotes
 

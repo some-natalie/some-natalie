@@ -1,5 +1,5 @@
 ---
-title: Banana bread
+title: "Banana bread"
 classes: wide
 ---
 

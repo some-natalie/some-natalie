@@ -15,6 +15,7 @@ classes: wide
 - Oil for cooking (canola, vegetable, other neutral oil)
 
 ### Optional
+
 - A splash or two of liqueur (rum, brandy, cognac, ameretto are good ideas)
 - A little beer or juice or a couple drops of extract
 - A couple tablespoons of castor sugar or sugar in the raw

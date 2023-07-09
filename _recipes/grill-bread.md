@@ -1,30 +1,30 @@
 ---
-title: Grilled bread
+title: "Grilled bread"
 classes: wide
 ---
 
-> Grilled no-knead focaccia bread 
+> Grilled no-knead focaccia bread
 
 ## Ingredients
 
-- 1 cup white whole wheat flour 
-- 1.25 cups bread flour 
-- 1 cup all-purpose flour 
+- 1 cup white whole wheat flour
+- 1.25 cups bread flour
+- 1 cup all-purpose flour
 - 14 oz of very warm water (about 115 F)
 - 0.75 tsp of active dry yeast (for starting in the morning)
 - 0.5 tsp salt
 
-### Optional toppings 
+### Optional toppings
 
 - Flaky salt
 - Grated sharp cheese
 - Dill and chives
-- Fresh rosemary leaves 
-- Roasted garlic 
+- Fresh rosemary leaves
+- Roasted garlic
 - Savory seasoning mix like Herbs de province or Italian blend
-- Roasted red peppers 
-- Sun dried tomatoes 
-- Hummus or extra virgin olive oil or tzatziki for spreading or dipping 
+- Roasted red peppers
+- Sun dried tomatoes
+- Hummus or extra virgin olive oil or tzatziki for spreading or dipping
 
 ## Directions
 

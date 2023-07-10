@@ -9,7 +9,6 @@ tags:
 classes: wide
 excerpt: "Stop putting all code security alerts into a ticketing system.  Here's what to do instead."
 image: /assets/graphics/memes/belle-alerts.jpg
-pin: true
 ---
 
 > 💖 This post contains unresolved professional trauma and is fueled by a desire to spare others that deep pain.  You have been warned. 💖

@@ -9,6 +9,8 @@ tags:
 classes: wide
 mermaid: true
 excerpt: "Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)"
+image: /assets/graphics/2023-07-03-threat-modeling/Slide1.jpeg
+pin: true
 ---
 
 GitHub Actions is phenomenally popular in both open-source and enterprise development - partly due to how _different_ it is from many other existing CI/CD tools.  However, this means you'll need to update your threat model to account for those differences.
@@ -27,8 +29,6 @@ This talk gives a quick overview of what threat modeling is and why it's importa
 1. [Governing the ungovernable](#governing-the-ungovernable) - expanding this model to the enterprise, with tons of people and processes and stakeholders, without quitting your job to become a goat farmer[^1] 🐐
 
 ## Introduction
-
-![slide-1](/assets/graphics/2023-07-03-threat-modeling/Slide1.jpeg)
 
 ![slide-2](/assets/graphics/2023-07-03-threat-modeling/Slide2.jpeg)
 

@@ -9,6 +9,7 @@ tags:
   - security
   - on-premises
 excerpt: "Self-hosted GitHub Actions runners and Kubernetes are a natural fit - let's put them together securely."
+image: /assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide2.png
 ---
 
 GitHub Actions is one of the most popular CI tools in use today.  If you need or want to run it yourself, though, there are a lot of design choices to make and not a lot of guidance.  The most popular choice is [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source project to manage and automatically scale the runner agents in Kubernetes.  That still leaves a lot of questions with security implications, outlined in this post as slides + commentary from a talk I gave at [CloudNativeSecurityCon North America 2023](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) in Seattle, WA.
@@ -17,8 +18,6 @@ GitHub Actions is one of the most popular CI tools in use today.  If you need or
 {: .prompt-info}
 
 ### Introduction
-
-![slide-02](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide2.png)
 
 Self-hosted GitHub Actions runners and Kubernetes are a natural fit, but there's not a lot of guidance on how to put the two together. The leading solution is [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source community project which provides a controller for autoscaling, ephemeral, and version-controlled compute. It does not, unfortunately, show off how to design and deploy it securely.
 

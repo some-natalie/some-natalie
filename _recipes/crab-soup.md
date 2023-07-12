@@ -1,6 +1,7 @@
 ---
 title: "Summer crab soup"
 classes: wide
+excerpt: "Fresh summer crab and seasonal corn on the cob in a creamy soup.  Goes great in a bread bowl.  More of a chowder or bisque for consistency, but the family calls it soup."
 ---
 
 > Fresh summer crab and seasonal corn on the cob in a creamy soup.  Goes great in a bread bowl.  More of a chowder or bisque for consistency, but the family calls it soup.

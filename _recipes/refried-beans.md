@@ -1,6 +1,7 @@
 ---
 title: "Refried beans"
 classes: wide
+excerpt: "Easier, healthier, and tastier from scratch"
 ---
 
 > Refried beans are easy and better from scratch.

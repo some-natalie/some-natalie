@@ -1,6 +1,7 @@
 ---
 title: "Butterscotch syrup"
 classes: wide
+excerpt: "Simple butterscotch for coffee, desserts, and more."
 ---
 
 > Butterscotch syrup for coffee, desserts, and such.

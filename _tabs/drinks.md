@@ -12,5 +12,5 @@ This is not a coffee or tea or cocktail blog either, but all the beverage things
 
 {% assign sorted = site.drinks | sort: 'title' %}
 {% for drink in sorted %}
-- [{{ drink.title }}]({{ drink.url | relative_url }})
+- [{{ drink.title }}]({{ drink.url | relative_url }}) - {{ drink.excerpt }}
 {% endfor %}

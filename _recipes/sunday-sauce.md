@@ -1,6 +1,7 @@
 ---
 title: "Sunday sauce"
 classes: wide
+excerpt: "Pasta with red sauce is good any day of the week.  Meat optional."
 ---
 
 > Pasta with red sauce is good any day of the week.  Meat optional.

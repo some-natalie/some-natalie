@@ -1,6 +1,7 @@
 ---
 title: "Bread machine bread"
 classes: wide
+excerpt: "Whole wheat bread for the bread machine"
 ---
 
 > Whole wheat bread for the bread machine

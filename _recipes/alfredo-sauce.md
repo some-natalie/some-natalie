@@ -1,6 +1,7 @@
 ---
 title: "Alfredo sauce"
 classes: wide
+excerpt: "Simple sauce, lots of variations and cheese"
 ---
 
 > Simple Alfredo sauce, lots of variations

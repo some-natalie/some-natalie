@@ -1,6 +1,7 @@
 ---
 title: "Crepes"
 classes: wide
+excerpt: "Traditional crepes, fill with fruit or vegetables or cheese or any other number of tasty things."
 ---
 
 > Traditional crepes, fill with fruit or vegetables or cheese or any other number of tasty things.
@@ -35,4 +36,6 @@ classes: wide
 ## Notes
 
 - Need the crepe pan and spreader!
+- Recipe from the booklet that came with the pan
 - A nice flexible and broad spatula makes flipping easy
+- Do not make on teleconference calls!

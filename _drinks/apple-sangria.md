@@ -1,9 +1,10 @@
 ---
 title: "Apple sangria"
 classes: wide
+excerpt: "Warm fall days in a simple pitcher cocktail"
 ---
 
-> Warm fall days in a nice pitcher cocktail
+> Warm fall days in a simple pitcher cocktail
 
 ## Ingredients
 

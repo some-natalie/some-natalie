@@ -1,6 +1,7 @@
 ---
 title: "Midnight mint syrup"
 classes: wide
+excerpt: "Dark chocolate and mint syrup for ice cream, coffee, and more."
 ---
 
 > Dark chocolate and mint syrup for ice cream, coffee, and more.

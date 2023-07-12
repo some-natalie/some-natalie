@@ -16,8 +16,8 @@ excerpt: "Christmas-time chocolates with just a hint of coffee to balance it all
 
 ## Directions
 
-1. Melt chocolate chips.  Combine with cream cheese, coffee, and water. 
-1. Roll into small balls (about the size of a quarter). 
+1. Melt chocolate chips.  Combine with cream cheese, coffee, and water.
+1. Roll into small balls (about the size of a quarter).
 1. Chill in the fridge for several hours before dipping in melted chocolate.
 
 ## Notes

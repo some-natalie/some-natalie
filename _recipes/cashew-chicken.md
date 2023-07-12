@@ -16,7 +16,6 @@ excerpt: "Quick weeknight meal with extra veggies!  Delicious _without_ the chic
 - 0.5 teaspoon salt
 - 1 cups corn or vegetable oil in the wok
 
-
 ### Cashew mixture
 
 - 1 green pepper, half-inch pieces

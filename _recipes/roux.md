@@ -1,6 +1,7 @@
 ---
 title: "Roux"
 classes: wide
+excerpt: "Thicken your soup/sauce/whatever"
 ---
 
 > Thicken your soup/sauce/whatever with roux.  Not sure this really needs a recipe.

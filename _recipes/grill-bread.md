@@ -1,6 +1,7 @@
 ---
 title: "Grilled bread"
 classes: wide
+excerpt: "Grilled no-knead focaccia bread"
 ---
 
 > Grilled no-knead focaccia bread

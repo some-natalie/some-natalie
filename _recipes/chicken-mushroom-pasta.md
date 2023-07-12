@@ -1,6 +1,7 @@
 ---
 title: "Chicken and mushroom pasta"
 classes: wide
+excerpt: "Chicken and cremini mushrooms in a cream reduction sauce.  Not “rigatoni d” from a nice Italian restaurant."
 ---
 
 > Chicken and cremini mushrooms in a cream reduction sauce.  Not “rigatoni d” from a nice Italian restaurant.

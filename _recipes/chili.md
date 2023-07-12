@@ -1,6 +1,7 @@
 ---
 title: "Three bean chili"
 classes: wide
+excerpt: "As meaty (or vegetarian or vegan) as you’d like.  As spicy as you want it.  In the oven or on the stove top.  It’s chili, don’t make it complicated."
 ---
 
 > As meaty (or vegetarian or vegan) as you’d like.  As spicy as you want it.  In the oven or on the stove top.  It’s chili, don’t make it complicated.

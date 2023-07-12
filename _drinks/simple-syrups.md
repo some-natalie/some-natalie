@@ -1,6 +1,7 @@
 ---
 title: "Simple syrups"
 classes: wide
+excerpt: "All the simple syrups to put in teas and coffees and cocktails"
 ---
 
 > All the simple syrups to put in teas and coffees and cocktails

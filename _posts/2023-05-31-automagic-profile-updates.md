@@ -29,6 +29,7 @@ The GitHub Actions workflow in `~/.github/workflows/update-readme.yml` ([link](h
 
 Since the script is only looking at filenames, this step will fail with no changes to commit/push if a file is edited but not created.  A small Bash `if` condition helps out here, exiting with a status code of `0` if there’s only edits to existing files.  This tells Actions that it succeeded with no changes when that happens.
 
+{% raw %}
 ```shell
 if [[ `git status --porcelain --untracked-files=no` ]]; then
   # Changes
@@ -41,6 +42,7 @@ else
   exit 0
 fi
 ```
+{% endraw %}
 
 ### Roll your own
 

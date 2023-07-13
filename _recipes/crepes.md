@@ -17,7 +17,7 @@ excerpt: "Traditional crepes, fill with fruit or vegetables or cheese or any oth
 
 ### Optional
 
-- A splash or two of liqueur (rum, brandy, cognac, ameretto are good ideas)
+- A splash or two of liqueur (rum, brandy, cognac, amaretto are good ideas)
 - A little beer or juice or a couple drops of extract
 - A couple tablespoons of castor sugar or sugar in the raw
 - Substitute about a quarter of the flour for whole wheat, buckwheat flour, etc.

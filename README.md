@@ -4,9 +4,9 @@ I'm Natalie, a devops engineering consultant experienced in developing infrastru
 
 :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Please stop saying 'Just use Firecracker' - do this instead](https://some-natalie.dev/blog/stop-saying-just-use-firecracker):  Using things for what they're meant for empowers teams at scale - and also, how to avoid death by a thousand cuts along the path of shoving VMs into systems designed for containers.
 1. [Revisiting the Cost of Waiting on Builds](https://some-natalie.dev/blog/revisiting-build-times):  It's been nearly a year and so much has changed - how much does waiting on builds cost now?
 1. [Threat Modeling the GitHub Actions ecosystem](https://some-natalie.dev/blog/threat-modeling-actions):  Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)
-1. [Adding Mermaid Diagrams](https://some-natalie.dev/blog/mermaid-diagrams):  Adding Mermaid (or any custom JavaScript) to a Jekyll site without a plugin
 <!-- END_SECTION:latest_posts -->
 
 :briefcase: I work a lot with

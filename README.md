@@ -1,24 +1,26 @@
 # Hi there 👋
 
-I'm Natalie, a devops engineering consultant experienced in developing infrastructure-as-code solutions and operations automation.  I work at the intersection of technology, people, and highly-regulated industries as a Senior Solutions Engineer at [GitHub](https://github.com/github)!
+I'm Natalie, a DevSecOps engineer and consultant experienced in developer experience and consolidation within a wide array of security-focused environments.  I work at the intersection of technology, people, and highly-regulated industries as a Senior Solutions Engineer at [GitHub](https://github.com/github)!
 
-:memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
+### :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
 1. [Please stop saying 'Just use Firecracker' - do this instead](https://some-natalie.dev/blog/stop-saying-just-use-firecracker):  Using things for what they're meant for empowers teams at scale - and also, how to avoid death by a thousand cuts along the path of shoving VMs into systems designed for containers.
 1. [Revisiting the Cost of Waiting on Builds](https://some-natalie.dev/blog/revisiting-build-times):  It's been nearly a year and so much has changed - how much does waiting on builds cost now?
 1. [Threat Modeling the GitHub Actions ecosystem](https://some-natalie.dev/blog/threat-modeling-actions):  Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)
 <!-- END_SECTION:latest_posts -->
 
-:briefcase: I work a lot with
+### :briefcase: I work a lot with
 
-- GitHub Enterprise
-- Linux (mostly RHEL and Ubuntu these days)
-- Kubernetes
-- Python
-- Bash
-- but mostly, I work with people on all of the above!  You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
+- **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql)
+- **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
+- **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles)
+- **Python** - [advanced security CSV export](https://github.com/advanced-security/ghas-to-csv)
+- **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6)
+- but mostly, I work with people on all of the above! 💖
 
-:space_invader: I play with
+You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
+
+### :space_invader: I play with
 
 - Video games on a Windows 10 VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's got about 5% or so performance drop (just looking at frame rates) over a native install.  You should check it out [here](https://github.com/some-natalie/fedora-acs-override).
 - All sorts of handy Raspberry Pi projects, including
@@ -26,12 +28,12 @@ I'm Natalie, a devops engineering consultant experienced in developing infrastru
   - [OpenWRT](https://openwrt.org) router ([build directions](https://some-natalie.dev/blog/openwrt-setup/))
   - [Pi-hole](https://pi-hole.net), for DNS and ad-blocking
   - Ubiquiti UniFi network controller, in [Docker](https://github.com/jacobalberty/unifi-docker) of course
-- I have an awesome life outside of tech, so while I have a few projects that I enjoy (:point_up:), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
+- I have an awesome life outside of tech, so while I have a few projects that I enjoy (👆), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
 
-Heads up!
+### Heads up!
 
 - 🔭 I’m currently working on automating everything put in front of me.
-- 🌱 I’m currently learning some more in-depth Kubernetes administration and a bit of Go.
+- 🌱 I’m currently learning some more in-depth Kubernetes security and technical writing.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).

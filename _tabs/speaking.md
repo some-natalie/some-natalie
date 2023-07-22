@@ -8,6 +8,8 @@ Natalie is a senior solutions engineer at GitHub serving the public sector marke
 
 She's passionate about diversity in technology and empowering engineers to build better.
 
+---
+
 ## 2023
 
 **Threat Modeling the GitHub Actions Ecosystem** (23 June) at [BSides Boulder](https://bsidesboulder.org) is a tour through the four questions outlined in the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/) to provide an enterprise-ready threat model for implementing GitHub Actions securely.
@@ -16,10 +18,14 @@ She's passionate about diversity in technology and empowering engineers to build
 - [Slides](https://some-natalie.dev/blog/threat-modeling-actions), with writeup and links
 - Recording coming soon
 
+![cncf-cnsc2023](/assets/graphics/speaking/cncf-cnsc2023.JPG){: .w-30 .right}
+
 **Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller**  (1 Feb) at [CloudNativeSecurityCon North America](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) is a deep dive into the security considerations of running self-hosted GitHub Actions compute with [actions-runner-controller](https://github.com/actions/actions-runner-controller).
 
 - [Slides](https://some-natalie.dev/blog/securing-ghactions-with-arc/), with writeup and links
 - [YouTube](https://youtu.be/Ax4VPm2KrqQ)
+
+---
 
 ## 2022
 
@@ -34,6 +40,8 @@ She's passionate about diversity in technology and empowering engineers to build
 - [RPM file example](https://koji.fedoraproject.org/koji/buildinfo?buildID=2058325) walking through the process of building RPMs from the source RPM
 - [DEB file example](https://packages.debian.org/buster/libopenscap8) walking through the contents and process of building DEBs from a source tarball
 
+---
+
 ## 2021
 
 **Goobernetes**, or building GitHub Actions compute on-premises without (many) tears (14 Oct) at the [Boulder Linux/Unix User Group](https://www.meetup.com/Boulder-Linux-Unix-User-Group/)
@@ -42,8 +50,10 @@ She's passionate about diversity in technology and empowering engineers to build
 - [Slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2021-10-14_Goobernetes.pdf)
 - [Source code](https://github.com/boozallen/goobernetes)
 
-> The above source code repository isn't maintained.  Please look to [kubernoodles](https://github.com/some-natalie/kubernoodles) for a newer take on the same problem.
+> The above source code repository isn't maintained.  Please look to [kubernoodles](../kubernoodles) for a newer take on the same problem.
 {: .prompt-info }
+
+---
 
 ## 2020
 

@@ -63,7 +63,7 @@ The use of Kubernetes that I see the most is using it as [enterprise continuous 
 
 Are there better, safer, faster, more economical places to establish trust on your team's inputs than at the very end of this process?
 
-**Doing dumb things in a VM is still dumb.**  The isolation of a VM is great and I won't argue it's substantially better than a container.  Even better is how _much_ gets stripped out of micro-VMs - things like additional interfaces, much of the "sharing" ability of devices between host and VM, etc.  This all combines to dramatically shrink the surface area of things that could get squirrely, but doesn't make your cluster completely immune to all the things that could go wrong.  Here's a few things it won't do a thing to stop.
+**Doing risky things in a VM is still risky.**  The isolation of a VM is great and I won't argue it's substantially better than a container.  Even better is how _much_ gets stripped out of micro-VMs - things like additional interfaces, much of the "sharing" ability of devices between host and VM, etc.  This all combines to dramatically shrink the surface area of things that could get squirrely, but doesn't make your cluster completely immune to all the things that could go wrong.  Here's a few things it won't do a thing to stop.
 
 - **Network activity** isn't _that_ different here.  If you allow your VM-pod network access, it's still allowed the same network access your vanilla-container-pod would have had.  Example threats here would be downloading and executing arbitrary binaries, or reaching out for a command-and-control attack or crypto-mining service.
 - **Contaminated container images** are still compromised, but the vector of escaping from the container to the host for more persistent naughtiness is (mostly) shut down.  This is particularly concerning for using containers to build your code, possibly adding the ability to persist _elsewhere_ where that built code is run.
@@ -95,15 +95,17 @@ Looking critically at your workloads and reviewing their changes can catch all m
 
 If you have a dozen/hundred/thousand teams, maybe they can share _most_ of their infrastructure in a shared Kubernetes cluster for cost controls and governance.  Giving infrastructure teams room to manage edge cases with [boring technology](https://mcfunley.com/choose-boring-technology) allows for their bandwidth to be invested elsewhere.  I am not suggesting taking away all the guardrails further along - only balancing limited time and energy to deliver the best and most secure thing you can.  **Limiting complexity that may not be the most impactful to your security posture helps that goal.**
 
-Other alternatives that might be simpler include:
+## Alternative approaches
 
-- Using a regular virtual machine specifically for `privileged task` , usually with existing templates and configuration management tooling
+Okay, so you definitely still do code review and you still _need_ to do something else to both enable the business and protect it from itself.  Other ways to solve this problem that might be simpler include:
+
+- Using a regular virtual machine specifically for `privileged task`, usually with existing templates and configuration management tooling and relying on existing infrastructure isolation (e.g., one project/department = one VM pool)
 - Another cluster used specifically for `privileged task`
 - Using [eBPF](https://ebpf.io/) for kernel-level observability and enforcement ([like so](../kubernoodles-pt-3)) 🐝
 - Moving these workloads into a rootless and sudoless (but still privileged) container, frequently used for Docker-in-Docker (example [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/rootless-ubuntu-jammy.Dockerfile))
-- Changing your workload's tools elsewhere - e.g., use [Kaniko](https://github.com/GoogleContainerTools/kaniko) for container building, or using the [runner-with-k8s-jobs](https://github.com/actions/actions-runner-controller/blob/master/docs/deploying-alternative-runners.md#runner-with-k8s-jobs) for actions-runner-controller.
+- Changing your workload's tools elsewhere if possible - e.g., use [Kaniko](https://github.com/GoogleContainerTools/kaniko) or [Buildah](https://buildah.io/) for container building, or using the [runner-with-k8s-jobs](https://github.com/actions/actions-runner-controller/blob/master/docs/deploying-alternative-runners.md#runner-with-k8s-jobs) for actions-runner-controller.
 
-This could all still be true and Firecracker is _still_ the best option for you.[^4]  Adding complexity to a system is completely appropriate as the best choice for the project.
+This could all still be true and Firecracker (or similar) is _still_ the best option for you.[^4]  Adding complexity to a system is completely appropriate if it's the best choice for the project.
 
 Making mindful choices about technologies your team uses is what “just use `tech`“ completely papers over.  Whatever you do, please stop saying "just use Firecracker”. It robs us of an opportunity to have a multi-faceted discussion of the problems we face as technologists and the tools we use to address them.
 

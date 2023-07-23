@@ -10,7 +10,7 @@ classes: wide
 excerpt: "Using things for what they're meant for empowers teams at scale - and also, how to avoid death by a thousand cuts along the path of shoving VMs into systems designed for containers."
 ---
 
-Please stop saying "just use [Firecracker](https://firecracker-microvm.github.io/)" when faced with a container security challenge.  It's a fabulously cool technology.  It's got great use cases - it's the foundation of AWS Lambda and it's on [GitHub](https://github.com/firecracker-microvm/firecracker) and written in 🦀 Rust 🦀 so it's super cool.  A whole herd of SaaS providers now offer it as a managed service as well.  We’re all glossing over two fundamental problems.
+Please stop saying "just use [Firecracker](https://firecracker-microvm.github.io/)" when faced with a container security challenge.  It's a fabulously cool technology.  It's got great use cases - it's the foundation of AWS Lambda and it's on [GitHub](https://github.com/firecracker-microvm/firecracker) and written in 🦀 Rust 🦀 so it's super cool.  A whole herd of SaaS providers now offer it as a managed service as well.[^1]  We’re all glossing over two fundamental problems.
 
 1. Not every container use case works well in a micro-VM out of the box. 🙊
 2. Micro-VMs don’t solve all your container security problems. 😱
@@ -19,7 +19,7 @@ I've touched on this a few times when talking about [enterprise scale CI with Ku
 
 > User - "So this whole GitHub Actions thing is great and since we self-host GitHub, we can put this in our existing Kubernetes cluster, right?”
 >
-> Me - Yep!  Here's some stuff to get you going.[^1]
+> Me - Yep!  Here's some stuff to get you going.[^2]
 
 :: several days later ::
 
@@ -51,13 +51,13 @@ Within Kubernetes, our pod’s lifecycle now looks something like this:
 5. Now we cross the boundary from container runtime into the firecracker microVM (and runc) and the work happens.  If there's any networking involved, CNI is also implemented with `firecracker-containerd`, so there's one more hop around the network for stuff to get done.
 6. Once it’s done, now we need to reclaim this VM’s resources and tell the kubelet the process is done.
 
-See how many extra handoffs happen? Firecracker is a **fabulously** cool thing, but it’s not a drop-in replacement for a container runtime that Kubernetes expects. I’d recommend browsing some of the open issues and discussions in their GitHub organization ([link](https://github.com/firecracker-microvm)) to get a handle on all the ways people who were told “just use firecrackers” had problems along this path to avoid the same ones, should this still be of interest.[^2]
+See how many extra handoffs happen? Firecracker is a **fabulously** cool thing, but it’s not a drop-in replacement for a container runtime that Kubernetes expects. I’d recommend browsing some of the open issues and discussions in their GitHub organization ([link](https://github.com/firecracker-microvm)) to get a handle on all the ways people who were told “just use firecrackers” had problems along this path to avoid the same ones, should this still be of interest.[^3]
 
 ## The risks
 
 👏 Any particular technology isn’t **the** magic fix for a multi-faceted security problem. 👏
 
-That's my biggest problem with this discussion about Firecracker that comes up - the sheer coolness of it obscures the practicalities of implementation for your use case and what problems it truly addresses.[^3]
+That's my biggest problem with this discussion about Firecracker that comes up - the sheer coolness of it obscures the practicalities of implementation for your use case and what problems it truly addresses.[^4]
 
 The use of Kubernetes that I see the most is using it as [enterprise continuous integration](../kubernetes-for-enterprise-ci) systems.  It's great for this!  These loads tend to be "peaky" in intensity - acting like "spot instances", efficiently scheduling jobs that tend to not be time sensitive, is ideal.  This use also lends itself to Firecracker, as it was designed to execute untrusted user functions safely in a serverless environment.
 
@@ -105,7 +105,7 @@ Okay, so you definitely still do code review and you still _need_ to do somethin
 - Moving these workloads into a rootless and sudoless (but still privileged) container, frequently used for Docker-in-Docker (example [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/rootless-ubuntu-jammy.Dockerfile))
 - Changing your workload's tools elsewhere if possible - e.g., use [Kaniko](https://github.com/GoogleContainerTools/kaniko) or [Buildah](https://buildah.io/) for container building, or using the [runner-with-k8s-jobs](https://github.com/actions/actions-runner-controller/blob/master/docs/deploying-alternative-runners.md#runner-with-k8s-jobs) for actions-runner-controller.
 
-This could all still be true and Firecracker (or similar) is _still_ the best option for you.[^4]  Adding complexity to a system is completely appropriate if it's the best choice for the project.
+This could all still be true and Firecracker (or similar) is _still_ the best option for you.[^5]  Adding complexity to a system is completely appropriate if it's the best choice for the project.
 
 Making mindful choices about technologies your team uses is what “just use `tech`“ completely papers over.  Whatever you do, please stop saying "just use Firecracker”. It robs us of an opportunity to have a multi-faceted discussion of the problems we face as technologists and the tools we use to address them.
 
@@ -113,7 +113,8 @@ Making mindful choices about technologies your team uses is what “just use `te
 
 ### Footnotes
 
-[^1]: Here's the resources I typically send for folks starting out on the self-hosted runner journey - the official [documentation](https://docs.github.com/en/enterprise-cloud@latest/actions/hosting-your-own-runners/managing-self-hosted-runners) and an [architecture guide to self-hosted GitHub Actions](https://some-natalie.dev/blog/arch-guide-to-selfhosted-actions/).  Most importantly, do what works best for your teams - everyone has a different custom implementation and that’s fine!
-[^2]: `firecracker-containerd` has solved a **bunch** of these paper cuts over the past year or two, including shipping a CNI compatible network interface and the ability to have multiple containers in one VM.
-[^3]: For the record, I adore Firecracker and want to play with it even more!
-[^4]: <https://www.talhoffman.com/2021/07/18/firecracker-internals/> remains the best deep dive into the internals of Firecracker and how it works that I’ve ever read.
+[^1]: (one more footnote) I work with the super-duper regulated crowd and these SaaS solutions don't operate in that space, so I don't interact with their products much - it's bare metal k8s all day for me.  Your milage may vary here!
+[^2]: Here's the resources I typically send for folks starting out on the self-hosted runner journey - the official [documentation](https://docs.github.com/en/enterprise-cloud@latest/actions/hosting-your-own-runners/managing-self-hosted-runners) and an [architecture guide to self-hosted GitHub Actions](https://some-natalie.dev/blog/arch-guide-to-selfhosted-actions/).  Most importantly, do what works best for your teams - everyone has a different custom implementation and that’s fine!
+[^3]: `firecracker-containerd` has solved a **bunch** of these paper cuts over the past year or two, including shipping a CNI compatible network interface and the ability to have multiple containers in one VM.
+[^4]: For the record, I adore Firecracker and want to play with it even more!
+[^5]: <https://www.talhoffman.com/2021/07/18/firecracker-internals/> remains the best deep dive into the internals of Firecracker and how it works that I’ve ever read.

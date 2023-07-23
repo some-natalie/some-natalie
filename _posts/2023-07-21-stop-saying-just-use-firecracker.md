@@ -17,7 +17,7 @@ Please stop saying "just use [Firecracker](https://firecracker-microvm.github.io
 
 I've touched on this a few times when talking about [enterprise scale CI with Kubernetes](../kubernetes-for-enterprise-ci) and again at [CNCF CloudNativeSecurityCon 2023](../securing-ghactions-with-arc) - micro-VMs are fantastic, but probably _not_ what you're looking for to address the bulk of your continuous integration security problems.  Unless you're already dedicated, have teammates who _also_ want to go down this path, and are deeply familiar with virtualization technologies - you may end up in a big pit of despair due to the added complexity, especially on-premises.  As an example, here's a conversation that I’ve had pretty often lately.
 
-> User - "So this whole GitHub Actions thing is great and since we self-host GitHub, we can put this in our existing Kubernetes cluster, right?”
+> User - "So this whole GitHub Actions thing is great and since we self-host GitHub, we can put this in our existing Kubernetes cluster, right?"
 >
 > Me - Yep!  Here's some stuff to get you going.[^2]
 
@@ -47,11 +47,11 @@ Within Kubernetes, our pod’s lifecycle now looks something like this:
 1. The scheduler is hanging out on the control plane and gets a request to start some sort of work. The scheduler sees an appropriate node with enough resources available and asks that node’s kubelet to do the thing! The kubelet works off the PodSpec that it gets from the scheduler and thinks [this](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/) is how it manages the lifecycle of that pod.
 2. So the kubelet talks to the container runtime on the node using the language they share, the [container runtime interface](https://kubernetes.io/docs/concepts/architecture/cri/), and asks it to start a new pod with whatever is in the PodSpec.
 3. Usually, we’re near the end of the story here, but because this is a VM and not a container, we’ve got some extra stuff to do. CRI is implemented in a plugin to the runtime `containerd`, so now we’re going to bridge the next gap between what Kubernetes thinks is a container and a kernel VM that Firecracker creates.
-4. This is where the next plugin comes into play, `firecracker-containerd` ([GitHub](https://github.com/firecracker-microvm/firecracker-containerd)). This adds another “translation” to what Kubernetes expects to what Firecracker can do.
+4. This is where the next plugin comes into play, `firecracker-containerd` ([GitHub](https://github.com/firecracker-microvm/firecracker-containerd)). This adds another "translation" to what Kubernetes expects to what Firecracker can do.
 5. Now we cross the boundary from container runtime into the firecracker microVM (and runc) and the work happens.  If there's any networking involved, CNI is also implemented with `firecracker-containerd`, so there's one more hop around the network for stuff to get done.
 6. Once it’s done, now we need to reclaim this VM’s resources and tell the kubelet the process is done.
 
-See how many extra handoffs happen? Firecracker is a **fabulously** cool thing, but it’s not a drop-in replacement for a container runtime that Kubernetes expects. I’d recommend browsing some of the open issues and discussions in their GitHub organization ([link](https://github.com/firecracker-microvm)) to get a handle on all the ways people who were told “just use firecrackers” had problems along this path to avoid the same ones, should this still be of interest.[^3]
+See how many extra handoffs happen? Firecracker is a **fabulously** cool thing, but it’s not a drop-in replacement for a container runtime that Kubernetes expects. I’d recommend browsing some of the open issues and discussions in their GitHub organization ([link](https://github.com/firecracker-microvm)) to get a handle on all the ways people who were told "just use firecrackers" had problems along this path to avoid the same ones, should this still be of interest.[^3]
 
 ## The risks
 
@@ -107,13 +107,13 @@ Okay, so you definitely still do code review and you still _need_ to do somethin
 
 This could all still be true and Firecracker (or similar) is _still_ the best option for you.[^5]  Adding complexity to a system is completely appropriate if it's the best choice for the project.
 
-Making mindful choices about technologies your team uses is what “just use `tech`“ completely papers over.  Whatever you do, please stop saying "just use Firecracker”. It robs us of an opportunity to have a multi-faceted discussion of the problems we face as technologists and the tools we use to address them.
+Making mindful choices about technologies your team uses is what "just use `tech`" completely papers over.  Whatever you do, please stop saying "just use Firecracker". It robs us of an opportunity to have a multi-faceted discussion of the problems we face as technologists and the tools we use to address them.
 
 ---
 
 ### Footnotes
 
-[^1]: (one more footnote) I work with the super-duper regulated crowd and these SaaS solutions don't operate in that space, so I don't interact with their products much - it's bare metal k8s all day for me.  Your milage may vary here!
+[^1]: I work with the super-duper regulated crowd and these SaaS solutions don't operate in that space, so I don't interact with their products much - it's bare metal k8s all day for me.  Your milage may vary here!
 [^2]: Here's the resources I typically send for folks starting out on the self-hosted runner journey - the official [documentation](https://docs.github.com/en/enterprise-cloud@latest/actions/hosting-your-own-runners/managing-self-hosted-runners) and an [architecture guide to self-hosted GitHub Actions](https://some-natalie.dev/blog/arch-guide-to-selfhosted-actions/).  Most importantly, do what works best for your teams - everyone has a different custom implementation and that’s fine!
 [^3]: `firecracker-containerd` has solved a **bunch** of these paper cuts over the past year or two, including shipping a CNI compatible network interface and the ability to have multiple containers in one VM.
 [^4]: For the record, I adore Firecracker and want to play with it even more!

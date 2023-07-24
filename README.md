@@ -28,11 +28,13 @@ You can find me in our work Slack sharing all sorts of neat things you can do wi
   - [OpenWRT](https://openwrt.org) router ([build directions](https://some-natalie.dev/blog/openwrt-setup/))
   - [Pi-hole](https://pi-hole.net), for DNS and ad-blocking
   - Ubiquiti UniFi network controller, in [Docker](https://github.com/jacobalberty/unifi-docker) of course
-- I have an awesome life outside of tech, so while I have a few projects that I enjoy (👆), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
+- I'm getting into the [Flipper Zero](https://flipperzero.one/) lately - it's so handy _and_ mischievous!
+
+I have an awesome life outside of tech, so while I have a few projects that I enjoy (👆), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
 
 ### Heads up!
 
-- 🔭 I’m currently working on automating everything put in front of me.
+- 🔭 I’m exploring new parts of technology, communications, and finding fun problems to solve.
 - 🌱 I’m currently learning some more in-depth Kubernetes security and technical writing.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her

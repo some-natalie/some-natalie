@@ -62,5 +62,5 @@
 
 ### Education
 
-- Master's of Science in Engineering from Virginia Tech (2012)
-- Bachelor's of Science in Engineering from Virginia Tech, double major (2010)
+- **Master's of Science in Engineering** from Virginia Tech (2012)
+- **Bachelor's of Science in Engineering** from Virginia Tech, double major (2010)

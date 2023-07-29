@@ -6,6 +6,7 @@ categories:
 tags:
   - openwrt
   - linux
+  - homelab
 classes: wide
 excerpt: "Building things you own."
 ---

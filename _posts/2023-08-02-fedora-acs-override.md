@@ -10,7 +10,10 @@ classes: wide
 excerpt: "Making white-box GPU compute multi-tenant using the Access Control Services override patch in Linux - or run Windows video games without suffering from dual booting"
 ---
 
-My GitHub repository [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override) has been used to talk about for many _other_ topics - [benchmarking build times](https://some-natalie.dev/blog/waiting-on-bulids/), showing how [matrix builds](https://some-natalie.dev/blog/revisiting-build-times/#experiment-design) work in Actions, and tour of how [building software for Linux](https://some-natalie.dev/speaking/#linux-software-packaging-maybe-in-a-nutshell) has changed over the years.  However, I've never talked much about why I spent hours putting this all together to begin with.  I don't compile my own kernel [just for fun](https://en.wikipedia.org/wiki/Linus_Torvalds) - so let's talk about why this patch exists, what it solves, and step-by-step how to build it and use it.
+My GitHub repository [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override) has been used to talk about many _other_ topics - [benchmarking build times](https://some-natalie.dev/blog/waiting-on-bulids/), showing how [matrix builds](https://some-natalie.dev/blog/revisiting-build-times/#experiment-design) work in Actions, and tour of how [building software for Linux](https://some-natalie.dev/speaking/#linux-software-packaging-maybe-in-a-nutshell) has changed over the years.  However, I've never talked much about why I spent hours putting this all together to begin with.  I don't compile my own kernel [just for fun](https://en.wikipedia.org/wiki/Linus_Torvalds) - so let's talk about why this patch exists, what it solves, and step-by-step how to build it and use it.
+
+> Looking for the repository?  It's here - [some-natalie/fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
+{: .prompt-info}
 
 ## Why?
 

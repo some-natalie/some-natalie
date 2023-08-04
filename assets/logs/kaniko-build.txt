@@ -1,0 +1,1252 @@
+2023-08-04T18:53:05.3030444Z Requested labels: kaniko-worker
+2023-08-04T18:53:05.3030636Z Job defined at: some-natalie/kubernoodles/.github/workflows/test-kaniko.yml@refs/heads/kaniko
+2023-08-04T18:53:05.3030796Z Waiting for a runner to pick up this job...
+2023-08-04T18:53:12.3669768Z Job is waiting for a runner from 'kaniko-worker' to come online.
+2023-08-04T18:53:12.5077136Z Job is about to start running on the runner: kaniko-worker-dkfmt-runner-2njgz (repository)
+2023-08-04T18:53:17.8179093Z Current runner version: '2.307.1'
+2023-08-04T18:53:17.8186772Z Runner name: 'kaniko-worker-dkfmt-runner-2njgz'
+2023-08-04T18:53:17.8187160Z Runner group name: 'Default'
+2023-08-04T18:53:17.8187808Z Machine name: 'kaniko-worker-dkfmt-runner-2njgz'
+2023-08-04T18:53:17.8190175Z ##[group]GITHUB_TOKEN Permissions
+2023-08-04T18:53:17.8190651Z Contents: read
+2023-08-04T18:53:17.8190836Z Metadata: read
+2023-08-04T18:53:17.8191005Z Packages: write
+2023-08-04T18:53:17.8191184Z ##[endgroup]
+2023-08-04T18:53:17.8193253Z Secret source: Actions
+2023-08-04T18:53:17.8193549Z Prepare workflow directory
+2023-08-04T18:53:17.9103490Z Prepare all required actions
+2023-08-04T18:53:17.9317115Z Complete job name: build
+2023-08-04T18:53:18.0388902Z ##[group]Run '/home/runner/k8s/index.js'
+2023-08-04T18:53:18.0406168Z shell: /home/runner/externals/node16/bin/node {0}
+2023-08-04T18:53:18.0406567Z ##[endgroup]
+2023-08-04T18:53:25.6591371Z cat: can't open '/etc/*release*': No such file or directory
+2023-08-04T18:53:25.7349497Z ##[group]Run # Write config file
+2023-08-04T18:53:25.7349901Z [36;1m# Write config file[0m
+2023-08-04T18:53:25.7350456Z [36;1mAUTH=$(echo -n some-natalie:*** | base64)[0m
+2023-08-04T18:53:25.7350786Z [36;1mecho "{\"auths\": {\"ghcr.io\": {\"auth\": \"${AUTH}\"}}}" > /kaniko/.docker/config.json[0m
+2023-08-04T18:53:25.7351043Z [36;1m[0m
+2023-08-04T18:53:25.7351213Z [36;1m# Configure git[0m
+2023-08-04T18:53:25.7351420Z [36;1mexport GIT_USERNAME="kaniko-bot"[0m
+2023-08-04T18:53:25.7351751Z [36;1mexport GIT_PASSWORD="***"[0m
+2023-08-04T18:53:25.7351938Z [36;1m[0m
+2023-08-04T18:53:25.7352108Z [36;1m# Build and push[0m
+2023-08-04T18:53:25.7352358Z [36;1m/kaniko/executor --dockerfile="./images/ubi9.Dockerfile" \[0m
+2023-08-04T18:53:25.7352743Z [36;1m  --context="git://github.com/some-natalie/kubernoodles.git#refs/heads/kaniko#615c7a0c3d774cf8f8b587159ee4ac1fd53dc898" \[0m
+2023-08-04T18:53:25.7353171Z [36;1m  --destination="ghcr.io/some-natalie/kubernoodles/kaniko-build:test" \[0m
+2023-08-04T18:53:25.7353453Z [36;1m  --push-retry 5 \[0m
+2023-08-04T18:53:25.7354324Z [36;1m  --image-name-with-digest-file /workspace/image-digest.txt[0m
+2023-08-04T18:53:25.7357871Z shell: sh -e {0}
+2023-08-04T18:53:25.7358068Z ##[endgroup]
+2023-08-04T18:53:25.7462010Z ##[group]Run '/home/runner/k8s/index.js'
+2023-08-04T18:53:25.7463002Z shell: /home/runner/externals/node16/bin/node {0}
+2023-08-04T18:53:25.7463213Z ##[endgroup]
+2023-08-04T18:53:26.6541358Z Enumerating objects: 1251, done.
+2023-08-04T18:53:26.6543551Z Counting objects:   0% (1/1251)
+2023-08-04T18:53:26.6543886Z Counting objects:   1% (13/1251)
+2023-08-04T18:53:26.6544092Z Counting objects:   2% (26/1251)
+2023-08-04T18:53:26.6544312Z Counting objects:   3% (38/1251)
+2023-08-04T18:53:26.6545221Z Counting objects:   4% (51/1251)
+2023-08-04T18:53:26.6545957Z Counting objects:   5% (63/1251)
+2023-08-04T18:53:26.6546212Z Counting objects:   6% (76/1251)
+2023-08-04T18:53:26.6546428Z Counting objects:   7% (88/1251)
+2023-08-04T18:53:26.6546692Z Counting objects:   8% (101/1251)
+2023-08-04T18:53:26.6546935Z Counting objects:   9% (113/1251)
+2023-08-04T18:53:26.6547147Z Counting objects:  10% (126/1251)
+2023-08-04T18:53:26.6547366Z Counting objects:  11% (138/1251)
+2023-08-04T18:53:26.6547563Z Counting objects:  12% (151/1251)
+2023-08-04T18:53:26.6547765Z Counting objects:  13% (163/1251)
+2023-08-04T18:53:26.6547951Z Counting objects:  14% (176/1251)
+2023-08-04T18:53:26.6548141Z Counting objects:  15% (188/1251)
+2023-08-04T18:53:26.6548331Z Counting objects:  16% (201/1251)
+2023-08-04T18:53:26.6548515Z Counting objects:  17% (213/1251)
+2023-08-04T18:53:26.6548703Z Counting objects:  18% (226/1251)
+2023-08-04T18:53:26.6548893Z Counting objects:  19% (238/1251)
+2023-08-04T18:53:26.6549076Z Counting objects:  20% (251/1251)
+2023-08-04T18:53:26.6549266Z Counting objects:  21% (263/1251)
+2023-08-04T18:53:26.6549456Z Counting objects:  22% (276/1251)
+2023-08-04T18:53:26.6549642Z Counting objects:  23% (288/1251)
+2023-08-04T18:53:26.6549841Z Counting objects:  24% (301/1251)
+2023-08-04T18:53:26.6550574Z Counting objects:  25% (313/1251)
+2023-08-04T18:53:26.6550763Z Counting objects:  26% (326/1251)
+2023-08-04T18:53:26.6550950Z Counting objects:  27% (338/1251)
+2023-08-04T18:53:26.6551151Z Counting objects:  28% (351/1251)
+2023-08-04T18:53:26.6551339Z Counting objects:  29% (363/1251)
+2023-08-04T18:53:26.6551524Z Counting objects:  30% (376/1251)
+2023-08-04T18:53:26.6551716Z Counting objects:  31% (388/1251)
+2023-08-04T18:53:26.6552081Z Counting objects:  32% (401/1251)
+2023-08-04T18:53:26.6552269Z Counting objects:  33% (413/1251)
+2023-08-04T18:53:26.6552460Z Counting objects:  34% (426/1251)
+2023-08-04T18:53:26.6552649Z Counting objects:  35% (438/1251)
+2023-08-04T18:53:26.6552833Z Counting objects:  36% (451/1251)
+2023-08-04T18:53:26.6553024Z Counting objects:  37% (463/1251)
+2023-08-04T18:53:26.6553213Z Counting objects:  38% (476/1251)
+2023-08-04T18:53:26.6553402Z Counting objects:  39% (488/1251)
+2023-08-04T18:53:26.6554516Z Counting objects:  40% (501/1251)
+2023-08-04T18:53:26.6554909Z Counting objects:  41% (513/1251)
+2023-08-04T18:53:26.6555113Z Counting objects:  42% (526/1251)
+2023-08-04T18:53:26.6555303Z Counting objects:  43% (538/1251)
+2023-08-04T18:53:26.6555519Z Counting objects:  44% (551/1251)
+2023-08-04T18:53:26.6555711Z Counting objects:  45% (563/1251)
+2023-08-04T18:53:26.6555985Z Counting objects:  46% (576/1251)
+2023-08-04T18:53:26.6556323Z Counting objects:  47% (588/1251)
+2023-08-04T18:53:26.6556529Z Counting objects:  48% (601/1251)
+2023-08-04T18:53:26.6556719Z Counting objects:  49% (613/1251)
+2023-08-04T18:53:26.6556936Z Counting objects:  50% (626/1251)
+2023-08-04T18:53:26.6557146Z Counting objects:  51% (639/1251)
+2023-08-04T18:53:26.6557331Z Counting objects:  52% (651/1251)
+2023-08-04T18:53:26.6557518Z Counting objects:  53% (664/1251)
+2023-08-04T18:53:26.6557706Z Counting objects:  54% (676/1251)
+2023-08-04T18:53:26.6557891Z Counting objects:  55% (689/1251)
+2023-08-04T18:53:26.6558093Z Counting objects:  56% (701/1251)
+2023-08-04T18:53:26.6558278Z Counting objects:  57% (714/1251)
+2023-08-04T18:53:26.6558469Z Counting objects:  58% (726/1251)
+2023-08-04T18:53:26.6558658Z Counting objects:  59% (739/1251)
+2023-08-04T18:53:26.6558844Z Counting objects:  60% (751/1251)
+2023-08-04T18:53:26.6559035Z Counting objects:  61% (764/1251)
+2023-08-04T18:53:26.6559216Z Counting objects:  62% (776/1251)
+2023-08-04T18:53:26.6559401Z Counting objects:  63% (789/1251)
+2023-08-04T18:53:26.6559587Z Counting objects:  64% (801/1251)
+2023-08-04T18:53:26.6559771Z Counting objects:  65% (814/1251)
+2023-08-04T18:53:26.6559958Z Counting objects:  66% (826/1251)
+2023-08-04T18:53:26.6560852Z Counting objects:  67% (839/1251)
+2023-08-04T18:53:26.6561537Z Counting objects:  68% (851/1251)
+2023-08-04T18:53:26.6561754Z Counting objects:  69% (864/1251)
+2023-08-04T18:53:26.6561943Z Counting objects:  70% (876/1251)
+2023-08-04T18:53:26.6562131Z Counting objects:  71% (889/1251)
+2023-08-04T18:53:26.6562427Z Counting objects:  72% (901/1251)
+2023-08-04T18:53:26.6562628Z Counting objects:  73% (914/1251)
+2023-08-04T18:53:26.6562822Z Counting objects:  74% (926/1251)
+2023-08-04T18:53:26.6563007Z Counting objects:  75% (939/1251)
+2023-08-04T18:53:26.6563193Z Counting objects:  76% (951/1251)
+2023-08-04T18:53:26.6563379Z Counting objects:  77% (964/1251)
+2023-08-04T18:53:26.6563564Z Counting objects:  78% (976/1251)
+2023-08-04T18:53:26.6564116Z Counting objects:  79% (989/1251)
+2023-08-04T18:53:26.6564361Z Counting objects:  80% (1001/1251)
+2023-08-04T18:53:26.6564557Z Counting objects:  81% (1014/1251)
+2023-08-04T18:53:26.6564748Z Counting objects:  82% (1026/1251)
+2023-08-04T18:53:26.6564943Z Counting objects:  83% (1039/1251)
+2023-08-04T18:53:26.6565129Z Counting objects:  84% (1051/1251)
+2023-08-04T18:53:26.6565322Z Counting objects:  85% (1064/1251)
+2023-08-04T18:53:26.6565514Z Counting objects:  86% (1076/1251)
+2023-08-04T18:53:26.6565698Z Counting objects:  87% (1089/1251)
+2023-08-04T18:53:26.6565888Z Counting objects:  88% (1101/1251)
+2023-08-04T18:53:26.6566541Z Counting objects:  89% (1114/1251)
+2023-08-04T18:53:26.6567070Z Counting objects:  90% (1126/1251)
+2023-08-04T18:53:26.6567266Z Counting objects:  91% (1139/1251)
+2023-08-04T18:53:26.6567457Z Counting objects:  92% (1151/1251)
+2023-08-04T18:53:26.6567647Z Counting objects:  93% (1164/1251)
+2023-08-04T18:53:26.6567831Z Counting objects:  94% (1176/1251)
+2023-08-04T18:53:26.6568022Z Counting objects:  95% (1189/1251)
+2023-08-04T18:53:26.6568221Z Counting objects:  96% (1201/1251)
+2023-08-04T18:53:26.6568413Z Counting objects:  97% (1214/1251)
+2023-08-04T18:53:26.6568596Z Counting objects:  98% (1226/1251)
+2023-08-04T18:53:26.6568787Z Counting objects:  99% (1239/1251)
+2023-08-04T18:53:26.6568977Z Counting objects: 100% (1251/1251)
+2023-08-04T18:53:26.6569170Z Counting objects: 100% (1251/1251), done.
+2023-08-04T18:53:26.6569384Z Compressing objects:   0% (1/411)
+2023-08-04T18:53:26.6569586Z Compressing objects:   1% (5/411)
+2023-08-04T18:53:26.6569781Z Compressing objects:   2% (9/411)
+2023-08-04T18:53:26.6570115Z Compressing objects:   3% (13/411)
+2023-08-04T18:53:26.6570341Z Compressing objects:   4% (17/411)
+2023-08-04T18:53:26.6570537Z Compressing objects:   5% (21/411)
+2023-08-04T18:53:26.6570736Z Compressing objects:   6% (25/411)
+2023-08-04T18:53:26.6570936Z Compressing objects:   7% (29/411)
+2023-08-04T18:53:26.6571128Z Compressing objects:   8% (33/411)
+2023-08-04T18:53:26.6571328Z Compressing objects:   9% (37/411)
+2023-08-04T18:53:26.6571526Z Compressing objects:  10% (42/411)
+2023-08-04T18:53:26.6571717Z Compressing objects:  11% (46/411)
+2023-08-04T18:53:26.6571929Z Compressing objects:  12% (50/411)
+2023-08-04T18:53:26.6572128Z Compressing objects:  13% (54/411)
+2023-08-04T18:53:26.6572324Z Compressing objects:  14% (58/411)
+2023-08-04T18:53:26.6572516Z Compressing objects:  15% (62/411)
+2023-08-04T18:53:26.6572712Z Compressing objects:  16% (66/411)
+2023-08-04T18:53:26.6572910Z Compressing objects:  17% (70/411)
+2023-08-04T18:53:26.6588378Z Compressing objects:  18% (74/411)
+2023-08-04T18:53:26.6588882Z Compressing objects:  19% (79/411)
+2023-08-04T18:53:26.6589159Z Compressing objects:  20% (83/411)
+2023-08-04T18:53:26.6589371Z Compressing objects:  21% (87/411)
+2023-08-04T18:53:26.6608202Z Compressing objects:  22% (91/411)
+2023-08-04T18:53:26.6608680Z Compressing objects:  23% (95/411)
+2023-08-04T18:53:26.6609033Z Compressing objects:  24% (99/411)
+2023-08-04T18:53:26.6609301Z Compressing objects:  25% (103/411)
+2023-08-04T18:53:26.7056887Z Compressing objects:  26% (107/411)
+2023-08-04T18:53:26.7057292Z Compressing objects:  27% (111/411)
+2023-08-04T18:53:26.7057588Z Compressing objects:  28% (116/411)
+2023-08-04T18:53:26.7057865Z Compressing objects:  29% (120/411)
+2023-08-04T18:53:26.7058149Z Compressing objects:  30% (124/411)
+2023-08-04T18:53:26.7058459Z Compressing objects:  31% (128/411)
+2023-08-04T18:53:26.7058744Z Compressing objects:  32% (132/411)
+2023-08-04T18:53:26.7059017Z Compressing objects:  33% (136/411)
+2023-08-04T18:53:26.7059293Z Compressing objects:  34% (140/411)
+2023-08-04T18:53:26.7059823Z Compressing objects:  35% (144/411)
+2023-08-04T18:53:26.7060376Z Compressing objects:  36% (148/411)
+2023-08-04T18:53:26.7060676Z Compressing objects:  37% (153/411)
+2023-08-04T18:53:26.7060961Z Compressing objects:  38% (157/411)
+2023-08-04T18:53:26.7061233Z Compressing objects:  39% (161/411)
+2023-08-04T18:53:26.7061516Z Compressing objects:  40% (165/411)
+2023-08-04T18:53:26.7061798Z Compressing objects:  41% (169/411)
+2023-08-04T18:53:26.7062071Z Compressing objects:  42% (173/411)
+2023-08-04T18:53:26.7062349Z Compressing objects:  43% (177/411)
+2023-08-04T18:53:26.7062626Z Compressing objects:  44% (181/411)
+2023-08-04T18:53:26.7062897Z Compressing objects:  45% (185/411)
+2023-08-04T18:53:26.7063175Z Compressing objects:  46% (190/411)
+2023-08-04T18:53:26.7063449Z Compressing objects:  47% (194/411)
+2023-08-04T18:53:26.7063718Z Compressing objects:  48% (198/411)
+2023-08-04T18:53:26.7063994Z Compressing objects:  49% (202/411)
+2023-08-04T18:53:26.7064279Z Compressing objects:  50% (206/411)
+2023-08-04T18:53:26.7064550Z Compressing objects:  51% (210/411)
+2023-08-04T18:53:26.7066064Z Compressing objects:  52% (214/411)
+2023-08-04T18:53:26.7066347Z Compressing objects:  53% (218/411)
+2023-08-04T18:53:26.7066626Z Compressing objects:  54% (222/411)
+2023-08-04T18:53:26.7066892Z Compressing objects:  55% (227/411)
+2023-08-04T18:53:26.7067426Z Compressing objects:  56% (231/411)
+2023-08-04T18:53:26.7067664Z Compressing objects:  57% (235/411)
+2023-08-04T18:53:26.7067888Z Compressing objects:  58% (239/411)
+2023-08-04T18:53:26.7068117Z Compressing objects:  59% (243/411)
+2023-08-04T18:53:26.7068341Z Compressing objects:  60% (247/411)
+2023-08-04T18:53:26.7068559Z Compressing objects:  61% (251/411)
+2023-08-04T18:53:26.7068782Z Compressing objects:  62% (255/411)
+2023-08-04T18:53:26.7069006Z Compressing objects:  63% (259/411)
+2023-08-04T18:53:26.7069224Z Compressing objects:  64% (264/411)
+2023-08-04T18:53:26.7069449Z Compressing objects:  65% (268/411)
+2023-08-04T18:53:26.7069927Z Compressing objects:  66% (272/411)
+2023-08-04T18:53:26.7070180Z Compressing objects:  67% (276/411)
+2023-08-04T18:53:26.7070413Z Compressing objects:  68% (280/411)
+2023-08-04T18:53:26.7070647Z Compressing objects:  69% (284/411)
+2023-08-04T18:53:26.7070875Z Compressing objects:  70% (288/411)
+2023-08-04T18:53:26.7071094Z Compressing objects:  71% (292/411)
+2023-08-04T18:53:26.7071322Z Compressing objects:  72% (296/411)
+2023-08-04T18:53:26.7071547Z Compressing objects:  73% (301/411)
+2023-08-04T18:53:26.7071766Z Compressing objects:  74% (305/411)
+2023-08-04T18:53:26.7071992Z Compressing objects:  75% (309/411)
+2023-08-04T18:53:26.7072221Z Compressing objects:  76% (313/411)
+2023-08-04T18:53:26.7072441Z Compressing objects:  77% (317/411)
+2023-08-04T18:53:26.7072665Z Compressing objects:  78% (321/411)
+2023-08-04T18:53:26.7072890Z Compressing objects:  79% (325/411)
+2023-08-04T18:53:26.7073209Z Compressing objects:  80% (329/411)
+2023-08-04T18:53:26.7121376Z Compressing objects:  81% (333/411)
+2023-08-04T18:53:26.7122649Z Compressing objects:  82% (338/411)
+2023-08-04T18:53:26.7123900Z Compressing objects:  83% (342/411)
+2023-08-04T18:53:26.7125525Z Compressing objects:  84% (346/411)
+2023-08-04T18:53:26.7128089Z Compressing objects:  85% (350/411)
+2023-08-04T18:53:26.7129943Z Compressing objects:  86% (354/411)
+2023-08-04T18:53:26.7130177Z Compressing objects:  87% (358/411)
+2023-08-04T18:53:26.7130379Z Compressing objects:  88% (362/411)
+2023-08-04T18:53:26.7130588Z Compressing objects:  89% (366/411)
+2023-08-04T18:53:26.7130792Z Compressing objects:  90% (370/411)
+2023-08-04T18:53:26.7130990Z Compressing objects:  91% (375/411)
+2023-08-04T18:53:26.7131199Z Compressing objects:  92% (379/411)
+2023-08-04T18:53:26.7131405Z Compressing objects:  93% (383/411)
+2023-08-04T18:53:26.7131609Z Compressing objects:  94% (387/411)
+2023-08-04T18:53:26.7131805Z Compressing objects:  95% (391/411)
+2023-08-04T18:53:26.7132007Z Compressing objects:  96% (395/411)
+2023-08-04T18:53:26.7132210Z Compressing objects:  97% (399/411)
+2023-08-04T18:53:26.7132419Z Compressing objects:  98% (403/411)
+2023-08-04T18:53:26.7132629Z Compressing objects:  99% (407/411)
+2023-08-04T18:53:26.7132830Z Compressing objects: 100% (411/411)
+2023-08-04T18:53:26.7133038Z Compressing objects: 100% (411/411), done.
+2023-08-04T18:53:26.8619784Z Total 1251 (delta 880), reused 1155 (delta 807), pack-reused 0
+2023-08-04T18:53:27.7234227Z [36mINFO[0m[0001] Retrieving image manifest registry.access.redhat.com/ubi9/ubi-init:9.2 
+2023-08-04T18:53:27.7234958Z [36mINFO[0m[0001] Retrieving image registry.access.redhat.com/ubi9/ubi-init:9.2 from registry registry.access.redhat.com 
+2023-08-04T18:53:28.4459141Z [36mINFO[0m[0002] Built cross stage deps: map[]                
+2023-08-04T18:53:28.4460601Z [36mINFO[0m[0002] Retrieving image manifest registry.access.redhat.com/ubi9/ubi-init:9.2 
+2023-08-04T18:53:28.4461988Z [36mINFO[0m[0002] Returning cached image manifest              
+2023-08-04T18:53:28.4462630Z [36mINFO[0m[0002] Executing 0 build triggers                   
+2023-08-04T18:53:28.4464670Z [36mINFO[0m[0002] Building stage 'registry.access.redhat.com/ubi9/ubi-init:9.2' [idx: '0', base-idx: '-1'] 
+2023-08-04T18:53:28.4466225Z [36mINFO[0m[0002] Unpacking rootfs as cmd RUN dnf update -y     && dnf install dnf-plugins-core -y     && dnf install -y     git     jq     krb5-libs     libicu     libyaml-devel     lttng-ust     openssl-libs     passwd     rpm-build     vim     wget     yum-utils     zlib     && dnf clean all requires it. 
+2023-08-04T18:53:33.2621725Z [36mINFO[0m[0007] LABEL org.opencontainers.image.source https://github.com/some-natalie/kubernoodles 
+2023-08-04T18:53:33.2622445Z [36mINFO[0m[0007] Applying label org.opencontainers.image.source=https://github.com/some-natalie/kubernoodles 
+2023-08-04T18:53:33.2639337Z [36mINFO[0m[0007] LABEL org.opencontainers.image.path "images/ubi9.Dockerfile" 
+2023-08-04T18:53:33.2639988Z [36mINFO[0m[0007] Applying label org.opencontainers.image.path=images/ubi9.Dockerfile 
+2023-08-04T18:53:33.2641700Z [36mINFO[0m[0007] LABEL org.opencontainers.image.title "ubi9"  
+2023-08-04T18:53:33.2642316Z [36mINFO[0m[0007] Applying label org.opencontainers.image.title=ubi9 
+2023-08-04T18:53:33.2647108Z [36mINFO[0m[0007] LABEL org.opencontainers.image.description "A RedHat UBI 9 based runner image for GitHub Actions" 
+2023-08-04T18:53:33.2648422Z [36mINFO[0m[0007] Applying label org.opencontainers.image.description=A RedHat UBI 9 based runner image for GitHub Actions 
+2023-08-04T18:53:33.2649068Z [36mINFO[0m[0007] LABEL org.opencontainers.image.authors "Natalie Somersall (@some-natalie)" 
+2023-08-04T18:53:33.2650166Z [36mINFO[0m[0007] Applying label org.opencontainers.image.authors=Natalie Somersall (@some-natalie) 
+2023-08-04T18:53:33.2650669Z [36mINFO[0m[0007] LABEL org.opencontainers.image.licenses "MIT" 
+2023-08-04T18:53:33.2651290Z [36mINFO[0m[0007] Applying label org.opencontainers.image.licenses=MIT 
+2023-08-04T18:53:33.2653542Z [36mINFO[0m[0007] LABEL org.opencontainers.image.documentation https://github.com/some-natalie/kubernoodles/README.md 
+2023-08-04T18:53:33.2654631Z [36mINFO[0m[0007] Applying label org.opencontainers.image.documentation=https://github.com/some-natalie/kubernoodles/README.md 
+2023-08-04T18:53:33.2655122Z [36mINFO[0m[0007] ARG TARGETPLATFORM=linux/amd64               
+2023-08-04T18:53:33.2655504Z [36mINFO[0m[0007] ARG RUNNER_VERSION=2.307.1                   
+2023-08-04T18:53:33.2655976Z [36mINFO[0m[0007] ARG RUNNER_CONTAINER_HOOKS_VERSION=0.3.2     
+2023-08-04T18:53:33.2656334Z [36mINFO[0m[0007] SHELL ["/bin/bash", "-o", "pipefail", "-c"]  
+2023-08-04T18:53:33.2656701Z [36mINFO[0m[0007] ENV UID=1000                                 
+2023-08-04T18:53:33.2657038Z [36mINFO[0m[0007] ENV GID=0                                    
+2023-08-04T18:53:33.2657426Z [36mINFO[0m[0007] ENV USERNAME="runner"                        
+2023-08-04T18:53:33.2658172Z [36mINFO[0m[0007] RUN dnf update -y     && dnf install dnf-plugins-core -y     && dnf install -y     git     jq     krb5-libs     libicu     libyaml-devel     lttng-ust     openssl-libs     passwd     rpm-build     vim     wget     yum-utils     zlib     && dnf clean all 
+2023-08-04T18:53:33.2659311Z [36mINFO[0m[0007] Initializing snapshotter ...                 
+2023-08-04T18:53:33.2660219Z [36mINFO[0m[0007] Taking snapshot of full filesystem...        
+2023-08-04T18:53:34.2402602Z [36mINFO[0m[0008] Cmd: /bin/bash                               
+2023-08-04T18:53:34.2403406Z [36mINFO[0m[0008] Args: [-o pipefail -c dnf update -y     && dnf install dnf-plugins-core -y     && dnf install -y     git     jq     krb5-libs     libicu     libyaml-devel     lttng-ust     openssl-libs     passwd     rpm-build     vim     wget     yum-utils     zlib     && dnf clean all] 
+2023-08-04T18:53:34.2405583Z [36mINFO[0m[0008] Running: [/bin/bash -o pipefail -c dnf update -y     && dnf install dnf-plugins-core -y     && dnf install -y     git     jq     krb5-libs     libicu     libyaml-devel     lttng-ust     openssl-libs     passwd     rpm-build     vim     wget     yum-utils     zlib     && dnf clean all] 
+2023-08-04T18:53:34.5649932Z Updating Subscription Management repositories.
+2023-08-04T18:53:34.5650253Z Unable to read consumer identity
+2023-08-04T18:53:34.5651256Z Subscription Manager is operating in container mode.
+2023-08-04T18:53:34.5682493Z 
+2023-08-04T18:53:34.5685108Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:53:34.5685467Z 
+2023-08-04T18:53:35.1708748Z Red Hat Universal Base Image 9 (RPMs) - BaseOS  1.0 MB/s | 581 kB     00:00    
+2023-08-04T18:53:35.8691074Z Red Hat Universal Base Image 9 (RPMs) - AppStre 3.2 MB/s | 1.9 MB     00:00    
+2023-08-04T18:53:36.7328515Z Red Hat Universal Base Image 9 (RPMs) - CodeRea 389 kB/s | 198 kB     00:00    
+2023-08-04T18:53:36.8738259Z Dependencies resolved.
+2023-08-04T18:53:36.8747924Z Nothing to do.
+2023-08-04T18:53:36.8748858Z Complete!
+2023-08-04T18:53:37.2231619Z Updating Subscription Management repositories.
+2023-08-04T18:53:37.2232372Z Unable to read consumer identity
+2023-08-04T18:53:37.2232712Z Subscription Manager is operating in container mode.
+2023-08-04T18:53:37.2262064Z 
+2023-08-04T18:53:37.2263311Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:53:37.2263606Z 
+2023-08-04T18:53:37.2788839Z Last metadata expiration check: 0:00:01 ago on Fri Aug  4 18:53:36 2023.
+2023-08-04T18:53:37.3005371Z Dependencies resolved.
+2023-08-04T18:53:37.3006340Z ================================================================================
+2023-08-04T18:53:37.3006896Z  Package              Arch       Version            Repository             Size
+2023-08-04T18:53:37.3007411Z ================================================================================
+2023-08-04T18:53:37.3007680Z Installing:
+2023-08-04T18:53:37.3008228Z  dnf-plugins-core     noarch     4.3.0-5.el9_2      ubi-9-baseos-rpms      42 k
+2023-08-04T18:53:37.3008465Z 
+2023-08-04T18:53:37.3008589Z Transaction Summary
+2023-08-04T18:53:37.3008923Z ================================================================================
+2023-08-04T18:53:37.3009144Z Install  1 Package
+2023-08-04T18:53:37.3009290Z 
+2023-08-04T18:53:37.3009402Z Total download size: 42 k
+2023-08-04T18:53:37.3009666Z Installed size: 22 k
+2023-08-04T18:53:37.3012810Z Downloading Packages:
+2023-08-04T18:53:37.4832810Z dnf-plugins-core-4.3.0-5.el9_2.noarch.rpm       231 kB/s |  42 kB     00:00    
+2023-08-04T18:53:37.4838884Z --------------------------------------------------------------------------------
+2023-08-04T18:53:37.4840281Z Total                                           228 kB/s |  42 kB     00:00     
+2023-08-04T18:53:37.4949558Z Running transaction check
+2023-08-04T18:53:37.4981965Z Transaction check succeeded.
+2023-08-04T18:53:37.4982773Z Running transaction test
+2023-08-04T18:53:37.5011667Z Transaction test succeeded.
+2023-08-04T18:53:37.5016414Z Running transaction
+2023-08-04T18:53:37.5191390Z   Preparing        :                                                        1/1 
+2023-08-04T18:53:37.5665900Z   Installing       : dnf-plugins-core-4.3.0-5.el9_2.noarch                  1/1 
+2023-08-04T18:53:37.5994825Z   Verifying        : dnf-plugins-core-4.3.0-5.el9_2.noarch                  1/1 
+2023-08-04T18:53:37.5995411Z Installed products updated.
+2023-08-04T18:53:37.6310234Z 
+2023-08-04T18:53:37.6311804Z Installed:
+2023-08-04T18:53:37.6313678Z   dnf-plugins-core-4.3.0-5.el9_2.noarch                                         
+2023-08-04T18:53:37.6314750Z 
+2023-08-04T18:53:37.6315113Z Complete!
+2023-08-04T18:53:38.0561591Z Updating Subscription Management repositories.
+2023-08-04T18:53:38.0597105Z Unable to read consumer identity
+2023-08-04T18:53:38.0598220Z Subscription Manager is operating in container mode.
+2023-08-04T18:53:38.0599452Z 
+2023-08-04T18:53:38.0600903Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:53:38.0601154Z 
+2023-08-04T18:53:38.1147191Z Last metadata expiration check: 0:00:02 ago on Fri Aug  4 18:53:36 2023.
+2023-08-04T18:53:38.1299614Z Package krb5-libs-1.20.1-9.el9_2.x86_64 is already installed.
+2023-08-04T18:53:38.1303038Z Package openssl-libs-1:3.0.7-17.el9_2.x86_64 is already installed.
+2023-08-04T18:53:38.1303398Z Package passwd-0.80-12.el9.x86_64 is already installed.
+2023-08-04T18:53:38.1312341Z Package zlib-1.2.11-39.el9.x86_64 is already installed.
+2023-08-04T18:53:38.1511520Z Dependencies resolved.
+2023-08-04T18:53:38.1604170Z ===========================================================================================
+2023-08-04T18:53:38.1605884Z  Package                      Arch    Version                Repository                Size
+2023-08-04T18:53:38.1607035Z ===========================================================================================
+2023-08-04T18:53:38.1607745Z Installing:
+2023-08-04T18:53:38.1608308Z  git                          x86_64  2.39.3-1.el9_2         ubi-9-appstream-rpms      66 k
+2023-08-04T18:53:38.1610264Z  jq                           x86_64  1.6-14.el9             ubi-9-appstream-rpms     190 k
+2023-08-04T18:53:38.1610781Z  libicu                       x86_64  67.1-9.el9             ubi-9-baseos-rpms        9.6 M
+2023-08-04T18:53:38.1611308Z  libyaml-devel                x86_64  0.2.5-7.el9            ubi-9-codeready-builder  165 k
+2023-08-04T18:53:38.1612150Z  lttng-ust                    x86_64  2.12.0-6.el9           ubi-9-appstream-rpms     296 k
+2023-08-04T18:53:38.1612980Z  rpm-build                    x86_64  4.16.1.3-22.el9        ubi-9-appstream-rpms     105 k
+2023-08-04T18:53:38.1613408Z  vim-enhanced                 x86_64  2:8.2.2637-20.el9_1    ubi-9-appstream-rpms     1.8 M
+2023-08-04T18:53:38.1613811Z  wget                         x86_64  1.21.1-7.el9           ubi-9-appstream-rpms     794 k
+2023-08-04T18:53:38.1614618Z  yum-utils                    noarch  4.3.0-5.el9_2          ubi-9-baseos-rpms         45 k
+2023-08-04T18:53:38.1614863Z Installing dependencies:
+2023-08-04T18:53:38.1615211Z  binutils                     x86_64  2.35.2-37.el9          ubi-9-baseos-rpms        4.6 M
+2023-08-04T18:53:38.1622433Z  binutils-gold                x86_64  2.35.2-37.el9          ubi-9-baseos-rpms        734 k
+2023-08-04T18:53:38.1623395Z  bzip2                        x86_64  1.0.8-8.el9            ubi-9-baseos-rpms         60 k
+2023-08-04T18:53:38.1625715Z  cpio                         x86_64  2.13-16.el9            ubi-9-baseos-rpms        279 k
+2023-08-04T18:53:38.1626764Z  diffutils                    x86_64  3.7-12.el9             ubi-9-baseos-rpms        402 k
+2023-08-04T18:53:38.1627680Z  dwz                          x86_64  0.14-3.el9             ubi-9-appstream-rpms     130 k
+2023-08-04T18:53:38.1628051Z  ed                           x86_64  1.14.2-12.el9          ubi-9-baseos-rpms         78 k
+2023-08-04T18:53:38.1628791Z  efi-srpm-macros              noarch  6-2.el9_0              ubi-9-appstream-rpms      24 k
+2023-08-04T18:53:38.1629232Z  elfutils                     x86_64  0.188-3.el9            ubi-9-baseos-rpms        533 k
+2023-08-04T18:53:38.1629637Z  elfutils-debuginfod-client   x86_64  0.188-3.el9            ubi-9-baseos-rpms         40 k
+2023-08-04T18:53:38.1630051Z  emacs-filesystem             noarch  1:27.2-8.el9_2.1       ubi-9-appstream-rpms     9.6 k
+2023-08-04T18:53:38.1630438Z  file                         x86_64  5.39-12.1.el9_2        ubi-9-baseos-rpms         52 k
+2023-08-04T18:53:38.1630824Z  fonts-srpm-macros            noarch  1:2.0.5-7.el9.1        ubi-9-appstream-rpms      29 k
+2023-08-04T18:53:38.1631243Z  gdb-minimal                  x86_64  10.2-10.el9            ubi-9-appstream-rpms     3.5 M
+2023-08-04T18:53:38.1631633Z  ghc-srpm-macros              noarch  1.5.0-6.el9            ubi-9-appstream-rpms     9.0 k
+2023-08-04T18:53:38.1632025Z  git-core                     x86_64  2.39.3-1.el9_2         ubi-9-appstream-rpms     4.3 M
+2023-08-04T18:53:38.1632413Z  git-core-doc                 noarch  2.39.3-1.el9_2         ubi-9-appstream-rpms     2.9 M
+2023-08-04T18:53:38.1632810Z  glibc-gconv-extra            x86_64  2.34-60.el9            ubi-9-baseos-rpms        1.7 M
+2023-08-04T18:53:38.1633582Z  go-srpm-macros               noarch  3.2.0-1.el9            ubi-9-appstream-rpms      29 k
+2023-08-04T18:53:38.1633974Z  gpm-libs                     x86_64  1.20.7-29.el9          ubi-9-appstream-rpms      22 k
+2023-08-04T18:53:38.1634344Z  groff-base                   x86_64  1.22.4-10.el9          ubi-9-baseos-rpms        1.1 M
+2023-08-04T18:53:38.1635576Z  info                         x86_64  6.7-15.el9             ubi-9-baseos-rpms        228 k
+2023-08-04T18:53:38.1635984Z  kernel-srpm-macros           noarch  1.0-12.el9             ubi-9-appstream-rpms      17 k
+2023-08-04T18:53:38.1636382Z  less                         x86_64  590-2.el9_2            ubi-9-baseos-rpms        166 k
+2023-08-04T18:53:38.1636742Z  libcbor                      x86_64  0.7.0-5.el9            ubi-9-baseos-rpms         59 k
+2023-08-04T18:53:38.1637390Z  libedit                      x86_64  3.1-37.20210216cvs.el9 ubi-9-baseos-rpms        108 k
+2023-08-04T18:53:38.1637805Z  libfido2                     x86_64  1.6.0-7.el9            ubi-9-baseos-rpms         74 k
+2023-08-04T18:53:38.1638181Z  libpkgconf                   x86_64  1.7.3-10.el9           ubi-9-baseos-rpms         37 k
+2023-08-04T18:53:38.1638539Z  libpsl                       x86_64  0.21.1-5.el9           ubi-9-baseos-rpms         66 k
+2023-08-04T18:53:38.1638909Z  lua-srpm-macros              noarch  1-6.el9                ubi-9-appstream-rpms      10 k
+2023-08-04T18:53:38.1639303Z  ncurses                      x86_64  6.2-8.20210508.el9     ubi-9-baseos-rpms        412 k
+2023-08-04T18:53:38.1639675Z  numactl-libs                 x86_64  2.0.14-9.el9           ubi-9-baseos-rpms         31 k
+2023-08-04T18:53:38.1640056Z  ocaml-srpm-macros            noarch  6-6.el9                ubi-9-appstream-rpms     9.1 k
+2023-08-04T18:53:38.1640455Z  oniguruma                    x86_64  6.9.6-1.el9.5          ubi-9-appstream-rpms     221 k
+2023-08-04T18:53:38.1640857Z  openblas-srpm-macros         noarch  2-11.el9               ubi-9-appstream-rpms     8.6 k
+2023-08-04T18:53:38.1641259Z  openssh                      x86_64  8.7p1-30.el9_2         ubi-9-baseos-rpms        460 k
+2023-08-04T18:53:38.1641627Z  openssh-clients              x86_64  8.7p1-30.el9_2         ubi-9-baseos-rpms        709 k
+2023-08-04T18:53:38.1642013Z  patch                        x86_64  2.7.6-16.el9           ubi-9-appstream-rpms     130 k
+2023-08-04T18:53:38.1642399Z  perl-AutoLoader              noarch  5.74-480.el9           ubi-9-appstream-rpms      23 k
+2023-08-04T18:53:38.1642798Z  perl-B                       x86_64  1.80-480.el9           ubi-9-appstream-rpms     185 k
+2023-08-04T18:53:38.1643167Z  perl-Carp                    noarch  1.50-460.el9           ubi-9-appstream-rpms      31 k
+2023-08-04T18:53:38.1643573Z  perl-Class-Struct            noarch  0.66-480.el9           ubi-9-appstream-rpms      24 k
+2023-08-04T18:53:38.1644517Z  perl-Data-Dumper             x86_64  2.174-462.el9          ubi-9-appstream-rpms      59 k
+2023-08-04T18:53:38.1644928Z  perl-Digest                  noarch  1.19-4.el9             ubi-9-appstream-rpms      29 k
+2023-08-04T18:53:38.1645316Z  perl-Digest-MD5              x86_64  2.58-4.el9             ubi-9-appstream-rpms      39 k
+2023-08-04T18:53:38.1645712Z  perl-DynaLoader              x86_64  1.47-480.el9           ubi-9-appstream-rpms      27 k
+2023-08-04T18:53:38.1646098Z  perl-Encode                  x86_64  4:3.08-462.el9         ubi-9-appstream-rpms     1.7 M
+2023-08-04T18:53:38.1646514Z  perl-Errno                   x86_64  1.30-480.el9           ubi-9-appstream-rpms      17 k
+2023-08-04T18:53:38.1646895Z  perl-Error                   noarch  1:0.17029-7.el9        ubi-9-appstream-rpms      46 k
+2023-08-04T18:53:38.1647291Z  perl-Exporter                noarch  5.74-461.el9           ubi-9-appstream-rpms      34 k
+2023-08-04T18:53:38.1647678Z  perl-Fcntl                   x86_64  1.13-480.el9           ubi-9-appstream-rpms      23 k
+2023-08-04T18:53:38.1648067Z  perl-File-Basename           noarch  2.85-480.el9           ubi-9-appstream-rpms      19 k
+2023-08-04T18:53:38.1648673Z  perl-File-Find               noarch  1.37-480.el9           ubi-9-appstream-rpms      27 k
+2023-08-04T18:53:38.1649072Z  perl-File-Path               noarch  2.18-4.el9             ubi-9-appstream-rpms      38 k
+2023-08-04T18:53:38.1649473Z  perl-File-Temp               noarch  1:0.231.100-4.el9      ubi-9-appstream-rpms      63 k
+2023-08-04T18:53:38.1649858Z  perl-File-stat               noarch  1.09-480.el9           ubi-9-appstream-rpms      19 k
+2023-08-04T18:53:38.1650255Z  perl-FileHandle              noarch  2.03-480.el9           ubi-9-appstream-rpms      17 k
+2023-08-04T18:53:38.1650655Z  perl-Getopt-Long             noarch  1:2.52-4.el9           ubi-9-appstream-rpms      64 k
+2023-08-04T18:53:38.1651057Z  perl-Getopt-Std              noarch  1.12-480.el9           ubi-9-appstream-rpms      17 k
+2023-08-04T18:53:38.1651556Z  perl-Git                     noarch  2.39.3-1.el9_2         ubi-9-appstream-rpms      39 k
+2023-08-04T18:53:38.1651978Z  perl-HTTP-Tiny               noarch  0.076-460.el9          ubi-9-appstream-rpms      58 k
+2023-08-04T18:53:38.1652366Z  perl-IO                      x86_64  1.43-480.el9           ubi-9-appstream-rpms      94 k
+2023-08-04T18:53:38.1652747Z  perl-IO-Socket-IP            noarch  0.41-5.el9             ubi-9-appstream-rpms      45 k
+2023-08-04T18:53:38.1653153Z  perl-IPC-Open3               noarch  1.21-480.el9           ubi-9-appstream-rpms      25 k
+2023-08-04T18:53:38.1653552Z  perl-MIME-Base64             x86_64  3.16-4.el9             ubi-9-appstream-rpms      34 k
+2023-08-04T18:53:38.1653944Z  perl-Net-SSLeay              x86_64  1.92-2.el9             ubi-9-appstream-rpms     392 k
+2023-08-04T18:53:38.1654329Z  perl-POSIX                   x86_64  1.94-480.el9           ubi-9-appstream-rpms      99 k
+2023-08-04T18:53:38.1654726Z  perl-PathTools               x86_64  3.78-461.el9           ubi-9-appstream-rpms      92 k
+2023-08-04T18:53:38.1655132Z  perl-Pod-Escapes             noarch  1:1.07-460.el9         ubi-9-appstream-rpms      22 k
+2023-08-04T18:53:38.1655542Z  perl-Pod-Perldoc             noarch  3.28.01-461.el9        ubi-9-appstream-rpms      92 k
+2023-08-04T18:53:38.1656713Z  perl-Pod-Simple              noarch  1:3.42-4.el9           ubi-9-appstream-rpms     229 k
+2023-08-04T18:53:38.1657147Z  perl-Pod-Usage               noarch  4:2.01-4.el9           ubi-9-appstream-rpms      43 k
+2023-08-04T18:53:38.1657569Z  perl-Scalar-List-Utils       x86_64  4:1.56-461.el9         ubi-9-appstream-rpms      77 k
+2023-08-04T18:53:38.1657982Z  perl-SelectSaver             noarch  1.02-480.el9           ubi-9-appstream-rpms      13 k
+2023-08-04T18:53:38.1658385Z  perl-Socket                  x86_64  4:2.031-4.el9          ubi-9-appstream-rpms      58 k
+2023-08-04T18:53:38.1658768Z  perl-Storable                x86_64  1:3.21-460.el9         ubi-9-appstream-rpms      98 k
+2023-08-04T18:53:38.1659172Z  perl-Symbol                  noarch  1.08-480.el9           ubi-9-appstream-rpms      16 k
+2023-08-04T18:53:38.1659576Z  perl-Term-ANSIColor          noarch  5.01-461.el9           ubi-9-appstream-rpms      51 k
+2023-08-04T18:53:38.1659995Z  perl-Term-Cap                noarch  1.17-460.el9           ubi-9-appstream-rpms      24 k
+2023-08-04T18:53:38.1660393Z  perl-TermReadKey             x86_64  2.38-11.el9            ubi-9-appstream-rpms      40 k
+2023-08-04T18:53:38.1660806Z  perl-Text-ParseWords         noarch  3.30-460.el9           ubi-9-appstream-rpms      18 k
+2023-08-04T18:53:38.1661227Z  perl-Text-Tabs+Wrap          noarch  2013.0523-460.el9      ubi-9-appstream-rpms      25 k
+2023-08-04T18:53:38.1661638Z  perl-Time-Local              noarch  2:1.300-7.el9          ubi-9-appstream-rpms      37 k
+2023-08-04T18:53:38.1662032Z  perl-URI                     noarch  5.09-3.el9             ubi-9-appstream-rpms     125 k
+2023-08-04T18:53:38.1662412Z  perl-base                    noarch  2.27-480.el9           ubi-9-appstream-rpms      18 k
+2023-08-04T18:53:38.1663106Z  perl-constant                noarch  1.33-461.el9           ubi-9-appstream-rpms      25 k
+2023-08-04T18:53:38.1663493Z  perl-if                      noarch  0.60.800-480.el9       ubi-9-appstream-rpms      16 k
+2023-08-04T18:53:38.1663879Z  perl-interpreter             x86_64  4:5.32.1-480.el9       ubi-9-appstream-rpms      75 k
+2023-08-04T18:53:38.1664724Z  perl-lib                     x86_64  0.65-480.el9           ubi-9-appstream-rpms      17 k
+2023-08-04T18:53:38.1665116Z  perl-libnet                  noarch  3.13-4.el9             ubi-9-appstream-rpms     134 k
+2023-08-04T18:53:38.1665496Z  perl-libs                    x86_64  4:5.32.1-480.el9       ubi-9-appstream-rpms     2.2 M
+2023-08-04T18:53:38.1665860Z  perl-mro                     x86_64  1.23-480.el9           ubi-9-appstream-rpms      31 k
+2023-08-04T18:53:38.1666246Z  perl-overload                noarch  1.31-480.el9           ubi-9-appstream-rpms      47 k
+2023-08-04T18:53:38.1666842Z  perl-overloading             noarch  0.02-480.el9           ubi-9-appstream-rpms      15 k
+2023-08-04T18:53:38.1667265Z  perl-parent                  noarch  1:0.238-460.el9        ubi-9-appstream-rpms      16 k
+2023-08-04T18:53:38.1667656Z  perl-podlators               noarch  1:4.14-460.el9         ubi-9-appstream-rpms     118 k
+2023-08-04T18:53:38.1668068Z  perl-srpm-macros             noarch  1-41.el9               ubi-9-appstream-rpms     9.4 k
+2023-08-04T18:53:38.1668462Z  perl-subs                    noarch  1.03-480.el9           ubi-9-appstream-rpms      13 k
+2023-08-04T18:53:38.1668832Z  perl-vars                    noarch  1.05-480.el9           ubi-9-appstream-rpms      15 k
+2023-08-04T18:53:38.1669204Z  pkgconf                      x86_64  1.7.3-10.el9           ubi-9-baseos-rpms         45 k
+2023-08-04T18:53:38.1669586Z  pkgconf-m4                   noarch  1.7.3-10.el9           ubi-9-baseos-rpms         16 k
+2023-08-04T18:53:38.1669978Z  pkgconf-pkg-config           x86_64  1.7.3-10.el9           ubi-9-baseos-rpms         12 k
+2023-08-04T18:53:38.1670387Z  publicsuffix-list-dafsa      noarch  20210518-3.el9         ubi-9-baseos-rpms         59 k
+2023-08-04T18:53:38.1671604Z  pyproject-srpm-macros        noarch  1.6.2-1.el9            ubi-9-appstream-rpms      15 k
+2023-08-04T18:53:38.1672055Z  python-srpm-macros           noarch  3.9-52.el9             ubi-9-appstream-rpms      24 k
+2023-08-04T18:53:38.1672463Z  qt5-srpm-macros              noarch  5.15.3-1.el9           ubi-9-appstream-rpms     9.9 k
+2023-08-04T18:53:38.1672868Z  redhat-rpm-config            noarch  199-1.el9              ubi-9-appstream-rpms      76 k
+2023-08-04T18:53:38.1673280Z  rust-srpm-macros             noarch  17-4.el9               ubi-9-appstream-rpms      11 k
+2023-08-04T18:53:38.1673663Z  unzip                        x86_64  6.0-56.el9             ubi-9-baseos-rpms        186 k
+2023-08-04T18:53:38.1674024Z  userspace-rcu                x86_64  0.12.1-6.el9           ubi-9-baseos-rpms        114 k
+2023-08-04T18:53:38.1674800Z  vim-common                   x86_64  2:8.2.2637-20.el9_1    ubi-9-appstream-rpms     7.0 M
+2023-08-04T18:53:38.1675262Z  vim-filesystem               noarch  2:8.2.2637-20.el9_1    ubi-9-baseos-rpms         22 k
+2023-08-04T18:53:38.1675631Z  xz                           x86_64  5.2.5-8.el9_0          ubi-9-baseos-rpms        230 k
+2023-08-04T18:53:38.1675973Z  zip                          x86_64  3.0-35.el9             ubi-9-baseos-rpms        270 k
+2023-08-04T18:53:38.1676361Z  zstd                         x86_64  1.5.1-2.el9            ubi-9-baseos-rpms        552 k
+2023-08-04T18:53:38.1676589Z Installing weak dependencies:
+2023-08-04T18:53:38.1676957Z  perl-IO-Socket-SSL           noarch  2.073-1.el9            ubi-9-appstream-rpms     223 k
+2023-08-04T18:53:38.1677372Z  perl-Mozilla-CA              noarch  20200520-6.el9         ubi-9-appstream-rpms      14 k
+2023-08-04T18:53:38.1677762Z  perl-NDBM_File               x86_64  1.15-480.el9           ubi-9-appstream-rpms      25 k
+2023-08-04T18:53:38.1677960Z 
+2023-08-04T18:53:38.1678268Z Transaction Summary
+2023-08-04T18:53:38.1678480Z ===========================================================================================
+2023-08-04T18:53:38.1678670Z Install  127 Packages
+2023-08-04T18:53:38.1678778Z 
+2023-08-04T18:53:38.1678855Z Total download size: 52 M
+2023-08-04T18:53:38.1679044Z Installed size: 200 M
+2023-08-04T18:53:38.1679228Z Downloading Packages:
+2023-08-04T18:53:38.4275778Z (1/127): file-5.39-12.1.el9_2.x86_64.rpm        207 kB/s |  52 kB     00:00    
+2023-08-04T18:53:38.4404261Z (2/127): userspace-rcu-0.12.1-6.el9.x86_64.rpm  434 kB/s | 114 kB     00:00    
+2023-08-04T18:53:38.4717327Z (3/127): pkgconf-pkg-config-1.7.3-10.el9.x86_64 279 kB/s |  12 kB     00:00    
+2023-08-04T18:53:38.4986677Z (4/127): elfutils-0.188-3.el9.x86_64.rpm        1.6 MB/s | 533 kB     00:00    
+2023-08-04T18:53:38.5480416Z (5/127): bzip2-1.0.8-8.el9.x86_64.rpm           793 kB/s |  60 kB     00:00    
+2023-08-04T18:53:38.5844733Z (6/127): ncurses-6.2-8.20210508.el9.x86_64.rpm  4.7 MB/s | 412 kB     00:00    
+2023-08-04T18:53:38.5888793Z (7/127): openssh-8.7p1-30.el9_2.x86_64.rpm      3.0 MB/s | 460 kB     00:00    
+2023-08-04T18:53:38.6384405Z (8/127): libfido2-1.6.0-7.el9.x86_64.rpm        1.3 MB/s |  74 kB     00:00    
+2023-08-04T18:53:38.6419005Z (9/127): xz-5.2.5-8.el9_0.x86_64.rpm            4.3 MB/s | 230 kB     00:00    
+2023-08-04T18:53:38.6449544Z (10/127): ed-1.14.2-12.el9.x86_64.rpm           810 kB/s |  78 kB     00:00    
+2023-08-04T18:53:38.8462732Z (11/127): info-6.7-15.el9.x86_64.rpm            1.4 MB/s | 228 kB     00:00    
+2023-08-04T18:53:38.8662194Z (12/127): glibc-gconv-extra-2.34-60.el9.x86_64. 7.6 MB/s | 1.7 MB     00:00    
+2023-08-04T18:53:38.8731786Z (13/127): elfutils-debuginfod-client-0.188-3.el 613 kB/s |  40 kB     00:00    
+2023-08-04T18:53:38.9704811Z (14/127): unzip-6.0-56.el9.x86_64.rpm           1.9 MB/s | 186 kB     00:00    
+2023-08-04T18:53:39.0460062Z (15/127): libcbor-0.7.0-5.el9.x86_64.rpm        788 kB/s |  59 kB     00:00    
+2023-08-04T18:53:39.0670517Z (16/127): binutils-2.35.2-37.el9.x86_64.rpm      11 MB/s | 4.6 MB     00:00    
+2023-08-04T18:53:39.0767407Z (17/127): groff-base-1.22.4-10.el9.x86_64.rpm   5.2 MB/s | 1.1 MB     00:00    
+2023-08-04T18:53:39.0886838Z (18/127): numactl-libs-2.0.14-9.el9.x86_64.rpm  744 kB/s |  31 kB     00:00    
+2023-08-04T18:53:39.1069394Z (19/127): pkgconf-1.7.3-10.el9.x86_64.rpm       1.1 MB/s |  45 kB     00:00    
+2023-08-04T18:53:39.1341070Z (20/127): zstd-1.5.1-2.el9.x86_64.rpm           9.4 MB/s | 552 kB     00:00    
+2023-08-04T18:53:39.1444567Z (21/127): pkgconf-m4-1.7.3-10.el9.noarch.rpm    428 kB/s |  16 kB     00:00    
+2023-08-04T18:53:39.1829446Z (22/127): less-590-2.el9_2.x86_64.rpm           3.4 MB/s | 166 kB     00:00    
+2023-08-04T18:53:39.1920803Z (23/127): libedit-3.1-37.20210216cvs.el9.x86_64 2.2 MB/s | 108 kB     00:00    
+2023-08-04T18:53:39.2302589Z (24/127): vim-filesystem-8.2.2637-20.el9_1.noar 466 kB/s |  22 kB     00:00    
+2023-08-04T18:53:39.2433263Z (25/127): libpsl-0.21.1-5.el9.x86_64.rpm        1.3 MB/s |  66 kB     00:00    
+2023-08-04T18:53:39.2486257Z (26/127): binutils-gold-2.35.2-37.el9.x86_64.rp 4.5 MB/s | 734 kB     00:00    
+2023-08-04T18:53:39.2755022Z (27/127): yum-utils-4.3.0-5.el9_2.noarch.rpm    999 kB/s |  45 kB     00:00    
+2023-08-04T18:53:39.2865215Z (28/127): publicsuffix-list-dafsa-20210518-3.el 1.4 MB/s |  59 kB     00:00    
+2023-08-04T18:53:39.3071256Z (29/127): diffutils-3.7-12.el9.x86_64.rpm       6.8 MB/s | 402 kB     00:00    
+2023-08-04T18:53:39.3482691Z (30/127): openssh-clients-8.7p1-30.el9_2.x86_64 9.7 MB/s | 709 kB     00:00    
+2023-08-04T18:53:39.3512460Z (31/127): libpkgconf-1.7.3-10.el9.x86_64.rpm    581 kB/s |  37 kB     00:00    
+2023-08-04T18:53:39.3571525Z (32/127): zip-3.0-35.el9.x86_64.rpm             5.4 MB/s | 270 kB     00:00    
+2023-08-04T18:53:39.4065454Z (33/127): perl-Socket-2.031-4.el9.x86_64.rpm    1.2 MB/s |  58 kB     00:00    
+2023-08-04T18:53:39.4634702Z (34/127): cpio-2.13-16.el9.x86_64.rpm           2.4 MB/s | 279 kB     00:00    
+2023-08-04T18:53:39.5037390Z (35/127): patch-2.7.6-16.el9.x86_64.rpm         1.3 MB/s | 130 kB     00:00    
+2023-08-04T18:53:39.5375465Z (36/127): perl-Class-Struct-0.66-480.el9.noarch 325 kB/s |  24 kB     00:00    
+2023-08-04T18:53:39.5830728Z (37/127): perl-Pod-Perldoc-3.28.01-461.el9.noar 1.1 MB/s |  92 kB     00:00    
+2023-08-04T18:53:39.6311644Z (38/127): perl-srpm-macros-1-41.el9.noarch.rpm  101 kB/s | 9.4 kB     00:00    
+2023-08-04T18:53:39.6615055Z (39/127): perl-Data-Dumper-2.174-462.el9.x86_64 751 kB/s |  59 kB     00:00    
+2023-08-04T18:53:39.7366559Z (40/127): perl-Text-Tabs+Wrap-2013.0523-460.el9 242 kB/s |  25 kB     00:00    
+2023-08-04T18:53:39.7804111Z (41/127): perl-lib-0.65-480.el9.x86_64.rpm      140 kB/s |  17 kB     00:00    
+2023-08-04T18:53:39.8654723Z (42/127): libicu-67.1-9.el9.x86_64.rpm           19 MB/s | 9.6 MB     00:00    
+2023-08-04T18:53:39.8666013Z (43/127): openblas-srpm-macros-2-11.el9.noarch.  66 kB/s | 8.6 kB     00:00    
+2023-08-04T18:53:39.8693085Z (44/127): lua-srpm-macros-1-6.el9.noarch.rpm    116 kB/s |  10 kB     00:00    
+2023-08-04T18:53:39.9071055Z (45/127): emacs-filesystem-27.2-8.el9_2.1.noarc 243 kB/s | 9.6 kB     00:00    
+2023-08-04T18:53:39.9154832Z (46/127): perl-Term-ANSIColor-5.01-461.el9.noar 1.0 MB/s |  51 kB     00:00    
+2023-08-04T18:53:39.9183290Z (47/127): dwz-0.14-3.el9.x86_64.rpm             2.6 MB/s | 130 kB     00:00    
+2023-08-04T18:53:39.9593924Z (48/127): perl-Digest-MD5-2.58-4.el9.x86_64.rpm 768 kB/s |  39 kB     00:00    
+2023-08-04T18:53:39.9617003Z (49/127): rust-srpm-macros-17-4.el9.noarch.rpm  243 kB/s |  11 kB     00:00    
+2023-08-04T18:53:39.9738653Z (50/127): lttng-ust-2.12.0-6.el9.x86_64.rpm     5.3 MB/s | 296 kB     00:00    
+2023-08-04T18:53:40.0057859Z (51/127): perl-MIME-Base64-3.16-4.el9.x86_64.rp 790 kB/s |  34 kB     00:00    
+2023-08-04T18:53:40.0095686Z (52/127): perl-Scalar-List-Utils-1.56-461.el9.x 1.6 MB/s |  77 kB     00:00    
+2023-08-04T18:53:40.0147635Z (53/127): perl-constant-1.33-461.el9.noarch.rpm 621 kB/s |  25 kB     00:00    
+2023-08-04T18:53:40.0473567Z (54/127): perl-File-Path-2.18-4.el9.noarch.rpm  919 kB/s |  38 kB     00:00    
+2023-08-04T18:53:40.0524505Z (55/127): ghc-srpm-macros-1.5.0-6.el9.noarch.rp 211 kB/s | 9.0 kB     00:00    
+2023-08-04T18:53:40.0548347Z (56/127): perl-Mozilla-CA-20200520-6.el9.noarch 364 kB/s |  14 kB     00:00    
+2023-08-04T18:53:40.0978310Z (57/127): perl-IO-Socket-SSL-2.073-1.el9.noarch 4.3 MB/s | 223 kB     00:00    
+2023-08-04T18:53:40.0994532Z (58/127): perl-Carp-1.50-460.el9.noarch.rpm     674 kB/s |  31 kB     00:00    
+2023-08-04T18:53:40.1165960Z (59/127): perl-File-Temp-0.231.100-4.el9.noarch 1.0 MB/s |  63 kB     00:00    
+2023-08-04T18:53:40.1433942Z (60/127): perl-Symbol-1.08-480.el9.noarch.rpm   371 kB/s |  16 kB     00:00    
+2023-08-04T18:53:40.1995707Z (61/127): perl-Net-SSLeay-1.92-2.el9.x86_64.rpm 4.6 MB/s | 392 kB     00:00    
+2023-08-04T18:53:40.2399071Z (62/127): efi-srpm-macros-6-2.el9_0.noarch.rpm  248 kB/s |  24 kB     00:00    
+2023-08-04T18:53:40.2757992Z (63/127): perl-Error-0.17029-7.el9.noarch.rpm   612 kB/s |  46 kB     00:00    
+2023-08-04T18:53:40.3377691Z (64/127): gdb-minimal-10.2-10.el9.x86_64.rpm     15 MB/s | 3.5 MB     00:00    
+2023-08-04T18:53:40.3404984Z (65/127): gpm-libs-1.20.7-29.el9.x86_64.rpm     225 kB/s |  22 kB     00:00    
+2023-08-04T18:53:40.3464177Z (66/127): perl-Pod-Simple-3.42-4.el9.noarch.rpm 3.2 MB/s | 229 kB     00:00    
+2023-08-04T18:53:40.3799434Z (67/127): perl-Text-ParseWords-3.30-460.el9.noa 438 kB/s |  18 kB     00:00    
+2023-08-04T18:53:40.3898509Z (68/127): perl-Digest-1.19-4.el9.noarch.rpm     589 kB/s |  29 kB     00:00    
+2023-08-04T18:53:40.4046572Z (69/127): perl-Pod-Escapes-1.07-460.el9.noarch. 384 kB/s |  22 kB     00:00    
+2023-08-04T18:53:40.4217920Z (70/127): perl-HTTP-Tiny-0.076-460.el9.noarch.r 1.4 MB/s |  58 kB     00:00    
+2023-08-04T18:53:40.4319125Z (71/127): perl-Pod-Usage-2.01-4.el9.noarch.rpm  1.0 MB/s |  43 kB     00:00    
+2023-08-04T18:53:40.4564909Z (72/127): python-srpm-macros-3.9-52.el9.noarch. 470 kB/s |  24 kB     00:00    
+2023-08-04T18:53:40.4649783Z (73/127): perl-TermReadKey-2.38-11.el9.x86_64.r 939 kB/s |  40 kB     00:00    
+2023-08-04T18:53:40.4745255Z (74/127): perl-Exporter-5.74-461.el9.noarch.rpm 801 kB/s |  34 kB     00:00    
+2023-08-04T18:53:40.4938302Z (75/127): fonts-srpm-macros-2.0.5-7.el9.1.noarc 803 kB/s |  29 kB     00:00    
+2023-08-04T18:53:40.5031531Z (76/127): ocaml-srpm-macros-6-6.el9.noarch.rpm  241 kB/s | 9.1 kB     00:00    
+2023-08-04T18:53:40.5125355Z (77/127): perl-parent-0.238-460.el9.noarch.rpm  425 kB/s |  16 kB     00:00    
+2023-08-04T18:53:40.5389694Z (78/127): perl-Term-Cap-1.17-460.el9.noarch.rpm 545 kB/s |  24 kB     00:00    
+2023-08-04T18:53:40.5673353Z (79/127): perl-podlators-4.14-460.el9.noarch.rp 2.1 MB/s | 118 kB     00:00    
+2023-08-04T18:53:40.5855711Z (80/127): qt5-srpm-macros-5.15.3-1.el9.noarch.r 215 kB/s | 9.9 kB     00:00    
+2023-08-04T18:53:40.6446975Z (81/127): perl-Getopt-Long-2.52-4.el9.noarch.rp 1.1 MB/s |  64 kB     00:00    
+2023-08-04T18:53:40.6963809Z (82/127): perl-Encode-3.08-462.el9.x86_64.rpm   8.9 MB/s | 1.7 MB     00:00    
+2023-08-04T18:53:40.7513821Z (83/127): wget-1.21.1-7.el9.x86_64.rpm          7.3 MB/s | 794 kB     00:00    
+2023-08-04T18:53:40.7584508Z (84/127): perl-Time-Local-1.300-7.el9.noarch.rp 595 kB/s |  37 kB     00:00    
+2023-08-04T18:53:40.8303026Z (85/127): jq-1.6-14.el9.x86_64.rpm              2.4 MB/s | 190 kB     00:00    
+2023-08-04T18:53:40.8393512Z (86/127): perl-libnet-3.13-4.el9.noarch.rpm     1.6 MB/s | 134 kB     00:00    
+2023-08-04T18:53:40.9120878Z (87/127): perl-Storable-3.21-460.el9.x86_64.rpm 1.3 MB/s |  98 kB     00:00    
+2023-08-04T18:53:40.9202882Z (88/127): perl-PathTools-3.78-461.el9.x86_64.rp 1.0 MB/s |  92 kB     00:00    
+2023-08-04T18:53:41.0123878Z (89/127): oniguruma-6.9.6-1.el9.5.x86_64.rpm    2.2 MB/s | 221 kB     00:00    
+2023-08-04T18:53:41.0451635Z (90/127): vim-common-8.2.2637-20.el9_1.x86_64.r  15 MB/s | 7.0 MB     00:00    
+2023-08-04T18:53:41.0841063Z (91/127): vim-enhanced-8.2.2637-20.el9_1.x86_64  11 MB/s | 1.8 MB     00:00    
+2023-08-04T18:53:41.0878780Z (92/127): perl-URI-5.09-3.el9.noarch.rpm        1.6 MB/s | 125 kB     00:00    
+2023-08-04T18:53:41.0901509Z (93/127): perl-IO-Socket-IP-0.41-5.el9.noarch.r 1.0 MB/s |  45 kB     00:00    
+2023-08-04T18:53:41.1214801Z (94/127): pyproject-srpm-macros-1.6.2-1.el9.noa 412 kB/s |  15 kB     00:00    
+2023-08-04T18:53:41.1316129Z (95/127): perl-overload-1.31-480.el9.noarch.rpm 1.1 MB/s |  47 kB     00:00    
+2023-08-04T18:53:41.1961265Z (96/127): git-2.39.3-1.el9_2.x86_64.rpm         890 kB/s |  66 kB     00:00    
+2023-08-04T18:53:41.2129530Z (97/127): go-srpm-macros-3.2.0-1.el9.noarch.rpm 353 kB/s |  29 kB     00:00    
+2023-08-04T18:53:41.2677265Z (98/127): perl-AutoLoader-5.74-480.el9.noarch.r 322 kB/s |  23 kB     00:00    
+2023-08-04T18:53:41.2697163Z (99/127): perl-DynaLoader-1.47-480.el9.x86_64.r 486 kB/s |  27 kB     00:00    
+2023-08-04T18:53:41.2961394Z (100/127): perl-libs-5.32.1-480.el9.x86_64.rpm   11 MB/s | 2.2 MB     00:00    
+2023-08-04T18:53:41.3114304Z (101/127): perl-Errno-1.30-480.el9.x86_64.rpm   384 kB/s |  17 kB     00:00    
+2023-08-04T18:53:41.3526687Z (102/127): perl-SelectSaver-1.02-480.el9.noarch 239 kB/s |  13 kB     00:00    
+2023-08-04T18:53:41.3667759Z (103/127): perl-Git-2.39.3-1.el9_2.noarch.rpm   715 kB/s |  39 kB     00:00    
+2023-08-04T18:53:41.4495195Z (104/127): rpm-build-4.16.1.3-22.el9.x86_64.rpm 1.1 MB/s | 105 kB     00:00    
+2023-08-04T18:53:41.4791864Z (105/127): perl-File-Find-1.37-480.el9.noarch.r 244 kB/s |  27 kB     00:00    
+2023-08-04T18:53:41.5232952Z (106/127): perl-B-1.80-480.el9.x86_64.rpm       2.5 MB/s | 185 kB     00:00    
+2023-08-04T18:53:41.5812533Z (107/127): perl-Getopt-Std-1.12-480.el9.noarch. 173 kB/s |  17 kB     00:00    
+2023-08-04T18:53:41.5929030Z (108/127): perl-vars-1.05-480.el9.noarch.rpm    213 kB/s |  15 kB     00:00    
+2023-08-04T18:53:41.6127632Z (109/127): git-core-2.39.3-1.el9_2.x86_64.rpm    13 MB/s | 4.3 MB     00:00    
+2023-08-04T18:53:41.6186042Z (110/127): kernel-srpm-macros-1.0-12.el9.noarch 458 kB/s |  17 kB     00:00    
+2023-08-04T18:53:41.6419826Z (111/127): perl-POSIX-1.94-480.el9.x86_64.rpm   2.0 MB/s |  99 kB     00:00    
+2023-08-04T18:53:41.6494291Z (112/127): perl-FileHandle-2.03-480.el9.noarch. 472 kB/s |  17 kB     00:00    
+2023-08-04T18:53:41.6608107Z (113/127): perl-IO-1.43-480.el9.x86_64.rpm      2.2 MB/s |  94 kB     00:00    
+2023-08-04T18:53:41.6788444Z (114/127): perl-NDBM_File-1.15-480.el9.x86_64.r 679 kB/s |  25 kB     00:00    
+2023-08-04T18:53:41.6912901Z (115/127): perl-File-stat-1.09-480.el9.noarch.r 461 kB/s |  19 kB     00:00    
+2023-08-04T18:53:41.7041119Z (116/127): redhat-rpm-config-199-1.el9.noarch.r 1.7 MB/s |  76 kB     00:00    
+2023-08-04T18:53:41.7520206Z (117/127): perl-overloading-0.02-480.el9.noarch 248 kB/s |  15 kB     00:00    
+2023-08-04T18:53:41.7643189Z (118/127): perl-if-0.60.800-480.el9.noarch.rpm  262 kB/s |  16 kB     00:00    
+2023-08-04T18:53:41.8146219Z (119/127): perl-subs-1.03-480.el9.noarch.rpm    272 kB/s |  13 kB     00:00    
+2023-08-04T18:53:41.8198382Z (120/127): perl-base-2.27-480.el9.noarch.rpm    279 kB/s |  18 kB     00:00    
+2023-08-04T18:53:41.8553828Z (121/127): perl-mro-1.23-480.el9.x86_64.rpm     753 kB/s |  31 kB     00:00    
+2023-08-04T18:53:41.8581229Z (122/127): perl-IPC-Open3-1.21-480.el9.noarch.r 609 kB/s |  25 kB     00:00    
+2023-08-04T18:53:41.9071523Z (123/127): perl-File-Basename-2.85-480.el9.noar 395 kB/s |  19 kB     00:00    
+2023-08-04T18:53:41.9094152Z (124/127): perl-Fcntl-1.13-480.el9.x86_64.rpm   432 kB/s |  23 kB     00:00    
+2023-08-04T18:53:41.9350235Z (125/127): git-core-doc-2.39.3-1.el9_2.noarch.r  11 MB/s | 2.9 MB     00:00    
+2023-08-04T18:53:41.9514594Z (126/127): perl-interpreter-5.32.1-480.el9.x86_ 1.7 MB/s |  75 kB     00:00    
+2023-08-04T18:53:41.9623753Z (127/127): libyaml-devel-0.2.5-7.el9.x86_64.rpm 3.1 MB/s | 165 kB     00:00    
+2023-08-04T18:53:41.9658441Z --------------------------------------------------------------------------------
+2023-08-04T18:53:41.9658817Z Total                                            14 MB/s |  52 MB     00:03     
+2023-08-04T18:53:43.7203877Z Running transaction check
+2023-08-04T18:53:43.7966610Z Transaction check succeeded.
+2023-08-04T18:53:43.7966865Z Running transaction test
+2023-08-04T18:53:44.4540154Z Transaction test succeeded.
+2023-08-04T18:53:44.4544448Z Running transaction
+2023-08-04T18:53:45.4416128Z   Preparing        :                                                        1/1 
+2023-08-04T18:53:45.4617309Z   Installing       : elfutils-debuginfod-client-0.188-3.el9.x86_64        1/127 
+2023-08-04T18:53:45.5680222Z   Installing       : binutils-gold-2.35.2-37.el9.x86_64                   2/127 
+2023-08-04T18:53:45.5770797Z   Installing       : binutils-2.35.2-37.el9.x86_64                        3/127 
+2023-08-04T18:53:45.5933021Z   Running scriptlet: binutils-2.35.2-37.el9.x86_64                        3/127 
+2023-08-04T18:53:45.6000127Z   Installing       : unzip-6.0-56.el9.x86_64                              4/127 
+2023-08-04T18:53:45.6120447Z   Installing       : file-5.39-12.1.el9_2.x86_64                          5/127 
+2023-08-04T18:53:45.6437316Z   Installing       : zip-3.0-35.el9.x86_64                                6/127 
+2023-08-04T18:53:45.7381155Z   Installing       : elfutils-0.188-3.el9.x86_64                          7/127 
+2023-08-04T18:53:45.7434754Z   Installing       : gdb-minimal-10.2-10.el9.x86_64                       8/127 
+2023-08-04T18:53:45.7536963Z   Installing       : pyproject-srpm-macros-1.6.2-1.el9.noarch             9/127 
+2023-08-04T18:53:45.7575340Z   Installing       : oniguruma-6.9.6-1.el9.5.x86_64                      10/127 
+2023-08-04T18:53:45.7606821Z   Installing       : qt5-srpm-macros-5.15.3-1.el9.noarch                 11/127 
+2023-08-04T18:53:45.7642997Z   Installing       : ocaml-srpm-macros-6-6.el9.noarch                    12/127 
+2023-08-04T18:53:45.7679706Z   Installing       : gpm-libs-1.20.7-29.el9.x86_64                       13/127 
+2023-08-04T18:53:45.7712111Z   Installing       : efi-srpm-macros-6-2.el9_0.noarch                    14/127 
+2023-08-04T18:53:45.7743688Z   Installing       : ghc-srpm-macros-1.5.0-6.el9.noarch                  15/127 
+2023-08-04T18:53:45.7808446Z   Installing       : rust-srpm-macros-17-4.el9.noarch                    16/127 
+2023-08-04T18:53:45.7847939Z   Installing       : dwz-0.14-3.el9.x86_64                               17/127 
+2023-08-04T18:53:45.7882375Z   Installing       : emacs-filesystem-1:27.2-8.el9_2.1.noarch            18/127 
+2023-08-04T18:53:45.7910896Z   Installing       : lua-srpm-macros-1-6.el9.noarch                      19/127 
+2023-08-04T18:53:45.7943476Z   Installing       : openblas-srpm-macros-2-11.el9.noarch                20/127 
+2023-08-04T18:53:45.8021979Z   Installing       : perl-srpm-macros-1-41.el9.noarch                    21/127 
+2023-08-04T18:53:45.8081991Z   Installing       : cpio-2.13-16.el9.x86_64                             22/127 
+2023-08-04T18:53:45.8136835Z   Installing       : libpkgconf-1.7.3-10.el9.x86_64                      23/127 
+2023-08-04T18:53:45.8254927Z   Installing       : pkgconf-1.7.3-10.el9.x86_64                         24/127 
+2023-08-04T18:53:45.8321119Z   Installing       : diffutils-3.7-12.el9.x86_64                         25/127 
+2023-08-04T18:53:45.8358348Z   Installing       : publicsuffix-list-dafsa-20210518-3.el9.noarch       26/127 
+2023-08-04T18:53:45.8416760Z   Installing       : libpsl-0.21.1-5.el9.x86_64                          27/127 
+2023-08-04T18:53:46.2713508Z   Installing       : vim-filesystem-2:8.2.2637-20.el9_1.noarch           28/127 
+2023-08-04T18:53:46.2915179Z   Installing       : vim-common-2:8.2.2637-20.el9_1.x86_64               29/127 
+2023-08-04T18:53:46.2999687Z   Installing       : libedit-3.1-37.20210216cvs.el9.x86_64               30/127 
+2023-08-04T18:53:46.3053065Z   Installing       : less-590-2.el9_2.x86_64                             31/127 
+2023-08-04T18:53:46.3083806Z   Installing       : pkgconf-m4-1.7.3-10.el9.noarch                      32/127 
+2023-08-04T18:53:46.3283505Z   Installing       : pkgconf-pkg-config-1.7.3-10.el9.x86_64              33/127 
+2023-08-04T18:53:46.3334165Z   Installing       : zstd-1.5.1-2.el9.x86_64                             34/127 
+2023-08-04T18:53:46.3384490Z   Installing       : numactl-libs-2.0.14-9.el9.x86_64                    35/127 
+2023-08-04T18:53:46.3450244Z   Installing       : libcbor-0.7.0-5.el9.x86_64                          36/127 
+2023-08-04T18:53:46.3498401Z   Installing       : libfido2-1.6.0-7.el9.x86_64                         37/127 
+2023-08-04T18:53:46.4153967Z   Running scriptlet: groff-base-1.22.4-10.el9.x86_64                     38/127 
+2023-08-04T18:53:46.4236766Z   Installing       : groff-base-1.22.4-10.el9.x86_64                     38/127 
+2023-08-04T18:53:46.4365429Z   Running scriptlet: groff-base-1.22.4-10.el9.x86_64                     38/127 
+2023-08-04T18:53:46.4437618Z   Installing       : info-6.7-15.el9.x86_64                              39/127 
+2023-08-04T18:53:46.4504895Z   Installing       : ed-1.14.2-12.el9.x86_64                             40/127 
+2023-08-04T18:53:46.4642729Z   Installing       : patch-2.7.6-16.el9.x86_64                           41/127 
+2023-08-04T18:53:46.4786346Z   Installing       : xz-5.2.5-8.el9_0.x86_64                             42/127 
+2023-08-04T18:53:46.4858059Z   Installing       : ncurses-6.2-8.20210508.el9.x86_64                   43/127 
+2023-08-04T18:53:46.4906609Z   Installing       : perl-Digest-1.19-4.el9.noarch                       44/127 
+2023-08-04T18:53:46.5002710Z   Installing       : perl-Digest-MD5-2.58-4.el9.x86_64                   45/127 
+2023-08-04T18:53:46.5053352Z   Installing       : perl-B-1.80-480.el9.x86_64                          46/127 
+2023-08-04T18:53:46.5084632Z   Installing       : perl-FileHandle-2.03-480.el9.noarch                 47/127 
+2023-08-04T18:53:46.5133795Z   Installing       : perl-AutoLoader-5.74-480.el9.noarch                 48/127 
+2023-08-04T18:53:46.5228509Z   Installing       : perl-Data-Dumper-2.174-462.el9.x86_64               49/127 
+2023-08-04T18:53:46.5515144Z   Installing       : perl-libnet-3.13-4.el9.noarch                       50/127 
+2023-08-04T18:53:46.5584606Z   Installing       : perl-Net-SSLeay-1.92-2.el9.x86_64                   51/127 
+2023-08-04T18:53:46.5708751Z   Installing       : perl-base-2.27-480.el9.noarch                       52/127 
+2023-08-04T18:53:46.5779478Z   Installing       : perl-URI-5.09-3.el9.noarch                          53/127 
+2023-08-04T18:53:46.5821014Z   Installing       : perl-Time-Local-2:1.300-7.el9.noarch                54/127 
+2023-08-04T18:53:46.5864070Z   Installing       : perl-Mozilla-CA-20200520-6.el9.noarch               55/127 
+2023-08-04T18:53:46.5908343Z   Installing       : perl-Text-Tabs+Wrap-2013.0523-460.el9.noarch        56/127 
+2023-08-04T18:53:46.5942140Z   Installing       : perl-Pod-Escapes-1:1.07-460.el9.noarch              57/127 
+2023-08-04T18:53:46.5991466Z   Installing       : perl-if-0.60.800-480.el9.noarch                     58/127 
+2023-08-04T18:53:46.6035684Z   Installing       : perl-IO-Socket-IP-0.41-5.el9.noarch                 59/127 
+2023-08-04T18:53:46.6139515Z   Installing       : perl-File-Path-2.18-4.el9.noarch                    60/127 
+2023-08-04T18:53:46.6197800Z   Installing       : perl-IO-Socket-SSL-2.073-1.el9.noarch               61/127 
+2023-08-04T18:53:46.6241824Z   Installing       : perl-Term-ANSIColor-5.01-461.el9.noarch             62/127 
+2023-08-04T18:53:46.6276471Z   Installing       : perl-Class-Struct-0.66-480.el9.noarch               63/127 
+2023-08-04T18:53:46.6327202Z   Installing       : perl-subs-1.03-480.el9.noarch                       64/127 
+2023-08-04T18:53:46.6368685Z   Installing       : perl-POSIX-1.94-480.el9.x86_64                      65/127 
+2023-08-04T18:53:46.6425297Z   Installing       : perl-IPC-Open3-1.21-480.el9.noarch                  66/127 
+2023-08-04T18:53:46.6572302Z   Installing       : perl-File-Temp-1:0.231.100-4.el9.noarch             67/127 
+2023-08-04T18:53:46.6647605Z   Installing       : perl-Pod-Simple-1:3.42-4.el9.noarch                 68/127 
+2023-08-04T18:53:46.6698815Z   Installing       : perl-HTTP-Tiny-0.076-460.el9.noarch                 69/127 
+2023-08-04T18:53:46.6763348Z   Installing       : perl-Term-Cap-1.17-460.el9.noarch                   70/127 
+2023-08-04T18:53:46.6808455Z   Installing       : perl-Socket-4:2.031-4.el9.x86_64                    71/127 
+2023-08-04T18:53:46.6833189Z   Installing       : perl-Symbol-1.08-480.el9.noarch                     72/127 
+2023-08-04T18:53:46.6867474Z   Installing       : perl-SelectSaver-1.02-480.el9.noarch                73/127 
+2023-08-04T18:53:46.6943784Z   Installing       : perl-File-stat-1.09-480.el9.noarch                  74/127 
+2023-08-04T18:53:46.7023363Z   Installing       : perl-Pod-Perldoc-3.28.01-461.el9.noarch             75/127 
+2023-08-04T18:53:46.7066887Z   Installing       : perl-podlators-1:4.14-460.el9.noarch                76/127 
+2023-08-04T18:53:46.7097095Z   Installing       : perl-Text-ParseWords-3.30-460.el9.noarch            77/127 
+2023-08-04T18:53:46.7141381Z   Installing       : perl-overloading-0.02-480.el9.noarch                78/127 
+2023-08-04T18:53:46.7207508Z   Installing       : perl-mro-1.23-480.el9.x86_64                        79/127 
+2023-08-04T18:53:46.7246361Z   Installing       : perl-IO-1.43-480.el9.x86_64                         80/127 
+2023-08-04T18:53:46.7293968Z   Installing       : perl-Fcntl-1.13-480.el9.x86_64                      81/127 
+2023-08-04T18:53:46.7337087Z   Installing       : perl-Pod-Usage-4:2.01-4.el9.noarch                  82/127 
+2023-08-04T18:53:46.7395729Z   Installing       : perl-MIME-Base64-3.16-4.el9.x86_64                  83/127 
+2023-08-04T18:53:46.7438785Z   Installing       : perl-Scalar-List-Utils-4:1.56-461.el9.x86_64        84/127 
+2023-08-04T18:53:46.7478329Z   Installing       : perl-constant-1.33-461.el9.noarch                   85/127 
+2023-08-04T18:53:46.7506503Z   Installing       : perl-parent-1:0.238-460.el9.noarch                  86/127 
+2023-08-04T18:53:46.7540889Z   Installing       : perl-Errno-1.30-480.el9.x86_64                      87/127 
+2023-08-04T18:53:46.7572059Z   Installing       : perl-Getopt-Std-1.12-480.el9.noarch                 88/127 
+2023-08-04T18:53:46.7610039Z   Installing       : perl-vars-1.05-480.el9.noarch                       89/127 
+2023-08-04T18:53:46.7656564Z   Installing       : perl-overload-1.31-480.el9.noarch                   90/127 
+2023-08-04T18:53:46.7692780Z   Installing       : perl-Storable-1:3.21-460.el9.x86_64                 91/127 
+2023-08-04T18:53:46.7751210Z   Installing       : perl-File-Basename-2.85-480.el9.noarch              92/127 
+2023-08-04T18:53:46.7799222Z   Installing       : perl-Getopt-Long-1:2.52-4.el9.noarch                93/127 
+2023-08-04T18:53:46.7843708Z   Installing       : perl-Carp-1.50-460.el9.noarch                       94/127 
+2023-08-04T18:53:46.7925291Z   Installing       : perl-Exporter-5.74-461.el9.noarch                   95/127 
+2023-08-04T18:53:46.7981905Z   Installing       : perl-PathTools-3.78-461.el9.x86_64                  96/127 
+2023-08-04T18:53:46.8806157Z   Installing       : perl-NDBM_File-1.15-480.el9.x86_64                  97/127 
+2023-08-04T18:53:47.0346693Z   Installing       : perl-Encode-4:3.08-462.el9.x86_64                   98/127 
+2023-08-04T18:53:47.0483267Z   Installing       : perl-libs-4:5.32.1-480.el9.x86_64                   99/127 
+2023-08-04T18:53:47.0529023Z   Installing       : perl-interpreter-4:5.32.1-480.el9.x86_64           100/127 
+2023-08-04T18:53:47.0563082Z   Installing       : kernel-srpm-macros-1.0-12.el9.noarch               101/127 
+2023-08-04T18:53:47.0601554Z   Installing       : python-srpm-macros-3.9-52.el9.noarch               102/127 
+2023-08-04T18:53:47.0645789Z   Installing       : fonts-srpm-macros-1:2.0.5-7.el9.1.noarch           103/127 
+2023-08-04T18:53:47.0736700Z   Installing       : go-srpm-macros-3.2.0-1.el9.noarch                  104/127 
+2023-08-04T18:53:47.0795200Z   Installing       : redhat-rpm-config-199-1.el9.noarch                 105/127 
+2023-08-04T18:53:47.0850589Z   Installing       : perl-lib-0.65-480.el9.x86_64                       106/127 
+2023-08-04T18:53:47.0891804Z   Installing       : perl-Error-1:0.17029-7.el9.noarch                  107/127 
+2023-08-04T18:53:47.0940444Z   Installing       : perl-DynaLoader-1.47-480.el9.x86_64                108/127 
+2023-08-04T18:53:47.0991520Z   Installing       : perl-TermReadKey-2.38-11.el9.x86_64                109/127 
+2023-08-04T18:53:47.1070716Z   Installing       : perl-File-Find-1.37-480.el9.noarch                 110/127 
+2023-08-04T18:53:47.1117221Z   Installing       : bzip2-1.0.8-8.el9.x86_64                           111/127 
+2023-08-04T18:53:47.1526529Z   Running scriptlet: openssh-8.7p1-30.el9_2.x86_64                      112/127 
+2023-08-04T18:53:47.1789548Z   Installing       : openssh-8.7p1-30.el9_2.x86_64                      112/127 
+2023-08-04T18:53:47.1831790Z   Installing       : openssh-clients-8.7p1-30.el9_2.x86_64              113/127 
+2023-08-04T18:53:47.3126749Z   Running scriptlet: openssh-clients-8.7p1-30.el9_2.x86_64              113/127 
+2023-08-04T18:53:47.6073613Z   Installing       : git-core-2.39.3-1.el9_2.x86_64                     114/127 
+2023-08-04T18:53:47.6227648Z   Installing       : git-core-doc-2.39.3-1.el9_2.noarch                 115/127 
+2023-08-04T18:53:47.6285048Z   Installing       : perl-Git-2.39.3-1.el9_2.noarch                     116/127 
+2023-08-04T18:53:47.6381803Z   Installing       : git-2.39.3-1.el9_2.x86_64                          117/127 
+2023-08-04T18:53:47.6575775Z   Installing       : userspace-rcu-0.12.1-6.el9.x86_64                  118/127 
+2023-08-04T18:53:47.6700905Z   Installing       : lttng-ust-2.12.0-6.el9.x86_64                      119/127 
+2023-08-04T18:53:47.7084283Z   Installing       : rpm-build-4.16.1.3-22.el9.x86_64                   120/127 
+2023-08-04T18:53:47.7322446Z   Installing       : vim-enhanced-2:8.2.2637-20.el9_1.x86_64            121/127 
+2023-08-04T18:53:47.7491184Z   Installing       : libyaml-devel-0.2.5-7.el9.x86_64                   122/127 
+2023-08-04T18:53:47.7601008Z   Installing       : wget-1.21.1-7.el9.x86_64                           123/127 
+2023-08-04T18:53:48.0283391Z   Installing       : jq-1.6-14.el9.x86_64                               124/127 
+2023-08-04T18:53:48.0386990Z   Installing       : libicu-67.1-9.el9.x86_64                           125/127 
+2023-08-04T18:53:48.1512070Z   Installing       : yum-utils-4.3.0-5.el9_2.noarch                     126/127 
+2023-08-04T18:53:48.1627019Z   Installing       : glibc-gconv-extra-2.34-60.el9.x86_64               127/127 
+2023-08-04T18:53:50.5823035Z   Running scriptlet: glibc-gconv-extra-2.34-60.el9.x86_64               127/127 
+2023-08-04T18:53:50.5823544Z   Verifying        : userspace-rcu-0.12.1-6.el9.x86_64                    1/127 
+2023-08-04T18:53:50.5826414Z   Verifying        : file-5.39-12.1.el9_2.x86_64                          2/127 
+2023-08-04T18:53:50.5827099Z   Verifying        : elfutils-0.188-3.el9.x86_64                          3/127 
+2023-08-04T18:53:50.5827494Z   Verifying        : pkgconf-pkg-config-1.7.3-10.el9.x86_64               4/127 
+2023-08-04T18:53:50.5827876Z   Verifying        : openssh-8.7p1-30.el9_2.x86_64                        5/127 
+2023-08-04T18:53:50.5828520Z   Verifying        : bzip2-1.0.8-8.el9.x86_64                             6/127 
+2023-08-04T18:53:50.5828869Z   Verifying        : ncurses-6.2-8.20210508.el9.x86_64                    7/127 
+2023-08-04T18:53:50.5829201Z   Verifying        : ed-1.14.2-12.el9.x86_64                              8/127 
+2023-08-04T18:53:50.5829536Z   Verifying        : libfido2-1.6.0-7.el9.x86_64                          9/127 
+2023-08-04T18:53:50.5830896Z   Verifying        : xz-5.2.5-8.el9_0.x86_64                             10/127 
+2023-08-04T18:53:50.5831234Z   Verifying        : binutils-2.35.2-37.el9.x86_64                       11/127 
+2023-08-04T18:53:50.5831596Z   Verifying        : glibc-gconv-extra-2.34-60.el9.x86_64                12/127 
+2023-08-04T18:53:50.5831963Z   Verifying        : info-6.7-15.el9.x86_64                              13/127 
+2023-08-04T18:53:50.5836219Z   Verifying        : elfutils-debuginfod-client-0.188-3.el9.x86_64       14/127 
+2023-08-04T18:53:50.5837271Z   Verifying        : groff-base-1.22.4-10.el9.x86_64                     15/127 
+2023-08-04T18:53:50.5837654Z   Verifying        : unzip-6.0-56.el9.x86_64                             16/127 
+2023-08-04T18:53:50.5837997Z   Verifying        : libcbor-0.7.0-5.el9.x86_64                          17/127 
+2023-08-04T18:53:50.5838623Z   Verifying        : numactl-libs-2.0.14-9.el9.x86_64                    18/127 
+2023-08-04T18:53:50.5838988Z   Verifying        : pkgconf-1.7.3-10.el9.x86_64                         19/127 
+2023-08-04T18:53:50.5839324Z   Verifying        : zstd-1.5.1-2.el9.x86_64                             20/127 
+2023-08-04T18:53:50.5839682Z   Verifying        : binutils-gold-2.35.2-37.el9.x86_64                  21/127 
+2023-08-04T18:53:50.5840061Z   Verifying        : pkgconf-m4-1.7.3-10.el9.noarch                      22/127 
+2023-08-04T18:53:50.5840418Z   Verifying        : less-590-2.el9_2.x86_64                             23/127 
+2023-08-04T18:53:50.5840763Z   Verifying        : libedit-3.1-37.20210216cvs.el9.x86_64               24/127 
+2023-08-04T18:53:50.5841123Z   Verifying        : vim-filesystem-2:8.2.2637-20.el9_1.noarch           25/127 
+2023-08-04T18:53:50.5841476Z   Verifying        : libpsl-0.21.1-5.el9.x86_64                          26/127 
+2023-08-04T18:53:50.5841817Z   Verifying        : yum-utils-4.3.0-5.el9_2.noarch                      27/127 
+2023-08-04T18:53:50.5843348Z   Verifying        : publicsuffix-list-dafsa-20210518-3.el9.noarch       28/127 
+2023-08-04T18:53:50.5843857Z   Verifying        : diffutils-3.7-12.el9.x86_64                         29/127 
+2023-08-04T18:53:50.5845134Z   Verifying        : openssh-clients-8.7p1-30.el9_2.x86_64               30/127 
+2023-08-04T18:53:50.5845947Z   Verifying        : libpkgconf-1.7.3-10.el9.x86_64                      31/127 
+2023-08-04T18:53:50.5846315Z   Verifying        : zip-3.0-35.el9.x86_64                               32/127 
+2023-08-04T18:53:50.5847600Z   Verifying        : cpio-2.13-16.el9.x86_64                             33/127 
+2023-08-04T18:53:50.5847956Z   Verifying        : libicu-67.1-9.el9.x86_64                            34/127 
+2023-08-04T18:53:50.5848306Z   Verifying        : perl-Socket-4:2.031-4.el9.x86_64                    35/127 
+2023-08-04T18:53:50.5848649Z   Verifying        : patch-2.7.6-16.el9.x86_64                           36/127 
+2023-08-04T18:53:50.5850394Z   Verifying        : perl-Class-Struct-0.66-480.el9.noarch               37/127 
+2023-08-04T18:53:50.5850827Z   Verifying        : perl-Pod-Perldoc-3.28.01-461.el9.noarch             38/127 
+2023-08-04T18:53:50.5853660Z   Verifying        : perl-srpm-macros-1-41.el9.noarch                    39/127 
+2023-08-04T18:53:50.5854518Z   Verifying        : perl-Data-Dumper-2.174-462.el9.x86_64               40/127 
+2023-08-04T18:53:50.5854986Z   Verifying        : perl-Text-Tabs+Wrap-2013.0523-460.el9.noarch        41/127 
+2023-08-04T18:53:50.5855389Z   Verifying        : perl-lib-0.65-480.el9.x86_64                        42/127 
+2023-08-04T18:53:50.5855973Z   Verifying        : openblas-srpm-macros-2-11.el9.noarch                43/127 
+2023-08-04T18:53:50.5856657Z   Verifying        : lua-srpm-macros-1-6.el9.noarch                      44/127 
+2023-08-04T18:53:50.5857144Z   Verifying        : emacs-filesystem-1:27.2-8.el9_2.1.noarch            45/127 
+2023-08-04T18:53:50.5858117Z   Verifying        : perl-Term-ANSIColor-5.01-461.el9.noarch             46/127 
+2023-08-04T18:53:50.5858610Z   Verifying        : dwz-0.14-3.el9.x86_64                               47/127 
+2023-08-04T18:53:50.5859097Z   Verifying        : perl-Digest-MD5-2.58-4.el9.x86_64                   48/127 
+2023-08-04T18:53:50.5859566Z   Verifying        : rust-srpm-macros-17-4.el9.noarch                    49/127 
+2023-08-04T18:53:50.5860029Z   Verifying        : lttng-ust-2.12.0-6.el9.x86_64                       50/127 
+2023-08-04T18:53:50.5860565Z   Verifying        : perl-Scalar-List-Utils-4:1.56-461.el9.x86_64        51/127 
+2023-08-04T18:53:50.5864788Z   Verifying        : perl-MIME-Base64-3.16-4.el9.x86_64                  52/127 
+2023-08-04T18:53:50.5865371Z   Verifying        : perl-constant-1.33-461.el9.noarch                   53/127 
+2023-08-04T18:53:50.5866247Z   Verifying        : perl-File-Path-2.18-4.el9.noarch                    54/127 
+2023-08-04T18:53:50.5866715Z   Verifying        : ghc-srpm-macros-1.5.0-6.el9.noarch                  55/127 
+2023-08-04T18:53:50.5867209Z   Verifying        : perl-Mozilla-CA-20200520-6.el9.noarch               56/127 
+2023-08-04T18:53:50.5868089Z   Verifying        : perl-IO-Socket-SSL-2.073-1.el9.noarch               57/127 
+2023-08-04T18:53:50.5868680Z   Verifying        : perl-Carp-1.50-460.el9.noarch                       58/127 
+2023-08-04T18:53:50.5869134Z   Verifying        : perl-File-Temp-1:0.231.100-4.el9.noarch             59/127 
+2023-08-04T18:53:50.5869563Z   Verifying        : gdb-minimal-10.2-10.el9.x86_64                      60/127 
+2023-08-04T18:53:50.5870720Z   Verifying        : perl-Symbol-1.08-480.el9.noarch                     61/127 
+2023-08-04T18:53:50.5871152Z   Verifying        : perl-Net-SSLeay-1.92-2.el9.x86_64                   62/127 
+2023-08-04T18:53:50.5872070Z   Verifying        : efi-srpm-macros-6-2.el9_0.noarch                    63/127 
+2023-08-04T18:53:50.5873881Z   Verifying        : perl-Error-1:0.17029-7.el9.noarch                   64/127 
+2023-08-04T18:53:50.5875599Z   Verifying        : gpm-libs-1.20.7-29.el9.x86_64                       65/127 
+2023-08-04T18:53:50.5876384Z   Verifying        : perl-Pod-Simple-1:3.42-4.el9.noarch                 66/127 
+2023-08-04T18:53:50.5876868Z   Verifying        : perl-Text-ParseWords-3.30-460.el9.noarch            67/127 
+2023-08-04T18:53:50.5877639Z   Verifying        : perl-Digest-1.19-4.el9.noarch                       68/127 
+2023-08-04T18:53:50.5878706Z   Verifying        : perl-Pod-Escapes-1:1.07-460.el9.noarch              69/127 
+2023-08-04T18:53:50.5879481Z   Verifying        : perl-HTTP-Tiny-0.076-460.el9.noarch                 70/127 
+2023-08-04T18:53:50.5880050Z   Verifying        : perl-Pod-Usage-4:2.01-4.el9.noarch                  71/127 
+2023-08-04T18:53:50.5884409Z   Verifying        : python-srpm-macros-3.9-52.el9.noarch                72/127 
+2023-08-04T18:53:50.5886329Z   Verifying        : perl-TermReadKey-2.38-11.el9.x86_64                 73/127 
+2023-08-04T18:53:50.5887720Z   Verifying        : perl-Exporter-5.74-461.el9.noarch                   74/127 
+2023-08-04T18:53:50.5888520Z   Verifying        : fonts-srpm-macros-1:2.0.5-7.el9.1.noarch            75/127 
+2023-08-04T18:53:50.5889097Z   Verifying        : ocaml-srpm-macros-6-6.el9.noarch                    76/127 
+2023-08-04T18:53:50.5890110Z   Verifying        : perl-parent-1:0.238-460.el9.noarch                  77/127 
+2023-08-04T18:53:50.5891152Z   Verifying        : perl-Term-Cap-1.17-460.el9.noarch                   78/127 
+2023-08-04T18:53:50.5891748Z   Verifying        : perl-Encode-4:3.08-462.el9.x86_64                   79/127 
+2023-08-04T18:53:50.5893400Z   Verifying        : perl-podlators-1:4.14-460.el9.noarch                80/127 
+2023-08-04T18:53:50.5894050Z   Verifying        : qt5-srpm-macros-5.15.3-1.el9.noarch                 81/127 
+2023-08-04T18:53:50.5894467Z   Verifying        : vim-common-2:8.2.2637-20.el9_1.x86_64               82/127 
+2023-08-04T18:53:50.5895464Z   Verifying        : perl-Getopt-Long-1:2.52-4.el9.noarch                83/127 
+2023-08-04T18:53:50.5896188Z   Verifying        : wget-1.21.1-7.el9.x86_64                            84/127 
+2023-08-04T18:53:50.5896959Z   Verifying        : perl-Time-Local-2:1.300-7.el9.noarch                85/127 
+2023-08-04T18:53:50.5897417Z   Verifying        : jq-1.6-14.el9.x86_64                                86/127 
+2023-08-04T18:53:50.5897871Z   Verifying        : perl-libnet-3.13-4.el9.noarch                       87/127 
+2023-08-04T18:53:50.5898294Z   Verifying        : perl-PathTools-3.78-461.el9.x86_64                  88/127 
+2023-08-04T18:53:50.5898820Z   Verifying        : perl-Storable-1:3.21-460.el9.x86_64                 89/127 
+2023-08-04T18:53:50.5899256Z   Verifying        : oniguruma-6.9.6-1.el9.5.x86_64                      90/127 
+2023-08-04T18:53:50.5899694Z   Verifying        : vim-enhanced-2:8.2.2637-20.el9_1.x86_64             91/127 
+2023-08-04T18:53:50.5900748Z   Verifying        : perl-URI-5.09-3.el9.noarch                          92/127 
+2023-08-04T18:53:50.5901207Z   Verifying        : perl-IO-Socket-IP-0.41-5.el9.noarch                 93/127 
+2023-08-04T18:53:50.5901741Z   Verifying        : pyproject-srpm-macros-1.6.2-1.el9.noarch            94/127 
+2023-08-04T18:53:50.5903342Z   Verifying        : perl-overload-1.31-480.el9.noarch                   95/127 
+2023-08-04T18:53:50.5903875Z   Verifying        : perl-libs-4:5.32.1-480.el9.x86_64                   96/127 
+2023-08-04T18:53:50.5904298Z   Verifying        : git-2.39.3-1.el9_2.x86_64                           97/127 
+2023-08-04T18:53:50.5904775Z   Verifying        : go-srpm-macros-3.2.0-1.el9.noarch                   98/127 
+2023-08-04T18:53:50.5905202Z   Verifying        : perl-AutoLoader-5.74-480.el9.noarch                 99/127 
+2023-08-04T18:53:50.5905668Z   Verifying        : perl-DynaLoader-1.47-480.el9.x86_64                100/127 
+2023-08-04T18:53:50.5906104Z   Verifying        : perl-Errno-1.30-480.el9.x86_64                     101/127 
+2023-08-04T18:53:50.5906659Z   Verifying        : git-core-2.39.3-1.el9_2.x86_64                     102/127 
+2023-08-04T18:53:50.5907215Z   Verifying        : perl-SelectSaver-1.02-480.el9.noarch               103/127 
+2023-08-04T18:53:50.5995423Z   Verifying        : perl-Git-2.39.3-1.el9_2.noarch                     104/127 
+2023-08-04T18:53:50.5995922Z   Verifying        : rpm-build-4.16.1.3-22.el9.x86_64                   105/127 
+2023-08-04T18:53:50.5996775Z   Verifying        : perl-File-Find-1.37-480.el9.noarch                 106/127 
+2023-08-04T18:53:50.5997156Z   Verifying        : perl-B-1.80-480.el9.x86_64                         107/127 
+2023-08-04T18:53:50.5997522Z   Verifying        : perl-Getopt-Std-1.12-480.el9.noarch                108/127 
+2023-08-04T18:53:50.5998000Z   Verifying        : perl-vars-1.05-480.el9.noarch                      109/127 
+2023-08-04T18:53:50.5998402Z   Verifying        : kernel-srpm-macros-1.0-12.el9.noarch               110/127 
+2023-08-04T18:53:50.5998827Z   Verifying        : perl-POSIX-1.94-480.el9.x86_64                     111/127 
+2023-08-04T18:53:50.5999201Z   Verifying        : perl-FileHandle-2.03-480.el9.noarch                112/127 
+2023-08-04T18:53:50.5999670Z   Verifying        : perl-IO-1.43-480.el9.x86_64                        113/127 
+2023-08-04T18:53:50.6000328Z   Verifying        : perl-NDBM_File-1.15-480.el9.x86_64                 114/127 
+2023-08-04T18:53:50.6000778Z   Verifying        : perl-File-stat-1.09-480.el9.noarch                 115/127 
+2023-08-04T18:53:50.6001175Z   Verifying        : redhat-rpm-config-199-1.el9.noarch                 116/127 
+2023-08-04T18:53:50.6001553Z   Verifying        : git-core-doc-2.39.3-1.el9_2.noarch                 117/127 
+2023-08-04T18:53:50.6001929Z   Verifying        : perl-overloading-0.02-480.el9.noarch               118/127 
+2023-08-04T18:53:50.6002703Z   Verifying        : perl-if-0.60.800-480.el9.noarch                    119/127 
+2023-08-04T18:53:50.6003069Z   Verifying        : perl-base-2.27-480.el9.noarch                      120/127 
+2023-08-04T18:53:50.6003428Z   Verifying        : perl-subs-1.03-480.el9.noarch                      121/127 
+2023-08-04T18:53:50.6003799Z   Verifying        : perl-mro-1.23-480.el9.x86_64                       122/127 
+2023-08-04T18:53:50.6004166Z   Verifying        : perl-IPC-Open3-1.21-480.el9.noarch                 123/127 
+2023-08-04T18:53:50.6004539Z   Verifying        : perl-Fcntl-1.13-480.el9.x86_64                     124/127 
+2023-08-04T18:53:50.6004916Z   Verifying        : perl-File-Basename-2.85-480.el9.noarch             125/127 
+2023-08-04T18:53:50.6005290Z   Verifying        : perl-interpreter-4:5.32.1-480.el9.x86_64           126/127 
+2023-08-04T18:53:50.6930362Z   Verifying        : libyaml-devel-0.2.5-7.el9.x86_64                   127/127 
+2023-08-04T18:53:50.6930689Z Installed products updated.
+2023-08-04T18:53:50.7515100Z 
+2023-08-04T18:53:50.7515666Z Installed:
+2023-08-04T18:53:50.7516186Z   binutils-2.35.2-37.el9.x86_64                                                 
+2023-08-04T18:53:50.7516544Z   binutils-gold-2.35.2-37.el9.x86_64                                            
+2023-08-04T18:53:50.7516892Z   bzip2-1.0.8-8.el9.x86_64                                                      
+2023-08-04T18:53:50.7517799Z   cpio-2.13-16.el9.x86_64                                                       
+2023-08-04T18:53:50.7518207Z   diffutils-3.7-12.el9.x86_64                                                   
+2023-08-04T18:53:50.7518622Z   dwz-0.14-3.el9.x86_64                                                         
+2023-08-04T18:53:50.7518949Z   ed-1.14.2-12.el9.x86_64                                                       
+2023-08-04T18:53:50.7519292Z   efi-srpm-macros-6-2.el9_0.noarch                                              
+2023-08-04T18:53:50.7519636Z   elfutils-0.188-3.el9.x86_64                                                   
+2023-08-04T18:53:50.7520010Z   elfutils-debuginfod-client-0.188-3.el9.x86_64                                 
+2023-08-04T18:53:50.7520392Z   emacs-filesystem-1:27.2-8.el9_2.1.noarch                                      
+2023-08-04T18:53:50.7520728Z   file-5.39-12.1.el9_2.x86_64                                                   
+2023-08-04T18:53:50.7521109Z   fonts-srpm-macros-1:2.0.5-7.el9.1.noarch                                      
+2023-08-04T18:53:50.7521471Z   gdb-minimal-10.2-10.el9.x86_64                                                
+2023-08-04T18:53:50.7523090Z   ghc-srpm-macros-1.5.0-6.el9.noarch                                            
+2023-08-04T18:53:50.7523509Z   git-2.39.3-1.el9_2.x86_64                                                     
+2023-08-04T18:53:50.7523832Z   git-core-2.39.3-1.el9_2.x86_64                                                
+2023-08-04T18:53:50.7524175Z   git-core-doc-2.39.3-1.el9_2.noarch                                            
+2023-08-04T18:53:50.7524531Z   glibc-gconv-extra-2.34-60.el9.x86_64                                          
+2023-08-04T18:53:50.7524899Z   go-srpm-macros-3.2.0-1.el9.noarch                                             
+2023-08-04T18:53:50.7525250Z   gpm-libs-1.20.7-29.el9.x86_64                                                 
+2023-08-04T18:53:50.7525580Z   groff-base-1.22.4-10.el9.x86_64                                               
+2023-08-04T18:53:50.7526245Z   info-6.7-15.el9.x86_64                                                        
+2023-08-04T18:53:50.7526598Z   jq-1.6-14.el9.x86_64                                                          
+2023-08-04T18:53:50.7526940Z   kernel-srpm-macros-1.0-12.el9.noarch                                          
+2023-08-04T18:53:50.7527283Z   less-590-2.el9_2.x86_64                                                       
+2023-08-04T18:53:50.7527595Z   libcbor-0.7.0-5.el9.x86_64                                                    
+2023-08-04T18:53:50.7527957Z   libedit-3.1-37.20210216cvs.el9.x86_64                                         
+2023-08-04T18:53:50.7528284Z   libfido2-1.6.0-7.el9.x86_64                                                   
+2023-08-04T18:53:50.7528605Z   libicu-67.1-9.el9.x86_64                                                      
+2023-08-04T18:53:50.7528935Z   libpkgconf-1.7.3-10.el9.x86_64                                                
+2023-08-04T18:53:50.7529267Z   libpsl-0.21.1-5.el9.x86_64                                                    
+2023-08-04T18:53:50.7529604Z   libyaml-devel-0.2.5-7.el9.x86_64                                              
+2023-08-04T18:53:50.7529953Z   lttng-ust-2.12.0-6.el9.x86_64                                                 
+2023-08-04T18:53:50.7530298Z   lua-srpm-macros-1-6.el9.noarch                                                
+2023-08-04T18:53:50.7530640Z   ncurses-6.2-8.20210508.el9.x86_64                                             
+2023-08-04T18:53:50.7530971Z   numactl-libs-2.0.14-9.el9.x86_64                                              
+2023-08-04T18:53:50.7531325Z   ocaml-srpm-macros-6-6.el9.noarch                                              
+2023-08-04T18:53:50.7531682Z   oniguruma-6.9.6-1.el9.5.x86_64                                                
+2023-08-04T18:53:50.7532038Z   openblas-srpm-macros-2-11.el9.noarch                                          
+2023-08-04T18:53:50.7532398Z   openssh-8.7p1-30.el9_2.x86_64                                                 
+2023-08-04T18:53:50.7532753Z   openssh-clients-8.7p1-30.el9_2.x86_64                                         
+2023-08-04T18:53:50.7533095Z   patch-2.7.6-16.el9.x86_64                                                     
+2023-08-04T18:53:50.7534561Z   perl-AutoLoader-5.74-480.el9.noarch                                           
+2023-08-04T18:53:50.7535137Z   perl-B-1.80-480.el9.x86_64                                                    
+2023-08-04T18:53:50.7535490Z   perl-Carp-1.50-460.el9.noarch                                                 
+2023-08-04T18:53:50.7535974Z   perl-Class-Struct-0.66-480.el9.noarch                                         
+2023-08-04T18:53:50.7536363Z   perl-Data-Dumper-2.174-462.el9.x86_64                                         
+2023-08-04T18:53:50.7536734Z   perl-Digest-1.19-4.el9.noarch                                                 
+2023-08-04T18:53:50.7537140Z   perl-Digest-MD5-2.58-4.el9.x86_64                                             
+2023-08-04T18:53:50.7537584Z   perl-DynaLoader-1.47-480.el9.x86_64                                           
+2023-08-04T18:53:50.7538280Z   perl-Encode-4:3.08-462.el9.x86_64                                             
+2023-08-04T18:53:50.7538620Z   perl-Errno-1.30-480.el9.x86_64                                                
+2023-08-04T18:53:50.7538954Z   perl-Error-1:0.17029-7.el9.noarch                                             
+2023-08-04T18:53:50.7539300Z   perl-Exporter-5.74-461.el9.noarch                                             
+2023-08-04T18:53:50.7539654Z   perl-Fcntl-1.13-480.el9.x86_64                                                
+2023-08-04T18:53:50.7540014Z   perl-File-Basename-2.85-480.el9.noarch                                        
+2023-08-04T18:53:50.7540390Z   perl-File-Find-1.37-480.el9.noarch                                            
+2023-08-04T18:53:50.7540752Z   perl-File-Path-2.18-4.el9.noarch                                              
+2023-08-04T18:53:50.7541266Z   perl-File-Temp-1:0.231.100-4.el9.noarch                                       
+2023-08-04T18:53:50.7541641Z   perl-File-stat-1.09-480.el9.noarch                                            
+2023-08-04T18:53:50.7542007Z   perl-FileHandle-2.03-480.el9.noarch                                           
+2023-08-04T18:53:50.7542371Z   perl-Getopt-Long-1:2.52-4.el9.noarch                                          
+2023-08-04T18:53:50.7542727Z   perl-Getopt-Std-1.12-480.el9.noarch                                           
+2023-08-04T18:53:50.7543610Z   perl-Git-2.39.3-1.el9_2.noarch                                                
+2023-08-04T18:53:50.7543983Z   perl-HTTP-Tiny-0.076-460.el9.noarch                                           
+2023-08-04T18:53:50.7544336Z   perl-IO-1.43-480.el9.x86_64                                                   
+2023-08-04T18:53:50.7544685Z   perl-IO-Socket-IP-0.41-5.el9.noarch                                           
+2023-08-04T18:53:50.7545062Z   perl-IO-Socket-SSL-2.073-1.el9.noarch                                         
+2023-08-04T18:53:50.7545442Z   perl-IPC-Open3-1.21-480.el9.noarch                                            
+2023-08-04T18:53:50.7545808Z   perl-MIME-Base64-3.16-4.el9.x86_64                                            
+2023-08-04T18:53:50.7546176Z   perl-Mozilla-CA-20200520-6.el9.noarch                                         
+2023-08-04T18:53:50.7546530Z   perl-NDBM_File-1.15-480.el9.x86_64                                            
+2023-08-04T18:53:50.7546876Z   perl-Net-SSLeay-1.92-2.el9.x86_64                                             
+2023-08-04T18:53:50.7547238Z   perl-POSIX-1.94-480.el9.x86_64                                                
+2023-08-04T18:53:50.7547589Z   perl-PathTools-3.78-461.el9.x86_64                                            
+2023-08-04T18:53:50.7547950Z   perl-Pod-Escapes-1:1.07-460.el9.noarch                                        
+2023-08-04T18:53:50.7548331Z   perl-Pod-Perldoc-3.28.01-461.el9.noarch                                       
+2023-08-04T18:53:50.7548705Z   perl-Pod-Simple-1:3.42-4.el9.noarch                                           
+2023-08-04T18:53:50.7549070Z   perl-Pod-Usage-4:2.01-4.el9.noarch                                            
+2023-08-04T18:53:50.7549431Z   perl-Scalar-List-Utils-4:1.56-461.el9.x86_64                                  
+2023-08-04T18:53:50.7549805Z   perl-SelectSaver-1.02-480.el9.noarch                                          
+2023-08-04T18:53:50.7550155Z   perl-Socket-4:2.031-4.el9.x86_64                                              
+2023-08-04T18:53:50.7550495Z   perl-Storable-1:3.21-460.el9.x86_64                                           
+2023-08-04T18:53:50.7550844Z   perl-Symbol-1.08-480.el9.noarch                                               
+2023-08-04T18:53:50.7551221Z   perl-Term-ANSIColor-5.01-461.el9.noarch                                       
+2023-08-04T18:53:50.7551604Z   perl-Term-Cap-1.17-460.el9.noarch                                             
+2023-08-04T18:53:50.7551990Z   perl-TermReadKey-2.38-11.el9.x86_64                                           
+2023-08-04T18:53:50.7553061Z   perl-Text-ParseWords-3.30-460.el9.noarch                                      
+2023-08-04T18:53:50.7553456Z   perl-Text-Tabs+Wrap-2013.0523-460.el9.noarch                                  
+2023-08-04T18:53:50.7553825Z   perl-Time-Local-2:1.300-7.el9.noarch                                          
+2023-08-04T18:53:50.7554704Z   perl-URI-5.09-3.el9.noarch                                                    
+2023-08-04T18:53:50.7555045Z   perl-base-2.27-480.el9.noarch                                                 
+2023-08-04T18:53:50.7555398Z   perl-constant-1.33-461.el9.noarch                                             
+2023-08-04T18:53:50.7555749Z   perl-if-0.60.800-480.el9.noarch                                               
+2023-08-04T18:53:50.7556096Z   perl-interpreter-4:5.32.1-480.el9.x86_64                                      
+2023-08-04T18:53:50.7556424Z   perl-lib-0.65-480.el9.x86_64                                                  
+2023-08-04T18:53:50.7557161Z   perl-libnet-3.13-4.el9.noarch                                                 
+2023-08-04T18:53:50.7557559Z   perl-libs-4:5.32.1-480.el9.x86_64                                             
+2023-08-04T18:53:50.7557878Z   perl-mro-1.23-480.el9.x86_64                                                  
+2023-08-04T18:53:50.7558227Z   perl-overload-1.31-480.el9.noarch                                             
+2023-08-04T18:53:50.7558594Z   perl-overloading-0.02-480.el9.noarch                                          
+2023-08-04T18:53:50.7558950Z   perl-parent-1:0.238-460.el9.noarch                                            
+2023-08-04T18:53:50.7559284Z   perl-podlators-1:4.14-460.el9.noarch                                          
+2023-08-04T18:53:50.7559641Z   perl-srpm-macros-1-41.el9.noarch                                              
+2023-08-04T18:53:50.7559996Z   perl-subs-1.03-480.el9.noarch                                                 
+2023-08-04T18:53:50.7560334Z   perl-vars-1.05-480.el9.noarch                                                 
+2023-08-04T18:53:50.7560789Z   pkgconf-1.7.3-10.el9.x86_64                                                   
+2023-08-04T18:53:50.7561417Z   pkgconf-m4-1.7.3-10.el9.noarch                                                
+2023-08-04T18:53:50.7561856Z   pkgconf-pkg-config-1.7.3-10.el9.x86_64                                        
+2023-08-04T18:53:50.7562249Z   publicsuffix-list-dafsa-20210518-3.el9.noarch                                 
+2023-08-04T18:53:50.7562656Z   pyproject-srpm-macros-1.6.2-1.el9.noarch                                      
+2023-08-04T18:53:50.7563223Z   python-srpm-macros-3.9-52.el9.noarch                                          
+2023-08-04T18:53:50.7563995Z   qt5-srpm-macros-5.15.3-1.el9.noarch                                           
+2023-08-04T18:53:50.7564378Z   redhat-rpm-config-199-1.el9.noarch                                            
+2023-08-04T18:53:50.7564742Z   rpm-build-4.16.1.3-22.el9.x86_64                                              
+2023-08-04T18:53:50.7565100Z   rust-srpm-macros-17-4.el9.noarch                                              
+2023-08-04T18:53:50.7565433Z   unzip-6.0-56.el9.x86_64                                                       
+2023-08-04T18:53:50.7565762Z   userspace-rcu-0.12.1-6.el9.x86_64                                             
+2023-08-04T18:53:50.7566096Z   vim-common-2:8.2.2637-20.el9_1.x86_64                                         
+2023-08-04T18:53:50.7566415Z   vim-enhanced-2:8.2.2637-20.el9_1.x86_64                                       
+2023-08-04T18:53:50.7566742Z   vim-filesystem-2:8.2.2637-20.el9_1.noarch                                     
+2023-08-04T18:53:50.7567067Z   wget-1.21.1-7.el9.x86_64                                                      
+2023-08-04T18:53:50.7567372Z   xz-5.2.5-8.el9_0.x86_64                                                       
+2023-08-04T18:53:50.7567682Z   yum-utils-4.3.0-5.el9_2.noarch                                                
+2023-08-04T18:53:50.7568005Z   zip-3.0-35.el9.x86_64                                                         
+2023-08-04T18:53:50.7568596Z   zstd-1.5.1-2.el9.x86_64                                                       
+2023-08-04T18:53:50.7568751Z 
+2023-08-04T18:53:50.7568808Z Complete!
+2023-08-04T18:53:51.1570163Z Updating Subscription Management repositories.
+2023-08-04T18:53:51.1571009Z Unable to read consumer identity
+2023-08-04T18:53:51.1571917Z Subscription Manager is operating in container mode.
+2023-08-04T18:53:51.1597466Z 
+2023-08-04T18:53:51.1598354Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:53:51.1598730Z 
+2023-08-04T18:53:51.1716075Z 26 files removed
+2023-08-04T18:53:51.2399376Z [36mINFO[0m[0025] Taking snapshot of full filesystem...        
+2023-08-04T18:53:55.7270370Z [36mINFO[0m[0029] RUN useradd -G 0 $USERNAME                   
+2023-08-04T18:53:55.7271950Z [36mINFO[0m[0029] Cmd: /bin/bash                               
+2023-08-04T18:53:55.7273186Z [36mINFO[0m[0029] Args: [-o pipefail -c useradd -G 0 $USERNAME] 
+2023-08-04T18:53:55.7274007Z [36mINFO[0m[0029] Running: [/bin/bash -o pipefail -c useradd -G 0 $USERNAME] 
+2023-08-04T18:53:55.7633630Z [36mINFO[0m[0029] Taking snapshot of full filesystem...        
+2023-08-04T18:53:56.4148041Z [36mINFO[0m[0030] ENV HOME /home/${USERNAME}                   
+2023-08-04T18:53:56.4148714Z [36mINFO[0m[0030] RUN mkdir -p /actions-runner     && chown -R $USERNAME:$GID /actions-runner 
+2023-08-04T18:53:56.4149638Z [36mINFO[0m[0030] Cmd: /bin/bash                               
+2023-08-04T18:53:56.4150175Z [36mINFO[0m[0030] Args: [-o pipefail -c mkdir -p /actions-runner     && chown -R $USERNAME:$GID /actions-runner] 
+2023-08-04T18:53:56.4150774Z [36mINFO[0m[0030] Running: [/bin/bash -o pipefail -c mkdir -p /actions-runner     && chown -R $USERNAME:$GID /actions-runner] 
+2023-08-04T18:53:56.4227326Z [36mINFO[0m[0030] Taking snapshot of full filesystem...        
+2023-08-04T18:53:56.8168884Z [36mINFO[0m[0030] WORKDIR /actions-runner                      
+2023-08-04T18:53:56.8169277Z [36mINFO[0m[0030] Cmd: workdir                                 
+2023-08-04T18:53:56.8170071Z [36mINFO[0m[0030] Changed working directory to /actions-runner 
+2023-08-04T18:53:56.8209989Z [36mINFO[0m[0030] No files changed in this command, skipping snapshotting. 
+2023-08-04T18:53:56.8210708Z [36mINFO[0m[0030] COPY images/software/gh-cli.sh gh-cli.sh     
+2023-08-04T18:53:56.8211241Z [36mINFO[0m[0030] Taking snapshot of files...                  
+2023-08-04T18:53:56.8216749Z [36mINFO[0m[0030] RUN bash gh-cli.sh && rm gh-cli.sh           
+2023-08-04T18:53:56.8217531Z [36mINFO[0m[0030] Cmd: /bin/bash                               
+2023-08-04T18:53:56.8217933Z [36mINFO[0m[0030] Args: [-o pipefail -c bash gh-cli.sh && rm gh-cli.sh] 
+2023-08-04T18:53:56.8218331Z [36mINFO[0m[0030] Running: [/bin/bash -o pipefail -c bash gh-cli.sh && rm gh-cli.sh] 
+2023-08-04T18:53:57.1624942Z Updating Subscription Management repositories.
+2023-08-04T18:53:57.1625697Z Unable to read consumer identity
+2023-08-04T18:53:57.1625979Z Subscription Manager is operating in container mode.
+2023-08-04T18:53:57.1655042Z 
+2023-08-04T18:53:57.1656020Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:53:57.1656263Z 
+2023-08-04T18:53:57.1713462Z Adding repo from: https://cli.github.com/packages/rpm/gh-cli.repo
+2023-08-04T18:53:57.6844570Z Updating Subscription Management repositories.
+2023-08-04T18:53:57.6845567Z Unable to read consumer identity
+2023-08-04T18:53:57.6846902Z Subscription Manager is operating in container mode.
+2023-08-04T18:53:57.6876761Z 
+2023-08-04T18:53:57.6878844Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:53:57.6879553Z 
+2023-08-04T18:53:57.9893656Z packages for the GitHub CLI                      11 kB/s | 2.6 kB     00:00    
+2023-08-04T18:53:58.4854246Z Red Hat Universal Base Image 9 (RPMs) - BaseOS  1.2 MB/s | 581 kB     00:00    
+2023-08-04T18:53:59.1451199Z Red Hat Universal Base Image 9 (RPMs) - AppStre 3.4 MB/s | 1.9 MB     00:00    
+2023-08-04T18:53:59.9001006Z Red Hat Universal Base Image 9 (RPMs) - CodeRea 474 kB/s | 198 kB     00:00    
+2023-08-04T18:54:00.0373351Z Dependencies resolved.
+2023-08-04T18:54:00.0383017Z ================================================================================
+2023-08-04T18:54:00.0383828Z  Package       Architecture      Version                Repository         Size
+2023-08-04T18:54:00.0384107Z ================================================================================
+2023-08-04T18:54:00.0384307Z Installing:
+2023-08-04T18:54:00.0385695Z  gh            x86_64            2.32.1-1               gh-cli             10 M
+2023-08-04T18:54:00.0386010Z 
+2023-08-04T18:54:00.0386133Z Transaction Summary
+2023-08-04T18:54:00.0386435Z ================================================================================
+2023-08-04T18:54:00.0387042Z Install  1 Package
+2023-08-04T18:54:00.0387188Z 
+2023-08-04T18:54:00.0387269Z Total download size: 10 M
+2023-08-04T18:54:00.0387464Z Installed size: 40 M
+2023-08-04T18:54:00.0387646Z Downloading Packages:
+2023-08-04T18:54:01.1988690Z gh_2.32.1_linux_amd64.rpm                       9.0 MB/s |  10 MB     00:01    
+2023-08-04T18:54:01.1997266Z --------------------------------------------------------------------------------
+2023-08-04T18:54:01.2002654Z Total                                           9.0 MB/s |  10 MB     00:01     
+2023-08-04T18:54:01.7525687Z packages for the GitHub CLI                     6.7 kB/s | 3.1 kB     00:00    
+2023-08-04T18:54:01.8189353Z Importing GPG key 0x75716059:
+2023-08-04T18:54:01.8189705Z  Userid     : "GitHub CLI <opensource+cli@github.com>"
+2023-08-04T18:54:01.8189981Z  Fingerprint: 2C61 0620 1985 B60E 6C7A C873 23F3 D4EA 7571 6059
+2023-08-04T18:54:01.8190312Z  From       : https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x23F3D4EA75716059
+2023-08-04T18:54:01.8241295Z Key imported successfully
+2023-08-04T18:54:01.8634657Z Running transaction check
+2023-08-04T18:54:01.8655919Z Transaction check succeeded.
+2023-08-04T18:54:01.8657075Z Running transaction test
+2023-08-04T18:54:01.9033973Z Transaction test succeeded.
+2023-08-04T18:54:01.9037287Z Running transaction
+2023-08-04T18:54:02.3494201Z   Preparing        :                                                        1/1 
+2023-08-04T18:54:02.4553733Z   Installing       : gh-2.32.1-1.x86_64                                     1/1 
+2023-08-04T18:54:02.5021052Z   Verifying        : gh-2.32.1-1.x86_64                                     1/1 
+2023-08-04T18:54:02.5021358Z Installed products updated.
+2023-08-04T18:54:02.5429431Z 
+2023-08-04T18:54:02.5429891Z Installed:
+2023-08-04T18:54:02.5430410Z   gh-2.32.1-1.x86_64                                                            
+2023-08-04T18:54:02.5430570Z 
+2023-08-04T18:54:02.5430629Z Complete!
+2023-08-04T18:54:02.9203406Z Updating Subscription Management repositories.
+2023-08-04T18:54:02.9204467Z Unable to read consumer identity
+2023-08-04T18:54:02.9205418Z Subscription Manager is operating in container mode.
+2023-08-04T18:54:02.9234588Z 
+2023-08-04T18:54:02.9235287Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:54:02.9235543Z 
+2023-08-04T18:54:02.9349752Z 31 files removed
+2023-08-04T18:54:03.0123553Z [36mINFO[0m[0036] Taking snapshot of full filesystem...        
+2023-08-04T18:54:04.4170667Z [36mINFO[0m[0038] COPY images/software/kubectl.sh kubectl.sh   
+2023-08-04T18:54:04.4316918Z [36mINFO[0m[0038] Taking snapshot of files...                  
+2023-08-04T18:54:04.4325983Z [36mINFO[0m[0038] RUN bash kubectl.sh && rm kubectl.sh         
+2023-08-04T18:54:04.4326343Z [36mINFO[0m[0038] Cmd: /bin/bash                               
+2023-08-04T18:54:04.4326697Z [36mINFO[0m[0038] Args: [-o pipefail -c bash kubectl.sh && rm kubectl.sh] 
+2023-08-04T18:54:04.4327121Z [36mINFO[0m[0038] Running: [/bin/bash -o pipefail -c bash kubectl.sh && rm kubectl.sh] 
+2023-08-04T18:54:04.8123905Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2023-08-04T18:54:04.8125352Z                                  Dload  Upload   Total   Spent    Left  Speed
+2023-08-04T18:54:04.8125677Z 
+2023-08-04T18:54:04.8993981Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:04.8994429Z 100   138  100   138    0     0   1586      0 --:--:-- --:--:-- --:--:--  1586
+2023-08-04T18:54:05.6458673Z 
+2023-08-04T18:54:06.6460221Z  16 46.9M   16 7977k    0     0  9577k      0  0:00:05 --:--:--  0:00:05 9577k
+2023-08-04T18:54:07.6467408Z  44 46.9M   44 20.8M    0     0  11.3M      0  0:00:04  0:00:01  0:00:03 13.0M
+2023-08-04T18:54:08.4934843Z  74 46.9M   74 35.0M    0     0  12.3M      0  0:00:03  0:00:02  0:00:01 13.6M
+2023-08-04T18:54:08.4936659Z 100 46.9M  100 46.9M    0     0  12.7M      0  0:00:03  0:00:03 --:--:-- 13.7M
+2023-08-04T18:54:08.7378383Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2023-08-04T18:54:08.7381595Z                                  Dload  Upload   Total   Spent    Left  Speed
+2023-08-04T18:54:08.7383260Z 
+2023-08-04T18:54:08.8293167Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:08.8294395Z 100   138  100   138    0     0   1516      0 --:--:-- --:--:-- --:--:--  1516
+2023-08-04T18:54:08.8996745Z 
+2023-08-04T18:54:08.8997996Z 100    64  100    64    0     0    395      0 --:--:-- --:--:-- --:--:--   395
+2023-08-04T18:54:09.2457847Z [36mINFO[0m[0043] Taking snapshot of full filesystem...        
+2023-08-04T18:54:12.2650360Z [36mINFO[0m[0046] RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash 
+2023-08-04T18:54:12.2650854Z [36mINFO[0m[0046] Cmd: /bin/bash                               
+2023-08-04T18:54:12.2651335Z [36mINFO[0m[0046] Args: [-o pipefail -c curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash] 
+2023-08-04T18:54:12.2651921Z [36mINFO[0m[0046] Running: [/bin/bash -o pipefail -c curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash] 
+2023-08-04T18:54:12.2702562Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2023-08-04T18:54:12.2704403Z                                  Dload  Upload   Total   Spent    Left  Speed
+2023-08-04T18:54:12.2705953Z 
+2023-08-04T18:54:12.3492499Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:12.3493820Z 100 11345  100 11345    0     0   140k      0 --:--:-- --:--:-- --:--:--  142k
+2023-08-04T18:54:12.9534917Z Downloading https://get.helm.sh/helm-v3.12.2-linux-amd64.tar.gz
+2023-08-04T18:54:14.0751775Z Verifying checksum... Done.
+2023-08-04T18:54:14.4511734Z Preparing to install helm into /usr/local/bin
+2023-08-04T18:54:14.6093353Z helm installed into /usr/local/bin/helm
+2023-08-04T18:54:14.6237201Z [36mINFO[0m[0048] Taking snapshot of full filesystem...        
+2023-08-04T18:54:16.3328451Z [36mINFO[0m[0050] RUN test -n "$TARGETPLATFORM" || (echo "TARGETPLATFORM must be set" && false) 
+2023-08-04T18:54:16.3328894Z [36mINFO[0m[0050] Cmd: /bin/bash                               
+2023-08-04T18:54:16.3329676Z [36mINFO[0m[0050] Args: [-o pipefail -c test -n "$TARGETPLATFORM" || (echo "TARGETPLATFORM must be set" && false)] 
+2023-08-04T18:54:16.3330222Z [36mINFO[0m[0050] Running: [/bin/bash -o pipefail -c test -n "$TARGETPLATFORM" || (echo "TARGETPLATFORM must be set" && false)] 
+2023-08-04T18:54:16.3344140Z [36mINFO[0m[0050] Taking snapshot of full filesystem...        
+2023-08-04T18:54:16.9002056Z [36mINFO[0m[0050] No files were changed, appending empty layer to config. No layer added to image. 
+2023-08-04T18:54:16.9004796Z [36mINFO[0m[0050] RUN export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2)     && if [ "$ARCH" = "amd64" ]; then export ARCH=x64 ; fi     && curl -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz     && tar xzf ./runner.tar.gz     && rm runner.tar.gz     && ./bin/installdependencies.sh     && dnf clean all 
+2023-08-04T18:54:16.9006260Z [36mINFO[0m[0050] Cmd: /bin/bash                               
+2023-08-04T18:54:16.9008105Z [36mINFO[0m[0050] Args: [-o pipefail -c export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2)     && if [ "$ARCH" = "amd64" ]; then export ARCH=x64 ; fi     && curl -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz     && tar xzf ./runner.tar.gz     && rm runner.tar.gz     && ./bin/installdependencies.sh     && dnf clean all] 
+2023-08-04T18:54:16.9010004Z [36mINFO[0m[0050] Running: [/bin/bash -o pipefail -c export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2)     && if [ "$ARCH" = "amd64" ]; then export ARCH=x64 ; fi     && curl -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz     && tar xzf ./runner.tar.gz     && rm runner.tar.gz     && ./bin/installdependencies.sh     && dnf clean all] 
+2023-08-04T18:54:16.9095236Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2023-08-04T18:54:16.9099211Z                                  Dload  Upload   Total   Spent    Left  Speed
+2023-08-04T18:54:16.9101343Z 
+2023-08-04T18:54:17.1497180Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:17.1500567Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:17.6456995Z 
+2023-08-04T18:54:18.6460643Z   2  137M    2 3048k    0     0  4142k      0  0:00:33 --:--:--  0:00:33 4142k
+2023-08-04T18:54:19.6467406Z  16  137M   16 23.2M    0     0  13.3M      0  0:00:10  0:00:01  0:00:09 20.2M
+2023-08-04T18:54:20.6508387Z  32  137M   32 44.1M    0     0  16.1M      0  0:00:08  0:00:02  0:00:06 20.5M
+2023-08-04T18:54:21.6505572Z  47  137M   47 64.9M    0     0  17.3M      0  0:00:07  0:00:03  0:00:04 20.6M
+2023-08-04T18:54:22.6589073Z  61  137M   61 84.8M    0     0  17.9M      0  0:00:07  0:00:04  0:00:03 20.4M
+2023-08-04T18:54:23.6459868Z  73  137M   73  101M    0     0  17.6M      0  0:00:07  0:00:05  0:00:02 19.6M
+2023-08-04T18:54:24.6455452Z  83  137M   83  115M    0     0  17.0M      0  0:00:08  0:00:06  0:00:02 18.3M
+2023-08-04T18:54:25.2026705Z  94  137M   94  129M    0     0  16.7M      0  0:00:08  0:00:07  0:00:01 17.1M
+2023-08-04T18:54:25.2028452Z 100  137M  100  137M    0     0  16.5M      0  0:00:08  0:00:08 --:--:-- 15.9M
+2023-08-04T18:54:28.8572699Z --------OS Information--------
+2023-08-04T18:54:28.8584620Z NAME="Red Hat Enterprise Linux"
+2023-08-04T18:54:28.8585232Z VERSION="9.2 (Plow)"
+2023-08-04T18:54:28.8585432Z ID="rhel"
+2023-08-04T18:54:28.8585596Z ID_LIKE="fedora"
+2023-08-04T18:54:28.8591329Z VERSION_ID="9.2"
+2023-08-04T18:54:28.8591682Z PLATFORM_ID="platform:el9"
+2023-08-04T18:54:28.8591958Z PRETTY_NAME="Red Hat Enterprise Linux 9.2 (Plow)"
+2023-08-04T18:54:28.8593932Z ANSI_COLOR="0;31"
+2023-08-04T18:54:28.8594535Z LOGO="fedora-logo-icon"
+2023-08-04T18:54:28.8616921Z CPE_NAME="cpe:/o:redhat:enterprise_linux:9::baseos"
+2023-08-04T18:54:28.8617382Z HOME_URL="https://www.redhat.com/"
+2023-08-04T18:54:28.8618171Z DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9"
+2023-08-04T18:54:28.8618647Z BUG_REPORT_URL="https://bugzilla.redhat.com/"
+2023-08-04T18:54:28.8618888Z 
+2023-08-04T18:54:28.8619020Z REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 9"
+2023-08-04T18:54:28.8619271Z REDHAT_BUGZILLA_PRODUCT_VERSION=9.2
+2023-08-04T18:54:28.8619606Z REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+2023-08-04T18:54:28.8619861Z REDHAT_SUPPORT_PRODUCT_VERSION="9.2"
+2023-08-04T18:54:28.8620239Z ------------------------------
+2023-08-04T18:54:28.8620469Z The current OS is Fedora based
+2023-08-04T18:54:28.8620729Z --Fedora/RHEL/CentOS Version--
+2023-08-04T18:54:28.8620993Z Red Hat Enterprise Linux release 9.2 (Plow)
+2023-08-04T18:54:28.8621840Z ------------------------------
+2023-08-04T18:54:28.8622019Z /usr/bin/yum
+2023-08-04T18:54:29.1459076Z Updating Subscription Management repositories.
+2023-08-04T18:54:29.1459370Z Unable to read consumer identity
+2023-08-04T18:54:29.1460036Z Subscription Manager is operating in container mode.
+2023-08-04T18:54:29.1487724Z 
+2023-08-04T18:54:29.1488679Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:54:29.1488934Z 
+2023-08-04T18:54:29.4345568Z packages for the GitHub CLI                      11 kB/s | 2.6 kB     00:00    
+2023-08-04T18:54:29.9698107Z Red Hat Universal Base Image 9 (RPMs) - BaseOS  1.1 MB/s | 581 kB     00:00    
+2023-08-04T18:54:30.6715654Z Red Hat Universal Base Image 9 (RPMs) - AppStre 3.2 MB/s | 1.9 MB     00:00    
+2023-08-04T18:54:31.5791390Z Red Hat Universal Base Image 9 (RPMs) - CodeRea 346 kB/s | 198 kB     00:00    
+2023-08-04T18:54:31.7303986Z Package lttng-ust-2.12.0-6.el9.x86_64 is already installed.
+2023-08-04T18:54:31.7304627Z Package openssl-libs-1:3.0.7-17.el9_2.x86_64 is already installed.
+2023-08-04T18:54:31.7304993Z Package krb5-libs-1.20.1-9.el9_2.x86_64 is already installed.
+2023-08-04T18:54:31.7305321Z Package zlib-1.2.11-39.el9.x86_64 is already installed.
+2023-08-04T18:54:31.7305636Z Package libicu-67.1-9.el9.x86_64 is already installed.
+2023-08-04T18:54:31.7390553Z Dependencies resolved.
+2023-08-04T18:54:31.7400099Z Nothing to do.
+2023-08-04T18:54:31.7400618Z Complete!
+2023-08-04T18:54:31.8014845Z -----------------------------
+2023-08-04T18:54:31.8015738Z  Finish Install Dependencies
+2023-08-04T18:54:31.8016090Z -----------------------------
+2023-08-04T18:54:32.1440385Z Updating Subscription Management repositories.
+2023-08-04T18:54:32.1442661Z Unable to read consumer identity
+2023-08-04T18:54:32.1444752Z Subscription Manager is operating in container mode.
+2023-08-04T18:54:32.1486370Z 
+2023-08-04T18:54:32.1489239Z This system is not registered with an entitlement server. You can use subscription-manager to register.
+2023-08-04T18:54:32.1489608Z 
+2023-08-04T18:54:32.1644121Z 31 files removed
+2023-08-04T18:54:32.2519050Z [36mINFO[0m[0066] Taking snapshot of full filesystem...        
+2023-08-04T18:54:43.0629677Z [36mINFO[0m[0076] RUN curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-container-hooks/releases/download/v${RUNNER_CONTAINER_HOOKS_VERSION}/actions-runner-hooks-k8s-${RUNNER_CONTAINER_HOOKS_VERSION}.zip     && unzip ./runner-container-hooks.zip -d ./k8s     && rm runner-container-hooks.zip 
+2023-08-04T18:54:43.0630405Z [36mINFO[0m[0076] Cmd: /bin/bash                               
+2023-08-04T18:54:43.0631312Z [36mINFO[0m[0076] Args: [-o pipefail -c curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-container-hooks/releases/download/v${RUNNER_CONTAINER_HOOKS_VERSION}/actions-runner-hooks-k8s-${RUNNER_CONTAINER_HOOKS_VERSION}.zip     && unzip ./runner-container-hooks.zip -d ./k8s     && rm runner-container-hooks.zip] 
+2023-08-04T18:54:43.0633300Z [36mINFO[0m[0076] Running: [/bin/bash -o pipefail -c curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-container-hooks/releases/download/v${RUNNER_CONTAINER_HOOKS_VERSION}/actions-runner-hooks-k8s-${RUNNER_CONTAINER_HOOKS_VERSION}.zip     && unzip ./runner-container-hooks.zip -d ./k8s     && rm runner-container-hooks.zip] 
+2023-08-04T18:54:43.0683529Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2023-08-04T18:54:43.0684653Z                                  Dload  Upload   Total   Spent    Left  Speed
+2023-08-04T18:54:43.0684827Z 
+2023-08-04T18:54:43.3700084Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:43.3700940Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2023-08-04T18:54:43.6493740Z 
+2023-08-04T18:54:43.6494593Z  98  788k   98  774k    0     0  1332k      0 --:--:-- --:--:-- --:--:-- 1332k
+2023-08-04T18:54:43.6495071Z 100  788k  100  788k    0     0  1354k      0 --:--:-- --:--:-- --:--:-- 14.1M
+2023-08-04T18:54:43.6546335Z Archive:  ./runner-container-hooks.zip
+2023-08-04T18:54:43.7027508Z   inflating: ./k8s/index.js          
+2023-08-04T18:54:43.7053569Z [36mINFO[0m[0077] Taking snapshot of full filesystem...        
+2023-08-04T18:54:45.4574882Z [36mINFO[0m[0079] COPY images/logger.sh images/startup.sh /usr/bin/ 
+2023-08-04T18:54:45.4697863Z [36mINFO[0m[0079] Taking snapshot of files...                  
+2023-08-04T18:54:45.4702726Z [36mINFO[0m[0079] RUN chmod +x /usr/bin/startup.sh     && chown -R $USERNAME:$UID /actions-runner 
+2023-08-04T18:54:45.4703177Z [36mINFO[0m[0079] Cmd: /bin/bash                               
+2023-08-04T18:54:45.4703675Z [36mINFO[0m[0079] Args: [-o pipefail -c chmod +x /usr/bin/startup.sh     && chown -R $USERNAME:$UID /actions-runner] 
+2023-08-04T18:54:45.4704698Z [36mINFO[0m[0079] Running: [/bin/bash -o pipefail -c chmod +x /usr/bin/startup.sh     && chown -R $USERNAME:$UID /actions-runner] 
+2023-08-04T18:54:45.5442035Z [36mINFO[0m[0079] Taking snapshot of full filesystem...        
+2023-08-04T18:54:57.3667213Z [36mINFO[0m[0091] USER $USERNAME                               
+2023-08-04T18:54:57.3669118Z [36mINFO[0m[0091] Cmd: USER                                    
+2023-08-04T18:54:57.3670771Z [36mINFO[0m[0091] CMD ["startup.sh"]                           
+2023-08-04T18:54:57.3711013Z [36mINFO[0m[0091] Pushing image to ghcr.io/some-natalie/kubernoodles/kaniko-build:test 
+2023-08-04T18:59:51.6300831Z [36mINFO[0m[0385] Pushed ghcr.io/some-natalie/kubernoodles/kaniko-build@sha256:ddce90cbb0093b32641de1048b275034ec5ee0e3fae70443f60d80baeda7f787 
+2023-08-04T18:59:51.6718808Z ##[group]Run '/home/runner/k8s/index.js'
+2023-08-04T18:59:51.6719930Z shell: /home/runner/externals/node16/bin/node {0}
+2023-08-04T18:59:51.6720139Z ##[endgroup]
+2023-08-04T18:59:52.0984495Z Cleaning up orphan processes

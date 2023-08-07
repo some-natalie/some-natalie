@@ -15,14 +15,16 @@ Here's what has been done and where we're going.
 - [Part 3](../blog/kubernoodles-pt-3) - Dive into understanding what's really being run in our self-hosted GitHub Actions runners with [tetragon](https://github.com/cilium/tetragon).
 - [Part 4](../blog/kubernoodles-pt-4) - Setup the Kubernetes cluster, GitHub, and actions-runner-controller to work together, then make a GitHub Actions workflow to create and remove test deployments from a Helm chart.
 - [Part 5](../blog/kubernoodles-pt-5) - How to build your own custom images for actions-runner-controller!
+- [Part 6](../blog/kaniko-in-arc) - Using [Kaniko](https://github.com/GoogleContainerTools/kaniko) in actions-runner-controller to build containers without privileged pods.
 
 Coming soon:
 
-- Automating the builds and testing of custom runner images
+- Automating the builds of custom runner images
+- Writing tests for your custom runner images
+- Rebuilding and releasing custom runners on a schedule
 - Log streaming
 - Private registries
 - File caching
-- k8s jobs
 
 > My environment uses Azure services.  They're currently "free" for me and I'll try to call out using vanilla k8s as much as possible for portability.
 {: .prompt-info }

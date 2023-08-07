@@ -1,0 +1,170 @@
+$ kubectl describe pod -n "test-runners" kaniko-worker-n6bfm-runner
+Name:             kaniko-worker-n6bfm-runner-rfjhx
+Namespace:        test-runners
+Priority:         0
+Service Account:  kaniko-worker-gha-runner-scale-set-kube-mode-service-account
+Node:             aks-agentpool-19384760-vmss000005
+Start Time:       Mon, 07 Aug 2023 08:46:43 -0600
+Labels:           actions-ephemeral-runner=True
+                  actions.github.com/organization=some-natalie
+                  actions.github.com/repository=kubernoodles
+                  actions.github.com/scale-set-name=kaniko-worker
+                  actions.github.com/scale-set-namespace=test-runners
+                  app.kubernetes.io/component=runner
+                  app.kubernetes.io/part-of=gha-runner-scale-set
+                  app.kubernetes.io/version=0.4.0
+                  pod-template-hash=b9c87b59c
+Annotations:      actions.github.com/runner-group-name: Default
+Status:           Running
+IP:               10.244.1.24
+IPs:
+  IP:           10.244.1.24
+Controlled By:  EphemeralRunner/kaniko-worker-n6bfm-runner-rfjhx
+Init Containers:
+  kube-init:
+    Container ID:  docker://460f4de893826f9c53fceb5901c51d9a2fad779357b0647ea59dfdc28dd9c95f
+    Image:         ghcr.io/actions/actions-runner:latest
+    Image ID:      docker-pullable://ghcr.io/actions/actions-runner@sha256:5703960b0e91cb0101e69aab55ee9e9fbd4a870adcdf906f63c3fff2342cccc4
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sudo
+      chown
+      -R
+      runner:runner
+      /home/runner/_work
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 07 Aug 2023 08:46:44 -0600
+      Finished:     Mon, 07 Aug 2023 08:46:44 -0600
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /home/runner/_work from work (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-sqvxh (ro)
+Containers:
+  runner:
+    Container ID:  docker://7ca9938d159d6d0c54f6c282696298af797679ae5f2cb2b03c4ece20456ada6e
+    Image:         ghcr.io/actions/actions-runner:latest
+    Image ID:      docker-pullable://ghcr.io/actions/actions-runner@sha256:5703960b0e91cb0101e69aab55ee9e9fbd4a870adcdf906f63c3fff2342cccc4
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /home/runner/run.sh
+    State:          Running
+      Started:      Mon, 07 Aug 2023 08:46:45 -0600
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      ACTIONS_RUNNER_CONTAINER_HOOKS:          /home/runner/k8s/index.js
+      ACTIONS_RUNNER_POD_NAME:                 kaniko-worker-n6bfm-runner-rfjhx (v1:metadata.name)
+      ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER:    false
+      ACTIONS_RUNNER_INPUT_JITCONFIG:          <set to the key 'jitToken' in secret 'kaniko-worker-n6bfm-runner-rfjhx'>  Optional: false
+      GITHUB_ACTIONS_RUNNER_EXTRA_USER_AGENT:  actions-runner-controller/0.4.0
+    Mounts:
+      /home/runner/_work from work (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-sqvxh (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  work:
+    Type:          EphemeralVolume (an inline specification for a volume that gets created and deleted with the pod)
+    StorageClass:  standard
+    Volume:
+    Labels:            <none>
+    Annotations:       <none>
+    Capacity:
+    Access Modes:
+    VolumeMode:    Filesystem
+  kube-api-access-sqvxh:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age    From               Message
+  ----     ------            ----   ----               -------
+  Warning  FailedScheduling  7m13s  default-scheduler  0/1 nodes are available: waiting for ephemeral volume controller to create the persistentvolumeclaim "kaniko-worker-n6bfm-runner-rfjhx-work". preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod..
+  Normal   Scheduled         7m11s  default-scheduler  Successfully assigned test-runners/kaniko-worker-n6bfm-runner-rfjhx to aks-agentpool-19384760-vmss000005
+  Normal   Pulling           7m11s  kubelet            Pulling image "ghcr.io/actions/actions-runner:latest"
+  Normal   Pulled            7m10s  kubelet            Successfully pulled image "ghcr.io/actions/actions-runner:latest" in 656.677987ms (656.7359ms including waiting)
+  Normal   Created           7m10s  kubelet            Created container kube-init
+  Normal   Started           7m10s  kubelet            Started container kube-init
+  Normal   Pulling           7m10s  kubelet            Pulling image "ghcr.io/actions/actions-runner:latest"
+  Normal   Pulled            7m9s   kubelet            Successfully pulled image "ghcr.io/actions/actions-runner:latest" in 682.345156ms (682.404474ms including waiting)
+  Normal   Created           7m9s   kubelet            Created container runner
+  Normal   Started           7m9s   kubelet            Started container runner
+
+Name:             kaniko-worker-n6bfm-runner-rfjhx-workflow
+Namespace:        test-runners
+Priority:         0
+Service Account:  default
+Node:             aks-agentpool-19384760-vmss000005
+Start Time:       Mon, 07 Aug 2023 08:48:20 -0600
+Labels:           runner-pod=kaniko-worker-n6bfm-runner-rfjhx
+Annotations:      <none>
+Status:           Running
+IP:               10.244.1.25
+IPs:
+  IP:  10.244.1.25
+Containers:
+  job:
+    Container ID:  docker://1dea4c6307f5f836c82037d86631453ab84d9ad0c31321cdb605cd6d19b64b72
+    Image:         gcr.io/kaniko-project/executor:debug
+    Image ID:      docker-pullable://gcr.io/kaniko-project/executor@sha256:5e5214e7ec4a90569a2a660b1c7c3a9dafa8c22ede9a06851733cec5f42f4632
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      tail
+    Args:
+      -f
+      /dev/null
+    State:          Running
+      Started:      Mon, 07 Aug 2023 08:48:21 -0600
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /__e from work (rw,path="externals")
+      /__w from work (rw)
+      /github/home from work (rw,path="_temp/_github_home")
+      /github/workflow from work (rw,path="_temp/_github_workflow")
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-twxsj (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  work:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  kaniko-worker-n6bfm-runner-rfjhx-work
+    ReadOnly:   false
+  kube-api-access-twxsj:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason   Age    From     Message
+  ----    ------   ----   ----     -------
+  Normal  Pulled   5m33s  kubelet  Container image "gcr.io/kaniko-project/executor:debug" already present on machine
+  Normal  Created  5m33s  kubelet  Created container job
+  Normal  Started  5m33s  kubelet  Started container job

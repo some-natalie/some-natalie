@@ -1,7 +1,7 @@
 ---
-title: “Coffee cake”
+title: "Coffee cake"
 classes: wide
-excerpt: “Crumbly cinnamon coffee cake”
+excerpt: "Crumbly cinnamon coffee cake"
 ---
 
 > Crumbly cinnamon coffee cake

@@ -1,7 +1,7 @@
 ---
-title: “Granola”
+title: "Granola"
 classes: wide
-excerpt: “Slow-cooker granola”
+excerpt: "Slow-cooker granola"
 ---
 
 > It's the laziest granola mixes ever.  Throw it all in the slow cooker, stir, cook on low for a few hours, and cool to eat.  Leave the lid cracked!

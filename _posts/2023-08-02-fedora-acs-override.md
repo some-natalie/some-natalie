@@ -404,7 +404,7 @@ Let's shove the RPM build into a container to make this repeatable _and_ not on 
 
 ## Resources
 
-- Alex Williamson's blog on the VFIO tips and tricks, [IOMMU groups](http://vfio.blogspot.com/2014/08/iommu-groups-inside-and-out.html), and more - [link](https://vfio.blogspot.com/)
+- Alex Williamson's blog on the VFIO tips and tricks, [IOMMU groups](https://vfio.blogspot.com/2014/08/iommu-groups-inside-and-out.html), and more - [link](https://vfio.blogspot.com/)
 - Arch Linux wiki post on PCI passthrough -  [link](https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF)
 - Red Hat's documentation on IOMMU groups and virtualization - [link](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/app-iommu#doc-wrapper)
 - Linux kernel documentation on VFIO - [link](https://docs.kernel.org/driver-api/vfio.html)

@@ -9,7 +9,7 @@ classes: wide
 excerpt: "The git aliases and shortcuts that I use daily (and why)"
 ---
 
-Even though [git](http://git-scm.com/) is one of the most common software programs used in development, I'm continually impressed both at how customizable it is and how often it isn't customized at all!  There are several ways to change how git behaves, with one of the most common being [git aliases](https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases).  These are saved in your [git configuration file](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration) (usually `~/.gitconfig`), and added under the `[alias]` heading.  Here's mine [in full](https://github.com/some-natalie/dotfiles/blob/main/git/.gitconfig) as an example.
+Even though [git](https://git-scm.com/) is one of the most common software programs used in development, I'm continually impressed both at how customizable it is and how often it isn't customized at all!  There are several ways to change how git behaves, with one of the most common being [git aliases](https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases).  These are saved in your [git configuration file](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration) (usually `~/.gitconfig`), and added under the `[alias]` heading.  Here's mine [in full](https://github.com/some-natalie/dotfiles/blob/main/git/.gitconfig) as an example.
 
 After spending quite a few years working with git on a daily basis, I've found or written a few of my own that make life easier.
 
@@ -55,12 +55,12 @@ This alias resets the HEAD to the last commit, allowing you to go back in time b
 
 ## Make up a commit message
 
-Writing commit messages is hard.  Writing _meaningful_ commit messages is [even harder](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/).  When I need a "just make one up" message, I'll use one of the two below.  It stages everything and commits with either a bland message or a random smart-ass comment from [whatthecommit.com](http://whatthecommit.com).
+Writing commit messages is hard.  Writing _meaningful_ commit messages is [even harder](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/).  When I need a "just make one up" message, I'll use one of the two below.  It stages everything and commits with either a bland message or a random smart-ass comment from [whatthecommit.com](https://whatthecommit.com).
 
 ```config
 [alias]
   comet = commit -am "try this"
-  yolo = commit -am "`curl -s http://whatthecommit.com/index.txt`"
+  yolo = commit -am "`curl -s https://whatthecommit.com/index.txt`"
 ```
 
 > This is bordering on heresy for some, but I strongly believe that individual commits should _never_ be important, only pull requests.  Meaningful discussion about a set of code changes, reviews, tests, etc., should not happen while you're iterating over the "does it work" stage.  It should happen _before_ development begins (in an [ADR](https://adr.github.io/) document or [issue](https://docs.github.com/en/issues)) and again once the changes are actually being proposed (usually in a [pull request](https://docs.github.com/en/pull-requests)).

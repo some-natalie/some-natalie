@@ -80,3 +80,14 @@ Equal parts, ground with a mortar and pestle, of
 - 0.5 teaspoon allspice
 
 Also goes well as a simple syrup or sugar blend for topping baked stuff or coffee
+
+### Prime rib rub
+
+- 1 tablespoon black peppercorns, coarsely ground
+- 1 tablespoon green peppercorns, coarsely ground
+- 1 tablespoon pink peppercorns, coarsely ground
+- 1 tablespoons dried celery seeds
+- 2 tablespoons dried garlic powder
+- 1 tablespoon crushed and dried rosemary
+
+Rub the prime rib with a bunch of kosher salt, then add this on before putting in the sous vide bag. Alternatively, also use an egg white or two before roasting in the oven.

@@ -1,10 +1,10 @@
 ---
 title: "Grasshopper cheesecake"
 classes: wide
-excerpt: "Grasshopper cheesecake - creme de menthe and cocoa cheesecake in a chocolate cookie crust"
+excerpt: "Creme de menthe and cocoa cheesecake in a chocolate cookie crust"
 ---
 
-> Grasshopper cheesecake - creme de menthe and cocoa cheesecake in a chocolate cookie crust.
+> Creme de menthe and cocoa cheesecake in a chocolate cookie crust.
 
 ## Ingredients
 

@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Easy breakfast gravy"
 ---
 
-> Easy breakfast gravy, serve over [buttermilk biscuits](../recipes/buttermilk-biscuits)
+> Easy breakfast gravy, serve over [buttermilk biscuits](../buttermilk-biscuits)
 
 ## Ingredients
 

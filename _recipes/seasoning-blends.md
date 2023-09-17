@@ -91,3 +91,14 @@ Also goes well as a simple syrup or sugar blend for topping baked stuff or coffe
 - 1 tablespoon crushed and dried rosemary
 
 Rub the prime rib with a bunch of kosher salt, then add this on before putting in the sous vide bag. Alternatively, also use an egg white or two before roasting in the oven.
+
+### Fried chicken
+
+- 1.5 tsp ground red pepper
+- 1.5 tsp ground chipotle chile pepper
+- 1.5 tsp garlic powder
+- 1.5 tsp dried crushed red pepper
+- 1.5 tsp ground black pepper
+- 0.75 tsp salt
+- 0.5 tsp paprika
+ 

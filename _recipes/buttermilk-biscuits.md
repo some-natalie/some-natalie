@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Fast whole-grain drop biscuits"
 ---
 
-> Fast whole-grain drop biscuits.  Pair with [sausage gravy](../recipes/sausage-gravy) for breakfast 🤤
+> Fast whole-grain drop biscuits.  Pair with [sausage gravy](../sausage-gravy) for breakfast 🤤
 
 ## Ingredients
 

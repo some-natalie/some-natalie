@@ -39,21 +39,21 @@ This is all completely opinionated - just wanted to write down the combination t
 
 | Cut | Temp | Time | Notes |
 | --- | --- | --- | --- |
-| Bacon | 145°F / 63°C | 24 ±12 hours | finish on skillet |
+| Bacon | 145°F / 63°C | 24 ± 12 hours | finish on skillet |
 | Beef brisket | 155°F / 68°C | 30 hours | add 1-2 drops liquid smoke, a pinch of [pink curing salt](https://en.wikipedia.org/wiki/Curing_salt)<br>finish in oven at 300 °F / 149 °C for 1-2 hours for bark |
 | Beef prime rib | 132°F / 55°C | 6 hours | finish in oven at 425 °F / 218 °C for 10-15 minutes before serving |
 | Beef steak (most cuts) | 129°F / 54°C | 2-4 hours | sear before serving |
-| Beef tri-tip roast | 134°F / 57°C | 2 ±2 hours | sear before serving |
+| Beef tri-tip roast | 134°F / 57°C | 2 ± 2 hours | sear before serving |
 | Burgers | 124°F / 51°C | 1.5-2 hours | finish on pan or grill |
 | Dulce de Leche | 185°F / 85°C | 12 hours | 1 can sweetened condensed milk, that's it! |
 | Egg bites | 172°F / 78°C | 1 hour | - 6 eggs<br>- 0.25 cup cream cheese<br>- 0.5 cup cheese<br>- other mix ins | 
-| Poached pears or apples | 176°F / 80°C | 1 hour | - 2 cups white wine<br>- 2 cups water<br>- 1 cup maple syrup<br>- 1 cup sugar<br>- 4 pears or apples |
-| Salmon | 120°F / 49°C | 45 ±15 minutes, based on thickness | add fat and some aromatics to bag |
+| Poached pears or apples | 176°F / 80°C | 1 hour | - 2 cups white wine<br>- 2 cups water<br>- 1 cup maple syrup<br>- 4 pears or apples |
+| Salmon | 120°F / 49°C | 45 ± 15 minutes<br>based on thickness | add fat and some aromatics to bag |
 | Toasted cream | 180°F / 82°C | 24 hours | add pinch of baking soda per pint for browning |
 
 ## Stand mixer speed chart
 
-KitchenAid mixer speed to attachment chart.  I lost the manuals to these years ago.
+Recommended stand mixer speed for each attachment.  I lost the manuals to these years ago.
 
 ### Pasta rolling set	
 

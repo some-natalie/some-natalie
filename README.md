@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Raspberry Pi desktops for little kids](https://some-natalie.dev/blog/kiddo-pi):  Little kid computers, made a teeny tiny bit easier with some automation
 1. [Using Kaniko in Actions-Runner-Controller](https://some-natalie.dev/blog/kaniko-in-arc):  (Kubernoodles, part 6 of ?) - Building containers without Docker-in-Docker or privileged pods with Kaniko
 1. [Building the Linux kernel for dedicated hardware VMs](https://some-natalie.dev/blog/fedora-acs-override):  Making white-box GPU compute multi-tenant using the Access Control Services override patch in Linux - or run Windows video games without suffering from dual booting
-1. [Please stop saying 'Just use Firecracker' - do this instead](https://some-natalie.dev/blog/stop-saying-just-use-firecracker):  Using things for what they're meant for empowers teams at scale - and also, how to avoid death by a thousand cuts along the path of shoving VMs into systems designed for containers.
 <!-- END_SECTION:latest_posts -->
 
 ### :briefcase: I work a lot with

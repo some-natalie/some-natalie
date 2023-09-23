@@ -1,0 +1,52 @@
+name: 🍋 Update Raspberry Pi firmware
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "which Raspberry Pi to run firmware updates"
+        required: true
+        type: choice
+        options:
+          - kid-pi-1
+          - kid-pi-2
+          - pihole
+
+jobs:
+  updates:
+    name: Update the firmware and reboot the VM
+    runs-on: ${{ github.event.inputs.target }}
+    steps:
+      - name: Update the apt cache
+        shell: bash
+        run: |
+          sudo rpi-update -y
+      - name: Reboot
+        shell: bash
+        run: sudo shutdown -r +1 "Rebooting ... brb"
+
+  wait:
+    name: wait 5 minutes
+    runs-on: ubuntu-latest
+    needs: [updates]
+    steps:
+      - name: sleep 300
+        shell: bash
+        run: sleep 300
+
+  healthcheck:
+    name: Verify everything is back up and online
+    runs-on: ${{ github.event.inputs.target }}
+    needs: [wait]
+    steps:
+      - name: Verify we're back online and have rebooted less than 10 minutes ago
+        shell: bash
+        run: |
+          secs="$(awk '{print $1}' /proc/uptime | sed 's/\.[^\.]*$//')"
+          if [ "$secs" -lt 600 ]; then
+            echo "System rebooted less than 10 minutes ago"
+            exit 0
+          else
+            echo "System rebooted more than 10 minutes ago"
+            exit 1
+          fi

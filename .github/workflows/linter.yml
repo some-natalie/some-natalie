@@ -1,4 +1,4 @@
-name: Lint Code Base
+name: 🧼 Lint code
 
 on:
   pull_request:

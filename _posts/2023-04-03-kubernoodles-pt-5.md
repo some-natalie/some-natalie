@@ -64,7 +64,7 @@ What we really want to be able to do is have these "fat containers" be treated a
 Here's our code snippet with the base image for this example.
 
 ```Dockerfile
-FROM registry.access.redhat.com/ubi8/ubi-init:8.7
+FROM registry.access.redhat.com/ubi8/ubi-init:8.8
 ```
 
 ## Labels are the best
@@ -99,7 +99,7 @@ The first two arguments go into installing [actions/runner](https://github.com/a
 # Arguments
 ARG TARGETPLATFORM=linux/amd64
 ARG RUNNER_VERSION=2.303.0
-ARG RUNNER_CONTAINER_HOOKS_VERSION=0.3.1
+ARG RUNNER_CONTAINER_HOOKS_VERSION=0.4.0
 ```
 
 I like to bundle any other similar arguments together here too, such as versions of other software to include.  Keeping it together means I don't hunt through long Dockerfiles to update it - I want my "future me" to like "present me" as much as possible.
@@ -294,7 +294,7 @@ helm install ubi8 \
   --namespace "runners" \
   -f local-private-ubi8.yml \
   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-  --version 0.3.0
+  --version 0.6.1
 ```
 
 Now check that the single pod is up and listening.

@@ -113,12 +113,13 @@ And apply it!
 $ helm install kaniko-worker \
     --namespace "test-runners" \
     -f helm-kaniko.yml \
-    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-se
+    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
+    --version 0.6.1
 
-Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.4.0
-Digest: sha256:594b49b2f45c81c9d1db1937f3a255eccddb386f60ced72dcc5cff7633361657
+Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.6.1
+Digest: sha256:d0a4e067e15a2c616c6c2d049e98d9dc8e8aadb11ac6625cd01ee3ca30db8caa
 NAME: kaniko-worker
-LAST DEPLOYED: Fri Aug  4 15:55:17 2023
+LAST DEPLOYED: Fri Sep 29 12:01:00 2023
 NAMESPACE: test-runners
 STATUS: deployed
 REVISION: 1

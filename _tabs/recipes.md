@@ -29,8 +29,8 @@ Time and temp combinations that work well.
 
 | What | Temp | Time | Notes |
 | --- | --- | --- | --- |
-| Bacon | 400°F | 30 mins | finish on skillet |
-| Brussel sprouts | 400°F | 20-30 mins | start on skillet, flip all halves down |
+| Bacon | 400°F | 30 mins | fridge, warm on skillet |
+| Brussel sprouts | 500°F | 20 mins | start on skillet, flip all halves down |
 | Smashed potatoes | 450°F | 30 mins | boil first, use thin tray in oven |
 | Any crock pot "low" meal | 225°F | same as recipe | crack lid for evaporation, stir sometimes |
 
@@ -57,6 +57,7 @@ This is all completely opinionated - just wanted to write down the combination t
 | Dulce de Leche | 185°F / 85°C | 12 hours | 1 can sweetened condensed milk, that's it! |
 | Egg bites | 172°F / 78°C | 1 hour | - 6 eggs<br>- 0.25 cup cream cheese<br>- 0.5 cup cheese<br>- other mix ins | 
 | Poached pears or apples | 176°F / 80°C | 1 hour | - 2 cups white wine<br>- 2 cups water<br>- 1 cup maple syrup<br>- 4 pears or apples |
+| Pork shoulder | 185°F / 85°C | 12 ± 4 hours | shred, broil for 5-10 minutes at end |
 | Salmon | 120°F / 49°C | 45 ± 15 minutes<br>based on thickness | add fat and some aromatics to bag |
 | Toasted cream | 180°F / 82°C | 24 hours | add pinch of baking soda per pint for browning |
 

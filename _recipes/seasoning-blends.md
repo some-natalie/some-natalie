@@ -101,4 +101,13 @@ Rub the prime rib with a bunch of kosher salt, then add this on before putting i
 - 1.5 tsp ground black pepper
 - 0.75 tsp salt
 - 0.5 tsp paprika
- 
+
+### Wild rice
+
+- 1 tsp marjoram
+- 1 tsp chives
+- 0.5 tsp thyme
+- 0.5 tsp savory
+- black pepper and salt, to taste
+
+Use with strong broth (vegetable or chicken) and a flavorful fat (butter, extra virgin olive oil, rendered animal fat) for wild rice pilaf.

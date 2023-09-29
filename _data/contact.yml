@@ -9,11 +9,15 @@
 
 - type: linkedin
   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
-  url:  'https://linkedin.com/in/nsomersall'                  # Fill with your Linkedin homepage
+  url:  'https://linkedin.com/in/nsomersall'
+
+- type: mastodon
+  icon: 'fab fa-mastodon' 
+  url:  'https://infosec.exchange/@some_natalie'
 
 - type: sessionize
   icon: 'fas fa-microphone'
-  url:  'https://sessionize.com/some-natalie/'                  # Fill with your Sessionize homepage
+  url:  'https://sessionize.com/some-natalie/'
 
 - type: rss
   icon: "fas fa-rss"

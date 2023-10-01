@@ -4,7 +4,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
-1. [Building RPMs in Containers](https://some-natalie.dev/blog/container-bulid-rpms):  Building RPM files in containers because version-controlled build environments are amazing!
+1. [Building RPMs in containers](https://some-natalie.dev/blog/container-bulid-rpms):  Building RPM files in containers because version-controlled build environments are amazing!
 1. [Raspberry Pi desktops for little kids](https://some-natalie.dev/blog/kiddo-pi):  Little kid computers, made a teeny tiny bit easier with some automation
 1. [Using Kaniko in Actions-Runner-Controller](https://some-natalie.dev/blog/kaniko-in-arc):  (Kubernoodles, part 6 of ?) - Building containers without Docker-in-Docker or privileged pods with Kaniko
 <!-- END_SECTION:latest_posts -->

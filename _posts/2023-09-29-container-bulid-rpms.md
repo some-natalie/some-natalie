@@ -1,5 +1,5 @@
 ---
-title: "Building RPMs in Containers"
+title: "Building RPMs in containers"
 date: 2023-09-29
 classes: wide
 excerpt: "Building RPM files in containers because version-controlled build environments are amazing!"

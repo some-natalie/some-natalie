@@ -1,5 +1,5 @@
 ---
-title: "Revisiting the Cost of Waiting on Builds"
+title: "Revisiting the cost of waiting on builds"
 date: 2023-07-07
 categories:
   - blog

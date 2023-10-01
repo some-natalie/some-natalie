@@ -54,4 +54,19 @@ jobs:
             echo "System rebooted more than 10 minutes ago"
             exit 1
           fi
+
+  create-failure-issue:
+    name: Create an issue on failure of any step to investigate
+    runs-on: ubuntu-latest # use GitHub hosted runners
+    if: ${{ failure() }}
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Create failure issue
+        shell: bash
+        run: |
+          gh issue create -R some-natalie/some-natalie \
+            --title "Update on pihole failed" \
+            --body "Please investigate!"
  

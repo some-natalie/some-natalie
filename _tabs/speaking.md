@@ -8,6 +8,8 @@ Natalie is a senior solutions engineer at GitHub serving the public sector marke
 
 She's passionate about diversity in technology and empowering engineers to build better.
 
+🎤 [Sessionize profile](https://sessionize.com/some-natalie/)
+
 ---
 
 ## 2023

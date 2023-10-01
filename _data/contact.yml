@@ -15,9 +15,9 @@
   icon: 'fab fa-mastodon' 
   url:  'https://infosec.exchange/@some_natalie'
 
-- type: sessionize
-  icon: 'fas fa-microphone'
-  url:  'https://sessionize.com/some-natalie/'
+# - type: sessionize
+#   icon: 'fas fa-microphone'
+#   url:  'https://sessionize.com/some-natalie/'
 
 - type: rss
   icon: "fas fa-rss"

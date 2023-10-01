@@ -10,18 +10,26 @@ This is not a food blog.  I don't want to be a food blogger.
 
 I would like to make some family recipes publicly accessible without vendor lock-in or asking friends and family to make yet another account on a random "recipe keeper" service.  It’s hard to do better than markdown and a git repo for platform neutrality, so this is as good of a place as any.
 
+- [Marinades](../recipes/marinades)
 - [Seasoning blends](../recipes/seasoning-blends)
 - [Salad dressings](#salad-dressings)
 - [Baking time chart](#baking-time-chart)
 - [Sous vide time chart](#sous-vide-time-chart)
 - [Stand mixer attachments](#stand-mixer-speed-chart)
- 
 
 ## Recipe list
 
 {% assign sorted = site.recipes | sort: 'title' %}
-{% for recipe in sorted %}
-- [{{ recipe.title }}]({{ recipe.url | relative_url }}) - {{ recipe.excerpt }}{% endfor %}
+{% for recipe in sorted %}{% unless recipe.omit == true %}- [{{ recipe.title }}]({{ recipe.url | relative_url }}) - {{ recipe.excerpt }}
+{% endunless %}{% endfor %}
+
+## Salad dressings
+
+| Name | Ratios |
+| --- | --- |
+| Jam | - 2 tbsp jam<br>- 0.25 cup acid<br>- 0.5 cup fat<br>-herbs, to taste |
+| Buttermilk | - 0.5 cup buttermilk<br>- 0.25 cup acid<br>- 2 tsp honey<br>- 0.25 cup fresh herbs<br>- salt, pepper, dried herbs to taste |
+| Maple | - 0.25 cup maple syrup<br>- 3 tbsp apple cider vinegar<br>- 2 tbsp olive oil<br>- 2 tsp poppy seeds<br>- 2 shallots, minced<br>- 2 tsp Dijon |
 
 ## Baking time chart
 
@@ -33,14 +41,6 @@ Time and temp combinations that work well.
 | Brussel sprouts | 500°F | 20 mins | start on skillet, flip all halves down |
 | Smashed potatoes | 450°F | 30 mins | boil first, use thin tray in oven |
 | Any crock pot "low" meal | 225°F | same as recipe | crack lid for evaporation, stir sometimes |
-
-## Salad dressings
-
-| Name | Ratios |
-| --- | --- |
-| Jam | - 2 tbsp jam<br>- 0.25 cup acid<br>- 0.5 cup fat<br>-herbs, to taste |
-| Buttermilk | - 0.5 cup buttermilk<br>- 0.25 cup acid<br>- 2 tsp honey<br>- 0.25 cup fresh herbs<br>- salt, pepper, dried herbs to taste |
-| Maple | - 0.25 cup maple syrup<br>- 3 tbsp apple cider vinegar<br>- 2 tbsp olive oil<br>- 2 tsp poppy seeds<br>- 2 shallots, minced<br>- 2 tsp Dijon |
 
 ## Sous vide time chart
 

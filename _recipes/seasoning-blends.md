@@ -2,6 +2,7 @@
 title: "Seasoning blends"
 classes: wide
 excerpt: "All the seasoning blends in one note."
+omit: true
 ---
 
 > Flavor your stuff.  WIP as I add more here ... 😊
@@ -111,3 +112,15 @@ Rub the prime rib with a bunch of kosher salt, then add this on before putting i
 - black pepper and salt, to taste
 
 Use with strong broth (vegetable or chicken) and a flavorful fat (butter, extra virgin olive oil, rendered animal fat) for wild rice pilaf.
+
+### BBQ pulled pork
+
+- 4 tbsp dark brown sugar
+- 1 tbsp paprika
+- 2 tsp table salt (double for Kosher salt) 
+- 1 tsp ground coriander
+- 1 tsp ground cumin
+- 1 tsp freshly ground black pepper
+- 0.5 tsp ground fennel seed 
+- 0.25 tsp ground chipotle chili pepper, optional
+ 

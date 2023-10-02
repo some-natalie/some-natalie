@@ -9,12 +9,12 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 1. [Using Kaniko in Actions-Runner-Controller](https://some-natalie.dev/blog/kaniko-in-arc):  (Kubernoodles, part 6 of ?) - Building containers without Docker-in-Docker or privileged pods with Kaniko
 <!-- END_SECTION:latest_posts -->
 
-### :briefcase: I work a lot with
+### :briefcase: Day to day, I work with
 
 - **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql)
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
-- **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles)
-- **Python** - [advanced security CSV export](https://github.com/advanced-security/ghas-to-csv)
+- **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles), self-hosted GitHub Actions runners made for humans
+- **Python** - [Advanced Security CSV export](https://github.com/advanced-security/ghas-to-csv)
 - **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6)
 - but mostly, I work with people on all of the above! 💖
 
@@ -39,3 +39,4 @@ I have an awesome life outside of tech, so while I have a few projects that I en
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).
+- 💬 Want to chat?  I'm on [Mastodon](https://infosec.exchange/@some-natalie).

@@ -17,7 +17,7 @@ For this little experiment, I used my own personal project - I compile the Linux
 
 The project builds the Linux kernel RPM packages for Fedora 35 and 36 using Docker.  Since GitHub's hosted runners are all Ubuntu, using the Fedora container image to build its' own software provides a better experience than trying to build RPMs in a Debian-based system.  To make the calculations a bit easier, I took the average of these two builds per compute tier.
 
-### Waiting on the build to finish
+## Waiting on the build to finish
 
 Let's assume you have developers waiting on this build to complete.  The assumption is that developers are waiting for the entire time the build runs.  The hourly cost of a developer is assumed to be $75 (USD), or approximately $150,000 per year (including fringe benefits, taxes, etc).  This seemed to be roughly reasonable using StackOverflow's [developer survey](https://insights.stackoverflow.com/survey/2021#salary-comp-total-usa) for 2021.  If you check out the spreadsheet, you can edit this appropriately.
 
@@ -36,7 +36,7 @@ Plotted out, it makes a pretty compelling case for spending a bit on better hard
 
 ![build-cost-1](/assets/graphics/2022-10-03-build-cost-1.png)
 
-### Task switching
+## Task switching
 
 Now let's change the assumption that the developers are changing tasks instead of waiting on the build to finish.  Context switching has a cost too ([source](https://www.joelonsoftware.com/2001/02/12/human-task-switches-considered-harmful/)).  Play around with the spreadsheet to come up with some reasonable assumptions, but based on my own experience, switching from one focused task to another takes at least an hour so that's what I used to run the numbers again.
 
@@ -51,7 +51,7 @@ Now let's change the assumption that the developers are changing tasks instead o
 
 The numbers tell a different story here - if you're going to switch tasks anyways, the speed of execution doesn't matter significantly.  Labor is so much more expensive than compute that saving a few dollars speeding up the build is inconsequential.
 
-### Conclusion
+## Conclusion
 
 The cheapest (and from experience, least frustrating) option is to speed up the build substantially and keep the team on track.  In this case, spending an extra $4-5 on build compute saves about $40 per build for an individual developer, or a little over $200 per build for a team of 5.  Seems like a good investment to build on faster hardware.
 
@@ -59,6 +59,8 @@ The cheapest (and from experience, least frustrating) option is to speed up the 
 
 [Part 3 of 3](https://some-natalie.dev/blog/waiting-on-builds-pt-3/) - do we build it or do we buy it?
 
-#### Disclosure
+---
+
+## Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.

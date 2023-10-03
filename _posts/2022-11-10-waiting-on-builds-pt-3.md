@@ -28,7 +28,7 @@ Instead, we're going to look at some of the themes I've seen in building, using,
 
 ⏱️ ... And my 5 minutes are up.  That's a lot of costs and design considerations to keep in mind.
 
-### Milton Friedman's Pencil
+## Milton Friedman's Pencil
 
 In 1980, economist Milton Friedman hosted a 10-hour PBS series based on his most recently published book, but the most well-known tidbit was about how a pencil promotes world peace - no single person has the skill and materials to make a pencil and through specialization and cooperation, a pencil is trivially inexpensive and of predictable usability[^1].  There's a decent analogy here to continuous integration as it starts and scales in a company.  No single one of the design considerations outlined above are insurmountable, but it's a lot of in-depth knowledge needed to be both good quality and economical.
 
@@ -39,7 +39,7 @@ There's tremendous value in knowing how _everything_ listed above works.  This i
 ![uphill-both-ways](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/uphill-both-ways.gif)
 _not how I intended to sound but I learned a lot going uphill both ways ..._
 
-### What makes you money?
+## What makes you money?
 
 It might be more economical for your team to own and operate their own continuous integration compute (or any compute for that matter).  You also might _have_ to do this anyways for any number of other perfectly valid reasons - like needing specific hardware or to meet regulatory requirements that cannot be met otherwise.  Having been through this discussion in different roles at varying scales, here's a couple things that seem to be overlooked quite a lot.
 
@@ -49,13 +49,13 @@ Next is that there's a hard-to-quantify economic value in delaying decisions on 
 
 To paraphrase [Dan McKinley](https://mcfunley.com/choose-boring-technology), each company gets a fixed number of "innovation tokens" to do cool stuff.  A build system is just like every other architecture decision the team faces.  Is a build system boring to your team or is this system something your company wants/needs to invest one of its' precious innovation tokens[^4] on?
 
-#### Disclosure
+---
+
+## Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.
 
----
-
-#### Footnotes
+## Footnotes
 
 [^1]: Milton Friedman's pencil clip on [YouTube](https://www.youtube.com/watch?v=R5Gppi-O3a8), based on Leonard Read's "I, Pencil" poem ([link](https://www.econlib.org/library/Essays/rdPncl1.html)), and some good critique of the theory by Tim Hartford ([link](https://www.bbc.com/news/business-48383050)).  Probably lots more discussion on this than I could ever footnote, so spare me some pop economics and do a comprehensive academic search in as much depth as one desires.
 [^2]: That's also why this site is mostly written in [Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) and built/hosted on [GitHub Pages](https://docs.github.com/en/pages).  Markdown is routine for me and I'd like a reason to learn more about web things.

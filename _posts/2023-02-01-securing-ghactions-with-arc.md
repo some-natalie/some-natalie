@@ -17,7 +17,7 @@ GitHub Actions is one of the most popular CI tools in use today.  If you need or
 > 🎥 [YouTube video](https://www.youtube.com/watch?v=Ax4VPm2KrqQ) if watching a video is more your speed!
 {: .prompt-info}
 
-### Introduction
+## Introduction
 
 Self-hosted GitHub Actions runners and Kubernetes are a natural fit, but there's not a lot of guidance on how to put the two together. The leading solution is [actions-runner-controller](https://github.com/actions/actions-runner-controller), an open-source community project which provides a controller for autoscaling, ephemeral, and version-controlled compute. It does not, unfortunately, show off how to design and deploy it securely.
 
@@ -35,7 +35,7 @@ I'm sorry to disappoint if you jumped in here with the impossible expectations o
 
 My career experience leads me to a bias.  **Friction, the force of resistance to movement between two parties, is the leading cause of users, admins, and developers doing insecure things.**  Eliminating any friction where security concerns are involved will inherently lead to (proportionately) fewer insecure things.
 
-### Why would you ever self-host?
+## Why would you ever self-host?
 
 ![slide-06](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide6.png)
 
@@ -91,7 +91,7 @@ The next hard security challenge is the economic incentives that encourage poor 
 
 To understand why these challenges are a bit unique to using Actions within Kubernetes, let’s take a tiny detour into what GitHub Actions _really_ are.
 
-### A quick detour into GitHub Actions
+## A quick detour into GitHub Actions
 
 ![slide-10](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide10.png)
 
@@ -119,7 +119,7 @@ Lastly, Docker Actions run by building and running a container ... in a containe
 
 ⚠️ You're not just allowing the privileged execution of arbitrary user input in your Kubernetes cluster, right?! ⚠️
 
-### Cluster settings
+## Cluster settings
 
 ![slide-12](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide12.png)
 
@@ -193,7 +193,7 @@ In conclusion, there's no single _best_ path forward here, but lots of good guid
 
 The wide variety of possible needs means it's hard to provide specific guidance apart from the fact that it can be hard to co-tenant diverse continuous integration jobs in Kubernetes - so let's talk about how multi-tenancy works in actions-runner-controller!
 
-### Controller settings
+## Controller settings
 
 ![slide-19](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide19.png)
 
@@ -240,7 +240,7 @@ Sometimes, developer empowerment comes in the form of “no, and here’s how I�
 
 Since so much depends on it, let’s talk about designing and building your runner image(s) as a secure part of your software supply chain.
 
-### Pod images
+## Pod images
 
 ![slide-23](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide23.png)
 
@@ -331,7 +331,7 @@ Tagging images is a unique exception to common practice.  Several teams I've wor
 
 No matter what you choose, remember there is no hell quite like trying to fill out an incident report against `latest`.  The who/what/when is impossible to prove for what's going on where.  Does your pod get pulled every time or only if not present?  Did you scale to 0 or were there “older latest” pods hanging out that might get work? 😱 😭
 
-### Conclusions
+## Conclusions
 
 ![slide-30](/assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide30.png)
 
@@ -351,7 +351,7 @@ The bigger risk to the very foundation of your software supply chain isn’t tha
 
 ---
 
-### Footnotes
+## Footnotes
 
 [^1]: GitHub publishes a guide on security of Actions.  The section on self-hosted runners ([link](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#hardening-for-self-hosted-runners)) is very much worth reading several times over.
 

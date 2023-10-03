@@ -13,7 +13,7 @@ image: /assets/graphics/2022-11-21-cloud-native/slide-01.jpg
 
 This post is slides + commentary from a talk I gave at Cloud Native Colorado on November 21st, 2022 about some of the weird ways you can blow up your cluster and your sanity once continuous integration jobs are added into Kubernetes, lessons learned in how to avoid these problems, and why it's _still_ worth all the effort to containerize your build system ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2022-11-21_Cloud-Native-CO.pdf) as presented).  Kubernetes saves a ton of time and heartache maintaining a shared build infrastructure, but here's a few ways it's not your average application.
 
-### Introduction
+## Introduction
 
 ![slide-02](/assets/graphics/2022-11-21-cloud-native/slide-02.jpg)
 
@@ -51,7 +51,7 @@ Without routine maintenance and some supply chain management, most shared build 
 
 ---
 
-### Nested Virtualization
+## Nested Virtualization
 
 ![slide-06](/assets/graphics/2022-11-21-cloud-native/slide-06.jpg)
 
@@ -81,7 +81,7 @@ What's not in this picture is equally important - what's the network path for a 
 
 Then all the way back upwards to get back, for each and every packet.
 
-#### All about maximum packet size
+### All about maximum packet size
 
 ![slide-09](/assets/graphics/2022-11-21-cloud-native/slide-09.jpg)
 
@@ -132,7 +132,7 @@ The two decisions to make around audience size versus pod size - big pods or lot
 
 ---
 
-### Privileged Pods
+## Privileged Pods
 
 ![slide-15](/assets/graphics/2022-11-21-cloud-native/slide-15.jpg)
 
@@ -146,7 +146,7 @@ The first point is that a privileged pod does not always mean that a process has
 
 There's a decent amount of overlap in how these two concepts are used in practice, adding to the confusion.  To help mitigate potential escalations and untrusted workloads, it's helpful to keep [defense in depth](https://csrc.nist.gov/glossary/term/defense_in_depth) in mind, layering controls and allowing minimal permissions to prevent container escapes and other security incidents.
 
-#### How Linux handles permissions (in a nutshell)
+### How Linux handles permissions (in a nutshell)
 
 ![slide-17](/assets/graphics/2022-11-21-cloud-native/slide-17.jpg)
 
@@ -168,7 +168,7 @@ This isn't the end of the world, but our toolbox has changed compared to managin
 
 Let's talk through a couple common places this comes up.
 
-#### Docker-in-Docker
+### Docker-in-Docker
 
 ![slide-18](/assets/graphics/2022-11-21-cloud-native/slide-18.jpg)
 
@@ -208,7 +208,7 @@ A quick note - a pod that isn't run with `privileged` but has `CAP_SYS_ADMIN` is
 
 This does come up in some compilers and applications used in debugging, especially older applications.  Reconsider migrating them into containers or perhaps isolate these projects to another cluster.
 
-#### Just use Firecracker
+### Just use Firecracker
 
 ![slide-21](/assets/graphics/2022-11-21-cloud-native/slide-21.jpg)
 
@@ -246,7 +246,7 @@ If you want to scale VMs up and down using a cloud provider, it might be signifi
 
 ---
 
-### Ephemerality
+## Ephemerality
 
 ![slide-24](/assets/graphics/2022-11-21-cloud-native/slide-24.jpg)
 
@@ -268,7 +268,7 @@ Sometimes, a read-only cache that can be safely shared between pods isn't good e
 
 ---
 
-### Conclusion
+## Conclusion
 
 ![slide-27](/assets/graphics/2022-11-21-cloud-native/slide-27.jpg)
 
@@ -288,7 +288,7 @@ This is a bit of a counter-intuitive use of containers as VMs, despite my repeti
 
 ---
 
-### Resources
+## Resources
 
 These are the resources linked in the slides at the end of the full deck, as well as more I've added in writing this out.
 
@@ -307,7 +307,7 @@ Resources specific to GitHub Actions
 
 ---
 
-### Footnotes
+## Footnotes
 
 [^1]: 2022 Stack Overflow Survey, [link](https://survey.stackoverflow.co/2022/#salary-united-states)
 [^2]: David Kirkpatrick in "Now Every Company Is A Software Company", Forbes magazine, November 2011, [link](https://www.forbes.com/sites/techonomy/2011/11/30/now-every-company-is-a-software-company)

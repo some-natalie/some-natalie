@@ -166,7 +166,7 @@ This final step happened because I am too ~~lazy~~ busy to maintain my own local
 
 ---
 
-### Footnotes
+## Footnotes
 
 A much easier path, should I care to run my own infrastructure, would have been to use a Fedora/etc machine with the runner agent on it, then not bother with containers.  I don't want to run my own stuff at home in my free time. 😇
 

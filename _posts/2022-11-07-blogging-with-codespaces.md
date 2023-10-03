@@ -9,7 +9,7 @@ classes: wide
 excerpt: "Using devcontainers (and not developer tears) to manage dependencies for this site"
 ---
 
-### Inspiration
+## Inspiration
 
 I started this site for a few reasons:
 
@@ -19,7 +19,7 @@ I started this site for a few reasons:
 
 However, learning how to manage Ruby dependencies wasn't one of those reasons.
 
-### Getting Started
+## Getting Started
 
 This is a webpage hosted in [GitHub Pages](https://docs.github.com/en/pages) and built with [Jekyll](https://jekyllrb.com/) - there's _nothing_ special going on here.  The content is hosted in my [profile](https://github.com/some-natalie/some-natalie) repository[^2], but it could be literally any other repository.  There's tons of guides about setting up a custom domain, picking a theme for Jekyll, etc. - so I picked a theme to start with and installed Ruby on my laptop, then went to start installing my dependencies only to get this fun error:
 
@@ -33,7 +33,7 @@ It's important to have a fast feedback loop while learning - seeing the changes 
 
 Enter [GitHub Codespaces](https://github.com/features/codespaces) and custom [devcontainers](https://code.visualstudio.com/docs/devcontainers/containers).
 
-### Using Codespaces (the slightly harder way)
+## Using Codespaces (the slightly harder way)
 
 When a repository is opened in a Codespace without a pre-defined devcontainer, you'll get a default image that has tons of stuff in it.  It doesn't automatically install the dependencies and start my website though, so I had to remember the commands to do this every time I want to mess with it.  By adding a small `~/.devcontainer/devcontainer.json` file ([link](https://github.com/some-natalie/some-natalie/blob/main/.devcontainer/devcontainer.json)), I'm able to have all of this done for me in a smaller image that only contains Ruby and not the entire kitchen sink of other popular languages/frameworks.  The full file is below, with comments in-line:
 
@@ -71,13 +71,13 @@ When a repository is opened in a Codespace without a pre-defined devcontainer, y
 
 You should be able to copy/paste this file as a starting point for most basic Jekyll sites.  There's many more base images to use and layer together to fit your project's needs - the official list is in [this repository](https://github.com/devcontainers/images).  I created a multi-container application example [here](https://github.com/octodemo/webhook-demo/blob/main/.devcontainer/devcontainer.json) to show off more complicated features available in devcontainers ([documentation](https://code.visualstudio.com/docs/devcontainers/containers)).  As for this project, it's a relief to not have to mess with dependencies on my laptop every time I want to learn a little something new.
 
-#### Disclosure
+---
+
+## Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.
 
----
-
-#### Footnotes
+## Footnotes
 
 [^1]: Many thanks to [Keith](https://securing.dev) for pushing me out of my comfort zone here and sending me this piece by Troy Hunt - [Why online identities are a smart career move](https://www.troyhunt.com/why-online-identities-are-smart-career/), Sept 2009.
 [^2]: You can do this too!  More on profile repositories in [GitHub's documentation](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).

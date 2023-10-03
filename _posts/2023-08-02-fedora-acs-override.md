@@ -413,6 +413,8 @@ Let's shove the RPM build into a container to make this repeatable _and_ not on 
 
 I put this together based on my own machine at home because I knew I'd forget this process if I ever had to do it again.  There was a lot of reading of Bugzilla, StackOverflow, and a bunch of blogs/forums/mailing lists all over the internet.  Thanks to everyone who did something similar so I could cobble together something from all of them that **Works On My Machine**. ✅
 
+---
+
 ## Footnotes
 
 [^n]: The exact behavior and alternates available is determined by the driver for the hardware.

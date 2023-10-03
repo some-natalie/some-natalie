@@ -17,19 +17,20 @@ Adding social links to each other is easy from my blog’s theme ([link](https:/
 
 At a high level, all that was needed is a simple Python script and a GitHub Action to run it as needed - editing a section in the `README.md` file and committing/pushing it back to the same repository.
 
-### Updating my profile README
+## Updating my profile README
 
 The script in `~/.github/scripts/latest-posts.py` ([link](https://github.com/some-natalie/some-natalie/blob/main/.github/scripts/latest-posts.py)) is what makes everything happen.  It gets the latest information from all the posts and updates the README file between two comments.  There's a really nifty package called [`frontmatter`](https://pypi.org/project/python-frontmatter/) that reads and parses YAML front matter used in the posts.
 
 There's three functions that list the contents of the `~/_posts` directory, reads the metadata from the YAML in each file, then constructs the URL from the filename and custom domain.  Then it'll change the content between the `START` and `END` tags within the markdown file, leaving a link to the website (not the markdown file of the post) and the blurb of what the post is about for the latest three posts.
 
-### Now run the thing when needed
+## Now run the thing when needed
 
 The GitHub Actions workflow in `~/.github/workflows/update-readme.yml` ([link](https://github.com/some-natalie/some-natalie/blob/main/.github/workflows/update-readme.yml)) runs whenever a push to `main` changes any of the posts to commit and push back into the repository, making the new posts visible on my profile readme. 🎉
 
 Since the script is only looking at filenames, this step will fail with no changes to commit/push if a file is edited but not created.  A small Bash `if` condition helps out here, exiting with a status code of `0` if there’s only edits to existing files.  This tells Actions that it succeeded with no changes when that happens.
 
 {% raw %}
+
 ```shell
 if [[ `git status --porcelain --untracked-files=no` ]]; then
   # Changes
@@ -42,9 +43,10 @@ else
   exit 0
 fi
 ```
+
 {% endraw %}
 
-### Roll your own
+## Roll your own
 
 There’s a million profile readme generators that do way more intricate stuff.  Some take credentials to log in and scrape data to calculate neat statistics like your top languages, pull request / review activity, etc. for private repositories too.  Others generate beautiful _live!!!_ visualizations of that data.  They’re gorgeous and complicated and perhaps a bit slow, since you’re generating that information on demand - overkill for editing a simple text file when something changes, which is all I wanted to accomplish.
 
@@ -54,6 +56,6 @@ A quick change of the site's domain in the Python script should be all you'd nee
 
 ---
 
-### Footnotes
+## Footnotes
 
 [^1]: The way to find this out isn’t terrifically obvious, but since your profile repository has to be public for the README file to show up, you can use the built-in traffic insights for that repo at `https://github.com/<username>/<username>/graphs/traffic`.

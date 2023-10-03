@@ -143,6 +143,8 @@ This website is a free [GitHub Pages](https://docs.github.com/en/pages) site, bu
 
 I want to write about some of the neat stuff I build, problems to solve, and [establish a public history](https://www.troyhunt.com/why-online-identities-are-smart-career/) of being something approaching competent.  I'm still not wanting to dive deep into static website generation or other website stuff.
 
-### Disclosure
+---
+
+## Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.

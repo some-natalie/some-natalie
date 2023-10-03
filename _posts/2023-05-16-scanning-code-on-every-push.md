@@ -125,7 +125,7 @@ When a push to any branch would add a vulnerable dependency, here’s the outcom
 ![summary](/assets/graphics/2023-05-16-every-push/summary.png)
 _detailed summary [here](../../assets/graphics/2023-05-16-every-push/details.png) and [logs](../../assets/logs/dependency-review.txt)_
 
-### Other systems
+## Other systems
 
 I'm not sure, to be honest - there’s lots of other systems.  Here's some general advice:
 
@@ -134,6 +134,8 @@ I'm not sure, to be honest - there’s lots of other systems.  Here's some gener
 - Lots of small, short-lived iterations are better than long change cycles (for appsec and many other things)
 - Shifting left is nice and all, but be mindful that frequent interruptions become a hinderance instead of an assistant - even if your intentions are good.
 
-### Disclaimer
+---
+
+## Disclaimer
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.

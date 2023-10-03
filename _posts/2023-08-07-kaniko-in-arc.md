@@ -19,7 +19,7 @@ I had assumed there was some publicly discoverable code combining a container bu
 
 Here’s how to use Google’s [Kaniko](https://cloud.google.com/blog/products/containers-kubernetes/introducing-kaniko-build-container-images-in-kubernetes-and-google-container-builder-even-without-root-access) to build containers in actions-runner-controller _without_ privileged pods or Docker-in-Docker.
 
-### Storage setup
+## Storage setup
 
 In order to run a container within actions-runner-controller, we’ll need to use the [runner with k8s jobs](https://github.com/actions/actions-runner-controller/blob/master/docs/deploying-alternative-runners.md#runner-with-k8s-jobs) and [container hooks](https://github.com/actions/runner-container-hooks/tree/main/packages/k8s)[^d], which allows the runner pod to dynamically spin up other containers instead of trying to use the default Docker socket.  This means a new set of runners and a new [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) to back it up - full [manifest](https://github.com/some-natalie/kubernoodles/blob/main/cluster-configs/k8s-mode-storage.yml) file for both our test and production namespaces, if you want to jump ahead.
 
@@ -63,7 +63,7 @@ spec:
 
 And apply it with a quick `kubectl apply -f k8s-storage.yml` to move forward.
 
-### Deploy the runners
+## Deploy the runners
 
 Now, we need runners that have the container hooks installed and can run jobs natively in Kubernetes.  The pre-built Actions runner image ([Dockerfile](https://github.com/actions/runner/blob/main/images/Dockerfile)) does all of this perfectly and is maintained by GitHub, so that’s what we’ll use here.  The finished chart is [here](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-kaniko.yml).
 
@@ -130,7 +130,7 @@ Thank you for installing gha-runner-scale-set.
 Your release is named kaniko-worker.
 ```
 
-### Write the workflow
+## Write the workflow
 
 Now that we have runners that can accept container tasks natively within Kubernetes, let’s build  and push a container!  (full [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/test-kaniko.yml), if you want to jump ahead)
 
@@ -188,7 +188,7 @@ Here’s our successful [workflow run](https://github.com/some-natalie/kubernood
 > Full [workflow logs](https://github.com/some-natalie/some-natalie/blob/main/assets/logs/kubernoodles-pt-6/kaniko-build.txt) and output of [kubectl describe pod](https://github.com/some-natalie/some-natalie/blob/main/assets/logs/kubernoodles-pt-6/k-describe-pod.txt) for the runner and the job containers are retained in the repository to prevent rotating out after 90 days.
 {: .prompt-info}
 
-### Notes
+## Notes
 
 One runtime flag to highlight is [`--label`](https://github.com/GoogleContainerTools/kaniko#flag---label), which adds the OCI labels to the finished image instead of the `LABEL` directive in the Dockerfile.  You may need to edit your Dockerfiles and workflow pipelines moving from other container build systems to make sure the final image has the correct labels.  There are **tons** of other build flags and options in Kaniko, as well as many different ways to use it.  Check out the project on [GitHub](https://github.com/GoogleContainerTools/kaniko) for a more detailed outline on what flags are available. 📚
 
@@ -202,7 +202,9 @@ In order to do this all internally, you'll need to bring in or build a GitHub Ac
 
 Next - Build custom runners into GitHub Actions so it'll build/test/deploy itself!
 
-### Footnotes
+---
+
+## Footnotes
 
 [^p]: A discussion with lots of links on this here - [Add rootless DinD runner by some-natalie · Pull Request \#1644 · actions/actions-runner-controller](https://github.com/actions/actions-runner-controller/pull/1644)
 [^d]: The official documentation is well worth reading a few times over - [Deploying runner scale sets with Actions Runner Controller - GitHub Enterprise Cloud Docs](https://docs.github.com/en/enterprise-cloud@latest/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/deploying-runner-scale-sets-with-actions-runner-controller#using-kubernetes-mode)

@@ -524,6 +524,8 @@ Learning GitHub resources
 - [Skills](https://skills.github.com/), the free interactive training for lots of things GitHub
 - [Git and GitHub Learning](https://docs.github.com/en/get-started/quickstart/git-and-github-learning-resources)
 
+---
+
 ## Footnotes
 
 [^1]: [/r/sysadmin](https://www.reddit.com/r/sysadmin/comments/4l7kjd/found_a_text_file_at_work_titled_why_should_i/) post that started that

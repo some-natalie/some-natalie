@@ -168,13 +168,11 @@ Here's a few general recommendations that don't fall neatly into the above, lear
 
 ---
 
-### Disclosure
+## Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.  The purpose of writing this is to have a written reference to a conversation I have frequently on architecture decisions and usage patterns for self-hosted GitHub Actions runners within large and diverse companies, which may be helpful more broadly.
 
----
-
-### Footnotes
+## Footnotes
 
 [^1]: "Shadow IT" encompasses all types of ungoverned infrastructure set up to workaround a central IT department.  Basically, bring-your-own-device without being allowed to do so.  More about this on [Wikipedia](https://en.wikipedia.org/wiki/Shadow_IT).
 [^2]: "Dangerously silly" things I have seen here include ungoverned cloud infrastructure accounts going to purchase cards, random servers in offices that haven't been updated in _years_, a laptop on a shared desk that said "do not unplug or close lid" taped to it, tons of scripts and config files disabling SSL verification entirely so as not to fail with corporate TLS encryption breaking, etc.

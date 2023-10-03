@@ -111,7 +111,7 @@ Making mindful choices about technologies your team uses is what "just use `tech
 
 ---
 
-### Footnotes
+## Footnotes
 
 [^1]: I work with the super-duper regulated crowd and these SaaS solutions don't operate in that space, so I don't interact with their products much - it's bare metal k8s all day for me.  Your milage may vary here!
 [^2]: Here's the resources I typically send for folks starting out on the self-hosted runner journey - the official [documentation](https://docs.github.com/en/enterprise-cloud@latest/actions/hosting-your-own-runners/managing-self-hosted-runners) and an [architecture guide to self-hosted GitHub Actions](https://some-natalie.dev/blog/arch-guide-to-selfhosted-actions/).  Most importantly, do what works best for your teams - everyone has a different custom implementation and that’s fine!

@@ -13,11 +13,11 @@ It’s been nearly a year since I first looked into the cost of waiting on build
 
 I’d assumed that like every year in tech, quite a bit has changed - but I was only partially right!
 
-### Technical changes
+## Technical changes
 
 There were some technical changes to GitHub's larger runners in that time.  This time around, it's publicly available ([release notes](https://github.blog/changelog/2023-06-21-github-hosted-larger-runners-for-actions-are-generally-available/)) and not in a private beta.  The new runners are using Ubuntu 22.04 (Jammy Jellyfish), not Ubuntu 20.04 (Focal Fossa).  Now we're also building newer versions of the Linux kernel for [Fedora](https://fedoraproject.org/) to stay in line with what's current - releases 37, 38, and the upstream development build for 39.
 
-### Economic changes
+## Economic changes
 
 Apart from widespread hand-wringing about unprecedented macroeconomic conditions[^1] in the press, for the scope of this trial, I was surprised at how little needed updating.
 
@@ -35,7 +35,7 @@ Compute continues to get cheaper and more available as well.  I didn't want to d
 
 For the cost analysis below, I'll use the lower side of $90/hr for developer time.
 
-### Experiment design
+## Experiment design
 
 This time around, I needed a bit more data for my upcoming project's benchmarks, so I took the average of 3 runs spread across time of day to account for any "peaky" workloads.  I also used a broader array of builds:
 
@@ -87,7 +87,7 @@ jobs:
 
 {% endraw %}
 
-### Results
+## Results
 
 | Average | 2-core | 4-core | 8-core | 16-core | 32-core | 64-core |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -105,7 +105,7 @@ This is a textbook example of questionable data visualization.  Due to the huge 
 > If you'd like to look further into this data or reproduce the experiment, here's the [source code](https://github.com/some-fantastic/fedora-acs-override).  The spreadsheet of data and all build logs from this are preserved [here](https://github.com/some-natalie/some-natalie/tree/main/assets/logs/waiting-on-builds-pt-4). 👩‍🔬
 {: .prompt-info}
 
-### Analysis
+## Analysis
 
 The overall build times of newer versions of Fedora have been trending upward for a while, as noted by looking back at the 2-core runners used over time in the [upstream project](https://github.com/some-natalie/fedora-acs-override).  The development kernel takes slightly less than released versions too, by a small amount.
 
@@ -113,11 +113,13 @@ Despite the time of day and long run time of the jobs, they'd all end up within 
 
 I was surprised that it was this simple to find a job that couldn't reliably complete in 6 hours that wasn't mining cryptocurrency or similar tasks.  In every run, the debug build running on the 2 core runner failed at least once.  No correlation can be made between Fedora version and failure and it's not worth investigating further.
 
-### Conclusions
+## Conclusions
 
 Developer time at a conservative cost of $1.50 per minute ($90/hr) still seems outright silly to waste to save a couple pennies on compute cost.  It's just as true now as it was at $75/hr.  The same is also true of laptops or noise-canceling headphones or leaving a bunch of Slack channels - saving focus time where it's most impactful to the business is almost always a worthwhile expense.
 
-### Footnotes
+---
+
+## Footnotes
 
 [^1]: I'm on the older side of Millennial and this is my third or fourth "once in a lifetime" macroeconomic catastrophe.  I'm unperturbed by apocalyptic economics journalism at this point. 😑
 [^2]: [The State of the Tech Market in 2023](https://newsletter.pragmaticengineer.com/i/129742293/downward-pressure-on-compensation-at-the-top-of-the-market)

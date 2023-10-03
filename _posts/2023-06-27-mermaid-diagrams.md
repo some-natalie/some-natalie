@@ -21,11 +21,13 @@ This seemed like a good opportunity to learn some web things while assembling th
 This was simultaneously disappointing and marvelous.  First, add the following header for the YAML front matter in `_includes/head.html`:
 
 {% raw %}
+
 ```html
 {% if page.mermaid %}
     {% include mermaid.html %}
 {% endif %}
 ```
+
 {% endraw %}
 
 This will tell browsers to load the rather large JavaScript module only where needed, preserving the speed and simplicity of static websites wherever possible.  I'll indicate this need by setting a front matter key on each post that needs Mermaid diagrams using `mermaid: true`, same as other page settings like table of contents, tags, post titles, etc.
@@ -79,14 +81,14 @@ I'm still working on assembling a much longer post of my slides, talk, and how m
 
 ---
 
-### Resources
+## Resources
 
 - [Live editor](https://mermaid-js.github.io/mermaid-live-editor/) to make diagrams and see changes live
 - Amazing [cheat sheet](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/) for Mermaid syntax
 - An older [walkthrough](https://jojozhuang.github.io/tutorial/jekyll-diagram-with-mermaid/) for doing this task
 - Mermaid's [theme documentation](https://mermaid.js.org/config/theming.html)
 
-### Footnotes
+## Footnotes
 
 [^1]: [Include diagrams in markdown](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)
 [^2]: Example build pipeline [here](https://github.com/some-natalie/some-natalie/blob/main/.github/workflows/pages.yml), execution logs [here](https://github.com/some-natalie/some-natalie/actions/workflows/pages.yml)

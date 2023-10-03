@@ -313,6 +313,8 @@ Yeah, this is 20 minutes (more? less?) in and we're using containers as VMs.  It
 
 Next - a small detour into [building containers without `--privileged`](../kaniko-in-arc), then how to move this build into GitHub Actions so it'll build/test/deploy itself!
 
+---
+
 ## Footnotes
 
 [^1]: ADR stands for Architecture Decision Record.  It's used to document a design problem, why it was approached the way it was, and any alternatives considered.  You can read more about them at [adr.github.io](https://adr.github.io/).

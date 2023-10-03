@@ -14,7 +14,7 @@ excerpt: "How to run Dependabot on-premises using Red Hat Enterprise Linux"
 
 GitHub makes some assumptions about the container execution environment for Actions that aren't always true for self-hosted environments.  This is frustrating if you need or want to stay within one Linux ecosystem on-premises.  Here's how to get Dependabot working with self-hosted GitHub Actions runners and Docker in the latest minor releases of RHEL 7, 8, and 9 - 7.9, 8.6, and 9.0 as of October 2022.
 
-### Setup
+## Setup
 
 First, leave SELinux alone.  I know the first thing we all do when something doesn't work is disable it, but really - let it work!  I promise it isn't the problem.
 
@@ -100,16 +100,16 @@ Current runner version: '2.293.0'
 
 ![dependabot-prs](/assets/graphics/2022-10-18-dependabot-prs.png)
 
-### Why not Podman?
+## Why not Podman?
 
 It's not feasible to use rootless Podman here.  The [github/dependabot-action](https://github.com/github/dependabot-action) creates two containers for the duration of each run that need to talk to each other and to the internet, which isn't Podman's default.  It's possible to try and intercept each run and connect them to the network successfully, but that's not automatic.  The Action assumes container networking works similar to Docker, where containers can talk to each other and outbound by default.
 
-### Ephemerality
+## Ephemerality
 
 It's possible, but not advisable, to use [ephemeral self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/autoscaling-with-self-hosted-runners#using-ephemeral-runners-for-autoscaling) for Dependabot.  The [github/dependabot-action](https://github.com/github/dependabot-action) pulls approximately 4 GB of Docker images if those images aren't already present on the runner.  This drives up your bandwidth usage and can possibly get your IP address space rate-limited.
 
 ---
 
-#### Footnotes
+## Footnotes
 
 [^1]: It's probably possible to get the Docker Engine using `nftables` instead, but according to the [official documentation](https://docs.docker.com/network/iptables/), it's assuming `iptables`.

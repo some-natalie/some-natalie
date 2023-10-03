@@ -206,13 +206,13 @@ For secrets, all secrets committed are compromised.  You need to rotate them.  G
 - For non-GitHub platforms, consider using [OWASP SEDATED](https://github.com/OWASP/SEDATED) if you can configure pre-receive hooks.  It may require a bit of regular expressions to set up the first time, but it's undramatic once you get it going.
 - For pre-commit hooks, consider using [git-secrets](https://github.com/awslabs/git-secrets) from AWS Labs.  It's one of the easier hooks to install and configure, but this must be done on every single machine.  Pre-commit hooks only work if they run on every machine and every commit.
 
-#### Disclosure
+---
+
+## Disclosure
 
 I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.
 
----
-
-#### Footnotes
+## Footnotes
 
 [^1]: Same general feature with a different name for other repo hosting products.  "Pull request" and `refs/pull` in GitHub becomes "merge request" and `refs/merge-request` in GitLab or "pull request" and `refs/pull-request` in Atlassian products (BitBucket/Stash).  Atlassian has a great blog article about _why_ these refs exist [here](https://blog.developer.atlassian.com/a-better-pull-request/).
 [^2]: You can read more about git references in the [documentation](https://git-scm.com/book/en/v2/Git-Internals-Git-References).

@@ -38,7 +38,8 @@ Time and temp combinations that work well.
 | What | Temp | Time | Notes |
 | --- | --- | --- | --- |
 | Bacon | 400°F | 30 mins | fridge, warm on skillet |
-| Brussel sprouts | 500°F | 20 mins | start on skillet, flip all halves down |
+| Brussels sprouts | 500°F | 20 mins | start on skillet, flip all halves down |
+| Pork ribs | 550°F<br>325°F | 20 mins<br>2 hrs | start uncovered in sheet tray<br>cover tightly in foil to finish |
 | Smashed potatoes | 450°F | 30 mins | boil first, use thin tray in oven |
 | Any crock pot "low" meal | 225°F | same as recipe | crack lid for evaporation, stir sometimes |
 

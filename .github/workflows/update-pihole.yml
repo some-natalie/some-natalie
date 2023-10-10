@@ -3,7 +3,7 @@ name: 🫐 Update pihole
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 20 * * 3"
+    - cron: "15 08 * * 3" # 8:15am every Wednesday (UTC)
 
 jobs:
   updates:

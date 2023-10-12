@@ -39,4 +39,4 @@ I have an awesome life outside of tech, so while I have a few projects that I en
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](RESUME.md), but you can also look at a little bit of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).
-- 💬 Want to chat?  I'm on [Mastodon](https://infosec.exchange/@some-natalie).
+- 💬 Want to chat?  I'm on [Mastodon](https://infosec.exchange/@some_natalie).

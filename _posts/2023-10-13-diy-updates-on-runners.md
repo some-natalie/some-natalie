@@ -15,17 +15,17 @@ excerpt: "Remarkably helpful automation to update your own CI servers"
 
 ![fridaythe13th](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/fridaythe13th.gif){: .w-50 .right}
 
-Keeping your infrastructure up to date is important and ... it seems like this is a common oversight for build servers _specifically_.[^build]
+Your build infrastructure can update itself using your own CI tooling.  It's easier and _way_ better than it sounds, especially at scales that don't justify hiring dedicated teams of engineers to run it.  Hear me out ... 
 
-Most folks should just update everything on all machines from the default repositories for that OS, then reboot, once a week (ish), without exception - the folks that are mad at that suggestion, head to footnote[^fix].
+No one will argue that keeping your infrastructure up to date is important to your company's security posture.  Yet, I've noticed this is a common oversight for build servers _specifically_.[^build]
 
-With big fleets of infrastructure, this gets done with tools designed to do _exactly_ that task - [Ansible](https://www.ansible.com/), [Puppet](https://www.puppet.com/), [Red Hat Satellite](https://www.redhat.com/en/technologies/management/satellite), etc.  It works great for teams that have invested time and energy into building and maintaining those tools, but ...
+It's way less risky to simply update everything on these machines from the default repositories for that OS, then reboot, once a week (ish).  To the folks mad at that suggestion, please head to the footnotes[^fix].  With big fleets of infrastructure, this gets done with tools designed to do _exactly_ that task - [Ansible](https://www.ansible.com/), [Puppet](https://www.puppet.com/), [Red Hat Satellite](https://www.redhat.com/en/technologies/management/satellite), etc.  These tools are great for teams that have invested time and energy into building and maintaining them, but ...
 
 🤔 What if you need something a little simpler?
 
 ## Self-updating CI servers
 
-Running OS updates on my self-hosted runners using GitHub Actions itself is surprisingly effective.  Here’s the workflow jobs ([full file](https://github.com/some-natalie/some-natalie/blob/main/.github/workflows/update-kodi.yml)):
+Running OS updates on my self-hosted runners using GitHub Actions itself is surprisingly effective.[^github]  Here’s the workflow jobs ([full file](https://github.com/some-natalie/some-natalie/blob/main/.github/workflows/update-kodi.yml)) with the `runs-on` target changed out:
 
 ```yaml
 apt-updates:
@@ -74,9 +74,9 @@ check-its-back-up:
         fi
 ```
 
-This is surprisingly good!  Staying on the latest updates within [Raspberry Pi OS](https://www.raspberrypi.com/software/) (or any Debian or Ubuntu based system) is now boring, easy, and undramatic.  I get to leverage the fact that the upstream developers put a ton of time and testing into packaging their software and it’s one more chore I don’t have to do.
+This is surprisingly good!  Staying on the latest updates within [Raspberry Pi OS](https://www.raspberrypi.com/software/) (or any Debian or Ubuntu based system) is now boring, easy, and automated.  I get to leverage the fact that the upstream developers put a ton of time and testing into packaging their software and it’s one more chore I don’t have to do.
 
-For the Red Hat based distributions, it’d only change a little to look more like 👇
+For the Red Hat based distributions, it’d only change a little to look more like 👇 for updates.
 
 ```yaml
 dnf-updates:
@@ -87,15 +87,11 @@ dnf-updates:
       run: |
         sudo dnf clean all
         sudo dnf update -y
-
-    - name: Reboot
-      shell: bash
-      run: sudo shutdown -r +1 "Rebooting ... brb"
 ```
 
 ## Let’s handle failures
 
-This isn’t much harder to notify on failure.  If any of the steps above fail, this will create an issue in the repo that controls these runners.  You can of course create more complex logic like assign it to a team, add comments, and more ([docs](https://cli.github.com/manual/gh_issue_create) to do all that).
+It isn’t much harder to notify on failure.  If any of the steps above fail, this will create an issue in the repo that controls these runners.  You can of course create more complex logic like assign it to a team, add comments, and more ([docs](https://cli.github.com/manual/gh_issue_create) to do all that).
 
 {% raw %}
 ```yaml
@@ -117,6 +113,8 @@ create-failure-issue:
 {% endraw %}
 
 ## Handy tasks to include
+
+🧰 Don't be limited to operating system updates.  Throwing manual tasks into `cron` is one of the oldest tools in the sysadmin toolbox.  Here's a couple more examples:
 
 Clearing the local Docker cache of images not in use is handy from time to time.  This is particularly helpful on self-hosted Dependabot runners, as those tend to be VMs and also tend to be large containers that change on each GHES upgrade.[^d]
 
@@ -155,12 +153,17 @@ Here's [an example](https://github.com/some-natalie/some-natalie/actions/workflo
 
 Obviously, this is for persistent VMs or bare metal compute.  Ephemeral container-based runners don’t have any of these concerns, as updates happen on building a new image.
 
-There’s also none of the true enterprise fleet management niceness that I’m used to - no rollbacks, phased deployments, state management, etc.  I wouldn’t recommend using this at scale, but this has worked fabulously for a home lab.  It would work quite well for labs, build farms, and other “easy to overlook” environments in the enterprise too.
+There’s also none of the enterprise fleet management niceness that I’m used to - no rollbacks, phased deployments, state management, etc.  I wouldn’t recommend using this at large scale, but this has worked fabulously for a home lab.  It would work quite well for labs, most build farms, and other “easy to overlook” environments in the enterprise too.
 
 ---
+
+## Disclosure
+
+I work at GitHub as a solutions engineer at the time of writing this.  All opinions are my own.
 
 ## Footnotes
 
 [^build]: I still don’t know why this is, but my guess is that different teams are responsible for the dev/test/production environments versus build servers to put things into that promotion path.  If you have a better idea, lemme know?
 [^fix]: Particular needs around complex software should be met with investing in robust regression and acceptance tests, observability, and deployment logic for the applications on top _rather_ than living in fear of the next inevitable CVE.  This requires some level of engineering discipline to maintain the application, the dependencies, and such ... but it _also_ prevents the sheer terror of rebooting a machine that has 1000+ days of uptime.  If the thought of running `yum update -y && reboot` on a Friday scares you, 💓 **fix that** 💓
+[^github]: This should work equally well for any other bare metal or VM-based compute in other CI systems - GitLab, Azure DevOps, etc., all have the ability to schedule jobs.  I have used this approach with Jenkins in a prior job and it's quite serviceable.  The [code](https://github.com/some-natalie/some-natalie/tree/main/.github/workflows) for these jobs is all public in GitHub, so continuing to minimize tool sprawl for things Not My Job is ideal.
 [^d]: More about that in the [official docs](https://docs.github.com/en/enterprise-server@3.10/admin/github-actions/enabling-github-actions-for-github-enterprise-server/managing-self-hosted-runners-for-dependabot-updates) or if you’re using Red Hat (or derivative) VMs instead here - [Dependabot on Red Hat Enterprise Linux using Docker](../dependabot-on-rhel-docker/).

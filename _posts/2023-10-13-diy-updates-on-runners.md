@@ -8,6 +8,7 @@ tags:
 categories:
   - blog
 classes: wide
+image: /assets/graphics/2023-10-13-diy-updates-on-runners/light.png
 excerpt: "Remarkably helpful automation to update your own CI servers"
 ---
 

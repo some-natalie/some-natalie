@@ -8,13 +8,10 @@ tags:
 categories:
   - blog
 classes: wide
-image: /assets/graphics/2023-10-13-diy-updates-on-runners/light.png
 excerpt: "Remarkably helpful automation to update your own CI servers"
 ---
 
 🎃 It’s Friday the 13th - let’s talk questionable, but effective, ideas 👻
-
-![fridaythe13th](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/fridaythe13th.gif){: .w-50 .right}
 
 Your build infrastructure can update itself using your own CI tooling.  It's easier and _way_ better than it sounds, especially at scales that don't justify hiring dedicated teams of engineers to run it.  Hear me out ... 
 
@@ -152,7 +149,11 @@ Here's [an example](https://github.com/some-natalie/some-natalie/actions/workflo
 
 ## Limitations
 
-Obviously, this is for persistent VMs or bare metal compute.  Ephemeral container-based runners don’t have any of these concerns, as updates happen on building a new image.
+![fridaythe13th](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/fridaythe13th.gif){: .w-50 .right}
+
+🎃 Not as spooky as we thought for Friday the 13th, right?  You can even continue to gate updates through your internal repo mirrors, just ... keep those up to date too, please. 🥺
+
+Obviously, this is for persistent VMs or bare metal compute only.  Ephemeral (usually container-based) runners don’t have any of these concerns, as updates happen on building a new image.
 
 There’s also none of the enterprise fleet management niceness that I’m used to - no rollbacks, phased deployments, state management, etc.  I wouldn’t recommend using this at large scale, but this has worked fabulously for a home lab.  It would work quite well for labs, most build farms, and other “easy to overlook” environments in the enterprise too.
 

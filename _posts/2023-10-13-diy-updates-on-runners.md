@@ -13,7 +13,7 @@ excerpt: "Remarkably helpful automation to update your own CI servers"
 
 🎃 It’s Friday the 13th - let’s talk questionable, but effective, ideas 👻
 
-Your build infrastructure can update itself using your own CI tooling.  It's easier and _way_ better than it sounds, especially at scales that don't justify hiring dedicated teams of engineers to run it.  Hear me out ... 
+Your build infrastructure can update itself using your own CI tooling.  It's easier and _way_ better than it sounds, especially at scales that don't justify hiring dedicated teams of engineers to run it.  Hear me out ...
 
 No one will argue that keeping your infrastructure up to date is important to your company's security posture.  Yet, I've noticed this is a common oversight for build servers _specifically_.[^build]
 

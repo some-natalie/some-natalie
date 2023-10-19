@@ -49,6 +49,9 @@ jobs:
             echo "System rebooted more than 10 minutes ago"
             exit 1
           fi
+      - name: Check Unifi controller is up and healthy
+        shell: bash
+        run: sudo docker ps -a | grep jacobalberty\/unifi\.*\(healthy\)
 
   create-failure-issue:
     name: Create an issue on failure of any step to investigate

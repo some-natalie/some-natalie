@@ -54,6 +54,9 @@ jobs:
             echo "System rebooted more than 10 minutes ago"
             exit 1
           fi
+      - name: Verify pihole is back up
+        shell: bash
+        run: sudo pihole status
 
   create-failure-issue:
     name: Create an issue on failure of any step to investigate
@@ -69,4 +72,3 @@ jobs:
           gh issue create -R some-natalie/some-natalie \
             --title "Update on pihole failed" \
             --body "Please investigate!"
- 

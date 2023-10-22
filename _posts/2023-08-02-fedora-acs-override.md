@@ -400,7 +400,7 @@ It's pretty straightforward to add PCI hardware by address in [Virtual Machine M
 
 ## Next time
 
-Let's shove the RPM build into a container to make this repeatable _and_ not on our machine!
+Let's shove the RPM build into a container to make this repeatable _and_ not on our machine!  [Building RPMs in containers](../container-bulid-rpms/)
 
 ## Resources
 

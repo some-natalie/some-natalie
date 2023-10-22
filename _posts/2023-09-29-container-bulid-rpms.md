@@ -162,7 +162,7 @@ jobs:
             !/home/runner/work/_temp/_github_home/rpmbuild/RPMS/x86_64/*debug*.rpm
 ```
 
-This final step happened because I am too ~~lazy~~ busy to maintain my own local build infrastructure for [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override) and don't want to lock my own computer up for hours building either.  I don't want to run servers, don't care how long the build takes, and now my build process is `click button, wait, receive files` - can't get easier than that! 🍹
+This final step happened because I am too ~~lazy~~ busy to maintain my own local build infrastructure for [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override) and don't want to lock my own computer up for hours building either.  You can read more about the project and how it works [here](../fedora-acs-override).  I don't want to run servers, don't care how long the build takes, and now my build process is `click button, wait, receive files` - can't get easier than that! 🍹
 
 ---
 

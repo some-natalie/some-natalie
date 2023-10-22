@@ -79,7 +79,7 @@ flowchart LR
 
 ### Some assumptions
 
-![deployment-mess](/assets/graphics/memes/deployment.png){: .w-50 .right}
+![deployment-mess](/assets/graphics/memes/deployment-mess.png){: .w-50 .right}
 
 We’re making some assumptions here for the sake of time.  Please **DO** include these topics in your own threat model - they are important!  But they’re also bespoke and we’re on a timeline here.
 

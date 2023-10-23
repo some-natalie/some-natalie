@@ -31,6 +31,11 @@ I would like to make some family recipes publicly accessible without vendor lock
 | Buttermilk | - 0.5 cup buttermilk<br>- 0.25 cup acid<br>- 2 tsp honey<br>- 0.25 cup fresh herbs<br>- salt, pepper, dried herbs to taste |
 | Maple | - 0.25 cup maple syrup<br>- 3 tbsp apple cider vinegar<br>- 2 tbsp olive oil<br>- 2 tsp poppy seeds<br>- 2 shallots, minced<br>- 2 tsp Dijon |
 
+## Salad ratios
+
+| Name | Ratios |
+| Brussels sprouts | - 10 sprouts, shaved<br>- 1 small apple, finely diced<br>- 0.25 cup seeds or nuts<br>- 0.25 cup dried fruits<br>- 0.25 cup crumbly cheese (optional) |.
+
 ## Baking time chart
 
 Time and temp combinations that work well.

@@ -79,3 +79,19 @@ All scaled to 8 ounces of pasta, scale up/down accordingly.  Salt and pepper to 
 - 0.25 cup loosely packed chopped fresh basil leaves
 
 If you want this more "soup-y", add more broth. 👩‍🍳
+
+### Pulled pork mac and cheese
+
+- 6 oz cheese
+- 1-2 drops liquid smoke
+- Black pepper, to taste
+- 4 oz pulled pork
+- 1-2 tbsp BBQ sauce
+- A splash of heavy cream _or_ pat of butter, as needed to emulsify correctly
+
+Optional toppings
+  - Panko 
+  - Scallions
+  - Hot sauce
+ 
+This is a pick-your-own adventure recipe.  I tend to use sharp cheeses and a mustard BBQ sauce, which are closer to traditional "mac and cheese" flavors.  Use elbow macaroni or other sturdy shape that will hold up to stirring while the cheese melts.  Depending on the fat and moisture of the cheeses, a little bit of extra fat at the end (cream or butter, etc) will be needed to correct the texture of the sauce.

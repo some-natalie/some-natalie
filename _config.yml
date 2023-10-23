@@ -143,6 +143,10 @@ collections:
     output: true
     permalink: /:collection/:path/ 
     sort_by: name
+  diy:
+    output: true
+    permalink: /:collection/:path/
+    sort_by: name 
 
 defaults:
   - scope:
@@ -189,6 +193,14 @@ defaults:
       layout: page  
       categories:
         - drinks 
+  # _diy
+  - scope:
+      path: "_diy"
+      type: diy
+    values:
+      layout: page
+      categories:
+        - diy   
 
 sass:
   style: compressed

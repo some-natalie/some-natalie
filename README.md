@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [CI for your CI - building and testing your custom runner images](https://some-natalie.dev/blog/kubernoodles-pt-7):  (Kubernoodles, part 7 of ?) - Continuously shipping CI as an enterprise service, continuously 😉
 1. [Kodi setup on a Raspberry Pi 4](https://some-natalie.dev/blog/kodi-setup):  🍿 Movie night, locally
 1. [Self-updating build servers, automatically](https://some-natalie.dev/blog/diy-updates-on-runners):  Remarkably helpful automation to update your own CI servers
-1. [One whole year](https://some-natalie.dev/blog/one-year):  I've been at this whole writing thing for a year!
 <!-- END_SECTION:latest_posts -->
 
 ### :briefcase: Day to day, I work with

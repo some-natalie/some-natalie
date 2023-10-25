@@ -16,10 +16,10 @@ Here's what has been done and where we're going.
 - [Part 4](../blog/kubernoodles-pt-4) - Setup the Kubernetes cluster, GitHub, and actions-runner-controller to work together, then make a GitHub Actions workflow to create and remove test deployments from a Helm chart.
 - [Part 5](../blog/kubernoodles-pt-5) - How to build your own custom images for actions-runner-controller!
 - [Part 6](../blog/kaniko-in-arc) - Using [Kaniko](https://github.com/GoogleContainerTools/kaniko) in actions-runner-controller to build containers without privileged pods.
+- [Part 7](../blog/kubernoodles-pt-7) - CI for your CI, or how to test your custom runner images on each change.
 
 Coming soon:
 
-- Automating the builds of custom runner images
 - Writing tests for your custom runner images
 - Rebuilding and releasing custom runners on a schedule
 - Log streaming

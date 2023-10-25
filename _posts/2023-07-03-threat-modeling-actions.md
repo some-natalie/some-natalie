@@ -366,6 +366,8 @@ I think everyone here has a story about this. 😊
 
 If you do nothing else beyond cleaning and rotating all the random credentials and secrets in your repositories, I think this talk is a huge success.  Fixing this reduces your potential for compromise all throughout this pipeline.[^9]
 
+### Storing secrets
+
 ![slide-33](/assets/graphics/2023-07-03-threat-modeling/Slide33.jpeg)
 
 Okay, so you’re gonna fix that mess … where do you put the shiny, new, uncompromised secrets?  You’ve got a few great options.
@@ -384,9 +386,13 @@ You can also just as easily plug in your existing secret store.  Here’s some e
 - Azure - [Azure/cli](https://github.com/azure/cli)
 - Google Cloud - [google-github-actions/get-secretmanager-secrets](https://github.com/google-github-actions/get-secretmanager-secrets)
 
+### Using Just-In-Time authentication
+
 ![slide-35](/assets/graphics/2023-07-03-threat-modeling/Slide35.jpeg)
 
 Of course, you may not even need to get that complicated.  Actions also generates a unique JIT authentication token on each run that’s only valid for the duration of that run.  The scope it has is defined in the workflow file, so it too can be reviewed and approved via pull request.  More on that [here](https://docs.github.com/en/actions/security-guides/automatic-token-authentication).
+
+### A questionable maneuver
 
 ![slide-36](/assets/graphics/2023-07-03-threat-modeling/Slide36.jpeg)
 
@@ -409,6 +415,8 @@ My answer is _it depends_.  I wouldn’t recommend doing this, but here’s the 
 - The combination of `echo VALUE | decode VALUE > write to disk` keeps interaction with the value scoped to having to read that file.  Echoing into an environment variable allows more processes to read it.
 
 There’s a few better ways to pass secrets or other information between steps.
+
+### A better idea
 
 ![slide-37](/assets/graphics/2023-07-03-threat-modeling/Slide37.jpeg)
 

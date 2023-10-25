@@ -52,8 +52,9 @@ Lessons learned the hard way
 - "Hybrid cloud" sounds simple, but is tricky to execute.  By building in the cheapest and most open place you can (commercial cloud), then moving the finished artifact (runner image) to more isolated enclaves, it reduces the number of ~~things to go wrong~~ _differences_ between each provider/location.
 - Tiny discrete images that do one thing and do it well is the most idiomatic use of containers.  It does pretty poorly here for technical complexity and labor spend per image.
 - Big pods are not bad here - caching over persistent read-only volumes is hard and setting your `imagepullpolicy=ifnotpresent` is simple.
-- (slide from CNCF conf about # images)
-- (meme about small discrete images vs all my tools in one image)
+- There's a balance somewhere on the number and size of images the team supports versus the amount of time spent on each one.  Each company will have to find that on their own.  My rationale to big pods not being bad is that admin/dev/maintenance time is extremely expensive and time spent flinging around big containers is cheap.
+
+![builder-images](/assets/graphics/memes/builder-images.jpg){: .align-center .shadow .rounded-10}
 
 > Kubernoodles is a reference architecture, sure, but it's also a _working demo_ repository.  I use it at work to show how to run [actions-runner-controller](https://github.com/actions/actions-runner-controller) within highly-regulated industries to prioritize maximum developer freedom and minimal staffing overhead.  There are design choices you are going to change to bring this into your company.  I'll call these out as best I can.
 {: .prompt-info}
@@ -297,6 +298,16 @@ job:
 {% endraw %}
 
 The full [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/weekly-cleanup.yml) also closes issues and PRs that are inactive and a few other repo maintenance chores.  The important thing to note is that the JIT read/write Packages scope doesn't allow for image deletion, so you must set a personal access token that has that privilege and store it in Secrets.
+
+## The other part of tidy
+
+![eeyore](/assets/graphics/memes/eeyore-does-yaml.jpeg){: .right .w-50 .shadow .rounded}
+
+One more lesson learned the hard way:  Lint your pull requests.  All of them.  No exceptions.  YAML is [notoriously unfriendly](https://ruudvanasseldonk.com/2023/01/11/the-yaml-document-from-hell) at times and this step prevents a ton of ~~debugging~~ pain and suffering.
+
+This project uses the [super-linter](https://github.com/super-linter/super-linter) to lint _everything_, but across tons of teams with different conventions, this keeps a consistent quality across the board.  Here's the [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/super-linter.yml) and all of the linting [configurations](https://github.com/some-natalie/kubernoodles/tree/main/.github/linters) that I use.
+
+Note it also improves our overall security posture by using Hadolint to enforce the use of specific upstream registries as well! 🧹
 
 ## Airgap caveats
 

@@ -50,8 +50,7 @@ First, some assumptions!
 - Issues and PRs track requests and changes to 👆 … you can use other things, but if you’re already in the repo, why go anywhere else?
 - Internal visibility of this repository and these images is a 👏 very 👏 good 👏 thing 👏 to allow platform teams to scale without a ton of extra headcount for each image.  Developers can see what goes in to building it, investigate and send PRs to fix things themselves, you can inherently track changes ... etc.
 
-> Kubernoodles is a reference architecture, sure, but it's also a _working demo_ repository.  I use it at work to show how to run [actions-runner-controller](https://github.com/actions/actions-runner-controller) within highly-regulated industries to prioritize maximum developer freedom and minimal staffing overhead.  There are design choices you are going to change to bring this into your company.  I'll call these out as best I can.
-{: .prompt-info}
+Kubernoodles is a _working demo_ repository.  There are design choices you are going to change to bring this into your company.  I'll call these out as best I can.
 
 ## Getting squared away
 
@@ -124,9 +123,9 @@ After all these years, here's an appropriate use for `latest` tag!  We're going 
 
 ## Deploy it
 
-This is primarily a demonstration that prioritizes neutrality / portability across vendors, it uses a vanilla Kubernetes implementation and not a specific Action to not be opinionated on vendor specifics.  If you're deploying into a managed Kubernetes service in Azure/AWS/etc., use their official Action or CLI tooling on your runner image instead.  This step runs using secrets and variables defined for the `test` environment.  You can read more about defining and using environments (such as "test" and "prod") in the [docs](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
+This prioritizes portability across vendors, so it uses a vanilla Kubernetes implementation and not a specific Action for a provider.  If you're deploying into a managed Kubernetes service in Azure/AWS/etc., use their official Action or CLI tooling on your runner image instead.  This step runs using secrets and variables defined for the `test` environment.  You can read more about defining and using environments (such as "test" and "prod") in the [docs](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
 
->There's a questionable maneuver on writing the config file to disk here.  I talked about the reasoning and risks on doing this [here](../threat-modeling-actions#a-questionable-maneuver).  **tl;dr** is that is probably fine so long as it's safe to assume the runner executing this task is both ephemeral and has no other interactive task that could hijack the credentials in the time it's running.
+> There's a questionable maneuver on writing the config file to disk here.  I talked about the reasoning and risks on doing this [here](../threat-modeling-actions#a-questionable-maneuver).  **tl;dr** is that is probably fine so long as it's safe to assume the runner executing this task is both ephemeral and has no other interactive task that could hijack the credentials in the time it's running.
 {: .prompt-warning}
 
 The GHCR login is used to bypass rate limits on pulling the OCI image for the listener on the runner scale set and runner images.  It is not _strictly_ necessary, but most large companies run the risk of hitting API rate limits.  This step avoids that in most cases.
@@ -183,7 +182,7 @@ Finally, there are lots of methods to determine how healthy a Kubernetes deploym
 
 Let's make sure our runner image works.  This step runs only on the test runner, time limited to 15 minutes before failure to prevent stalling or hangups.
 
-Think carefully about what tests to run?  In this case, we're doing the following:
+Think carefully about what tests need to run.  In this case, we're doing the following:
 
 - Dumping some debug info to the console ([test code](https://github.com/some-natalie/kubernoodles/blob/main/tests/debug/action.yml))
 - Docker works and is available ([test code](https://github.com/some-natalie/kubernoodles/blob/main/tests/docker/action.yml))
@@ -250,7 +249,7 @@ Now use helm to uninstall the test chart.  The only thing to call out here is th
 
 ## Handling failures
 
-Speaking of failures, let's talk about how to handle them.  This job runs as a PR check, so failures are fine so long as they're not merged.  Merging into the main branch is gated by [repo rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) to prevent changes that don't pass the tests.  Here's what that looks like:
+Speaking of failures, let's talk about how to handle them.  This job runs as a PR check, so failures are fine.  Merging into the main branch is gated by [repo rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) to prevent changes that don't pass the tests.  Here's what that looks like:
 
 ![pr-light](/assets/graphics/2023-10-25-kubernoodles-pt-7/pr-light.png){: .light .w-75 .shadow .rounded-10}
 ![pr-dark](/assets/graphics/2023-10-25-kubernoodles-pt-7/pr-dark.png){: .dark .w-75 .shadow .rounded-10}
@@ -291,7 +290,16 @@ job:
 ```
 {% endraw %}
 
-The full [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/weekly-cleanup.yml) also closes issues and PRs that are inactive and a few other repo maintenance chores.  The important thing to note is that the JIT read/write Packages scope doesn't allow for image deletion, so you must set a personal access token that has that privilege and store it in Secrets.
+The full [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/weekly-cleanup.yml) also closes issues and PRs that are inactive and a few other repo maintenance chores.  Note the JIT read/write Packages scope doesn't allow for image deletion, so you must set a personal access token that has that privilege and store it in Secrets.
+
+## Lessons learned the hard way
+
+- "Hybrid cloud" sounds simple, but is tricky to execute.  By building in the cheapest and most open place you can (commercial cloud), then moving the finished artifact (runner image) to more isolated enclaves, it reduces the number of ~~things to go wrong~~ _differences_ between each provider/location.
+- Tiny discrete images that do one thing and do it well is the most idiomatic use of containers.  I've found this pattern does poorly here due to labor spend per image, then needing teams to rework their builds to fit this paradigm.
+- Big pods are not bad - Consistent caching (and invalidation as needed) of build tools in persistent read-only volumes is difficult, whereas caching complete images that don't change too often by setting your `imagePullPolicy: IfNotPresent` is simple.
+- There's a balance somewhere on the number and size of images the team supports versus the amount of time spent on each one.  Each company will have to find that on their own.
+
+My bias to big pods not being _that_ bad is that admin/dev/maintenance time is extremely expensive and time spent flinging around big containers is cheap.
 
 ## The other part of tidy
 
@@ -304,15 +312,6 @@ YAML is [notoriously unfriendly](https://ruudvanasseldonk.com/2023/01/11/the-yam
 This project uses [super-linter](https://github.com/super-linter/super-linter) to lint _everything_.  Across tons of teams with different conventions, this keeps a consistent quality across the board.  Here's the [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/super-linter.yml) and all of the linting [configurations](https://github.com/some-natalie/kubernoodles/tree/main/.github/linters) that I use.
 
 Note it also improves our overall security posture by using Hadolint to enforce the use of specific upstream registries as well! 🧹
-
-## Lessons learned the hard way
-
-- "Hybrid cloud" sounds simple, but is tricky to execute.  By building in the cheapest and most open place you can (commercial cloud), then moving the finished artifact (runner image) to more isolated enclaves, it reduces the number of ~~things to go wrong~~ _differences_ between each provider/location.
-- Tiny discrete images that do one thing and do it well is the most idiomatic use of containers.  I've found this pattern does poorly here due to labor spend per image, then needing teams to rework their builds to fit this paradigm.
-- Big pods are not bad - Consistent caching (and invalidation as needed) of build tools in persistent read-only volumes is difficult, whereas caching complete images that don't change too often by setting your `imagePullPolicy: IfNotPresent` is simple.
-- There's a balance somewhere on the number and size of images the team supports versus the amount of time spent on each one.  Each company will have to find that on their own.
-
-My bias to big pods not being _that_ bad is that admin/dev/maintenance time is extremely expensive and time spent flinging around big containers is cheap.
 
 ## Airgap caveats
 

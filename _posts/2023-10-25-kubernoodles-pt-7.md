@@ -51,7 +51,7 @@ Lessons learned the hard way
 
 - "Hybrid cloud" sounds simple, but is tricky to execute.  By building in the cheapest and most open place you can (commercial cloud), then moving the finished artifact (runner image) to more isolated enclaves, it reduces the number of ~~things to go wrong~~ _differences_ between each provider/location.
 - Tiny discrete images that do one thing and do it well is the most idiomatic use of containers.  It does pretty poorly here for technical complexity and labor spend per image.
-- Big pods are not bad here - caching over persistent read-only volumes is hard and setting your `imagepullpolicy=ifnotpresent` is simple.
+- Big pods are not bad here - Consistent caching (and invalidation as needed) of build tools in persistent read-only volumes is difficult, whereas caching complete images that don't change too often by setting your `imagePullPolicy: IfNotPresent` is simple.
 - There's a balance somewhere on the number and size of images the team supports versus the amount of time spent on each one.  Each company will have to find that on their own.  My rationale to big pods not being bad is that admin/dev/maintenance time is extremely expensive and time spent flinging around big containers is cheap.
 
 ![builder-images](/assets/graphics/memes/builder-images.jpg){: .align-center .shadow .rounded-10}

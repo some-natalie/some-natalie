@@ -14,25 +14,21 @@ mermaid: true
 
 Let's have your Actions runners build and test themselves!
 
+**The end product is an automated check on images for fast feedback on each change.**
+
 ![light](/assets/graphics/2023-10-25-kubernoodles-pt-7/pipeline-light.png){: .light .shadow .rounded-10}
 ![dark](/assets/graphics/2023-10-25-kubernoodles-pt-7/pipeline-dark.png){: .dark .shadow .rounded-10}
 
-**The end product is an automated check on images for fast feedback on each change.**
-
 This uses GitHub’s hosted runners and a commercial cloud Kubernetes cluster to build and test each change to the image.  The finished image can then be signed, scanned, and pulled into internal environments as needed for the self-hosted crowd - enabling image reuse across enterprise platforms.
 
-> The approach works just as well fully disconnected, having self-hosted runners build and test themselves.  This is how I’d originally developed and ran this for production users before realizing there should be a public examples on how to do this - hop down to the [airgap caveats](#airgap-caveats) for what else you'll need.
-{: .prompt-info}
-
-This time, we're going to build, test, and publish a rootless/sudoless D-in-D capable runner.  This is usually a nice middle ground between "can't `--privileged` at all" and "free for all cluster" - you can do a lot of container-y things without having to mess with [container hooks](https://github.com/actions/runner-container-hooks) or [kaniko](https://github.com/GoogleContainerTools/kaniko) and still keep some guardrails in place.
+The custom runner in this case is a rootless/sudoless D-in-D capable image.  This is usually a nice middle ground between "can't `--privileged` at all" and "free for all cluster" - allowing users to safely do a lot of container-y things without having to mess with [container hooks](https://github.com/actions/runner-container-hooks) or [kaniko](https://github.com/GoogleContainerTools/kaniko).
 
 ```mermaid
 flowchart LR
     A(Build<br>`image:test`) --> B(Push to registry)
     B --> C(Deploy to<br>test namespace)
-    C --> D(Wait for<br>5 minutes)
-    D --> E(Run tests!)
-    E --> F(Delete the deployment)
+    C --> D(Run tests!)
+    D --> E(Delete the deployment)
 ```
 
 We're going to walk through the workflow above step-by-step.  Here's the finished files for the impatient. 😊
@@ -56,13 +52,13 @@ Kubernoodles is a _working demo_ repository.  There are design choices you are g
 
 Up front, you'll need:
 
-- A test namespace in a cluster, which isn't _truly_ isolated but we simply need some resource quotas for testing.  If you've been following along, it's already created and called `test-runners`.
+- A test namespace in a cluster.  If you've been following along, it's already created and called `test-runners`.
 - A way to deploy into that namespace / secret stored.  We're using all GitHub features for this.
 - A registry to pull from and push to.  We're using GitHub Packages for this.
 
 ## When to run this test?
 
-This workflow builds and tests proposed changes to runners in a dedicated namespace.  In my opinion, these don't need to be isolated onto another cluster, but it does need some resource constraints that a namespace could provide so as not to interfere with "real jobs".  It should at least run
+This workflow builds and tests proposed changes to runners in a dedicated testing namespace.  In my opinion, these don't need to be isolated onto another cluster, but it does need some resource constraints that a namespace could provide so as not to interfere with "real jobs".  It should at least run
 
 - on PR to the files changing the image
 - on demand, which is handy for troubleshooting
@@ -93,7 +89,9 @@ on:
 
 ## Build it
 
-After all these years, here's an appropriate use for `latest` tag!  We're going to use `test` though, since I 🙈 _shame_ 🙈 actually use `latest` in my demo deployment.  This checks out our repository, logs in to the container registry for our finished file using JIT [automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication), then builds and pushes the container.  Nothing fancy going on yet. 🥱
+After all these years, here's an appropriate use for `latest` tag!  We're going to use `test` though, since I 🙈 _shame_ 🙈 actually use `latest` in my demo deployment.
+
+This step checks out our repository, logs in to the container registry for our finished file using JIT [automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication), then builds and pushes the container.  Nothing fancy going on yet. 🥱
 
 {% raw %}
 ```yaml
@@ -123,14 +121,14 @@ After all these years, here's an appropriate use for `latest` tag!  We're going 
 
 ## Deploy it
 
-This prioritizes portability across vendors, so it uses a vanilla Kubernetes implementation and not a specific Action for a provider.  If you're deploying into a managed Kubernetes service in Azure/AWS/etc., use their official Action or CLI tooling on your runner image instead.  This step runs using secrets and variables defined for the `test` environment.  You can read more about defining and using environments (such as "test" and "prod") in the [docs](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
+In prioritizing portability across vendors, it uses a vanilla Kubernetes implementation and not a specific Action for a provider.  If you're deploying into a managed Kubernetes service in Azure/AWS/etc., use their official Action or CLI tooling on your runner image instead.  This step runs using secrets and variables defined for the `test` [environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
 
 > There's a questionable maneuver on writing the config file to disk here.  I talked about the reasoning and risks on doing this [here](../threat-modeling-actions#a-questionable-maneuver).  **tl;dr** is that is probably fine so long as it's safe to assume the runner executing this task is both ephemeral and has no other interactive task that could hijack the credentials in the time it's running.
 {: .prompt-warning}
 
-The GHCR login is used to bypass rate limits on pulling the OCI image for the listener on the runner scale set and runner images.  It is not _strictly_ necessary, but most large companies run the risk of hitting API rate limits.  This step avoids that in most cases.
+The GHCR login is used to bypass rate limits on pulling the OCI image for the listener on the runner scale set and runner images.  It is not _strictly_ necessary, but most large companies run the risk of hitting API rate limits.  This step avoids that.
 
-Deploying is a straightforward Helm chart with the values that we checked out at the start of the step, injected with some [secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions) and [variables](https://docs.github.com/en/actions/learn-github-actions/variables) that target the test environment.  The deployments are kept in the [`deployments` directory](https://github.com/some-natalie/kubernoodles/tree/main/deployments) of the project.
+Deploying is a straightforward Helm chart with the values that we checked out at the start of the step, injected with some [secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions) and [variables](https://docs.github.com/en/actions/learn-github-actions/variables) to target the test environment.  The deployments are kept in the [`deployments` directory](https://github.com/some-natalie/kubernoodles/tree/main/deployments) of the project.
 
 Finally, there are lots of methods to determine how healthy a Kubernetes deployment is and each project has their own opinion.  I've chosen to use a dead simple `sleep 300` to wait for 5 minutes to allow the new runner image to go where it needs, initialize, and connect to GitHub for a task.  It should be plenty enough time to succeed.  Other methods can be swapped in easily enough.
 
@@ -182,7 +180,7 @@ Finally, there are lots of methods to determine how healthy a Kubernetes deploym
 
 Let's make sure our runner image works.  This step runs only on the test runner, time limited to 15 minutes before failure to prevent stalling or hangups.
 
-Think carefully about what tests need to run.  In this case, we're doing the following:
+Think carefully about what tests need to run to provide comprehensive coverage of your usage.  In this case, we're doing the following:
 
 - Dumping some debug info to the console ([test code](https://github.com/some-natalie/kubernoodles/blob/main/tests/debug/action.yml))
 - Docker works and is available ([test code](https://github.com/some-natalie/kubernoodles/blob/main/tests/docker/action.yml))
@@ -258,7 +256,7 @@ I do not feel the need to alert anyone on failure of a PR check, but it's entire
 
 ## Keeping things tidy
 
-As expected, this generates a bunch of untagged images - each PR may have a few checks and all reuse the `test` tag.  They eat up a ton of disk space over time for no good reason.  Luckily, cleaning this up can also be regularly scheduled with a marketplace Action called [container-retention-policy](https://github.com/snok/container-retention-policy).  Here's the step to add to a routine cleanup job:
+This generates a bunch of untagged images - each PR may have a few checks and all reuse the `test` tag.  They eat up a ton of disk space over time for no good reason.  Luckily, cleaning this up can also be regularly scheduled with a marketplace Action called [container-retention-policy](https://github.com/snok/container-retention-policy).  Here's the step to add to a routine cleanup job:
 
 {% raw %}
 ```yaml

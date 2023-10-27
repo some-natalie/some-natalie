@@ -11,6 +11,16 @@ platforms:
     icon: "fab fa-linkedin"
     link: "https://www.linkedin.com/sharing/share-offsite/?url=URL"
 
+  - type: Mastodon
+    icon: "fa-brands fa-mastodon"
+    link: |
+      [
+        {&quot;label&quot;:&quot;infosec.exchange&quot;,&quot;link&quot;:&quot;https://infosec.exchange/&quot;},
+        {&quot;label&quot;:&quot;hachyderm.io&quot;,&quot;link&quot;:&quot;https://hachyderm.io/&quot;},
+        {&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},
+        {&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},
+        {&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;}]
+
   # - type: Twitter
   #   icon: "fab fa-twitter"
   #   link: "https://twitter.com/intent/tweet?text=TITLE&url=URL"

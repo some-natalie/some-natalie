@@ -17,8 +17,6 @@ Let's have your Actions runners build and test themselves!
 ![light](/assets/graphics/2023-10-25-kubernoodles-pt-7/pipeline-light.png){: .light .shadow .rounded-10}
 ![dark](/assets/graphics/2023-10-25-kubernoodles-pt-7/pipeline-dark.png){: .dark .shadow .rounded-10}
 
-This uses GitHub’s hosted runners and a commercial cloud Kubernetes cluster to build and test each change to the image.  Once finished, it can then be signed, scanned, and pulled into internal environments as needed for the self-hosted crowd - enabling image reuse across enterprise platforms.
-
 The custom runner in this case is rootless and sudoless, but still using Docker-in-Docker.  This is usually a nice middle ground between "can't `--privileged` at all" and "free for all cluster" - allowing users to safely do a lot of container-y things without having to mess with [container hooks](https://github.com/actions/runner-container-hooks) or [kaniko](https://github.com/GoogleContainerTools/kaniko).
 
 We're going to walk through the workflow above step-by-step.  Here's the finished files for the impatient. 😊
@@ -345,7 +343,9 @@ Naturally, the next question is "but I can't have internet though, can I still h
 ![first-try](/assets/graphics/2023-10-25-kubernoodles-pt-7/first-try.png){: .w-75 .shadow .rounded-10}
 _When GHES first shipped Actions in 3.0, this was a fun thing to figure out._
 
-You'll need to fling across:
+This example uses GitHub’s hosted runners and a commercial cloud Kubernetes cluster to build and test each change to the image.  Once finished, it can then be signed, scanned, and pulled into internal environments as needed for the self-hosted crowd - enabling image reuse across enterprise platforms.
+
+Adapting this to an air gap means moving the complete artifact and doing any modifications (eg, new certificates to trust) on the high side (simple) **or** bringing over literally everything to build it again (hard).  If you're going down that harder path, you'll need to fling across:
 
 - the base images (eg, `ubuntu`, `ubi`)
 - all of the software and certificates and such that you'll need

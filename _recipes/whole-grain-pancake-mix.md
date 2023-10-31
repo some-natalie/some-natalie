@@ -1,10 +1,10 @@
 ---
 title: "Whole grain pancake mix"
 classes: wide
-excerpt: "Make-ahead, shelf-stable pancake mix"
+excerpt: "Make-ahead, shelf-stable pancake mix 🥞"
 ---
 
-> Fast and nutritious pancake mix - good sweet or savory.
+> Fast and nutritious pancake mix - good sweet or savory.  🥞
 
 ## Ingredients
 

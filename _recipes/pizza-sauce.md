@@ -1,10 +1,10 @@
 ---
 title: "Pizza sauce"
 classes: wide
-excerpt: "Big batch of pizza sauce"
+excerpt: "Big batch of pizza sauce 🍕"
 ---
 
-> It's pizza sauce.
+> It's pizza sauce. 🍕
 
 ## Ingredients
 

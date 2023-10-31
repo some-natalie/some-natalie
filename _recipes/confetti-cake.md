@@ -1,10 +1,10 @@
 ---
 title: "Confetti cake"
 classes: wide
-excerpt: "Vanilla cake with sprinkles inside and on top!"
+excerpt: "Vanilla cake with sprinkles inside and on top! 🍰"
 ---
 
-> Vanilla cake with sprinkles inside and on top!
+> Vanilla cake with sprinkles inside and on top! 🍰
 
 ## Ingredients
 

@@ -34,7 +34,7 @@ I would like to make some family recipes publicly accessible without vendor lock
 ## Salad ratios
 
 | Name | Ratios |
-| Brussels sprouts | - 10 sprouts, shaved<br>- 1 small apple, finely diced<br>- 0.25 cup seeds or nuts<br>- 0.25 cup dried fruits<br>- 0.25 cup crumbly cheese (optional) |.
+| Brussels sprouts | - 10 sprouts, shaved<br>- 1 small apple, finely diced<br>- 0.25 cup seeds or nuts<br>- 0.25 cup dried fruits<br>- 0.25 cup crumbly cheese (optional) |
 
 ## Baking time chart
 

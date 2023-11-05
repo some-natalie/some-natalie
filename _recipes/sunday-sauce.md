@@ -38,3 +38,4 @@ excerpt: "Pasta with red sauce is good any day of the week.  Meat optional. 🍝
 - There's no need to be picky about the type of red wine.  I tend to use boxed red blend that sits in the pantry for cooking, but a quick pour from whatever you're drinking this evening works too.  Balsamic vinegar also works as a substitute.
 - Freezes and reheats excellently for fast meals from leftovers.
 - Don't like sausage?  Use pork shoulder, beef short ribs or chuck, or other "tough cut" instead.  Brown thoroughly, then simmer like a normal braise.  Optionally, shred the meat before serving.
+- For a more "woodsy" take, add a stem or two of fresh rosemary and a drop of liquid smoke, but take out about half of the onion (less sweet) and omit the parsley.  Goes well with beef chuck or pork shoulder for a hearty ragù.

@@ -18,6 +18,7 @@ To do that, we'll need to write comprehensive tests for our runners, using GitHu
 ## Test #0
 
 The first test isn't explicitly a test - it's the prior PR checks that validate the image:
+
 - can be built ([example](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/test-jammy-dind.yml%23L15-L46))
 - deployed via a Helm chart
 - initialize
@@ -42,7 +43,7 @@ runs:
     - name: "Python 3.10 is available"
       shell: bash
       run: |
-		python3 -V | grep "3.10"
+        python3 -V | grep "3.10"
 ```
 
 It's printing out the Python version, piping that output into the `grep` command, which then looks to see if the string `3.10` is there.  If it is, the exit code will be `0` and GitHub Actions will be a happy camper.  If not, the step fails and we should probably investigate.
@@ -182,12 +183,12 @@ runs:
     - name: "Python 3.10 is available"
       shell: bash
       run: |
-		python3 -V | grep "3.10"
-		if $? -ne 0; then
-		  echo "- ❌ docker run hello-world failed" >> $GITHUB_STEP_SUMMARY
-		else
-		  echo "- ✅ docker run hello-world succeeded" >> $GITHUB_STEP_SUMMARY
-		fi
+        python3 -V | grep "3.10"
+        if $? -ne 0; then
+          echo "- ❌ docker run hello-world failed" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- ✅ docker run hello-world succeeded" >> $GITHUB_STEP_SUMMARY
+        fi
 ```
 
 ## Conclusions

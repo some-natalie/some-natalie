@@ -17,12 +17,13 @@ Here's what has been done and where we're going.
 - [Part 5](../blog/kubernoodles-pt-5) - How to build your own custom images for actions-runner-controller!
 - [Part 6](../blog/kaniko-in-arc) - Using [Kaniko](https://github.com/GoogleContainerTools/kaniko) in actions-runner-controller to build containers without privileged pods.
 - [Part 7](../blog/kubernoodles-pt-7) - CI for your CI, or how to test your custom runner images on each change.
+- [Part 8](../blog/testing-runner-containers) - Test your enterprise CI images with the same rigor as your other software.
 
 Coming soon:
 
-- Writing tests for your custom runner images
 - Rebuilding and releasing custom runners on a schedule
 - Log streaming
+- More fun with [eBPF](https://ebpf.io)
 - Private registries
 - File caching
 

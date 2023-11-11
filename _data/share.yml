@@ -13,13 +13,19 @@ platforms:
 
   - type: Mastodon
     icon: "fa-brands fa-mastodon"
-    link: |
-      [
-        {&quot;label&quot;:&quot;infosec.exchange&quot;,&quot;link&quot;:&quot;https://infosec.exchange/&quot;},
-        {&quot;label&quot;:&quot;hachyderm.io&quot;,&quot;link&quot;:&quot;https://hachyderm.io/&quot;},
-        {&quot;label&quot;:&quot;fosstodon.org&quot;,&quot;link&quot;:&quot;https://fosstodon.org/&quot;},
-        {&quot;label&quot;:&quot;mastodon.social&quot;,&quot;link&quot;:&quot;https://mastodon.social/&quot;},
-        {&quot;label&quot;:&quot;mastodon.online&quot;,&quot;link&quot;:&quot;https://mastodon.online/&quot;}]
+    # See: https://github.com/justinribeiro/share-to-mastodon#properties
+    instances:
+      - label: infosec.exchange
+        link: "https://infosec.exchange/"
+      - label: hachyderm.io
+        link: "https://hachyderm.io/" 
+      - label: mastodon.social
+        link: "https://mastodon.social/"
+      - label: mastodon.online
+        link: "https://mastodon.online/"
+      - label: fosstodon.org
+        link: "https://fosstodon.org/"
+      - label: photog.social
 
   # - type: Twitter
   #   icon: "fab fa-twitter"

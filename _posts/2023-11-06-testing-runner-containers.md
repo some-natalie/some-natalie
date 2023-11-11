@@ -9,11 +9,24 @@ tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
+mermaid: true 
 ---
 
 [Last time](../kubernoodles-pt-7), we built a pipeline to test our custom CI container images on each proposed change.  It built and launched a runner, dumped some debug information to the console as a "test", then removed itself.  This is valuable, but definitely not robust enough to save serious engineering hours.
 
-To do that, we'll need to write comprehensive tests for our runners, using GitHub Actions to test itself.  Many of our basic infrastructure availability tests can be run as [composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) for reusability across different custom images.  Mostly, they wrap simple shell scripts to verify that something does or does not work as expected using the most basic utilities wherever possible.  These are all stored in the `~/tests` directory of our runner image repository ([link](https://github.com/some-natalie/kubernoodles/tree/main/tests)), then called by the workflows that build/test changes to the runners on pull request.  
+```mermaid
+flowchart LR
+    A(Build<br>`image:test`) --> B(Push to registry)
+    B --> C(Deploy to<br>test namespace)
+    subgraph Does it do the things we need?
+      C --> D(Run tests!)
+    end
+    D --> E(Delete the deployment)
+```
+
+To do that, let's spend more time in the highlighted box of the above diagram.  We'll write comprehensive tests for our runners, using GitHub Actions to test itself.
+
+Many of our basic infrastructure availability tests can be run as [composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) for reusability across different custom images.  Mostly, they wrap simple shell scripts to verify that something does or does not work as expected using the most basic utilities wherever possible.  These are all stored in the `~/tests` directory of our runner image repository ([link](https://github.com/some-natalie/kubernoodles/tree/main/tests)), then called by the workflows that build/test changes to the runners on pull request.
 
 ## Test #0
 

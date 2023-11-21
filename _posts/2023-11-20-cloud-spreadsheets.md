@@ -88,14 +88,14 @@ I can't pass inspection without power to the box.
 (╯°□°)╯︵ ┻━┻
 </b></p></div>
 
-A professional would have known this up front.  Another $1800 was spent to have a licensed electrician pat my back and reinstall the meter to pass inspection, turning my utility account back on.  I spent way more money and time than I otherwise would have if I'd started at not doing it myself.[^console] 😑
+A local professional would have known this up front.  Another $1800 was spent to have a licensed electrician pat my back and reinstall the meter to pass inspection, turning my utility account back on.  I spent way more money and time than I otherwise would have if I'd started at not doing it myself.[^console] 😑
 
 ![money-tweety-bird](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/money-emma-webster.gif){: .w-50 .shadow .rounded-10}
 _how finance sees cloud spend and how my DIY projects are funded_
 
 ## Lessons learned
 
-Don't dogmatically resist hiring out the parts of your ~~home improvement~~ business infrastructure.  The decision is never as simple as _only_ numbers in a spreadsheet or a thought piece on social media.  It's okay to iterate between strategy and napkin math a few times.
+Don't dogmatically resist hiring out the parts of your ~~home improvement~~ business infrastructure.  The decision is never as simple as _only_ numbers in a spreadsheet or a thought piece on social media.  It's good to iterate between strategy and napkin math a few times _before_ spending hours to create detailed designs, cost comparisons, and other planning documents.
 
 Take a moment to first consciously consider hiring a (SaaS) professional or staying skilled enough to keep it on-premises as a technology strategy to the problem you're facing. 🧘‍♀️
 

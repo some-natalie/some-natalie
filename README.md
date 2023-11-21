@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### :memo: I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Cloud cost spreadsheets ask the wrong question](https://some-natalie.dev/blog/cloud-spreadsheets):  Or what I learned replacing the 200A breaker panel on my house ⚡
 1. [Writing tests for your Actions runners](https://some-natalie.dev/blog/testing-runner-containers):  (Kubernoodles, part 8 of ?) - Test your enterprise CI with the same rigor as your other software 🧪
 1. [CI for your CI - building and testing your custom runner images](https://some-natalie.dev/blog/kubernoodles-pt-7):  (Kubernoodles, part 7 of ?) - Continuously shipping CI as an enterprise service, continuously 😉
-1. [Kodi setup on a Raspberry Pi 4](https://some-natalie.dev/blog/kodi-setup):  🍿 Movie night, locally
 <!-- END_SECTION:latest_posts -->
 
 ### :briefcase: Day to day, I work with

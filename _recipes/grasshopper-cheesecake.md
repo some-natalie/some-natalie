@@ -21,7 +21,7 @@ excerpt: "Creme de menthe and cocoa cheesecake in a chocolate cookie crust"
 
 ## Directions
 
-1. Preheat oven to 300 degrees F. 
+1. Preheat oven to 300°F. 
 1. Combine crumbs and butter; press firmly on bottom of a 9-inch springform pan. 
 1. In large mixer bowl, beat cream cheese until fluffy. Gradually beat in sweetened condensed milk until smooth. Add eggs; mix well. 
 1. Divide batter in half (about 3 cups each); beat cocoa, 2 tablespoons white creme de cacao, and vanilla into one half of the batter. Pour into prepared pan. 

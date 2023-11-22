@@ -16,6 +16,6 @@ excerpt: "Sweet corn spoonbread from family gatherings"
 
 ## Directions
 
-1. Preheat oven to 350° F.  Grease a 9x13" pan.
+1. Preheat oven to 350°F.  Grease a 9x13" pan.
 1. Mix all together.
 1. Bake for about 20 minutes or until golden.

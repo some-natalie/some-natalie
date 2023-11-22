@@ -19,7 +19,7 @@ excerpt: "Big batch of pizza sauce 🍕"
 
 ## Directions
 
-1. Preheat oven to 225° F (about 110° C).
+1. Preheat oven to 225°F (about 110°C).
 1. Combine all ingredients in a dutch oven.
 1. Bake with the lid slightly cracked for 4-6 hours.
 1. Remove and use for pizza, dipping bread, etc.

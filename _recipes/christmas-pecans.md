@@ -20,7 +20,7 @@ excerpt: "Nana's handwritten recipe for the spiced pecans she'd make at Christma
 ## Directions
 
 1. Mix altogether and add pecans.
-1. Bake at 250° F for 55 minutes.
+1. Bake at 250°F for 55 minutes.
 
 ## Notes
 

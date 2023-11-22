@@ -23,7 +23,7 @@ excerpt: "Pasta with red sauce is good any day of the week.  Meat optional. 🍝
 
 ## Directions
 
-1. Preheat oven to 225° F (about 110° C).
+1. Preheat oven to 225°F (about 110°C).
 1. In a big dutch oven over medium heat, sweat the onions in a little bit of olive oil until translucent (about 5-10 minutes).
 1. Add the garlic and cook until fragrant, about a minute.
 1. Add the sausage and stir in the onions and garlic to help break it up some, about 3 minutes.

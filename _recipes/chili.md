@@ -40,7 +40,7 @@ excerpt: "As meaty (or vegetarian or vegan) as you’d like.  As spicy as you wa
 1. Cook onions until translucent in oil, about 5-10 minutes.  Scrape up all the nice brown bits from the meat.
 1. Add the minced garlic and cook until fragrant, maybe a minute.  
 1. Add everything else into the big dutch oven (including whole muscle cut meat, but not tofu or ground meat if using).
-1. Simmer for around 6 hours (on low on the stove and stir or in a 250F oven with the pot’s lid cracked), adding water as needed.
+1. Simmer for around 6 hours (on low on the stove and stir or in a 250°F oven with the pot’s lid cracked), adding water as needed.
 1. (about 30 minutes before serving) If using whole muscle cut meat, shred the meat and return to dutch oven.  If using ground meat, brown and toss into the chili.  If using tofu, crumble or cut and add to the pot.
 1. Serve with cheese, cornbread, and any other toppings.
 
@@ -50,4 +50,4 @@ excerpt: "As meaty (or vegetarian or vegan) as you’d like.  As spicy as you wa
 - If I'm making this for vegans, I use vegetable oil and don't add tofu or other meat alternatives at all.  Just the beans and vegetables are fabulous.
 - If I'm making this for folks who eat meat, I tend to use rendered bacon fat and cubed pork shoulder.
 - Sometimes it helps to use a pinch or two of baking soda in the water used to soak beans, especially if the beans are older.  Rinse all of the beans and pick them over for debris before cooking.
-- :hot_pepper: I think this is quite mild, flavorful but not at all spicy.
+- 🌶️ I think this is quite mild, flavorful but not at all spicy.

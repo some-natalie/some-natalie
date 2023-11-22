@@ -17,7 +17,7 @@ excerpt: "Easy breakfasts made in advance, tons of variations."
 
 ## Directions
 
-1. Preheat oven to 350° F
+1. Preheat oven to 350°F.
 1. Mix 4 eggs, half and half, and salt and pepper.  Set aside.
 1. Put cheese and any other mix-ins into pie crust.
 1. Pour egg mixture into pie crust.

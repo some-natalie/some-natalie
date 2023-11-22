@@ -24,7 +24,7 @@ excerpt: "Cookies to feed the entire scouting troop for a whole trip"
 
 1. In large bowl combine all ingredients, mix until well blended.
 1. Drop by large spoonfuls onto ungreased cookie sheet.
-1. Bake at 350 degrees F. for 12 minutes (or so).
+1. Bake at 350°F. for 12 minutes (or so).
 
 ## Notes
 

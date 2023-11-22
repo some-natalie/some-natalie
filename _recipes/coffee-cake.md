@@ -36,7 +36,7 @@ excerpt: "Crumbly cinnamon coffee cake"
 1. _For the Cake_ - Grease two 9" cake pans. With electric mixer on medium-low speed, mix flour, sugars, baking powder, baking soda, cinnamon, and salt in large bowl. Beat in butter, 1 tablespoon at a time, until mixture is crumbly, with pea-sized pieces, 1 to 2 minutes. Add eggs, one at a time, until combined. Add sour cream in 3 additions, scraping down bowl as necessary. Increase speed to medium-high and beat until batter is light and fluffy, about 2 minutes.
 1. Divide half of butter between prepared pans. Sprinkle streusel without nuts evenly over each
 pan. Divide remaining batter evenly between pans and top with nutty streusel.
-1. Adjust oven rack to middle position and heat oven to 350 degrees. Unwrap cakes and bake until golden brown and toothpick inserted in center comes out with a few dry crumbs attached, about 45 minutes (about 55 if frozen). Cool at least 15 minutes. Serve.
+1. Adjust oven rack to middle position and heat oven to 350°F. Unwrap cakes and bake until golden brown and toothpick inserted in center comes out with a few dry crumbs attached, about 45 minutes (about 55 if frozen). Cool at least 15 minutes. Serve.
 
 ## Notes
 

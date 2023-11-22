@@ -26,7 +26,7 @@ excerpt: "The deep fryer comes out of the pantry about once a year and this is w
 
 1. Combine the 7 spices and reserve half the mixture. Cut the chicken into 1-inch pieces. Place chicken in a bowl with half of the spice mixture. Toss until covered. Pour 2 cups of buttermilk in, cover and chill for 24 hours.
 1. Mix half the spice mixture, bread crumbs, and flour together. Remove chicken pieces, discard buttermilk. Dredge chicken in breadcrumb mixture.
-1. Heat oil to 350 degrees. Fry chicken until done.
+1. Heat oil to 350°F. Fry chicken until done.
 
 ## Notes
 

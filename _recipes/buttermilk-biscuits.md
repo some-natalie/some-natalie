@@ -23,7 +23,7 @@ excerpt: "Fast whole-grain drop biscuits"
 1. Add just enough buttermilk to make a heavy, wet dough
 1. "Knead" the dough lightly until it sticks together
 1. Pat dough out on a well-floured surface to approximately one inch thick _or_ drop it by large spoonful onto an ungreased cookie sheet
-1. Bake in preheated 425 degree oven approximately 10 minutes, and cool on a wire rack
+1. Bake in preheated 425°F oven approximately 10 minutes, and cool on a wire rack
 
 ## Notes
 

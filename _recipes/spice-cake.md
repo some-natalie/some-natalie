@@ -26,7 +26,7 @@ excerpt: "Warm fall spices in a rich buttermilk cake"
 
 1. Whisk dry ingredients together
 1. Add wet ingredients and stir to combine
-1. Bake for 25 min in two greased 9 inch cake pans at 350.
+1. Bake for 25 min in two greased 9 inch cake pans at 350°F.
 
 ## Notes
 

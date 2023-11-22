@@ -20,7 +20,7 @@ excerpt: "Shelf-stable high-energy trail snack"
 1. Start by mixing together the first five ingredients.
 1. Mix in the nuts and oatmeal.
 1. Spread the mixture in a large sheet pan. Press it down into the pan.
-1. Bake at 325 F in a convection (wind) oven for 15 to 18 minutes.
+1. Bake at 325°F in a convection (wind) oven for 15 to 18 minutes.
 1. As soon as the bread is taken from the oven, use a spatual to press it down (to keep it from crumbling).
 1. Cut the bread while it is still warm.
 

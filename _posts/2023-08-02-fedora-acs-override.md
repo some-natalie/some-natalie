@@ -153,6 +153,7 @@ To set the build ID, add these two lines near the top of the spec file with the 
 # Set buildid
 %define buildid .acs
 ```
+{: file='~/rpmbuild/SPECS/kernel.spec'}
 
 To add the patch, add the two lines below to the spec file in the section for patches (usually right below the sources).  The exact number of the patch here isn't _too_ important.  It does specify the order of application (lower patches applied first), but this is good to be applied last.
 
@@ -160,12 +161,14 @@ To add the patch, add the two lines below to the spec file in the section for pa
 # ACS override patch
 Patch1000: add-acs-override.patch
 ```
+{: file='~/rpmbuild/SPECS/kernel.spec'}
 
 Then tell it to apply the patch in the `prep` section. It will be below the `ApplyOptionalPatch()` function definition, normally right above the `# END OF PATCH APPLICATIONS` comment.
 
 ```config
 ApplyOptionalPatch add-acs-override.patch
 ```
+{: file='~/rpmbuild/SPECS/kernel.spec'}
 
 ### Compile the kernel
 
@@ -231,6 +234,7 @@ Edit `/etc/modprobe.d/kvm.conf`.  These two lines are commented out due to stabi
 #options kvm_intel nested=1
 #options kvm_amd nested=1
 ```
+{: file='/etc/modprobe.d/kvm.conf'}
 
 ### Deal with host drivers
 
@@ -264,6 +268,7 @@ lsmod | grep nvidia    # This should display at least a couple things
     ```shell
     GRUB_CMDLINE_LINUX="rd.driver.pre=vfio-pci rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1 resume=/dev/mapper/arch-swap rd.lvm.lv=arch/root rd.lvm.lv=arch/swap rhgb quiet intel_iommu=on iommu=pt pcie_acs_override=downstream"
     ```
+    {: file='/etc/default/grub'}
 
     Here's what each command does:
 
@@ -294,6 +299,7 @@ lsmod | grep nvidia    # This should display at least a couple things
     ```config
     install vfio-pci /sbin/vfio-pci-override.sh
     ```
+    {: file='/etc/modprobe.d/local.conf'}
 
     This file tells `modprobe` we're going to need to run an install script later on in the boot process.
 

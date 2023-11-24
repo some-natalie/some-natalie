@@ -55,6 +55,7 @@ jobs:
           echo "Number: ${{ matrix.number }}"
           echo "Letter: ${{ matrix.letter }}"
 ```
+{: file='~/.github/workflows/arc2-test.yml'}
 
 ## Print debug information from the runner
 
@@ -101,6 +102,7 @@ jobs:
         pwd
         ls -lah .
 ```
+{: file='~/.github/workflows/arc2-debug.yml'}
 
 ## Leave the runner up for inbound connection
 
@@ -126,6 +128,7 @@ jobs:
           echo "Hello world"
           sleep 3600
 ```
+{: file='~/.github/workflows/arc2-sleep.yml'}
 
 ## Test container mode
 
@@ -159,6 +162,7 @@ jobs:
           echo "Number: ${{ matrix.number }}"
           echo "Letter: ${{ matrix.letter }}"
 ```
+{: file='~/.github/workflows/arc2-container-test.yml'}
 
 ## Next
 

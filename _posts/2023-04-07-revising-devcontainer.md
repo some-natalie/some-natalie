@@ -70,6 +70,7 @@ for repo in $REPOS; do
     git clone https://github.com/"$repo".git /workspaces/"$repo_name"
 done
 ```
+{: file='~/.devcontainer/post-create.sh'}
 
 Make sure it's executable and add it to our `devcontainer.json` file as (one of) the `postCreateCommand` scripts.
 
@@ -89,8 +90,8 @@ for repo in $REPOS; do
     repo_name=$(echo "$repo" | cut -d'/' -f2) # split the repo name from owner
     code-insiders --add /workspaces/"$repo_name"
 done
-
 ```
+{: file='~/load-workspace.sh}
 
 Swap `code-insiders` for `code` if you want to use the insider's edition of VS Code instead.  Weirdly enough, `code` doesn't exist at the creation/start/attach points of the [lifecycle](https://containers.dev/implementors/spec/#lifecycle) so it must be run by the user after first attach.  We also want jekyll to run on _every_ attach as well, starting our webserver.  
 

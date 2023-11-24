@@ -68,6 +68,7 @@ When a repository is opened in a Codespace without a pre-defined devcontainer, y
   "postAttachCommand": "bundle exec jekyll serve --livereload"
 }
 ```
+{: file='~/.devcontainer/devcontainer.json'}
 
 You should be able to copy/paste this file as a starting point for most basic Jekyll sites.  There's many more base images to use and layer together to fit your project's needs - the official list is in [this repository](https://github.com/devcontainers/images).  I created a multi-container application example [here](https://github.com/octodemo/webhook-demo/blob/main/.devcontainer/devcontainer.json) to show off more complicated features available in devcontainers ([documentation](https://code.visualstudio.com/docs/devcontainers/containers)).  As for this project, it's a relief to not have to mess with dependencies on my laptop every time I want to learn a little something new.
 

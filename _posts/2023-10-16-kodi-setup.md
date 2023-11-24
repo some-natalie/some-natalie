@@ -81,6 +81,7 @@ RestartSec = 5
 [Install]
 WantedBy = multi-user.target
 ```
+{: file='/lib/systemd/system/kodi.service'}
 
 Note you will need to edit the `user` and `group` to match the username you created.  Enable the service to start Kodi automatically at boot:
 

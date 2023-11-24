@@ -213,6 +213,7 @@ for g in /sys/kernel/iommu_groups/*; do
     done;
 done;
 ```
+{: file='iommu-group.sh'}
 
 ### Install the hypervisor software
 
@@ -302,6 +303,7 @@ lsmod | grep nvidia    # This should display at least a couple things
     add_drivers+= " vfio vfio_iommu_type1 vfio_pci vfio_virqfd "
     install_items+=" /sbin/vfio-pci-override.sh /usr/bin/find /usr/bin/dirname "
     ```
+    {: file='/etc/dracut.conf.d/local.conf'}
 
     Dracut is a (mostly Red Hat specific) framework to make that transition between an initial ram drive and finding the real bootable system partition less reliant on specific scripts, arguments, and other shenanigans between kernel versions.  Upgrading your kernel used to be really hard and this is one of the abstractions to make it more reliable and easier on us humans.
 
@@ -325,6 +327,7 @@ lsmod | grep nvidia    # This should display at least a couple things
     
     modprobe -i vfio-pci
     ```
+    {: file='/sbin/vfio-pci-override.sh'}
 
     You likely need to modify the line that starts with `DEVS` to be the device IDs of the devices you're going to give to the VM (and therefore use the passthrough `vfio-pci` driver for).  This script will iterate over them, overriding whatever driver the system thinks it should use with what operates like a placeholder.  These devices will be unavailable for use by the host machine, but will allocate themselves to the VM when it starts.
 

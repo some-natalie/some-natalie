@@ -17,16 +17,17 @@ excerpt: "Beans baked with molasses and salt pork"
 - 0.25 lbs bacon or salt pork
 - 1 small onion, finely diced
 - a splash or two of apple cider vinegar
+- Ham bone (optional)
 
 ## Directions
 
 1. Soak beans for a whole day in water with a bit of salt in it.
 1. Drain and rinse the beans. 
-1. Par-cook for an hour or so with the powdered onion, garlic, and sage.  Boil, then simmer uncovered.
-1. Drain and rinse the beans, reserve bean broth.  Set aside.
+1. Par-cook for an hour or so with the powdered onion, garlic, sage, and the ham bone (if using).  Boil, then simmer uncovered.
+1. Drain and rinse the beans, reserve bean broth.  Pick any ham off the bone.  Set aside.
 1. In a dutch oven, cook pork until fat renders and it's more or less done.  Remove all but a tablespoon or two of fat.
-1. Add the onion and cook until translucent
-1. Add in the beans, molasses, dijon mustard, a drop or two of liquid smoke (optional), and a couple turns of the pepper mill.  Add bean broth until the beans are covered, stir.
+1. Add the onion and cook until translucent.
+1. Add in the beans, molasses, dijon mustard, a drop or two of liquid smoke (optional), any bits of ham from the bone, and a couple turns of the pepper mill.  Add bean broth until the beans are covered, stir.
 1. Bake uncovered at 300°F for 4-6 hours or so, until done.  Add bean broth water as needed to keep the beans from drying out.
 1. Once done, add a splash of vinegar and a pinch of salt at the end, to taste.
 

@@ -61,7 +61,7 @@ This is all completely opinionated - just wanted to write down the combination t
 | Beef tri-tip roast | 134°F / 57°C | 2 ± 2 hours | sear before serving |
 | Burgers | 124°F / 51°C | 1.5-2 hours | finish on pan or grill |
 | Dulce de Leche | 185°F / 85°C | 12 hours | 1 can sweetened condensed milk, that's it! |
-| Egg bites | 172°F / 78°C | 1 hour | - 6 eggs<br>- 0.25 cup cream cheese<br>- 0.5 cup cheese<br>- other mix ins | 
+| Egg bites | 172°F / 78°C | 1 hour | - 6 eggs<br>- 0.25 cup cream cheese<br>- 0.5 cup cheese<br>- other mix ins |
 | Poached pears or apples | 176°F / 80°C | 1 hour | - 2 cups white wine<br>- 2 cups water<br>- 1 cup maple syrup<br>- 4 pears or apples |
 | Pork shoulder | 185°F / 85°C | 12 ± 4 hours | shred, broil for 5-10 minutes at end |
 | Salmon | 120°F / 49°C | 45 ± 15 minutes<br>based on thickness | add fat and some aromatics to bag |
@@ -71,7 +71,7 @@ This is all completely opinionated - just wanted to write down the combination t
 
 Recommended stand mixer speed for each attachment.  I lost the manuals to these years ago.
 
-### Pasta rolling set	
+### Pasta rolling set
 
 | attachment | speed |
 | --- | --- |
@@ -82,7 +82,7 @@ Recommended stand mixer speed for each attachment.  I lost the manuals to these 
 ### Pasta extruder
 
 | attachment | speed |
-| --- | --- |	
+| --- | --- |
 | spaghetti plate | 10 |
 | bucatini plate | 10 |
 | rigatoni plate | 6 |
@@ -100,7 +100,7 @@ Recommended stand mixer speed for each attachment.  I lost the manuals to these 
 | slicing blade (large core) | 6 |
 | peeling blade | 4 |
 
-### Other attachments	
+### Other attachments
 
 | attachment | speed |
 | --- | --- |

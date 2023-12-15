@@ -32,4 +32,3 @@ excerpt: "Simple syrup with fruits and herbs for desserts and drinks"
 
 - Acidity from the lemon juice is needed to preserve the syrup and balance out the sugar.
 - **DO NOT CAN** - this is _not_ a canning recipe and the acidity has not been checked.  This can be frozen for long-term storage instead.
- 

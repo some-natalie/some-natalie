@@ -55,7 +55,7 @@ omit: true
 
 ### Za'atar
 
-Equal parts, ground with a mortar and pestle, of 
+Equal parts, ground with a mortar and pestle, of
 
 - dried thyme
 - dried sumac
@@ -117,10 +117,9 @@ Use with strong broth (vegetable or chicken) and a flavorful fat (butter, extra 
 
 - 4 tbsp dark brown sugar
 - 1 tbsp paprika
-- 2 tsp table salt (double for Kosher salt) 
+- 2 tsp table salt (double for Kosher salt)
 - 1 tsp ground coriander
 - 1 tsp ground cumin
 - 1 tsp freshly ground black pepper
-- 0.5 tsp ground fennel seed 
+- 0.5 tsp ground fennel seed
 - 0.25 tsp ground chipotle chili pepper, optional
- 

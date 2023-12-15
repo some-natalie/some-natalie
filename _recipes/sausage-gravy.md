@@ -16,7 +16,7 @@ excerpt: "Easy breakfast gravy"
 - 0.5 teaspoon garlic powder
 - 0.25 tsp ground mustard
 - 0.25 tsp dried marjoram
-- 1 Tbsp maple syrup 
+- 1 Tbsp maple syrup
 - 4 Tbsp all-purpose flour
 - 2.25 cups whole milk
 - More salt and black pepper, to taste
@@ -27,7 +27,7 @@ excerpt: "Easy breakfast gravy"
 1. Add meat and seasonings, stirring constantly to break it up.  Cook for a few minutes.
 1. Add flour and stir until fully coating everything in the pan.
 1. Slowly pour in milk, stirring constantly to prevent clumps.
-1. Cook until it simmers, then remove from heat.  Gravy will thicken as it stands! 
+1. Cook until it simmers, then remove from heat.  Gravy will thicken as it stands!
 1. Taste, adjust salt and pepper as needed, then serve.
 
 ## Notes

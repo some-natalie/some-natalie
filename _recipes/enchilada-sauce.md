@@ -27,4 +27,3 @@ excerpt: "Red enchilada sauce."
 
 - This is super mild for kids.  Double the ancho and chipotle chili powder and add 0.25 to 0.5 tsp of cayenne pepper to make it more spicy.
 - To make vegan (or if you don't have bacon fat on hand), use vegetable oil and an optional couple drops liquid smoke.
- 

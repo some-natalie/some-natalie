@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Needs no introduction, just time"
 ---
 
-> Needs no introduction - a favorite Creole one-pot of meat, tons of veggies, and rice 
+> Needs no introduction - a favorite Creole one-pot of meat, tons of veggies, and rice
 
 ## Ingredients
 
@@ -32,7 +32,7 @@ excerpt: "Needs no introduction, just time"
 1. Preheat oven to 375°F. Cut all the meats and veggies, open all the cans, measure all the spices - this dish has layers, but it comes together faster than veggies can be chopped.
 1. Fry the bacon in a dutch oven over low heat until done.  Remove the bacon, reserve for later use.
 1. Add the chicken and brown thoroughly.  Remove, reserve for later.
-1. In the same pot over medium-high heat, add the onions and bell peppers and celery.  Cook until the onions turn translucent and start to brown. 
+1. In the same pot over medium-high heat, add the onions and bell peppers and celery.  Cook until the onions turn translucent and start to brown.
 1. Add garlic, diced tomatoes, tomato paste, andouille, and ham.  Sauté until the meats just begin to turn brown.
 1. Deglaze the pot with beer.
 1. Add the chicken, tomato paste, Ro-Tel, parsley and green onions, and seasonings.
@@ -48,4 +48,3 @@ excerpt: "Needs no introduction, just time"
 - If cooking for kids that don't like spice, omit the cayenne pepper.
 - Serve with hot sauce.
 - Recipe fits in a 5.5 quart dutch oven
- 

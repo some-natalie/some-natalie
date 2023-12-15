@@ -31,4 +31,3 @@ excerpt: "It's bacon and booze in your mac and cheese, great BBQ side dish."
 - Will always be an empty dish at the end of any potluck.
 - Potato starch works best, but Wondra flour will do the trick if needed.
 - Other sharp-ish cheeses will work.
- 

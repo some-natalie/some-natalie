@@ -8,12 +8,12 @@ excerpt: "Shelf-stable high-energy trail snack"
 
 ## Ingredients
 
-1.5 pounds margarine or butter 4 cups sugar
-0.67 cup corn syrup
-0.67 cup honey
-2 teaspoons maple flavoring
-1.5 cups ground nuts
-19 cups oatmeal
+- 1.5 pounds margarine or butter 4 cups sugar
+- 0.67 cup corn syrup
+- 0.67 cup honey
+- 2 teaspoons maple flavoring
+- 1.5 cups ground nuts
+- 19 cups oatmeal
 
 ## Directions
 
@@ -25,7 +25,6 @@ excerpt: "Shelf-stable high-energy trail snack"
 1. Cut the bread while it is still warm.
 
 ## Notes
- 
+
 - For home preparation, cut the recipe at least in half.
 - A conventional oven requires a longer baking time than convection, time may need adjusting.
- 

@@ -34,4 +34,3 @@ excerpt: "Easy breakfasts made in advance, tons of variations."
   - fresh spring herbs (chives, chervil, parsley, tarragon, etc.)
   - caramelized onions
   - fresh onions and bell peppers
- 

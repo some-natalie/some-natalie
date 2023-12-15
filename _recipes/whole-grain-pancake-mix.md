@@ -43,7 +43,7 @@ excerpt: "Make-ahead, shelf-stable pancake mix 🥞"
 
 ## Notes
 
-- Adapted from King Arthur Baking's recipe for [whole grain pancake mix](https://www.kingarthurbaking.com/recipes/homemade-whole-grain-pancake-mix-recipe). 
+- Adapted from King Arthur Baking's recipe for [whole grain pancake mix](https://www.kingarthurbaking.com/recipes/homemade-whole-grain-pancake-mix-recipe).
 - Yield
   - a batch using 1 cup of the mix will make about 5 to 8 pancakes, depending on size.
   - the entire batch makes a bit more than 8 cups of mix

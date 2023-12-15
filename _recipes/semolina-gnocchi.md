@@ -9,14 +9,14 @@ excerpt: "Make-ahead sheet pan semolina gnocchi"
 ## Ingredients
 
 - 6 cups whole milk
-- A small pinch of roasted granulated garlic 
+- A small pinch of roasted granulated garlic
 - 1.5 cups semolina flour
 - 8 tablespoons (1 stick) butter
 - 0.75 cups grated Parmigiano-Reggiano
 - 0.75 cups grated Asiago
 - Salt and freshly ground black pepper, to taste
 
-## Directions 
+## Directions
 
 1. In a large dutch oven, combine the milk and butter.  Heat on low until the butter is fully melted.
 1. Slowly whisk in the semolina flour, granulated garlic, and some salt and pepper.  Taste.
@@ -31,4 +31,3 @@ excerpt: "Make-ahead sheet pan semolina gnocchi"
 - Go light or omit the garlic.  A little goes a LONG way.
 - Other tasty additions include some basil or parsley, thyme, or goat cheese instead of Parmesan and Asiago.
 - If you want to get fancy, it should set firmly enough to cut it with a cookie cutter before roasting.
- 

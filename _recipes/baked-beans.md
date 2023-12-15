@@ -9,11 +9,11 @@ excerpt: "Beans baked with molasses and salt pork"
 ## Ingredients
 
 - 0.5 lbs Great Northern beans
-- A little powdered onion, powdered garlic, and rubbed sage 
-- 0.33 cup molasses 
-- 1 tsp dijon mustard 
-- freshly ground black pepper 
-- a drop or two of liquid smoke 
+- A little powdered onion, powdered garlic, and rubbed sage
+- 0.33 cup molasses
+- 1 tsp dijon mustard
+- freshly ground black pepper
+- a drop or two of liquid smoke
 - 0.25 lbs bacon or salt pork
 - 1 small onion, finely diced
 - a splash or two of apple cider vinegar
@@ -22,7 +22,7 @@ excerpt: "Beans baked with molasses and salt pork"
 ## Directions
 
 1. Soak beans for a whole day in water with a bit of salt in it.
-1. Drain and rinse the beans. 
+1. Drain and rinse the beans.
 1. Par-cook for an hour or so with the powdered onion, garlic, sage, and the ham bone (if using).  Boil, then simmer uncovered.
 1. Drain and rinse the beans, reserve bean broth.  Pick any ham off the bone.  Set aside.
 1. In a dutch oven, cook pork until fat renders and it's more or less done.  Remove all but a tablespoon or two of fat.

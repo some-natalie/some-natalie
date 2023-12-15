@@ -20,4 +20,3 @@ excerpt: "Ditch the glaze packet, use this instead."
 ## Directions
 
 1. Mix over low heat.  Use as a ham glaze.
- 

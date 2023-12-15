@@ -11,7 +11,7 @@ excerpt: "The Thanksgiving dessert"
 - 1 can (15 oz) pumpkin puree (not the pie mix)
 - 1 can (12 oz) evaporated milk
 - 2 eggs
-- 0.75 cup packed light brown sugar 
+- 0.75 cup packed light brown sugar
 - 1 tsp ground cinnamon
 - 0.5 tsp ground nutmeg
 - 0.5 tsp salt
@@ -29,4 +29,3 @@ excerpt: "The Thanksgiving dessert"
 ## Notes
 
 - More or less the same recipe that's on the back of the pumpkin puree can.
- 

@@ -25,7 +25,7 @@ omit: true
 
 - 0.25 cup light olive oil
 - 2 tbsp lemon juice
-- 2 tablespoons minced garlic 
+- 2 tablespoons minced garlic
 - 1 tbsp dried oregano
 - 0.5 tsp ground coriander seed
 - Kosher salt and freshly ground black pepper, to taste
@@ -39,11 +39,11 @@ If using for meat, do not use for more than 4-ish hours.  It's acidic enough to 
 - 2 tablespoons grated fresh ginger (or 1/2 tsp. ground ginger)
 - 2 tablespoons rice vinegar (or red wine vinegar)
 - 1 tablespoon sesame oil
-- 1 tablespoon toasted sesame seeds 
+- 1 tablespoon toasted sesame seeds
 - 1 teaspoon vegetable oil
 - 0.5 cup thinly-sliced green onions
 
-Optional garnishes: extra thinly-sliced green onions, extra toasted sesame seeds, coarsely-ground black pepper, sriracha or chili crisp, cornstarch to thicken 
+Optional garnishes: extra thinly-sliced green onions, extra toasted sesame seeds, coarsely-ground black pepper, sriracha or chili crisp, cornstarch to thicken
 
 ### Teriyaki
 
@@ -55,7 +55,7 @@ Optional garnishes: extra thinly-sliced green onions, extra toasted sesame seeds
 ### Adobo
 
 - 1 cup water
-- 1 cup rice vinegar 
+- 1 cup rice vinegar
 - 1 cup soy sauce
 - 3 tbsp minced garlic
 - 1 tbsp whole black peppercorns

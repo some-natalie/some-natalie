@@ -40,7 +40,7 @@ All scaled to 8 ounces of pasta, scale up/down accordingly.  Salt and pepper to 
 - 2 tablespoons of extra virgin olive oil
 - 3 cups vegetable broth
 - 0.25 cups white wine
-- Grated asiago, for serving 
+- Grated asiago, for serving
 
 ### Caramelized onion
 
@@ -90,8 +90,9 @@ If you want this more "soup-y", add more broth. 👩‍🍳
 - A splash of heavy cream _or_ pat of butter, as needed to emulsify correctly
 
 Optional toppings
-  - Panko 
-  - Scallions
-  - Hot sauce
- 
+
+- Panko
+- Scallions
+- Hot sauce
+
 This is a pick-your-own adventure recipe.  I tend to use sharp cheeses and a mustard BBQ sauce, which are closer to traditional "mac and cheese" flavors.  Use elbow macaroni or other sturdy shape that will hold up to stirring while the cheese melts.  Depending on the fat and moisture of the cheeses, a little bit of extra fat at the end (cream or butter, etc) will be needed to correct the texture of the sauce.

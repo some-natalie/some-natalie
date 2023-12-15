@@ -43,11 +43,11 @@ excerpt: "Vanilla cake with sprinkles inside and on top! 🍰"
 1. Remove the cake from the oven and either serve the cake warm from the oven or allow it to cool completely in the pan before frosting.
 
 ### For frosting
- 
+
 1. Beat butter, confectioners’ sugar, and salt together until more or less smooth.
 1. Add vanilla and a little water.  Stir.
 1. Repeat adding water and stirring until spreadable, about 2 Tbsp.
-1. Frost in the pan. 
+1. Frost in the pan.
 1. Top with sprinkles!
 
 ## Notes
@@ -55,4 +55,3 @@ excerpt: "Vanilla cake with sprinkles inside and on top! 🍰"
 - Adapted from [King Arthur Baking Company](https://www.kingarthurbaking.com/)'s recipe for [vanilla cake pan cake](https://www.kingarthurbaking.com/recipes/vanilla-cake-pan-cake-recipe)
 - Stores at room temp for a few days.
 - Freezes well without frosting.
- 

@@ -29,4 +29,3 @@ excerpt: "Cookies to feed the entire scouting troop for a whole trip"
 ## Notes
 
 - This recipe is all about packing a ton of calories in a shelf-stable format for all day outdoor activities.
- 

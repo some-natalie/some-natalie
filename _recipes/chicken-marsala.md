@@ -30,4 +30,3 @@ excerpt: "Simple chicken marsala"
 
 - Wondra is pre-cooked flour.  Find it (usually) in the baking aisle of the grocery store.  Do not be tempted to add more or treat it like regular flour - a little bit goes a long way.  It takes a few minutes to "set".
 - If you don't have Wondra, dredge the chicken in some flour before cooking instead.
- 

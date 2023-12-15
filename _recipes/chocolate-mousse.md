@@ -23,4 +23,3 @@ excerpt: "_the_ family recipe"
 1. Beat the cream until stiff, adding 2 tablespoons of the sugar toward the end of the beating. Fold into the chocolate mixture.
 1. Beat the egg whites until soft peaks start to form. Beat in the remaining 4 tablespoons of sugar and continue beating until stiff. Fold into the mousse.
 1. Spoon the mousse into a crystal bowl and chill until ready to serve, at least 4 hours. When ready to serve, garnish with whipped cream and grated chocolate.
- 

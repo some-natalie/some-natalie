@@ -19,7 +19,7 @@ excerpt: "Spread on sandwiches, top on crusty bread, serve on a cheese board, an
 1. Remove bacon from dutch oven.  Drain all but 2 tbsp or so of fat.
 1. Add onion and bourbon, stirring to deglaze the pan.
 1. Reduce heat to low and caramelize, stirring from time to time until it's as dark brown as you'd like.
-1. Optionally, add the bacon bits back in at the end.  Otherwise use in other dishes. 
+1. Optionally, add the bacon bits back in at the end.  Otherwise use in other dishes.
 
 ## Notes
 

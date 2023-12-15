@@ -19,7 +19,7 @@ excerpt: "Simple crust for most pies"
 
 1. Cut cold butter into small cubes and work into flour and salt mixture.
 1. Work in egg, vinegar, and water. Work quickly so as to keep the mixture cold.
-1. Roll as much or as little as you'd like. 
+1. Roll as much or as little as you'd like.
 
 ## Notes
 

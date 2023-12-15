@@ -14,7 +14,7 @@ excerpt: "The side dish that goes with all the holiday meals, (mostly) from scra
 - 0.33 cups of cultured buttermilk
 - 1 egg
 
-### For the stuffing 
+### For the stuffing
 
 - Cornbread, torn into chunks
 - 3 tbsp unsalted butter (or other flavorful fat such as bacon drippings or schmaltz)
@@ -23,11 +23,11 @@ excerpt: "The side dish that goes with all the holiday meals, (mostly) from scra
 - 1-2 large stalks celery, diced (a bit over half a cup)
 - 1 carrot, diced (a bit under half a cup)
 - 2 cloves garlic, minced
-- 0.5 cup white wine 
+- 0.5 cup white wine
 - 1 tbsp dried sage
 - Freshly ground black pepper
 - 0.5 tsp marjoram
-- 1.5 cups homemade chicken stock, divided (may not use all of it, add 1 unflavored gelatin packet if using store bought stock) 
+- 1.5 cups homemade chicken stock, divided (may not use all of it, add 1 unflavored gelatin packet if using store bought stock)
 
 ## Directions
 

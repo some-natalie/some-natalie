@@ -19,8 +19,8 @@ excerpt: "Holiday cheer in a jar"
 
 ## Directions
 
-1. Combine apples, vinegar, and lemon zest in pot. Bring to a boil over medium heat. Cover and simmer for 10-15 minutes, until the apples begin to soften, stirring occasionally. 
-1. Stir in remaining ingredients. Simmer for 20-30 minutes, stirring often, until the jam thickens. Test for set if desired. 
+1. Combine apples, vinegar, and lemon zest in pot. Bring to a boil over medium heat. Cover and simmer for 10-15 minutes, until the apples begin to soften, stirring occasionally.
+1. Stir in remaining ingredients. Simmer for 20-30 minutes, stirring often, until the jam thickens. Test for set if desired.
 
 ## Notes
 

@@ -27,4 +27,3 @@ excerpt: "Holiday candy"
 - Store, tightly covered.  Keeps for a few weeks.
 - Don't use the "smelly" cheap plastic containers.  Use glass if you can, so it doesn't take on a plastic-y taste.
 - Makes a bit over a pound.
- 

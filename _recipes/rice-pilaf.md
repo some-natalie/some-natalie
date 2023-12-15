@@ -30,4 +30,3 @@ excerpt: "An easy side dish"
 - Tons of veggies go great stirred in.  Peas, tiny carrot bits, basically anything crunchy.
 - Same for lentils.
 - Also for chopped nuts.
- 

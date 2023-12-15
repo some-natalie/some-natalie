@@ -27,7 +27,7 @@ excerpt: "Slow-cooker granola"
 - 1 tsp vanilla extract
 - pinch of salt
 
-## Cinnamon raisin 
+## Cinnamon raisin
 
 - 3 cups old-fashioned rolled oats
 - 1 cup chopped walnuts or pecans
@@ -36,4 +36,3 @@ excerpt: "Slow-cooker granola"
 - 2 tablespoons water
 - 1 tablespoon vegetable oil
 - 1 cup raisins
- 

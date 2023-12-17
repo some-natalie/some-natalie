@@ -40,7 +40,7 @@ excerpt: "(or lasagna if you'd rather)"
 
 1. Rinse and chop any herbs.
 1. Put everything in the mixer and stir until even, about 1 minute.
-1. Stuff into manicotti or lasagna, bake at about 350 for 45 minutes to an hour, depending on thickness (for using fresh egg pasta).
+1. Stuff into manicotti or lasagna, bake at about 350°F for 45 minutes to an hour, depending on thickness (for using fresh egg pasta).
 1. Top with mozzarella when it's about half an hour from done.
 
 ## Notes

@@ -357,7 +357,7 @@ Adapting this to an air gap means moving the complete artifact and doing any mod
 
 ## Next time
 
-Way more than strictly necessary on writing these infrastructure tests in custom Actions for your runners. 📋✅
+Way more than strictly necessary on writing these [infrastructure tests in custom Actions for your runners](../testing-runner-containers). 📋✅
 
 ---
 

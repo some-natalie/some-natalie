@@ -200,7 +200,7 @@ Kaniko certainly isn’t the only player in this space, but it’s the most comm
 
 In order to do this all internally, you'll need to bring in or build a GitHub Actions runner that can run k8s jobs internally - the default one from GitHub ([link](https://github.com/actions/runner/pkgs/container/actions-runner)) works great here, but if that’s not alright, make sure to read the assumptions of custom runners [here](https://github.com/actions/actions-runner-controller/blob/master/docs/adrs/2022-10-17-runner-image.md) before installing the container hooks as outlined above.  The Kaniko executor image and and all base images will need to be internal too.
 
-Next - Build custom runners into GitHub Actions so it'll build/test/deploy itself!
+Next - Build custom runners into GitHub Actions so [it'll build/test/deploy itself](../kubernoodles-pt-7)!
 
 ---
 

@@ -208,6 +208,10 @@ runs:
 
 As we've seen so far, this pattern of using containers in Kubernetes similarly to virtual machines leads to large images.  Balancing these large images means having _more_ images to maintain.  Comprehensive test coverage of what's necessary for each image to function allows this maintenance to be easier and is another stepping stone to automating more of this infrastructure.  What better system to use to than to have your GitHub Actions runner image(s) test itself?
 
+## Next time
+
+Diving deep into MTU - what it is, how it works, why it's important for actions-runner-controller implementations, and how to stop it from 🌟 ruining your day 🌟
+
 ---
 
 ## Footnotes

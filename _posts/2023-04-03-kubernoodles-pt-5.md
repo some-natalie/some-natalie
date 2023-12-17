@@ -311,7 +311,7 @@ Yeah, this is 20 minutes (more? less?) in and we're using containers as VMs.  It
 
 ![gru](/assets/graphics/memes/gru-does-containers.jpg)
 
-Next - a small detour into [building containers without `--privileged`](../kaniko-in-arc), then how to move this build into GitHub Actions so it'll build/test/deploy itself!
+Next - a small detour into [building containers without `--privileged`](../kaniko-in-arc), then how to move this build into GitHub Actions so [it'll build/test/deploy itself](../kubernoodles-pt-7)!
 
 ---
 

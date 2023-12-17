@@ -16,6 +16,8 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ### Threat Modeling the GitHub Actions Ecosystem
 
+![bsides-boulder-2023](/assets/graphics/speaking/bsides-boulder-2023.JPG){: .w-30 .right .shadow .rounded-10}
+
 [BSides Boulder](https://bsidesboulder.org) (23 June) - A tour through the four questions outlined in the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/) to provide an enterprise-ready threat model for implementing GitHub Actions securely.  GitHub Actions is one of the most popular CI tools in use today. If you need or want to use it for business, though, there are a lot of choices to make that have huge implications to the information security and compliance posture of your organization. These questions get harder with more users and projects, moving faster and not prioritizing security.
 
 In this talk, we'll dive deep into what an Action really is, what goes into an Action out of the marketplace, and how each of the three types of Action can be exploited with a demonstration. With each exploit, a few control strategies will be discussed to counter it.
@@ -26,7 +28,7 @@ In this talk, we'll dive deep into what an Action really is, what goes into an A
 
 ### Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller
 
-![cncf-cnsc2023](/assets/graphics/speaking/cncf-cnsc2023.JPG){: .w-30 .right}
+![cncf-cnsc2023](/assets/graphics/speaking/cncf-cnsc2023.JPG){: .w-30 .right .shadow .rounded-10}
 
 [CNCF CloudNativeSecurityCon North America](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) (1 Feb) - A deep dive into the security considerations of running self-hosted GitHub Actions compute with [actions-runner-controller](https://github.com/actions/actions-runner-controller).  We'll review typical deployment architectures, then cover 3 distinct places where security risk and ease of use collide with insight and resources for navigating these design choices. First the cluster settings are examined to show methods to limit the "blast radius" of a potential bad actor and provide insight into the why and how of using privileged pods. Next, the controller settings are reviewed for how to scope runner deployments and grant permissions within GitHub to provide least-privilege. Lastly, the runner pod is taken apart to show how to build supply chain security into the image and the software it builds for you.
 

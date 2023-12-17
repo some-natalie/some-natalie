@@ -16,7 +16,7 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ### Threat Modeling the GitHub Actions Ecosystem
 
-![bsides-boulder-2023](/assets/graphics/speaking/bsides-boulder-2023.JPG){: .w-30 .right .shadow .rounded-10}
+![bsides-boulder-2023](/assets/graphics/speaking/bsides-boulder-2023.JPG){: .w-50 .right .shadow .rounded-10}
 
 [BSides Boulder](https://bsidesboulder.org) (23 June) - A tour through the four questions outlined in the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/) to provide an enterprise-ready threat model for implementing GitHub Actions securely.  GitHub Actions is one of the most popular CI tools in use today. If you need or want to use it for business, though, there are a lot of choices to make that have huge implications to the information security and compliance posture of your organization. These questions get harder with more users and projects, moving faster and not prioritizing security.
 

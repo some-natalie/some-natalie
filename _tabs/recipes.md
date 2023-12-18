@@ -27,7 +27,7 @@ I would like to make some family recipes publicly accessible without vendor lock
 
 | Name | Ratios |
 | --- | --- |
-| Jam | - 2 tbsp jam<br>- 0.25 cup acid<br>- 0.5 cup fat<br>-herbs, to taste |
+| Jam | - 2 tbsp jam<br>- 0.25 cup acid<br>- 0.5 cup fat<br>- herbs, to taste |
 | Buttermilk | - 0.5 cup buttermilk<br>- 0.25 cup acid<br>- 2 tsp honey<br>- 0.25 cup fresh herbs<br>- salt, pepper, dried herbs to taste |
 | Maple | - 0.25 cup maple syrup<br>- 3 tbsp apple cider vinegar<br>- 2 tbsp olive oil<br>- 2 tsp poppy seeds<br>- 2 shallots, minced<br>- 2 tsp Dijon |
 
@@ -47,6 +47,8 @@ Time and temp combinations that work well.
 | Pork ribs | 550°F<br>325°F | 20 mins<br>2 hrs | start uncovered in sheet tray<br>cover tightly in foil to finish |
 | Smashed potatoes | 450°F | 30 mins | boil first, use thin tray in oven |
 | Any crock pot "low" meal | 225°F | same as recipe | crack lid for evaporation, stir sometimes |
+
+🍳 To apply seasoning to cast iron:  Put a baking sheet on the lowest rack, then preheat oven to 500°F.  Apply a thin layer of vegetable oil, removing excess.  Bake for an hour, then cool before storage.  Repeat as often as necessary.
 
 ## Sous vide time chart
 

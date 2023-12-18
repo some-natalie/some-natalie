@@ -12,6 +12,7 @@ tags:
   - codeql
   - github-actions
   - kubernetes
+  - security
 ---
 
 I have my build compiling inside of a container ... now I want to scan it with [CodeQL](https://codeql.github.com), too.

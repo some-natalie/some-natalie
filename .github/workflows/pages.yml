@@ -52,7 +52,7 @@ jobs:
           bundle exec htmlproofer _site --disable-external --check-html --enforce_https false
 
       - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 

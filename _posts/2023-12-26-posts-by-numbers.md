@@ -45,14 +45,16 @@ For top pages, it wasn't surprising that the [guide to building custom images](.
 ![skeletor](/assets/graphics/memes/inspirational-skeletor.jpg){: .shadow .rounded-10 .w-75}
 
 In looking at the data so far, a couple things stand out.
+
 - Search engine optimization is worth some thought.  Being discoverable drives the biggest share of traffic.
 - It seems like each post should be announced on LinkedIn, Slack (internally), Mastodon, etc.  That also helps, as it seems that after a post, the traffic bumps on the site for a short while.
 - Users tend to not explore much - navigation beyond the thing they landed on doesn't appear common.
 
 In the new year, I'd like to learn more about:
+
 - What, if any, sharing options on the site get used?  I have a couple "share link" buttons - including directly to LinkedIn and Mastodon.  It'd be handy to understand what, if anything, is used.
 - What does "engagement" mean as opposed to the count metrics?  It's intuitive to grasp "total users" or "total views", but what's a "scroll event" or "click" on a static website?  Seems like there's a lot more to be known here.
 - While it was extremely simple to get going with Google Analytics, what would self-hosting or using another metrics provider look like?
-- What _else_ could I do with a static site generator? 
+- What _else_ could I do with a static site generator?
 
 I have exactly zero ambitions for my website.  It's liberating to not expect anything of a hobby.  At best, it's a living résumé and a place to toss some other things to share.  This was a neat way to learn a little bit about traffic analytics now that there's enough data to parse. 🥂

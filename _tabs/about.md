@@ -14,6 +14,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
 - **Kubernetes** - [kubernoodles](../kubernoodles), self-hosted GitHub Actions runners made for humans
 - **Python** - [Advanced Security CSV export](https://github.com/advanced-security/ghas-to-csv)
+- **Go** - [gh-org-admin-promote](https://github.com/some-natalie/gh-org-admin-promote) 
 - **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6)
 - but mostly, I work with people on all of the above! 💖
 
@@ -21,7 +22,7 @@ You can find me in our work Slack sharing all sorts of neat things you can do wi
 
 ### 👾 I play with
 
-- Video games on a Windows 10 VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's got about 5% or so performance drop (just looking at frame rates) over a native install.  You should check it out - [code](https://github.com/some-natalie/fedora-acs-override) and [write-up](https://some-natalie.dev/blog/fedora-acs-override/) on how it works.
+- Video games in a Windows VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's got about 5% or so performance drop (just looking at frame rates) over a native install.  You should check it out - [code](https://github.com/some-natalie/fedora-acs-override) and [write-up](https://some-natalie.dev/blog/fedora-acs-override/) on how it works.
 - All sorts of handy Raspberry Pi projects, including
   - [Kodi](https://kodi.tv/) set up on a television for local media ([build directions](https://some-natalie.dev/blog/kodi-setup/))
   - [OpenWRT](https://openwrt.org) router ([build directions](https://some-natalie.dev/blog/openwrt-setup/))
@@ -33,8 +34,8 @@ I have an awesome life outside of tech, so while I have a few projects that I en
 
 ### Heads up!
 
-- 🔭 I’m exploring new parts of technology, communications, and finding fun problems to solve.
-- 🌱 I’m currently learning some more in-depth Kubernetes security and technical writing.
+- 🔭 I’m exploring new parts of technology, communications, and finding fun problems to solve.  Right now, that's rewriting some of my projects in [Go](https://go.dev/) for better dependency management across platforms.
+- 🌱 I’m currently studying to sit for my [OSCP certification](https://www.offsec.com/courses/pen-200/) and learning to write better conference talk proposals.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](https://github.com/some-natalie/some-natalie/blob/main/RESUME.md), but you can also look at a little bit of what I've been up to in [my GitHub profile](https://github.com/some-natalie).  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://linkedin.com/in/nsomersall).

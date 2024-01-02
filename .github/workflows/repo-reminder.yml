@@ -1,4 +1,4 @@
-name: Monthly check-in on repos
+name: 🗓️ Monthly check-in on repos
 on:
   workflow_dispatch:
   schedule:

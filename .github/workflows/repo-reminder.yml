@@ -1,0 +1,28 @@
+name: Monthly check-in on repos
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: 0 0 1 * *  # first of the month
+
+jobs:
+  maintenance_reminder:
+    name: Monthly maintenance reminder
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set Date
+      run: echo "date=$(date -u '+%B %Y')" >> $GITHUB_ENV
+    
+    - uses: imjohnbo/extract-issue-template-fields@v0.0.1
+      id: extract
+      with:
+        path: .github/ISSUE_TEMPLATE/repo-maintenance.md
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - uses: imjohnbo/issue-bot@v3
+      with:
+        title: "${{ steps.extract.outputs.title }} for ${{ env.date }}"
+        body: ${{ steps.extract.outputs.body }}
+        pinned: false
+        close-previous: true
+        linked-comments: true

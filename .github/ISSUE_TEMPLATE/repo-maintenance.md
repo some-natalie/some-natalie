@@ -19,6 +19,11 @@ title: "Repo maintenance checklist"
   - [ ] dumb-init ([link](https://github.com/Yelp/dumb-init))
   - [ ] UBI8/ubi8-init image ([link](https://catalog.redhat.com/software/containers/ubi8/ubi-init/5c359b97d70cc534b3a378c8))
   - [ ] UBI9/ubi9-init image ([link](https://catalog.redhat.com/software/containers/ubi9-init/6183297540a2d8e95c82e8bd))
+- [ ] bump stuff in the cluster
+  - [ ] cilium
+  - [ ] tetragon
+  - [ ] actions-runner-controller
+  - [ ] kubernetes 
 
 ### fedora-acs-override
 

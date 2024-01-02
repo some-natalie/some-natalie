@@ -24,8 +24,5 @@ jobs:
       with:
         title: "${{ steps.extract.outputs.title }} for ${{ env.date }}"
         body: ${{ steps.extract.outputs.body }}
-        pinned: false
-        close-previous: true
-        linked-comments: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

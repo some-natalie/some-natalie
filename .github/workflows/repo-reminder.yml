@@ -29,4 +29,3 @@ jobs:
         linked-comments: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 

@@ -12,6 +12,7 @@ I would like to make some family recipes publicly accessible without vendor lock
 
 - [Marinades](../recipes/marinades)
 - [Seasoning blends](../recipes/seasoning-blends)
+- [Stocks and broths](../recipes/stocks)
 - [Salad dressings](#salad-dressings)
 - [Baking time chart](#baking-time-chart)
 - [Sous vide time chart](#sous-vide-time-chart)

@@ -50,7 +50,8 @@ Markdown table generator - https://www.tablesgenerator.com/markdown_tables
 - [ ] 🐈 Clean kitty watering dish
 - [ ] 🌱 Water house plants
 - [ ] 🧺 Put away all the clean laundry
-- [ ] ... edit as needed, of course ...
+- [ ] 🧹 Sweep, mop, and vacuum 🤖
+- [ ] 📋 Make weekly reward sheets for kids (homework, feed kitty, feed fish, set the table, put laundry away, pick up upstairs and downstairs toys, etc.)
 
 ## Other tasks
 

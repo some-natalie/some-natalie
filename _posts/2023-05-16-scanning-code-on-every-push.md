@@ -6,7 +6,6 @@ categories:
 tags:
   - CI
   - security
-  - dependency-mgmt
   - questionable-ideas
 classes: wide
 excerpt: "Why it's probably not what you're wanting to do and how to do it anyways."

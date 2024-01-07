@@ -7,7 +7,6 @@ tags:
   - CI
   - kubernetes
   - security
-  - on-premises
 excerpt: "Self-hosted GitHub Actions runners and Kubernetes are a natural fit - let's put them together securely."
 image: /assets/graphics/2023-02-01-sec-of-ghactions-arc/Slide2.png
 ---

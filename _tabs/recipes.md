@@ -49,7 +49,8 @@ Time and temp combinations that work well.
 | Smashed potatoes | 450°F | 30 mins | boil first, use thin tray in oven |
 | Any crock pot "low" meal | 225°F | same as recipe | crack lid for evaporation, stir sometimes |
 
-🍳 To apply seasoning to cast iron:  Put a baking sheet on the lowest rack, then preheat oven to 500°F.  Apply a thin layer of vegetable oil, removing excess.  Bake for an hour, then cool before storage.  Repeat as often as necessary.
+> 🍳 To apply seasoning to cast iron:  Put a baking sheet on the lowest rack, then preheat oven to 500°F.  Apply a thin layer of vegetable oil, removing excess.  Bake for an hour, then cool before storage.  Repeat as necessary.
+{: .prompt-tip}
 
 ## Sous vide time chart
 

@@ -198,9 +198,9 @@ runs:
       run: |
         python3 -V | grep "3.10"
         if $? -ne 0; then
-          echo "- ❌ docker run hello-world failed" >> $GITHUB_STEP_SUMMARY
+          echo "- ❌ Python 3.10 not available" >> $GITHUB_STEP_SUMMARY
         else
-          echo "- ✅ docker run hello-world succeeded" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Python 3.10 works!" >> $GITHUB_STEP_SUMMARY
         fi
 ```
 

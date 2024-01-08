@@ -114,13 +114,13 @@ $ helm install kaniko-worker \
     --namespace "test-runners" \
     -f helm-kaniko.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.6.1
+    --version 0.8.1
 
-Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.6.1
-Digest: sha256:d0a4e067e15a2c616c6c2d049e98d9dc8e8aadb11ac6625cd01ee3ca30db8caa
+Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.8.1
+Digest: sha256:36a1f7a07ae5a3b15a9d190cf492ab66dd3a1302f37bde2f1ce5a6660592eb10
 NAME: kaniko-worker
-LAST DEPLOYED: Fri Sep 29 12:01:00 2023
-NAMESPACE: test-runners
+LAST DEPLOYED: Mon Jan  8 09:35:09 2024
+NAMESPACE: ghec-runners
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
@@ -168,6 +168,7 @@ jobs:
             --push-retry 5 \
             --image-name-with-digest-file /workspace/image-digest.txt
 ```
+{: file='~/.github/workflows/test-kaniko.yml'}
 {% endraw %}
 
 In the workflow, I used the `debug` image as it provides more log output than the standard one and that’s my default as I build out new things.  It shouldn’t be necessary once you’ve got a good workflow established.

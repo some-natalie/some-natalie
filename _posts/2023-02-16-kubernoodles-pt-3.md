@@ -41,16 +41,16 @@ First, install [Tetragon](https://github.com/cilium/tetragon) into your cluster.
 
 ```console
 # Install tetragon
-helm install tetragon cilium/tetragon -n kube-system --version 0.11.0
+helm install tetragon cilium/tetragon -n kube-system --version 1.0.1
 ```
 
 ## Install the tetra CLI
 
 Tetragon will output raw JSON just fine - and if you already know this just needs to be shipped into your SIEM, there's probably not much need for looking at things locally.  To get the pretty stuff at the CLI, we need the local CLI utility.  Go to the link below, download the latest release for your architecture, and install.
 
-[https://github.com/cilium/tetragon/releases/latest](https://github.com/cilium/tetragon/releases/latest)
+[Tetra CLI docs](https://tetragon.io/docs/installation/tetra-cli/)
 
-Next, on a Mac, tell it to let you launch it.
+Next, if you're on a Mac, you might need tell it to let you launch it.
 
 ```shell
 xattr -dr com.apple.quarantine /usr/local/bin/tetra
@@ -58,7 +58,7 @@ xattr -dr com.apple.quarantine /usr/local/bin/tetra
 
 ## Figure out what you want to know
 
-I'm rolling with the defaults, plus privileged access and TCP network connectivity.  There's tons of other examples to use [here](https://github.com/cilium/tetragon/tree/main/crds/examples) - for the sake of simplicity and not _too_ much in the logs for a proof of concept, I'm going to omit file access.  I think trying to understand every read/write, open, and close of every file could get uniquely noisy in build jobs too, versus other uses of containers.
+I'm rolling with the defaults, plus privileged access and TCP network connectivity.  There's tons of other examples to use [here](https://github.com/cilium/tetragon/tree/main/examples) - for the sake of simplicity and not _too_ much in the logs for a proof of concept, I'm going to omit file access.  I think trying to understand every read/write, open, and close of every file could get uniquely noisy in build jobs too, versus other uses of containers.
 
 This configuration will tell me the following
 
@@ -81,13 +81,13 @@ kubectl apply -f https://raw.githubusercontent.com/cilium/tetragon/main/examples
 Start streaming the logs into `stdout` and pipe them into the Tetra CLI for the `runners` namespace.
 
 ```console
-kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout -f | tetra getevents -o compact --namespace runners
+kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout -f | tetra getevents -o compact --namespace ghec-runners
 ```
 
 Start the job we created in [part 2](../kubernoodles-pt-2/#leave-the-runner-up-for-inbound-connection) that creates an idle pod for an hour to do random fun stuff inside.  Now, let's `exec` in and do some shifty shenanigans!
 
 ```shell
-kubectl exec -i -t -n runners defaults-xh5cc-runner-8w4hb -c runner -- sh -c "clear; (bash || ash || sh)"
+kubectl exec -i -t -n ghec-runners defaults-fsmdn-runner-47qck -c runner -- sh -c "clear; (bash || ash || sh)"
 ```
 
 And here's the output of some fun commands _within_ the pod.

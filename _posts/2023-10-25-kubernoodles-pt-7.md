@@ -66,8 +66,9 @@ on:
       - "images/rootless-ubuntu-jammy.Dockerfile"
       - "images/**.sh"
       - "images/software/*"
-      - ".github/workflows/test-jammy.yml"
+      - ".github/workflows/test-jammy-dind.yml"
 ```
+{: file='~/.github/workflows/test-jammy-dind.yml'}
 
 ℹ️ A small note on names - GitHub sorts all workflows alphabetically w/o grouping in the Actions tab.  Unicode characters allow "groups" in a hacky way.  Look at this logical grouping of things:
 
@@ -116,6 +117,7 @@ This step checks out our repository, logs in to the container registry for our f
           push: true
           tags: ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:test
 ```
+{: file='~/.github/workflows/test-jammy-dind.yml'}
 {% endraw %}
 
 ## Deploy it
@@ -172,7 +174,8 @@ Finally, there are lots of methods to determine how healthy a Kubernetes deploym
             --set githubConfigSecret.github_app_installation_id="${{ vars.ARC_INSTALL_ID }}" \
             --set githubConfigSecret.github_app_private_key="${{ secrets.ARC_APP_PRIVATE_KEY }}" \
             -f deployments/helm-jammy-dind-test.yml \
-            oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+            oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
+            --version 0.8.1
 
         env:
           KUBECONFIG: /tmp/config
@@ -183,6 +186,7 @@ Finally, there are lots of methods to determine how healthy a Kubernetes deploym
       - name: Wait 5 minutes to let the new pod come up
         run: sleep 300
 ```
+{: file='~/.github/workflows/test-jammy-dind.yml'}
 {% endraw %}
 
 ## Test it
@@ -204,7 +208,7 @@ This step runs only on the test runner, time limited to 15 minutes before failur
 - `sudo` access doesn't work ([test code](https://github.com/some-natalie/kubernoodles/blob/main/tests/sudo-fails/action.yml))
 - Container Actions work as expected ([test code](https://github.com/some-natalie/kubernoodles/tree/main/tests/container))
 
-Much more on using Actions to test your Actions runners next time. 😊
+Much more on using Actions to test your Actions runners [next time](../testing-runner-containers). 😊
 
 ```yaml
   test:
@@ -229,6 +233,7 @@ Much more on using Actions to test your Actions runners next time. 😊
       - name: Container Action test
         uses: ./tests/container
 ```
+{: file='~/.github/workflows/test-jammy-dind.yml'}
 
 ## Remove that deployment
 
@@ -270,6 +275,7 @@ Now use helm to uninstall the test chart.  It's important to delete the test dep
       - name: Remove kubeconfig info
         run: rm -f /tmp/config
 ```
+{: file='~/.github/workflows/test-jammy-dind.yml'}
 {% endraw %}
 
 ## Handling failures
@@ -313,6 +319,7 @@ job:
           skip-tags: latest, v*
           token: ${{ secrets.GHCR_CLEANUP_TOKEN }}
 ```
+{: file='~/.github/workflows/weekly-cleanup.yml'}
 {% endraw %}
 
 Note the JIT read/write Packages scope doesn't allow for image deletion, so you must set a personal access token that has that privilege and store it in Secrets.  The full [workflow file](https://github.com/some-natalie/kubernoodles/blob/main/.github/workflows/weekly-cleanup.yml) also closes issues and PRs that are inactive.

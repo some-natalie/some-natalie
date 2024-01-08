@@ -81,6 +81,7 @@ metadata:
     kubernetes.io/service-account.name: test-deploy-user
 type: kubernetes.io/service-account-token
 ```
+{: file='test-deploy-user.yml'}
 
 Now, create the account and all the goodness from above by running the commands below.
 
@@ -228,7 +229,6 @@ Now that we have Kubernetes, GitHub, and actions-runner-controller all set up to
 Here's the workflow file:
 
 {% raw %}
-
 ```yaml
 name: 🐝 Manually deploy runners
 
@@ -289,7 +289,7 @@ jobs:
       - name: Remove kubeconfig info
         run: rm -f /tmp/config
 ```
-
+{: file='~/.github/workflows/manual-deploy.yml'}
 {% endraw %}
 
 And here it is deploying and removing our development runners! 🎉

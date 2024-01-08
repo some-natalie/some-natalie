@@ -30,6 +30,7 @@ First thing to test is the automatic scaling - we want it to scale up and down t
 
 Here's the workflow, with comments explaining what going on.
 
+{% raw %}
 ```yaml
 name: 🐿️ ARC-2 fast scaling test
 
@@ -56,6 +57,7 @@ jobs:
           echo "Letter: ${{ matrix.letter }}"
 ```
 {: file='~/.github/workflows/arc2-test.yml'}
+{% endraw %}
 
 ## Print debug information from the runner
 
@@ -136,6 +138,7 @@ By default, all jobs given to a runner will run on it.  In the context of action
 
 This workflow simply tests that's working as expected, using `alpine:3` (or other lightweight container if preferred) to print some information to the console.
 
+{% raw %}
 ```yaml
 name: 🐿️ ARC-2 container job test
 
@@ -163,6 +166,7 @@ jobs:
           echo "Letter: ${{ matrix.letter }}"
 ```
 {: file='~/.github/workflows/arc2-container-test.yml'}
+{% endraw %}
 
 ## Next
 

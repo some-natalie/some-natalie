@@ -14,17 +14,16 @@ excerpt: "(Kubernoodles, part 5 of ?) - You need your own image.  Here's how to 
 
 Now that we have [actions-runner-controller](https://github.com/actions/actions-runner-controller) up and running, we need to think through the runner image some.  This piece is all about how to build your own image(s) and whether it's a good idea to do that.
 
-> The end result of this how-to is an image based on UBI 8 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).<br><br>🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi8.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi8.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://github.com/actions/actions-runner-controller/blob/master/docs/preview/gha-runner-scale-set-controller/README.md), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi8).  We'll cover a Docker-in-Docker container build later.
+> The end result of this how-to is an image based on UBI 9 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).<br><br>🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi9.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi9.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/deploying-runner-scale-sets-with-actions-runner-controller), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi9).  We'll cover a Docker-in-Docker container build later.
 {: .prompt-tip}
 
 ## All about the default runner image
 
 There's a default runner image for use that is maintained by GitHub.  It's very minimal and might suit your needs.  It's based on the Microsoft container image for .NET, which is based on Debian.  It adds the [actions/runner](https://github.com/actions/runner) agent, the [container hooks](https://github.com/actions/runner-container-hooks/), and Docker to run container Actions.  The extraordinarily thoughtful ADR[^1] is [here](https://github.com/actions/actions-runner-controller/blob/master/docs/adrs/2022-10-17-runner-image.md) and it's worth reading several times over.  ([Dockerfile](https://github.com/actions/runner/blob/main/images/Dockerfile) and [image registry](https://github.com/actions/runner/pkgs/container/actions-runner))
 
-This could be problematic for a few reasons.
+This could be problematic for a few reasons.[^dind]
 
 1. The `runner` user has sudo rights.  This allows users the flexibility to modify the image to build their code, automate the toil, and all the other cool stuff that can be done with Actions - drastically reducing the number of bespoke images to maintain for each project.  This maintenance savings comes at the price of giving users a shell with root access in a pod.
-1. It's running Docker-in-Docker, meaning that you'll need to run it as a privileged pod (previously discussed [here](../securing-ghactions-with-arc/#cluster-settings) and [here](../kubernetes-for-enterprise-ci/#privileged-pods) as to why that's probably not a good idea).
 1. It's based on Debian - this is fine for platform neutral stuff, but if you're in the Red Hat ecosystem doing things specific to that, it's less than ideal.  Ditto for other Linux ecosystems, but Red Hat is the one I see most frequently.
 1. Because the image has so few things cached and installed inside of it, at scale, running `docker pull` or `apt install` (etc) starts to _really_ eat at your network ingress budget and cause long build times by pulling/installing the same software all the time.
 
@@ -57,14 +56,14 @@ One final consideration on your base image - please use an init system for your 
 
 What we really want to be able to do is have these "fat containers" be treated as a regular Linux process by the worker nodes in Kubernetes.  [Actions-runner-controller](https://github.com/actions/actions-runner-controller) treats containers as VMs because GitHub Actions assumes the base compute for things is a virtual machine - running general purpose build infrastructure in containers usually ends up with this pattern.  An init system provides a lightweight and simple abstraction to allow Kubernetes to manage these containers, the worker nodes to reap processes as expected, and developers to not rework their entire workflow to run in containers.  I recommend the following:
 
-- The pre-built `ubi-init` images for UBI ([Documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/building_running_and_managing_containers#con_understanding-the-ubi-init-images_assembly_types-of-container-images))
+- The pre-built `ubi-init` images for UBI ([Documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/building_running_and_managing_containers#con_understanding-the-ubi-init-images_assembly_types-of-container-images))
 - Yelp's `dumb-init` project ([GitHub](https://github.com/yelp/dumb-init) and [blog announcement](https://engineeringblog.yelp.com/2016/01/dumb-init-an-init-for-docker.html)) to add into other base images.
 - `tini` ([GitHub](https://github.com/krallin/tini)) is built-in to Docker when you use the `--init` flag, also a great minimal init system.
 
 Here's our code snippet with the base image for this example.
 
 ```Dockerfile
-FROM registry.access.redhat.com/ubi8/ubi-init:8.8
+FROM registry.access.redhat.com/ubi9/ubi-init:9.3
 ```
 
 ## Labels are the best
@@ -79,9 +78,9 @@ Defining almost anything you want is the [entire point of labels](https://docs.d
 
 ```Dockerfile
 LABEL org.opencontainers.image.source https://github.com/some-natalie/kubernoodles
-LABEL org.opencontainers.image.path "images/ubi8.Dockerfile"
-LABEL org.opencontainers.image.title "ubi8"
-LABEL org.opencontainers.image.description "A RedHat UBI 8 based runner image for GitHub Actions"
+LABEL org.opencontainers.image.path "images/ubi9.Dockerfile"
+LABEL org.opencontainers.image.title "ubi9"
+LABEL org.opencontainers.image.description "A RedHat UBI 9 based runner image for GitHub Actions"
 LABEL org.opencontainers.image.authors "Natalie Somersall (@some-natalie)"
 LABEL org.opencontainers.image.licenses "MIT"
 LABEL org.opencontainers.image.documentation https://github.com/some-natalie/kubernoodles/README.md
@@ -98,8 +97,8 @@ The first two arguments go into installing [actions/runner](https://github.com/a
 ```Dockerfile
 # Arguments
 ARG TARGETPLATFORM=linux/amd64
-ARG RUNNER_VERSION=2.303.0
-ARG RUNNER_CONTAINER_HOOKS_VERSION=0.4.0
+ARG RUNNER_VERSION=2.311.0
+ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ```
 
 I like to bundle any other similar arguments together here too, such as versions of other software to include.  Keeping it together means I don't hunt through long Dockerfiles to update it - I want my "future me" to like "present me" as much as possible.
@@ -195,7 +194,7 @@ Now for things not in the package ecosystem, I like run the commands in-line if 
 # Install helm using the in-line curl to bash method
 RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-# Use an install script to install the `gh` cli
+# Use an install script to install the `gh` cli, more about that below!
 COPY images/software/gh-cli.sh gh-cli.sh
 RUN bash gh-cli.sh && rm gh-cli.sh
 ```
@@ -219,6 +218,7 @@ elif grep -q "CentOS\|Red Hat" "/etc/redhat-release"; then
   yum clean all
 fi
 ```
+{: file='images/software/gh-cli.sh'}
 
 ### Caching stuff
 
@@ -253,8 +253,8 @@ At any rate, don't use `latest` for real life.  There is no torture quite like t
 Now build and push that image from our workstation.  Don't make this complicated.  Using Docker from your workstation, here's what that looks like (substituting your filenames, registry paths, etc.):
 
 ```shell
-docker build -f images/ubi8.Dockerfile -t ghcr.io/some-natalie/kubernoodles/ubi8:latest .
-docker push ghcr.io/some-natalie/kubernoodles/ubi8:latest
+docker build -f images/ubi9.Dockerfile -t ghcr.io/some-natalie/kubernoodles/ubi9:latest .
+docker push ghcr.io/some-natalie/kubernoodles/ubi9:latest
 ```
 
 And here's the super basic values for the Helm chart:
@@ -284,17 +284,19 @@ template:
   spec:
     containers:
     - name: runner
-      image: ghcr.io/some-natalie/kubernoodles/ubi8:latest
+      image: ghcr.io/some-natalie/kubernoodles/ubi9:latest
+      command: ["/actions-runner/run.sh"]
 ```
+{: file='local-private-ubi9.yml'}
 
 And how to apply it:
 
 ```shell
-helm install ubi8 \
+helm install ubi9 \
   --namespace "runners" \
-  -f local-private-ubi8.yml \
+  -f local-private-ubi9.yml \
   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-  --version 0.6.1
+  --version 0.8.1
 ```
 
 Now check that the single pod is up and listening.
@@ -302,7 +304,7 @@ Now check that the single pod is up and listening.
 ```console
 $ kubectl get pods --namespace runners
 NAME                      READY   STATUS    RESTARTS   AGE
-ubi8-2tg6n-runner-pm7z6   1/1     Running   0          1m
+ubi9-2tg6n-runner-pm7z6   1/1     Running   0          1m
 ```
 
 ## Lastly
@@ -321,3 +323,4 @@ Next - a small detour into [building containers without `--privileged`](../kanik
 [^2]: What's reasonable here is really up to you - but this pattern lends itself quite readily to ancient versions of "approved and hardened" images that don't get ever get updated (and fall out of their compliance standard for being so "secure").
 [^3]: [Free as in beer](https://en.wikipedia.org/wiki/Gratis_versus_libre), anyways.  More about [redistribution](https://developers.redhat.com/articles/ubi-faq#redistribution) and [licensing](https://developers.redhat.com/articles/ubi-faq#legal_and_licensing) and such at Red Hat's site.
 [^4]: To be perfectly honest, I spent several hours trying to find the origin of the phrase "nobody ever got fired for buying IBM", and I couldn't find a definitive answer.  It's been around for decades, though.
+[^dind]: This used to have a section on Docker-in-Docker, as it was more typical to have one container do this too.  Now ARC supports having a DinD capable container within the pod (usually [docker:dind](https://hub.docker.com/_/docker)).  That'll still need to be run as a privileged pod (previously discussed [here](../securing-ghactions-with-arc/#cluster-settings) and [here](../kubernetes-for-enterprise-ci/#privileged-pods) as to why that's probably not a good idea).  However, it's now a much more explicitly created choice.

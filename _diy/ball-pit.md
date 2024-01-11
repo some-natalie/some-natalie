@@ -4,7 +4,7 @@ classes: wide
 excerpt: "Surviving COVID quarantines and snow days with small children, then finding tons of fun. You know you've always wanted a ball pit."
 ---
 
-![pic](../../assets/graphics/diy/ball-pit/ball-pit-medium.jpeg){: .w-50 .left}
+![pic](/assets/graphics/diy/ball-pit/ball-pit-medium.jpeg){: .w-50 .left}
 
 Shortly after moving into our home in 2020, we built a PVC ball pit (ostensibly) for the children.  It's 6' by 4' and full of thousands of crush-proof plastic balls.  A bunch of stuffed animals have found their way into it too.  It was cheap and easy to build.  For the sustained kiddo entertainment throughout COVID closures and snow days while two grown-ups attempt to work, it's been one of the best toys they have.
 
@@ -47,7 +47,7 @@ I take meetings while sitting inside it, even if the kids aren't home ... 😇
 
 ## Diagram
 
-![assembly](../../assets/graphics/diy/ball-pit/ball-pit-diagram.jpg)
+![assembly](/assets/graphics/diy/ball-pit/ball-pit-diagram.jpg)
 
 ## Assembly
 

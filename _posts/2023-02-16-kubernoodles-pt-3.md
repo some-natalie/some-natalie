@@ -16,7 +16,7 @@ One of the first questions to answer when building out GitHub Actions compute on
 
 In an old-school persistent-machine setup, this isn't a problem _at all_ - for Actions or any other system.  Install the company's anti-virus program, endpoint protection stuff, logging stack, etc. like literally every other machine on the network and everyone is good to go.  Likewise, if continuous integration is already a service, a lot of that risk is already handled for you by that SaaS provider.  Once we combine putting these jobs into ephemeral containers **and** self-hosting this platform, the question gets a lot harder to answer.
 
-![dodgy-users](../../assets/graphics/2023-02-16-kubernoodles-pt-3/dodgy-users.png)
+![dodgy-users](/assets/graphics/2023-02-16-kubernoodles-pt-3/dodgy-users.png)
 _I'm far more offended by `curl -k | bash` than at any attempt of container escape.  Disabling SSL verification is never the answer._
 
 This is a difficult situation for an actions-runner-controller setup due to several compounding factors.

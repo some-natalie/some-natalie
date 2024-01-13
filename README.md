@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [A quick and dirty guide to X11 forwarding over SSH](https://some-natalie.dev/blog/ssh-x11-forwarding):  Securely bring your Linux GUI apps to your Mac with the magic of SSH. 🧙🏼‍♀️
 1. [Scrum the home](https://some-natalie.dev/blog/scrum-the-home):  🏡 Running a home, with some help from Scrum (ish)
 1. [Posts by the numbers for 2023](https://some-natalie.dev/blog/posts-by-numbers):  Taking a peek at traffic analytics and what to learn more about with more data.
-1. [Adding CodeQL to your (compiled) container build](https://some-natalie.dev/blog/codeql-container-builds):  Using CodeQL inside of a containerized build for compiled languages
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

@@ -25,3 +25,5 @@ excerpt: "Big pot of black beans for soup, tacos, over rice, or a million other 
 
 - Swap lime juice for orange juice if you have one and not the other
 - White onions work more or less as good as yellow ones
+- Add some diced poblano pepper for a little spice - about half a pepper w/ no seeds for kids 
+ 

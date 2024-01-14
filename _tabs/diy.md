@@ -4,7 +4,7 @@ order: 7
 icon: fa-solid fa-screwdriver-wrench
 ---
 
-Common theme here - this also isn't a DIY blog.  Sometimes I make things that have nothing to do with computers or technology.  It may be helpful to others to share.  Enjoy!
+This isn't a DIY blog.  Sometimes I make things that have nothing to do with computers or technology.  It may be helpful to others to share.  Enjoy!
 
 ## Projects
 

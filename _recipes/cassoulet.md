@@ -14,7 +14,7 @@ excerpt: "Brothy beans and tender meats in a big pot, but not traditional."
 - 2-3 celery stalks, finely chopped
 - 5 or 6 cloves of garlic, finely diced (or about 2 tbsp of minced garlic)
 - Half a pound of sausage (usually a garlicky pork or beef sausage), casing removed and cut into 1" pieces
-- 1.5 pounds (ish?) of bone-in, skin-on chicken thighs or quarters (maybe 4-6 thighs)
+- 2 pounds (ish?) of bone-in, skin-on chicken thighs or quarters (maybe 4-6 thighs)
 - 6-8 ounces of bacon (or pork belly) cut into small pieces
 - 1 quart chicken broth
 - 2 packets of unflavored gelatin
@@ -42,3 +42,4 @@ excerpt: "Brothy beans and tender meats in a big pot, but not traditional."
 - Duck confit and duck fat is traditionally used, but hard to find.  Turkey legs work well too.
 - Don't make it hard.  It's beans and meats and some veggies in a brown broth.
 - Baking soda and extra soak and cook time on dried beans needed for altitude adjustments.
+- A [bouquet garni](https://en.wikipedia.org/wiki/Bouquet_garni) (fresh herbs) is an easy upgrade if you have fresh herbs available.

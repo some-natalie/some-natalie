@@ -6,7 +6,7 @@ order: 6
 icon: fas fa-fw fa-mug-hot
 ---
 
-This is not a coffee or tea or cocktail blog either, but all the beverage things and components can live here instead.  Syrups, bitters, alcoholic drinks are all mixed in here.
+This is not a coffee or tea or cocktail blog.  Syrups, bitters, alcoholic drinks are all mixed in here too.
 
 ## Drink list
 

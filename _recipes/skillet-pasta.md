@@ -30,6 +30,16 @@ All scaled to 8 ounces of pasta, scale up/down accordingly.  Salt and pepper to 
 - Cajun seasoning ([link](../seasoning-blends/#cajun)), to taste
 - 0.5 cup cheese (colby jack or pepper jack) to melt on top
 
+### Baked ziti
+
+- 1 cup marinara sauce
+- 0.5 lb cooked Italian sausage (hot or mild, optional)
+- 8 oz (ish) ricotta
+- A handful or two of shredded mozzarella
+- Shredded romano, asiago, or parmesan
+
+Cook the pasta, drain almost all of the water out.  Stir in ricotta, cooked sausage, and marinara sauce.  Let the starchy water make a nice sauce.  Top with shredded cheese.  Optionally bake at 350°F for 10-15 minutes to melt the cheese.
+
 ### Basil and cherry tomato
 
 - 8 oz cherry tomatoes, halved or quartered

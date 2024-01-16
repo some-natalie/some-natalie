@@ -10,10 +10,10 @@ excerpt: "Make-ahead sheet pan semolina gnocchi"
 
 - 6 cups whole milk
 - A small pinch of roasted granulated garlic
-- 1.5 cups semolina flour
+- 1.75 cups semolina flour
 - 8 tablespoons (1 stick) butter
-- 0.75 cups grated Parmigiano-Reggiano
-- 0.75 cups grated Asiago
+- 1 cup grated Parmigiano-Reggiano
+- 1 cup grated Asiago
 - Salt and freshly ground black pepper, to taste
 
 ## Directions
@@ -31,3 +31,5 @@ excerpt: "Make-ahead sheet pan semolina gnocchi"
 - Go light or omit the garlic.  A little goes a LONG way.
 - Other tasty additions include some basil or parsley, thyme, or goat cheese instead of Parmesan and Asiago.
 - If you want to get fancy, it should set firmly enough to cut it with a cookie cutter before roasting.
+- The recipe halves well.  Use an 8x8" pan instead.
+ 

@@ -14,9 +14,6 @@ Why I've made certain design choices is based on experiences shared below:
 - Considerations on [containerizing CI at an enterprise scale](../blog/kubernetes-for-enterprise-ci/)
 - [Securely using actions-runner-controller](../blog/securing-ghactions-with-arc/)
 
-> Last updated in **January 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently demonstrating.
-{: .prompt-info}
-
 Here's what has been done and where we're going.
 
 1. [Initial cluster setup](../blog/kubernoodles-pt-1) - Kubernetes cluster setup in a managed provider, installing [cilium](https://github.com/cilium/cilium) and [hubble](https://github.com/cilium/hubble) to power observability, and [actions-runner-controller](https://github.com/actions/actions-runner-controller) with default runners in a scaling set.
@@ -28,12 +25,16 @@ Here's what has been done and where we're going.
 1. [Continuous integration for custom runner images](../blog/kubernoodles-pt-7) - CI for your CI, or how to test your custom runner images on each change.
 1. [Writing tests for Actions runners](../blog/testing-runner-containers) - Test your enterprise CI images with the same rigor as your other software.
 
+> Last updated in **January 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently demonstrating.
+{: .prompt-info}
+
 Coming soon:
 
 - Rebuilding and releasing custom runners on a schedule
 - Log streaming
 - More fun with [eBPF](https://ebpf.io)
 - File caching
+- Fun with metrics!
 
 > My environment uses Azure services.  They're currently "free" for me and I'll try to call out using vanilla k8s as much as possible for portability.
 {: .prompt-info }

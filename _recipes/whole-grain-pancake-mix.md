@@ -38,7 +38,7 @@ excerpt: "Make-ahead, shelf-stable pancake mix 🥞"
 
 1. Whisk together 1 cup of mix, 1 cup of whole buttermilk (or a combination of half plain yogurt and half milk; or 3/4 cup liquid whey), 2 tablespoons of oil, and 1 large egg. Don't worry if it seems thin at first: the oats will soak up the milk, and the mix will thicken a bit as it stands.
 1. Let the batter stand for at least 30 minutes before cooking.
-1. Heat a lightly greased griddle to 350°F (if you've got a griddle with a temperature setting; if not, medium-hot will do).
+1. Heat a lightly greased skillet over a medium flame.
 1. Make small-ish pancakes with quarter-cup ladle.
 
 ## Notes

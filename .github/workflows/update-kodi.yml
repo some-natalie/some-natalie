@@ -65,5 +65,5 @@ jobs:
         shell: bash
         run: |
           gh issue create -R some-natalie/some-natalie \
-            --title "Update on pihole failed" \
+            --title "Update on kodi failed" \
             --body "Please investigate!"

@@ -20,6 +20,11 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: sudo apt dist-upgrade -y
+      - name: Remove unnecessary packages
+        shell: bash
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: sudo apt autoremove -y  
       - name: Reboot
         shell: bash
         run: sudo shutdown -r +1 "Rebooting ... brb"

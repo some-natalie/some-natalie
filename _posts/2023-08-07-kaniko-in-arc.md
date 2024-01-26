@@ -114,9 +114,9 @@ $ helm install kaniko-worker \
     --namespace "test-runners" \
     -f helm-kaniko.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.8.1
+    --version 0.8.2
 
-Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.8.1
+Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.8.2
 Digest: sha256:36a1f7a07ae5a3b15a9d190cf492ab66dd3a1302f37bde2f1ce5a6660592eb10
 NAME: kaniko-worker
 LAST DEPLOYED: Mon Jan  8 09:35:09 2024

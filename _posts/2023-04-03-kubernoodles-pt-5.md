@@ -296,7 +296,7 @@ helm install ubi9 \
   --namespace "runners" \
   -f local-private-ubi9.yml \
   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-  --version 0.8.1
+  --version 0.8.2
 ```
 
 Now check that the single pod is up and listening.

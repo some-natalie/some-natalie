@@ -24,7 +24,7 @@ In this talk, we'll dive deep into what an Action really is, what goes into an A
 
 - Abstract on [Sessionize](https://sessionize.com/s/some-natalie/threat-modeling-the-github-actions-ecosystem/68736)
 - [Slides](https://some-natalie.dev/blog/threat-modeling-actions), with writeup and links
-- Recording coming soon
+- [YouTube](https://youtu.be/Bk8KpeLs8Mo)
 
 ### Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller
 

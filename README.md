@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Chargeback in GitHub Enterprise Cloud](https://some-natalie.dev/blog/chargeback-clou):  Simple accounting for licenses and resource usage in GitHub Enterprise Cloud (SaaS) 💸
 1. [Flipper Zero saves the holidays (and other personal fun)](https://some-natalie.dev/blog/flipper-at-home):  Personal uses for the internet's favorite cybernetic dolphin companion. 🐬
 1. [A quick and dirty guide to X11 forwarding over SSH](https://some-natalie.dev/blog/ssh-x11-forwarding):  Securely bring your Linux GUI apps to your Mac with the magic of SSH. 🧙🏼‍♀️
-1. [Scrum the home](https://some-natalie.dev/blog/scrum-the-home):  🏡 Running a home, with some help from Scrum (ish)
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

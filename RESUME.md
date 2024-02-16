@@ -12,7 +12,7 @@
 
 ---
 
-### GitHub - Senior Solutions Engineer, 2021-present
+### GitHub - Senior Solutions Engineer, 2021-2024
 
 - **Partner exclusively with the most security-conscious customers**, guiding them on meeting their development and security needs within the entire GitHub Enterprise platform and integrations.
   - Automating and building the infrastructure to support it safely

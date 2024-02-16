@@ -177,9 +177,9 @@ Clever architecture decisions, such as trying to keep hierarchy as simple as pos
 
 ## Next time
 
-Now let's try this on hard mode - self-hosting all this goodness using GitHub Enterprise Server and _still_ having an awesome chargeback model!
+Now let's try this on hard mode - self-hosting all this goodness using GitHub Enterprise Server and _still_ having [an awesome chargeback model!](../chargeback-server)
 
-![business-unikitty](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/meeting-lego-movie.gif)
+![business-unikitty](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/meeting-lego-movie.gif){: .shadow .rounded-10}
 
 ---
 

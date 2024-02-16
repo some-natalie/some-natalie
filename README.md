@@ -5,7 +5,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
 1. [Chargeback in GitHub Enterprise Server](https://some-natalie.dev/blog/chargeback-server):  Accounting for licenses and resource usage in GitHub Enterprise Server (self-hosted) - the easy way and the hard way! 💸
-1. [Chargeback in GitHub Enterprise Cloud](https://some-natalie.dev/blog/chargeback-cloud):  Simple accounting for licenses and resource usage in GitHub Enterprise Cloud (SaaS) 💸
+1. [Chargeback in GitHub Enterprise Cloud](https://some-natalie.dev/blog/chargeback-clou):  Simple accounting for licenses and resource usage in GitHub Enterprise Cloud (SaaS) 💸
 1. [Flipper Zero saves the holidays (and other personal fun)](https://some-natalie.dev/blog/flipper-at-home):  Personal uses for the internet's favorite cybernetic dolphin companion. 🐬
 <!-- END_SECTION:latest_posts -->
 

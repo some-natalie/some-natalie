@@ -63,7 +63,7 @@ flowchart TD;
 If you want to follow the same general model as the cloud chargebacks, you can download the following CSV files from GitHub Enterprise Server and load them into a spreadsheet.
 
 - [all users report](https://docs.github.com/en/enterprise-server@latest/admin/administering-your-instance/administering-your-instance-from-the-web-ui/site-admin-dashboard#reports) - note that regardless of activity, all users that are not suspended consume a seat!
-- [GHAS active committers](https://docs.github.com/en/enterprise-server@3.11/billing/managing-billing-for-github-advanced-security/viewing-your-github-advanced-security-usage#downloading-github-advanced-security-license-usage-information) - the number of consumed seats is the sum of unique users in this spreadsheet.
+- [GHAS active committers](https://docs.github.com/en/enterprise-server@latest/billing/managing-billing-for-github-advanced-security/viewing-your-github-advanced-security-usage#downloading-github-advanced-security-license-usage-information) - the number of consumed seats is the sum of unique users in this spreadsheet.
 - a mapping of cost centers to user identities
 
 ### Automating information collection for chargeback

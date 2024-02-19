@@ -19,7 +19,7 @@ The end product is an "appliance-like" device that can play local media on a tel
 
 You'll need some parts and pieces to build this.
 
-- Raspberry Pi 4 (amount of RAM up to you)
+- Raspberry Pi 4 or 5 (amount of RAM up to you)
 - Micro-SD card (capacity up to you)
 - Power supply for the board (15W USB-C)
 - Case (strongly recommend a passively cooled case like [this one](https://flirc.tv/products/flirc-raspberry-pi-4-case-silver))
@@ -51,7 +51,7 @@ sudo reboot
 
 There's a decent chance that there'll be new firmware, drivers, security fixes, etc.  It's now a plain server, ready to install any graphical apps.
 
-> Older guides have you configure more settings in the `/boot/config.txt` file.  Most aren't necessary on the Pi 4 B model with the default OS.  In particular, the `gpu_mem` settings are deprecated in favor of letting the memory management unit (MMU) do what it was designed to.  [Legacy config.txt options](https://www.raspberrypi.com/documentation/computers/legacy_config_txt.html%23gpu_mem) is the official documentation on this if you're looking for some light reading.  I did _no_ configuration changes apart from what's in this guide and it works fabulously.
+> Older guides have you configure more settings in the `/boot/config.txt` file.  Most aren't necessary on the Pi 4 B model (or later) with the default OS.  In particular, the `gpu_mem` settings are deprecated in favor of letting the memory management unit (MMU) do what it was designed to.  [Legacy config.txt options](https://www.raspberrypi.com/documentation/computers/legacy_config_txt.html%23gpu_mem) is the official documentation on this if you're looking for some light reading.  I did _no_ configuration changes apart from what's in this guide and it works fabulously.
 {: .prompt-info}
 
 ## Kodi installation

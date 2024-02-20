@@ -10,7 +10,6 @@ classes: wide
 mermaid: true
 excerpt: "Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)"
 image: /assets/graphics/2023-07-03-threat-modeling/Slide1.jpeg
-pin: true
 ---
 
 GitHub Actions is phenomenally popular in both open-source and enterprise development - partly due to how _different_ it is from many other existing CI/CD tools.  However, this means you'll need to update your threat model to account for those differences.

@@ -8,7 +8,6 @@ tags:
   - business
   - kubernetes
 excerpt: "When you absolutely, positively have to host it yourself, here's some help."
-pin: true
 ---
 
 This piece is going to take a look at what this feature is and a quick overview of how it works, then go through some key decisions you should think through as you set it up.  A bunch of experience both building and running this at scale as well as advising others doing the same went into this writeup.  Opinions from that experience are noted in the last paragraph of each key decision, as well as some reasoning as to _why_.  Links to jump ahead:

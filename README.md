@@ -1,6 +1,6 @@
 # Hi there 👋
 
-I'm Natalie, a DevSecOps engineer and consultant experienced in developer experience and consolidation within a wide array of security-focused environments.  I work at the intersection of technology, people, and highly-regulated industries as a Senior Solutions Engineer at [GitHub](https://github.com/github)!
+I'm Natalie, a DevSecOps engineer and consultant experienced in developer experience and consolidation within a wide array of security-focused environments.  I work at the intersection of technology, people, and highly-regulated industries as a Principal Federal Solutions Engineer at [Chainguard](https://chainguard.dev)!
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
@@ -11,12 +11,12 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 💼 Day to day, I work with
 
-- **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql)
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
 - **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles), self-hosted GitHub Actions runners made for humans
+- **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6) 
 - **Python** - [Advanced Security CSV export](https://github.com/advanced-security/ghas-to-csv)
 - **Go** - [gh-org-admin-promote](https://github.com/some-natalie/gh-org-admin-promote)
-- **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6)
+- **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql) 
 - but mostly, I work with people on all of the above! 💖
 
 You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
@@ -29,7 +29,7 @@ You can find me in our work Slack sharing all sorts of neat things you can do wi
   - [OpenWRT](https://openwrt.org) router ([build directions](https://some-natalie.dev/blog/openwrt-setup/))
   - [Pi-hole](https://pi-hole.net), for DNS and ad-blocking
   - Ubiquiti UniFi network controller, in [Docker](https://github.com/jacobalberty/unifi-docker) of course
-- I'm getting into the [Flipper Zero](https://flipperzero.one/) lately - it's so handy _and_ mischievous!
+- I'm getting into the [Flipper Zero](https://flipperzero.one/) lately - it's so handy _and_ mischievous! ([some fun uses](https://some-natalie.dev/blog/flipper-at-home/))
 
 I have an awesome life outside of tech, so while I have a few projects that I enjoy (👆), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
 

@@ -2,17 +2,21 @@
 
 🗺️ Boulder, CO metro area
 
-✍️ Blog - <https://some-natalie.dev>
+✍🏻 Blog - <https://some-natalie.dev>
 
 🎤 Speaking - <https://some-natalie.dev/speaking>
 
-👩‍💻 GitHub - <https://github.com/some-natalie>
+👩🏻‍💻 GitHub - <https://github.com/some-natalie>
 
 💼 LinkedIn - <https://linkedin.com/in/nsomersall>
 
 ---
 
-### GitHub - Senior Solutions Engineer, 2021-2024
+### [Chainguard](https://chainguard.dev) - Principal Federal Solutions Engineer, 2024-present
+
+I just started ... I'll update this once I have my feet under me. 😊
+
+### [GitHub](https://github.com/github) - Senior Solutions Engineer, 2021-2024
 
 - **Partner exclusively with the most security-conscious customers**, guiding them on meeting their development and security needs within the entire GitHub Enterprise platform and integrations.
   - Automating and building the infrastructure to support it safely
@@ -22,7 +26,7 @@
 - **Develop custom solutions** such as human-friendly [Kubernetes runners](https://github.com/some-natalie/kubernoodles), managing an [enterprise-wide security team](https://github.com/advanced-security/enterprise-security-team) across the largest GitHub customers, and other projects you can browse [here](https://github.com/some-natalie?tab=repositories).
 - **Thought leadership**, speaking and writing about developer problems within regulated industries, and customer advocacy within our Product and Engineering teams.
 
-### Booz Allen Hamilton - Lead Engineer, 2015-2021
+### [Booz Allen Hamilton](https://www.boozallen.com) - Lead Engineer, 2015-2021
 
 - **Lead consolidation of developer tools** within CMMC and ITAR compliance including:
   - Plan of Action and Mitigation (POA&M) management for all findings in these enterprise-wide systems
@@ -62,5 +66,5 @@
 
 ### Education
 
-- **Master's of Science in Engineering** from Virginia Tech (2012)
-- **Bachelor's of Science in Engineering** from Virginia Tech, double major (2010)
+- **Master's of Science in Engineering** from [Virginia Tech](https://www.vt.edu) (2012)
+- **Bachelor's of Science in Engineering** from [Virginia Tech](https://www.vt.edu), double major (2010)

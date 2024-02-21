@@ -4,7 +4,7 @@ order: 8
 icon: fas fa-fw fa-microphone
 ---
 
-Natalie is a senior solutions engineer at GitHub serving the public sector market. She spent years designing, building, and leading complex systems in regulated environments at a major systems integrator, but has also taken her career in many other directions - including detours into project management, systems engineering, and teaching.  
+Natalie is a principal solutions engineer at Chainguard serving the public sector market. She spent years designing, building, and leading complex systems in regulated environments at a major systems integrator, but has also taken her career in many other directions - including detours into project management, systems engineering, and teaching.  
 
 She's passionate about diversity in technology and empowering engineers to build better.
 

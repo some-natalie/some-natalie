@@ -40,7 +40,7 @@ az aks create -n <cluster-name> -g <resource-group-name> -l <region-name> \
 az aks get-credentials --resource-group <resource-group-name> --name <cluster-name>
 ```
 
-Next, add [Cilium](https://cilium.io/) ([GitHub](https://github.com/cilium/cilium)) as our CNI-compatible networking.  It's going to provide visibility in L3/4 and L7 networking.  [Hubble](https://docs.cilium.io/en/v1.12/intro/#what-is-hubble) will provide us ways to actually see that info.
+Next, add [Cilium](https://cilium.io/) ([GitHub](https://github.com/cilium/cilium)) as our CNI-compatible networking.  It's going to provide visibility in L3/4 and L7 networking.  [Hubble](https://docs.cilium.io/en/stable/gettingstarted/hubble_intro/) will provide us ways to actually see that info.
 
 ```shell
 # Add the helm repo
@@ -49,7 +49,7 @@ helm repo update
 
 # Install cilium and hubble into our cluster
 helm install cilium cilium/cilium \
-    --version 1.14.5 \
+    --version 1.15.1 \
     --namespace kube-system \
     --set aksbyocni.enabled=true \
     --set nodeinit.enabled=true \

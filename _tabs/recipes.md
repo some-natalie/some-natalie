@@ -13,6 +13,7 @@ I would like to make some family recipes publicly accessible without vendor lock
 - [Marinades](../recipes/marinades)
 - [Seasoning blends](../recipes/seasoning-blends)
 - [Stocks and broths](../recipes/stocks)
+- [Drinks](#drink-list) 🍹
 - [Salad dressings](#salad-dressings)
 - [Baking time chart](#baking-time-chart)
 - [Sous vide time chart](#sous-vide-time-chart)
@@ -22,6 +23,12 @@ I would like to make some family recipes publicly accessible without vendor lock
 
 {% assign sorted = site.recipes | sort: 'title' %}
 {% for recipe in sorted %}{% unless recipe.omit == true %}- [{{ recipe.title }}]({{ recipe.url | relative_url }}) - {{ recipe.excerpt }}
+{% endunless %}{% endfor %}
+
+## Drink list
+
+{% assign sorted = site.drinks | sort: 'title' %}
+{% for drink in sorted %}{% unless drink.omit == true %}- [{{ drink.title }}]({{ drink.url | relative_url }}) - {{ drink.excerpt }}
 {% endunless %}{% endfor %}
 
 ## Salad dressings

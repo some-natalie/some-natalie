@@ -23,7 +23,7 @@ title: "Repo maintenance checklist"
   - [ ] cilium
   - [ ] tetragon
   - [ ] actions-runner-controller
-  - [ ] kubernetes 
+  - [ ] kubernetes
 
 ### fedora-acs-override
 
@@ -32,20 +32,6 @@ title: "Repo maintenance checklist"
 - [ ] look over open issues
 - [ ] merge dependabot PRs
 - [ ] cron job still running to build RPMs
-
-### ghas-to-csv
-
-[project link](https://github.com/advanced-security/ghas-to-csv)
-
-- [ ] look over open issues
-- [ ] merge dependabot PRs
-
-### enterprise-security-team
-
-[project link](https://github.com/advanced-security/enterprise-security-team)
-
-- [ ] look over open issues
-- [ ] merge dependabot PRs
 
 ### gh-org-admin-promote
 
@@ -75,8 +61,8 @@ title: "Repo maintenance checklist"
 - [ ] look over open issues
 - [ ] merge dependabot PRs
 
-### GHES SQL database queries
+### Jekyll-in-a-can
 
-[project link](https://github.com/github/platform-samples/tree/master/sql)
+[project link](https://github.com/some-natalie/jekyll-in-a-can)
 
-- [ ] spin up a GHES server, load with data using [the power](https://github.com/gm3dmo/the-power), validate they return what's expected - update README.md with results on newest major version
+- [ ] merge dependabot PRs

@@ -19,6 +19,8 @@ I would like to make some family recipes publicly accessible without vendor lock
 - [Sous vide time chart](#sous-vide-time-chart)
 - [Stand mixer attachments](#stand-mixer-speed-chart)
 
+---
+
 ## Recipe list
 
 {% assign sorted = site.recipes | sort: 'title' %}

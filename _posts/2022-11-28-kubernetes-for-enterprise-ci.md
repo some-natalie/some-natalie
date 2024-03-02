@@ -6,6 +6,8 @@ categories:
 tags:
   - CI
   - kubernetes
+  - containers
+  - business
 toc: true
 excerpt: "What happens to container security and reliability when continuous integration is shoved in too!"
 image: /assets/graphics/2022-11-21-cloud-native/slide-01.jpg

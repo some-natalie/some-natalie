@@ -6,6 +6,7 @@ categories:
 tags:
   - CI
   - business
+  - github-actions
   - kubernetes
 excerpt: "When you absolutely, positively have to host it yourself, here's some help."
 ---

@@ -6,6 +6,7 @@ categories:
 tags:
   - kubernetes
   - codespaces
+  - containers
 classes: wide
 excerpt: "It's like Codespaces, but much more work for much less functionality."
 ---

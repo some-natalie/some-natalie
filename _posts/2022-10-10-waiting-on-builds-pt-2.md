@@ -5,7 +5,6 @@ categories:
   - blog
 tags:
   - CI
-  - linux
   - business
 classes: wide
 excerpt: "How much does it cost to wait on builds?  More numbers make it even clearer."

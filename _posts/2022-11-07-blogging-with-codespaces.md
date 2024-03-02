@@ -5,6 +5,7 @@ categories:
   - blog
 tags:
   - codespaces
+  - containers
 classes: wide
 excerpt: "Using devcontainers (and not developer tears) to manage dependencies for this site"
 ---

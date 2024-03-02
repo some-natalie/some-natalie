@@ -6,6 +6,7 @@ categories:
 tags:
   - security
   - github-actions
+  - containers
 classes: wide
 mermaid: true
 excerpt: "Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)"
@@ -17,6 +18,8 @@ GitHub Actions is phenomenally popular in both open-source and enterprise develo
 This talk gives a quick overview of what threat modeling is and why it's important before diving into what an Action _really_ is under the covers, how to handle secrets within it, and some key decisions that'll change your model based on real-world experience.
 
 > This post is images, expanded commentary, and resources from a talk I gave at [BSides Boulder 2023](https://bsidesboulder.org/2023/talks/) on June 23rd, 2023 on Threat Modeling GitHub Actions ([slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2023-06-23_Bsides-Boulder-Threat-Modeling-Actions.pdf) as presented).  Since there's no screen-sharing on a website, I can't bounce back and forth between code and a browser and this talk like I could in real life.  There's lots more code snippets, links, and screenshots here than in the original deck to make up for that. 💖
+>
+>  🎥 [YouTube video](https://youtu.be/Bk8KpeLs8Mo) if watching a video is more your speed!
 {: .prompt-info}
 
 ## 🗺️ Where we're going

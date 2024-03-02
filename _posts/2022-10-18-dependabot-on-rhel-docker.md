@@ -7,6 +7,7 @@ tags:
   - security
   - dependabot
   - linux
+  - containers
 classes: wide
 excerpt: "How to run Dependabot on-premises using Red Hat Enterprise Linux"
 ---

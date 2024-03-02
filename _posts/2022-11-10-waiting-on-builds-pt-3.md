@@ -5,7 +5,6 @@ categories:
   - blog
 tags:
   - CI
-  - linux
   - business
 classes: wide
 excerpt: "Do we build it ourselves or do we buy it as a service?"

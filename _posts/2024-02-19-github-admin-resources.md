@@ -10,7 +10,7 @@ tags:
 pin: true
 ---
 
-> This post links to all[^found] the publicly-accessible GitHub content I've written, coded, or talked to.  **I've left GitHub.**  As this website is mostly things _I'm_ learning and making repeatable (e.g., things built/learned from common customer conversations), **expect less GitHub-focused content moving forward.**[^feels]  I'd like to un-pin a lot of things here to make room for ✨ **new adventures** ✨ without leaving a huge chunk of traffic to this site reliant on searching or bookmarks.
+> This post links to all the publicly-accessible GitHub content I've written, coded, or talked to.[^found]  **I've left GitHub.**  As this website is mostly things _I'm_ learning and making repeatable (e.g., things built/learned from common customer conversations), **expect less GitHub-focused content moving forward.**[^feels]  I'd like to un-pin a lot of things here to make room for ✨ **new adventures** ✨ without leaving a huge chunk of traffic to this site reliant on searching or bookmarks.
 {: .prompt-info}
 
 ![octocat](/assets/graphics/2024-02-19-admin/some-natalie-octocat.png){: .w-50 .rounded-10 .right}

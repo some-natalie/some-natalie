@@ -5,9 +5,9 @@ classes: wide
 mermaid: true
 excerpt: "Accounting for licenses and resource usage in GitHub Enterprise Server (self-hosted) - the easy way and the hard way! 💸"
 categories:
-- blog
+  - blog
 tags:
-- business
+  - business
 ---
 
 Last time, we looked at a simple ["chargeback" system for the SaaS version of GitHub](../chargeback-cloud).  As there's limited availability of the data by API, we downloaded some CSV files and used a spreadsheet's built-in analysis tools to make some invoices for each organization in the enterprise.

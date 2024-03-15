@@ -4,11 +4,11 @@ date: 2024-01-12
 classes: wide
 excerpt: "Securely bring your Linux GUI apps to your Mac with the magic of SSH. 🧙🏼‍♀️"
 categories:
-- blog
+  - blog
 tags:
-- homelab
-- linux
-- oscp
+  - homelab
+  - linux
+  - oscp
 ---
 
 ![portals](/assets/graphics/2024-01-12-ssh-x11-forwarding/thinking-with-portals.jpg){: .shadow .rounded-10 .w-50 .right}

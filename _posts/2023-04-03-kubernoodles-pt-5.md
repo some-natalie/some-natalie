@@ -98,7 +98,7 @@ The first two arguments go into installing [actions/runner](https://github.com/a
 # Arguments
 ARG TARGETPLATFORM=linux/amd64
 ARG RUNNER_VERSION=2.314.1
-ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.1
+ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.0
 ```
 
 I like to bundle any other similar arguments together here too, such as versions of other software to include.  Keeping it together means I don't hunt through long Dockerfiles to update it - I want my "future me" to like "present me" as much as possible.

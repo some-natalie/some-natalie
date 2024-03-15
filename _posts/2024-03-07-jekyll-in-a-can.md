@@ -4,10 +4,10 @@ date: 2024-03-07
 classes: wide
 excerpt: "Safely repackaging Jekyll to run in a container for local development was addictively easy."
 categories:
-- blog
+  - blog
 tags:
-- security
-- containers
+  - security
+  - containers
 ---
 
 New gig, new tech stack to learn ... let's do the simple things first! 📚

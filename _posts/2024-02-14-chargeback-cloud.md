@@ -5,9 +5,9 @@ classes: wide
 mermaid: true
 excerpt: "Simple accounting for licenses and resource usage in GitHub Enterprise Cloud (SaaS) 💸"
 categories:
-- blog
+  - blog
 tags:
-- business
+  - business
 ---
 
 One of the most common questions asked by companies adopting GitHub Enterprise is how to **know who's using what.**  This information is critically important to government agencies, non-profits, consultancies, and any other customer-billable business.  Even without these needs, it's valuable to identify usage and growth trends for cost predictability, opportunities to coach teams to optimize usage, and much more.

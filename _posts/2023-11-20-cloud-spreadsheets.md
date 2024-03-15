@@ -3,12 +3,10 @@ title: "Cloud cost spreadsheets ask the wrong question"
 date: 2023-11-20
 classes: wide
 excerpt: "Or what I learned replacing the 200A breaker panel on my house ⚡"
-
 categories:
-- blog
-
+  - blog
 tags:
-- business
+  - business
 ---
 
 There's been quite a lot of commotion lately about The Company Formerly Known As Twitter's [60% YoY cost savings](https://www.datacenterdynamics.com/en/news/xtwitter-claims-100m-in-annual-savings-after-exiting-sacramento-data-center/) by leaving the cloud in favor of data centers run in-house.  Lots has been written about business apps of all sizes coming back on-premises, making the front page of Hacker News, trending on LinkedIn, and all around extolling the virtues of controlling your entire supply chain from metal upwards.  Rolling your own is cool again! 😎

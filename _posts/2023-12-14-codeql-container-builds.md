@@ -3,10 +3,8 @@ title: "Adding CodeQL to your (compiled) container build"
 date: 2023-12-14
 classes: wide
 excerpt: "Using CodeQL inside of a containerized build for compiled languages"
-
 categories:
   - blog
-
 tags:
   - linux
   - codeql

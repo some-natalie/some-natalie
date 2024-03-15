@@ -4,11 +4,11 @@ date: 2024-01-08
 classes: wide
 excerpt: "🏡 Running a home, with some help from Scrum (ish)"
 categories:
-- blog
+  - blog
 tags:
-- github-actions
-- homelab
-- project-management
+  - github-actions
+  - homelab
+  - project-management
 ---
 
 🥂 In the spirit of the new year, I thought I'd share how we've been creating some order out of chaos in our home.  We've been at this for over two years now and it's worked fairly well so far.

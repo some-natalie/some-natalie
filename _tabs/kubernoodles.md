@@ -25,7 +25,7 @@ Here's what has been done and where we're going.
 1. [Continuous integration for custom runner images](../blog/kubernoodles-pt-7) - CI for your CI, or how to test your custom runner images on each change.
 1. [Writing tests for Actions runners](../blog/testing-runner-containers) - Test your enterprise CI images with the same rigor as your other software.
 
-> Last updated in **January 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently demonstrating.
+> Last updated in **March 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
 {: .prompt-info}
 
 Coming soon:

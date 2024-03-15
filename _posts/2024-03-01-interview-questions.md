@@ -4,10 +4,10 @@ date: 2024-03-01
 classes: wide
 excerpt: "Job interviews are a two-way street.  Of course I have questions for you. 💖"
 categories:
-- blog
+  - blog
 tags:
-- business
-- career
+  - business
+  - career
 ---
 
 Tech job descriptions are the professional version of a tween "dream boyfriend" checklist. 🙊

@@ -7,8 +7,6 @@ tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
-toc: true
-toc_sticky: true
 excerpt: "(Kubernoodles, part 5 of ?) - You need your own image.  Here's how to make it ✨ awesome ✨"
 ---
 

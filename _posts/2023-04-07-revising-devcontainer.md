@@ -6,8 +6,6 @@ categories:
 tags:
   - codespaces
 classes: wide
-# toc: true
-# toc_sticky: true
 excerpt: "Now with private drafts 🤐 - written with Obsidian and Codespaces"
 ---
 

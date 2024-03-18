@@ -42,3 +42,5 @@ excerpt: "Crumbly cinnamon coffee cake"
 ## Notes
 
 - Wrap unbaked pans with plastic wrap and refrigerate for 24 hours or freeze for 1 month.
+- Also works in two 9x9" pans, reduce baking time to 45 minutes.
+ 

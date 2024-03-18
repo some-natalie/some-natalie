@@ -1,10 +1,7 @@
 ---
 title: "Career interview questions"
 date: 2024-03-01
-classes: wide
 excerpt: "Job interviews are a two-way street.  Of course I have questions for you. 💖"
-categories:
-  - blog
 tags:
   - business
   - career

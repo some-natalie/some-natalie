@@ -1,13 +1,10 @@
 ---
 title: "Actions Workflows to Test Custom Runners"
 date: 2023-02-14
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
-classes: wide
 excerpt: "(Kubernoodles, part 2 of ?) - Create a few Actions to test, scale, and debug our self-hosted runners."
 ---
 

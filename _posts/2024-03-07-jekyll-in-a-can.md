@@ -1,10 +1,7 @@
 ---
 title: "Building a secure Jekyll container"
 date: 2024-03-07
-classes: wide
 excerpt: "Safely repackaging Jekyll to run in a container for local development was addictively easy."
-categories:
-  - blog
 tags:
   - security
   - containers

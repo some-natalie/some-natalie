@@ -1,12 +1,9 @@
 ---
 title: "Managing an enterprise-wide application security team on GitHub"
 date: 2023-03-22
-categories:
-  - blog
 tags:
   - business
   - security
-classes: wide
 excerpt: "Create and manage a uniform team enterprise-wide - or how that last mile really is the hardest."
 ---
 

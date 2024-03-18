@@ -1,11 +1,8 @@
 ---
 title: "Git aliases and shortcuts for daily use"
 date: 2022-12-02
-categories:
-  - blog
 tags:
   - git
-classes: wide
 excerpt: "The git aliases and shortcuts that I use daily (and why)"
 ---
 

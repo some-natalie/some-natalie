@@ -1,10 +1,7 @@
 ---
 title: "Cloud cost spreadsheets ask the wrong question"
 date: 2023-11-20
-classes: wide
 excerpt: "Or what I learned replacing the 200A breaker panel on my house ⚡"
-categories:
-  - blog
 tags:
   - business
 ---

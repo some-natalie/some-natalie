@@ -1,13 +1,10 @@
 ---
 title: "Scanning your code on every single push"
 date: 2023-05-15
-categories:
-  - blog
 tags:
   - CI
   - security
   - questionable-ideas
-classes: wide
 excerpt: "Why it's probably not what you're wanting to do and how to do it anyways."
 ---
 

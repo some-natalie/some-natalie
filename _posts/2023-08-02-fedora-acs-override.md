@@ -1,12 +1,9 @@
 ---
 title: "Building the Linux kernel for dedicated hardware VMs"
 date: 2023-08-02
-categories:
-  - blog
 tags:
   - linux
   - homelab
-classes: wide
 excerpt: "Making white-box GPU compute multi-tenant using the Access Control Services override patch in Linux - or run Windows video games without suffering from dual booting"
 ---
 

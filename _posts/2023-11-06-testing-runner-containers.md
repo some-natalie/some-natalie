@@ -1,10 +1,7 @@
 ---
 title: "Writing tests for your Actions runners"
 date: 2023-11-06
-classes: wide
 excerpt: "(Kubernoodles, part 8 of ?) - Test your enterprise CI with the same rigor as your other software 🧪"
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles

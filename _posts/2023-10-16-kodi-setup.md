@@ -1,10 +1,7 @@
 ---
 title: "Kodi setup on a Raspberry Pi 4"
 date: 2023-10-16
-classes: wide
 excerpt: "🍿 Movie night, locally"
-categories:
-  - blog
 tags:
   - homelab
 ---

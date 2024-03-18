@@ -1,11 +1,8 @@
 ---
 title: "Chargeback in GitHub Enterprise Cloud"
 date: 2024-02-14
-classes: wide
 mermaid: true
 excerpt: "Simple accounting for licenses and resource usage in GitHub Enterprise Cloud (SaaS) 💸"
-categories:
-  - blog
 tags:
   - business
 ---

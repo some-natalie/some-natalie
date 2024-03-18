@@ -1,13 +1,10 @@
 ---
 title: "Setting up automated deployments via Helm + Actions"
 date: 2023-02-22
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
-classes: wide
 excerpt: "(Kubernoodles, part 4 of ?) - Every system should deploy itself automatically, but we'll start manually to understand how it all comes together"
 ---
 

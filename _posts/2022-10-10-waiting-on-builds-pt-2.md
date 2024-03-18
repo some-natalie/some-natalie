@@ -1,12 +1,9 @@
 ---
 title: "The cost of waiting on builds, part 2"
 date: 2022-10-10
-categories:
-  - blog
 tags:
   - CI
   - business
-classes: wide
 excerpt: "How much does it cost to wait on builds?  More numbers make it even clearer."
 ---
 

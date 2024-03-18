@@ -1,10 +1,7 @@
 ---
 title: "Scrum the home"
 date: 2024-01-08
-classes: wide
 excerpt: "🏡 Running a home, with some help from Scrum (ish)"
-categories:
-  - blog
 tags:
   - github-actions
   - homelab

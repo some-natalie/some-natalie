@@ -1,10 +1,7 @@
 ---
 title: "GitHub Enterprise administration resources"
 date: 2024-02-19
-classes: wide
 excerpt: "A summary of publicly-available GitHub things I've done that you might be looking for on my website."
-categories:
-  - blog
 tags:
   - github-enterprise
 pin: true

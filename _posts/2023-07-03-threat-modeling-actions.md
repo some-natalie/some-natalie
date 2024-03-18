@@ -1,13 +1,10 @@
 ---
 title: "Threat Modeling the GitHub Actions ecosystem"
 date: 2023-07-03
-categories:
-  - blog
 tags:
   - security
   - github-actions
   - containers
-classes: wide
 mermaid: true
 excerpt: "Understand and secure the most critical part of your software supply chain - where you build and ship your code! (from BSides Boulder 2023)"
 image: /assets/graphics/2023-07-03-threat-modeling/Slide1.jpeg

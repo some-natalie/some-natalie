@@ -1,14 +1,11 @@
 ---
 title: "What are your users really doing within GitHub Actions?"
 date: 2023-02-16
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
   - observability
-classes: wide
 excerpt: "(Kubernoodles, part 3 of ?) - eBPF + actions-runner-controller = 💖 pure o11y love 💖"
 ---
 

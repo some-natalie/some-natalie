@@ -1,10 +1,7 @@
 ---
 title: "Flipper Zero saves the holidays (and other personal fun)"
 date: 2024-01-17
-classes: wide
 excerpt: "Personal uses for the internet's favorite cybernetic dolphin companion. 🐬"
-categories:
-  - blog
 tags:
   - security
   - homelab

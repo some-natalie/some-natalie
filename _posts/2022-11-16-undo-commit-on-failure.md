@@ -1,13 +1,10 @@
 ---
 title: "Undo a commit on a failed GitHub Actions job"
 date: 2022-11-16
-categories:
-  - blog
 tags:
   - CI
   - git
   - questionable-ideas
-classes: wide
 excerpt: "How to automatically roll back code changes in GitHub Actions"
 ---
 

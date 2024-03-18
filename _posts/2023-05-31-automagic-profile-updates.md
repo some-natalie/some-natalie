@@ -1,11 +1,8 @@
 ---
 title: "Lazy profile readme updates from my blog"
 date: 2023-05-31
-categories:
-  - blog
 tags:
   - CI
-classes: wide
 excerpt: "There’s a thousand profile README generators, so of course I had to roll my own instead."
 ---
 

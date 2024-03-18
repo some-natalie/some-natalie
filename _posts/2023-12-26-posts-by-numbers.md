@@ -1,10 +1,7 @@
 ---
 title: "Posts by the numbers for 2023"
 date: 2023-12-26
-classes: wide
 excerpt: "Taking a peek at traffic analytics and what to learn more about with more data."
-categories:
-  - blog
 tags:
   - homelab
 mermaid: true

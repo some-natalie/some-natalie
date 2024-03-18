@@ -1,13 +1,10 @@
 ---
 title: "Using Kaniko in Actions-Runner-Controller"
 date: 2023-08-07
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
-classes: wide
 excerpt: "(Kubernoodles, part 6 of ?) - Building containers without Docker-in-Docker or privileged pods with Kaniko"
 ---
 

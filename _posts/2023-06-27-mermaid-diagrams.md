@@ -1,9 +1,6 @@
 ---
 title: "Adding Mermaid Diagrams"
 date: 2023-06-27
-categories:
-  - blog
-classes: wide
 excerpt: "Adding Mermaid (or any custom JavaScript) to a Jekyll site without a plugin"
 mermaid: true
 ---

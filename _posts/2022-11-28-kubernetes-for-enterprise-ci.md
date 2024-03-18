@@ -1,8 +1,6 @@
 ---
 title: "Containerized CI at an Enterprise Scale"
 date: 2022-11-28
-categories:
-  - blog
 tags:
   - CI
   - kubernetes

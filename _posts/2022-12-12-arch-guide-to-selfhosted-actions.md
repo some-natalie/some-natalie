@@ -1,8 +1,6 @@
 ---
 title: "Architecture guide to self-hosted GitHub Actions"
 date: 2022-12-12
-categories:
-  - blog
 tags:
   - CI
   - business

@@ -1,8 +1,6 @@
 ---
 title: "Revisiting the cost of waiting on builds"
 date: 2023-07-07
-categories:
-  - blog
 tags:
   - CI
   - business

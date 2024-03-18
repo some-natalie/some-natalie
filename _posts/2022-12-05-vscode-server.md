@@ -1,13 +1,10 @@
 ---
 title: "Devcontainers in Kubernetes"
 date: 2022-12-05
-categories:
-  - blog
 tags:
   - kubernetes
   - codespaces
   - containers
-classes: wide
 excerpt: "It's like Codespaces, but much more work for much less functionality."
 ---
 

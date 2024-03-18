@@ -5,9 +5,6 @@ tags:
   - homelab
   - questionable-ideas
   - github-actions
-categories:
-  - blog
-classes: wide
 excerpt: "Remarkably helpful automation to update your own CI servers"
 ---
 

@@ -1,8 +1,6 @@
 ---
 title: "test post please ignore"
 date: 2022-10-02
-categories:
-  - blog
 excerpt: "none"
 ---
 

@@ -1,12 +1,9 @@
 ---
 title: "Please stop saying 'Just use Firecracker' - do this instead"
 date: 2023-07-21
-categories:
-  - blog
 tags:
   - security
   - kubernetes
-classes: wide
 excerpt: "Using things for what they're meant for empowers teams at scale - and also, how to avoid death by a thousand cuts along the path of shoving VMs into systems designed for containers."
 ---
 

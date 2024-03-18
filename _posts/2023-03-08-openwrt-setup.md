@@ -1,13 +1,10 @@
 ---
 title: "Replacing my router with OpenWRT and a Raspberry Pi"
 date: 2023-03-08
-categories:
-  - blog
 tags:
   - openwrt
   - linux
   - homelab
-classes: wide
 excerpt: "Building things you own."
 ---
 

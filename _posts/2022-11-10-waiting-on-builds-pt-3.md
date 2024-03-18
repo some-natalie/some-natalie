@@ -1,12 +1,9 @@
 ---
 title: "The cost of waiting on builds, part 3"
 date: 2022-11-10
-categories:
-  - blog
 tags:
   - CI
   - business
-classes: wide
 excerpt: "Do we build it ourselves or do we buy it as a service?"
 ---
 

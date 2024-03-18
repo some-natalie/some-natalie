@@ -1,11 +1,8 @@
 ---
 title: "Blogging with Codespaces, part 2"
 date: 2023-04-07
-categories:
-  - blog
 tags:
   - codespaces
-classes: wide
 excerpt: "Now with private drafts 🤐 - written with Obsidian and Codespaces"
 ---
 

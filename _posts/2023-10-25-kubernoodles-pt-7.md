@@ -1,10 +1,7 @@
 ---
 title: "CI for your CI - building and testing your custom runner images"
 date: 2023-10-25
-classes: wide
 excerpt: "(Kubernoodles, part 7 of ?) - Continuously shipping CI as an enterprise service, continuously 😉"
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles

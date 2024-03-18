@@ -1,10 +1,7 @@
 ---
 title: "A quick and dirty guide to X11 forwarding over SSH"
 date: 2024-01-12
-classes: wide
 excerpt: "Securely bring your Linux GUI apps to your Mac with the magic of SSH. 🧙🏼‍♀️"
-categories:
-  - blog
 tags:
   - homelab
   - linux

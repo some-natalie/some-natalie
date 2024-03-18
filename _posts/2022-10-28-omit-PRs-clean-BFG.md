@@ -1,11 +1,8 @@
 ---
 title: "Removing big files from repos using BFG"
 date: 2022-10-25
-categories:
-  - blog
 tags:
   - git
-classes: wide
 excerpt: "What does the 'deny updating a hidden ref' error even mean?"
 ---
 

@@ -1,12 +1,9 @@
 ---
 title: "Blogging with Codespaces"
 date: 2022-11-07
-categories:
-  - blog
 tags:
   - codespaces
   - containers
-classes: wide
 excerpt: "Using devcontainers (and not developer tears) to manage dependencies for this site"
 ---
 

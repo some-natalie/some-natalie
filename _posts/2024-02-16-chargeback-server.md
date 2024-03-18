@@ -1,11 +1,8 @@
 ---
 title: "Chargeback in GitHub Enterprise Server"
 date: 2024-02-16
-classes: wide
 mermaid: true
 excerpt: "Accounting for licenses and resource usage in GitHub Enterprise Server (self-hosted) - the easy way and the hard way! 💸"
-categories:
-  - blog
 tags:
   - business
 ---

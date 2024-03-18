@@ -1,12 +1,9 @@
 ---
 title: "Stop putting application security alerts in ticket systems"
 date: 2023-04-14
-categories:
-  - blog
 tags:
   - security
   - business
-classes: wide
 excerpt: "Stop putting all code security alerts into a ticketing system.  Here's what to do instead."
 image: /assets/graphics/memes/belle-alerts.jpg
 ---

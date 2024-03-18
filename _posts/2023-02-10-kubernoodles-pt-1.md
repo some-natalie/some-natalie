@@ -1,13 +1,10 @@
 ---
 title: "Kubernoodles Cluster Setup"
 date: 2023-02-10
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles
   - actions-runner-controller
-classes: wide
 excerpt: "(Kubernoodles, part 1 of ?) - Setup your k8s cluster, actions-runner-controller, and some default runners for later o11y."
 ---
 

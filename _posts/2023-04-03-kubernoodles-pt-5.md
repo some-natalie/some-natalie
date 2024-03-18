@@ -1,8 +1,6 @@
 ---
 title: "Creating custom images for actions-runner-controller"
 date: 2023-04-03
-categories:
-  - blog
 tags:
   - kubernetes
   - kubernoodles

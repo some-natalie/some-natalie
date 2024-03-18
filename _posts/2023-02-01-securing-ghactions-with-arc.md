@@ -1,8 +1,6 @@
 ---
 title: "Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller"
 date: 2023-02-01
-categories:
-  - blog
 tags:
   - CI
   - kubernetes

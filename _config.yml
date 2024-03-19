@@ -167,7 +167,8 @@ defaults:
       path: ""
       type: tabs # see `site.collections`
     values:
-      layout: page
+      layout: post
+      toc: true
       permalink: /:title/
   - scope:
       path: assets/img/favicons
@@ -182,7 +183,8 @@ defaults:
       path: "_recipes"
       type: recipes
     values:
-      layout: page
+      layout: post
+      toc: true
       categories:
         - recipes
   # _drinks
@@ -190,7 +192,8 @@ defaults:
       path: "_drinks"
       type: drinks
     values:
-      layout: page  
+      layout: post
+      toc: true  
       categories:
         - drinks 
   # _diy
@@ -198,7 +201,8 @@ defaults:
       path: "_diy"
       type: diy
     values:
-      layout: page
+      layout: post
+      toc: true
       categories:
         - diy   
 

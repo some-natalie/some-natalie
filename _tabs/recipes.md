@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Recipes
 permalink: /recipes/
 order: 5
@@ -10,16 +9,13 @@ This is not a food blog.  I don't want to be a food blogger. 👩🏻‍🍳
 
 I would like to make some family recipes publicly accessible without vendor lock-in or asking friends and family to make yet another account on a random "recipe keeper" service.  It’s hard to do better than markdown and a git repo for platform neutrality, so this is as good of a place as any.
 
+---
+
+## Mix lists
+
 - [Marinades](../recipes/marinades)
 - [Seasoning blends](../recipes/seasoning-blends)
 - [Stocks and broths](../recipes/stocks)
-- [Drinks](#drink-list) 🍹
-- [Salad dressings](#salad-dressings)
-- [Baking time chart](#baking-time-chart)
-- [Sous vide time chart](#sous-vide-time-chart)
-- [Stand mixer attachments](#stand-mixer-speed-chart)
-
----
 
 ## Recipe list
 

@@ -193,9 +193,7 @@ defaults:
       type: drinks
     values:
       layout: post
-      toc: true  
-      categories:
-        - drinks 
+      toc: true
   # _diy
   - scope:
       path: "_diy"

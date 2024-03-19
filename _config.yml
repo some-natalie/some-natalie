@@ -185,8 +185,6 @@ defaults:
     values:
       layout: post
       toc: true
-      categories:
-        - recipes
   # _drinks
   - scope:
       path: "_drinks"
@@ -201,8 +199,6 @@ defaults:
     values:
       layout: post
       toc: true
-      categories:
-        - diy   
 
 sass:
   style: compressed

@@ -1,7 +1,7 @@
 ---
 title: Recipes
 permalink: /recipes/
-order: 5
+order: 4
 icon: fas fa-fw fa-utensils
 ---
 

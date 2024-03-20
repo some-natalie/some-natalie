@@ -1,7 +1,7 @@
 ---
 title: "Hi there 👋"
 icon: fas fa-info-circle
-order: 9
+order: 8
 ---
 
 I'm Natalie, a DevSecOps engineer and consultant experienced in developer experience and consolidation within a wide array of security-focused environments.  I work at the intersection of technology, people, and highly-regulated industries as a Principal Federal Solutions Engineer at [Chainguard](https://chainguard.dev)!

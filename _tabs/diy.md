@@ -1,6 +1,6 @@
 ---
 title: "DIY"
-order: 6
+order: 5
 icon: fa-solid fa-screwdriver-wrench
 ---
 

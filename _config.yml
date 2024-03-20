@@ -146,7 +146,11 @@ collections:
   diy:
     output: true
     permalink: /:collection/:path/
-    sort_by: name 
+    sort_by: name
+  resources:
+    output: true
+    permalink: /:collection/:path/
+    sort_by: name
 
 defaults:
   - scope:
@@ -199,6 +203,14 @@ defaults:
     values:
       layout: post
       toc: true
+  # _resources
+  - scope:
+      path: "_resources"
+      type: resources
+    values:
+      layout: post
+      toc: true
+      permalink: /grimoire/:title/
 
 sass:
   style: compressed

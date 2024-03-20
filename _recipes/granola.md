@@ -1,6 +1,6 @@
 ---
 title: "Granola"
-classes: wide
+layout: post
 excerpt: "Slow-cooker granola"
 ---
 

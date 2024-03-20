@@ -1,6 +1,5 @@
 ---
 title: "Confetti cake"
-classes: wide
 excerpt: "Vanilla cake with sprinkles inside and on top! 🍰"
 ---
 

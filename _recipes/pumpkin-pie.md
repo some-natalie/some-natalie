@@ -1,6 +1,5 @@
 ---
 title: "Pumpkin pie"
-classes: wide
 excerpt: "The Thanksgiving dessert"
 ---
 

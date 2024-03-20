@@ -1,6 +1,5 @@
 ---
 title: "Peppermint bark"
-classes: wide
 excerpt: "Holiday candy"
 ---
 

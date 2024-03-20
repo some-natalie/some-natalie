@@ -1,6 +1,5 @@
 ---
 title: "Sicilian artichokes"
-classes: wide
 excerpt: "Sicilian stuffed artichokes and pasta (_cacocciula_)"
 ---
 

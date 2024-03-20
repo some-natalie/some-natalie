@@ -1,6 +1,5 @@
 ---
 title: "Semolina pasta"
-classes: wide
 excerpt: "Homemade pasta for rolling, cutting, and other tasty shapes."
 ---
 

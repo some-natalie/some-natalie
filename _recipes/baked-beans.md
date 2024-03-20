@@ -1,6 +1,5 @@
 ---
 title: "Baked beans"
-classes: wide
 excerpt: "Beans baked with molasses and salt pork"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Self-watering bucket planters"
-classes: wide
 excerpt: "Reuse plastic buckets to create simple self-watering planters."
 ---
 

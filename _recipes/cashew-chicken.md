@@ -1,6 +1,5 @@
 ---
 title: "Cashew chicken"
-classes: wide
 excerpt: "Quick weeknight meal with extra veggies!  Delicious _without_ the chicken too."
 ---
 

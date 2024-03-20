@@ -1,6 +1,5 @@
 ---
 title: "Chocolate mousse"
-classes: wide
 excerpt: "_the_ family recipe"
 ---
 

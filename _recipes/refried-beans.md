@@ -1,6 +1,5 @@
 ---
 title: "Refried beans"
-classes: wide
 excerpt: "Easier, healthier, and tastier from scratch"
 ---
 

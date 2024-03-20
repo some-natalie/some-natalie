@@ -1,6 +1,5 @@
 ---
 title: "Quiche"
-classes: wide
 excerpt: "Easy breakfasts made in advance, tons of variations."
 ---
 

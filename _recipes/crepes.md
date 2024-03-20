@@ -1,6 +1,5 @@
 ---
 title: "Crepes"
-classes: wide
 excerpt: "Traditional crepes, fill with fruit or vegetables or cheese or any other number of tasty things."
 ---
 

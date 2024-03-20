@@ -1,6 +1,5 @@
 ---
 title: "Rice pilaf"
-classes: wide
 excerpt: "An easy side dish"
 ---
 

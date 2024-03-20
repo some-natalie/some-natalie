@@ -1,6 +1,5 @@
 ---
 title: "Taco rice"
-classes: wide
 excerpt: "Rice for tacos, from scratch."
 ---
 

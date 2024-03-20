@@ -187,14 +187,14 @@ defaults:
       path: "_recipes"
       type: recipes
     values:
-      layout: post
+      layout: page
       toc: true
   # _drinks
   - scope:
       path: "_drinks"
       type: drinks
     values:
-      layout: post
+      layout: page
       toc: true
   # _diy
   - scope:

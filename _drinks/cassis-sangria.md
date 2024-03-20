@@ -1,6 +1,5 @@
 ---
 title: "Cassis sangria"
-classes: wide
 excerpt: "Easy summer pitcher cocktail"
 ---
 

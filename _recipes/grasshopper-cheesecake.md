@@ -1,6 +1,5 @@
 ---
 title: "Grasshopper cheesecake"
-classes: wide
 excerpt: "Creme de menthe and cocoa cheesecake in a chocolate cookie crust"
 ---
 

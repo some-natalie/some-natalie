@@ -1,6 +1,5 @@
 ---
 title: "Black beans"
-classes: wide
 excerpt: "Big pot of black beans for soup, tacos, over rice, or a million other ways."
 ---
 

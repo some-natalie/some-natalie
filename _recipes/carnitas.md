@@ -1,6 +1,5 @@
 ---
 title: "Carnitas"
-classes: wide
 excerpt: "Easy oven carnitas"
 ---
 

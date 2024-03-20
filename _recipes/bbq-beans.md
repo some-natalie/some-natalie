@@ -1,6 +1,5 @@
 ---
 title: "BBQ beans"
-classes: wide
 excerpt: "Tangy and smokey mustard BBQ beans"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Infused bourbons"
-classes: wide
 excerpt: "What to do when you try one you don't like 🥃"
 ---
 
@@ -30,8 +29,8 @@ excerpt: "What to do when you try one you don't like 🥃"
 
 ### Peach pecan
 
-- 4 peaches, peeled and cut into chunks 
-- 1 cup raw pecans 
+- 4 peaches, peeled and cut into chunks
+- 1 cup raw pecans
 - 3 cups bourbon whiskey
 
 ### Vanilla chai

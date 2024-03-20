@@ -1,6 +1,5 @@
 ---
 title: "Hudson Bay bread"
-classes: wide
 excerpt: "Shelf-stable high-energy trail snack"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Mocha truffles"
-classes: wide
 excerpt: "Christmas-time chocolates with just a hint of coffee to balance it all out"
 ---
 

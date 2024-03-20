@@ -1,6 +1,5 @@
 ---
 title: "Pumpkin spice muffins"
-classes: wide
 excerpt: "When making pie is too much and muffins are just easier."
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Jambalaya"
-classes: wide
 excerpt: "Needs no introduction, just time"
 ---
 

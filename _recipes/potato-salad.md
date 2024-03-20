@@ -1,6 +1,5 @@
 ---
 title: "Potato salad"
-classes: wide
 excerpt: "The mother-in-law’s potato salad"
 ---
 

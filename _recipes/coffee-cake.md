@@ -1,6 +1,5 @@
 ---
 title: "Coffee cake"
-classes: wide
 excerpt: "Crumbly cinnamon coffee cake"
 ---
 

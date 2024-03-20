@@ -1,6 +1,5 @@
 ---
 title: "Banana pancakes"
-classes: wide
 excerpt: "Yet another way to use up brown bananas"
 ---
 

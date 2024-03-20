@@ -1,6 +1,5 @@
 ---
 title: "Whole grain pancake mix"
-classes: wide
 excerpt: "Make-ahead, shelf-stable pancake mix 🥞"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Marinades"
-classes: wide
+layout: post
 excerpt: "All the homemade marinades in one note."
 omit: true
 ---

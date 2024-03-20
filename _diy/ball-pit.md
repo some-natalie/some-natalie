@@ -1,6 +1,5 @@
 ---
 title: "Ball pit"
-classes: wide
 excerpt: "Surviving COVID quarantines and snow days with small children, then finding tons of fun. You know you've always wanted a ball pit."
 ---
 

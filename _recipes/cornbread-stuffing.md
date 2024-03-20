@@ -1,6 +1,5 @@
 ---
 title: "Cornbread stuffing"
-classes: wide
 excerpt: "The side dish that goes with all the holiday meals, (mostly) from scratch"
 ---
 

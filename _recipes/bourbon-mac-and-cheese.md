@@ -1,6 +1,5 @@
 ---
 title: "Bourbon mac and cheese"
-classes: wide
 excerpt: "It's bacon and booze in your mac and cheese, great BBQ side dish."
 ---
 

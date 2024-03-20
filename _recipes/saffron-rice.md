@@ -1,6 +1,5 @@
 ---
 title: "Saffron rice"
-classes: wide
 excerpt: "Yellow rice, but better and with real saffron."
 ---
 

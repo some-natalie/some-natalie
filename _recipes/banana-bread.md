@@ -1,6 +1,5 @@
 ---
 title: "Banana bread"
-classes: wide
 excerpt: "Everyone’s favorite way to use up brown bananas 🍌"
 ---
 

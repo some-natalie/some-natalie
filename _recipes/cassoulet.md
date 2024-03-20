@@ -1,6 +1,5 @@
 ---
 title: "Cassoulet"
-classes: wide
 excerpt: "Brothy beans and tender meats in a big pot, but not traditional."
 ---
 

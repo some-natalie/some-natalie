@@ -1,6 +1,5 @@
 ---
 title: "Spiced apple blackberry jam"
-classes: wide
 excerpt: "Holiday cheer in a jar"
 ---
 

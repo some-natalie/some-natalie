@@ -1,6 +1,5 @@
 ---
 title: "Sweet pickles"
-classes: wide
 excerpt: "Nana's handwritten recipe for sweet pickles.  They take about 2 weeks to make, then 6 to cure."
 ---
 

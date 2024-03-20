@@ -1,6 +1,6 @@
 ---
 title: "Skillet pastas"
-classes: wide
+layout: post
 excerpt: "One-pan skillet pasta variations"
 ---
 

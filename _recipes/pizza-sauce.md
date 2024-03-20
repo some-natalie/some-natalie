@@ -1,6 +1,5 @@
 ---
 title: "Pizza sauce"
-classes: wide
 excerpt: "Big batch of pizza sauce 🍕"
 ---
 

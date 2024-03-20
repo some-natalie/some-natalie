@@ -1,6 +1,5 @@
 ---
 title: "Buttermilk fried chicken bites"
-classes: wide
 excerpt: "The deep fryer comes out of the pantry about once a year and this is why. 🍗"
 ---
 

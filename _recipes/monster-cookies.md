@@ -1,6 +1,5 @@
 ---
 title: "Monster cookies"
-classes: wide
 excerpt: "Cookies to feed the entire scouting troop for a whole trip"
 ---
 

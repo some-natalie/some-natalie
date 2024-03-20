@@ -1,6 +1,5 @@
 ---
 title: "Enchilada sauce"
-classes: wide
 excerpt: "Red enchilada sauce."
 ---
 

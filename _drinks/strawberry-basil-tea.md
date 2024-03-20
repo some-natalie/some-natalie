@@ -1,6 +1,5 @@
 ---
 title: "Strawberry basil tea"
-classes: wide
 excerpt: "Summer iced tea to use up extra strawberries and fresh basil"
 ---
 

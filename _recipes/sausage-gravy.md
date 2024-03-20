@@ -1,6 +1,5 @@
 ---
 title: "Sausage gravy"
-classes: wide
 excerpt: "Easy breakfast gravy"
 ---
 

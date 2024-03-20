@@ -1,6 +1,5 @@
 ---
 title: "Chocolate mouse-y cookies"
-classes: wide
 excerpt: "Holiday cookie for the cookie jar"
 ---
 

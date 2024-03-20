@@ -1,6 +1,5 @@
 ---
 title: "Christmas pecans"
-classes: wide
 excerpt: "Nana's handwritten recipe for the spiced pecans she'd make at Christmas"
 ---
 

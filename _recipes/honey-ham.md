@@ -1,6 +1,5 @@
 ---
 title: "Spiced lemon ham"
-classes: wide
 excerpt: "Ditch the glaze packet, use this instead."
 ---
 

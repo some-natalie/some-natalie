@@ -1,6 +1,5 @@
 ---
 title: "Buttermilk drop biscuits"
-classes: wide
 excerpt: "Fast whole-grain drop biscuits"
 ---
 

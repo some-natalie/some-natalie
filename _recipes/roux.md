@@ -1,6 +1,5 @@
 ---
 title: "Roux"
-classes: wide
 excerpt: "Thicken your soup/sauce/whatever"
 ---
 

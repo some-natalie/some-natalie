@@ -1,6 +1,6 @@
 ---
 title: "Stocks and broths"
-classes: wide
+layout: post
 excerpt: "All the stocks in one note."
 omit: true
 ---

@@ -1,6 +1,5 @@
 ---
 title: "Kernel corn spoonbread"
-classes: wide
 excerpt: "Sweet corn spoonbread from family gatherings"
 ---
 

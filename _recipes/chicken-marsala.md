@@ -1,6 +1,5 @@
 ---
 title: "Chicken marsala"
-classes: wide
 excerpt: "Simple chicken marsala"
 ---
 

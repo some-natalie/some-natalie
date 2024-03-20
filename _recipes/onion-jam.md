@@ -1,6 +1,5 @@
 ---
 title: "Caramelized onion jam"
-classes: wide
 excerpt: "Spread on sandwiches, top on crusty bread, serve on a cheese board, and more."
 ---
 

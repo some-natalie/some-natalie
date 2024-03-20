@@ -1,6 +1,5 @@
 ---
 title: "Bourbon slushy"
-classes: wide
 excerpt: "Summer porch sipper"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Dinner rolls"
-classes: wide
 excerpt: "Fast yeasty dinner rolls in a dutch oven."
 ---
 

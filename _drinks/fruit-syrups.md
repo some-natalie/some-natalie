@@ -1,6 +1,5 @@
 ---
 title: "Fruit syrups"
-classes: wide
 excerpt: "Simple syrup with fruits and herbs for desserts and drinks"
 ---
 

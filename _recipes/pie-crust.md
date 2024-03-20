@@ -1,6 +1,5 @@
 ---
 title: "Pie crust"
-classes: wide
 excerpt: "Simple crust for most pies"
 ---
 

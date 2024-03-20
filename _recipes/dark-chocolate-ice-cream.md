@@ -1,6 +1,5 @@
 ---
 title: "Dark chocolate ice cream"
-classes: wide
 excerpt: "As dark as you'd like it"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Manicotti"
-classes: wide
 excerpt: "(or lasagna if you'd rather)"
 ---
 

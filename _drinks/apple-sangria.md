@@ -1,6 +1,5 @@
 ---
 title: "Apple sangria"
-classes: wide
 excerpt: "Warm fall days in a simple pitcher cocktail"
 ---
 

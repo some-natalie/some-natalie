@@ -1,6 +1,5 @@
 ---
 title: "Spice cake"
-classes: wide
 excerpt: "Warm fall spices in a rich buttermilk cake"
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Semolina gnocchi"
-classes: wide
 excerpt: "Make-ahead sheet pan semolina gnocchi"
 ---
 

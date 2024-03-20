@@ -1,6 +1,6 @@
 ---
 title: "Seasoning blends"
-classes: wide
+layout: post
 excerpt: "All the seasoning blends in one note."
 omit: true
 ---

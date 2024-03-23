@@ -140,4 +140,4 @@ I built this container to fix my own problems and learn the tech stack and custo
 
 ## Disclosure
 
-I work at Chainguard as a sales engineer at the time of writing this.  All opinions are my own.
+I work at Chainguard as a solutions engineer at the time of writing this.  All opinions are my own.

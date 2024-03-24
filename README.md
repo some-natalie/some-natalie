@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [A gentle introduction to container escapes and no-clump gravy](https://some-natalie.dev/blog/containers-and-gravy):  🥞 From PancakesCon 5 - it's containers and gravy! 🥞
 1. [Building a secure Jekyll container](https://some-natalie.dev/blog/jekyll-in-a-can):  Safely repackaging Jekyll to run in a container for local development was addictively easy.
 1. [Career interview questions](https://some-natalie.dev/blog/interview-questions):  Job interviews are a two-way street.  Of course I have questions for you. 💖
-1. [GitHub Enterprise administration resources](https://some-natalie.dev/blog/github-admin-resources):  A summary of publicly-available GitHub things I've done that you might be looking for on my website.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

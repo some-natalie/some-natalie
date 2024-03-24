@@ -5,7 +5,7 @@ excerpt: "little bits of shell code that have no other home"
 
 ## Jekyll
 
-Check a Jekyll website for broken links and other issues with [htmlproofer](https://github.com/gjtorikian/html-proofer)
+Check a Jekyll website for broken links and other issues with [htmlproofer](https://github.com/gjtorikian/html-proofer).
 
 ```shell
 function check-website {
@@ -24,7 +24,7 @@ function check-website {
 }
 ```
 
-Build and run a Jekyll website in the current working directory.
+Build and run a Jekyll website in the current working directory, available at `http://localhost:4000/`.
 
 ```shell
 function run-website {

@@ -20,6 +20,9 @@ She's passionate about diversity in technology and empowering engineers to build
 
 Nest, stop ruining your gravy, pan sauces, etc. with clumpy flour or adding so much it becomes solid.  Learn how to balance fat and flour for perfect pan gravy, then a couple techniques on how to recover just in case it wasn't right the first time. 👩🏻‍🍳
 
+- [Slides](../blog/containers-and-gravy/), with writeup and links
+- Video coming soon!
+
 ## 2023
 
 ### Threat Modeling the GitHub Actions Ecosystem
@@ -31,7 +34,7 @@ Nest, stop ruining your gravy, pan sauces, etc. with clumpy flour or adding so m
 In this talk, we'll dive deep into what an Action really is, what goes into an Action out of the marketplace, and how each of the three types of Action can be exploited with a demonstration. With each exploit, a few control strategies will be discussed to counter it.
 
 - Abstract on [Sessionize](https://sessionize.com/s/some-natalie/threat-modeling-the-github-actions-ecosystem/68736)
-- [Slides](https://some-natalie.dev/blog/threat-modeling-actions), with writeup and links
+- [Slides](../blog/threat-modeling-actions), with writeup and links
 - [YouTube](https://youtu.be/Bk8KpeLs8Mo)
 
 ### Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller
@@ -40,7 +43,7 @@ In this talk, we'll dive deep into what an Action really is, what goes into an A
 
 [CNCF CloudNativeSecurityCon North America](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) (1 Feb) - A deep dive into the security considerations of running self-hosted GitHub Actions compute with [actions-runner-controller](https://github.com/actions/actions-runner-controller).  We'll review typical deployment architectures, then cover 3 distinct places where security risk and ease of use collide with insight and resources for navigating these design choices. First the cluster settings are examined to show methods to limit the "blast radius" of a potential bad actor and provide insight into the why and how of using privileged pods. Next, the controller settings are reviewed for how to scope runner deployments and grant permissions within GitHub to provide least-privilege. Lastly, the runner pod is taken apart to show how to build supply chain security into the image and the software it builds for you.
 
-- [Slides](https://some-natalie.dev/blog/securing-ghactions-with-arc/), with writeup and links
+- [Slides](../blog/securing-ghactions-with-arc/), with writeup and links
 - [YouTube](https://youtu.be/Ax4VPm2KrqQ)
 
 ---
@@ -51,7 +54,7 @@ In this talk, we'll dive deep into what an Action really is, what goes into an A
 
 [Colorado Kubernetes & Cloud Native](https://www.meetup.com/colorado-kubernetes-cloud-native/) (21 Nov) - Let's summarize what to think about as an enterprise moving continuous integration workloads into containers orchestrated with Kubernetes - everything from the benefits and drawbacks of nested virtualization to the how and why of privileged pods - from the perspective of having done the thing a few times over!
 
-- [Slides](https://some-natalie.dev/blog/kubernetes-for-enterprise-ci/), with writeup and links
+- [Slides](../blog/kubernetes-for-enterprise-ci/), with writeup and links
 
 ### Linux Software Packaging, maybe in a nutshell
 

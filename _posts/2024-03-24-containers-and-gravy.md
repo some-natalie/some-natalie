@@ -194,7 +194,7 @@ I'm a fan of exploring the second one.  A mentor told me years ago that **"there
 
 **I don't need to be clever to exploit misconfigurations.**  Even better is the fact that there are usually a valid business reason to configure things in this way _some of the time_, so a human overlooking that change in production is quite possible.
 
-![shortcut](/assets/graphics/gifs/shortcut.gif){: .shadow .rounded-10}
+![shortcut](https://github.com/some-natalie/some-natalie/raw/main/assets/graphics/gifs/shortcut.gif){: .shadow .rounded-10}
 _Workplace safety and infosec have a lot in common._
 
 ### The spicy take

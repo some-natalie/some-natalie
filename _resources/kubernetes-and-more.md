@@ -57,13 +57,14 @@ function grype-summary () {
 
 Outputs something like this:
 
-```text
+```shell-session
+ᐅ grype-summary nginx:1
    2 "Critical"
   14 "High"
    4 "Low"
   34 "Medium"
   72 "Negligible"
-  20 "Unknown
+  20 "Unknown"
 ```
 
 ### Multi-image Grype summarization

@@ -1,28 +1,14 @@
 ---
 title: "Container stuff"
 excerpt: "Kubernetes, Docker, Helm, and other container things"
+layout: post
 ---
 
-## Helm
+- [Chainctl](#chainctl)
+- [Grype](#grype)
+- [Helm](#helm)
 
-[helm docs](https://helm.sh/docs/)
-
-### List unique images
-
-```shell
-function helm-ls-images {
-  if [ "${1}" = "-h" ]; then
-    echo "Usage: helm-images [chart]"
-    echo "List of unique images used in Helm chart."
-    return
-  fi
-  if [ "${1}" = "" ]; then
-    echo "Chart name required."
-    return
-  fi
-  helm template "${1}" | grep -oE 'image: .+' | cut -d' ' -f2 | sort | uniq
-}
-```
+---
 
 ## Chainctl
 
@@ -43,5 +29,80 @@ function chainctl-id {
   fi
   echo "Getting group ID for domain ${1} ..."
   chainctl iam organizations list -o json | jq '.items[] | select(.name == '\"${1}\"') | .id'
+}
+```
+
+---
+
+## Grype
+
+### Summarize Grype results
+
+```shell
+function grype-summary () {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: grype-summary [path]"
+    echo "Summarize vulnerabilities found by Grype."
+    return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Path or image name required."
+    return
+  fi
+  grype ${1} -o json --file grype.json -q
+  cat grype.json | jq  '.matches[].vulnerability.severity' | sort | uniq -c
+  rm grype.json
+}
+```
+
+Outputs something like this:
+
+```text
+   2 "Critical"
+  14 "High"
+   4 "Low"
+  34 "Medium"
+  72 "Negligible"
+  20 "Unknown
+```
+
+### Multi-image Grype summarization
+
+I wrote a [Python script](https://github.com/some-natalie/dotfiles/blob/main/scripts/grype-summation.py) that takes a newline-delimited text file to summarize multiple Grype results into a pretty console table.
+
+```shell-session
+ᐅ ./grype-summation.py test-list.txt
+Analyzing nginx:1...
+Analyzing registry.access.redhat.com/ubi9/ubi-init:9.3...
+Analyzing cgr.dev/chainguard-private/nginx-fips:1...
++----------------------------------------------+----------+------+--------+-----+------------+---------+
+|                    Image                     | Critical | High | Medium | Low | Negligible | Unknown |
++----------------------------------------------+----------+------+--------+-----+------------+---------+
+|                   nginx:1                    |    2     |  14  |   34   |  4  |     72     |   20    |
+| registry.access.redhat.com/ubi9/ubi-init:9.3 |    0     |  1   |   32   | 143 |     0      |    4    |
+|   cgr.dev/chainguard-private/nginx-fips:1    |    0     |  0   |   0    |  0  |     0      |    0    |
++----------------------------------------------+----------+------+--------+-----+------------+---------+
+```
+
+---
+
+## Helm
+
+[helm docs](https://helm.sh/docs/)
+
+### List unique images
+
+```shell
+function helm-ls-images {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: helm-images [chart]"
+    echo "List of unique images used in Helm chart."
+    return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Chart name required."
+    return
+  fi
+  helm template "${1}" | grep -oE 'image: .+' | cut -d' ' -f2 | sort | uniq
 }
 ```

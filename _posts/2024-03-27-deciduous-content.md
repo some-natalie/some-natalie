@@ -22,7 +22,7 @@ I read a lot before starting this blog about capital-B Blogging, building an aud
 
 🌲 It is lovely to always be relevant no matter the season.  There is a cost to that resiliency.  Evergreen trees tend to grow slower than their deciduous counterparts.
 
-My [list of questions to ask your interviewer](../job-interview-questions) has been in my private notes for at least 15 years, with minor updates on each job search.  It took 6 months to write a little blurb on the questions I put a star next to and why I like asking them.  The list sat in my "blog ideas" folder even longer.  I'd look at it, wonder what future me will think of present me, and decide it's easier to not share with others navigating career transitions.
+My [list of questions to ask your interviewer](../interview-questions) has been in my private notes for at least 15 years, with minor updates on each job search.  It took 6 months to write a little blurb on the questions I put a star next to and why I like asking them.  The list sat in my "blog ideas" folder even longer.  I'd look at it, wonder what future me will think of present me, and decide it's easier to not share with others navigating career transitions.
 
 **Evergreen content is scary.**  It's so very tempting to start at "what will I be _proud_ of in 5/10/whatever years?" to remain relevant.  The future isn't always conducive to being predicted.  Torturing oneself into projecting ideas into the future, weighing expectations, and editing for the sake of it is anxious procrastination.
 
@@ -32,7 +32,7 @@ Past me had no clue what the present world would look like and had a wholly diff
 
 **The forest is never finished.**  Trees and blog posts grow, thrive, and expire individually at their own pace and in their own time.  They make the best of the seasons and hold on through droughts and frosts.  When a tree dies, it still has a use for many years to come as the forest reclaims it. 🌳
 
-The most popular content here, by far, is the work I've done with [actions-runner-controller](../kubernoodles) in big enterprises - promoting secure innersource patterns for large-scale and diverse continuous integration needs.  That [season may be over](../github-admin-resources), but it is still here to provide help to anyone searching for it.  It, too, will slowly age into obsolescence like leaves on a forest floor.[^updates]
+The most popular content here, by far, is the work I've done with [actions-runner-controller](../../kubernoodles) in big enterprises - promoting secure innersource patterns for large-scale and diverse continuous integration needs.  That [season may be over](../github-admin-resources), but it is still here to provide help to anyone searching for it.  It, too, will slowly age into obsolescence like leaves on a forest floor.[^updates]
 
 This sounds terrible, but these leaves fuel new growth!  The knowledge gained building it and helping so many others hasn't left.  Instead, it provides a foundation to build on.
 
@@ -54,4 +54,4 @@ Here's to growing another 50 posts! 🥂
 
 ## Footnotes
 
-[^updates]: I don't know if/when I'll stop updating anything.  I just updated [kubernoodles](../kubernoodles) earlier today, but it is no longer a professional priority to keep it maintained.
+[^updates]: I don't know if/when I'll stop updating anything.  I just updated [kubernoodles](../../kubernoodles) earlier today, but it is no longer a professional priority to keep it maintained.

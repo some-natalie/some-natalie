@@ -7,6 +7,7 @@ layout: post
 - [Chainctl](#chainctl)
 - [Grype](#grype)
 - [Helm](#helm)
+- [Kubectl](#kubectl)
 
 ---
 
@@ -104,6 +105,16 @@ function helm-ls-images {
     echo "Chart name required."
     return
   fi
-  helm template "${1}" | grep -oE 'image: .+' | cut -d' ' -f2 | sort | uniq
+  helm template "${1}" | grep -oE 'image: .+' | cut -d' ' -f2 | sort | uniq | tr -d '"'
 }
+```
+
+---
+
+## Kubectl
+
+### Export a specific context
+
+```shell
+kubectl config view --minify --flatten --raw --context=CONTEXTNAME
 ```

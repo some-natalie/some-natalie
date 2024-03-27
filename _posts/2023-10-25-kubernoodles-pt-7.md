@@ -172,7 +172,7 @@ Finally, there are lots of methods to determine how healthy a Kubernetes deploym
             --set githubConfigSecret.github_app_private_key="${{ secrets.ARC_APP_PRIVATE_KEY }}" \
             -f deployments/helm-jammy-dind-test.yml \
             oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-            --version 0.8.3
+            --version 0.9.0
 
         env:
           KUBECONFIG: /tmp/config
@@ -353,7 +353,7 @@ Adapting this to an air gap means moving the complete artifact and doing any mod
 
 - the base images (eg, `ubuntu`, `ubi`)
 - all of the software and certificates and such that you'll need
-- OCI helm charts and images for the ARC release you'll use from [here](https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.8.3)
+- OCI helm charts and images for the ARC release you'll use from [here](https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.9.0)
 - all of the actions referenced in the workflow above
 
 > Another side project of mine, [skilled teleportation](https://github.com/some-natalie/skilled-teleportation), provides a simple bundler to move GitHub Actions from low to high using [actions-sync](https://github.com/actions/actions-sync).

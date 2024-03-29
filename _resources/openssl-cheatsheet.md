@@ -56,7 +56,7 @@ Remove a passphrase from a private key
 openssl rsa -in privateKey.pem -out newPrivateKey.pem
 ```
 
-### Verifications
+## Verifications
 
 Check a Certificate Signing Request (CSR)
 
@@ -90,7 +90,7 @@ openssl rsa -noout -modulus -in privateKey.key | openssl md5
 openssl req -noout -modulus -in CSR.csr | openssl md5
 ```
 
-### Conversions
+## Conversions
 
 Convert a DER file (.crt .cer .der) to PEM
 

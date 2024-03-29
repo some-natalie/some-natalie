@@ -241,3 +241,6 @@ jekyll-archives:
     tag: tag
   permalinks:
     tag: /tags/:name/
+
+plugins:
+  - jekyll-target-blank

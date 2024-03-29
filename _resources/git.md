@@ -60,6 +60,26 @@ function git-nah () {
 }
 ```
 
+### One-liners
+
+List all branches not tracked with a remote branch.
+
+```shell
+git branch -vv | cut -c 3- | awk '$3 !~/\[/ { print $1 }'
+```
+
+Print a list of files in a repo by number of commits touching them, useful for finding the most changed files.
+
+```shell
+git log --pretty=format: --name-only | sort | uniq -c | sort
+```
+
+Print number of commits per day, sorted by date.
+
+```shell
+git log --date=short --pretty=format:%ad | sort | uniq -c
+```
+
 ## Git aliases
 
 > [gitconfig files](https://github.com/some-natalie/dotfiles/tree/main/git) on GitHub

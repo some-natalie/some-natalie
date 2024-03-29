@@ -24,7 +24,7 @@ function check-website {
 }
 ```
 
-Build and run a Jekyll website in the current working directory, available at `http://localhost:4000/`.
+Build and run a Jekyll website in the current working directory, available at `http://localhost:4000/`.  This script will clean up from the previous build if you pass `-c` as an argument.
 
 ```shell
 function run-website {
@@ -34,7 +34,10 @@ function run-website {
     echo "Website will be available at http://localhost:4000."
     return
   fi
-  rm -rf Gemfile.lock _site .jekyll-cache && \
+  if [ "${1}" = "-c" ]; then
+    echo "Cleaning up first ..."
+    rm -rf Gemfile.lock _site .jekyll-cache
+  fi
   docker run -it --rm \
     --volume="$PWD:/work" \
     -p 4000:4000 \

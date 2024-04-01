@@ -118,3 +118,26 @@ function helm-ls-images {
 ```shell
 kubectl config view --minify --flatten --raw --context=CONTEXTNAME
 ```
+
+### List all images running in a cluster
+
+Does exactly what the title says it does.  I usually redirect output into a text file, then run [the Python script above](#multi-image-grype-summarization) on it for a quick table of vulnerability count by images in a cluster.
+
+```shell
+function k-ls-images {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: k-ls-images"
+    echo "List all images running in a cluster, using the current context."
+    return
+  fi
+  if [ "${1}" = "-c" ]; then
+    echo "Returning count of pods running each image as well."
+    echo " ... any `uniq` arguments work here ... "
+  fi
+  kubectl get pods --all-namespaces \
+    -o jsonpath="{.items[*].spec['initContainers', 'containers'][*].image}" |\
+  tr -s '[[:space:]]' '\n' |\
+  sort |\
+  uniq ${1}
+}
+```

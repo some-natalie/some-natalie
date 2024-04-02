@@ -70,10 +70,10 @@ Outputs something like this:
 
 ### Multi-image Grype summarization
 
-I wrote a [Python script](https://github.com/some-natalie/dotfiles/blob/main/scripts/grype-summation.py) that takes a newline-delimited text file to summarize multiple Grype results into a pretty console table.
+I wrote a [Python script](https://github.com/some-natalie/dotfiles/blob/main/scripts/grype-table.py) that takes a newline-delimited text file to summarize multiple Grype results into a pretty console table.
 
 ```shell-session
-ᐅ ./grype-summation.py test-list.txt
+ᐅ ./grype-table.py test-list.txt
 Analyzing nginx:1...
 Analyzing registry.access.redhat.com/ubi9/ubi-init:9.3...
 Analyzing cgr.dev/chainguard-private/nginx-fips:1...
@@ -85,6 +85,8 @@ Analyzing cgr.dev/chainguard-private/nginx-fips:1...
 |   cgr.dev/chainguard-private/nginx-fips:1    |    0     |  0   |   0    |  0  |     0      |    0    |
 +----------------------------------------------+----------+------+--------+-----+------------+---------+
 ```
+
+To make life easier, it's symlinked into `/usr/local/bin`.
 
 ---
 

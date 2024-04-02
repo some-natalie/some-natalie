@@ -71,6 +71,22 @@ Cipher checks (swap `HOST:PORT` and `CIPHER` as needed)
 
 ## Manually working with certs
 
+### Certificate chain order
+
+The order and the lack of whitespace is important!  I always mess this up.
+
+```conf
+-----BEGIN CERTIFICATE-----
+(Your Primary SSL certificate: your_domain_name.crt)
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+(Your Intermediate certificate: DigiCertCA.crt)
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+(Your Root certificate: TrustedRoot.crt)
+-----END CERTIFICATE-----
+```
+
 ### New private key and CSR
 
 ```shell

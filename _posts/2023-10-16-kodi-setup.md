@@ -4,6 +4,7 @@ date: 2023-10-16
 excerpt: "🍿 Movie night, locally"
 tags:
   - homelab
+  - diy
 ---
 
 ![popcorn](https://media.githubusercontent.com/media/some-natalie/some-natalie/main/assets/graphics/gifs/popcorn.gif){: .w-30 .left}

@@ -5,6 +5,7 @@ tags:
   - openwrt
   - linux
   - homelab
+  - diy
 excerpt: "Building things you own."
 ---
 

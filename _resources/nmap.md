@@ -17,7 +17,7 @@ Enumerate SSL/TLS ciphers supported by a server, [script docs](https://nmap.org/
 nmap -sV --script ssl-enum-ciphers -p <port> <target>
 ```
 
-For FIPS 140-2 projects - note that RC4-MD5 ciphers, Camellia ciphers, curve 25519 and other elliptic curves are all _not acceptable_ and shouldn't show up in compliant results.
+For [FIPS 140-2](https://csrc.nist.gov/pubs/fips/140-2/upd2/final) projects - note that RC4-MD5 ciphers, Camellia ciphers, curve 25519 and other elliptic curves are all _not acceptable_ and shouldn't show up in compliant results.
 
 ### Vulners
 

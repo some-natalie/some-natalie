@@ -5,6 +5,7 @@ excerpt: "Personal uses for the internet's favorite cybernetic dolphin companion
 tags:
   - security
   - homelab
+  - diy
 ---
 
 My [Flipper Zero](https://flipperzero.one/) hasn't left my side since I got it last summer - it's earned a spot in my laptop bag for how handy it is at work and at home.  Here's how it saved some headaches over the holidays. 🎄

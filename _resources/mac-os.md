@@ -32,5 +32,9 @@ function mac-updates {
   # Oh my zsh - https://ohmyz.sh
   echo "Updating Oh My Zsh ..."
   omz update
+
+  # Nmap scripts - https://nmap.org
+  echo "Updating Nmap scripts ..."
+  nmap --script-updatedb
 }
 ```

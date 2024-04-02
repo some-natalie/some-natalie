@@ -5,9 +5,9 @@ excerpt: "tl;dr commands for OpenSSL 🔒"
 
 ## Faves
 
-[testssl.sh](https://testssl.sh) is the easy-button testing for printing to the console ([GitHub](https://github.com/drwetter/testssl.sh)).
+🩷 [testssl.sh](https://testssl.sh) is the easy-button testing for printing to the console ([GitHub](https://github.com/drwetter/testssl.sh)).
 
-### Print a remote server's SSL certificate to the terminal
+### Print a remote server's SSL certificate
 
 ```shell
 function sslcert() {
@@ -22,10 +22,14 @@ function sslcert() {
 }
 ```
 
-### Generate a random password
+### Randomness
 
 ```shell
-openssl rand -base64 16
+# a long password
+openssl rand -base64 32
+
+# mac address
+openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/:$//'
 ```
 
 ---
@@ -53,6 +57,7 @@ Cipher checks (swap `HOST:PORT` and `CIPHER` as needed)
 | Certificate | `openssl x509 -in certificate.crt -text -noout` |
 | PKCS#12 (.pfx .p12) | `openssl pkcs12 -info -in keyStore.p12` |
 | MD5 hashes | (cert) `openssl x509 -noout -modulus -in certificate.crt | openssl md5`<br>(key) `openssl rsa -noout -modulus -in privateKey.key | openssl md5`<br>(CSR) `openssl req -noout -modulus -in CSR.csr | openssl md5` |
+| All local ciphers | `openssl ciphers -v` |
 
 ---
 
@@ -93,11 +98,51 @@ The order and the lack of whitespace is important!  I always mess this up.
 openssl req \
   -out CSR.csr \
   -new \
-  -newkey rsa:4096 \
   -nodes \
   -keyout PrivateKey.key \
-  -config req.conf
+  -config csr.conf
 ```
+
+### Config files
+
+Here's an example configuration for `service.company.com` with subdomains and other SANs for dev/test environments, as well as IP addresses.  SANs are all optional fields, but it's helpful to have multiple domains/subdomains/IPs share a certificate.  ([documentation](https://www.openssl.org/docs/manmaster/man5/config.html))
+
+```conf
+[req]
+default_bits = 4096
+distinguished_name = dn
+prompt = no
+req_extensions = req_ext
+
+[dn]
+C="US"                            # two digit country code
+ST="VA"                           # state
+L="McLean"                        # city
+O="Company Name"                  # organization
+OU="Company Division"             # organizational unit
+emailAddress="email@company.com"  # contact email
+CN="service.company.com"          # common name (FQDN of the cert)
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+# dev and wildcard subdomain
+DNS.0 = dev-service.company.com
+DNS.1 = *.dev-service.company.com
+# test and explicit subdomains
+DNS.2 = test-service.company.com
+DNS.3 = web.test-service.company.com
+DNS.4 = storage.test-service.company.com
+# prod subdomains of main cert
+DNS.5 = web.service.company.com
+DNS.6 = storage.service.company.com
+# ipv4 address
+IP.0 = 10.3.3.3
+# ipv6 address
+IP.1 = 2001:db8::1
+```
+{: file='~/csr.conf'}
 
 ### Generate self-signed certificate
 

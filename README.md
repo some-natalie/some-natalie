@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Checking capabilities changes at PR](https://some-natalie.dev/blog/bincapz-check):  Easily call out changes to binary capabilities in a pull request with bincapz and GitHub Actions.
 1. [Organization costs of the xz backdoor](https://some-natalie.dev/blog/xz-thoughts):  Managing insider threats when the whole world is an insider.
 1. [Deciduous content](https://some-natalie.dev/blog/deciduous-content):  Evergreen content is hard, why not be deciduous instead? 🌳
-1. [A gentle introduction to container escapes and no-clump gravy](https://some-natalie.dev/blog/containers-and-gravy):  🥞 From PancakesCon 5 - it's containers and gravy! 🥞
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

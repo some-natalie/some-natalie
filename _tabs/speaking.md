@@ -14,6 +14,15 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ## 2024
 
+### Whodunnit?  A Git Repository Mystery
+
+[BSides Boulder](https://bsidesboulder.org) (14 June) - With all the recent focus on software supply chain security, let's look at the very far left of this process - **how does git know who did what, when, where, and why?**
+
+It seems straightforward to assume that you have all of this information in a git repository, but that's probably not the case.  In this talk, we'll walk through how to determine the answers to each of these questions, edge cases and technical gotchas to watch out for, and why each are important to your company's security posture.
+
+- Abstract on [Sessionize](https://sessionize.com/some-natalie/)
+- 🌻 Slides and writeup to be posted soon after the talk!
+
 ### A Gentle Intro to Container Escapes and No-Clump Gravy
 
 [PancakesCon 5](https://pancakescon.com/2024-conference-information/) (24 March) - Lots of security and sysadmin courses talk about a "container escape", but what is that _really_?  We'll go over what a container is, demonstrate how to escape from it, and why that's not a good thing.  Then we'll talk about common ways to prevent this exploit.

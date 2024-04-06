@@ -13,3 +13,5 @@ function pi-temp {
   echo "CPU Temp: $(cat)°F"
 }
 ```
+
+🕰️ Check NTP first for all network weirdness.  The lack of a [real-time clock](https://en.wikipedia.org/wiki/Real-time_clock) means that if NTP ever fails (or there's been a power outage), the time drift can knock DNSSEC or other time-dependent services into failure pretty fast.

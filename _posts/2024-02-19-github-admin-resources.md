@@ -4,7 +4,7 @@ date: 2024-02-19
 excerpt: "A summary of publicly-available GitHub things I've done that you might be looking for on my website."
 tags:
   - github-enterprise
-pin: true
+mermaid: true 
 ---
 
 > This post links to all the publicly-accessible GitHub content I've written, coded, or talked to.[^found]  **I've left GitHub.**  As this website is mostly things _I'm_ learning and making repeatable (e.g., things built/learned from common customer conversations), **expect less GitHub-focused content moving forward.**[^feels]  I'd like to un-pin a lot of things here to make room for ✨ **new adventures** ✨ without leaving a huge chunk of traffic to this site reliant on searching or bookmarks.
@@ -16,6 +16,7 @@ pin: true
 - 💼 [Business](#business) stuff - chargebacks, license/cost management, the costs of builds
 - 🔐 [Security](#security) projects mostly related to Advanced Security features
 - 👩‍💻 [Administration](#administration) general admin tools in the toolbox
+- 📊 [Diagrams](#diagrams) random diagrams I've made and used
 
 ## GitHub Actions
 
@@ -62,6 +63,28 @@ Part of all those years of experience is a ton of small scripts and other tidbit
   - [audit queries](https://github.com/github/platform-samples/tree/master/sql#audit-queries) return lists of credentials, their scope and age and owner, and more.
   - [metrics queries](https://github.com/github/platform-samples/tree/master/sql#metrics-queries) summarize usage metrics such as global language use, PR and issue activity, and more.
   - [security queries](https://github.com/github/platform-samples/tree/master/sql#security-queries) should be deprecated in favor of using something like [ghas-to-csv](https://github.com/advanced-security/ghas-to-csv) to scrape the API instead.  This API didn't exist when I was creating these queries.
+
+## Diagrams
+
+Typical deployment of GHES and supporting architecture with basic data segregation.
+
+```mermaid
+graph RL
+    A(fab:fa-github GitHub Enteprise Server<br>high availability pair) --> C{load balancer}
+    G(MinIO for Actions+Packages) --> A
+    H(Kubernetes cluster<br>for Actions) --> A
+    K(Artifact repository) <--> H
+    L(Deployment targets) <--> H
+    A --> Z{WAF, DPI}
+    B(fa:fa-hard-drive Backup utilities) --> A
+    C <-->|HTTPS, SSH| D(endpoints on VPN)
+    C <-->|HTTPS, SSH| E(private cloud)
+    C <-->|HTTPS, SSH| F(on-prem datacenter)
+    Z <-->|https://ghes-fqdn/org-team-A| Y(CIDR block<br>for team A)
+    Z <-->|https://ghes-fqdn/org-team-B| X(CIDR block<br>for team B)
+    Z <-->|https://ghes-fqdn/org-team-C| W(CIDR block of external integration<br>needed by team C)
+    Z --> |HTTPS| I(fas:fa-cloud GitHub Connect<br>internet)
+```  
 
 ---
 

@@ -8,6 +8,7 @@ excerpt: "scripts, commands, flags, and other things that I need often"
 - Scripts are usually in `/usr/share/nmap/scripts/` or `/opt/homebrew/share/nmap/scripts`
 - To update scripts, run `nmap --script-updatedb` (maybe with `sudo`)
 - Searching w/ `cat script.db | grep` can filter by lots, like `safe` or `intrusive` and `vuln`
+- Use `nmap --script-help script-title-here` to see built-in man pages for that script
 
 ### SSL ciphers
 

@@ -20,7 +20,7 @@ She's passionate about diversity in technology and empowering engineers to build
 
 It seems straightforward to assume that you have all of this information in a git repository, but that's probably not the case.  In this talk, we'll walk through how to determine the answers to each of these questions, edge cases and technical gotchas to watch out for, and why each are important to your company's security posture.
 
-- Abstract on [Sessionize](https://sessionize.com/some-natalie/)
+- Abstract on [Sessionize](https://sessionize.com/s/some-natalie/whodunnit-git-repository-mysteries/93884)
 - 🌻 Slides and writeup to be posted soon after the talk!
 
 ### A Gentle Intro to Container Escapes and No-Clump Gravy

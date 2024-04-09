@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Pi-hole configuration for the lazy and slightly paranoid](https://some-natalie.dev/blog/pihole):  Block ads and trackers and more, automatically, no matter where you are.
 1. [Checking capabilities changes at PR](https://some-natalie.dev/blog/bincapz-check):  Easily call out changes to binary capabilities in a pull request with bincapz and GitHub Actions.
 1. [Organization costs of the xz backdoor](https://some-natalie.dev/blog/xz-thoughts):  Managing insider threats when the whole world is an insider.
-1. [Deciduous content](https://some-natalie.dev/blog/deciduous-content):  Evergreen content is hard, why not be deciduous instead? 🌳
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

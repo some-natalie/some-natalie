@@ -26,7 +26,7 @@ You can find me in our work Slack sharing all sorts of neat things you can do wi
 - All sorts of handy Raspberry Pi projects, including
   - [Kodi](https://kodi.tv/) set up on a television for local media ([build directions](https://some-natalie.dev/blog/kodi-setup/))
   - [OpenWRT](https://openwrt.org) router ([build directions](https://some-natalie.dev/blog/openwrt-setup/))
-  - [Pi-hole](https://pi-hole.net), for DNS and ad-blocking
+  - [Pi-hole](https://pi-hole.net), for DNS and ad-blocking ([build directions](https://some-natalie.dev/blog/pihole/))
   - Ubiquiti UniFi network controller, in [Docker](https://github.com/jacobalberty/unifi-docker) of course
 - I'm getting into the [Flipper Zero](https://flipperzero.one/) lately - it's so handy _and_ mischievous! ([some fun uses](https://some-natalie.dev/blog/flipper-at-home/))
 - Video games in a Windows VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's got about 5% or so performance drop (just looking at frame rates) over a native install.  You should check it out - [code](https://github.com/some-natalie/fedora-acs-override) and [write-up](https://some-natalie.dev/blog/fedora-acs-override/) on how it works. 

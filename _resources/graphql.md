@@ -8,7 +8,7 @@ layout: post
 
 - [Introduction to GraphQL](https://graphql.org/learn/), which I need every time I work with it
 - GraphQL API docs for [GitHub](https://docs.github.com/en/graphql) and [GitLab](https://docs.gitlab.com/ee/api/graphql/)
-- GitHub GraphQL Explorer for [GitHub](https://docs.github.com/en/graphql/overview/explorer) and [GitLab](https://gitlab.com/-/graphql-explorer)
+- GraphQL Explorer for [GitHub](https://docs.github.com/en/graphql/overview/explorer) and [GitLab](https://gitlab.com/-/graphql-explorer)
 
 ## GitHub projects, issues, and pull requests
 

@@ -140,6 +140,21 @@ query countEnterpriseOrganizations($slug: String!) {
 }
 ```
 
+### Get info about an organization
+
+This query returns a little information about a specific organization and your relationship to it.  ([documentation](https://docs.github.com/en/enterprise-cloud@latest/graphql/reference/objects#organization) for other info to query)
+
+```graphql
+query getOrgInfo($org: String!) {
+  organization(login: $org) {
+    id
+    name
+    viewerIsAMember
+    viewerCanAdminister
+  }
+}
+```
+
 ### List organizations in an enterprise
 
 Same as above, but with a list of them all individually.  The count here should match the total count from the query above.  The `id` field is the UUID for it, stored in that `orgId` variable for other queries.

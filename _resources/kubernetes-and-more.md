@@ -5,6 +5,7 @@ layout: post
 ---
 
 - [Chainctl](#chainctl)
+- [Docker](#docker)
 - [Grype](#grype)
 - [Helm](#helm)
 - [Kubectl](#kubectl)
@@ -30,6 +31,27 @@ function chainctl-id {
   fi
   echo "Getting group ID for domain ${1} ..."
   chainctl iam organizations list -o json | jq '.items[] | select(.name == '\"${1}\"') | .id'
+}
+```
+
+---
+
+## Docker
+
+### Return size in human-readable format
+
+```shell
+function docker-size {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: docker-size [image]"
+    echo "Inspect the size of a Docker image and return it in human-readable format."
+    return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Image name required."
+    return
+  fi
+  docker inspect -f "{{ .Size }}" ${1} | numfmt --to=si
 }
 ```
 

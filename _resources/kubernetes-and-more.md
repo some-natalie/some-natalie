@@ -40,6 +40,7 @@ function chainctl-id {
 
 ### Return size in human-readable format
 
+{% raw %}
 ```shell
 function docker-size {
   if [ "${1}" = "-h" ]; then
@@ -54,6 +55,7 @@ function docker-size {
   docker inspect -f "{{ .Size }}" ${1} | numfmt --to=si
 }
 ```
+{% endraw %}
 
 ---
 

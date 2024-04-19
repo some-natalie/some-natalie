@@ -7,7 +7,6 @@ tags:
 - containers
 - food
 image: /assets/graphics/2024-03-24-containers-and-gravy/square-painting.png
-pin: true
 ---
 
 **Part 1: A gentle intro to container escapes** ([link](#containers-101)) 🔐 Lots of security and sysadmin courses talk about a "container escape", but what is that _really_?  We'll go over what a container is, demonstrate how to escape from it, and why that's not a good thing.  Then we'll talk about common ways to prevent this exploit.

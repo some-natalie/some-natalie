@@ -17,6 +17,7 @@ An always-changing collection of notes, links, tables, and other such goodies! ð
 - [crontab.guru](https://crontab.guru/) is `cron` scheduling for humans
 - [CyberChef](https://gchq.github.io/CyberChef/), the magic multi-tool for data decoding and deobfuscation
 - [Draw.io](https://app.diagrams.net/) makes flowcharts and diagrams, exportable as images or XML
+- [jq play](https://jqplay.org/) for testing `jq` commands online
 - [JSONcrack](https://jsoncrack.com/editor) makes JSON human friendly
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables)
 - [Mermaid JS diagram live editor](https://mermaid-js.github.io/mermaid-live-editor)

@@ -4,6 +4,7 @@ date: 2023-03-22
 tags:
   - business
   - security
+  - graphql
 excerpt: "Create and manage a uniform team enterprise-wide - or how that last mile really is the hardest."
 ---
 

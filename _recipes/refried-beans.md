@@ -11,9 +11,10 @@ excerpt: "Easier, healthier, and tastier from scratch"
 - 0.25 tsp baking soda
 - 1 tbsp dried oregano
 - 1 tsp cumin
-- 0.5 tsp chipotle chili powder
+- 0.5 tsp chipotle or ancho chili powder
 - about 3 drops of liquid smoke, optional
 - half a white onion, finely chopped
+- half a bell pepper, finely chopped, optional
 - a couple cloves of garlic (about 2 tbsp minced)
 - a couple tablespoons of oil for refrying them at the end (vegetable oil or rendered bacon fat)
 - salt to taste
@@ -29,5 +30,5 @@ excerpt: "Easier, healthier, and tastier from scratch"
 
 ## Notes
 
-- The easy variations here is to mess with the type and amount of chili powder.  Use hatch chilis instead for a nice southwest flavor.  Ancho chilis are great and a bit more mild than the chipotle chilis.
+- The easy variations here is to mess with the type and amount of chili powder.  Use hatch chilis instead for a nice southwest flavor.  Ancho chilis are great and a bit more mild than the chipotle chilis.  Use a quarter teaspoon instead for kids and those who really don't like spicy foods.
 - No need to pre-soak the beans, but it can take most of a day to simmer.

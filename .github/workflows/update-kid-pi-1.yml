@@ -7,7 +7,7 @@ on:
 
 jobs:
   updates:
-    name: Update the OS and reboot the VM
+    name: Update the OS and reboot the machine
     runs-on: kid-pi-1
     steps:
       - name: Update the apt cache

@@ -1,14 +1,14 @@
-name: 🍓 Update kid-pi-2
+name: 🍊 Update lab machine
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 20 * * 2"
+    - cron: "18 18 * * 2"
 
 jobs:
   updates:
     name: Update the OS and reboot the machine
-    runs-on: kid-pi-2
+    runs-on: lab-machine
     steps:
       - name: Update the apt cache
         shell: bash
@@ -40,7 +40,7 @@ jobs:
 
   healthcheck:
     name: Verify everything is back up and online
-    runs-on: kid-pi-2
+    runs-on: lab-machine
     needs: [wait]
     steps:
       - name: Verify we're back online and have rebooted less than 10 minutes ago
@@ -67,5 +67,5 @@ jobs:
         shell: bash
         run: |
           gh issue create -R some-natalie/some-natalie \
-            --title "Update on kid-pi-2 failed" \
+            --title "Update on lab machine failed" \
             --body "Please investigate!"

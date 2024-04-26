@@ -91,7 +91,7 @@ query listOpenIssues($repo: String!, $org: String!) {
 This query returns the project cards associated with an issue in a repository.  The relationship between issues and project boards is many-to-many, so an issue can be associated with multiple projects and a project can have multiple repositories in it.  Much of this data is needed for other reports or to change the data with a mutation.
 
 ```graphql
-query issues($org: String!, $repo: String!) {
+query issuesInProject($org: String!, $repo: String!) {
   organization(login: $org) {
     repository(name: $repo) {
       issues(first: 10) {

@@ -410,7 +410,7 @@ Once you shift your mind from REST to GraphQL, it's pretty powerful.  It allows 
 
 I hope this helps guide others, both with GraphQL and with writing custom reports to ~~avoid JIRA~~ support your favorite project managers! 💝
 
-> Next up, I'll be writing about **GraphQL patterns to know**.  These are tips, tricks, and design patterns that I've found useful in my GraphQL adventures. 🦉
+> Next up, I'll be writing about [**GraphQL patterns to know**](../graphql-tips) - tips, tricks, and design patterns that I've found useful in my GraphQL adventures. 🦉
 {: .prompt-info}
 
 ![card-catalog-3](/assets/graphics/2024-04-22-graphql-intro/card-catalog-3.jpg){: .w-75 .shadow .rounded-10 }

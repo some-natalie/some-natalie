@@ -86,6 +86,48 @@ query listOpenIssues($repo: String!, $org: String!) {
 }
 ```
 
+### List all project cards associated to issues in a repo
+
+This query returns the project cards associated with an issue in a repository.  The relationship between issues and project boards is many-to-many, so an issue can be associated with multiple projects and a project can have multiple repositories in it.  Much of this data is needed for other reports or to change the data with a mutation.
+
+```graphql
+query issues($org: String!, $repo: String!) {
+  organization(login: $org) {
+    repository(name: $repo) {
+      issues(first: 10) {
+        totalCount  # total number of issues in that repo
+        nodes {
+          id      # issue ID
+          number  # issue number
+          title   # issue title
+          projectItems(includeArchived: true, first: 10) {
+            edges {
+              node {
+                id  # card ID
+                project {
+                  title  # project board title
+                  id     # project board ID
+                }
+                isArchived  # whether the card is archived
+                status: fieldValueByName(name: "Status") {
+                  ... on ProjectV2ItemFieldSingleSelectValue {
+                    name
+                  }
+                } # custom field values, as many as needed
+              }
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+  }
+}
+```
+
 ### Add an issue or PR to a board
 
 Use the `id` field from the issue or PR query above as the `contentId` variable.  The `projectId` variable is the UUID for the project board.

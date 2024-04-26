@@ -27,12 +27,13 @@ First, let's setup the cluster.  I want to play with [eBPF](https://ebpf.io/) fo
 ```shell
 # Create your cluster without a network plugin
 az aks create -n <cluster-name> -g <resource-group-name> -l <region-name> \
-    --max-pods 100 \
-    --auto-upgrade-channel rapid \
-    --kubernetes-version 1.29.0 \
-    --node-vm-size Standard_B4ms \
-    --network-plugin none \
-    --tier free
+  --max-pods 50 \
+  --auto-upgrade-channel rapid \
+  --kubernetes-version 1.29.2 \
+  --node-vm-size Standard_D4ds_v5 \
+  --network-plugin none \
+  --tier free \
+  --generate-ssh-keys
 
 # Set the context
 az aks get-credentials --resource-group <resource-group-name> --name <cluster-name>
@@ -47,7 +48,7 @@ helm repo update
 
 # Install cilium and hubble into our cluster
 helm install cilium cilium/cilium \
-    --version 1.15.3 \
+    --version 1.15.4 \
     --namespace kube-system \
     --set aksbyocni.enabled=true \
     --set nodeinit.enabled=true \

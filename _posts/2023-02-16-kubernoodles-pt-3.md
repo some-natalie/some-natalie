@@ -38,7 +38,7 @@ First, install [Tetragon](https://github.com/cilium/tetragon) into your cluster.
 
 ```console
 # Install tetragon
-helm install tetragon cilium/tetragon -n kube-system --version 1.0.2
+helm install tetragon cilium/tetragon -n kube-system --version 1.0.3
 ```
 
 ## Install the tetra CLI
@@ -78,7 +78,7 @@ kubectl apply -f https://raw.githubusercontent.com/cilium/tetragon/main/examples
 Start streaming the logs into `stdout` and pipe them into the Tetra CLI for the `runners` namespace.
 
 ```console
-kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout -f | tetra getevents -o compact --namespace ghec-runners
+kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout -f | tetra getevents -o compact --namespaces ghec-runners
 ```
 
 Start the job we created in [part 2](../kubernoodles-pt-2/#leave-the-runner-up-for-inbound-connection) that creates an idle pod for an hour to do random fun stuff inside.  Now, let's `exec` in and do some shifty shenanigans!

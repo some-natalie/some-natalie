@@ -13,6 +13,7 @@ I would like to make some family recipes publicly accessible without vendor lock
 
 ## Mix lists
 
+- [BBQ sauce](../recipes/bbq-sauce)
 - [Compound butters](../recipes/compound-butters)
 - [Marinades](../recipes/marinades)
 - [Seasoning blends](../recipes/seasoning-blends)
@@ -35,7 +36,7 @@ I would like to make some family recipes publicly accessible without vendor lock
 
 | Name | Ratios |
 | --- | --- |
-| Citrus | - 1 small shallot, minced<br>- 0.75 cup olive oil<br>- 0.25 cup Champagne vinegar<br>- 3 Tbsp lemon juice<br>- 2 Tbsp orange juice<br>- 0.5 tsp lemon zest<br>- salt, pepper to taste |
+| Citrus | - 1 small shallot, minced<br>- 0.75 cup olive oil<br>- 0.25 cup Champagne vinegar<br>- 3 Tbsp lemon juice + 0.5 tsp zest<br>- 2 Tbsp orange juice<br>- salt, pepper to taste |
 | Jam | - 2 tbsp jam<br>- 0.25 cup acid<br>- 0.5 cup fat<br>- herbs, to taste |
 | Buttermilk | - 0.5 cup buttermilk<br>- 0.25 cup acid<br>- 2 tsp honey<br>- 0.25 cup fresh herbs<br>- salt, pepper, dried herbs to taste |
 | Maple | - 0.25 cup maple syrup<br>- 3 tbsp apple cider vinegar<br>- 2 tbsp olive oil<br>- 2 tsp poppy seeds<br>- 2 shallots, minced<br>- 2 tsp Dijon |

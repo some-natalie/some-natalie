@@ -61,3 +61,23 @@ Optional garnishes: extra thinly-sliced green onions, extra toasted sesame seeds
 - 1 tbsp whole black peppercorns
 
 If using for meat, do not use for more than 4-ish hours.  It'll do weird mushy things to the meat texture.
+
+### Mustard apricot
+
+- 0.33 cup honey/dijon mustard
+- 3 tablespoons apricot preserves
+- 1 teaspoon ground ginger
+- Sprinkle caraway seed
+- Sprinkle crushed rosemary (or a fresh sprig or two)
+
+### Cuban citrus
+
+- 2 Tbsp minced garlic
+- 0.25 cup orange juice
+- 0.25 cup lime juice
+- 1.5 teaspoons ground cumin
+- 1.5 teaspoons dried oregano
+- 1 teaspoon black pepper
+- 0.5 teaspoon ground allspice, optional
+- Kosher salt
+ 

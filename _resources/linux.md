@@ -105,3 +105,21 @@ function listening {
   done
 }
 ```
+
+## Compress files with progress
+
+This uses `pigz` ([link](https://zlib.net/pigz/)) for multithreaded compression and `pv` ([man page](https://linux.die.net/man/1/pv)) to show progress.
+
+```shell
+# for a directory
+tar cf - /folder-with-big-files -P | pv -s $(du -sb /folder-with-big-files | awk '{print $1}') | pigz --best > big-files.tar.gz
+
+# for a single big file, like a VM HDD
+tar cf - vm-image.img -P | pv -s $(du -sb vm-image.img | awk '{print $1}') | pigz --best > vm-image.tar.gz
+```
+
+Output looks like this:
+
+```shell-session
+18.7GiB 0:03:20 [82.8MiB/s] [========>                                                          ] 15% ETA 0:34:56
+```

@@ -12,7 +12,7 @@ excerpt: "Homemade party snack - nuts optional"
 - 3 cups wheat Chex
 - 1 cup mixed nuts (optional)
 - 1 cup small pretzels
-- 1 cup bite-size bagel chips or other thin cracker
+- 1 cup bite-size bagel chips, plain Cheerios, or thin cracker
 - 6 Tbsp butter
 - 2 Tbsp Worcestershire sauce
 - 1.5 tsp seasoned salt
@@ -30,4 +30,3 @@ excerpt: "Homemade party snack - nuts optional"
 
 - Nuts are optional, but be mindful that salted nuts add salt.
 - Grandma omits the wheat Chex and uses more of the other dry stuff.
-   

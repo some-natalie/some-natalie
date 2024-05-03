@@ -12,10 +12,10 @@ image: /assets/graphics/2024-05-03-reduce-cves-arc/octopus-factory.jpg
 
 It's the same actions-runner-controller you know and love (or curse), but with many fewer CVEs to generate compliance paperwork.  With a new gig and new tech stack to learn, let’s do something a little harder than a local [Jekyll development container](../jekyll-in-a-can)! 📚
 
-> This walkthrough replaces the default container of [actions-runner-controller](https://github.com/actions/actions-runner-controller) and then builds an Actions [runner](github.com/actions/runner) based on [wolfi](https://github.com/wolfi-dev/), lowering CVEs and improving the overall security posture.  It's also using the [Kubernetes container mode](https://github.com/actions/runner-container-hooks/blob/main/packages/k8s/README.md), eliminating most use cases of privileged pods in actions-runner-controller.  I'm adding it to [kubernoodles](../../kubernoodles) to be used by the folks I used to and currently work with.
+> This walkthrough replaces the default container of [actions-runner-controller](https://github.com/actions/actions-runner-controller) and then builds an Actions [runner](https://github.com/actions/runner) based on [wolfi](https://github.com/wolfi-dev/), lowering CVEs and improving the overall security posture.  It's also using the [Kubernetes container mode](https://github.com/actions/runner-container-hooks/blob/main/packages/k8s/README.md), eliminating most use cases of privileged pods in actions-runner-controller.  I'm adding it to [kubernoodles](../../kubernoodles) to be used by the folks I used to and currently work with.
 {: .prompt-info}
 
-I've spoken [a time](../blog/kubernetes-for-enterprise-ci/#conclusion) or [two](../blog/securing-ghactions-with-arc/#pod-images) about GitHub Actions with actions-runner-controller encouraging a pattern of using containers as VMs.  This isn't very "cloud native" to fling giant containers around, but it's workable.
+I've spoken [a time](../kubernetes-for-enterprise-ci/#conclusion) or [two](../securing-ghactions-with-arc/#pod-images) about GitHub Actions with actions-runner-controller encouraging a pattern of using containers as VMs.  This isn't very "cloud native" to fling giant containers around, but it's workable.
 
 Let's revisit that reference architecture to lower the CVE count of each runner, learn a little about distroless, and maybe help some folks out.  Many of the runner images are currently well into the hundreds of CVEs each.  I remember having to fill out spreadsheets and acknowledging each CVE individually with written plans to mitigate them ... I don't ever want to do that again.  🙈
 
@@ -42,7 +42,7 @@ Let's make this easy, so we can remain at a human-manageable level of security i
 
 ### Upfront considerations
 
-The previous iterations of runners we'd built (`ubi8`, `ubi9`, and `ubuntu-jammy`) all resemble a traditional Linux server distribution because that's really what they are.  They even include an init system and package manager in the image.  In many ways, [that first custom image](../blog/kubernoodles-pt-5) resembled building a virtual machine image rather than a container.  This time, we're going to be more prescriptive about the utilities we're using, meaning that for larger deployments, you'll have **more deployments of smaller images** rather than a few big ones.
+The previous iterations of runners we'd built (`ubi8`, `ubi9`, and `ubuntu-jammy`) all resemble a traditional Linux server distribution because that's really what they are.  They even include an init system and package manager in the image.  In many ways, [that first custom image](../kubernoodles-pt-5) resembled building a virtual machine image rather than a container.  This time, we're going to be more prescriptive about the utilities we're using, meaning that for larger deployments, you'll have **more deployments of smaller images** rather than a few big ones.
 
 ```shell-session
 # apk update
@@ -53,7 +53,7 @@ OK: 53893 distinct packages available
 
 The package manager is a little different, using Alpine's [apk](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper) for management and Wolfi's own [apk ecosystem](https://github.com/wolfi-dev/os).  Being based on `glibc` (not `muslc` like Alpine) means packages can't usually cross between the two without being recompiled.  With over 50,000 packages available, it's got reasonable coverage for whatever it is you're wanting to do.
 
-Despite the drastic shift in the base image and package ecosystem from [our first custom image](../blog/kubernoodles-pt-5), the process of building the image is very similar.  It's **only a couple of lines to change** it, but to prevent the need to go back and forth between the two, let's **take it from the top!**
+Despite the drastic shift in the base image and package ecosystem from [our first custom image](../kubernoodles-pt-5), the process of building the image is very similar.  It's **only a couple of lines to change** it, but to prevent the need to go back and forth between the two, let's **take it from the top!**
 
 ### Labels are still the best
 

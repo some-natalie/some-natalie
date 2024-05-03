@@ -10,7 +10,7 @@ excerpt: "(Kubernoodles, part 5 of ?) - You need your own image.  Here's how to 
 
 Now that we have [actions-runner-controller](https://github.com/actions/actions-runner-controller) up and running, we need to think through the runner image some.  This piece is all about how to build your own image(s) and whether it's a good idea to do that.
 
-> The end result of this how-to is an image based on UBI 9 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).<br><br>🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi9.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi9.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/deploying-runner-scale-sets-with-actions-runner-controller), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi9).  We'll cover a Docker-in-Docker container build later.
+> The end result of this how-to is an image based on UBI 9 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).<br><br>⚠️ This image has **14 high CVEs** and almost 100 mediums, plus more low and informational findings (as of May 2024).  Need to lower that?  [Reducing CVEs in ARC](../reduce-cves-arc) should help!<br><br>🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi9.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi9.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/deploying-runner-scale-sets-with-actions-runner-controller), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi9).  We'll cover a Docker-in-Docker container build later.
 {: .prompt-tip}
 
 ## All about the default runner image
@@ -93,7 +93,7 @@ The first two arguments go into installing [actions/runner](https://github.com/a
 ```Dockerfile
 # Arguments
 ARG TARGETPLATFORM=linux/amd64
-ARG RUNNER_VERSION=2.314.1
+ARG RUNNER_VERSION=2.316.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.0
 ```
 
@@ -132,9 +132,9 @@ Now let's set up the runner agent.  That thoughtful ADR on the runner image ([he
 
 ```Dockerfile
 # Make and set the working directory
-RUN mkdir -p /actions-runner \
-    && chown -R $USERNAME:$GID /actions-runner
-WORKDIR /actions-runner
+RUN mkdir -p /home/runner \
+    && chown -R $USERNAME:$GID /home/runner
+WORKDIR /home/runner
 
 # Runner download supports amd64 as x64
 RUN export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2) \
@@ -281,7 +281,7 @@ template:
     containers:
     - name: runner
       image: ghcr.io/some-natalie/kubernoodles/ubi9:latest
-      command: ["/actions-runner/run.sh"]
+      command: ["/home/runner/run.sh"]
 ```
 {: file='local-private-ubi9.yml'}
 

@@ -10,6 +10,9 @@ excerpt: "(Kubernoodles, part 6 of ?) - Building containers without Docker-in-Do
 
 One of the most common business needs I hear concerns about for [actions-runner-controller](https://github.com/actions/actions-runner-controller) and security policy is how to build containers _without_ Docker-in-Docker and privileged pods.  It seems to come up in every conversation I have about self-hosted compute for GitHub Actions - so much so I have a “canned reply” for any emails/issues/discussions asking me about it and I’ve written [blog posts](https://some-natalie.dev/blog/stop-saying-just-use-firecracker/) and given [conference talks](https://some-natalie.dev/blog/securing-ghactions-with-arc/#cluster-settings) about the many ways to address the concern.
 
+> Check out [reducing the CVEs in your custom images](../reduce-cves-arc) to further secure your container builds.  The Kaniko executor is one of many things that can be done on low-to-zero CVE images.
+{: .prompt-tip}
+
 The problem with building containers in Kubernetes is that building a container normally relies on having interactive access to Docker/Podman/etc. and these usually require root access on your machine to run.  Even rootless Docker still needs a privileged pod to work with [seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/) and mount `procfs` and `sysfs` - so while it’s possible to remove `sudo` and run the Docker daemon without root, it still requires `--privileged` to run.[^p]
 
 I had assumed there was some publicly discoverable code combining a container builder in GitHub Actions with actions-runner-controller.  I was wrong - let’s fix that. 🙊

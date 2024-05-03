@@ -23,8 +23,9 @@ Here's what has been done and where we're going.
 1. [Building containers in ARC with Kaniko](../blog/kaniko-in-arc) - Using [Kaniko](https://github.com/GoogleContainerTools/kaniko) in actions-runner-controller to build containers without privileged pods.
 1. [Continuous integration for custom runner images](../blog/kubernoodles-pt-7) - CI for your CI, or how to test your custom runner images on each change.
 1. [Writing tests for Actions runners](../blog/testing-runner-containers) - Test your enterprise CI images with the same rigor as your other software.
+1. [Reducing your software vulnerabilities](../blog/reduce-cves-arc) - Reduce the number of CVEs in your runner images using [wolfi](https://github.com/wolfi-dev) to improve the security posture and eliminate many compliance headaches in regulated environments.
 
-> Last updated in **April 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
+> Last updated in **May 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
 {: .prompt-info}
 
 Coming soon:
@@ -35,5 +36,5 @@ Coming soon:
 - File caching
 - Fun with metrics!
 
-> My environment uses Azure services.  They're currently "free" for me and I'll try to call out using vanilla k8s as much as possible for portability.
+> My environment uses a mix of Azure services and on-prem resources.  They're currently "free" for me and I'll try to call out using vanilla k8s as much as possible for portability.
 {: .prompt-info }

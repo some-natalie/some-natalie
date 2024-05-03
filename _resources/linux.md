@@ -126,6 +126,28 @@ tar cf - vm-image.img -P |\
 
 Output looks like this:
 
-```shell-session
-18.7GiB 0:03:20 [82.8MiB/s] [=========>                                                   ] 15% ETA 0:34:56
+```text
+18.7GiB 0:03:20 [82.8MiB/s] [======>                               ] 15% ETA 0:34:56
+```
+
+## Strings that appears most in log file
+
+```shell
+# search
+grep -o 'string' file |\
+# sort
+  sort |\
+# deduplicate
+  uniq -c |\
+# sort by count
+  sort -nr |\
+# show top 25
+  head -n 25
+
+# now in practice for which repos are accessed the most by `git`
+grep -o 'repo=[^ ]*' /var/log/babeld/babeld.log |\
+  sort |\
+  uniq -c |\
+  sort -nr |\
+  head
 ```

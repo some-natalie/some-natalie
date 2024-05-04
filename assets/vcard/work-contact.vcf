@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+FN;CHARSET=UTF-8:Natalie Somersall
+N;CHARSET=UTF-8:Somersall;Natalie;;;
+EMAIL;CHARSET=UTF-8;type=WORK,INTERNET:some-natalie@chainguard.dev
+TITLE;CHARSET=UTF-8:Principal Federal Solutions Engineer
+ORG;CHARSET=UTF-8:Chainguard
+URL;CHARSET=UTF-8:https://some-natalie.dev
+URL;type=WORK;CHARSET=UTF-8:https://chainguard.dev
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/nsomersall
+X-SOCIALPROFILE;TYPE=GitHub:https://github.com/some-natalie
+REV:2024-05-04T18:47:11.022Z
+END:VCARD

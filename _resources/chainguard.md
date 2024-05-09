@@ -8,6 +8,31 @@ layout: post
 
 [chainctl docs](https://edu.chainguard.dev/chainguard/chainctl/chainctl-docs/chainctl/)
 
+### Find if an image is available using fuzzy search
+
+```shell
+function cgr-find {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: chainguard-search [image]"
+    echo "Search for an image by name with fzf."
+  return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Image name required."
+    return
+  fi
+  # set orgs
+  local privateorg="chainguard-private" # edit to your private registry
+  local publicorg="720909c9f5279097d847ad02a2f24ba8f59de36a" # UUID of public images registry
+  # private images
+  echo "---- private images ----"
+  chainctl img repos list --parent $privateorg -o json | jq -r '.items[].name' | fzf --filter="${1}"
+  # public images
+  echo "---- public images ----"
+  chainctl img repos list --parent $publicorg -o json | jq -r '.items[].name' | fzf --filter="${1}"
+}
+```
+
 ### Get the Chainguard group ID of a given domain
 
 ```shell

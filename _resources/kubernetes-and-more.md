@@ -4,12 +4,34 @@ excerpt: "Kubernetes, Docker, Helm, and other container things"
 layout: post
 ---
 
+- [Crane](#crane)
 - [Docker](#docker)
 - [Grype](#grype)
 - [Helm](#helm)
 - [Kubectl](#kubectl)
 
 ---
+
+## Crane
+
+[crane docs](https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md)
+
+### List tags available
+
+```shell
+function img-tags {
+    if [ "${1}" = "-h" ]; then
+        echo "Usage: imgtags cgr.dev/reponame/imagename]"
+        echo "List tags for an OCI-compliant image, omitting digests, using crane."
+        return
+    fi
+    if [ "${1}" = "" ]; then
+        echo "Image name required."
+        return
+    fi
+    crane ls ${1} --omit-digest-tags
+}
+```
 
 ## Docker
 

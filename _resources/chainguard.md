@@ -26,10 +26,14 @@ function cgr-find {
   local publicorg="720909c9f5279097d847ad02a2f24ba8f59de36a" # UUID of public images registry
   # private images
   echo "---- private images ----"
-  chainctl img repos list --parent $privateorg -o json | jq -r '.items[].name' | fzf --filter="${1}"
+  chainctl img repos list --parent $privateorg -o json |\
+    jq -r '.items[].name' |\
+    fzf --filter="${1}"
   # public images
   echo "---- public images ----"
-  chainctl img repos list --parent $publicorg -o json | jq -r '.items[].name' | fzf --filter="${1}"
+  chainctl img repos list --parent $publicorg -o json |\
+    jq -r '.items[].name' |\
+    fzf --filter="${1}"
 }
 ```
 
@@ -47,6 +51,7 @@ function chainctl-id {
     return
   fi
   echo "Getting group ID for domain ${1} ..."
-  chainctl iam organizations list -o json | jq '.items[] | select(.name == '\"${1}\"') | .id'
+  chainctl iam organizations list -o json |\
+    jq '.items[] | select(.name == '\"${1}\"') | .id'
 }
 ```

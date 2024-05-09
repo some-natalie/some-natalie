@@ -14,7 +14,9 @@ This function will remove all local branches that don't exist on the remote.  I 
 
 ```shell
 function git-cleanup {
-  git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+  git fetch -p && git branch -vv |\
+    awk '/: gone]/{print $1}' |\
+    xargs git branch -D
 }
 ```
 

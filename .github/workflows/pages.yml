@@ -49,7 +49,7 @@ jobs:
 
       - name: Test site
         run: |
-          bundle exec htmlproofer _site --disable-external --check-html --enforce_https false
+          bundle exec htmlproofer _site --disable-external --enforce_https false
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3

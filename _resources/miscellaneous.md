@@ -19,8 +19,7 @@ function check-website {
     --volume="$PWD:/work" \
     ghcr.io/some-natalie/jekyll-in-a-can:latest /bin/sh -c \
     "bundle exec jekyll b -d '_site' && \
-      bundle exec htmlproofer _site --disable-external \
-      --check-html"
+      bundle exec htmlproofer _site --disable-external"
 }
 ```
 

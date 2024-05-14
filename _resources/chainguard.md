@@ -28,12 +28,14 @@ function cgr-find {
   echo "---- private images ----"
   chainctl img repos list --parent $privateorg -o json |\
     jq -r '.items[].name' |\
-    fzf --filter="${1}"
+    fzf --filter="${1}" |\
+    sort
   # public images
   echo "---- public images ----"
   chainctl img repos list --parent $publicorg -o json |\
     jq -r '.items[].name' |\
-    fzf --filter="${1}"
+    fzf --filter="${1}" |\
+    sort
 }
 ```
 

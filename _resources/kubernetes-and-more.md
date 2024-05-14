@@ -35,6 +35,24 @@ function img-tags {
 
 ## Docker
 
+### Clean up all the things
+
+The "nuke it from orbit" approach that removes all stopped containers, dangling images, build cache, and volumes.  I use this one a lot.
+
+```shell
+function docker-cleanup {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: docker-cleanup"
+    echo "Remove all stopped containers and dangling images, build cache, volumes, and more."
+    return
+  fi
+  # remove all stopped containers, networks, images
+  docker system prune -af
+  # remove all unused volumes, not just anonymous ones
+  docker volume prune -af
+}
+```
+
 ### Return size in human-readable format
 
 {% raw %}
@@ -60,6 +78,8 @@ function docker-size {
 
 ### Summarize Grype results
 
+This prints out a markdown table to copy/paste into another system.
+
 ```shell
 function grype-summary () {
   if [ "${1}" = "-h" ]; then
@@ -72,7 +92,16 @@ function grype-summary () {
     return
   fi
   grype ${1} -o json --file grype.json -q
-  cat grype.json | jq  '.matches[].vulnerability.severity' | sort | uniq -c
+  echo "Total = $(cat grype.json | jq  '.matches[].vulnerability.severity' | uniq -c | awk '{sum += $1} END {print sum}')"
+  echo ""
+  echo "| Count | Severity |"
+  echo "|-------|----------|"
+  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Critical') | critical |"
+  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'High') | high |"
+  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Medium') | medium |"
+  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Low') | low |"
+  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Negligible') | negligible |"
+  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Unknown') | unknown |"
   rm grype.json
 }
 ```
@@ -80,13 +109,16 @@ function grype-summary () {
 Outputs something like this:
 
 ```shell-session
-ᐅ grype-summary nginx:1
-   2 "Critical"
-  14 "High"
-   4 "Low"
-  34 "Medium"
-  72 "Negligible"
-  20 "Unknown"
+Total = 164
+
+| Count | Severity |
+|-------|----------|
+| 2 | critical |
+| 14 | high |
+| 34 | medium |
+| 4 | low |
+| 76 | negligible |
+| 34 | unknown |
 ```
 
 ### Multi-image Grype summarization

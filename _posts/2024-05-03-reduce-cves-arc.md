@@ -316,7 +316,7 @@ helm install wolfi \
     --namespace "ghec-runners" \
     -f local-wolfi.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.9.1
+    --version 0.9.2
 ```
 
 Make sure everything is pointing to the latest version, as the free Chainguard images are only `latest`.  A version mismatch between the controller and the listener can cause issues.  But assuming everything matches up, the new scale set should be idle in the self-hosted runner group.
@@ -342,7 +342,7 @@ There isn't a huge difference between the upstream image from GitHub and the Cha
 
 | Image | (total) | Critical | High | Medium<br>and below |
 | --- | --- | --- | --- | --- |
-| ghcr.io/actions/gha-runner-scale-set-controller:0.9.1 | **6** | 0 | 0 | 6 |
+| ghcr.io/actions/gha-runner-scale-set-controller:0.9.2 | **18** | 0 | 0 | 18 |
 | cgr.dev/chainguard/gha-runner-scale-set-controller:latest | **0** | 0 | 0 | 0 |
 
 ### Runner CVEs
@@ -351,13 +351,13 @@ It's once we start comparing the runner images that the count of CVEs to invento
 
 | Image | (total) | Critical | High | Medium<br>and below |
 | --- | --- | --- | --- | --- |
-| ghcr.io/actions/actions-runner:2.316.1 | **63** | 0 | 1 | 62 |
+| ghcr.io/actions/actions-runner:2.316.1 | **71** | 0 | 1 | 70 |
 | ghcr.io/some-natalie/kubernoodles/wolfi:latest | **6** | 0 | 0 | 6 |
-| ghcr.io/some-natalie/kubernoodles/ubi8:latest | **580** | 4 | 12 | 564 |
-| ghcr.io/some-natalie/kubernoodles/ubi9:latest | **566** | 0 | 14 | 552 |
-| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **138** | 0 | 3 | 135 |
+| ghcr.io/some-natalie/kubernoodles/ubi8:latest | **596** | 4 | 13 | 579 |
+| ghcr.io/some-natalie/kubernoodles/ubi9:latest | **598** | 0 | 21 | 577 |
+| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **149** | 0 | 4 | 145 |
 
-> The CVE counts are as of 2 May 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag is the commit corresponding to `v0.13.1` for Kubernoodles.  The CVE counts are from the Grype scan (`v0.77.2`) run on the images listed above.
+> The CVE counts are as of 20 May 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag is the commit corresponding to `v0.13.2` for Kubernoodles.  The CVE counts are from the Grype scan (`v0.77.4`) run on the images listed above.
 {: .prompt-info}
 
 ## Why

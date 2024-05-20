@@ -59,7 +59,7 @@ What we really want to be able to do is have these "fat containers" be treated a
 Here's our code snippet with the base image for this example.
 
 ```Dockerfile
-FROM registry.access.redhat.com/ubi9/ubi-init:9.3
+FROM registry.access.redhat.com/ubi9/ubi-init:9.4
 ```
 
 ## Labels are the best
@@ -93,7 +93,7 @@ The first two arguments go into installing [actions/runner](https://github.com/a
 ```Dockerfile
 # Arguments
 ARG TARGETPLATFORM=linux/amd64
-ARG RUNNER_VERSION=2.316.0
+ARG RUNNER_VERSION=2.316.1
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.0
 ```
 
@@ -292,7 +292,7 @@ helm install ubi9 \
   --namespace "runners" \
   -f local-private-ubi9.yml \
   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-  --version 0.9.1
+  --version 0.9.2
 ```
 
 Now check that the single pod is up and listening.

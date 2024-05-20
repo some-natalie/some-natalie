@@ -83,7 +83,7 @@ Set up the non-root user to run jobs as too.
 ```dockerfile
 # Arguments
 ARG TARGETPLATFORM
-ARG RUNNER_VERSION=2.316.0
+ARG RUNNER_VERSION=2.316.1
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.0
 ARG DOTNET_VERSION=7
 
@@ -357,7 +357,7 @@ It's once we start comparing the runner images that the count of CVEs to invento
 | ghcr.io/some-natalie/kubernoodles/ubi9:latest | **598** | 0 | 21 | 577 |
 | ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **149** | 0 | 4 | 145 |
 
-> The CVE counts are as of 20 May 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag is the commit corresponding to `v0.13.2` for Kubernoodles.  The CVE counts are from the Grype scan (`v0.77.4`) run on the images listed above.
+> The CVE counts are as of 20 May 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag is the commit corresponding to `v0.13.3` for Kubernoodles.  The CVE counts are from the Grype scan (`v0.77.4`) run on the images listed above.
 {: .prompt-info}
 
 ## Why

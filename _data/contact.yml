@@ -9,7 +9,7 @@
 
 - type: linkedin
   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
-  url:  'https://linkedin.com/in/nsomersall'
+  url:  'https://www.linkedin.com/in/nsomersall'
 
 - type: mastodon
   icon: 'fab fa-mastodon' 

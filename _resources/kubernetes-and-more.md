@@ -14,7 +14,7 @@ layout: post
 
 ## Crane
 
-[crane docs](https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md)
+crane [docs](https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md) and [recipes](https://github.com/google/go-containerregistry/blob/main/cmd/crane/recipes.md)
 
 ### List tags available
 

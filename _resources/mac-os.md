@@ -36,5 +36,15 @@ function mac-updates {
   # Nmap scripts - https://nmap.org
   echo "Updating Nmap scripts ..."
   nmap --script-updatedb
+  
+  # Update go modules
+  echo "Updating public go modules ..."
+  go install github.com/chainguard-dev/bincapz@latest
+  echo "Updating private go modules ..." 
+  GOPRIVATE=github.com/ORG/REPO go install github.com/ORG/REPO@TAG
+
+  # Update Python packages
+  echo "Updating Python packages ..."
+  pip3 freeze --local | grep -v '^\-e' | grep -v '@' | cut -d = -f 1 | xargs pip3 install -U --ignore-installed --break-system-packages
 }
 ```

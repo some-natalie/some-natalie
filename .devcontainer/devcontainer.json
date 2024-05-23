@@ -1,6 +1,6 @@
 {
   "name": "Jekyll website",
-  "image": "mcr.microsoft.com/vscode/devcontainers/ruby:3-bullseye",
+  "image": "cgr.dev/chainguard/ruby-dev:latest",
   "features": {
     "git-lfs": "latest"
   },

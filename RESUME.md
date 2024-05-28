@@ -1,6 +1,6 @@
 # Natalie Somersall
 
-🗺️ Boulder, CO metro area
+🗺️ Denver, CO metro area
 
 ✍🏻 Blog - <https://some-natalie.dev>
 
@@ -14,15 +14,18 @@
 
 ### [Chainguard](https://chainguard.dev) - Principal Federal Solutions Engineer, 2024-present
 
-I just started ... I'll update this once I have my feet under me. 😊
+- **Build Federal sales** at a startup as the first solutions engineer dedicated to the vertical.
+- Facilitate proof of concepts on complex containerized applications, promoting across airgaps and other compliance boundaries as needed.
+- **Demonstrate business value of application security** and software supply chain best practices to a myriad of regulatory frameworks and guidelines, now including NIST [Secure Software Development Framework](https://csrc.nist.gov/Projects/ssdf) and [Application Container Security Guide](https://csrc.nist.gov/pubs/sp/800/190/final).
 
 ### [GitHub](https://github.com/github) - Senior Solutions Engineer, 2021-2024
 
 - **Partner exclusively with the most security-conscious customers**, guiding them on meeting their development and security needs within the entire GitHub Enterprise platform and integrations.
+  - Evaluating and securely deploying artificial intelligence (AI) across the development lifecycle, then assessing business and application security impacts
   - Automating and building the infrastructure to support it safely
   - Cultural changes of internal collaboration
   - Rolling out application security programs company-wide
-  - Cybersecurity deployment and compliance planning (eg, CMMC, ITAR, FedRAMP, SOX) of enterprise software factories
+  - Cybersecurity deployment and compliance planning (eg, **CMMC, ITAR, FedRAMP, SOX**) of enterprise software factories
 - Consistent **quota attainment of over 150%** every half.
 - **Develop custom solutions** such as human-friendly [Kubernetes runners](https://github.com/some-natalie/kubernoodles), managing an [enterprise-wide security team](https://github.com/advanced-security/enterprise-security-team) across the largest GitHub customers, and other projects you can browse [here](https://github.com/some-natalie?tab=repositories).
 - **Thought leadership**, speaking and writing about developer problems within regulated industries, and customer advocacy within our Product and Engineering teams.
@@ -50,10 +53,10 @@ I just started ... I'll update this once I have my feet under me. 😊
 
 ### Related experience
 
+- 🎙️ **Whodunnit? A git repo mystery** (June 2024) at [BSides Boulder](https://bsidesboulder.org) recounts many lessons learned the hard way to figure out *who* did *what*, *when*, *where*, and *why* in a git repository - then prove it in an audit. (slides with writeup shortly after talk)
 - 🎙️ **A Gentle Intro to Container Escapes** (March 2024) at [Pancakescon 5](https://pancakescon.com/2024-conference-information/) is an overview of what a container is, demonstrate how to escape from it, and common ways to prevent this exploit. ([slides](https://some-natalie.dev/blog/containers-and-gravy/) with writeup)
 - 🎙️ **Threat Modeling the GitHub Actions Ecosystem** (June 2023) at [BSides Boulder](https://bsidesboulder.org) is a tour through the four questions outlined in the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/) to create an enterprise-ready threat model for implementing GitHub Actions securely. ([slides](https://some-natalie.dev/blog/threat-modeling-actions) with writeup, [YouTube](https://youtu.be/Bk8KpeLs8Mo))
 - 🎙️ **Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller**  (February 2023) at [CNCF CloudNativeSecurityCon North America](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) is a deep dive into the security considerations of running self-hosted GitHub Actions compute with [actions-runner-controller](https://github.com/actions/actions-runner-controller). ([slides](https://some-natalie.dev/blog/securing-ghactions-with-arc/) with writeup, [YouTube](https://youtu.be/Ax4VPm2KrqQ))
-- ✍🏻 **The cost of waiting on builds** (2022-23) walks through one of the hardest to calculate costs, yet one of the cheapest ways to improve developer velocity and happiness - better hardware!  It was picked up by GitHub's content team ([link](https://github.blog/2022-12-08-experiment-the-hidden-costs-of-waiting-on-slow-build-times/)) and continues to drive better conversations around infrastructure, improving security by removing shadow IT assets implemented via frustration. ([link](https://some-natalie.dev/blog/waiting-on-bulids/))
 
 ### Related prior employment
 

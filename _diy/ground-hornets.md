@@ -9,7 +9,7 @@ Nests inside buildings should be attended to by a professional.  They have acces
 
 Sometimes, they simply have to be relocated gently.  To the afterlife.  With fire. 🔥
 
-![ground-hornet](/assets/graphics/diy/hornets/yellow-jacket-identification.JPG) {: .w-75 .shadow .rounded-10 }
+![ground-hornet](/assets/graphics/diy/hornets/yellow-jacket-identification.JPG){: .w-75 .shadow .rounded-10 }
 _this guy and his million buddies do not want peace_
 
 If you're not under a burn ban, fire is remarkably effective at removing them.  Wait until dusk and watch where they fly.  They'll return to their nest in the evening and are usually less aggressive.  Mark their entry hole with a stone or stick or something.  Come back in an hour or two, after the sun has set.  If you need a flashlight, try to put some red/pink film over it as light makes them wake back up.

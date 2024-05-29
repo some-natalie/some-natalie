@@ -8,7 +8,7 @@
 
 👩🏻‍💻 GitHub - <https://github.com/some-natalie>
 
-💼 LinkedIn - <https://linkedin.com/in/nsomersall>
+💼 LinkedIn - <https://www.linkedin.com/in/nsomersall>
 
 ---
 

@@ -27,7 +27,7 @@ It seems straightforward to assume that you have all of this information in a gi
 
 [PancakesCon 5](https://pancakescon.com/2024-conference-information/) (24 March) - Lots of security and sysadmin courses talk about a "container escape", but what is that _really_?  We'll go over what a container is, demonstrate how to escape from it, and why that's not a good thing.  Then we'll talk about common ways to prevent this exploit.
 
-Nest, stop ruining your gravy, pan sauces, etc. with clumpy flour or adding so much it becomes solid.  Learn how to balance fat and flour for perfect pan gravy, then a couple techniques on how to recover just in case it wasn't right the first time. 👩🏻‍🍳
+Next, stop ruining your gravy, pan sauces, etc. with clumpy flour or adding so much it becomes solid.  Learn how to balance fat and flour for perfect pan gravy, then a couple techniques on how to recover just in case it wasn't right the first time. 👩🏻‍🍳
 
 - [Slides](../blog/containers-and-gravy/), with writeup and links
 - Video coming soon!

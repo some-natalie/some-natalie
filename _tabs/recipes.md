@@ -40,10 +40,12 @@ I would like to make some family recipes publicly accessible without vendor lock
 | Jam | - 2 tbsp jam<br>- 0.25 cup acid<br>- 0.5 cup fat<br>- herbs, to taste |
 | Buttermilk | - 0.5 cup buttermilk<br>- 0.25 cup acid<br>- 2 tsp honey<br>- 0.25 cup fresh herbs<br>- salt, pepper, dried herbs to taste |
 | Maple | - 0.25 cup maple syrup<br>- 3 tbsp apple cider vinegar<br>- 2 tbsp olive oil<br>- 2 tsp poppy seeds<br>- 2 shallots, minced<br>- 2 tsp Dijon |
+| Spicy tahini | - 0.5 cup soy sauce<br>- 0.5 cup tahini<br>- 0.25 cup rice vinegar<br>- 3 Tbsp honey<br>- 2 Tbsp lime juice<br>- 1 Tbsp ginger paste (or grated)<br>- 1 Tbsp minced garlic<br>- 1Tbsp sriracha, to taste<br>- 1 tsp black pepper |
 
 ## Salad ratios
 
 | Name | Ratios |
+| --- | --- |
 | Brussels sprouts | - 10 sprouts, shaved<br>- 1 small apple, finely diced<br>- 0.25 cup seeds or nuts<br>- 0.25 cup dried fruits<br>- 0.25 cup crumbly cheese (optional) |
 
 ## Baking time chart

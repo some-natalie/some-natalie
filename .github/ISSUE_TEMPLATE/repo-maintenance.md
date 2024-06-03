@@ -17,8 +17,8 @@ title: "Repo maintenance checklist"
   - [ ] docker engine ([link](https://docs.docker.com/engine/release-notes/24.0/))
   - [ ] docker compose ([link](https://docs.docker.com/compose/release-notes/))
   - [ ] dumb-init ([link](https://github.com/Yelp/dumb-init))
-  - [ ] UBI8/ubi8-init image ([link](https://catalog.redhat.com/software/containers/ubi8/ubi-init/5c359b97d70cc534b3a378c8))
-  - [ ] UBI9/ubi9-init image ([link](https://catalog.redhat.com/software/containers/ubi9-init/6183297540a2d8e95c82e8bd))
+  - [ ] UBI8/ubi8-init base image ([link](https://catalog.redhat.com/software/containers/ubi8/ubi-init/5c359b97d70cc534b3a378c8))
+  - [ ] UBI9/ubi9-init base image ([link](https://catalog.redhat.com/software/containers/ubi9-init/6183297540a2d8e95c82e8bd))
 - [ ] bump stuff in the cluster
   - [ ] cilium
   - [ ] tetragon

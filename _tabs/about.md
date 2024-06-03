@@ -16,7 +16,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 - **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6) 
 - **Python** - [Advanced Security CSV export](https://github.com/advanced-security/ghas-to-csv)
 - **Go** - [gh-org-admin-promote](https://github.com/some-natalie/gh-org-admin-promote)
-- **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql) 
+- **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql)
 - but mostly, I work with people on all of the above! 💖
 
 You can find me in our work Slack sharing all sorts of neat things you can do with all that fun stuff and probably find out how I've broken and maybe fixed something too. 😀
@@ -33,7 +33,7 @@ You can find me in our work Slack sharing all sorts of neat things you can do wi
 
 I have an awesome life outside of tech, so while I have a few projects that I enjoy (👆), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
 
-### Heads up!
+### 🌸 Heads up!
 
 - 🌱 I’m currently studying to sit for my [OSCP certification](https://www.offsec.com/courses/pen-200/) and learning to write better conference talk proposals.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](../speaking/).

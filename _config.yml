@@ -33,9 +33,6 @@ url: "https://some-natalie.dev"
 github:
   username: some-natalie
 
-twitter:
-  username: some_natalie
-
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -43,7 +40,7 @@ social:
   # email: example@domain.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    # - https://twitter.com/username # change to your twitter homepage
+    # - https://twitter.com/some_natalie # change to your twitter homepage
     - https://github.com/some-natalie # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username

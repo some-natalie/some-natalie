@@ -95,7 +95,7 @@ In this talk, we'll dive deep into what an Action really is, what goes into an A
 
 ### Getting Started in DevSecOps in a Regulated Environment
 
-[DevSecOps Days Denver 2020](https://www.devsecopsdays.com/2020-devsecops-days-denver)
+[DevSecOps Days Denver 2020](https://www.devsecopsdays.com/2020-devsecops-days-denver) (29 Oct) - Natalie has worked with a great number of teams within system integrators as they've integrated security into their software engineering processes. Given the opportunity to work with such a diverse group of teams, she's found a couple of common traits in teams that thrive in delivering secure software in a regulated environment.
 
 - [Video](https://www.youtube.com/watch?v=ugDaAnXDp1Q)
 - [Slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2020-10-29_Getting-Started-w-DevSecOps-Regulated-Environment.pdf)

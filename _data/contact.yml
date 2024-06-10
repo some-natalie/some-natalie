@@ -1,19 +1,19 @@
 #  The contact options.
 
-- type: github
-  icon: "fab fa-github"
-
 # - type: email
 #   icon: "fas fa-envelope"
 #   noblank: true # open link in current tab
 
 - type: linkedin
-  icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
-  url:  'https://www.linkedin.com/in/nsomersall'
+  icon: "fab fa-linkedin"   # icons powered by <https://fontawesome.com/>
+  url:  "https://www.linkedin.com/in/nsomersall"
 
 - type: mastodon
-  icon: 'fab fa-mastodon' 
-  url:  'https://infosec.exchange/@some_natalie'
+  icon: "fab fa-mastodon"
+  url:  "https://infosec.exchange/@some_natalie"
+
+- type: github
+  icon: "fab fa-github"
 
 # - type: sessionize
 #   icon: 'fas fa-microphone'

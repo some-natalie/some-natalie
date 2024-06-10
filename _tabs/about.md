@@ -13,7 +13,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
 - **Kubernetes** - [kubernoodles](../kubernoodles), self-hosted GitHub Actions runners made for humans
-- **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6) 
+- **Software development in highly regulated industries** ([ITAR](https://www.pmddtc.state.gov/ddtc_public), [CMMC](https://dodcio.defense.gov/CMMC/), [NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final), DoD IL 2-6)
 - **Python** - [Advanced Security CSV export](https://github.com/advanced-security/ghas-to-csv)
 - **Go** - [gh-org-admin-promote](https://github.com/some-natalie/gh-org-admin-promote)
 - **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql)

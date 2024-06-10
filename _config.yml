@@ -47,7 +47,8 @@ social:
     - https://www.linkedin.com/in/nsomersall
     - https://infosec.exchange/@some_natalie
 
-google_site_verification: # fill in to your verification string
+# webmaster_verifications:
+#   google: # fill with the Google verification code
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings

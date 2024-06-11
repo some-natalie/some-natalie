@@ -1,5 +1,5 @@
 ---
-title: "Hi there 👋"
+title: "Hi there 👋🏻"
 icon: fas fa-info-circle
 order: 8
 layout: page

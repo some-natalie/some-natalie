@@ -3,9 +3,9 @@
 
 platforms:
 
-  - type: Telegram
-    icon: "fab fa-telegram"
-    link: "https://t.me/share/url?url=URL&text=TITLE"
+  # - type: Telegram
+  #   icon: "fab fa-telegram"
+  #   link: "https://t.me/share/url?url=URL&text=TITLE"
 
   - type: Linkedin
     icon: "fab fa-linkedin"
@@ -29,9 +29,21 @@ platforms:
   #   icon: "fab fa-twitter"
   #   link: "https://twitter.com/intent/tweet?text=TITLE&url=URL"
 
+  - type: Hacker News
+    icon: "fab fa-square-hacker-news"
+    link: "https://news.ycombinator.com/submitlink?u=URL&t=TITLE"
+
   # - type: Facebook
   #   icon: "fab fa-facebook-square"
   #   link: "https://www.facebook.com/sharer/sharer.php?title=TITLE&u=URL"
+
+  - type: Reddit
+    icon: "fab fa-reddit"
+    link: "https://www.reddit.com/submit?url=URL&title=TITLE"
+  
+  - type: Threads
+    icon: "fab fa-threads"
+    link: "https://www.threads.net/intent/post?text=URL"
 
   # - type: Weibo
   #   icon: "fab fa-weibo"

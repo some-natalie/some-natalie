@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Surviving your first code audit, or Whodunnit?  A git repo mystery.](https://some-natalie.dev/blog/git-code-audits):  From BSides Boulder 2024, many attempts to figure out who did what, when, where, and why in a git repository (and some lessons learned).
 1. [Reducing CVEs in actions-runner-controller](https://some-natalie.dev/blog/reduce-cves-arc):  (Kubernoodles, part 9 of ?) - The same actions-runner-controller you know and love (or curse), but with many fewer CVEs to generate compliance paperwork.
 1. [GraphQL patterns to know](https://some-natalie.dev/blog/graphql-tips):  Handy snippets, tips, and tricks for working in GraphQL I struggled for so you don't have to.
-1. [Intro to GraphQL using custom fields in GitHub Projects](https://some-natalie.dev/blog/graphql-intro):  Getting started with the new GitHub Issues and Projects API, exclusively in GraphQL, doesn't have to be so difficult.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

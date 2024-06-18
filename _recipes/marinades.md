@@ -80,4 +80,20 @@ If using for meat, do not use for more than 4-ish hours.  It'll do weird mushy t
 - 1 teaspoon black pepper
 - 0.5 teaspoon ground allspice, optional
 - Kosher salt
- 
+
+If using for meat, do not use for more than 4-ish hours.  It'll do weird mushy things to the meat texture.
+
+### Cilantro and ginger
+
+- 1 oz fresh cilantro (about 1 cup)
+- 2 Tbsp canola oil
+- 1 Tbsp fresh lemon juice
+- 2 tsp minced garlic
+- 1 tsp ginger paste
+- 0.5 tsp ground cumin
+- 0.5 tsp ground coriander
+- 0.5 tsp ground turmeric
+- 0.5 tsp paprika
+- 0.5 tsp crushed red pepper flakes
+- 0.5 tsp salt
+- 0.5 tsp freshly ground black pepper

@@ -16,12 +16,16 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ### Whodunnit?  A Git Repository Mystery
 
-[BSides Boulder](https://bsidesboulder.org) (14 June) - With all the recent focus on software supply chain security, let's look at the very far left of this process - **how does git know who did what, when, where, and why?**
+![bsides-boulder-2024](/assets/graphics/speaking/bsides-boulder-2024.png){: .w-50 .right .shadow .rounded-10}
+
+[BSides Boulder](https://bsidesboulder.org) (14 June) - With all the recent focus on software supply chain security, let's look at the very far left of this process - **how does git know who did what, when, where, and why?** ([Abstract](https://sessionize.com/s/some-natalie/whodunnit-git-repository-mysteries/93884) on Sessionize)
 
 It seems straightforward to assume that you have all of this information in a git repository, but that's probably not the case.  In this talk, we'll walk through how to determine the answers to each of these questions, edge cases and technical gotchas to watch out for, and why each are important to your company's security posture.
 
-- Abstract on [Sessionize](https://sessionize.com/s/some-natalie/whodunnit-git-repository-mysteries/93884)
-- 🌻 Slides and writeup to be posted soon after the talk!
+Slides with expanded write-up ([as presented](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2024-06-14_Bsides-Boulder-Git-Audit-Whodunnit.pdf))
+
+  1. [Introduction](../blog/git-code-audits), threat model, and biases I have
+  1. [Configuration matters](../blog/git-config-audits) to consider
 
 ### A Gentle Intro to Container Escapes and No-Clump Gravy
 
@@ -48,7 +52,7 @@ In this talk, we'll dive deep into what an Action really is, what goes into an A
 
 ### Securing Self-Hosted GitHub Actions with Kubernetes and Actions-Runner-Controller
 
-![cncf-cnsc2023](/assets/graphics/speaking/cncf-cnsc2023.JPG){: .w-30 .right .shadow .rounded-10}
+![cncf-cnsc2023](/assets/graphics/speaking/cncf-cnsc2023.JPG){: .w-50 .right .shadow .rounded-10}
 
 [CNCF CloudNativeSecurityCon North America](https://events.linuxfoundation.org/cloudnativesecuritycon-north-america/) (1 Feb) - A deep dive into the security considerations of running self-hosted GitHub Actions compute with [actions-runner-controller](https://github.com/actions/actions-runner-controller).  We'll review typical deployment architectures, then cover 3 distinct places where security risk and ease of use collide with insight and resources for navigating these design choices. First the cluster settings are examined to show methods to limit the "blast radius" of a potential bad actor and provide insight into the why and how of using privileged pods. Next, the controller settings are reviewed for how to scope runner deployments and grant permissions within GitHub to provide least-privilege. Lastly, the runner pod is taken apart to show how to build supply chain security into the image and the software it builds for you.
 

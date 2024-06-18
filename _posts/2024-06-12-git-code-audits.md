@@ -10,7 +10,7 @@ pin: true
 mermaid: true
 ---
 
-> From [BSides Boulder 2024](https://bsidesboulder.org/), many attempts to figure out **who** did **what**, **when**, **where**, and **why** in a git repository (and some lessons learned, too).  This is slides and resources as shown live on 14 June 2024.
+> From [BSides Boulder 2024](https://bsidesboulder.org/), many attempts to figure out **who** did **what**, **when**, **where**, and **why** in a git repository (and some lessons learned, too).  This is an expanded set of slides and resources since shown live on 14 June 2024.
 {: .prompt-info}
 
 How do you _know_ what you know about your codebase?
@@ -102,7 +102,7 @@ This time last year, we'd talked about [threat modeling the GitHub Actions ecosy
 
 **There's no ambiguity today** - the auditor or assessor will tell you.
 
-> More soon, after the talk on Friday, June 14th at [BSides Boulder 2024](https://bsidesboulder.org/)!
+> Up next - what configurations really matter in a git repository?  [Part 2: Configuration matters](../git-config-audits)
 {: .prompt-info}
 
 ---

@@ -32,7 +32,7 @@ Here's some questions we're trying to answer that I've had to grapple with first
 - [Intro](#intro) - Hi, I'm Natalie and I'm here to help
 - [Biases](#biases) - getting this out of the way up front
 - [Threat models](#threat-models) - what problem are we even solving?
-- **Git, but really fast** - a whirlwind overview of what matters in `~/.git/`
+- [Git, but really fast](../git-config-audits) - a whirlwind overview of what matters in `~/.git/`
 - **Who** - who did this?
 - **What** - what happened?
 - **When** - when???

@@ -1,9 +1,9 @@
 {
   "name": "Jekyll website",
-  "image": "mcr.microsoft.com/vscode/devcontainers/ruby:3-bullseye",
-  "features": {
-    "git-lfs": "latest"
-  },
+  "build": {
+        "dockerfile": "Dockerfile",
+        "args": {}
+    },
   "forwardPorts": [4000],
   "portsAttributes": {
     "4000": {
@@ -23,9 +23,9 @@
     }
   },
   "postCreateCommand": {
-    "bundle": "bundle",
+    "bundle": "bundle install --retry 5 --jobs 20",
     "clone-repos": ".devcontainer/post-create.sh",
     "first-welcome": "sudo echo '\n🌺 Run ./load-workspace.sh to add the other repositories defined in the devcontainer to VS Code. 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
   },
-  "postAttachCommand": "bundle exec jekyll serve --livereload"
+  "postAttachCommand": "bundle exec jekyll serve --livereload --host 0.0.0.0"
 }

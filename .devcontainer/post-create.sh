@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# This script doesn't run or get called by anything anymore.
+# There's no additional repositories to clone on creation.
+
 # Get the list of other repositories from devcontainer.json using jq
 REPOS=$(jq -r '.customizations.codespaces.repositories' .devcontainer/devcontainer.json | jq -r 'keys[]')
 

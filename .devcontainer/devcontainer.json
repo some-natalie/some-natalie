@@ -11,22 +11,9 @@
     }
   },
   "remoteUser": "nonroot",
-  "customizations": {
-    "codespaces": {
-      "repositories": {
-        "some-natalie/work-stuff": {
-          "permissions": {
-            "contents": "write",
-            "pull_requests": "write"
-          }
-        }
-      }
-    }
-  },
   "postCreateCommand": {
     "bundle": "bundle install --retry 5 --jobs 20",
-    "clone-repos": ".devcontainer/post-create.sh",
-    "first-welcome": "sudo echo '\n🌺 Run ./load-workspace.sh to add the other repositories defined in the devcontainer to VS Code. 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
+    "first-welcome": "sudo echo '\n🌺 Have a nice day! 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
   },
   "postAttachCommand": "bundle exec jekyll serve --host 0.0.0.0"
 }

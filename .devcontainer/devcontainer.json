@@ -12,8 +12,7 @@
   },
   "remoteUser": "nonroot",
   "postCreateCommand": {
-    "bundle": "bundle install --retry 5 --jobs 20",
-    "first-welcome": "sudo echo '\n🌺 Have a nice day! 🌺' >> /workspaces/.codespaces/shared/first-run-notice.txt"
+    "bundle": "bundle install --retry 5 --jobs 20"
   },
   "postAttachCommand": "bundle exec jekyll serve --host 0.0.0.0"
 }

@@ -9,7 +9,7 @@ mermaid: true
 image: /assets/graphics/2024-06-14-whodunnit-git-repo/rumpelstiltskin.webp
 ---
 
-> Can you guess who I am?[^rumplestiltskin] 😈  It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit. (from BSides Boulder 2024)"  This is an expanded set of slides and resources since shown live on 14 June 2024.  [Overview here, if you missed it!](../git-code-audits)
+> Can you guess who I am?[^rumplestiltskin] 😈  It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit.  This is an expanded set of slides and resources since shown live on 14 June 2024 at [BSides Boulder 2024](https://bsidesboulder.org/).  🪻 [Overview here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}
 
 Identity in git and in your central remote are not connected to each other.  **Reliably linking these two completely independent identities can be tricky** in any code audit.  If you take nothing else away from this presentation, let it be this one graphic.

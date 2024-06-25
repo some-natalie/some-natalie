@@ -9,7 +9,9 @@ mermaid: true
 image: /assets/graphics/2024-06-14-whodunnit-git-repo/rumpelstiltskin.webp
 ---
 
-> Can you guess who I am?[^rumplestiltskin] 😈  It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit.  This is an expanded set of slides and resources since shown live on 14 June 2024 at [BSides Boulder 2024](https://bsidesboulder.org/).  🪻 [Overview here, if you missed it!](../git-code-audits) 🪻
+> Can you guess who I am?[^rumplestiltskin] 😈  It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit.  This is an expanded set of slides and resources since shown live on 14 June 2024 at [BSides Boulder 2024](https://bsidesboulder.org/).
+>
+>🪻 [Overview here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}
 
 Identity in git and in your central remote are not connected to each other.  **Reliably linking these two completely independent identities can be tricky** in any code audit.  If you take nothing else away from this presentation, let it be this one graphic.
@@ -119,7 +121,7 @@ Commit signatures demonstrate that a key signed a particular set of code changes
 > Commit signing is _very frequently_ confused as a control to establish authorship of code changes - eg, Natalie's key didn't sign this code, therefore she didn't write it or didn't push it (or any other combination of these).  It's so common that it is one of the first questions I ask a team to determine their maturity at the start of any assessment readiness exercise.
 {: .prompt-tip}
 
-**There are three main ways to sign commits.**  Some are easier for users to configure, but all provide the same basic functionality.
+Commit signing and signature verification link the remote account that pushed the code owns the key that signed those changes.  In the example above, the commit was pushed to the remote and signed by `some-natalie`, but still authored by `Maintainer`.  **There are three main ways to sign commits.**  Some are easier for users to configure, but all provide the same basic functionality.
 
 ### x.509 signing
 

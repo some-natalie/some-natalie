@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Understanding identity in git repositories](https://some-natalie.dev/blog/git-identity):  Can you guess who I am? 😈 It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit. (from BSides Boulder 2024)
 1. [Git configurations in a code audit](https://some-natalie.dev/blog/git-config-audits):  From BSides Boulder 2024, here's a few things about git configuration I wish I knew before my first code audit got started.
 1. [Surviving your first code audit, or Whodunnit?  A git repo mystery.](https://some-natalie.dev/blog/git-code-audits):  From BSides Boulder 2024, many attempts to figure out who did what, when, where, and why in a git repository (and some lessons learned).
-1. [Reducing CVEs in actions-runner-controller](https://some-natalie.dev/blog/reduce-cves-arc):  (Kubernoodles, part 9 of ?) - The same actions-runner-controller you know and love (or curse), but with many fewer CVEs to generate compliance paperwork.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

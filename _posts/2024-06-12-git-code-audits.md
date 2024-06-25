@@ -33,7 +33,7 @@ Here's some questions we're trying to answer that I've had to grapple with first
 - [Biases](#biases) - getting this out of the way up front
 - [Threat models](#threat-models) - what problem are we even solving?
 - [Git, but really fast](../git-config-audits) - a whirlwind overview of what matters in `~/.git/`
-- **Who** - who did this?
+- [Who did this?](../git-identity) - all the ways you can't prove who did what
 - **What** - what happened?
 - **When** - when???
 - **Where** - where can we implement controls?

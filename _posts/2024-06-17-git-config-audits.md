@@ -152,7 +152,7 @@ These logs are used by other tools such as IDEs, git GUI clients, and more.  The
 
 > If the fundamental configurations are controlled by end users, where can we get the information we need to definitively know who did what?
 >
-> 🕵️‍♀️ **Next up** - a tour of how git thinks about identity and how we can answer audit questions on it.
+> 🕵️‍♀️ **Next up** - a tour of how git thinks about identity and how we can answer audit questions on it.  [Part 3: Understanding identity in git repositories](../git-identity)
 {: .prompt-info}
 
 ---

@@ -26,6 +26,7 @@ Slides with expanded write-up ([as presented](https://github.com/some-natalie/so
 
   1. [Introduction](../blog/git-code-audits), threat model, and biases I have
   1. [Configuration matters](../blog/git-config-audits) to consider
+  1. [Identity is hard](../blog/git-identity) to demonstrate, especially distributed
 
 ### A Gentle Intro to Container Escapes and No-Clump Gravy
 

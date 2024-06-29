@@ -12,9 +12,9 @@
 
 ---
 
-### [Chainguard](https://chainguard.dev) - Principal Federal Solutions Engineer, 2024-present
+### [Chainguard](https://chainguard.dev) - Principal Solutions Engineer, 2024-present
 
-- **Build Federal sales** at a startup as the first solutions engineer dedicated to the vertical.
+- **Build Public Sector sales** at a startup as the first solutions engineer dedicated to the vertical.
 - Facilitate proof of concepts on complex containerized applications, promoting across airgaps and other compliance boundaries as needed.
 - **Demonstrate business value of application security** and software supply chain best practices to a myriad of regulatory frameworks and guidelines, now including NIST [Secure Software Development Framework](https://csrc.nist.gov/Projects/ssdf) and [Application Container Security Guide](https://csrc.nist.gov/pubs/sp/800/190/final).
 

@@ -267,7 +267,7 @@ That was a lot.  It also feels like we've only scratched the surface of "hard to
 
 > Identity is hard, so let's change the pace and look at what git is 🌟 phenomenally good at 🌟 - tracking changes in files!
 >
-> 🕵️‍♀️ **Next up** - tips, tricks, and footguns to watch out for when looking at _what changed_ in a repository.
+> 🕵️‍♀️ **Next up** - tips, tricks, and footguns to watch out for when looking at _what changed_ in a repository.  [Part 4: Tips for auditing changes in git](../git-what-changed)
 {: .prompt-info}
 
 ---

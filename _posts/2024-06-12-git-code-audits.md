@@ -34,7 +34,7 @@ Here's some questions we're trying to answer that I've had to grapple with first
 - [Threat models](#threat-models) - what problem are we even solving?
 - [Git, but really fast](../git-config-audits) - a whirlwind overview of what matters in `~/.git/`
 - [Who did this?](../git-identity) - all the ways you can't prove who did what
-- **What** - what happened?
+- [Tips for auditing changes in git](../git-what-changed) - some common ways to not prove what happened and other weird conversations
 - **When** - when???
 - **Where** - where can we implement controls?
 - **Why** - why did this change happen?

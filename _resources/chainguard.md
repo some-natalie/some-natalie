@@ -23,7 +23,7 @@ function cgr-find {
   fi
   # set orgs
   local privateorg="chainguard-private" # edit to your private registry
-  local publicorg="720909c9f5279097d847ad02a2f24ba8f59de36a" # UUID of public images registry
+  local publicorg="chainguard" # public images registry
   # private images
   echo "---- private images ----"
   chainctl img repos list --parent $privateorg -o json |\

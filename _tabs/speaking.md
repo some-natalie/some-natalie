@@ -37,7 +37,7 @@ Slides with expanded write-up ([as presented](https://github.com/some-natalie/so
 Next, stop ruining your gravy, pan sauces, etc. with clumpy flour or adding so much it becomes solid.  Learn how to balance fat and flour for perfect pan gravy, then a couple techniques on how to recover just in case it wasn't right the first time. 👩🏻‍🍳
 
 - [Slides](../blog/containers-and-gravy/), with writeup and links
-- Video coming soon!
+- [YouTube](https://youtu.be/Mj29HnlrraY)
 
 ## 2023
 

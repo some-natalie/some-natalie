@@ -28,6 +28,7 @@ Slides with expanded write-up ([as presented](https://github.com/some-natalie/so
   1. [Configuration matters](../blog/git-config-audits) to consider
   1. [Identity is hard](../blog/git-identity) to demonstrate, especially distributed
   1. [Tips for auditing changes in git](../blog/git-what-changed) - some common ways to not prove what happened and other weird conversations
+  1. [Time is meaningless](../blog/git-time) and other terrible misunderstandings about how git understands time
 
 ### A Gentle Intro to Container Escapes and No-Clump Gravy
 

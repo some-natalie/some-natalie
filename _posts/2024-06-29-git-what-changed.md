@@ -112,7 +112,7 @@ These are simple enough to generate with only git, but remote repository hosts m
 
 > Git is great at tracking changes in files, but only if the people and processes are equally great at not rewriting history or any other funny business.
 >
-> 🕵️‍♀️ **Next up** - How does git understand time?  What can we prove about when a change occurred?
+> 🕵️‍♀️ **Next up** - How does git understand time?  What can we prove about when a change occurred?  [Part 5: time is meaningless and other terrible misunderstandings](../git-time)
 {: .prompt-info}
 
 ---

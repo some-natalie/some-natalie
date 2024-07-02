@@ -15,7 +15,7 @@ image: /assets/graphics/2024-03-24-containers-and-gravy/square-painting.png
 
 > This is slides, code, and demo walkthrough as shown live on 24 March 2024 at [PancakesCon 5](https://pancakescon.com/2024-conference-information/)! 🥞
 >
-> Here's the [slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2024-03-24_PancakesCon-Containers-and-Gravy.pdf) as presented.  Since there's no screen-sharing on a website, I can't bounce back and forth between code and a browser and this talk like I could in real life.  There's lots more code snippets, links, and screenshots here than in the original deck to make up for that. 💖
+> Here's the [slides](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2024-03-24_PancakesCon-Containers-and-Gravy.pdf) as presented and [YouTube](https://youtu.be/Mj29HnlrraY) recording.  Since there's no screen-sharing on a website, I can't bounce back and forth between code and a browser and this talk like I could in real life.  There's lots more code snippets, links, and screenshots here than in the original deck to make up for that. 💖
 {: .prompt-info}
 
 ## Introduction

@@ -22,7 +22,7 @@ She's passionate about diversity in technology and empowering engineers to build
 
 It seems straightforward to assume that you have all of this information in a git repository, but that's probably not the case.  In this talk, we'll walk through how to determine the answers to each of these questions, edge cases and technical gotchas to watch out for, and why each are important to your company's security posture.
 
-Slides with expanded write-up ([as presented](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2024-06-14_Bsides-Boulder-Git-Audit-Whodunnit.pdf))
+**Slides with expanded write-up** ([as presented](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2024-06-14_Bsides-Boulder-Git-Audit-Whodunnit.pdf))
 
   1. [Introduction](../blog/git-code-audits), threat model, and biases I have
   1. [Configuration matters](../blog/git-config-audits) to consider

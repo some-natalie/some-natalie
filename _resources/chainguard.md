@@ -23,7 +23,6 @@ function cgr-find {
   fi
   # set orgs
   local privateorg="chainguard-private" # edit to your private registry
-  local publicorg="chainguard" # public images registry
   # private images
   echo "---- private images ----"
   chainctl img repos list --parent $privateorg -o json |\
@@ -32,7 +31,7 @@ function cgr-find {
     sort
   # public images
   echo "---- public images ----"
-  chainctl img repos list --parent $publicorg -o json |\
+  chainctl img repos list --public -o json |\
     jq -r '.items[].name' |\
     fzf --filter="${1}" |\
     sort

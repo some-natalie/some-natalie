@@ -22,7 +22,7 @@ Let's revisit that reference architecture to lower the CVE count of each runner,
 By changing our base image, we can **reduce CVEs** for both the:
 
 - runner scale set controller **(from 6 to 0)** ([full chart](#controller-cves))
-- runner image **(from 63 to 6)** ([full chart](#runner-cves))
+- runner image **(from 172 to 5)** ([full chart](#runner-cves))
 
 Let's make this easy, so we can remain at a human-manageable level of security items to track moving forward _without_ dedicating a ton of headcount towards smashing CVEs.
 
@@ -83,8 +83,8 @@ Set up the non-root user to run jobs as too.
 ```dockerfile
 # Arguments
 ARG TARGETPLATFORM
-ARG RUNNER_VERSION=2.316.1
-ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.0
+ARG RUNNER_VERSION=2.317.0
+ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.1
 ARG DOTNET_VERSION=7
 
 # Set up the non-root user (runner)
@@ -316,7 +316,7 @@ helm install wolfi \
     --namespace "ghec-runners" \
     -f local-wolfi.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.9.2
+    --version 0.9.3
 ```
 
 Make sure everything is pointing to the latest version, as the free Chainguard images are only `latest`.  A version mismatch between the controller and the listener can cause issues.  But assuming everything matches up, the new scale set should be idle in the self-hosted runner group.
@@ -338,26 +338,27 @@ Our [runner test suite](../testing-runner-containers) hasn't changed since we la
 
 ### Controller CVEs
 
-There isn't a huge difference between the upstream image from GitHub and the Chainguard image.  Perhaps important to note is that the 6 CVEs on the GitHub image are all unknown severity according to the NVD database as of writing.
+There isn't currently a difference between the upstream image from GitHub and the Chainguard image.
 
 | Image | (total) | Critical | High | Medium<br>and below |
 | --- | --- | --- | --- | --- |
-| ghcr.io/actions/gha-runner-scale-set-controller:0.9.2 | **18** | 0 | 0 | 18 |
+| ghcr.io/actions/gha-runner-scale-set-controller:0.9.3 | **0** | 0 | 0 | 0 |
 | cgr.dev/chainguard/gha-runner-scale-set-controller:latest | **0** | 0 | 0 | 0 |
 
 ### Runner CVEs
 
-It's once we start comparing the runner images that the count of CVEs to inventory and manage becomes problematic.  The spread here is from 6 to 580, with the majority of the CVEs being medium or below.  The `wolfi` image is the lowest, with only 6 CVEs to account for.
+It's once we start comparing the runner images that the count of CVEs to inventory and manage becomes problematic.  The spread here is from 5 to well over 500, with the majority of the CVEs being medium or below.  The `wolfi` image is the lowest, with only 5 CVEs to account for.
 
 | Image | (total) | Critical | High | Medium<br>and below |
 | --- | --- | --- | --- | --- |
-| ghcr.io/actions/actions-runner:2.316.1 | **71** | 0 | 1 | 70 |
-| ghcr.io/some-natalie/kubernoodles/wolfi:latest | **6** | 0 | 0 | 6 |
-| ghcr.io/some-natalie/kubernoodles/ubi8:latest | **596** | 4 | 13 | 579 |
-| ghcr.io/some-natalie/kubernoodles/ubi9:latest | **598** | 0 | 21 | 577 |
-| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **149** | 0 | 4 | 145 |
+| ghcr.io/actions/actions-runner:2.317.0 | **172** | 8 | 5 | 159 |
+| ghcr.io/some-natalie/kubernoodles/wolfi:latest | **5** | 0 | 1 | 4 |
+| ghcr.io/some-natalie/kubernoodles/ubi8:latest | **548** | 4 | 4 | 540 |
+| ghcr.io/some-natalie/kubernoodles/ubi9:latest | **552** | 0 | 6 | 546 |
+| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **211** | 0 | 4 | 207 |
+| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-numbat:latest | **137** | 0 | 4 | 133 |
 
-> The CVE counts are as of 20 May 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag is the commit corresponding to `v0.13.3` for Kubernoodles.  The CVE counts are from the Grype scan (`v0.77.4`) run on the images listed above.
+> The CVE counts are as of 3 July 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag the most recent build to date for Kubernoodles.  The CVE counts are from the Grype scan (`v0.79.2`) run on the images listed above.
 {: .prompt-info}
 
 ## Why

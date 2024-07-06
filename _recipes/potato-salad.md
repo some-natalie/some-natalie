@@ -10,7 +10,7 @@ excerpt: "The mother-in-law’s potato salad"
 - 6 medium potatoes (butter or red)
 - 1 cup celery, finely diced
 - 0.5 cup onion, finely diced
-- 0.33 sweet pickle relish
+- 0.33 cup sweet pickle relish
 - 1.25 cups mayonnaise
 - 2 teaspoons white sugar
 - 2 teaspoons vinegar

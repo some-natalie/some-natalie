@@ -29,6 +29,7 @@ It seems straightforward to assume that you have all of this information in a gi
   1. [Identity is hard](../blog/git-identity) to demonstrate, especially distributed
   1. [Tips for auditing changes in git](../blog/git-what-changed) - some common ways to not prove what happened and other weird conversations
   1. [Time is meaningless](../blog/git-time) and other terrible misunderstandings about how git understands time
+  1. [Where to set compliance controls](../blog/git-compliance-controls) in regulated software developed in git repositories
 
 ### A Gentle Intro to Container Escapes and No-Clump Gravy
 

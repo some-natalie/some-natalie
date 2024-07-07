@@ -28,7 +28,7 @@ Here's what has been done and where we're going.
 > Last updated in **July 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
 {: .prompt-info}
 
-Coming soon:
+Maybe soon:
 
 - Rebuilding and releasing custom runners on a schedule
 - Log streaming
@@ -36,5 +36,5 @@ Coming soon:
 - File caching
 - Fun with metrics!
 
-> My environment uses a mix of Azure services and on-prem resources.  They're currently "free" for me and I'll try to call out using vanilla k8s as much as possible for portability.
+> My environment uses mostly on-prem resources.  I used to have more access to Azure services, so there's a lot of references there as well.  I'll try to call out using vanilla k8s as much as possible for portability.
 {: .prompt-info }

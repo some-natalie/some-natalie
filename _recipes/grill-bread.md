@@ -10,7 +10,7 @@ excerpt: "Grilled no-knead focaccia bread"
 - 1 cup white whole wheat flour
 - 1.25 cups bread flour
 - 1 cup all-purpose flour
-- 14 oz of very warm water (about 115 F)
+- 14 oz of very warm water (about 115°F)
 - 0.75 tsp of active dry yeast (for starting in the morning)
 - 0.5 tsp salt
 
@@ -40,4 +40,5 @@ excerpt: "Grilled no-knead focaccia bread"
 ## Notes
 
 - Total volume of flour is about 3.25 cups.  This is the blend I usually make.
+- It works well in the oven too.  I typically bake it at 550°F for about 12 minutes or so.
 - Halves perfectly for an 8” skillet

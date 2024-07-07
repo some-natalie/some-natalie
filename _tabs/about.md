@@ -35,7 +35,7 @@ I have an awesome life outside of tech, so while I have a few projects that I en
 
 ### 🌸 Heads up!
 
-- 🌱 I’m currently studying to sit for my [OSCP certification](https://www.offsec.com/courses/pen-200/) and learning to write better conference talk proposals.
+- 🌱 I’m currently studying to sit for my [OSCP certification](https://www.offsec.com/courses/pen-200/) and learning the ropes at a container security startup.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](../speaking/).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](https://github.com/some-natalie/some-natalie/blob/main/RESUME.md), but you can also find some of what I've been up to in [my GitHub profile](https://github.com/some-natalie).  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://www.linkedin.com/in/nsomersall).

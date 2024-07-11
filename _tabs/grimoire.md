@@ -22,6 +22,7 @@ An always-changing collection of notes, links, tables, and other such goodies! ð
 - [JSONcrack](https://jsoncrack.com/editor) makes JSON human friendly
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables)
 - [Mermaid JS diagram live editor](https://mermaid-js.github.io/mermaid-live-editor)
+- [Party-ify emoji generator](https://nathanielw.github.io/party-ify/) because sometimes you need a party
 - [sed.js](https://sed.js.org/) for testing `sed` commands online
 - [Tree generator](https://tree.nathanfriend.io/) for creating file tree diagrams
 

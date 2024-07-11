@@ -6,6 +6,7 @@ tags:
   - business
   - github-actions
   - kubernetes
+  - actions-runner-controller
 excerpt: "When you absolutely, positively have to host it yourself, here's some help."
 ---
 

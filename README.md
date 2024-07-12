@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Explaining why a code change happened during an audit](https://some-natalie.dev/blog/git-why):  From BSides Boulder 2024, trying to prove why changes occurred without any additional context is difficult.  Let's work together to make that easier. 💖
 1. [Where git can set compliance controls](https://some-natalie.dev/blog/git-compliance-controls):  From BSides Boulder 2024, locations of fun - where controls can be reliably set, where they can be bypassed, and where secrets can be stored too.
 1. [How git understands time](https://some-natalie.dev/blog/git-time):  From BSides Boulder 2024, time is meaningless and other terrible misunderstandings.
-1. [Tips for auditing changes in git](https://some-natalie.dev/blog/git-what-changed):  From BSides Boulder 2024, tracking what changed is the one thing that git is designed to do and it does that task ✨ phenomenally well. ✨  Here's some tips and tricks to make some weird questions easier to answer.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

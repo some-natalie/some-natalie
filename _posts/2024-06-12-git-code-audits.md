@@ -37,7 +37,7 @@ Here's some questions we're trying to answer that I've had to grapple with first
 - [Tips for auditing changes in git](../git-what-changed) - some common ways to not prove what happened and other weird conversations
 - [Time is meaningless](../git-time) and other terrible misunderstandings about how git understands time
 - [Where to set compliance controls](../git-compliance-controls) in regulated software developed in git repositories
-- **Why** - why did this change happen?  what can we do about it?
+- [Explaining why a code change happened during an audit](../git-why) is really hard to do, and even harder to _prove_, well after the change was made.  Let's make this reliably simple!
 - **No really, why?!?!** are we even here?
 
 This is the process we're going to dive into together. 🛟

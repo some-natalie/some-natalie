@@ -200,7 +200,7 @@ This balance point between flexibility and control can vary by project.  That's 
 
 > Controls and settings shift a lot.  Centralizing them into a single source of truth is both helpful and more secure.
 >
-> 🕵️‍♀️ **Next up** - how to figure out why something changed in the first place?
+> 🕵️‍♀️ **Next up** - how to figure out why something changed in the first place? [Part 7: Explaining why a code change happened during an audit](../git-why)
 {: .prompt-info }
 
 ---

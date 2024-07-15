@@ -5,6 +5,7 @@ tags:
   - kubernetes
   - codespaces
   - containers
+  - devcontainers
 excerpt: "It's like Codespaces, but much more work for much less functionality."
 ---
 

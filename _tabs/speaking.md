@@ -31,6 +31,7 @@ It seems straightforward to assume that you have all of this information in a gi
   1. [Time is meaningless](../blog/git-time) and other terrible misunderstandings about how git understands time
   1. [Where to set compliance controls](../blog/git-compliance-controls) in regulated software developed in git repositories
   1. [Explaining why a code change happened during an audit](../blog/git-why) is really hard to do, and even harder to _prove_, well after the change was made.  Let's make this reliably simple!
+  1. [Why develop when you have to audit](../blog/git-audited) explores the business and people complexities on top of this deeply technical problem. Despite all the hardships we’ve reviewed, building software and systems in highly regulated environments can still be rewarding, fast-paced, and fun!
 
 ### A Gentle Intro to Container Escapes and No-Clump Gravy
 

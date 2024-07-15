@@ -32,13 +32,13 @@ Here's some questions we're trying to answer that I've had to grapple with first
 - [Intro](#intro) - Hi, I'm Natalie and I'm here to help
 - [Biases](#biases) - getting this out of the way up front
 - [Threat models](#threat-models) - what problem are we even solving?
-- [Git, but really fast](../git-config-audits) - a whirlwind overview of what matters in `~/.git/`
+- [Git, but really fast](../git-config-audits) - a whirlwind overview of what matters in the `~/.git/` directory
 - [Who did this?](../git-identity) - all the ways you can't prove who did what
 - [Tips for auditing changes in git](../git-what-changed) - some common ways to not prove what happened and other weird conversations
 - [Time is meaningless](../git-time) and other terrible misunderstandings about how git understands time
 - [Where to set compliance controls](../git-compliance-controls) in regulated software developed in git repositories
 - [Explaining why a code change happened during an audit](../git-why) is really hard to do, and even harder to _prove_, well after the change was made.  Let's make this reliably simple!
-- **No really, why?!?!** are we even here?
+- [Why develop when you have to audit](../git-audited) explores the business and people complexities on top of this deeply technical problem. Despite all the hardships we’ve reviewed, building software and systems in highly regulated environments can still be rewarding, fast-paced, and fun!
 
 This is the process we're going to dive into together. 🛟
 

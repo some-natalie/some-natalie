@@ -3,6 +3,7 @@ title: "Blogging with Codespaces, part 2"
 date: 2023-04-07
 tags:
   - codespaces
+  - devcontainers
 excerpt: "Now with private drafts 🤐 - written with Obsidian and Codespaces"
 ---
 

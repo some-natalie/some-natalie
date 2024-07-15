@@ -4,6 +4,7 @@ date: 2022-11-07
 tags:
   - codespaces
   - containers
+  - devcontainers
 excerpt: "Using devcontainers (and not developer tears) to manage dependencies for this site"
 ---
 

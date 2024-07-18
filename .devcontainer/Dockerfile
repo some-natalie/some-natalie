@@ -11,7 +11,8 @@ USER root
 
 # Install vscode dependencies
 RUN apk update \
-  && apk add posix-libc-utils \
+  && apk add --no-cache \
+  posix-libc-utils \
   libstdc++ \
   git \
   git-lfs \

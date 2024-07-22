@@ -3,6 +3,18 @@ title: "Nmap"
 excerpt: "scripts, commands, flags, and other things that I need often"
 ---
 
+## Frequent scans
+
+I keep searching my shell history for these.
+
+| Command | Description |
+| --- | --- |
+| `nmap -sS -p 1-65535 hostname` | TCP SYN scan, all ports |
+| `nmap -sU -p 1-65535 hostname` | UDP scan, all ports |
+| `nmap -T5 -sn 192.168.0.0/24` | Fast ping scan of a subnet |
+| `nmap -p 80,443 --script "http-*" hostname` | Run all HTTP scripts against host |
+| `nmap -A hostname` | OS+version detection, script scanning, traceroute |
+
 ## Scripts
 
 - Scripts are usually in `/usr/share/nmap/scripts/` or `/opt/homebrew/share/nmap/scripts`
@@ -27,3 +39,7 @@ Enumerate vulnerabilities on a host, [script docs](https://nmap.org/nsedoc/scrip
 ```shell
 nmap -sV --script vulners [--script-args mincvss=<arg_val>] <target>
 ```
+
+## Links
+
+The [nmap book](https://nmap.org/book/toc.html) has it all, somewhere.

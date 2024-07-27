@@ -1,0 +1,9 @@
+{
+    "name": "docker-in-docker",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {}
+    },
+    "runArgs": ["--privileged"],
+    "postStartCommand": "if ! pgrep -x dockerd > /dev/null; then dockerd > /dev/null 2>&1 & sleep 5; fi"
+}

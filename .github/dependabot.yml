@@ -17,3 +17,7 @@ updates:
     directory: "/.github/scripts/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "pip"
+    directory: "/assets/devcontainers/multi-service/python/"
+    schedule:
+      interval: "weekly"

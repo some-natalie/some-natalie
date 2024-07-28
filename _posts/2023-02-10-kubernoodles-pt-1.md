@@ -48,7 +48,7 @@ helm repo update
 
 # Install cilium and hubble into our cluster
 helm install cilium cilium/cilium \
-    --version 1.15.4 \
+    --version 1.16.0 \
     --namespace kube-system \
     --set aksbyocni.enabled=true \
     --set nodeinit.enabled=true \

@@ -22,7 +22,7 @@ Let's revisit that reference architecture to lower the CVE count of each runner,
 By changing our base image, we can **reduce CVEs** for both the:
 
 - runner scale set controller **(from 6 to 0)** ([full chart](#controller-cves))
-- runner image **(from 172 to 5)** ([full chart](#runner-cves))
+- runner image **(from 117 to 6)** ([full chart](#runner-cves))
 
 Let's make this easy, so we can remain at a human-manageable level of security items to track moving forward _without_ dedicating a ton of headcount towards smashing CVEs.
 
@@ -83,7 +83,7 @@ Set up the non-root user to run jobs as too.
 ```dockerfile
 # Arguments
 ARG TARGETPLATFORM
-ARG RUNNER_VERSION=2.317.0
+ARG RUNNER_VERSION=2.318.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.1
 ARG DOTNET_VERSION=7
 
@@ -342,23 +342,23 @@ There isn't currently a difference between the upstream image from GitHub and th
 
 | Image | (total) | Critical | High | Medium<br>and below |
 | --- | --- | --- | --- | --- |
-| ghcr.io/actions/gha-runner-scale-set-controller:0.9.3 | **0** | 0 | 0 | 0 |
+| ghcr.io/actions/gha-runner-scale-set-controller:0.9.3 | **6** | 0 | 6 | 0 |
 | cgr.dev/chainguard/gha-runner-scale-set-controller:latest | **0** | 0 | 0 | 0 |
 
 ### Runner CVEs
 
-It's once we start comparing the runner images that the count of CVEs to inventory and manage becomes problematic.  The spread here is from 5 to well over 500, with the majority of the CVEs being medium or below.  The `wolfi` image is the lowest, with only 5 CVEs to account for.
+It's once we start comparing the runner images that the count of CVEs to inventory and manage becomes problematic.  The spread here is from 6 to well over 500, with the majority of the CVEs being medium or below.  The `wolfi` image is the lowest, with only 6 CVEs to account for.
 
 | Image | (total) | Critical | High | Medium<br>and below |
 | --- | --- | --- | --- | --- |
-| ghcr.io/actions/actions-runner:2.317.0 | **172** | 8 | 5 | 159 |
-| ghcr.io/some-natalie/kubernoodles/wolfi:latest | **5** | 0 | 1 | 4 |
-| ghcr.io/some-natalie/kubernoodles/ubi8:latest | **548** | 4 | 4 | 540 |
-| ghcr.io/some-natalie/kubernoodles/ubi9:latest | **552** | 0 | 6 | 546 |
-| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **211** | 0 | 4 | 207 |
-| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-numbat:latest | **137** | 0 | 4 | 133 |
+| ghcr.io/actions/actions-runner:2.318.0 | **172** | 8 | 5 | 159 |
+| ghcr.io/some-natalie/kubernoodles/wolfi:latest | **6** | 0 | 3 | 3 |
+| ghcr.io/some-natalie/kubernoodles/ubi8:latest | **555** | 4 | 7 | 544 |
+| ghcr.io/some-natalie/kubernoodles/ubi9:latest | **553** | 0 | 7 | 546 |
+| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-jammy:latest | **213** | 0 | 13 | 200 |
+| ghcr.io/some-natalie/kubernoodles/rootless-ubuntu-numbat:latest | **147** | 0 | 13 | 134 |
 
-> The CVE counts are as of 3 July 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag the most recent build to date for Kubernoodles.  The CVE counts are from the Grype scan (`v0.79.2`) run on the images listed above.
+> The CVE counts are as of 28 July 2024 and will change as new vulnerabilities are discovered and patched, images rebuilt, etc.  The `latest` tag the most recent build to date for Kubernoodles.  The CVE counts are from the Grype scan (`v0.79.3`) run on the images listed above.
 {: .prompt-info}
 
 ## Why

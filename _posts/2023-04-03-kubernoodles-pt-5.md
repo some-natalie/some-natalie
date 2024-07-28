@@ -97,7 +97,7 @@ The first two arguments go into installing [actions/runner](https://github.com/a
 ```Dockerfile
 # Arguments
 ARG TARGETPLATFORM=linux/amd64
-ARG RUNNER_VERSION=2.317.0
+ARG RUNNER_VERSION=2.318.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.1
 ```
 

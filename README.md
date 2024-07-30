@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Securing Devcontainers (part 2) - multi-service applications with Docker Compose](https://some-natalie.dev/blog/multiservice-devcontainers):  Hardening a multi-container application in a devcontainer.
 1. [Securing Devcontainers (part 1) - a simple setup with Ruby and Jekyll](https://some-natalie.dev/blog/securing-devcontainers):  Securing our devcontainers is addictively easy.  Let's start at a straightforward Ruby and Jekyll workspace for static website development.
 1. [Static analysis scans of a container's filesystem](https://some-natalie.dev/blog/sast-on-a-container):  Probably not what you're really wanting to accomplish, but it'll check a box for you.
-1. [Why develop when you have to audit](https://some-natalie.dev/blog/git-audited):  From BSides Boulder 2024, let's layer on the business and people complexities on top of this deeply technical problem.  Despite all the hardships we've reviewed, building software and systems in highly regulated environments can still be rewarding, fast-paced, and fun!
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

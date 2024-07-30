@@ -1,8 +1,3 @@
-# Multi-service development container
-
-The finished app may look like this
-
-```dockerfile
 FROM cgr.dev/chainguard/python:latest-dev AS builder
 
 ENV LANG=C.UTF-8
@@ -33,4 +28,3 @@ ENV PATH="/app/venv/bin:$PATH"
 EXPOSE 5000
 
 ENTRYPOINT [ "python", "-m", "flask", "run" ]
-```

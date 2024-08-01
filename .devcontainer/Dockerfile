@@ -14,6 +14,7 @@ RUN apk update \
   && apk add --no-cache \
   posix-libc-utils \
   libstdc++ \
+  dumb-init \
   git \
   git-lfs \
   curl \

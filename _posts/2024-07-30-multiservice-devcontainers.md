@@ -38,6 +38,7 @@ RUN apk update \
   && apk add --no-cache \
   posix-libc-utils \
   libstdc++ \
+  dumb-init \
   git \
   git-lfs \
   curl \
@@ -114,3 +115,9 @@ Pinning dependencies happens in `requirements.txt` (for Python) or in the `docke
 
 > Next time, let's get even more in depth by adding Docker-in-Docker to our devcontainer. 🐳
 {: .prompt-info}
+
+---
+
+## Disclosure
+
+I work at Chainguard as a solutions engineer at the time of writing this.  All opinions are my own.

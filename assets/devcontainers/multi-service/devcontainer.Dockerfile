@@ -15,6 +15,7 @@ RUN apk update \
   && apk add --no-cache \
   posix-libc-utils \
   libstdc++ \
+  dumb-init \
   git \
   git-lfs \
   curl \
@@ -39,4 +40,4 @@ COPY ./python/app.py app.py
 
 EXPOSE 5000
 
-ENTRYPOINT [ "python", "-m", "flask", "run" ]
+ENTRYPOINT [ "dumb-init", "--", "python", "-m", "flask", "run" ]

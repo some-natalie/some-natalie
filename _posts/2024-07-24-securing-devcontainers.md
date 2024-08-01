@@ -51,6 +51,7 @@ ENV LANG C.UTF-8
 Now we'll add a few dependencies.
 
 - `posix-libc-utils` and `libstdc++` are needed for [VS Code's server](https://code.visualstudio.com/docs/remote/vscode-server), responsible for allowing connectivity between the container and VS Code.
+- `dumb-init` provides a lightweight init script to run as `PID 1`.  This allows you to have failed processes inside your container without the host beliving the entire container failed (and perhaps terminating your session's devcontainer).
 - `git` and `git-lfs` are for version control.  Not _strictly_ necessary for a devcontainer, but needed to use git to pull/commit/push code.
 - `curl` is for downloading files, which I need to do for making a static website.
 
@@ -65,6 +66,7 @@ RUN apk update \
   && apk add --no-cache \
   posix-libc-utils \
   libstdc++ \
+  dumb-init \
   git \
   git-lfs \
   curl \
@@ -143,6 +145,10 @@ There's no additional work to address the security objections beyond what's outl
 {: .prompt-info }
 
 ---
+
+## Disclosure
+
+I work at Chainguard as a solutions engineer at the time of writing this.  All opinions are my own.
 
 ## Footnotes
 

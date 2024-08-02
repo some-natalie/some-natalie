@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Securing Devcontainers (part 3) - Docker-in-Docker](https://some-natalie.dev/blog/devcontainer-docker-in-docker):  Let's make some dangerous choices safer inside a devcontainer.  Sometimes it just isn't possible to do things 'the right way'.  In hindsight it wasn't possible to avoid 🐳 Docker-in-Docker 🐳, was it?
 1. [Securing Devcontainers (part 2) - multi-service applications with Docker Compose](https://some-natalie.dev/blog/multiservice-devcontainers):  Hardening a multi-container application in a devcontainer.
 1. [Securing Devcontainers (part 1) - a simple setup with Ruby and Jekyll](https://some-natalie.dev/blog/securing-devcontainers):  Securing our devcontainers is addictively easy.  Let's start at a straightforward Ruby and Jekyll workspace for static website development.
-1. [Static analysis scans of a container's filesystem](https://some-natalie.dev/blog/sast-on-a-container):  Probably not what you're really wanting to accomplish, but it'll check a box for you.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

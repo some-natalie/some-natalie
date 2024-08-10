@@ -26,7 +26,7 @@ excerpt: "Quick weeknight meal with extra veggies!  Delicious _without_ the chic
 ### Sauce
 
 - 0.25 cup dry sherry
-- 0.25 tablespoons soy sauce
+- 0.25 cup soy sauce
 - 2 tablespoons water
 - 2 tablespoons sugar
 - 2 tablespoons cornstarch

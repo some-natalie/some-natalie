@@ -16,13 +16,13 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ### Software not built secure, will not run secure (panel)
 
-![panel-pic](/assets/graphics/2024-08-19-secure-software-panel/panel-pic.webp){: .w-25 .left .shadow .rounded-10}
+![panel-pic](/assets/graphics/2024-08-22-secure-software-panel/panel-pic.webp){: .w-25 .left .shadow .rounded-10}
 
 **How To Build Secure by Design Software** was a panel session hosted by [Lineaje](https://www.lineaje.com) at their [Software Supply Chain Security Summit](https://www.lineaje.com/the-software-supply-chain-security-summit-2024) as a companion event to Black Hat USA 2024.  The panel opened on the observation that about **70% of corporate software comes from open source software.**
 
 Given that so much of your software components aren't in your direct control, **how do you build software to be secure by design?**
 
-ℹ️ writeup coming soon!
+✏️ [A quick writeup](../blog/devops-always-security) of a few thoughts from that panel.
 
 ### Whodunnit?  A Git Repository Mystery
 

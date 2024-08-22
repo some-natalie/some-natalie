@@ -8,4 +8,4 @@ group :test do
   gem "html-proofer", "~> 5.0"
 end
 
-gem 'jekyll-target-blank', '~> 2.0', '>= 2.0.2'
+gem "jekyll-target-blank", "~> 2.0", ">= 2.0.2"

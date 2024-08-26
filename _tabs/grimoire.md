@@ -25,6 +25,7 @@ An always-changing collection of notes, links, tables, and other such goodies! ð
 - [Party-ify emoji generator](https://nathanielw.github.io/party-ify/) because sometimes you need a party
 - [sed.js](https://sed.js.org/) for testing `sed` commands online
 - [Tree generator](https://tree.nathanfriend.io/) for creating file tree diagrams
+- [1-on-1 questions](https://veryhappythings.github.io/101-questions/) - a random selection of questions from [101 questions](https://jasonevanish.com/2014/05/29/101-questions-to-ask-in-1-on-1s/) to get unstuck
 
 ---
 

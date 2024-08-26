@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [You need a grimoire.](https://some-natalie.dev/blog/you-need-a-grimoire):  It's a book of magic when nothing else will help you. 🧙🏻‍♀️
 1. [DevOps has always been about Secure by Design software](https://some-natalie.dev/blog/devops-always-security):  From the Software Supply Chain Security Summit at Black Hat 2024, a less-than-modest argument that devops has **always** been improving security.
 1. [Securing Devcontainers (part 3) - Docker-in-Docker](https://some-natalie.dev/blog/devcontainer-docker-in-docker):  Let's make some dangerous choices safer inside a devcontainer.  Sometimes it just isn't possible to do things 'the right way'.  In hindsight it wasn't possible to avoid 🐳 Docker-in-Docker 🐳, was it?
-1. [Securing Devcontainers (part 2) - multi-service applications with Docker Compose](https://some-natalie.dev/blog/multiservice-devcontainers):  Hardening a multi-container application in a devcontainer.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

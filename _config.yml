@@ -243,3 +243,12 @@ jekyll-archives:
 
 plugins:
   - jekyll-target-blank
+  - jekyll-external-links
+
+external_links:
+  selector: 'main a'
+  # ignored_selectors:
+  #   - a[href*=travis]
+  #   - a[href*=coverity]
+  #   - a[href*=codecov]
+  marker_html: "<span class='ico-ext'> <i class='fas fa-arrow-up-right-from-square fa-2xs'></i></span>"

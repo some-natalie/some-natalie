@@ -25,9 +25,8 @@ excerpt: "Tangy and smokey mustard BBQ beans"
 - Add apple cider vinegar and fat.  Simmer until the bean broth forms a liquid-y gravy around the beans.
 - Stir in meats and salt to taste.  Serve.
 
-## Notes 
+## Notes
 
 - Any meats work well here, but all are completely optional.  Pulled pork, smoked sausage, brisket ends, and shredded smoked chicken all work well.
 - Cook time depends on altitude, freshness of the beans, etc.  In general, saving the acids and fats to the end tends to cook best in my experience.
 - Half a pound of beans is about one rounded cup.
- 

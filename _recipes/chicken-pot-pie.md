@@ -46,7 +46,7 @@ This can be baked right away (working hot) or refrigerated or frozen for later (
 
 ## Directions
 
-### For the broth
+### For the base broth
 
 1. Place all ingredients for broth in a pot.  Bring to a boil.
 1. Skim off any foam.  Lower heat to a simmer.
@@ -56,10 +56,10 @@ This can be baked right away (working hot) or refrigerated or frozen for later (
 1. **If working hot**, set aside.
 1. **If working cold**, refrigerate.
 
-### For the pie filling
+### For the filling
 
 1. Put butter, celery, onions, and carrots into a pot.  Cook until onions are starting to brown.
-1. Add garlic, parsley, and thyme.  Cook until garlic is done, about 1 minutes. 
+1. Add garlic, parsley, and thyme.  Cook until garlic is done, about 1 minutes.
 1. Add flour and stir to coat evenly.
 1. **If working hot**, add the other ingredients and cook together until assembly.
 1. **If working cold**, chill this thoroughly, then add the other ingredients that are also cold.  Stir together well.
@@ -70,7 +70,7 @@ This can be baked right away (working hot) or refrigerated or frozen for later (
 1. Place pie crust over the top and cut to fit, more or less.
 1. **If freezing**, wrap in plastic wrap, then aluminum foil.  Label with contents and date.  Freeze upright for up to 6 months.  Remove plastic wrap before baking!!
 1. **If refrigerating**, wrap in aluminum foil.  Refrigerate upright for up to a couple days.
-1. **If baking immediately**, brush with egg and wrap with aluminum foil.  Bake at 350°F until the center reaches 165°F, which depends on loaf shape and oven. 
+1. **If baking immediately**, brush with egg and wrap with aluminum foil.  Bake at 350°F until the center reaches 165°F, which depends on loaf shape and oven.
 
 ## Notes
 

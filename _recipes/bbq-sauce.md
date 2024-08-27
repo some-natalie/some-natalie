@@ -58,4 +58,3 @@ No cook - just mix and let sit!
 - 1 tablespoon sugar
 - 1 teaspoon Dijon mustard
 - 0.25 teaspoon garlic powder
- 

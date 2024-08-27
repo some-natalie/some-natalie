@@ -52,4 +52,3 @@ excerpt: "Fresh or freeze until you're ready, with cream cheese frosting"
 - To freeze, place individual buns in a greased muffin pan.  After completely frozen, transfer to a plastic bag.  They keep for about a few months.  Don't freeze the frosting.
 - To bake from frozen, bake at 350°F for 25 minutes in a muffin tray.
 - Adapted from [King Arthur Baking](https://www.kingarthurbaking.com/recipes/cinna-buns-recipe) for what's working at about 6000' elevation.
- 

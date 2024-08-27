@@ -31,4 +31,3 @@ excerpt: "Make-ahead sheet pan semolina gnocchi"
 - Other tasty additions include some basil or parsley, thyme, or goat cheese instead of Parmesan and Asiago.
 - If you want to get fancy, it should set firmly enough to cut it with a cookie cutter before roasting.
 - The recipe halves well.  Use an 8x8" pan instead.
- 

@@ -37,10 +37,9 @@ excerpt: "Fast yeasty dinner rolls in a dutch oven."
 1. Bake covered at 400°F for 15 minutes, then uncovered for another 10-ish minutes.  Rolls should be golden on top, but not browned.
 1. Put the pot on a cooling rack.  Once mostly cool, top with melted butter and anything else you'd like.
 
-## Notes 
+## Notes
 
 - Serve the rolls warm or at room temperature.
 - Store the rolls, well wrapped in plastic, for several days at room temperature; freeze for longer storage.
 - For a 2-3 qt dutch oven, cut the recipe to two-thirds.
 - For a larger party, use a 9-10 quart dutch oven and add half again the original quantities.
- 

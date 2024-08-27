@@ -21,10 +21,9 @@ excerpt: "Serve (or preserve) fresh corn as a sweet or savory side. 🌽"
 
 1. Melt fat in the pan, stir in flour and cook for a few minutes to make a roux in a skillet.  Sweat the onion or shallots, if using.
 1. Add corn, salt, pepper, honey, milk, and water/broth. Simmer 20 minutes on medium heat, stirring from time to time.
-1. Serve! 
+1. Serve!
 
 ## Notes
 
 - Can be frozen once cooled off.  Reheat in skillet on low heat.
 - Can use frozen or canned corn if needed.  Watch/adjust the salt content accordingly.
- 

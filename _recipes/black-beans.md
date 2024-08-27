@@ -57,4 +57,3 @@ Cook the bacon, set aside.  Cook veggies until edges are browning and most of th
 - 1 red bell pepper, roasted, peeled, and chopped
 - 1 can of beer (something light and hoppy)
 - salt, to taste
- 

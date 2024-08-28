@@ -9,4 +9,4 @@ group :test do
 end
 
 gem "jekyll-target-blank", "~> 2.0", ">= 2.0.2"
-gem "jekyll-external-links"
+gem "jekyll-external-links", "~> 1.0", ">= 1.0.2"

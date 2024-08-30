@@ -251,4 +251,4 @@ external_links:
   #   - a[href*=travis]
   #   - a[href*=coverity]
   #   - a[href*=codecov]
-  marker_html: "<span class='ico-ext'><sup> <i class='fas fa-arrow-up-right-from-square fa-2xs' style='font-size: 0.2 em;'></i></sup></span>"
+  marker_html: "<span class='ico-ext'><sup> <i class='fas fa-arrow-up-right-from-square fa-2xs' style='font-size: 0.1 em;'></i></sup></span>"

@@ -16,12 +16,12 @@ image: /assets/graphics/memes/ceiling-cat-is-watching-you.jpg
 
 ```mermaid
 flowchart LR
-    A(fa:fa-user\ndeveloper)
+    A(fa:fa-user<br>developer)
     subgraph what
-    B(fa:fa-laptop-code\nfiles)
+    B(fa:fa-laptop-code<br>files)
     end
-    C(fab:fa-git-alt\ngit repo\nlocal)
-    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\ngit repo\nremote)
+    C(fab:fa-git-alt<br>git repo<br>local)
+    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>git repo<br>remote)
     A --> B
     B --> C
     C --> D

@@ -70,7 +70,7 @@ The next thing we'll keep coming back to is this simplified pipeline of code mov
 
 ```mermaid
 flowchart LR
-    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
+    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub<br>code/issues/etc)
     B --> C(fa:fa-server Build)
     C --> D(fa:fa-server Deploy)
     D --> E(fa:fa-user Environment)
@@ -131,7 +131,7 @@ For the most part, Actions run and operate in the part of the pipeline highlight
 
 ```mermaid
 flowchart LR
-    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
+    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub<br>code/issues/etc)
     B --> C(fa:fa-server Build)
     subgraph Build and deploy your code
     C --> D(fa:fa-server Deploy)
@@ -328,14 +328,14 @@ For the folks that feel the need to bring external dependencies in, that's a com
 
 ```mermaid
 flowchart LR
-    Z(before\ntime) --> A
+    Z(before<br>time) --> A
     subgraph Where secret control can be a problem
-    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
+    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub<br>code/issues/etc)
     B --> C(fa:fa-server Build)
     C --> D(fa:fa-server Deploy)
     D --> E(fa:fa-user Environment)
     end
-    E --> F(heat death\nof universe)
+    E --> F(heat death<br>of universe)
 ```
 
 This is a problem everywhere!
@@ -485,15 +485,15 @@ Thing is, if it takes ~~millenia~~ months to review and approve something, the c
 
 ```mermaid
 flowchart TB
-    A(fab:fa-github User requests a\nmarketplace GitHub Action) --> B[Ticket Portal]
+    A(fab:fa-github User requests a<br>marketplace GitHub Action) --> B[Ticket Portal]
     B --> C(fa:fa-scale-balanced legal review)
-    B --> D(fa:fa-shield-halved information\nsecurity)
-    B --> E(fa:fa-server infrastructure\noperations)
+    B --> D(fa:fa-shield-halved information<br>security)
+    B --> E(fa:fa-server infrastructure<br>operations)
     E --> F{allow or deny?}
     D --> F
     C --> F
-    F -->|allowed| G[add to allowlist\nimport to GHES]
-    F -->|denied| H[user communication\nexplaining decision]
+    F -->|allowed| G[add to allowlist<br>import to GHES]
+    F -->|denied| H[user communication<br>explaining decision]
 ```
 
 - Infrastructure - Can we run this? Do we have the dependencies, etc.

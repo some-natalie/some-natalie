@@ -44,9 +44,9 @@ This is the process we're going to dive into together. 🛟
 
 ```mermaid
 flowchart LR
-    A(fa:fa-user\ndeveloper) --> B(fa:fa-laptop-code\nfiles)
-    B --> C(fab:fa-git-alt\ngit repository\nlocal)
-    C --> D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\ngit repository\nremote)
+    A(fa:fa-user<br>developer) --> B(fa:fa-laptop-code<br>files)
+    B --> C(fab:fa-git-alt<br>git repository<br>local)
+    C --> D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>git repository<br>remote)
 ```
 
 ## Intro

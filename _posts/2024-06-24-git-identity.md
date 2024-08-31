@@ -19,12 +19,12 @@ Identity in git and in your central remote are not connected to each other.  **R
 ```mermaid
 flowchart LR
     subgraph who
-    A(fa:fa-user\ndeveloper)
+    A(fa:fa-user<br>developer)
     end
-    A --> B(fa:fa-laptop-code\nfiles)
-    B --> C(fab:fa-git-alt\ngit repo\nlocal)
+    A --> B(fa:fa-laptop-code<br>files)
+    B --> C(fab:fa-git-alt<br>git repo<br>local)
     subgraph also who
-    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\ngit repo\nremote)
+    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>git repo<br>remote)
     end
     C --> D
 ```
@@ -105,9 +105,9 @@ But as shown in the example above, it doesn't seem to matter as much as would re
 
 ```mermaid
 flowchart LR
-    A(fa:fa-user fa:fa-laptop-code\nendpoint user identity) <-->|email address| B(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\nremote user identity)
+    A(fa:fa-user fa:fa-laptop-code<br>endpoint user identity) <-->|email address| B(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>remote user identity)
     subgraph a well-respected boundary with centralized identity
-    B <--> |SCIM\nor\nSAML| C(fas:fa-address-book\nidentity provider)
+    B <--> |SCIM<br>or<br>SAML| C(fas:fa-address-book<br>identity provider)
     end
 ```
 
@@ -153,10 +153,10 @@ Going back to our diagram, adding a method to tie code changes made on an endpoi
 
 ```mermaid
 flowchart LR
-    A(fa:fa-user fa:fa-laptop-code\nendpoint user identity) <-->|email address| B(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\nremote user identity)
+    A(fa:fa-user fa:fa-laptop-code<br>endpoint user identity) <-->|email address| B(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>remote user identity)
     subgraph a well-respected boundary with centralized identity and cryptography
-    B <--> |SCIM\nor\nSAML| C(fas:fa-address-book\nidentity provider)
-    B <--> |GPG or SSH keys\nfor signature verification| D(fas:fa-key\nkey server)
+    B <--> |SCIM<br>or<br>SAML| C(fas:fa-address-book<br>identity provider)
+    B <--> |GPG or SSH keys<br>for signature verification| D(fas:fa-key<br>key server)
     end
     A <--> |GPG or SSH keys issued| D
 ```

@@ -54,7 +54,7 @@ This should be reasonably reusable for other JS libraries too, such as [MathJax]
 
 ```mermaid
 flowchart LR
-    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
+    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub<br>code/issues/etc)
     B --> C(fa:fa-server Build)
     C --> D(fa:fa-server Deploy)
     D --> E(fa:fa-user Environment)
@@ -65,7 +65,7 @@ And here's how it was made in the markdown that defines this post.  There's new 
 ```html
 <div class="mermaid">
 flowchart LR
-    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub\ncode/issues/etc)
+    A(fa:fa-laptop-code Developer) --> B(fab:fa-github GitHub<br>code/issues/etc)
     B --> C(fa:fa-server Build)
     C --> D(fa:fa-server Deploy)
     D --> E(fa:fa-user Environment)

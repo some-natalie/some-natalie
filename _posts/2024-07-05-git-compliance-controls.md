@@ -16,12 +16,12 @@ image: /assets/graphics/2024-06-14-whodunnit-git-repo/controls.webp
 
 ```mermaid
 flowchart LR
-    A(fa:fa-user\ndeveloper)
+    A(fa:fa-user<br>developer)
     subgraph where
-    B(fa:fa-laptop-code\nfiles)
-    C(fab:fa-git-alt\ngit repo\nlocal)
+    B(fa:fa-laptop-code<br>files)
+    C(fab:fa-git-alt<br>git repo<br>local)
     end
-    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\ngit repo\nremote)
+    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>git repo<br>remote)
     A --> B
     B --> C
     C --> D
@@ -91,20 +91,20 @@ I see this come up most frequently on any configuration or infrastructure as cod
 
 ```mermaid
 flowchart LR
-    A(fa:fa-user\ndeveloper\nworking files)
-    B(fa:fa-laptop-code\nstaged files)
-    C(fab:fa-git-alt\ngit repo\nlocal)
+    A(fa:fa-user<br>developer<br>working files)
+    B(fa:fa-laptop-code<br>staged files)
+    C(fab:fa-git-alt<br>git repo<br>local)
     subgraph server hooks
-    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket\ngit repo\nremote)
+    D(fab:fa-github fab:fa-gitlab fab:fa-bitbucket<br>git repo<br>remote)
     end
     subgraph client-side hooks
     B --> |smudge| A
     A --> |clean| B
-    B --> |pre-commit\nhooks| C
+    B --> |pre-commit<br>hooks| C
     end
-    C --> |pre-receive\nhooks| D
+    C --> |pre-receive<br>hooks| D
     subgraph other controls
-    D <--> E(fas:fa-server\nbuild or deploy\ntargets)
+    D <--> E(fas:fa-server<br>build or deploy<br>targets)
     end
 ```
 

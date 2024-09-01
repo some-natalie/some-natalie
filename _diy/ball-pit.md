@@ -20,7 +20,7 @@ I take meetings while sitting inside it, even if the kids aren't home ... 😇
   - 2 ft lengths (x20) - precut saves time, feel free to cut it yourself
 - 1 inch 90 degree elbow PVC angle (x2)
 - 1 inch tee-joint PVC (x12)
-- Foam pipe insulation - 6 ft lengths (x4)
+- Foam pipe insulation - 6 ft lengths (x4) (optional)
 - 8-inch cable ties (x1000)
 
 #### Fabric store
@@ -36,7 +36,7 @@ I take meetings while sitting inside it, even if the kids aren't home ... 😇
 
 - Wire cutters make quick work of the little bits of zip tie at the end.
 - Something to cut the PVC yourself.  A ratcheting PVC pipe cutter is literally made for exactly this task, but I hesitate to recommend buying a tool for a single project.  A mitre box and handsaw works well.  You may need to sand the edges around the cut a little bit to smooth it some.  I used big branch loppers and it worked fine.
-- PVC primer and cement (optional) - I chose not to cement it together and instead it's entirely dry fit.  More on this in the notes.
+- PVC primer and cement (optional) - more on this in the notes.
 
 ### PVC cut list
 
@@ -62,8 +62,9 @@ I take meetings while sitting inside it, even if the kids aren't home ... 😇
 - The balls are the most expensive part.  Do not get balls that have little holes in them to get gross.  Get ball pit balls because they stay cleaner and can go through the washing machine.
 - The 3-way corner PVC thing is not used for plumbing or conduit.  It's only for folks making furniture and other widgets out of PVC, so it likely isn't at the hardware store.
 - Each fitting adds an inch or so to every dimension it's on.  You may choose to take an inch or two off of the corners around the entrance so it's more square.  Kids don't seem to mind it either way.
-- It's been in place for about 3 years now without any problems assembled dry-fit.  I can move it to vacuum underneath it.  Sometimes I need to pop a piece back into an elbow by the entrance and that's it.
-- I will be moving it to another part of the house in a few months.  When I do, I'm going to not use zip ties and instead use a yarn needle and some spare yarn to hold the mesh fabric onto the frame.  Some of the zip ties have worked loose and needed to be replaced.
+- It had been in place for about 3 years without any problems assembled dry-fit.  I can move it to vacuum underneath it.  Sometimes I need to pop a piece back into an elbow by the entrance and that's it.  As the kids got bigger (and rougher), I did eventually PVC cement it together and left two joints along the 4' sections dry-fit.  This means it'll come apart in 2 pieces if/when we decide to take it apart.
+- I will be moving it to another part of the house in a few months.  When I do, I'm going to not use zip ties and instead use a yarn needle and some spare yarn to hold the mesh fabric onto the frame.  Some of the zip ties have worked loose and needed to be replaced.  The cotton yarn works wonderfully and doesn't scratch anyone.
+- On reassembly, I left out the pipe insulation.  It didn't seem to do anything for anyone apart from get a little sticky over the years.
 - Stuffed animals and those big floor pillows for reading make relaxing additions. 🧸
 - If it's on top of hardwood flooring, use some foam mats underneath to protect it from scratches.
 

@@ -252,4 +252,4 @@ external_links:
     - a[href*="news.ycombinator.com/submitlink"]
     - a[href*="reddit.com/submit"]
     - a[href*="threads.net/intent"]
-  marker_html: "<span class='ico-ext'><sup> <i class='fas fa-arrow-up-right-from-square fa-2xs' style='font-size: 0.05 em;'></i></sup></span>"
+  marker_html: "<span class='ico-ext'><sup> <i class='fas fa-arrow-up-right-from-square fa-2xs'></i></sup></span>"

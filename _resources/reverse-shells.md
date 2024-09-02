@@ -5,6 +5,12 @@ excerpt: "a little list of reverse shells"
 
 (a work in progress list of some handy reverse shells)
 
+ℹ️ Some nifty links
+
+- [generator](https://www.revshells.com/)
+- [cheatsheet](https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/)
+- another [repo list](https://github.com/MrPineMan/Awesome-Reverse-Shell)
+
 ## Opening
 
 ### PHP

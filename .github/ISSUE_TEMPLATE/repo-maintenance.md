@@ -24,6 +24,8 @@ title: "Repo maintenance checklist"
   - [ ] tetragon
   - [ ] actions-runner-controller
   - [ ] kubernetes
+- [ ] cron job still running to build images
+- [ ] cron job still running to scan and update the README.md file
 
 ### fedora-acs-override
 
@@ -58,7 +60,6 @@ title: "Repo maintenance checklist"
 
 [project link](https://github.com/some-natalie/gitlog-to-csv)
 
-- [ ] look over open issues
 - [ ] merge dependabot PRs
 
 ### Jekyll-in-a-can
@@ -66,3 +67,4 @@ title: "Repo maintenance checklist"
 [project link](https://github.com/some-natalie/jekyll-in-a-can)
 
 - [ ] merge dependabot PRs
+- [ ] cron job still running to build images

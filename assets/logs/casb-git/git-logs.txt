@@ -1,0 +1,33 @@
+// failure #1
+
+$ git clone https://github.com/docker/awesome-compose.git
+Cloning into 'awesome-compose'...
+remote: Enumerating objects: 2733, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 2733 (delta 0), reused 1 (delta 0), pack-reused 2729 (from 1)
+Receiving objects: 100% (2733/2733), 7.42 MiB | 11.17 MiB/s, done.
+error: RPC failed; curl 56 GnuTLS recv error (-110): The TLS connection was non-properly terminated
+Resolving deltas: 100% (1317/1317), done.
+
+
+// failure #2
+
+$ git clone https://github.com/docker/awesome-compose.git
+Cloning into 'awesome-compose'...
+remote: Enumerating objects: 2733, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+error: RPC failed; curl 56 Recv failure: Connection was reset
+error: 2269 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
+
+
+// SSH failure
+
+$ git clone git@github.com:docker/awesome-compose.git
+Cloning into 'awesome-compose'...
+ssh: connect to host github.com port 22: Connection timed out
+fatal: Could not read from remote repository.

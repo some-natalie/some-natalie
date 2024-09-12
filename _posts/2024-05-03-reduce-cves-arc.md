@@ -47,7 +47,7 @@ The previous iterations of runners we'd built (`ubi8`, `ubi9`, and `ubuntu-jammy
 ```shell-session
 # apk update
 fetch https://packages.wolfi.dev/os/aarch64/APKINDEX.tar.gz
- [https://packages.wolfi.dev/os]
+  [https://packages.wolfi.dev/os]
 OK: 53893 distinct packages available
 ```
 
@@ -106,26 +106,27 @@ The list below is a reasonably minimal set of APKs to add to the image to do bas
 ```dockerfile
 # Install software
 RUN apk update \
-    && apk add --no-cache \
-    aspnet-${DOTNET_VERSION}-runtime \
-    bash \
-    build-base \
-    ca-certificates \
-    curl \
-    docker-cli \
-    git \
-    gh \
-    icu \
-    jq \
-    krb5-libs \
-    lttng-ust \
-    nodejs \
-    openssl \
-    openssl-dev \
-    wget \
-    unzip \
-    yaml-dev \
-    zlib
+  && apk add --no-cache \
+  aspnet-${DOTNET_VERSION}-runtime \
+  bash \
+  build-base \
+  ca-certificates \
+  curl \
+  docker-cli \
+  dumb-init \
+  git \
+  gh \
+  icu \
+  jq \
+  krb5-libs \
+  lttng-ust \
+  nodejs \
+  openssl \
+  openssl-dev \
+  wget \
+  unzip \
+  yaml-dev \
+  zlib
 ```
 {: file='~/images/wolfi.Dockerfile'}
 
@@ -138,7 +139,7 @@ RUN export PATH=$HOME/.local/bin:$PATH
 
 # Make and set the working directory
 RUN mkdir -p /home/runner \
-    && chown -R runner:runner /home/runner
+  && chown -R runner:runner /home/runner
 
 WORKDIR /home/runner
 
@@ -153,10 +154,10 @@ Install and set up the runner agent.  In this case, we're pulling it from GitHub
 ```dockerfile
 # Runner download supports amd64 and x64
 RUN export ARCH=$(echo ${TARGETPLATFORM} | cut -d / -f2) \
-    && if [ "$ARCH" = "amd64" ]; then export ARCH=x64 ; fi \
-    && curl -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz \
-    && tar xzf ./runner.tar.gz \
-    && rm runner.tar.gz
+  && if [ "$ARCH" = "amd64" ]; then export ARCH=x64 ; fi \
+  && curl -L -o runner.tar.gz https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz \
+  && tar xzf ./runner.tar.gz \
+  && rm runner.tar.gz
 ```
 {: file='~/images/wolfi.Dockerfile'}
 
@@ -180,8 +181,8 @@ Now place the container hooks where they need to be.  These are the scripts used
 ```dockerfile
 # Install container hooks
 RUN curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-container-hooks/releases/download/v${RUNNER_CONTAINER_HOOKS_VERSION}/actions-runner-hooks-k8s-${RUNNER_CONTAINER_HOOKS_VERSION}.zip \
-    && unzip ./runner-container-hooks.zip -d ./k8s \
-    && rm runner-container-hooks.zip
+  && unzip ./runner-container-hooks.zip -d ./k8s \
+  && rm runner-container-hooks.zip
 ```
 {: file='~/images/wolfi.Dockerfile'}
 
@@ -213,11 +214,11 @@ Fortunately, it's super easy to swap out the controller because it's already bui
 ```shell
 NAMESPACE="arc-systems"
 helm install arc \
-    --namespace "${NAMESPACE}" \
-    --create-namespace \
-    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller \
-    --set image.repository=cgr.dev/chainguard/gha-runner-scale-set-controller \
-    --set image.tag=latest
+  --namespace "${NAMESPACE}" \
+  --create-namespace \
+  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller \
+  --set image.repository=cgr.dev/chainguard/gha-runner-scale-set-controller \
+  --set image.tag=latest
 ```
 
 ## A quick detour into Kubernetes mode
@@ -259,7 +260,7 @@ Now that we've got the image and the controller set up, let's deploy the runner.
 ```yaml
 githubConfigUrl: "https://github.com/some-natalie/kubernoodles"
 
-githubConfigSecret: 
+githubConfigSecret:
   ### GitHub Apps configuration (for org or repo runners)
   github_app_id: ""
   github_app_installation_id: ""
@@ -297,7 +298,7 @@ template:
             mountPath: /home/runner/_work
 
 containerMode:
-  type: "kubernetes" 
+  type: "kubernetes"
   kubernetesModeWorkVolumeClaim:
     accessModes: ["ReadWriteOnce"]
     storageClassName: "local-path"  # use your real storage class here
@@ -313,10 +314,12 @@ And it's every bit as simple to deploy as the other runners!
 
 ```shell
 helm install wolfi \
-    --namespace "ghec-runners" \
-    -f local-wolfi.yml \
-    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.9.3
+  --namespace "ghec-runners" \
+  -f local-wolfi.yml \
+  oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
+  --version 0.9.3 \
+  --set image.repository=cgr.dev/chainguard/gha-runner-scale-set-controller \
+  --set image.tag=latest
 ```
 
 Make sure everything is pointing to the latest version, as the free Chainguard images are only `latest`.  A version mismatch between the controller and the listener can cause issues.  But assuming everything matches up, the new scale set should be idle in the self-hosted runner group.

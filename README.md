@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [How long do cows live?](https://some-natalie.dev/blog/cows-classical-lit-comms):  How long do cows live?  The best communication lesson I've learned, told as an ancient Greek tragedy. 🐄 🎭
 1. [Corporate proxies, meddler-in-the-middle attacks, and git](https://some-natalie.dev/blog/casb-mitm-git):  Malicious wireless access point or corporate security proxy?  Git can't tell the difference.
 1. [You need a grimoire.](https://some-natalie.dev/blog/you-need-a-grimoire):  It's a book of magic when nothing else will help you. 🧙🏻‍♀️
-1. [DevOps has always been about Secure by Design software](https://some-natalie.dev/blog/devops-always-security):  From the Software Supply Chain Security Summit at Black Hat 2024, a less-than-modest argument that devops has **always** been improving security.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

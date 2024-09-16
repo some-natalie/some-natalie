@@ -31,7 +31,7 @@ You can find me in our work Slack sharing all sorts of neat things you can do wi
 - I'm getting into the [Flipper Zero](https://flipperzero.one/) lately - it's so handy _and_ mischievous! ([some fun uses](../blog/flipper-at-home/))
 - Video games in a Windows VM on my Fedora desktop with libvirt, KVM, and a custom Linux kernel to pass hardware to it.  It's got about 5% or so performance drop (just looking at frame rates) over a native install.  You should check it out - [code](https://github.com/some-natalie/fedora-acs-override) and [write-up](../blog/fedora-acs-override/) on how it works.
 
-I have an awesome life outside of tech, so while I have a few projects that I enjoy (👆), nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
+I have an awesome life outside of tech, so while I have a few projects that I enjoy, nothing above is close to where I spend most of my time / energy.  If you need anything of mine above fixed, please feel free to fork it and send me a pull request! ❤️
 
 ### 🌸 Heads up!
 

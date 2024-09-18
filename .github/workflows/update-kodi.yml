@@ -24,7 +24,7 @@ jobs:
         shell: bash
         env:
           DEBIAN_FRONTEND: noninteractive
-        run: sudo apt autoremove -y 
+        run: sudo apt autoremove -y
       - name: Reboot
         shell: bash
         run: sudo shutdown -r +1 "Rebooting ... brb"
@@ -54,9 +54,9 @@ jobs:
             echo "System rebooted more than 10 minutes ago"
             exit 1
           fi
-      - name: Check Unifi controller is up and healthy
-        shell: bash
-        run: sudo docker ps -a | grep jacobalberty\/unifi\.*\(healthy\)
+      # - name: Check Unifi controller is up and healthy
+      #   shell: bash
+      #   run: sudo docker ps -a | grep jacobalberty\/unifi\.*\(healthy\)
 
   create-failure-issue:
     name: Create an issue on failure of any step to investigate

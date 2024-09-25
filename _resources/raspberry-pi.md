@@ -13,5 +13,13 @@ function pi-temp {
   echo "CPU Temp: $(cat)°F"
 }
 ```
+{: file='~/.bashrc'}
+
+Sometimes older DVI or VGA monitors don't like HDMI adapters.  They'll show "No signal" or go dormant when the device is online and works on newer monitors.  Editing `/boot/config.txt` to force HDMI hot-plug mode can sometimes help.  Must reboot to apply the setting.
+
+```conf
+hdmi_force_hotplug=1
+```
+{: file='/boot/config.txt'}
 
 🕰️ Check NTP first for all network weirdness.  The lack of a [real-time clock](https://en.wikipedia.org/wiki/Real-time_clock) means that if NTP ever fails (or there's been a power outage), the time drift can knock DNSSEC or other time-dependent services into failure pretty fast.

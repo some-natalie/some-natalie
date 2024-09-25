@@ -4,7 +4,7 @@ date: 2024-02-19
 excerpt: "A summary of publicly-available GitHub things I've done that you might be looking for on my website."
 tags:
   - github-enterprise
-mermaid: true 
+mermaid: true
 ---
 
 > This post links to all the publicly-accessible GitHub content I've written, coded, or talked to.[^found]  **I've left GitHub.**  As this website is mostly things _I'm_ learning and making repeatable (e.g., things built/learned from common customer conversations), **expect less GitHub-focused content moving forward.**[^feels]  I'd like to un-pin a lot of things here to make room for ✨ **new adventures** ✨ without leaving a huge chunk of traffic to this site reliant on searching or bookmarks.
@@ -80,11 +80,11 @@ graph RL
     C <-->|HTTPS, SSH| D(endpoints on VPN)
     C <-->|HTTPS, SSH| E(private cloud)
     C <-->|HTTPS, SSH| F(on-prem datacenter)
-    Z <-->|https://ghes-fqdn/org-team-A| Y(CIDR block<br>for team A)
-    Z <-->|https://ghes-fqdn/org-team-B| X(CIDR block<br>for team B)
-    Z <-->|https://ghes-fqdn/org-team-C| W(CIDR block of external integration<br>needed by team C)
+    Z <-->|HTTPS only<br>ghes-fqdn/org-team-A| Y(CIDR block<br>for team A)
+    Z <-->|HTTPS only<br>ghes-fqdn/org-team-B| X(CIDR block<br>for team B)
+    Z <-->|HTTPS only<br>ghes-fqdn/org-team-C| W(CIDR block of external integration<br>needed by team C)
     Z --> |HTTPS| I(fas:fa-cloud GitHub Connect<br>internet)
-```  
+```
 
 ---
 

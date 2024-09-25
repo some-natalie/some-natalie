@@ -29,3 +29,4 @@ excerpt: "Fast whole-grain drop biscuits"
 - Use cold fat! This is important to ensure that you end up with a nice, flaky biscuit.
 - Do not over-knead. The heat of your hands will cause the fat to warm up - this makes the biscuits tough.
 - Do not over-bake - they get kind of gummy.
+- Optional mix ins include fresh or dried herbs, dried fruit, chopped nuts, or freshly grated cheese.  Get creative!

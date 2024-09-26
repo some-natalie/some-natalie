@@ -38,6 +38,30 @@ function cgr-find {
 }
 ```
 
+### Export a list of images to a text file
+
+```shell
+function cgr-list {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: chainguard-list [outputfile]"
+    echo "Export a list of images to a text file."
+    return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Output file required."
+    return
+  fi
+  # set org name and export the list
+  local privateorg="chainguard-private" # edit to your private registry
+  chainctl img repos list --parent $privateorg -o json |\
+    jq -r '.items[].name' |\
+    sort > $1
+  # get length of images
+  local count=$(wc -l $1 | awk '{print $1}')
+  echo "List of $count images in $privateorg written to $1."
+}
+```
+
 ### Get the Chainguard group ID of a given domain
 
 ```shell

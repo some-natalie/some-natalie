@@ -51,14 +51,18 @@ function cgr-list {
     echo "Output file required."
     return
   fi
+  # get the current date
+  local day=$(date +%Y-%m-%d)
+  # split filename and extension with awk, keep the filename
+  local filename=$(echo $1 | awk -F. '{print $1}')
   # set org name and export the list
   local privateorg="chainguard-private" # edit to your private registry
   chainctl img repos list --parent $privateorg -o json |\
     jq -r '.items[].name' |\
-    sort > $1
+    sort > $filename-$day.txt
   # get length of images
-  local count=$(wc -l $1 | awk '{print $1}')
-  echo "List of $count images in $privateorg written to $1."
+  local count=$(wc -l $filename-$day.txt | awk '{print $1}')
+  echo "List of $count images in $privateorg written to $filename-$day.txt 🎉"
 }
 ```
 

@@ -3,6 +3,17 @@ title: "MacOS commands"
 excerpt: "functions and more for MacOS"
 ---
 
+## Use fingerprint for sudo
+
+May need to uncomment a line, but this should be all that's needed.
+
+```shell
+# sudo_local: local config file which survives system update and is included for sudo
+# uncomment following line to enable Touch ID for sudo
+auth       sufficient     pam_tid.so
+```
+{: file='/etc/pam.d/sudo_local'}
+
 ## Update it all
 
 ```shell
@@ -36,11 +47,11 @@ function mac-updates {
   # Nmap scripts - https://nmap.org
   echo "Updating Nmap scripts ..."
   nmap --script-updatedb
-  
+
   # Update go modules
   echo "Updating public go modules ..."
   go install github.com/chainguard-dev/bincapz@latest
-  echo "Updating private go modules ..." 
+  echo "Updating private go modules ..."
   GOPRIVATE=github.com/ORG/REPO go install github.com/ORG/REPO@TAG
 
   # Update Python packages

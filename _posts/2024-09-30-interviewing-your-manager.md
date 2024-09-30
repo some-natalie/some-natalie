@@ -65,4 +65,4 @@ I really like my job.  I get to spend perhaps an hour with someone before they'l
 [^none]: FWIW, none of the folks expressing this sort of opinion were hired for either role.  I'm grateful that that feeling towards an oft-maligned vertical was expressed early and wish those folks all the best.  💌
 [^why]: Huge pet peeve of mine - "management" and "leadership" are not synonymous.  I've had decent managers that had no "leadership" about them and great colleagues that had no formal authority yet wielded influence beyond anyone with folks under them on an org chart.  Leadership isn't defined by your spot on the org chart and management is a job with a façade of authority to it. Sometimes the two overlap, sometimes they don’t. 😊
 
-🤖 I've had a ton of fun messing with the new AI image tools.  This one is a "make this a watercolor" of a photo I'd taken of [cornflowers]() in the garden a few years back.
+🤖 I've had a ton of fun messing with the new AI image tools.  This one is a "make this a watercolor" of a photo I'd taken of [cornflowers](https://en.wikipedia.org/wiki/Centaurea_cyanus) in the garden a few years back.

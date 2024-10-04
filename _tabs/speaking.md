@@ -4,7 +4,7 @@ order: 7
 icon: fas fa-fw fa-microphone
 ---
 
-Natalie is a principal solutions engineer at Chainguard serving the public sector market. She spent years designing, building, and leading complex systems in regulated environments at a major systems integrator, but has also taken her career in many other directions - including detours into project management, systems engineering, and teaching.  
+Natalie is a principal solutions engineer at Chainguard serving the public sector market. She spent years designing, building, and leading complex systems in regulated environments at a major systems integrator, but has also taken her career in many other directions - including detours into project management, systems engineering, and teaching.
 
 She's passionate about diversity in technology and empowering engineers to build better.
 
@@ -30,7 +30,7 @@ Given that so much of your software components aren't in your direct control, **
 
 [BSides Boulder](https://bsidesboulder.org) (14 June) - With all the recent focus on software supply chain security, let's look at the very far left of this process - **how does git know who did what, when, where, and why?** ([Abstract](https://sessionize.com/s/some-natalie/whodunnit-git-repository-mysteries/93884) on Sessionize)
 
-It seems straightforward to assume that you have all of this information in a git repository, but that's probably not the case.  In this talk, we'll walk through how to determine the answers to each of these questions, edge cases and technical gotchas to watch out for, and why each are important to your company's security posture.
+It seems straightforward to assume that you have all of this information in a git repository, but that's probably not the case.  In this talk, we'll walk through how to determine the answers to each of these questions, edge cases and technical gotchas to watch out for, and why each are important to your company's security posture. ([YouTube](https://www.youtube.com/watch?v=A2tQhigHUNE) recording)
 
 **Slides with expanded write-up** ([as presented](https://github.com/some-natalie/some-natalie/raw/main/assets/slides/2024-06-14_Bsides-Boulder-Git-Audit-Whodunnit.pdf))
 

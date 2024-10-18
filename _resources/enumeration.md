@@ -17,10 +17,12 @@ excerpt: "noisy ways to learn stuff - enumeration, mapping, dynamic analysis, et
 First, get some wordlists.  I've been lazy and using the `wordlists` package in Kali.
 
 ```shell
-# basic directory enumeration, specifying port and protocol, with a big wordlist, and only return pdf and txt files
 gobuster dir \
+  # specify the target and port
   -u http://domain-name-here:8000 \
+  # with a big wordlist
   -w /usr/share/wordlists/dirb/big.txt \
+  # but only return pdf and txt files
   -x pdf,txt
 ```
 
@@ -36,6 +38,20 @@ docker run --rm -v $(pwd):/zap/wrk/:rw \
   -t http://TARGET-NAME:PORT \
   -g gen.conf \
   -r testreport.html
+```
+
+---
+
+## smb
+
+Once you see tcp/445 open, take a look around.
+
+```shell
+# list shares as guest
+netexec smb [hostname/ip] -u guest -p '' --shares
+
+# connect to a share as guest
+smbclient //hostname/sharename -U guest%
 ```
 
 ---

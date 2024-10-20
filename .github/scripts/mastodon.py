@@ -44,13 +44,12 @@ def post_to_mastodon(title, content, tags, visibility):
     # add hashes to each tag
     tags = " ".join(["#" + tag for tag in tags])
     # set data
-    disclaimer = "🤖 Cross-posted from https://some-natalie.dev/TIL#{} - some formatting may get lost between platforms.".format(title.lower().replace(" ", "-"))
+    disclaimer = "🤖 Cross-posted from https://some-natalie.dev/til/#{} - some formatting may get lost between platforms.".format(title.lower().replace(" ", "-"))
     data = {
         "status": content + "\n\n" + tags + "\n\n" + disclaimer,
         "visibility": visibility,
     }
     # make the request
-    print(data)
     response = requests.post(
         "https://" + os.environ["MASTODON_URL"] + "/api/v1/statuses", headers=headers, data=data
     )

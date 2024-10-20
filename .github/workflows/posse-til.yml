@@ -1,0 +1,24 @@
+name: 🐘 POSSE on a new TIL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_til/**.md"
+  workflow_dispatch:
+
+jobs:
+  post-to-mastodon:
+    name: 🐘 Post to Mastodon
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Post latest TIL to Mastodon
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_API_URL: ${{ vars.MASTODON_URL }}
+          POST_TYPE: "til"
+        run: |
+          pip3 install -r ./.github/scripts/requirements.txt
+          python3 ./.github/scripts/post-to-mastodon.py

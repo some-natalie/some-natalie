@@ -21,4 +21,4 @@ jobs:
           POST_TYPE: "til"
         run: |
           pip3 install -r ./.github/scripts/requirements.txt
-          python3 ./.github/scripts/post-to-mastodon.py
+          python3 ./.github/scripts/mastodon.py

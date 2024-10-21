@@ -94,14 +94,14 @@ function grype-summary () {
   grype ${1} -o json --file grype.json -q
   echo "Total = $(cat grype.json | jq  '.matches[].vulnerability.severity' | uniq -c | awk '{sum += $1} END {print sum}')"
   echo ""
-  echo "| Count | Severity |"
-  echo "|-------|----------|"
-  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Critical') | critical |"
-  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'High') | high |"
-  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Medium') | medium |"
-  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Low') | low |"
-  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Negligible') | negligible |"
-  echo "| $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Unknown') | unknown |"
+  echo "| Count | Severity    |"
+  echo "|-------|-------------|"
+  printf "| %-5s | %-11s |\n" $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Critical') "critical"
+  printf "| %-5s | %-11s |\n" $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'High') "high"
+  printf "| %-5s | %-11s |\n" $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Medium') "medium"
+  printf "| %-5s | %-11s |\n" $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Low') "low"
+  printf "| %-5s | %-11s |\n" $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Negligible') "negligible"
+  printf "| %-5s | %-11s |\n" $(cat grype.json | jq  '.matches[].vulnerability.severity' | grep -c 'Unknown') "unknown"
   rm grype.json
 }
 ```
@@ -109,16 +109,16 @@ function grype-summary () {
 Outputs something like this:
 
 ```shell-session
-Total = 164
+Total = 558
 
-| Count | Severity |
-|-------|----------|
-| 2 | critical |
-| 14 | high |
-| 34 | medium |
-| 4 | low |
-| 76 | negligible |
-| 34 | unknown |
+| Count | Severity    |
+|-------|-------------|
+| 38    | critical    |
+| 170   | high        |
+| 298   | medium      |
+| 43    | low         |
+| 0     | negligible  |
+| 9     | unknown     |
 ```
 
 ### Multi-image Grype summarization

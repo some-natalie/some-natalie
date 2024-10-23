@@ -8,7 +8,7 @@ tags:
 image: /assets/graphics/2024-06-14-whodunnit-git-repo/crocus.webp
 ---
 
-> From [BSides Boulder 2024](https://bsidesboulder.org/), let's layer on the business and people complexities on top of this deeply technical problem.  Despite all the hardships we've reviewed, building software and systems in highly regulated environments can still be rewarding, fast-paced, and fun!  This is an expanded set of slides and resources since shown live on 14 June 2024.
+> From [BSides Boulder 2024](https://bsidesboulder.org/), let's layer on the business and people complexities on top of this deeply technical problem.  Despite all the hardships we've reviewed, building software and systems in highly regulated environments can still be rewarding, fast-paced, and fun!  This is an expanded set of slides and resources since shown live on 14 June 2024 ([YouTube](https://www.youtube.com/watch?v=A2tQhigHUNE) recording).
 >
 >🪻 [Overview and contents here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}

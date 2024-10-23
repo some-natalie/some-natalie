@@ -8,7 +8,7 @@ tags:
 image: /assets/graphics/2024-06-14-whodunnit-git-repo/frozen-audit.jpg
 ---
 
-> From [BSides Boulder 2024](https://bsidesboulder.org/), many attempts to figure out **who** did **what**, **when**, **where**, and **why** in a git repository (and some lessons learned, too).  This is an expanded set of slides and resources since shown live on 14 June 2024.
+> From [BSides Boulder 2024](https://bsidesboulder.org/), many attempts to figure out **who** did **what**, **when**, **where**, and **why** in a git repository (and some lessons learned, too).  This is an expanded set of slides and resources since shown live on 14 June 2024 ([YouTube](https://www.youtube.com/watch?v=A2tQhigHUNE) recording).
 >
 >🪻 [Overview and contents here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}

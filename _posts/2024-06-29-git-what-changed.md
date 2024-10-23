@@ -9,7 +9,7 @@ mermaid: true
 image: /assets/graphics/memes/ceiling-cat-is-watching-you.jpg
 ---
 
-> From [BSides Boulder 2024](https://bsidesboulder.org/), tracking what changed is the one thing that git is designed to do and it does that task ✨ phenomenally well. ✨  Here's a few hard-earned **tips to make common awkward questions easier to answer**.  This is an expanded set of slides and resources since shown live on 14 June 2024.
+> From [BSides Boulder 2024](https://bsidesboulder.org/), tracking what changed is the one thing that git is designed to do and it does that task ✨ phenomenally well. ✨  Here's a few hard-earned **tips to make common awkward questions easier to answer**.  This is an expanded set of slides and resources since shown live on 14 June 2024 ([YouTube](https://www.youtube.com/watch?v=A2tQhigHUNE) recording).
 >
 >🪻 [Overview and contents here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}

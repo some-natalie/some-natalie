@@ -9,7 +9,7 @@ mermaid: true
 image: /assets/graphics/2024-06-14-whodunnit-git-repo/rumpelstiltskin.webp
 ---
 
-> Can you guess who I am?[^rumplestiltskin] 😈  It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit.  This is an expanded set of slides and resources since shown live on 14 June 2024 at [BSides Boulder 2024](https://bsidesboulder.org/).
+> Can you guess who I am?[^rumplestiltskin] 😈  It turns out distributed identity management is an oxymoron.  Here's what you can know and how to stay sane(ish) through your code audit.  This is an expanded set of slides and resources since shown live on 14 June 2024 at [BSides Boulder 2024](https://bsidesboulder.org/) ([YouTube](https://www.youtube.com/watch?v=A2tQhigHUNE) recording).
 >
 >🪻 [Overview here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}

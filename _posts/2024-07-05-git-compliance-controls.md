@@ -9,7 +9,7 @@ mermaid: true
 image: /assets/graphics/2024-06-14-whodunnit-git-repo/controls.webp
 ---
 
-> From [BSides Boulder 2024](https://bsidesboulder.org/), locations of fun - where controls can be reliably set, where they can be bypassed, and where secrets can be stored too.  This is an expanded set of slides and resources since shown live on 14 June 2024.
+> From [BSides Boulder 2024](https://bsidesboulder.org/), locations of fun - where controls can be reliably set, where they can be bypassed, and where secrets can be stored too.  This is an expanded set of slides and resources since shown live on 14 June 2024 ([YouTube](https://www.youtube.com/watch?v=A2tQhigHUNE) recording).
 >
 >🪻 [Overview and contents here, if you missed it!](../git-code-audits) 🪻
 {: .prompt-info}

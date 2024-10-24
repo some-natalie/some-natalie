@@ -15,7 +15,6 @@ Docs: https://docs.joinmastodon.org/methods/statuses/#create
 import requests
 import os
 import frontmatter
-import time
 
 
 # Get the list of filenames in _til, return only the most recent
@@ -66,22 +65,6 @@ def post_to_mastodon(title, content, tags, visibility):
             + "/web/statuses/"
             + response.json()["id"]
         )
-    # use the id to comment in conversation w/ disclaimer
-    time.sleep(5)
-    reply_data = {
-        "status": disclaimer,
-        "in_reply_to_id": response.json()["id"],
-        "visibility": visibility,
-    }
-    reply_headers = {
-        "Authorization": "Bearer " + os.environ["MASTODON_ACCESS_TOKEN"],
-        "Idempotency-Key": title + "_disclaimer",
-    }
-    response = requests.post(
-        "https://" + os.environ["MASTODON_URL"] + "/api/v1/statuses",
-        headers=reply_headers,
-        data=reply_data,
-    )
 
 
 # Run the thing!

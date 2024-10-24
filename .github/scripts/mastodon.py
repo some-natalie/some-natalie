@@ -15,6 +15,7 @@ Docs: https://docs.joinmastodon.org/methods/statuses/#create
 import requests
 import os
 import frontmatter
+import time
 
 
 # Get the list of filenames in _til, return only the most recent
@@ -46,7 +47,7 @@ def post_to_mastodon(title, content, tags, visibility):
     # set data
     disclaimer = "🤖 Cross-posted from https://some-natalie.dev/til/#{} - some formatting may get lost between platforms.".format(title.lower().replace(" ", "-"))
     data = {
-        "status": content + "\n\n" + tags + "\n\n" + disclaimer,
+        "status": content + "\n\n" + tags,
         "visibility": visibility,
     }
     # make the request
@@ -56,6 +57,16 @@ def post_to_mastodon(title, content, tags, visibility):
     # if the request was successful, print the URL
     if response.status_code == 200:
         print("Posted to Mastodon: " + os.environ["MASTODON_URL"] + "/web/statuses/" + response.json()["id"])
+    # use the id to comment in conversation w/ disclaimer
+    time.sleep(5)
+    reply_data = {
+        "status": disclaimer,
+        "in_reply_to_id": response.json()["id"],
+        "visibility": visibility
+    }
+    response = requests.post(
+      "https://" + os.environ["MASTODON_URL"] + "/api/v1/statuses", headers=headers, data=reply_data
+    )
 
 
 # Run the thing!

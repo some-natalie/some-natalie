@@ -15,7 +15,7 @@ excerpt: "Savory breakfast skillet bread (or scones)"
 - 2 tablespoons butter
 - 2 tablespoons rendered bacon fat
 - 1 heaping cup of cheddar cheese, crumbled or shredded
-- 0.33 cup fresh chopped chives or scallions **or** 3 tbsp dried chives
+- 0.33 cup fresh chopped chives **or** 3 tbsp dried chives
 - 0.5 lb bacon, uncooked and finely cut up
 - 0.75 cup heavy whipping cream
 - enough milk to make the dough cohesive (~0.25 cups)
@@ -32,6 +32,8 @@ excerpt: "Savory breakfast skillet bread (or scones)"
 
 ## Notes
 
-- For scones, reduce time to 20 minutes or so.
+- For scones, reduce baking time to 20 minutes or so.  Work into small wedges of uniform thickness, then bake on parchment paper.
+- If you don't have chives, you can substitute green onions or scallions.
+- Bacon fat can be substituted with butter or oil.
 - Resting the dough allows the whole wheat flour to hydrate some, preventing it from tasting too dry.
-- Adapted from [King Arthur Baking Company](https://www.kingarthurbaking.com/)'s recipe for [bacon cheddar chive scones](https://www.kingarthurbaking.com/recipes/bacon-cheddar-chive-scones-recipe).
+- Adapted from the [King Arthur Baking Company](https://www.kingarthurbaking.com/) recipe for [bacon cheddar chive scones](https://www.kingarthurbaking.com/recipes/bacon-cheddar-chive-scones-recipe).

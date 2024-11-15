@@ -25,7 +25,7 @@ Here's what has been done and where we're going.
 1. [Writing tests for Actions runners](../blog/testing-runner-containers) - Test your enterprise CI images with the same rigor as your other software.
 1. [Reducing your software vulnerabilities](../blog/reduce-cves-arc) - Reduce the number of CVEs in your runner images using [wolfi](https://github.com/wolfi-dev) to improve the security posture and eliminate many compliance headaches in regulated environments.
 
-> Last updated in **July 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
+> Last updated in **November 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
 {: .prompt-info}
 
 Maybe soon:

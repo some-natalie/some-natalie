@@ -12,7 +12,7 @@ Now that we have [actions-runner-controller](https://github.com/actions/actions-
 
 > The end result of this how-to is an image based on UBI 9 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).
 >
-> ⚠️ This image has **6 high CVEs** and almost 60 mediums, plus hundreds of low and informational findings (as of July 2024).  Need to lower that?  [Reducing CVEs in ARC](../reduce-cves-arc) should help!
+> ⚠️ This image has **3 high CVEs** and almost 40 mediums, plus hundreds of low and informational findings (as of November 2024).  Need to lower that?  [Reducing CVEs in ARC](../reduce-cves-arc) should help!
 >
 > 🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi9.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi9.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/deploying-runner-scale-sets-with-actions-runner-controller), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi9).  We'll cover a Docker-in-Docker container build later.
 {: .prompt-tip}
@@ -63,7 +63,7 @@ What we really want to be able to do is have these "fat containers" be treated a
 Here's our code snippet with the base image for this example.
 
 ```Dockerfile
-FROM registry.access.redhat.com/ubi9/ubi-init:9.4
+FROM registry.access.redhat.com/ubi9/ubi-init:9.5
 ```
 
 ## Labels are the best
@@ -77,13 +77,13 @@ Container labels are literally ✨ free glittery goodness ✨ bestowed upon us b
 Defining almost anything you want is the [entire point of labels](https://docs.docker.com/config/labels-custom-metadata/).  However, the [Open Container Initiative](https://opencontainers.org/) has defined a bunch of standard keys for your values [here](https://github.com/opencontainers/image-spec/blob/main/annotations.md).  The ones I use (with my values, not yours) are below.
 
 ```Dockerfile
-LABEL org.opencontainers.image.source https://github.com/some-natalie/kubernoodles
-LABEL org.opencontainers.image.path "images/ubi9.Dockerfile"
-LABEL org.opencontainers.image.title "ubi9"
-LABEL org.opencontainers.image.description "A RedHat UBI 9 based runner image for GitHub Actions"
-LABEL org.opencontainers.image.authors "Natalie Somersall (@some-natalie)"
-LABEL org.opencontainers.image.licenses "MIT"
-LABEL org.opencontainers.image.documentation https://github.com/some-natalie/kubernoodles/README.md
+LABEL org.opencontainers.image.source="https://github.com/some-natalie/kubernoodles"
+LABEL org.opencontainers.image.path="images/ubi9.Dockerfile"
+LABEL org.opencontainers.image.title="ubi9"
+LABEL org.opencontainers.image.description="A RedHat UBI 9 based runner image for GitHub Actions"
+LABEL org.opencontainers.image.authors="Natalie Somersall (@some-natalie)"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.documentation="https://github.com/some-natalie/kubernoodles/README.md"
 ```
 
 For your own internal images, make sure to at least set the `documentation` field to where your users can learn more.  Ideally, use [innersource patterns](https://resources.github.com/innersource/fundamentals/) to make the source code of your images available to your users so they can understand what's going on in their build compute, make changes, etc.  The `source` field can tell them that.
@@ -95,10 +95,10 @@ The next bit of code in our Dockerfile places all the arguments that get updated
 The first two arguments go into installing [actions/runner](https://github.com/actions/runner) later in the file - telling it which target architecture and release to use.  The last one is for [runner-container-hooks](https://github.com/actions/runner-container-hooks/), which is optional and I'm including for reasons we'll go into later.
 
 ```Dockerfile
-# Arguments
-ARG TARGETPLATFORM=linux/amd64
-ARG RUNNER_VERSION=2.318.0
-ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.1
+# Arguments, allowing TARGETPLATFORM to be set at build time
+ARG TARGETPLATFORM
+ARG RUNNER_VERSION=2.321.0
+ARG RUNNER_CONTAINER_HOOKS_VERSION=0.6.2
 ```
 
 I like to bundle any other similar arguments together here too, such as versions of other software to include.  Keeping it together means I don't hunt through long Dockerfiles to update it - I want my "future me" to like "present me" as much as possible.

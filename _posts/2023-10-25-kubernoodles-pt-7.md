@@ -108,7 +108,7 @@ This step checks out our repository, logs in to the container registry for our f
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           file: "images/rootless-ubuntu-jammy.Dockerfile"
           push: true
@@ -298,12 +298,11 @@ job:
       fail-fast: false
       matrix:
         runner:
-          - ubuntu-focal
-          - podman
+          - rootless-ubuntu-jammy
           - rootless-ubuntu-focal
-          - ubuntu-jammy
           - ubi8
           - ubi9
+          - wolfi
     steps:
       - name: Delete untagged containers
         uses: snok/container-retention-policy@v2

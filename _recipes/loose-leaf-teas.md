@@ -13,6 +13,12 @@ Most of these are discontinued or hard-to-find blends from commercial teas.
 
 ## Black teas
 
+**Summer Lavender** (black tea)
+
+* 3 parts malty black tea, like Assam
+* 1 part dried lavender flowers
+* Honey, to taste
+
 **Taste of Summer** (black tea)
 
 * Strawberries
@@ -137,6 +143,11 @@ Most of these are discontinued or hard-to-find blends from commercial teas.
 * Honey
 
 ## Herbal teas
+
+**Mint** (herbal)
+
+* 3 parts peppermint
+* 1 part spearmint
 
 **Chamomile** (herbal)
 

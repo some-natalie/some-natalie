@@ -24,17 +24,17 @@ Here's what has been done and where we're going.
 1. [Continuous integration for custom runner images](../blog/kubernoodles-pt-7) - CI for your CI, or how to test your custom runner images on each change.
 1. [Writing tests for Actions runners](../blog/testing-runner-containers) - Test your enterprise CI images with the same rigor as your other software.
 1. [Reducing your software vulnerabilities](../blog/reduce-cves-arc) - Reduce the number of CVEs in your runner images using [wolfi](https://github.com/wolfi-dev) to improve the security posture and eliminate many compliance headaches in regulated environments.
+1. [Building multi-architecture runners](../blog/multiarch-runner-builds) - Why not use ARM too?  Adding extra CPU architectures to our runner image builds was easy.
 
-> Last updated in **November 2024** with the updated versions of Kubernetes, actions-runner-controller, Cilium, etc. that I am currently using.
+> Last updated in **November 2024** with the updated versions of Kubernetes, actions-runner-controller, etc. that I am currently using.
 {: .prompt-info}
 
 Maybe soon:
 
-- Rebuilding and releasing custom runners on a schedule
 - Log streaming
 - More fun with [eBPF](https://ebpf.io)
 - File caching
 - Fun with metrics!
 
-> My environment uses mostly on-prem resources.  I used to have more access to Azure services, so there's a lot of references there as well.  I'll try to call out using vanilla k8s as much as possible for portability.
+> My environment uses mostly on-prem resources and now almost always is used to build _other_ software or demonstrate other parts of Kubernetes management.  I used to have more access to Azure services, so there's a lot of references there as well.  I'll try to call out using vanilla k8s as much as possible for portability.
 {: .prompt-info }

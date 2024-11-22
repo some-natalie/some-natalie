@@ -17,4 +17,4 @@ kyvernoPolicies:
   values:
     validationFailureAction: Audit
 ```
-{: ~/.values.yaml}
+{: file='~/.values.yaml' }

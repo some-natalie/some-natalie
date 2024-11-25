@@ -16,7 +16,7 @@ excerpt: "A simple daily boule of flour, yeast, water, and salt.  Start the nigh
 
 ### For the dough
 
-- 480g bread flour
+- 390g + 30g bread flour
 - 1 cup + 2 tablespoons of very warm water (about 115°F)
 - 1 scant tablespoon of sugar
 - 0.75 teaspoon active dry yeast
@@ -26,16 +26,17 @@ excerpt: "A simple daily boule of flour, yeast, water, and salt.  Start the nigh
 
 ## Directions
 
-### Starter (night before)
+### Starter (night before or morning the day before)
 
 1. Mix all of the ingredients in a bowl.
 1. Cover with plastic wrap and stab a small hole or two in the wrap.  Place the bowl on the warming pad overnight.
 
-### Dough (morning of)
+### Dough (morning of or evening the day before)
 
-1. Mix the starter and all of the ingredients together.  Rest for 10-15 minutes.
-1. Knead with the dough hook on "stir" for another 5-10 minutes, until a cohesive and sticky dough forms.  Scrape down the sides of the bowl.
-1. Cover the bowl with plastic wrap and stab a small hole or two in the wrap.  Place bowl on the warming pad until the dough doubles in size, approximately 1.5 hours.
+1. Mix the starter and all of the ingredients together, save for the 30g of flour.
+1. Rest the dough for 10-15 minutes.
+1. Knead with the dough hook on "stir" for another 10 minutes or so, adding the 30g of flour (up to 90g) until a cohesive and sticky dough forms.  Scrape down the sides of the bowl.
+1. Cover the bowl with plastic wrap and stab a small hole or two in the wrap.  Place bowl on the warming pad until the dough doubles in size, approximately 1.5 hours.  Alternatively, allow to rise overnight in the refrigerator and take the dough out to warm up.  Shape once it's at room temperature and you're ready to preheat the oven.
 
 ### To bake
 
@@ -49,6 +50,7 @@ excerpt: "A simple daily boule of flour, yeast, water, and salt.  Start the nigh
 
 ## Notes
 
+- Yields one ~2 pound loaf
 - Adapted to 6000' elevation and use of a dough warming pad from the [King Arthur Baking Company](https://www.kingarthurbaking.com/) recipe for [French-style country bread](https://www.kingarthurbaking.com/recipes/french-style-country-bread-recipe)
 - To extend the timeline, make the starter in the morning and let the first dough rise happen in the fridge overnight.  Allowing time for the dough to warm means shaping it around lunch and baking it in time for dinner.
 - Everything is sequenced to hold the oven at temp for at least an hour before baking because it takes forever for the steel to hold heat.

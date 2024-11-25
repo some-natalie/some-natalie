@@ -28,8 +28,8 @@ excerpt: "Crumbly cinnamon coffee cake"
 - 12 Tbs unsalted butter, softened
 - 3 large eggs
 - 1.75 cup sour cream (1 lb)
-- 1.5 cup white whole wheat flour
-- 2 cups unbleached all purpose flour
+- 2 cups white whole wheat flour
+- 1.5 cup unbleached all purpose flour
 
 ## Instructions
 

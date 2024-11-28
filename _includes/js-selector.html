@@ -74,6 +74,7 @@
 <!-- Pageviews -->
 {% if page.layout == 'post' %}
   {% assign provider = site.pageviews.provider %}
+
   {% if provider and provider != empty %}
     {% case provider %}
       {% when 'goatcounter' %}
@@ -82,6 +83,10 @@
         {% endif %}
     {% endcase %}
   {% endif %}
+{% endif %}
+
+{% if page.mermaid %}
+  {% include mermaid.html %}
 {% endif %}
 
 {% if jekyll.environment == 'production' %}

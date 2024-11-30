@@ -9,11 +9,11 @@ excerpt: "Bake right away or freeze until you're ready, as individual rolls or a
 
 ### Dough
 
-- 1 cup + 2 Tbsp whole milk, at room temperature
+- 1.25 cups whole milk, at room temperature
 - 2 large eggs, at room temperature
 - 5 tablespoons unsalted butter, cut up and at room temperature
-- 3.5 cups unbleached all-purpose flour
-- 1 cup white whole wheat flour
+- 2.5 cups unbleached all-purpose flour
+- 2 cups white whole wheat flour
 - 1.75 teaspoons salt
 - 0.5 cup granulated sugar
 - 1 teaspoon ground nutmeg
@@ -59,4 +59,4 @@ excerpt: "Bake right away or freeze until you're ready, as individual rolls or a
 - To freeze, place individual buns in a greased muffin pan.  After completely frozen, transfer to a plastic bag.  They keep for about a few months.  Don't freeze the frosting.
 - To bake from frozen, bake at 350°F for 25 minutes in a muffin tray.
 - Adapted from [King Arthur Baking](https://www.kingarthurbaking.com/recipes/cinna-buns-recipe) for what's working at about 6000' elevation. 
-- To make a single giant cinnamon roll, grease a large dutch oven or braiser.  Cut the dough before rolling it, then roll each strip into a giant cinnamon roll inside the dish.  Allow the dough to rise again in the dish with the lid on.  Bake uncovered at 350°F for 30-35 minutes.
+- To make a single giant cinnamon roll, grease a large dutch oven or braiser.  Cut the dough before rolling it, then roll each strip into a giant cinnamon roll inside the dish.  Allow the dough to rise again in the dish with the lid on, about an hour.  Bake uncovered at 350°F for 30-35 minutes.

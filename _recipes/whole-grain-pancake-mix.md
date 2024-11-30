@@ -49,4 +49,4 @@ excerpt: "Make-ahead, shelf-stable pancake mix 🥞"
 - If you don't have buttermilk, add 0.25 cup buttermilk powder to the 1 cup of dry mix along with 1 large egg and 1 cup water or milk.
 - The fat added to the pancake mix can add all sorts of flavors to the pancakes - rendered bacon fat or duck fat is delicious, butter is traditional, and vegetable oil is neutral.
 - Fresh or dried fruits, nuts, and cheese all make great mix-ins.
-  
+- Sourdough discard also makes a great mix-in.  It will make the pancakes more "bread-y", but still tender.

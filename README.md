@@ -4,7 +4,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
-1. [Interviewing with an AI assistant](https://some-natalie.dev/blog/ai-interview-helpers):  Interviewing with an AI helper isn't very helpful - here's how to make use it a little better.
+1. [Interviewing with an AI assistant](https://some-natalie.dev/blog/ai-interview-helpers):  Interviewing with an AI helper isn't very helpful - here's how to use it a little better.
 1. [Build multi-architecture runners for actions-runner-controller](https://some-natalie.dev/blog/multiarch-runner-builds):  (Kubernoodles, part 10 of ?) - Building actions-runner-controller images for ARM + Intel architectures from the same Dockerfile ... sounds easy, right?
 1. [A second year of writing on the internet](https://some-natalie.dev/blog/two-years):  The second year was easier than the first despite having so much more going on.
 <!-- END_SECTION:latest_posts -->

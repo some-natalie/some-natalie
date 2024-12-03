@@ -1,7 +1,7 @@
 ---
 title: "Interviewing with an AI assistant"
 date: 2024-12-03
-excerpt: "Interviewing with an AI helper isn't very helpful - here's how to make use it a little better."
+excerpt: "Interviewing with an AI helper isn't very helpful - here's how to use it a little better."
 tags:
 - career
 image: /assets/graphics/2024-12-03-ai-interview-helper/banner.webp

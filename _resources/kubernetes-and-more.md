@@ -72,6 +72,26 @@ function docker-size {
 ```
 {% endraw %}
 
+### Return a list of architectures for a multi-arch image
+
+```shell
+function docker-arch {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: docker-arch [image]"
+    echo "List the architectures for a multi-arch image."
+    return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Image name required."
+    return
+  fi
+  docker manifest inspect ${1} |\
+    jq -r '.manifests[].platform | select(.os != "unknown" and .architecture != "unknown") | "\(.os)-\(.architecture)"' |\
+    sort |\
+    uniq
+}
+```
+
 ---
 
 ## Grype

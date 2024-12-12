@@ -4,6 +4,7 @@ excerpt: "little bits of shell code that have no other home"
 ---
 
 - [Alpine packages](#alpine-packages)
+- [Clamav](#clamav)
 - [Jekyll](#jekyll)
 
 ---
@@ -50,6 +51,27 @@ function apk-find {
 
 > Make sure you specify the fully-qualified image name for those folks using private registries!
 {: .prompt-info}
+
+---
+
+## ClamAV
+
+Usually don't need [clamav](https://www.clamav.net/) at all, but when I do ... I really do.
+
+```shell
+# install via homebrew
+brew install clamav
+
+# there's no config file it needs by default
+# make the most basic one if it's not there
+echo "DNSDatabaseInfo current.cvd.clamav.net\nDatabaseMirror database.clamav.net" > /opt/homebrew/etc/clamav/freshclam.conf
+
+# update the database
+freshclam
+
+# scan a directory
+clamscan --infected --recursive path/to/directory
+```
 
 ---
 

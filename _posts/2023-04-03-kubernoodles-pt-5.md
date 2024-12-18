@@ -12,7 +12,7 @@ Now that we have [actions-runner-controller](https://github.com/actions/actions-
 
 > The end result of this how-to is an image based on UBI 9 that has no `sudo` rights.  This means container-y things won't work and users cannot modify the base image (which could be great or awful).
 >
-> ⚠️ This image has **3 high CVEs** and almost 40 mediums, plus hundreds of low and informational findings (as of November 2024).  Need to lower that?  [Reducing CVEs in ARC](../reduce-cves-arc) should help!
+> ⚠️ This image has **2 critical and 3 high CVEs**, plus hundreds of medium and below security vulnerabilities (as of December 2024).  Need to lower that?  [Reducing CVEs in ARC](../reduce-cves-arc) should help!
 >
 > 🚢  If you're impatient, here's links to the finished [Dockerfile](https://github.com/some-natalie/kubernoodles/blob/main/images/ubi9.Dockerfile), Helm [values.yml](https://github.com/some-natalie/kubernoodles/blob/main/deployments/helm-ubi9.yml) for [actions-runner-controller](https://github.com/actions/actions-runner-controller) as a [runner scale set](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/deploying-runner-scale-sets-with-actions-runner-controller), and the finished [image](https://github.com/some-natalie/kubernoodles/pkgs/container/kubernoodles%2Fubi9).  We'll cover a Docker-in-Docker container build later.
 {: .prompt-tip}
@@ -296,7 +296,7 @@ helm install ubi9 \
   --namespace "runners" \
   -f local-private-ubi9.yml \
   oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-  --version 0.9.3
+  --version 0.10.1
 ```
 
 Now check that the single pod is up and listening.

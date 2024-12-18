@@ -37,8 +37,8 @@ reclaimPolicy: Delete
 mountOptions:
  - dir_mode=0777 # this mounts at a directory needing this
  - file_mode=0777
- - uid=1000 # match your pod's user id, this is for actions/actions-runner
- - gid=1000
+ - uid=1001 # match your pod's user id, this is for actions/actions-runner
+ - gid=1001
  - mfsymlinks
  - cache=strict
  - actimeo=30
@@ -114,12 +114,12 @@ $ helm install kaniko-worker \
     --namespace "test-runners" \
     -f helm-kaniko.yml \
     oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set \
-    --version 0.9.3
+    --version 0.10.1
 
-Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.9.3
-Digest: sha256:36a1f7a07ae5a3b15a9d190cf492ab66dd3a1302f37bde2f1ce5a6660592eb10
+Pulled: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set:0.10.1
+Digest: sha256:fdde49f5b67513f86e9ae5d47732c94a92f28facde1d5689474f968afeb212ef
 NAME: kaniko-worker
-LAST DEPLOYED: Mon Jan  8 09:35:09 2024
+LAST DEPLOYED: Wed Dec 18 10:35:23 2024
 NAMESPACE: ghec-runners
 STATUS: deployed
 REVISION: 1
@@ -162,7 +162,7 @@ jobs:
           export GIT_PASSWORD="${{ secrets.GITHUB_TOKEN }}" # works for GHEC or GHES container registry
 
           # Build and push (sub in your image, of course)
-          /kaniko/executor --dockerfile="./images/ubi9.Dockerfile" \
+          /kaniko/executor --dockerfile="./images/kaniko-build-test.Dockerfile" \
             --context="${{ github.repositoryUrl }}#${{ github.ref }}#${{ github.sha }}" \
             --destination="ghcr.io/some-natalie/kubernoodles/kaniko-build:test" \
             --push-retry 5 \

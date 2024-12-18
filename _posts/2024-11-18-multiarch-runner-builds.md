@@ -163,7 +163,7 @@ Next up, scan the image and upload the report.  This step is a bit specific to u
 {% raw %}
 ```yaml
       - name: Scan it
-        uses: anchore/scan-action@v5
+        uses: anchore/scan-action@v6
         id: scan
         with:
           image: "ghcr.io/${{ github.repository }}/${{ matrix.os }}:${{ env.SHA_SHORT }}"

@@ -207,7 +207,7 @@ As we've seen so far, this pattern of using containers in Kubernetes similarly t
 
 ## Next time
 
-Diving deep into MTU - what it is, how it works, why it's important for actions-runner-controller implementations, and how to stop it from 🌟 ruining your day 🌟
+🔐 Managing the attack surface of our runners by removing unnecessary software and services in [reducing CVEs in actions-runner-controller](../reduce-cves-arc)
 
 ---
 

@@ -278,7 +278,8 @@ jobs:
           --set githubConfigSecret.github_app_installation_id="${{ vars.ARC_INSTALL_ID }}" \
           --set githubConfigSecret.github_app_private_key="${{ secrets.ARC_APP_PRIVATE_KEY }}" \
           -f deployments/helm-${{ github.event.inputs.target_scale_set }}.yml \
-          oci://ghcr.io/actions/actions-runner-controller-charts/auto-scaling-runner-set
+          oci://ghcr.io/actions/actions-runner-controller-charts/auto-scaling-runner-set \
+          --version 0.10.1
 
         env:
           KUBECONFIG: /tmp/config

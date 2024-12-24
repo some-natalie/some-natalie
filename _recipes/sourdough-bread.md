@@ -10,8 +10,8 @@ excerpt: "Lazy sourdough bread using the discard"
 - 375g bread flour
 - 150g whole grain flour (white, red, rye, whatever you'd like really)
 - 375g warm water
-- 100g unfed starter
-- 10g salt
+- 100g unfed starter (up to 200g, depending on how active the starter is)
+- 20g salt
 
 ## Directions
 

@@ -55,7 +55,9 @@ Time and temp combinations that work well.
 | What | Temp | Time | Notes |
 | --- | --- | --- | --- |
 | Bacon | 400°F | 30 mins | fridge, warm on skillet |
+| Beef prime rib | 175°F<br>550°F | Until 120°F inside (5-6 hours)<br>8-10 minutes | rest tented until<br>ready to serve |
 | Brussels sprouts | 500°F | 20 mins | start on skillet, flip all halves down |
+| Ham | 275°F<br>450°F | 20 mins/pound<br>10 mins | reheat covered<br>finish w/ glaze uncovered |
 | Pork ribs | 550°F<br>325°F | 20 mins<br>2 hrs | start uncovered in sheet tray<br>cover tightly in foil to finish |
 | Smashed potatoes | 450°F | 30 mins | boil first, use thin tray in oven |
 | Any crock pot "low" meal | 225°F | same as recipe | crack lid for evaporation, stir sometimes |

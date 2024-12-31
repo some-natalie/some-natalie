@@ -18,7 +18,7 @@ Let's chat about that AI recorder in job interviews.  Since I've been asked a fe
 
 ## Individually
 
-🤖 On any individual interview, I've found the “AI” features not useful.  It's a mediocre transcription servicer.  It takes a decent chunk of time editing what it wrote to be helpful to the hiring manager who's looking over mine (and other folks') notes.  I simply place a couple dashes and let it append away below my own notes.  Here's some funny ways it's goofed up in the transcription.
+🤖 On any individual interview, I've found the “AI” features not useful.  It's a mediocre transcription service.  It takes a decent chunk of time editing what it wrote to be helpful to the hiring manager who's looking over my (and other folks') notes.  I simply place a couple dashes and let it append away below my own notes.  Here's some funny ways it's goofed up in the transcription.
 
 - My "one rep" became "one wreck" 😆
 - Apparently there's "feature parody" between commercial and government regions ... 🤣

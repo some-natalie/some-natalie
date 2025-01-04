@@ -35,21 +35,21 @@ Idempotent builds are a best practice with a side effect of forcing an explicitl
 
 Transient builds change by design.  In this case, I want to build whatever the latest kernel is every time it's run by another orchestration tool.  To do this, leave all dependencies unpinned.
 
-In either case, this container builds RPMs, so let’s start from a well-established base and then install the things you know about up front.  Here’s an example ([link](https://github.com/some-natalie/fedora-acs-override/blob/main/fc38-action/Dockerfile)):
+In either case, this container builds RPMs, so let’s start from a well-established base and then install the things you know about up front.  Here’s an example ([link](https://github.com/some-natalie/fedora-acs-override/blob/main/fc41-action/Dockerfile)):
 
 ```dockerfile
-FROM fedora:38
+FROM fedora:41
 
-# Add RPM Fusion repository for build dependencies
+# Add RPM Fusion
 RUN dnf install -y \
     https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm \
     https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm \
     && dnf clean all
 
-# Update dnf, see note below!
+# Update
 RUN dnf update -y && dnf clean all
 
-# Install build dependencies for your project(s)
+# Install build dependencies
 RUN dnf install -y fedpkg fedora-packager rpmdevtools ncurses-devel pesign \
     bpftool bc bison dwarves elfutils-devel flex gcc gcc-c++ gcc-plugin-devel \
     glibc-static hostname m4 make net-tools openssl openssl-devel perl-devel \
@@ -59,11 +59,12 @@ RUN dnf install -y fedpkg fedora-packager rpmdevtools ncurses-devel pesign \
 # Setup build directory
 RUN rpmdev-setuptree
 
-# Set up the entrypoint script, more on this below
+# Set up the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 ```
+{: file='~/fc41-action/Dockerfile'}
 
 It’s okay to have a “builder image” per project - and it’s preferable over having one giant container that can build all the projects you’d ever need.  This pattern of smaller build images helps decouple projects packaging RPMs from each other's dependencies while allowing them to share compute.  It makes both the builder image and the software it exists to build easier to understand and control dependencies separately too.[^p]
 
@@ -99,6 +100,7 @@ sed -i '/^ApplyOptionalPatch patch-*/a ApplyOptionalPatch add-acs-override.patch
 # Build the things!
 cd ~/rpmbuild/SPECS && rpmbuild -bb kernel.spec --without debug --without debuginfo --target x86_64 --nodeps
 ```
+{: file='~/fc41-action/entrypoint.sh'}
 
 Lastly, don't forget to tag and publish your image for reuse.
 
@@ -125,7 +127,7 @@ First, create a file called `action.yml` to tell it to build and run that contai
 ```yaml
 name: "Build ACS kernel"
 
-description: "Build Fedora 38 kernel RPMs with ACS override patch"
+description: "Build Fedora 41 kernel RPMs with ACS override patch"
 
 outputs:
   kernel-version:
@@ -135,30 +137,32 @@ runs:
   using: "docker"
   image: "Dockerfile"
 ```
+{: file='~/fc41-action/action.yml'}
 
 Next, use that custom Action in a workflow to build the RPMs and upload them as build artifacts (to later do whatever you need with them).
 
 ```yaml
 jobs:
-  build-fc38:
+  build-fc41:
     runs-on: ubuntu-latest
-    name: Build Fedora 38 kernel with ACS override patch
+    name: Build Fedora 41 kernel with ACS override patch
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
 
-      - name: Build the Fedora 38 RPMs
+      - name: Build the Fedora 41 RPMs
         id: build-rpms
-        uses: ./fc38-action # wherever that action.yml file is in your repo
+        uses: ./fc41-action # wherever that action.yml file is in your repo
 
       - name: Upload the RPMs as artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: kernel-${{ steps.build-rpms.outputs.kernel-version }}-fc38-acs-override-rpms
+          name: kernel-${{ steps.build-rpms.outputs.kernel-version }}-fc41-acs-override-rpms
           path: |
             /home/runner/work/_temp/_github_home/rpmbuild/RPMS/x86_64/
             !/home/runner/work/_temp/_github_home/rpmbuild/RPMS/x86_64/*debug*.rpm
 ```
+{: file='~/.github/workflows/build-acs-kernel.yml'}
 
 This final step happened because I am too ~~lazy~~ busy to maintain my own local build infrastructure for [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override) and don't want to lock my own computer up for hours building either.  You can read more about the project and how it works [here](../fedora-acs-override).  I don't want to run servers, don't care how long the build takes, and now my build process is `click button, wait, receive files` - can't get easier than that! 🍹
 

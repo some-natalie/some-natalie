@@ -26,8 +26,13 @@ Here's what has been done and where we're going.
 1. [Reducing your software vulnerabilities](../blog/reduce-cves-arc) - Reduce the number of CVEs in your runner images using [wolfi](https://github.com/wolfi-dev) to improve the security posture and eliminate many compliance headaches in regulated environments.
 1. [Building multi-architecture runners](../blog/multiarch-runner-builds) - Why not use ARM too?  Adding extra CPU architectures to our runner image builds was easy.
 1. [Signing and attesting the builds of your container images](../blog/signing-attesting-builds) - Proving the link between the code, builds, and artifacts of your CI that builds your code ... to then prove the link between code, build, and artifact. ♾️
+1. Shrinking big container images - CI images can get big, but they don't have to be.  Let's unpack the relationship between image size, security, and the practices that can help.
+    1. [the Where and Why of big containers](../blog/big-container-images) shows why these workloads have such large images to begin with
+    1. Tidy up your container builds - _coming soon_
+    1. Squash builds are very effective and easy to implement - _coming soon_
+    1. Image “slimmers” aren't magic either - _coming soon_
 
-> Last updated in **December 2024** with the updated versions of Kubernetes, actions-runner-controller, etc. that I am currently using.
+> Last updated in **January 2025** with the updated versions of Kubernetes, actions-runner-controller, etc. that I am currently using.
 {: .prompt-info}
 
 Maybe soon:

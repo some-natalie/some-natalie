@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Shrinking container images (part 1) - the Where and Why of big containers](https://some-natalie.dev/blog/big-container-images):  Some containers are big, but reliably reducing their size isn't difficult or complicated.  Let's unpack the relationship between image size, security, and the practices that can help - starting with where you'll find them and why they're so big.
 1. [Signing artifacts, attesting builds, and why you should do both](https://some-natalie.dev/blog/signing-attesting-builds):  Proving the link between the code, builds, and artifacts of your CI that builds your code ... to then prove the link between code, build, and artifact. ♾️
 1. [Interviewing with an AI assistant](https://some-natalie.dev/blog/ai-interview-helpers):  Interviewing with an AI helper isn't very helpful - here's how to use it a little better.
-1. [Build multi-architecture runners for actions-runner-controller](https://some-natalie.dev/blog/multiarch-runner-builds):  (Kubernoodles, part 10 of ?) - Building actions-runner-controller images for ARM + Intel architectures from the same Dockerfile ... sounds easy, right?
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

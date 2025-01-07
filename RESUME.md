@@ -15,7 +15,7 @@
 ### [Chainguard](https://chainguard.dev) - Principal Solutions Engineer, 2024-present
 
 - **Build Public Sector sales** at a startup as the first solutions engineer dedicated to the vertical.  Grow the team within a year to include a manager and several peers supporting sales team growth.
-- **Facilitate proof of concepts** on complex applications, regulated artificial intelligence (AI) applications, migration into containerized workloads, promotion across air-gaps and other compliance boundaries as needed, and adoption of [FIPS-validated](https://csrc.nist.gov/pubs/fips/140-3/final) cryptography.
+- **Facilitate proof of concepts** on complex migrations into containerized workloads, regulated artificial intelligence (AI) applications, promotion across air-gaps and other compliance boundaries as needed, and adoption of [FIPS-validated](https://csrc.nist.gov/pubs/fips/140-3/final) cryptography.
 - **Setup delivery on secure networks,** meeting customers where they are at to expand market access.
 - **Demonstrate business value of application security** and software supply chain best practices to a myriad of regulatory frameworks and guidelines, now including NIST [Secure Software Development Framework](https://csrc.nist.gov/Projects/ssdf) and [Application Container Security Guide](https://csrc.nist.gov/pubs/sp/800/190/final).
 

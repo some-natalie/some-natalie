@@ -23,7 +23,7 @@ Let's unpack the relationship between size, security, and the practices that can
 > Where we're going 🗺️
 >
 > 1. [Avoid multipurpose images where you can](#first-do-less)
-> 1. Tidy up your container builds - _coming soon_
+> 1. [Tidy up your container builds](../tidy-big-builds)
 > 1. Squash builds are very effective and easy to implement - _coming soon_
 > 1. Image “slimmers” aren't magic either - _coming soon_
 {: .prompt-info}
@@ -148,7 +148,7 @@ Some of the images have an additional couple hundred MB with kubectl, helm, and 
 
 > "Do less" is quite good at reducing the size of each container.  For build systems, it also improves the security posture by having less software in each image to inspect, patch, test, configure, etc.  Fewer tasks/people/systems with access to any given thing means a reduced attack surface and lower CVEs.
 >
-> 🧹 **Next up** - Tidying up your container builds with some simple changes that can make a big difference.  **Part 2: Tidy big builds** is coming soon.
+> 🧹 **Next up** - Tidying up your container builds with some simple changes that can make a big difference.  [Part 2: Tidy big builds](../tidy-big-builds)
 {: .prompt-info}
 
 ---

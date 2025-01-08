@@ -28,7 +28,7 @@ Here's what has been done and where we're going.
 1. [Signing and attesting the builds of your container images](../blog/signing-attesting-builds) - Proving the link between the code, builds, and artifacts of your CI that builds your code ... to then prove the link between code, build, and artifact. ♾️
 1. Shrinking big container images - CI images can get big, but they don't have to be.  Let's unpack the relationship between image size, security, and the practices that can help.
     1. [the Where and Why of big containers](../blog/big-container-images) shows why these workloads have such large images to begin with
-    1. Tidy up your container builds - _coming soon_
+    1. [Tidy up your container builds](../blog/tidy-big-builds) walks through how to shrink builds by tidying up your build process
     1. Squash builds are very effective and easy to implement - _coming soon_
     1. Image “slimmers” aren't magic either - _coming soon_
 

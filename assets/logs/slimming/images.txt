@@ -1,0 +1,3 @@
+ubuntu:22.04
+updates-bad:latest
+updates-better:latest

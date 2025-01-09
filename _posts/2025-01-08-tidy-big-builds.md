@@ -181,7 +181,7 @@ Once we understand how containers are built, a couple key concepts help us contr
 
 > There is no substitute for knowing the software you're installing, how all of these tools work, and what they need to run.  This is the most important part of keeping your container images efficiently sized.
 > 
-> 📦 **Next up** - How and why to ship only the finished image as a single layer in **Part 3: Squashing big builds** (coming soon)
+> 📦 **Next up** - How and why to ship only the finished image as a single layer in [Part 3: Squashing big builds](../squash-big-builds)
 {: .prompt-info}
 
 ---

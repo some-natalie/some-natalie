@@ -24,7 +24,7 @@ Let's unpack the relationship between size, security, and the practices that can
 >
 > 1. [Avoid multipurpose images where you can](#first-do-less)
 > 1. [Tidy up your container builds](../tidy-big-builds)
-> 1. Squash builds are very effective and easy to implement - _coming soon_
+> 1. [Squash builds are very effective and easy to implement](../squash-big-builds)
 > 1. Image “slimmers” aren't magic either - _coming soon_
 {: .prompt-info}
 

@@ -3,13 +3,24 @@ title: "Sourdough bread"
 excerpt: "Lazy sourdough bread using the discard"
 ---
 
-> Lazy sourdough bread made using the discard.
+> Lazy sourdough bread made using the discard, with a few variations.
 
 ## Ingredients
 
+### Plain whole wheat
+
 - 375g bread flour
-- 150g whole grain flour (white, red, rye, whatever you'd like really)
+- 150g whole wheat flour (red)
 - 375g warm water
+- 100g unfed starter (up to 200g, depending on how active the starter is)
+- 20g salt
+
+### Coarse whole grains mixed in
+
+- 325g bread flour
+- 200g whole wheat flour (red)
+- 75g harvest grains blend (mix of seeds and coarse grains)
+- 400g warm water
 - 100g unfed starter (up to 200g, depending on how active the starter is)
 - 20g salt
 

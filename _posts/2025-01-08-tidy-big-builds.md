@@ -7,6 +7,7 @@ tags:
 - kubernoodles
 - actions-runner-controller
 - security
+- containers
 ---
 
 > Some containers are big and with a good enough reason to be big.  Reliably reducing their size isn't difficult or complicated.  Big images can be secure, too.  Let's unpack the relationship between size, security, and the practices that can help - starting with the simplest task of tidying your container build.
@@ -190,4 +191,4 @@ Once we understand how containers are built, a couple key concepts help us contr
 
 [^overlay]: Some great resources on OverlayFS from [Wikipedia](https://en.wikipedia.org/wiki/OverlayFS), the Arch Linux Wiki on [OverlayFS](https://wiki.archlinux.org/title/Overlay_filesystem), and the [Docker documentation](https://docs.docker.com/storage/storagedriver/overlayfs-driver/).
 [^helm]: Pretty sure this is how I have [Helm](https://helm.sh) installed in my GitHub Actions runners still.
-[^files]: Image size and builds were done in Jan 2025, as were scans with whatever the latest Grype version was.  All files, security data, and such were done at that point in time and this won't be kept up to date as time progresses.  Files for building these containers are all here - <https://github.com/some-natalie/some-natalie/tree/main/assets/logs/slimming>
+[^files]: Image size and builds were done in Jan 2025, as were scans with whatever the latest Grype version was.  All files, security data, and such were done at that point in time and this won't be kept up to date as time progresses.  Files for building these containers are all here - <https://github.com/some-natalie/some-natalie/tree/main/assets/slimming>

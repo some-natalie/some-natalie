@@ -7,6 +7,7 @@ tags:
 - kubernoodles
 - actions-runner-controller
 - security
+- containers
 ---
 
 > Some containers are big, but reliably reducing their size isn't difficult or complicated.  Now that we know what goes into an image, let's take one easy step to ship only what's needed - the final product.
@@ -66,7 +67,9 @@ ARG version=number
 ARG diffsoftware=version-number
 ENV buildtime=env-var
 
-# run all the build stuff needed here
+RUN install lots of stuff
+
+# now to squish the end result!
 
 FROM scratch AS final
 
@@ -180,7 +183,7 @@ Last (and most importantly), there are always a couple audit and compliance ques
 
 > Single-layer images from a multi-stage build are simple to implement.  They effectively reduce the final size of the image, yet don't alter the security posture in either direction.
 > 
-> 🪄 **Next up** - Actually knowing what I'm doing and running is hard.  Is there a magic shortcut I can take?  **Part 4: Slimming big builds** - (coming soon)
+> 🪄 **Next up** - Actually knowing what I'm doing and running is hard.  Is there a magic shortcut I can take?  [Part 4: Slimming big builds](../slim-big-builds)
 {: .prompt-info}
 
 ---

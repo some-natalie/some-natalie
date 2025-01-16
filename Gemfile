@@ -8,5 +8,6 @@ gem "html-proofer", "~> 5.0", group: :test
 
 gem "jekyll-target-blank", "~> 2.0", ">= 2.0.2"
 gem "jekyll-external-links", "~> 1.0", ">= 1.0.2"
+gem "jekyll-redirect-from", "~> 0.16", ">= 0.16.0"
 gem "csv", "~> 3.3", ">= 3.3.2"
 gem "base64", "~> 0.2", ">= 0.2.0"

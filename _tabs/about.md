@@ -1,7 +1,7 @@
 ---
 title: "Hi there 👋🏻"
 icon: fas fa-info-circle
-order: 9
+order: 8
 layout: page
 ---
 

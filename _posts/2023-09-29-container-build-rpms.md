@@ -7,6 +7,8 @@ tags:
   - CI
   - containers
   - github-actions
+redirect_from:
+  - /blog/container-bulid-rpms/
 ---
 
 ## Why?

@@ -153,10 +153,10 @@ collections:
     output: true
     permalink: /:collection/:path/
     sort_by: name
-  til:
-    output: false
-    permalink: /:collection/:path/
-    sort_by: name
+  # til:
+  #   output: false
+  #   permalink: /:collection/:path/
+  #   sort_by: name
 
 defaults:
   - scope:
@@ -251,6 +251,7 @@ jekyll-archives:
 plugins:
   - jekyll-target-blank
   - jekyll-external-links
+  - jekyll-redirect-from
 
 external_links:
   selector: "main a"

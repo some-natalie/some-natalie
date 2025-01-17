@@ -239,13 +239,21 @@ function k-ls-images {
 [Skopeo](https://github.com/containers/skopeo) can inspect the configuration of a container, not just what's in the OCI manifest.  It's great to get a handle on the default environment variables, working directory, and other defaults.  Use the `--config` flag to get the configuration of an image as a big JSON file.
 
 ```shell
-skopeo inspect --config --override-os="linux" --override-arch="amd64" docker://python:3.12
+skopeo inspect --config \
+  --override-os="linux" \
+  --override-arch="amd64" \
+  docker://python:3.12
 ```
 
 I also needed to specify the OS and CPU architecture I wanted to inspect.  Skopeo defaults to what's detected on the host and I'm on an ARM-based Mac.  This returns something that's easy to pipe through `jq` for just what I need - in this case, the default environment variables of the Python:3.12 image for Intel-based Linux systems.
 
 ```shell-session
-ᐅ skopeo inspect  --config --override-os="linux" --override-arch="amd64" docker://python:3.12 | jq '.config.Env'
+ᐅ skopeo inspect  --config \
+  --override-os="linux" \
+  --override-arch="amd64" \
+  docker://python:3.12 |\
+  jq '.config.Env'
+
 [
   "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
   "LANG=C.UTF-8",

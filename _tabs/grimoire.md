@@ -2,6 +2,8 @@
 title: "Grimoire"
 icon: fa-solid fa-hat-wizard
 order: 6
+redirect_from:
+  - /til
 ---
 
 An always-changing collection of notes, links, tables, and other such goodies! 💝

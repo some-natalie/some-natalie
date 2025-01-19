@@ -24,6 +24,14 @@ excerpt: "Lazy sourdough bread using the discard"
 - 100g unfed starter (up to 200g, depending on how active the starter is)
 - 20g salt
 
+### Rye
+
+- 375g whole wheat flour (white)
+- 150g rye flour
+- 400g water
+- 100g unfed starter (up to 200g, depending on how active the starter is)
+- 20g salt
+
 ## Directions
 
 1. **First thing in the morning,** mix everything together.  Fold the dough a couple times while fixing breakfast and otherwise getting ready for the day.

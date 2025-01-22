@@ -64,7 +64,7 @@ In smaller teams or slower-growing situations, this is probably someone in the l
 
 ![job-reqs-list](/assets/graphics/memes/job-descriptions.jpg){: .right .w-50 .shadow .rounded-10}
 
-I think [job descriptions are "dream boyfriend lists"](../career-interview-questions) of way too many things and not focusing on the more important parts ... again, just my opinion.
+I think [job descriptions are "dream boyfriend lists"](../interview-questions) of way too many things and not focusing on the more important parts ... again, just my opinion.
 
 Some of the things on that list are way more negotiable than others - but which ones?  During high-growth situations, there are some very silly incentives to get butts in seats and you may have more leverage than you think.
 

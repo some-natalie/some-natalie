@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [What B2B sales taught me about engineering jobs](https://some-natalie.dev/blog/meddpicc-job-search):  What I wish I knew as a new engineer heading out of college and into the job market - every job is a sales job.  Finding a job is selling you.
 1. [Shrinking container images (part 4) - trying out some slimmer apps](https://some-natalie.dev/blog/slim-big-builds):  Some containers are big, but reliably reducing their size isn't difficult or complicated.  Big images can be secure, too.  Let's unpack the relationship between size, security, and the practices that can help.
 1. [Shrinking container images (part 3) - squash it](https://some-natalie.dev/blog/squash-big-builds):  Some containers are big, but reliably reducing their size isn't difficult or complicated.  Now that we know what goes into an image, let's take one easy step to ship only what's needed - the final product.
-1. [Shrinking container images (part 2) - tidying up your builds](https://some-natalie.dev/blog/tidy-big-builds):  Some containers are big, but reliably reducing their size isn't difficult or complicated.  Let's start simple by tidying our container's build steps.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

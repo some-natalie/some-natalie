@@ -9,7 +9,7 @@ excerpt: "Bake right away or freeze until you're ready, as individual rolls or a
 
 ### Dough
 
-- 1.25 cups whole milk, at room temperature
+- 1.25 cups + 2 tablespoons whole milk, at room temperature
 - 2 large eggs, at room temperature
 - 5 tablespoons unsalted butter, cut up and at room temperature
 - 2.5 cups unbleached all-purpose flour

@@ -93,6 +93,47 @@ function docker-arch {
 }
 ```
 
+### Return the YAML needed for Iron Bank hardening manifests
+
+Sometimes Renovate gets stuck on image SHAs and you need to make a manual PR.  It's rare, but this helps when it happens to multi-arch image digests.  This function returns the YAML needed to bump the image SHAs per architecture in `~/hardening_manifest.yaml`.
+
+```shell
+function ib-sha-bump {
+  if [ "${1}" = "-h" ]; then
+    echo "Usage: ib-sha-bump [chainguard image]"
+    echo "Return the YAML needed to bump the SHA in an Iron Bank hardening manifest."
+    return
+  fi
+  if [ "${1}" = "" ]; then
+    echo "Image name required."
+    echo "Example: ib-sha-bump cgr.dev/chainguard/node:latest"
+    return
+  fi
+  local image_name=${1}
+  local manifest_json=$(docker manifest inspect "${image_name}")
+  jq -n --argjson data "${manifest_json}" --arg tag "${image_name}" '
+    def create_resource(manifest):
+      if manifest.platform.architecture == "amd64" then
+        {
+          tag: $tag,
+          url: ("docker://" + $tag + "@" + manifest.digest)
+        }
+      elif manifest.platform.architecture == "arm64" then
+        {
+          tag: ($tag + "-arm64"),
+          url: ("docker://" + $tag + "@" + manifest.digest)
+        }
+      end;
+    {
+      resources: [
+        create_resource($data.manifests[0]),
+        create_resource($data.manifests[1])
+      ]
+    }
+  ' | yq eval -P
+}
+```
+
 ---
 
 ## Grype

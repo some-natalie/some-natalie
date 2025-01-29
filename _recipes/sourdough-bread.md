@@ -37,7 +37,7 @@ excerpt: "Lazy sourdough bread using the discard"
 - 200g bread flour
 - 175g semolina flour
 - 150g whole wheat (white)
-- 375g warm water
+- 375g warm water or [cheese broth](../stocks#cheese-rinds)
 - 100g freshly shredded asiago cheese (or other sharp cheese)
 - 100g unfed starter (up to 200g, depending on how active the starter is)
 - 20g salt

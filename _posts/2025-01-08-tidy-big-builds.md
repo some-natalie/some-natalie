@@ -11,7 +11,7 @@ tags:
 ---
 
 > Some containers are big and with a good enough reason to be big.  Reliably reducing their size isn't difficult or complicated.  Big images can be secure, too.  Let's unpack the relationship between size, security, and the practices that can help - starting with the simplest task of tidying your container build.
-> 
+>
 > 🌟 [Overview and contents here, if you missed it!](../big-container-images) 🌟
 {: .prompt-info}
 
@@ -181,7 +181,7 @@ Once we understand how containers are built, a couple key concepts help us contr
 **A few MB isn't important compared to human focus.**  It's tempting to optimize for the sake of it, but there's a point where it isn't worth spending too much time optimizing this beyond the basics.  Let the bots help you keep things clean automatically as much as you can.  A linter like [hadolint](https://github.com/hadolint/hadolint) should catch much of this for you.  Code review is a good thing for catching the trickier implementation parts that a linter can't catch.
 
 > There is no substitute for knowing the software you're installing, how all of these tools work, and what they need to run.  This is the most important part of keeping your container images efficiently sized.
-> 
+>
 > 📦 **Next up** - How and why to ship only the finished image as a single layer in [Part 3: Squashing big builds](../squash-big-builds)
 {: .prompt-info}
 

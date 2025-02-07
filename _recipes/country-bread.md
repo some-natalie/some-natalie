@@ -54,4 +54,3 @@ excerpt: "A simple daily boule of flour, yeast, water, and salt.  Start the nigh
 - Adapted to 6000' elevation and use of a dough warming pad from the [King Arthur Baking Company](https://www.kingarthurbaking.com/) recipe for [French-style country bread](https://www.kingarthurbaking.com/recipes/french-style-country-bread-recipe)
 - To extend the timeline, make the starter in the morning and let the first dough rise happen in the fridge overnight.  Allowing time for the dough to warm means shaping it around lunch and baking it in time for dinner.
 - Everything is sequenced to hold the oven at temp for at least an hour before baking because it takes forever for the steel to hold heat.
- 

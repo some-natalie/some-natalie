@@ -27,7 +27,7 @@ Let's chat about that AI recorder in job interviews.  Since I've been asked a fe
 🚩 It's halfway decent at flagging unsafe questions or conversations in the recording.  But it isn't confidently good here either.
 
 > I'd said something to the effect of "I have no problem saying 'bugger off' to unqualified demo requests because it's a waste of everyone's time" and "I typically don't check my email over the weekend as I'm with family."  It flagged the phrase "bugger off" as being impolite.  The remark about spending time with family could be seen as discussion of life outside work.  In both cases, the conversation didn't get into unsafe territory, but I'm sure folks feel better having this sort of thing recorded if it did.
-
+>
 > However, it did _not_ catch a candidate that said "we want them to open the kimono a bit over some drinks."  I flagged that one myself, as a human being.  It's still not an uncommon phrase to hear in sales and [here's why that's a problem](https://www.catalyst.org/2021/03/22/racism-misogyny-asian-american-women-workplace/).  🤦‍♀️
 
 📝 To counter this inconsistency, I take notes.  These aren't detailed, just a couple words to jog my memory when writing up notes right afterward.  _You_ have my full attention.

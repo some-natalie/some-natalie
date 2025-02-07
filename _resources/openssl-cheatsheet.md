@@ -36,7 +36,7 @@ openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/:$//'
 
 ## FIPS stuff
 
-Cipher checks (swap `HOST:PORT` and `CIPHER` as needed)
+**Cipher checks** (swap `HOST:PORT` and `CIPHER` as needed)
 
 - `RC4-MD5` should fail
 - `CAMELLIA256-SHA` should fail
@@ -45,6 +45,8 @@ Cipher checks (swap `HOST:PORT` and `CIPHER` as needed)
 ```shell
 (echo "GET /" ; sleep 1) | openssl s_client -connect HOST:PORT -cipher CIPHER
 ```
+
+**Built-in verification** using the `openssl-fips-test` command is handy if it's included.  It can also be used from a debug container w/i k8s or other sidecar for life without a shell.
 
 ---
 

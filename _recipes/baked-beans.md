@@ -14,7 +14,7 @@ excerpt: "Beans baked with molasses and salt pork"
 - freshly ground black pepper
 - a drop or two of liquid smoke
 - 1 small onion, finely diced
-- a splash or two of apple cider vinegar 
+- a splash or two of apple cider vinegar
 - 0.25 lbs bacon or salt pork (optional)
 - Leftover ham, cut into small pieces (optional)
 - Ham bone and broth from cooking the ham (optional)

@@ -8,7 +8,7 @@ excerpt: "Savory breakfast skillet bread (or scones)"
 ## Ingredients
 
 - 1 cup white whole wheat flour
-- 1 cup all purpose flour 
+- 1 cup all purpose flour
 - 1 tablespoon baking powder
 - 2 teaspoons sugar
 - 1 tablespoon cheese powder

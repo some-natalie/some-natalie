@@ -14,6 +14,7 @@ One of the most misunderstood parts of software supply chain security is the dif
 We'll go through this using one of my small open-source projects as an example to follow along.
 
 > This means that you'll be able to
+>
 > - 🔗 Associate the end product (an image, tarball, executable, etc.) with the specific commit in Git.
 > - 🪪 Verify that the artifact was built by a specific CI run and any inputs associated with it.
 > - 🕵🏻‍♀️ Ensure it hasn't been tampered with after the build.

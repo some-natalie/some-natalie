@@ -11,7 +11,7 @@ tags:
 ---
 
 > Some containers are big, but reliably reducing their size isn't difficult or complicated.  Now that we know what goes into an image, let's take one easy step to ship only what's needed - the final product.
-> 
+>
 > 🌟 [Overview and contents here, if you missed it!](../big-container-images) 🌟
 {: .prompt-info}
 
@@ -182,7 +182,7 @@ Last (and most importantly), there are always a couple audit and compliance ques
 **We are losing the filesystem snapshots at each step of the build process, but our container execution is still only seeing the final image layer.**  Having layers can make the build process more efficient and allow reuse of layers (eg, `RUN install-some-stuff`) across many builds on shared node storage.  Spending a little time at the end to ship a single layer doesn't change our build efficiency or layer caches, as building and running are two different tasks.
 
 > Single-layer images from a multi-stage build are simple to implement.  They effectively reduce the final size of the image, yet don't alter the security posture in either direction.
-> 
+>
 > 🪄 **Next up** - Actually knowing what I'm doing and running is hard.  Is there a magic shortcut I can take?  [Part 4: Slimming big builds](../slim-big-builds)
 {: .prompt-info}
 

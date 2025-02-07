@@ -29,7 +29,7 @@ We're way more flexible in tech as opposed to management consulting.  Without th
 ![up-or-out-count-dark](/assets/graphics/charts/learning/up-or-out-count-dark.png){: .w-75 .rounded-10 .dark }
 ![up-or-out-count-light](/assets/graphics/charts/learning/up-or-out-count-light.png){: .w-75 .rounded-10 .light }
 
-Taking the upwards pressure out doesn't make more opportunities "upwards" available, though.  There's genuinely nothing wrong in not having that "up or out" pressure - _buuuuuut_ that's why every random HR conversation starts with "there must be a business need for <role> at <level>".  A company doesn't need a bunch of staff+ engineers or client principals compared to folks doing the work regardless of their tenure.  This is unmistakably clear for consultants and others familiar with this track, but seems to be a revelation to many of my colleagues in engineering.
+Taking the upwards pressure out doesn't make more opportunities "upwards" available, though.  There's genuinely nothing wrong in not having that "up or out" pressure - _buuuuuut_ that's why every random HR conversation starts with "there must be a business need for `<role>` at `<level>`".  A company doesn't need a bunch of staff+ engineers or client principals compared to folks doing the work regardless of their tenure.  This is unmistakably clear for consultants and others familiar with this track, but seems to be a revelation to many of my colleagues in engineering.
 
 It's more than acceptable to hang out where you're comfortable, especially when there are other priorities in your life.  **Guiltlessly take advantage of this when you want to!** 🌸
 
@@ -86,7 +86,7 @@ This job, the last one, the next one ... **the things you learn change you** (pr
 
 - Owning an ATO across a large defense consultancy made me extremely attentive to details and ready to go _incredibly deep_ technically on the things I was responsible for.
 - Moving into sales gave me a better understanding of the business of building software.
-- Joining a hyper-growth VC-funded startup is a rocket ride that forces extremely judicious use of my time and focus.  The company is fundamentally different every couple of months, so quite a lot of my job is too. 
+- Joining a hyper-growth VC-funded startup is a rocket ride that forces extremely judicious use of my time and focus.  The company is fundamentally different every couple of months, so quite a lot of my job is too.
 
 Learning is change and time only goes in one direction.
 

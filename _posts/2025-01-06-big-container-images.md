@@ -128,7 +128,6 @@ First, they're "built" much like any other software.  The container files (which
 ![fat-bottomed-pods](/assets/graphics/memes/fat-bottomed-pods.jpg){: .w-75 .rounded-10 .shadow}
 _how I really feel about big container images for CI_
 
-
 Second, most build agents are pretty big!  These handle a variety of workloads, each with their own dependencies.  How your organization decides to handle breaking down the types of workloads, tolerance for caching or setup time, and the company security boundary is what allows you to have **many small deployments** or **fewer larger deployments**.  At a massive scale for fewer-and-larger runners, both the GitLab and GitHub SaaS runners for Linux weigh in at tens of GBs of pre-loaded libraries.  On the other end, there are plenty of self-hosted teams that have each discrete step in each of their builds handled by a unique agent specialized _just_ for that step.
 
 > There are more tradeoffs in this calculation I spoke about [here](../securing-ghactions-with-arc/#controller-settings) - in short, pick your battles. ⚔️

@@ -34,4 +34,3 @@ excerpt: "Overnight whole-grain pancakes using the discard"
 - Reheats great over the week.
 - Using all-purpose flour results in flat sad pancakes at high altitude.
 - Adapted from King Arthur Baking's [recipe](https://www.kingarthurbaking.com/recipes/classic-sourdough-waffles-or-pancakes-recipe).
- 

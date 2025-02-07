@@ -5,6 +5,10 @@ excerpt: "Windows, Office, PowerShell, Active Directory, etc."
 
 I don't really work much with the Windows ecosystem anymore, so tossing my notes all in one page as I go.
 
+## Resources
+
+- [LOLBAS](https://lolbas-project.github.io/) is a handy list to living off the land attacks by executable.
+
 ## PowerShell
 
 `cmdlet` is what's native.  Try to use these when scripting.  It's a verbose, MSFT-y named equalivalent to gnu utilities.  It should do exactly one thing and can be chained together to accomplish something bigger.  Some arguments are only available if you use the `cmdlet` form and not the aliases.

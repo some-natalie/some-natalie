@@ -11,7 +11,7 @@ tags:
 ---
 
 > Some containers are big and with a good enough reason to be big.  Reliably reducing their size isn't difficult or complicated, but it _is_ work.  Let's see if we can find a shortcut.
-> 
+>
 > 🌟 [Overview and contents here, if you missed it!](../big-container-images) 🌟
 {: .prompt-info}
 

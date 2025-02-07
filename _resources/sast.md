@@ -76,7 +76,7 @@ codeql database analyze codeql.db \
 
 ## Semgrep
 
-### Basic setup stuff
+### Setup stuff
 
 ```shell
 brew install semgrep

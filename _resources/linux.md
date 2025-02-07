@@ -3,6 +3,10 @@ title: "Linux commands"
 excerpt: "mostly evergreen sysadmin things"
 ---
 
+## Resources
+
+- [GTFObins](https://gtfobins.github.io/) is a handy list of capabilities by binary.
+
 ## List all open files by process
 
 ```shell

@@ -16,7 +16,7 @@ Relying on “spray and pray” job applications wastes time that's needed to fi
 💸 Finding a job is selling you. 💸
 </b></p></div>
 
-It's common for engineers to have some distaste for the business side of things.  With graduation approaching, let's walk through the process of selling _you_ with a common sales methodology called "MEDDPICC".  Each letter stands for something to understand throughout the ~~enterprise buying~~ job search journey.
+It's common for engineers to have some distaste for the business side of things.  With graduation approaching, let's walk through the process of selling _you_ with a common sales methodology called "MEDDPICC".  Each letter stands for something to understand throughout the ~~enterprise buying[^b2b]~~ job search journey.
 
 ## M - metrics
 

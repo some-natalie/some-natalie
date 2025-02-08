@@ -69,5 +69,7 @@ jobs:
     steps:
       - name: Verify the master node is up and running
         shell: bash
+        env:
+          KUBECONFIG: ~/.kube/config
         run: |
-          kubectl get nodes
+          sudo kubectl get nodes

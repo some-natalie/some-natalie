@@ -2,8 +2,8 @@ name: 🍇 Update raspi-cluster
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "5 20 * * 0" # 8:05pm on Sundays UTC
+  schedule:
+    - cron: "5 20 * * 0" # 8:05pm on Sundays UTC
 
 jobs:
   updates:

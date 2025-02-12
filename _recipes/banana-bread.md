@@ -9,7 +9,7 @@ excerpt: "Everyone’s favorite way to use up brown bananas 🍌"
 
 - 1 cup all-purpose flour
 - 0.5 cup white whole wheat flour
-- 0.67 cup sugar
+- 0.5 cup sugar
 - 0.5 cup rolled oats
 - 2 teaspoons baking powder
 - 0.25 teaspoon baking soda
@@ -18,7 +18,7 @@ excerpt: "Everyone’s favorite way to use up brown bananas 🍌"
 - 0.25 teaspoon nutmeg
 - 2 overripe bananas
 - 2 eggs
-- 0.33 cup whole buttermilk
+- 0.33 cup buttermilk (any fat percentage)
 - 0.25 cup vegetable oil
 - 1.5 teaspoon vanilla extract
 

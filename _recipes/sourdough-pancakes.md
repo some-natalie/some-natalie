@@ -13,6 +13,7 @@ excerpt: "Overnight whole-grain pancakes using the discard"
 - 1 cup (227g) sourdough starter, unfed/discard
 - 2 tablespoons (28g) granulated sugar
 - 2 cups (454g) buttermilk, any fat percentage
+- 0.5 cup (75g) harvest grains blend, optional
 
 ### Batter
 
@@ -31,6 +32,7 @@ excerpt: "Overnight whole-grain pancakes using the discard"
 ## Notes
 
 - Drop sprinkles, chopped nuts, chocolate chips, whatever on the top of each pancake as it cooks.
+- Most any blend of seeds/grains for baker's texture are good here, too.
 - Reheats great over the week.
 - Using all-purpose flour results in flat sad pancakes at high altitude.
 - Adapted from King Arthur Baking's [recipe](https://www.kingarthurbaking.com/recipes/classic-sourdough-waffles-or-pancakes-recipe).

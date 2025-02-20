@@ -155,5 +155,5 @@ Even if you don't have all of these abbreviations covered, having some structure
 ## Footnotes
 
 [^b2b]: business-to-business sales, which is not the same as selling to consumers (commonly abbreviated `b2c`) or bartering or any other transactions.
-[^eng]: Even when they scoff at a _sales_ person showing up at the same tech networking event 🙄 ... the "engineering superiority complex" of engineering undergrads is petty and toxic.  As someone who _was_ that stereotype as an undergrad and got thoroughly humbled by real life.  I see you and hope work life is nicer to you. 🤭
+[^eng]: Even when they scoff at a _sales_ person showing up at the same tech networking event 🙄 ... the "engineering superiority complex" of engineering undergrads is petty and toxic.  As someone who _was_ that stereotype as an undergrad and got thoroughly humbled by real life, I see you and hope work life is nicer to you. 🤭
 [^prolly]: Mark Twain is definitely credited for making it popular in the US, even if the origins are unclear.  More about this quote on [Wikipedia](https://en.wikipedia.org/wiki/Lies,_damned_lies,_and_statistics).

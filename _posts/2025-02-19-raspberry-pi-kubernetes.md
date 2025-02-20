@@ -142,7 +142,7 @@ To do this, I [reused another job](../diy-updates-on-runners) to make GitHub Act
 ![updates-light](/assets/graphics/2025-02-19-pi-k8s/updates-light.png){: .shadow .rounded-10 .light }
 ![updates-dark](/assets/graphics/2025-02-19-pi-k8s/updates-dark.png){: .shadow .rounded-10 .dark }
 
-This has been chugging along without complaint for a few weeks now.  While there is a way to assign runners labels with an API ([docs](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/using-labels-with-self-hosted-runners#programmatically-assign-labels)), it is both not available in actions-runner-controller and also not helpful when the nodes are.  However, it would be handy to build some bespoke jobs around if needed.
+This has been chugging along without complaint for a few weeks now.  While there is a way to assign runners labels with an API ([docs](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/using-labels-with-self-hosted-runners#programmatically-assign-labels)), it is both not available in actions-runner-controller and not helpful when the nodes are persistent.  However, it would be handy to build some bespoke jobs around if needed.
 
 ## Parting thoughts
 

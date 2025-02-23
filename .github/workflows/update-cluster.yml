@@ -6,8 +6,8 @@ on:
     - cron: "5 20 * * 0" # 8:05pm on Sundays UTC
 
 jobs:
-  apt-updates:
-    name: Update the OS and reboot the machines
+  updates:
+    name: Update the OS packages, k3s, and reboot
     strategy:
       matrix:
         node: [cluster-1, cluster-2, cluster-3, cluster-4]
@@ -29,16 +29,6 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: sudo apt autoremove -y
-
-  k3s-updates:
-    name: Upgrade k3s
-    strategy:
-      matrix:
-        node: [cluster-1, cluster-2, cluster-3, cluster-4]
-    continue-on-error: true
-    runs-on: ${{ matrix.node }}
-    needs: apt-updates
-    steps:
       - name: Upgrade k3s on the control plane
         if: matrix.node == 'cluster-1'
         shell: bash
@@ -49,30 +39,20 @@ jobs:
         shell: bash
         run: |
           curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest K3S_URL=${{ secrets.K3S_URL }} K3S_TOKEN=${{ secrets.K3S_TOKEN }} sh -
-
-  reboot:
-    name: Reboot the machines
-    strategy:
-      matrix:
-        node: [cluster-1, cluster-2, cluster-3, cluster-4]
-    continue-on-error: true
-    runs-on: ${{ matrix.node }}
-    needs: [apt-updates, k3s-updates]
-    steps:
       - name: Reboot
         shell: bash
         run: sudo shutdown -r +1 "Rebooting ... brb"
 
   wait:
-    name: wait 5 minutes
+    name: Wait 3 minutes
     runs-on: ubuntu-latest
-    needs: [reboot]
+    needs: [updates]
     steps:
-      - name: sleep 300
+      - name: Wait 3 minutes
         shell: bash
-        run: sleep 300
+        run: sleep 180
 
-  uptime-check:
+  uptime-checks:
     name: Verify everything is back up and online
     strategy:
       matrix:
@@ -90,14 +70,8 @@ jobs:
           else
             echo "System rebooted more than 10 minutes ago"
             exit 1
-          fi
-
-  master-node-check:
-    name: Verify the master node is up and running
-    runs-on: cluster-1
-    needs: [uptime-check]
-    steps:
       - name: Verify the master node is up and running
+        if: matrix.node == 'cluster-1'
         shell: bash
         env:
           KUBECONFIG: ~/.kube/config

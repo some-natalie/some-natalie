@@ -6,7 +6,7 @@ on:
     - cron: "5 20 * * 0" # 8:05pm on Sundays UTC
 
 jobs:
-  updates:
+  apt-updates:
     name: Update the OS and reboot the machines
     strategy:
       matrix:
@@ -29,6 +29,36 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: sudo apt autoremove -y
+
+  k3s-updates:
+    name: Upgrade k3s
+    strategy:
+      matrix:
+        node: [cluster-1, cluster-2, cluster-3, cluster-4]
+    continue-on-error: true
+    runs-on: ${{ matrix.node }}
+    needs: apt-updates
+    steps:
+      - name: Upgrade k3s on the control plane
+        if: matrix.node == 'cluster-1'
+        shell: bash
+        run: |
+          curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -
+      - name: Upgrade k3s on the worker nodes
+        if: matrix.node != 'cluster-1'
+        shell: bash
+        run: |
+          curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest K3S_URL=${{ secrets.K3S_URL }} K3S_TOKEN=${{ secrets.K3S_TOKEN }} sh -
+
+  reboot:
+    name: Reboot the machines
+    strategy:
+      matrix:
+        node: [cluster-1, cluster-2, cluster-3, cluster-4]
+    continue-on-error: true
+    runs-on: ${{ matrix.node }}
+    needs: [apt-updates, k3s-updates]
+    steps:
       - name: Reboot
         shell: bash
         run: sudo shutdown -r +1 "Rebooting ... brb"

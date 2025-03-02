@@ -26,11 +26,12 @@ excerpt: "Lazy sourdough bread using the discard"
 
 ### Rye
 
-- 375g whole wheat flour (white)
+- 375g bread flour
 - 150g rye flour
 - 400g warm water
 - 100g unfed starter (up to 200g, depending on how active the starter is)
 - 20g salt
+- 1 tsp caraway seeds, optional
 
 ### Semolina and cheese
 
@@ -39,6 +40,15 @@ excerpt: "Lazy sourdough bread using the discard"
 - 150g whole wheat (white)
 - 375g warm water or [cheese broth](../stocks#cheese-rinds)
 - 100g freshly shredded asiago cheese (or other sharp cheese)
+- 100g unfed starter (up to 200g, depending on how active the starter is)
+- 20g salt
+
+### Pumpernickel
+
+- 375g bread flour
+- 150g pumpernickel flour
+- 40g rye bread improver
+- 380g warm water or rebrewed coffee grounds
 - 100g unfed starter (up to 200g, depending on how active the starter is)
 - 20g salt
 

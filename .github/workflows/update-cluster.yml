@@ -70,6 +70,7 @@ jobs:
           else
             echo "System rebooted more than 10 minutes ago"
             exit 1
+          fi 
       - name: Verify the master node is up and running
         if: matrix.node == 'cluster-1'
         shell: bash

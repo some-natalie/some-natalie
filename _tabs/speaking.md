@@ -12,6 +12,16 @@ She's passionate about diversity in technology and empowering engineers to build
 
 ---
 
+## 2025
+
+### Zero Trust isn't magic - it's hard work done well every day (panel)
+
+![speaker-pic](/assets/graphics/2025-03-09-zero-trust-software/speaker.jpg){: .w-25 .right .shadow .rounded-10}
+
+**Zero Trust Implementation: Lessons from the Federal Frontlines** was a panel session hosted by [ATARC](https://atarc.org/) at their [Public Sector Zero Trust Summit, Spring 2025](https://atarc.org/event/zt-2025-spring/).  Many thanks to the other speakers, moderators, and attendees for such a great place to trade stories of lessons learned the hard way. 📖
+
+✏️ [A quick writeup](../blog/zero-trust-software) of a few thoughts from that panel.
+
 ## 2024
 
 ### Software not built secure, will not run secure (panel)

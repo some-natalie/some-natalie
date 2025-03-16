@@ -1,0 +1,2251 @@
+﻿2024-12-11T04:49:00.8165263Z Current runner version: '2.321.0'
+2024-12-11T04:49:00.8188859Z ##[group]Operating System
+2024-12-11T04:49:00.8189593Z Ubuntu
+2024-12-11T04:49:00.8190079Z 22.04.5
+2024-12-11T04:49:00.8190704Z LTS
+2024-12-11T04:49:00.8191160Z ##[endgroup]
+2024-12-11T04:49:00.8191682Z ##[group]Runner Image
+2024-12-11T04:49:00.8192279Z Image: ubuntu-22.04
+2024-12-11T04:49:00.8192766Z Version: 20241201.1.0
+2024-12-11T04:49:00.8193811Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20241201.1/images/ubuntu/Ubuntu2204-Readme.md
+2024-12-11T04:49:00.8195247Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20241201.1
+2024-12-11T04:49:00.8196192Z ##[endgroup]
+2024-12-11T04:49:00.8196673Z ##[group]Runner Image Provisioner
+2024-12-11T04:49:00.8197300Z 2.0.385.1
+2024-12-11T04:49:00.8197770Z ##[endgroup]
+2024-12-11T04:49:00.8198986Z ##[group]GITHUB_TOKEN Permissions
+2024-12-11T04:49:00.8201110Z Attestations: write
+2024-12-11T04:49:00.8202181Z Metadata: read
+2024-12-11T04:49:00.8202864Z Packages: write
+2024-12-11T04:49:00.8203371Z SecurityEvents: write
+2024-12-11T04:49:00.8203957Z ##[endgroup]
+2024-12-11T04:49:00.8206980Z Secret source: Actions
+2024-12-11T04:49:00.8208004Z Prepare workflow directory
+2024-12-11T04:49:00.8508308Z Prepare all required actions
+2024-12-11T04:49:00.8544246Z Getting action download info
+2024-12-11T04:49:01.1391564Z Download action repository 'actions/checkout@v4' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2024-12-11T04:49:01.2216738Z Download action repository 'docker/setup-qemu-action@v3' (SHA:49b3bc8e6bdd4a60e6116a5414239cba5943d3cf)
+2024-12-11T04:49:01.4846277Z Download action repository 'docker/setup-buildx-action@v3' (SHA:c47758b77c9736f4b2ef4073d4d51994fabfe349)
+2024-12-11T04:49:01.7270001Z Download action repository 'docker/metadata-action@v5' (SHA:369eb591f429131d6889c46b94e711f089e6ca96)
+2024-12-11T04:49:02.0014210Z Download action repository 'docker/login-action@v3' (SHA:9780b0c442fbb1117ed29e0efdff1e18412f7567)
+2024-12-11T04:49:02.2528731Z Download action repository 'docker/build-push-action@v6' (SHA:48aba3b46d1b1fec4febb7c5d0c644b249a11355)
+2024-12-11T04:49:02.5423606Z Download action repository 'actions/attest-build-provenance@v2' (SHA:7668571508540a607bdfd90a87a560489fe372eb)
+2024-12-11T04:49:02.6864646Z Download action repository 'sigstore/cosign-installer@main' (SHA:718228a5f85f61170ad5c3ea6c0e9871cc92f1c5)
+2024-12-11T04:49:02.9220476Z Getting action download info
+2024-12-11T04:49:03.0447388Z Download action repository 'actions/attest-build-provenance@36fa7d009e22618ca7cd599486979b8150596c74' (SHA:36fa7d009e22618ca7cd599486979b8150596c74)
+2024-12-11T04:49:03.2323658Z Download action repository 'actions/attest@v2.1.0' (SHA:63d2e98e267398337e9a17ec68a5c8d936cb9247)
+2024-12-11T04:49:03.4523827Z Complete job name: build-jekyll
+2024-12-11T04:49:03.5375712Z ##[group]Run actions/checkout@v4
+2024-12-11T04:49:03.5377049Z with:
+2024-12-11T04:49:03.5378033Z   repository: some-natalie/jekyll-in-a-can
+2024-12-11T04:49:03.5379402Z   token: ***
+2024-12-11T04:49:03.5380216Z   ssh-strict: true
+2024-12-11T04:49:03.5381166Z   ssh-user: git
+2024-12-11T04:49:03.5381970Z   persist-credentials: true
+2024-12-11T04:49:03.5382876Z   clean: true
+2024-12-11T04:49:03.5383844Z   sparse-checkout-cone-mode: true
+2024-12-11T04:49:03.5384807Z   fetch-depth: 1
+2024-12-11T04:49:03.5385608Z   fetch-tags: false
+2024-12-11T04:49:03.5387035Z   show-progress: true
+2024-12-11T04:49:03.5388124Z   lfs: false
+2024-12-11T04:49:03.5388896Z   submodules: false
+2024-12-11T04:49:03.5389887Z   set-safe-directory: true
+2024-12-11T04:49:03.5391151Z ##[endgroup]
+2024-12-11T04:49:03.7132788Z Syncing repository: some-natalie/jekyll-in-a-can
+2024-12-11T04:49:03.7135866Z ##[group]Getting Git version info
+2024-12-11T04:49:03.7137628Z Working directory is '/home/runner/work/jekyll-in-a-can/jekyll-in-a-can'
+2024-12-11T04:49:03.7139873Z [command]/usr/bin/git version
+2024-12-11T04:49:03.7147540Z git version 2.47.1
+2024-12-11T04:49:03.7175914Z ##[endgroup]
+2024-12-11T04:49:03.7188901Z Temporarily overriding HOME='/home/runner/work/_temp/614d5a36-0fa0-4de4-ae95-c77042d5d703' before making global git config changes
+2024-12-11T04:49:03.7191750Z Adding repository directory to the temporary git global config as a safe directory
+2024-12-11T04:49:03.7201535Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/jekyll-in-a-can/jekyll-in-a-can
+2024-12-11T04:49:03.7236389Z Deleting the contents of '/home/runner/work/jekyll-in-a-can/jekyll-in-a-can'
+2024-12-11T04:49:03.7240248Z ##[group]Initializing the repository
+2024-12-11T04:49:03.7245379Z [command]/usr/bin/git init /home/runner/work/jekyll-in-a-can/jekyll-in-a-can
+2024-12-11T04:49:03.7303459Z hint: Using 'master' as the name for the initial branch. This default branch name
+2024-12-11T04:49:03.7305585Z hint: is subject to change. To configure the initial branch name to use in all
+2024-12-11T04:49:03.7307898Z hint: of your new repositories, which will suppress this warning, call:
+2024-12-11T04:49:03.7309684Z hint:
+2024-12-11T04:49:03.7311380Z hint: 	git config --global init.defaultBranch <name>
+2024-12-11T04:49:03.7313351Z hint:
+2024-12-11T04:49:03.7315472Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2024-12-11T04:49:03.7318536Z hint: 'development'. The just-created branch can be renamed via this command:
+2024-12-11T04:49:03.7320956Z hint:
+2024-12-11T04:49:03.7322750Z hint: 	git branch -m <name>
+2024-12-11T04:49:03.7325404Z Initialized empty Git repository in /home/runner/work/jekyll-in-a-can/jekyll-in-a-can/.git/
+2024-12-11T04:49:03.7329385Z [command]/usr/bin/git remote add origin https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:03.7356412Z ##[endgroup]
+2024-12-11T04:49:03.7358920Z ##[group]Disabling automatic garbage collection
+2024-12-11T04:49:03.7361177Z [command]/usr/bin/git config --local gc.auto 0
+2024-12-11T04:49:03.7391426Z ##[endgroup]
+2024-12-11T04:49:03.7393951Z ##[group]Setting up auth
+2024-12-11T04:49:03.7398830Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2024-12-11T04:49:03.7431857Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2024-12-11T04:49:03.7718501Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2024-12-11T04:49:03.7751464Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2024-12-11T04:49:03.7986558Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2024-12-11T04:49:03.8035073Z ##[endgroup]
+2024-12-11T04:49:03.8038547Z ##[group]Fetching the repository
+2024-12-11T04:49:03.8048074Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +094271388ab54e135b8560900a6fb6d6345b4492:refs/remotes/origin/main
+2024-12-11T04:49:03.9998649Z From https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:04.0000346Z  * [new ref]         094271388ab54e135b8560900a6fb6d6345b4492 -> origin/main
+2024-12-11T04:49:04.0026526Z ##[endgroup]
+2024-12-11T04:49:04.0028571Z ##[group]Determining the checkout info
+2024-12-11T04:49:04.0030321Z ##[endgroup]
+2024-12-11T04:49:04.0035926Z [command]/usr/bin/git sparse-checkout disable
+2024-12-11T04:49:04.0080338Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2024-12-11T04:49:04.0112735Z ##[group]Checking out the ref
+2024-12-11T04:49:04.0115832Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2024-12-11T04:49:04.0163063Z Switched to a new branch 'main'
+2024-12-11T04:49:04.0166606Z branch 'main' set up to track 'origin/main'.
+2024-12-11T04:49:04.0173617Z ##[endgroup]
+2024-12-11T04:49:04.0208103Z [command]/usr/bin/git log -1 --format=%H
+2024-12-11T04:49:04.0231890Z 094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:04.0441904Z ##[group]Run docker/setup-qemu-action@v3
+2024-12-11T04:49:04.0443133Z with:
+2024-12-11T04:49:04.0443988Z   image: docker.io/tonistiigi/binfmt:latest
+2024-12-11T04:49:04.0445004Z   platforms: all
+2024-12-11T04:49:04.0445873Z ##[endgroup]
+2024-12-11T04:49:04.2646621Z ##[group]Docker info
+2024-12-11T04:49:04.2694371Z [command]/usr/bin/docker version
+2024-12-11T04:49:04.3186972Z Client: Docker Engine - Community
+2024-12-11T04:49:04.3188733Z  Version:           26.1.3
+2024-12-11T04:49:04.3190207Z  API version:       1.45
+2024-12-11T04:49:04.3191644Z  Go version:        go1.21.10
+2024-12-11T04:49:04.3192628Z  Git commit:        b72abbb
+2024-12-11T04:49:04.3193628Z  Built:             Thu May 16 08:33:29 2024
+2024-12-11T04:49:04.3194700Z  OS/Arch:           linux/amd64
+2024-12-11T04:49:04.3195658Z  Context:           default
+2024-12-11T04:49:04.3196183Z 
+2024-12-11T04:49:04.3196690Z Server: Docker Engine - Community
+2024-12-11T04:49:04.3197626Z  Engine:
+2024-12-11T04:49:04.3198646Z   Version:          26.1.3
+2024-12-11T04:49:04.3199648Z   API version:      1.45 (minimum version 1.24)
+2024-12-11T04:49:04.3201098Z   Go version:       go1.21.10
+2024-12-11T04:49:04.3202377Z   Git commit:       8e96db1
+2024-12-11T04:49:04.3203323Z   Built:            Thu May 16 08:33:29 2024
+2024-12-11T04:49:04.3204403Z   OS/Arch:          linux/amd64
+2024-12-11T04:49:04.3205604Z   Experimental:     false
+2024-12-11T04:49:04.3206513Z  containerd:
+2024-12-11T04:49:04.3207311Z   Version:          1.7.24
+2024-12-11T04:49:04.3208454Z   GitCommit:        88bf19b2105c8b17560993bee28a01ddc2f97182
+2024-12-11T04:49:04.3209620Z  runc:
+2024-12-11T04:49:04.3210382Z   Version:          1.2.2
+2024-12-11T04:49:04.3211360Z   GitCommit:        v1.2.2-0-g7cb3632
+2024-12-11T04:49:04.3212368Z  docker-init:
+2024-12-11T04:49:04.3213182Z   Version:          0.19.0
+2024-12-11T04:49:04.3214180Z   GitCommit:        de40ad0
+2024-12-11T04:49:04.3241852Z [command]/usr/bin/docker info
+2024-12-11T04:49:04.5570070Z Client: Docker Engine - Community
+2024-12-11T04:49:04.5571084Z  Version:    26.1.3
+2024-12-11T04:49:04.5571563Z  Context:    default
+2024-12-11T04:49:04.5572200Z  Debug Mode: false
+2024-12-11T04:49:04.5572763Z  Plugins:
+2024-12-11T04:49:04.5573269Z   buildx: Docker Buildx (Docker Inc.)
+2024-12-11T04:49:04.5575307Z     Version:  v0.19.1
+2024-12-11T04:49:04.5575997Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+2024-12-11T04:49:04.5576622Z   compose: Docker Compose (Docker Inc.)
+2024-12-11T04:49:04.5577665Z     Version:  v2.27.1
+2024-12-11T04:49:04.5578364Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
+2024-12-11T04:49:04.5578838Z 
+2024-12-11T04:49:04.5579021Z Server:
+2024-12-11T04:49:04.5579606Z  Containers: 0
+2024-12-11T04:49:04.5580096Z   Running: 0
+2024-12-11T04:49:04.5580533Z   Paused: 0
+2024-12-11T04:49:04.5581141Z   Stopped: 0
+2024-12-11T04:49:04.5581615Z  Images: 15
+2024-12-11T04:49:04.5582045Z  Server Version: 26.1.3
+2024-12-11T04:49:04.5582699Z  Storage Driver: overlay2
+2024-12-11T04:49:04.5583227Z   Backing Filesystem: extfs
+2024-12-11T04:49:04.5583814Z   Supports d_type: true
+2024-12-11T04:49:04.5584421Z   Using metacopy: false
+2024-12-11T04:49:04.5584913Z   Native Overlay Diff: false
+2024-12-11T04:49:04.5585484Z   userxattr: false
+2024-12-11T04:49:04.5586083Z  Logging Driver: json-file
+2024-12-11T04:49:04.5586597Z  Cgroup Driver: cgroupfs
+2024-12-11T04:49:04.5587151Z  Cgroup Version: 2
+2024-12-11T04:49:04.5587723Z  Plugins:
+2024-12-11T04:49:04.5588156Z   Volume: local
+2024-12-11T04:49:04.5588746Z   Network: bridge host ipvlan macvlan null overlay
+2024-12-11T04:49:04.5589680Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+2024-12-11T04:49:04.5590507Z  Swarm: inactive
+2024-12-11T04:49:04.5590990Z  Runtimes: io.containerd.runc.v2 runc
+2024-12-11T04:49:04.5591678Z  Default Runtime: runc
+2024-12-11T04:49:04.5592230Z  Init Binary: docker-init
+2024-12-11T04:49:04.5592863Z  containerd version: 88bf19b2105c8b17560993bee28a01ddc2f97182
+2024-12-11T04:49:04.5625899Z  runc version: v1.2.2-0-g7cb3632
+2024-12-11T04:49:04.5626861Z  init version: de40ad0
+2024-12-11T04:49:04.5627711Z  Security Options:
+2024-12-11T04:49:04.5628176Z   apparmor
+2024-12-11T04:49:04.5628648Z   seccomp
+2024-12-11T04:49:04.5629204Z    Profile: builtin
+2024-12-11T04:49:04.5629724Z   cgroupns
+2024-12-11T04:49:04.5630217Z  Kernel Version: 6.5.0-1025-azure
+2024-12-11T04:49:04.5630902Z  Operating System: Ubuntu 22.04.5 LTS
+2024-12-11T04:49:04.5631507Z  OSType: linux
+2024-12-11T04:49:04.5632013Z  Architecture: x86_64
+2024-12-11T04:49:04.5632610Z  CPUs: 4
+2024-12-11T04:49:04.5633125Z  Total Memory: 15.61GiB
+2024-12-11T04:49:04.5633652Z  Name: fv-az1542-928
+2024-12-11T04:49:04.5634386Z  ID: d292b4cc-acf7-406d-b50f-82233a76aea4
+2024-12-11T04:49:04.5635094Z  Docker Root Dir: /var/lib/docker
+2024-12-11T04:49:04.5635732Z  Debug Mode: false
+2024-12-11T04:49:04.5636461Z  Username: githubactions
+2024-12-11T04:49:04.5637098Z  Experimental: false
+2024-12-11T04:49:04.5637662Z  Insecure Registries:
+2024-12-11T04:49:04.5638306Z   127.0.0.0/8
+2024-12-11T04:49:04.5638872Z  Live Restore Enabled: false
+2024-12-11T04:49:04.5639230Z 
+2024-12-11T04:49:04.5640172Z ##[endgroup]
+2024-12-11T04:49:04.5641143Z ##[group]Pulling binfmt Docker image
+2024-12-11T04:49:04.5642606Z [command]/usr/bin/docker pull docker.io/tonistiigi/binfmt:latest
+2024-12-11T04:49:04.7583592Z latest: Pulling from tonistiigi/binfmt
+2024-12-11T04:49:04.8106536Z 8d4d64c318a5: Pulling fs layer
+2024-12-11T04:49:04.8108716Z e9c608ddc3cb: Pulling fs layer
+2024-12-11T04:49:04.8985037Z e9c608ddc3cb: Verifying Checksum
+2024-12-11T04:49:04.8986311Z e9c608ddc3cb: Download complete
+2024-12-11T04:49:04.9498217Z 8d4d64c318a5: Verifying Checksum
+2024-12-11T04:49:04.9499468Z 8d4d64c318a5: Download complete
+2024-12-11T04:49:05.2019505Z 8d4d64c318a5: Pull complete
+2024-12-11T04:49:05.3139295Z e9c608ddc3cb: Pull complete
+2024-12-11T04:49:05.3183960Z Digest: sha256:66e11bea77a5ea9d6f0fe79b57cd2b189b5d15b93a2bdb925be22949232e4e55
+2024-12-11T04:49:05.3201817Z Status: Downloaded newer image for tonistiigi/binfmt:latest
+2024-12-11T04:49:05.3212567Z docker.io/tonistiigi/binfmt:latest
+2024-12-11T04:49:05.3231391Z ##[endgroup]
+2024-12-11T04:49:05.3232206Z ##[group]Image info
+2024-12-11T04:49:05.3255986Z [command]/usr/bin/docker image inspect docker.io/tonistiigi/binfmt:latest
+2024-12-11T04:49:05.3413280Z [
+2024-12-11T04:49:05.3414095Z     {
+2024-12-11T04:49:05.3415481Z         "Id": "sha256:354472a378935adfe74a19600b89bd9ada7bb058306fff23b3d6613405852faf",
+2024-12-11T04:49:05.3416670Z         "RepoTags": [
+2024-12-11T04:49:05.3417444Z             "tonistiigi/binfmt:latest"
+2024-12-11T04:49:05.3418010Z         ],
+2024-12-11T04:49:05.3418447Z         "RepoDigests": [
+2024-12-11T04:49:05.3419489Z             "tonistiigi/binfmt@sha256:66e11bea77a5ea9d6f0fe79b57cd2b189b5d15b93a2bdb925be22949232e4e55"
+2024-12-11T04:49:05.3420367Z         ],
+2024-12-11T04:49:05.3420788Z         "Parent": "",
+2024-12-11T04:49:05.3421508Z         "Comment": "buildkit.dockerfile.v0",
+2024-12-11T04:49:05.3422156Z         "Created": "2022-08-02T19:13:20.178433831Z",
+2024-12-11T04:49:05.3422745Z         "DockerVersion": "",
+2024-12-11T04:49:05.3423407Z         "Author": "",
+2024-12-11T04:49:05.3423811Z         "Config": {
+2024-12-11T04:49:05.3424229Z             "Hostname": "",
+2024-12-11T04:49:05.3424859Z             "Domainname": "",
+2024-12-11T04:49:05.3425306Z             "User": "",
+2024-12-11T04:49:05.3425754Z             "AttachStdin": false,
+2024-12-11T04:49:05.3426421Z             "AttachStdout": false,
+2024-12-11T04:49:05.3426907Z             "AttachStderr": false,
+2024-12-11T04:49:05.3427402Z             "Tty": false,
+2024-12-11T04:49:05.3428079Z             "OpenStdin": false,
+2024-12-11T04:49:05.3428624Z             "StdinOnce": false,
+2024-12-11T04:49:05.3429112Z             "Env": [
+2024-12-11T04:49:05.3429922Z                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+2024-12-11T04:49:05.3430627Z                 "QEMU_PRESERVE_ARGV0=1"
+2024-12-11T04:49:05.3431153Z             ],
+2024-12-11T04:49:05.3432108Z             "Cmd": null,
+2024-12-11T04:49:05.3432798Z             "Image": "",
+2024-12-11T04:49:05.3433266Z             "Volumes": {
+2024-12-11T04:49:05.3433946Z                 "/tmp": {}
+2024-12-11T04:49:05.3434395Z             },
+2024-12-11T04:49:05.3434811Z             "WorkingDir": "/",
+2024-12-11T04:49:05.3435494Z             "Entrypoint": [
+2024-12-11T04:49:05.3435984Z                 "/usr/bin/binfmt"
+2024-12-11T04:49:05.3436482Z             ],
+2024-12-11T04:49:05.3437093Z             "OnBuild": null,
+2024-12-11T04:49:05.3437581Z             "Labels": {
+2024-12-11T04:49:05.3438221Z                 "org.opencontainers.image.created": "2022-08-02T18:32:39.936Z",
+2024-12-11T04:49:05.3439602Z                 "org.opencontainers.image.description": "Cross-platform emulator collection distributed with Docker images",
+2024-12-11T04:49:05.3440658Z                 "org.opencontainers.image.licenses": "MIT",
+2024-12-11T04:49:05.3441861Z                 "org.opencontainers.image.revision": "a161c41c7aeaf3ef1c5b97f91aa02a12cca73432",
+2024-12-11T04:49:05.3443164Z                 "org.opencontainers.image.source": "https://github.com/tonistiigi/binfmt",
+2024-12-11T04:49:05.3444145Z                 "org.opencontainers.image.title": "Binfmt",
+2024-12-11T04:49:05.3445019Z                 "org.opencontainers.image.url": "https://github.com/tonistiigi/binfmt",
+2024-12-11T04:49:05.3446170Z                 "org.opencontainers.image.version": "qemu-v7.0.0-28"
+2024-12-11T04:49:05.3446815Z             }
+2024-12-11T04:49:05.3447158Z         },
+2024-12-11T04:49:05.3447738Z         "Architecture": "amd64",
+2024-12-11T04:49:05.3448248Z         "Os": "linux",
+2024-12-11T04:49:05.3448628Z         "Size": 60182964,
+2024-12-11T04:49:05.3449260Z         "GraphDriver": {
+2024-12-11T04:49:05.3449732Z             "Data": {
+2024-12-11T04:49:05.3450861Z                 "LowerDir": "/var/lib/docker/overlay2/ae961f4090c28900515eb13245251d5c44c16bf4b50d0229a23ce81e9724b96c/diff",
+2024-12-11T04:49:05.3452608Z                 "MergedDir": "/var/lib/docker/overlay2/8a199d60267b842336a3fb891bd09c6f6b48958f60d235d746c89398eb9f264b/merged",
+2024-12-11T04:49:05.3454195Z                 "UpperDir": "/var/lib/docker/overlay2/8a199d60267b842336a3fb891bd09c6f6b48958f60d235d746c89398eb9f264b/diff",
+2024-12-11T04:49:05.3455806Z                 "WorkDir": "/var/lib/docker/overlay2/8a199d60267b842336a3fb891bd09c6f6b48958f60d235d746c89398eb9f264b/work"
+2024-12-11T04:49:05.3456777Z             },
+2024-12-11T04:49:05.3457207Z             "Name": "overlay2"
+2024-12-11T04:49:05.3457783Z         },
+2024-12-11T04:49:05.3458165Z         "RootFS": {
+2024-12-11T04:49:05.3458608Z             "Type": "layers",
+2024-12-11T04:49:05.3459223Z             "Layers": [
+2024-12-11T04:49:05.3459952Z                 "sha256:4c67e4044f8c0fe3e3efaf76f2a3d5d3d866f8ef2e8a9da756949d90e576baa0",
+2024-12-11T04:49:05.3461004Z                 "sha256:949acf1cb73a60306e050836deb85a26fe23e226f6bcc499872b057efbf22dd1"
+2024-12-11T04:49:05.3461879Z             ]
+2024-12-11T04:49:05.3462263Z         },
+2024-12-11T04:49:05.3462699Z         "Metadata": {
+2024-12-11T04:49:05.3463300Z             "LastTagTime": "0001-01-01T00:00:00Z"
+2024-12-11T04:49:05.3463817Z         }
+2024-12-11T04:49:05.3464230Z     }
+2024-12-11T04:49:05.3464739Z ]
+2024-12-11T04:49:05.3465802Z ##[endgroup]
+2024-12-11T04:49:05.3466663Z ##[group]Installing QEMU static binaries
+2024-12-11T04:49:05.3468065Z [command]/usr/bin/docker run --rm --privileged docker.io/tonistiigi/binfmt:latest --install all
+2024-12-11T04:49:05.6170304Z installing: s390x OK
+2024-12-11T04:49:05.6173844Z installing: mips64 OK
+2024-12-11T04:49:05.6174772Z installing: arm64 OK
+2024-12-11T04:49:05.6175508Z installing: arm OK
+2024-12-11T04:49:05.6176197Z installing: ppc64le OK
+2024-12-11T04:49:05.6176731Z installing: riscv64 OK
+2024-12-11T04:49:05.6177228Z installing: mips64le OK
+2024-12-11T04:49:05.6400747Z {
+2024-12-11T04:49:05.6401699Z   "supported": [
+2024-12-11T04:49:05.6402219Z     "linux/amd64",
+2024-12-11T04:49:05.6402719Z     "linux/arm64",
+2024-12-11T04:49:05.6403829Z     "linux/riscv64",
+2024-12-11T04:49:05.6404330Z     "linux/ppc64le",
+2024-12-11T04:49:05.6404812Z     "linux/s390x",
+2024-12-11T04:49:05.6405302Z     "linux/386",
+2024-12-11T04:49:05.6405769Z     "linux/mips64le",
+2024-12-11T04:49:05.6406302Z     "linux/mips64",
+2024-12-11T04:49:05.6406836Z     "linux/arm/v7",
+2024-12-11T04:49:05.6407288Z     "linux/arm/v6"
+2024-12-11T04:49:05.6407791Z   ],
+2024-12-11T04:49:05.6408263Z   "emulators": [
+2024-12-11T04:49:05.6408676Z     "cli",
+2024-12-11T04:49:05.6409256Z     "llvm-13-runtime.binfmt",
+2024-12-11T04:49:05.6409875Z     "llvm-14-runtime.binfmt",
+2024-12-11T04:49:05.6410243Z     "llvm-15-runtime.binfmt",
+2024-12-11T04:49:05.6410814Z     "python3.10",
+2024-12-11T04:49:05.6411148Z     "qemu-aarch64",
+2024-12-11T04:49:05.6411481Z     "qemu-arm",
+2024-12-11T04:49:05.6411875Z     "qemu-mips64",
+2024-12-11T04:49:05.6412282Z     "qemu-mips64el",
+2024-12-11T04:49:05.6412652Z     "qemu-ppc64le",
+2024-12-11T04:49:05.6413016Z     "qemu-riscv64",
+2024-12-11T04:49:05.6413470Z     "qemu-s390x"
+2024-12-11T04:49:05.6413712Z   ]
+2024-12-11T04:49:05.6414127Z }
+2024-12-11T04:49:05.7800218Z ##[endgroup]
+2024-12-11T04:49:05.7801708Z ##[group]Extracting available platforms
+2024-12-11T04:49:06.1652920Z linux/amd64,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x,linux/386,linux/mips64le,linux/mips64,linux/arm/v7,linux/arm/v6
+2024-12-11T04:49:06.1654953Z ##[endgroup]
+2024-12-11T04:49:06.1805420Z ##[group]Run docker/setup-buildx-action@v3
+2024-12-11T04:49:06.1805828Z with:
+2024-12-11T04:49:06.1806112Z   driver: docker-container
+2024-12-11T04:49:06.1806446Z   install: false
+2024-12-11T04:49:06.1806729Z   use: true
+2024-12-11T04:49:06.1807024Z   cache-binary: true
+2024-12-11T04:49:06.1807314Z   cleanup: true
+2024-12-11T04:49:06.1807614Z ##[endgroup]
+2024-12-11T04:49:06.4160683Z ##[group]Docker info
+2024-12-11T04:49:06.4184287Z [command]/usr/bin/docker version
+2024-12-11T04:49:06.4393254Z Client: Docker Engine - Community
+2024-12-11T04:49:06.4394234Z  Version:           26.1.3
+2024-12-11T04:49:06.4395343Z  API version:       1.45
+2024-12-11T04:49:06.4396218Z  Go version:        go1.21.10
+2024-12-11T04:49:06.4396757Z  Git commit:        b72abbb
+2024-12-11T04:49:06.4397445Z  Built:             Thu May 16 08:33:29 2024
+2024-12-11T04:49:06.4398032Z  OS/Arch:           linux/amd64
+2024-12-11T04:49:06.4398546Z  Context:           default
+2024-12-11T04:49:06.4399102Z 
+2024-12-11T04:49:06.4399636Z Server: Docker Engine - Community
+2024-12-11T04:49:06.4400186Z  Engine:
+2024-12-11T04:49:06.4400663Z   Version:          26.1.3
+2024-12-11T04:49:06.4401184Z   API version:      1.45 (minimum version 1.24)
+2024-12-11T04:49:06.4402068Z   Go version:       go1.21.10
+2024-12-11T04:49:06.4402695Z   Git commit:       8e96db1
+2024-12-11T04:49:06.4403271Z   Built:            Thu May 16 08:33:29 2024
+2024-12-11T04:49:06.4403828Z   OS/Arch:          linux/amd64
+2024-12-11T04:49:06.4404511Z   Experimental:     false
+2024-12-11T04:49:06.4404968Z  containerd:
+2024-12-11T04:49:06.4405389Z   Version:          1.7.24
+2024-12-11T04:49:06.4406139Z   GitCommit:        88bf19b2105c8b17560993bee28a01ddc2f97182
+2024-12-11T04:49:06.4406749Z  runc:
+2024-12-11T04:49:06.4407194Z   Version:          1.2.2
+2024-12-11T04:49:06.4407794Z   GitCommit:        v1.2.2-0-g7cb3632
+2024-12-11T04:49:06.4408311Z  docker-init:
+2024-12-11T04:49:06.4408753Z   Version:          0.19.0
+2024-12-11T04:49:06.4409375Z   GitCommit:        de40ad0
+2024-12-11T04:49:06.4445811Z [command]/usr/bin/docker info
+2024-12-11T04:49:06.4886206Z Client: Docker Engine - Community
+2024-12-11T04:49:06.4887503Z  Version:    26.1.3
+2024-12-11T04:49:06.4888001Z  Context:    default
+2024-12-11T04:49:06.4888651Z  Debug Mode: false
+2024-12-11T04:49:06.4889088Z  Plugins:
+2024-12-11T04:49:06.4889524Z   buildx: Docker Buildx (Docker Inc.)
+2024-12-11T04:49:06.4890107Z     Version:  v0.19.1
+2024-12-11T04:49:06.4890702Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+2024-12-11T04:49:06.4891362Z   compose: Docker Compose (Docker Inc.)
+2024-12-11T04:49:06.4891981Z     Version:  v2.27.1
+2024-12-11T04:49:06.4892896Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
+2024-12-11T04:49:06.4893409Z 
+2024-12-11T04:49:06.4893561Z Server:
+2024-12-11T04:49:06.4894066Z  Containers: 0
+2024-12-11T04:49:06.4894417Z   Running: 0
+2024-12-11T04:49:06.4894824Z   Paused: 0
+2024-12-11T04:49:06.4895232Z   Stopped: 0
+2024-12-11T04:49:06.4895645Z  Images: 16
+2024-12-11T04:49:06.4896072Z  Server Version: 26.1.3
+2024-12-11T04:49:06.4896566Z  Storage Driver: overlay2
+2024-12-11T04:49:06.4897069Z   Backing Filesystem: extfs
+2024-12-11T04:49:06.4897569Z   Supports d_type: true
+2024-12-11T04:49:06.4898071Z   Using metacopy: false
+2024-12-11T04:49:06.4898546Z   Native Overlay Diff: false
+2024-12-11T04:49:06.4899046Z   userxattr: false
+2024-12-11T04:49:06.4899512Z  Logging Driver: json-file
+2024-12-11T04:49:06.4899999Z  Cgroup Driver: cgroupfs
+2024-12-11T04:49:06.4900467Z  Cgroup Version: 2
+2024-12-11T04:49:06.4900940Z  Plugins:
+2024-12-11T04:49:06.4901350Z   Volume: local
+2024-12-11T04:49:06.4901853Z   Network: bridge host ipvlan macvlan null overlay
+2024-12-11T04:49:06.4902766Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+2024-12-11T04:49:06.4903571Z  Swarm: inactive
+2024-12-11T04:49:06.4904100Z  Runtimes: io.containerd.runc.v2 runc
+2024-12-11T04:49:06.4904769Z  Default Runtime: runc
+2024-12-11T04:49:06.4905354Z  Init Binary: docker-init
+2024-12-11T04:49:06.4906349Z  containerd version: 88bf19b2105c8b17560993bee28a01ddc2f97182
+2024-12-11T04:49:06.4907095Z  runc version: v1.2.2-0-g7cb3632
+2024-12-11T04:49:06.4907693Z  init version: de40ad0
+2024-12-11T04:49:06.4908159Z  Security Options:
+2024-12-11T04:49:06.4908675Z   apparmor
+2024-12-11T04:49:06.4909150Z   seccomp
+2024-12-11T04:49:06.4909568Z    Profile: builtin
+2024-12-11T04:49:06.4910088Z   cgroupns
+2024-12-11T04:49:06.4910565Z  Kernel Version: 6.5.0-1025-azure
+2024-12-11T04:49:06.4910915Z  Operating System: Ubuntu 22.04.5 LTS
+2024-12-11T04:49:06.4911336Z  OSType: linux
+2024-12-11T04:49:06.4911791Z  Architecture: x86_64
+2024-12-11T04:49:06.4912260Z  CPUs: 4
+2024-12-11T04:49:06.4912754Z  Total Memory: 15.61GiB
+2024-12-11T04:49:06.4913286Z  Name: fv-az1542-928
+2024-12-11T04:49:06.4913814Z  ID: d292b4cc-acf7-406d-b50f-82233a76aea4
+2024-12-11T04:49:06.4914498Z  Docker Root Dir: /var/lib/docker
+2024-12-11T04:49:06.4915055Z  Debug Mode: false
+2024-12-11T04:49:06.4915568Z  Username: githubactions
+2024-12-11T04:49:06.4916158Z  Experimental: false
+2024-12-11T04:49:06.4916711Z  Insecure Registries:
+2024-12-11T04:49:06.4917223Z   127.0.0.0/8
+2024-12-11T04:49:06.4918038Z  Live Restore Enabled: false
+2024-12-11T04:49:06.4918350Z 
+2024-12-11T04:49:06.4918890Z ##[endgroup]
+2024-12-11T04:49:06.5903973Z ##[group]Buildx version
+2024-12-11T04:49:06.5928098Z [command]/usr/bin/docker buildx version
+2024-12-11T04:49:06.6639124Z github.com/docker/buildx v0.19.1 5113f9ea89afd597302961caf99cecd142c7ba05
+2024-12-11T04:49:06.6669649Z ##[endgroup]
+2024-12-11T04:49:06.6824326Z ##[group]Inspecting default docker context
+2024-12-11T04:49:06.6962537Z [
+2024-12-11T04:49:06.6962817Z   {
+2024-12-11T04:49:06.6963140Z     "Name": "default",
+2024-12-11T04:49:06.6963651Z     "Metadata": {},
+2024-12-11T04:49:06.6964085Z     "Endpoints": {
+2024-12-11T04:49:06.6964424Z       "docker": {
+2024-12-11T04:49:06.6964744Z         "Host": "unix:///var/run/docker.sock",
+2024-12-11T04:49:06.6965117Z         "SkipTLSVerify": false
+2024-12-11T04:49:06.6965440Z       }
+2024-12-11T04:49:06.6965697Z     },
+2024-12-11T04:49:06.6965962Z     "TLSMaterial": {},
+2024-12-11T04:49:06.6966254Z     "Storage": {
+2024-12-11T04:49:06.6966553Z       "MetadataPath": "<IN MEMORY>",
+2024-12-11T04:49:06.6966892Z       "TLSPath": "<IN MEMORY>"
+2024-12-11T04:49:06.6967213Z     }
+2024-12-11T04:49:06.6967592Z   }
+2024-12-11T04:49:06.6967868Z ]
+2024-12-11T04:49:06.6968518Z ##[endgroup]
+2024-12-11T04:49:06.6969221Z ##[group]Creating a new builder instance
+2024-12-11T04:49:06.7714108Z [command]/usr/bin/docker buildx create --name builder-e9df1925-1d1a-468e-884f-91156a092dfd --driver docker-container --buildkitd-flags --allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host --use
+2024-12-11T04:49:06.8135997Z builder-e9df1925-1d1a-468e-884f-91156a092dfd
+2024-12-11T04:49:06.8168435Z ##[endgroup]
+2024-12-11T04:49:06.8169122Z ##[group]Booting builder
+2024-12-11T04:49:06.8195675Z [command]/usr/bin/docker buildx inspect --bootstrap --builder builder-e9df1925-1d1a-468e-884f-91156a092dfd
+2024-12-11T04:49:06.8602762Z #1 [internal] booting buildkit
+2024-12-11T04:49:07.0109049Z #1 pulling image moby/buildkit:buildx-stable-1
+2024-12-11T04:49:08.6620531Z #1 pulling image moby/buildkit:buildx-stable-1 1.8s done
+2024-12-11T04:49:08.8125243Z #1 creating container buildx_buildkit_builder-e9df1925-1d1a-468e-884f-91156a092dfd0
+2024-12-11T04:49:08.9343953Z #1 creating container buildx_buildkit_builder-e9df1925-1d1a-468e-884f-91156a092dfd0 0.3s done
+2024-12-11T04:49:08.9358730Z #1 DONE 2.1s
+2024-12-11T04:49:08.9893019Z Name:          builder-e9df1925-1d1a-468e-884f-91156a092dfd
+2024-12-11T04:49:08.9893670Z Driver:        docker-container
+2024-12-11T04:49:08.9894326Z Last Activity: 2024-12-11 04:49:06 +0000 UTC
+2024-12-11T04:49:08.9895429Z 
+2024-12-11T04:49:08.9895654Z Nodes:
+2024-12-11T04:49:08.9896107Z Name:                  builder-e9df1925-1d1a-468e-884f-91156a092dfd0
+2024-12-11T04:49:08.9896879Z Endpoint:              unix:///var/run/docker.sock
+2024-12-11T04:49:08.9897934Z Status:                running
+2024-12-11T04:49:08.9898530Z BuildKit daemon flags: --allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host
+2024-12-11T04:49:08.9899176Z BuildKit version:      v0.18.1
+2024-12-11T04:49:08.9899852Z Platforms:             linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v7, linux/arm/v6
+2024-12-11T04:49:08.9900464Z Labels:
+2024-12-11T04:49:08.9900853Z  org.mobyproject.buildkit.worker.executor:         oci
+2024-12-11T04:49:08.9901344Z  org.mobyproject.buildkit.worker.hostname:         fc3fea680d67
+2024-12-11T04:49:08.9901775Z  org.mobyproject.buildkit.worker.network:          host
+2024-12-11T04:49:08.9902296Z  org.mobyproject.buildkit.worker.oci.process-mode: sandbox
+2024-12-11T04:49:08.9902772Z  org.mobyproject.buildkit.worker.selinux.enabled:  false
+2024-12-11T04:49:08.9903191Z  org.mobyproject.buildkit.worker.snapshotter:      overlayfs
+2024-12-11T04:49:08.9903819Z GC Policy rule#0:
+2024-12-11T04:49:08.9904123Z  All:            false
+2024-12-11T04:49:08.9904528Z  Filters:        type==source.local,type==exec.cachemount,type==source.git.checkout
+2024-12-11T04:49:08.9904978Z  Keep Duration:  48h0m0s
+2024-12-11T04:49:08.9905282Z  Max Used Space: 488.3MiB
+2024-12-11T04:49:08.9905578Z GC Policy rule#1:
+2024-12-11T04:49:08.9905847Z  All:            false
+2024-12-11T04:49:08.9906132Z  Keep Duration:  1440h0m0s
+2024-12-11T04:49:08.9906440Z  Reserved Space: 7.451GiB
+2024-12-11T04:49:08.9906730Z  Max Used Space: 54.95GiB
+2024-12-11T04:49:08.9907018Z  Min Free Space: 13.97GiB
+2024-12-11T04:49:08.9907312Z GC Policy rule#2:
+2024-12-11T04:49:08.9907588Z  All:            false
+2024-12-11T04:49:08.9907872Z  Reserved Space: 7.451GiB
+2024-12-11T04:49:08.9908164Z  Max Used Space: 54.95GiB
+2024-12-11T04:49:08.9908452Z  Min Free Space: 13.97GiB
+2024-12-11T04:49:08.9908735Z GC Policy rule#3:
+2024-12-11T04:49:08.9909002Z  All:            true
+2024-12-11T04:49:08.9909279Z  Reserved Space: 7.451GiB
+2024-12-11T04:49:08.9909589Z  Max Used Space: 54.95GiB
+2024-12-11T04:49:08.9909868Z  Min Free Space: 13.97GiB
+2024-12-11T04:49:08.9937264Z ##[endgroup]
+2024-12-11T04:49:09.0929642Z ##[group]Inspect builder
+2024-12-11T04:49:09.0953789Z {
+2024-12-11T04:49:09.0954389Z   "nodes": [
+2024-12-11T04:49:09.0954894Z     {
+2024-12-11T04:49:09.0955455Z       "name": "builder-e9df1925-1d1a-468e-884f-91156a092dfd0",
+2024-12-11T04:49:09.0956269Z       "endpoint": "unix:///var/run/docker.sock",
+2024-12-11T04:49:09.0956977Z       "status": "running",
+2024-12-11T04:49:09.0957990Z       "buildkitd-flags": "--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host",
+2024-12-11T04:49:09.0959638Z       "buildkit": "v0.18.1",
+2024-12-11T04:49:09.0960879Z       "platforms": "linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6",
+2024-12-11T04:49:09.0962392Z       "features": {
+2024-12-11T04:49:09.0963177Z         "Automatically load images to the Docker Engine image store": true,
+2024-12-11T04:49:09.0963998Z         "Cache export": true,
+2024-12-11T04:49:09.0964543Z         "Docker exporter": true,
+2024-12-11T04:49:09.0965088Z         "Multi-platform build": true,
+2024-12-11T04:49:09.0965591Z         "OCI exporter": true
+2024-12-11T04:49:09.0966035Z       },
+2024-12-11T04:49:09.0966460Z       "labels": {
+2024-12-11T04:49:09.0966987Z         "org.mobyproject.buildkit.worker.executor": "oci",
+2024-12-11T04:49:09.0967741Z         "org.mobyproject.buildkit.worker.hostname": "fc3fea680d67",
+2024-12-11T04:49:09.0968525Z         "org.mobyproject.buildkit.worker.network": "host",
+2024-12-11T04:49:09.0969325Z         "org.mobyproject.buildkit.worker.oci.process-mode": "sandbox",
+2024-12-11T04:49:09.0970174Z         "org.mobyproject.buildkit.worker.selinux.enabled": "false",
+2024-12-11T04:49:09.0971008Z         "org.mobyproject.buildkit.worker.snapshotter": "overlayfs"
+2024-12-11T04:49:09.0971653Z       },
+2024-12-11T04:49:09.0972043Z       "gcPolicy": [
+2024-12-11T04:49:09.0972751Z         {
+2024-12-11T04:49:09.0973222Z           "all": false,
+2024-12-11T04:49:09.0973648Z           "filter": [
+2024-12-11T04:49:09.0974156Z             "type==source.local",
+2024-12-11T04:49:09.0974715Z             "type==exec.cachemount",
+2024-12-11T04:49:09.0975236Z             "type==source.git.checkout"
+2024-12-11T04:49:09.0975775Z           ],
+2024-12-11T04:49:09.0976236Z           "keepDuration": "48h0m0s"
+2024-12-11T04:49:09.0976718Z         },
+2024-12-11T04:49:09.0977107Z         {
+2024-12-11T04:49:09.0977543Z           "all": false,
+2024-12-11T04:49:09.0977977Z           "keepDuration": "1440h0m0s"
+2024-12-11T04:49:09.0978502Z         },
+2024-12-11T04:49:09.0978913Z         {
+2024-12-11T04:49:09.0979280Z           "all": false
+2024-12-11T04:49:09.0979744Z         },
+2024-12-11T04:49:09.0980120Z         {
+2024-12-11T04:49:09.0980493Z           "all": true
+2024-12-11T04:49:09.0980935Z         }
+2024-12-11T04:49:09.0981332Z       ]
+2024-12-11T04:49:09.0981699Z     }
+2024-12-11T04:49:09.0982111Z   ],
+2024-12-11T04:49:09.0982599Z   "name": "builder-e9df1925-1d1a-468e-884f-91156a092dfd",
+2024-12-11T04:49:09.0983231Z   "driver": "docker-container",
+2024-12-11T04:49:09.0983756Z   "lastActivity": "2024-12-11T04:49:06.000Z"
+2024-12-11T04:49:09.0984285Z }
+2024-12-11T04:49:09.0985038Z ##[endgroup]
+2024-12-11T04:49:09.0985831Z ##[group]BuildKit version
+2024-12-11T04:49:09.0986404Z builder-e9df1925-1d1a-468e-884f-91156a092dfd0: v0.18.1
+2024-12-11T04:49:09.0987349Z ##[endgroup]
+2024-12-11T04:49:09.1109746Z ##[group]Run docker/metadata-action@v5
+2024-12-11T04:49:09.1110148Z with:
+2024-12-11T04:49:09.1110513Z   images: ghcr.io/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:09.1110931Z   tags: type=sha,format=long
+type=raw,value=latest
+
+2024-12-11T04:49:09.1111300Z   context: workflow
+2024-12-11T04:49:09.1111719Z   github-token: ***
+2024-12-11T04:49:09.1112025Z ##[endgroup]
+2024-12-11T04:49:09.7682528Z ##[group]Context info
+2024-12-11T04:49:09.7683003Z eventName: schedule
+2024-12-11T04:49:09.7683642Z sha: 094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:09.7684228Z ref: refs/heads/main
+2024-12-11T04:49:09.7684622Z workflow: Build container
+2024-12-11T04:49:09.7685146Z action: docker_meta
+2024-12-11T04:49:09.7685633Z actor: some-natalie
+2024-12-11T04:49:09.7686000Z runNumber: 53
+2024-12-11T04:49:09.7686459Z runId: 12269879788
+2024-12-11T04:49:09.7687079Z commitDate: Mon Dec 09 2024 17:47:56 GMT+0000 (Coordinated Universal Time)
+2024-12-11T04:49:09.7687996Z ##[endgroup]
+2024-12-11T04:49:09.7693498Z ##[group]Processing images input
+2024-12-11T04:49:09.7694080Z name=ghcr.io/some-natalie/jekyll-in-a-can,enable=true
+2024-12-11T04:49:09.7695603Z ##[endgroup]
+2024-12-11T04:49:09.7701931Z ##[group]Processing tags input
+2024-12-11T04:49:09.7702756Z type=raw,value=latest,enable=true,priority=200
+2024-12-11T04:49:09.7703520Z type=sha,format=long,prefix=sha-,enable=true,priority=100
+2024-12-11T04:49:09.7704650Z ##[endgroup]
+2024-12-11T04:49:09.7705511Z ##[group]Processing flavor input
+2024-12-11T04:49:09.7706258Z latest=auto
+2024-12-11T04:49:09.7706989Z prefix=
+2024-12-11T04:49:09.7707664Z prefixLatest=false
+2024-12-11T04:49:09.7708316Z suffix=
+2024-12-11T04:49:09.7708826Z suffixLatest=false
+2024-12-11T04:49:09.7709589Z ##[endgroup]
+2024-12-11T04:49:09.7745822Z ##[group]Docker image version
+2024-12-11T04:49:09.7746321Z latest
+2024-12-11T04:49:09.7747235Z ##[endgroup]
+2024-12-11T04:49:09.7752136Z ##[group]Docker tags
+2024-12-11T04:49:09.7752866Z ghcr.io/some-natalie/jekyll-in-a-can:latest
+2024-12-11T04:49:09.7753857Z ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:09.7755027Z ##[endgroup]
+2024-12-11T04:49:09.7860960Z ##[group]Docker labels
+2024-12-11T04:49:09.7861560Z org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+2024-12-11T04:49:09.7863105Z org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+2024-12-11T04:49:09.7864063Z org.opencontainers.image.licenses=MIT
+2024-12-11T04:49:09.7864901Z org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:09.7866148Z org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:09.7867157Z org.opencontainers.image.title=jekyll-in-a-can
+2024-12-11T04:49:09.7868094Z org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:09.7869073Z org.opencontainers.image.version=latest
+2024-12-11T04:49:09.7870056Z ##[endgroup]
+2024-12-11T04:49:09.7870965Z ##[group]Annotations
+2024-12-11T04:49:09.7871706Z manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+2024-12-11T04:49:09.7872971Z manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+2024-12-11T04:49:09.7874035Z manifest:org.opencontainers.image.licenses=MIT
+2024-12-11T04:49:09.7874996Z manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:09.7876221Z manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:09.7877468Z manifest:org.opencontainers.image.title=jekyll-in-a-can
+2024-12-11T04:49:09.7878421Z manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:09.7879374Z manifest:org.opencontainers.image.version=latest
+2024-12-11T04:49:09.7880555Z ##[endgroup]
+2024-12-11T04:49:09.7881697Z ##[group]JSON output
+2024-12-11T04:49:09.7882366Z {
+2024-12-11T04:49:09.7882726Z   "tags": [
+2024-12-11T04:49:09.7883252Z     "ghcr.io/some-natalie/jekyll-in-a-can:latest",
+2024-12-11T04:49:09.7884697Z     "ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"
+2024-12-11T04:49:09.7885547Z   ],
+2024-12-11T04:49:09.7885958Z   "labels": {
+2024-12-11T04:49:09.7886783Z     "org.opencontainers.image.created": "2024-12-11T04:49:09.770Z",
+2024-12-11T04:49:09.7887972Z     "org.opencontainers.image.description": "🧪🥫 - it's Jekyll in a container",
+2024-12-11T04:49:09.7889125Z     "org.opencontainers.image.licenses": "MIT",
+2024-12-11T04:49:09.7890053Z     "org.opencontainers.image.revision": "094271388ab54e135b8560900a6fb6d6345b4492",
+2024-12-11T04:49:09.7891211Z     "org.opencontainers.image.source": "https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7892356Z     "org.opencontainers.image.title": "jekyll-in-a-can",
+2024-12-11T04:49:09.7893371Z     "org.opencontainers.image.url": "https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7894264Z     "org.opencontainers.image.version": "latest"
+2024-12-11T04:49:09.7895014Z   },
+2024-12-11T04:49:09.7895503Z   "annotations": [
+2024-12-11T04:49:09.7896115Z     "manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z",
+2024-12-11T04:49:09.7897783Z     "manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container",
+2024-12-11T04:49:09.7898825Z     "manifest:org.opencontainers.image.licenses=MIT",
+2024-12-11T04:49:09.7899652Z     "manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492",
+2024-12-11T04:49:09.7900756Z     "manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7901767Z     "manifest:org.opencontainers.image.title=jekyll-in-a-can",
+2024-12-11T04:49:09.7902679Z     "manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7903636Z     "manifest:org.opencontainers.image.version=latest"
+2024-12-11T04:49:09.7904218Z   ]
+2024-12-11T04:49:09.7904564Z }
+2024-12-11T04:49:09.7905336Z ##[endgroup]
+2024-12-11T04:49:09.7906123Z ##[group]Bake file definition (tags)
+2024-12-11T04:49:09.7906718Z {
+2024-12-11T04:49:09.7907093Z   "target": {
+2024-12-11T04:49:09.7907531Z     "docker-metadata-action": {
+2024-12-11T04:49:09.7908074Z       "tags": [
+2024-12-11T04:49:09.7908577Z         "ghcr.io/some-natalie/jekyll-in-a-can:latest",
+2024-12-11T04:49:09.7909397Z         "ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"
+2024-12-11T04:49:09.7910219Z       ],
+2024-12-11T04:49:09.7910541Z       "args": {
+2024-12-11T04:49:09.7911104Z         "DOCKER_META_IMAGES": "ghcr.io/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7911856Z         "DOCKER_META_VERSION": "latest"
+2024-12-11T04:49:09.7912295Z       }
+2024-12-11T04:49:09.7912676Z     }
+2024-12-11T04:49:09.7913076Z   }
+2024-12-11T04:49:09.7913457Z }
+2024-12-11T04:49:09.7914191Z ##[endgroup]
+2024-12-11T04:49:09.7915011Z ##[group]Bake file definition (labels)
+2024-12-11T04:49:09.7915522Z {
+2024-12-11T04:49:09.7915904Z   "target": {
+2024-12-11T04:49:09.7916375Z     "docker-metadata-action": {
+2024-12-11T04:49:09.7916838Z       "labels": {
+2024-12-11T04:49:09.7917409Z         "org.opencontainers.image.created": "2024-12-11T04:49:09.770Z",
+2024-12-11T04:49:09.7918525Z         "org.opencontainers.image.description": "🧪🥫 - it's Jekyll in a container",
+2024-12-11T04:49:09.7919436Z         "org.opencontainers.image.licenses": "MIT",
+2024-12-11T04:49:09.7920260Z         "org.opencontainers.image.revision": "094271388ab54e135b8560900a6fb6d6345b4492",
+2024-12-11T04:49:09.7921517Z         "org.opencontainers.image.source": "https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7922403Z         "org.opencontainers.image.title": "jekyll-in-a-can",
+2024-12-11T04:49:09.7923336Z         "org.opencontainers.image.url": "https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7924144Z         "org.opencontainers.image.version": "latest"
+2024-12-11T04:49:09.7924667Z       }
+2024-12-11T04:49:09.7925128Z     }
+2024-12-11T04:49:09.7925430Z   }
+2024-12-11T04:49:09.7926030Z }
+2024-12-11T04:49:09.7927149Z ##[endgroup]
+2024-12-11T04:49:09.7927826Z ##[group]Bake file definition (annotations)
+2024-12-11T04:49:09.7928499Z {
+2024-12-11T04:49:09.7928818Z   "target": {
+2024-12-11T04:49:09.7929236Z     "docker-metadata-action": {
+2024-12-11T04:49:09.7929773Z       "annotations": [
+2024-12-11T04:49:09.7930433Z         "manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z",
+2024-12-11T04:49:09.7931644Z         "manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container",
+2024-12-11T04:49:09.7932600Z         "manifest:org.opencontainers.image.licenses=MIT",
+2024-12-11T04:49:09.7933451Z         "manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492",
+2024-12-11T04:49:09.7934573Z         "manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7935627Z         "manifest:org.opencontainers.image.title=jekyll-in-a-can",
+2024-12-11T04:49:09.7936518Z         "manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can",
+2024-12-11T04:49:09.7937444Z         "manifest:org.opencontainers.image.version=latest"
+2024-12-11T04:49:09.7938363Z       ]
+2024-12-11T04:49:09.7938690Z     }
+2024-12-11T04:49:09.7939185Z   }
+2024-12-11T04:49:09.7939631Z }
+2024-12-11T04:49:09.7940271Z ##[endgroup]
+2024-12-11T04:49:09.8072304Z ##[group]Run docker/login-action@v3
+2024-12-11T04:49:09.8072635Z with:
+2024-12-11T04:49:09.8072984Z   username: some-natalie
+2024-12-11T04:49:09.8073426Z   password: ***
+2024-12-11T04:49:09.8073683Z   registry: ghcr.io
+2024-12-11T04:49:09.8074024Z   ecr: auto
+2024-12-11T04:49:09.8074276Z   logout: true
+2024-12-11T04:49:09.8074508Z env:
+2024-12-11T04:49:09.8074842Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T04:49:09.8075540Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:09.8077958Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T04:49:09.8081817Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T04:49:09.8087708Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T04:49:09.8092327Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T04:49:09.8093316Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T04:49:09.8094316Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T04:49:09.8095193Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T04:49:09.8095817Z ##[endgroup]
+2024-12-11T04:49:10.0936531Z Logging into ghcr.io...
+2024-12-11T04:49:10.2336286Z Login Succeeded!
+2024-12-11T04:49:10.2487461Z ##[group]Run docker/build-push-action@v6
+2024-12-11T04:49:10.2487950Z with:
+2024-12-11T04:49:10.2488227Z   file: ./Dockerfile
+2024-12-11T04:49:10.2488473Z   platforms: linux/amd64,linux/arm64
+2024-12-11T04:49:10.2488872Z   push: true
+2024-12-11T04:49:10.2489195Z   tags: ghcr.io/some-natalie/jekyll-in-a-can:latest
+2024-12-11T04:49:10.2491359Z   annotations: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T04:49:10.2493443Z   load: false
+2024-12-11T04:49:10.2493779Z   no-cache: false
+2024-12-11T04:49:10.2494133Z   pull: false
+2024-12-11T04:49:10.2494512Z   github-token: ***
+2024-12-11T04:49:10.2494768Z env:
+2024-12-11T04:49:10.2495122Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T04:49:10.2495835Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:10.2498089Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T04:49:10.2501738Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T04:49:10.2507626Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T04:49:10.2512425Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T04:49:10.2513687Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T04:49:10.2514754Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T04:49:10.2515684Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T04:49:10.2516256Z ##[endgroup]
+2024-12-11T04:49:10.4813945Z ##[group]GitHub Actions runtime token ACs
+2024-12-11T04:49:10.4826181Z refs/heads/main: read/write
+2024-12-11T04:49:10.4827668Z ##[endgroup]
+2024-12-11T04:49:10.4828636Z ##[group]Docker info
+2024-12-11T04:49:10.4904466Z [command]/usr/bin/docker version
+2024-12-11T04:49:10.5106657Z Client: Docker Engine - Community
+2024-12-11T04:49:10.5107846Z  Version:           26.1.3
+2024-12-11T04:49:10.5108472Z  API version:       1.45
+2024-12-11T04:49:10.5108986Z  Go version:        go1.21.10
+2024-12-11T04:49:10.5109491Z  Git commit:        b72abbb
+2024-12-11T04:49:10.5110015Z  Built:             Thu May 16 08:33:29 2024
+2024-12-11T04:49:10.5110539Z  OS/Arch:           linux/amd64
+2024-12-11T04:49:10.5111025Z  Context:           default
+2024-12-11T04:49:10.5111366Z 
+2024-12-11T04:49:10.5111544Z Server: Docker Engine - Community
+2024-12-11T04:49:10.5112018Z  Engine:
+2024-12-11T04:49:10.5112436Z   Version:          26.1.3
+2024-12-11T04:49:10.5112971Z   API version:      1.45 (minimum version 1.24)
+2024-12-11T04:49:10.5113518Z   Go version:       go1.21.10
+2024-12-11T04:49:10.5114029Z   Git commit:       8e96db1
+2024-12-11T04:49:10.5114520Z   Built:            Thu May 16 08:33:29 2024
+2024-12-11T04:49:10.5115036Z   OS/Arch:          linux/amd64
+2024-12-11T04:49:10.5115573Z   Experimental:     false
+2024-12-11T04:49:10.5116049Z  containerd:
+2024-12-11T04:49:10.5116440Z   Version:          1.7.24
+2024-12-11T04:49:10.5117025Z   GitCommit:        88bf19b2105c8b17560993bee28a01ddc2f97182
+2024-12-11T04:49:10.5117656Z  runc:
+2024-12-11T04:49:10.5118054Z   Version:          1.2.2
+2024-12-11T04:49:10.5118547Z   GitCommit:        v1.2.2-0-g7cb3632
+2024-12-11T04:49:10.5119086Z  docker-init:
+2024-12-11T04:49:10.5119505Z   Version:          0.19.0
+2024-12-11T04:49:10.5119983Z   GitCommit:        de40ad0
+2024-12-11T04:49:10.5167862Z [command]/usr/bin/docker info
+2024-12-11T04:49:10.5600279Z Client: Docker Engine - Community
+2024-12-11T04:49:10.5601589Z  Version:    26.1.3
+2024-12-11T04:49:10.5602285Z  Context:    default
+2024-12-11T04:49:10.5602892Z  Debug Mode: false
+2024-12-11T04:49:10.5603299Z  Plugins:
+2024-12-11T04:49:10.5603747Z   buildx: Docker Buildx (Docker Inc.)
+2024-12-11T04:49:10.5604338Z     Version:  v0.19.1
+2024-12-11T04:49:10.5604852Z     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+2024-12-11T04:49:10.5605518Z   compose: Docker Compose (Docker Inc.)
+2024-12-11T04:49:10.5606105Z     Version:  v2.27.1
+2024-12-11T04:49:10.5606634Z     Path:     /usr/libexec/docker/cli-plugins/docker-compose
+2024-12-11T04:49:10.5607121Z 
+2024-12-11T04:49:10.5607265Z Server:
+2024-12-11T04:49:10.5607693Z  Containers: 1
+2024-12-11T04:49:10.5608083Z   Running: 1
+2024-12-11T04:49:10.5608484Z   Paused: 0
+2024-12-11T04:49:10.5608936Z   Stopped: 0
+2024-12-11T04:49:10.5609320Z  Images: 17
+2024-12-11T04:49:10.5609708Z  Server Version: 26.1.3
+2024-12-11T04:49:10.5610210Z  Storage Driver: overlay2
+2024-12-11T04:49:10.5610659Z   Backing Filesystem: extfs
+2024-12-11T04:49:10.5611118Z   Supports d_type: true
+2024-12-11T04:49:10.5611623Z   Using metacopy: false
+2024-12-11T04:49:10.5612060Z   Native Overlay Diff: false
+2024-12-11T04:49:10.5612563Z   userxattr: false
+2024-12-11T04:49:10.5613078Z  Logging Driver: json-file
+2024-12-11T04:49:10.5613561Z  Cgroup Driver: cgroupfs
+2024-12-11T04:49:10.5614044Z  Cgroup Version: 2
+2024-12-11T04:49:10.5614578Z  Plugins:
+2024-12-11T04:49:10.5614941Z   Volume: local
+2024-12-11T04:49:10.5615410Z   Network: bridge host ipvlan macvlan null overlay
+2024-12-11T04:49:10.5617288Z   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+2024-12-11T04:49:10.5617997Z  Swarm: inactive
+2024-12-11T04:49:10.5618463Z  Runtimes: io.containerd.runc.v2 runc
+2024-12-11T04:49:10.5619124Z  Default Runtime: runc
+2024-12-11T04:49:10.5619600Z  Init Binary: docker-init
+2024-12-11T04:49:10.5620249Z  containerd version: 88bf19b2105c8b17560993bee28a01ddc2f97182
+2024-12-11T04:49:10.5621085Z  runc version: v1.2.2-0-g7cb3632
+2024-12-11T04:49:10.5621636Z  init version: de40ad0
+2024-12-11T04:49:10.5622176Z  Security Options:
+2024-12-11T04:49:10.5622737Z   apparmor
+2024-12-11T04:49:10.5623110Z   seccomp
+2024-12-11T04:49:10.5623541Z    Profile: builtin
+2024-12-11T04:49:10.5624064Z   cgroupns
+2024-12-11T04:49:10.5624479Z  Kernel Version: 6.5.0-1025-azure
+2024-12-11T04:49:10.5625047Z  Operating System: Ubuntu 22.04.5 LTS
+2024-12-11T04:49:10.5625628Z  OSType: linux
+2024-12-11T04:49:10.5626042Z  Architecture: x86_64
+2024-12-11T04:49:10.5626523Z  CPUs: 4
+2024-12-11T04:49:10.5627049Z  Total Memory: 15.61GiB
+2024-12-11T04:49:10.5627551Z  Name: fv-az1542-928
+2024-12-11T04:49:10.5628032Z  ID: d292b4cc-acf7-406d-b50f-82233a76aea4
+2024-12-11T04:49:10.5628700Z  Docker Root Dir: /var/lib/docker
+2024-12-11T04:49:10.5629256Z  Debug Mode: false
+2024-12-11T04:49:10.5629711Z  Username: githubactions
+2024-12-11T04:49:10.5630329Z  Experimental: false
+2024-12-11T04:49:10.5630820Z  Insecure Registries:
+2024-12-11T04:49:10.5631275Z   127.0.0.0/8
+2024-12-11T04:49:10.5631848Z  Live Restore Enabled: false
+2024-12-11T04:49:10.5632221Z 
+2024-12-11T04:49:10.5632841Z ##[endgroup]
+2024-12-11T04:49:10.5633843Z ##[group]Proxy configuration
+2024-12-11T04:49:10.5634720Z No proxy configuration found
+2024-12-11T04:49:10.5635534Z ##[endgroup]
+2024-12-11T04:49:10.6145814Z ##[group]Buildx version
+2024-12-11T04:49:10.6170111Z [command]/usr/bin/docker buildx version
+2024-12-11T04:49:10.6562083Z github.com/docker/buildx v0.19.1 5113f9ea89afd597302961caf99cecd142c7ba05
+2024-12-11T04:49:10.6592273Z ##[endgroup]
+2024-12-11T04:49:10.6593048Z ##[group]Builder info
+2024-12-11T04:49:10.7480562Z {
+2024-12-11T04:49:10.7481214Z   "nodes": [
+2024-12-11T04:49:10.7481929Z     {
+2024-12-11T04:49:10.7482451Z       "name": "builder-e9df1925-1d1a-468e-884f-91156a092dfd0",
+2024-12-11T04:49:10.7483328Z       "endpoint": "unix:///var/run/docker.sock",
+2024-12-11T04:49:10.7483987Z       "status": "running",
+2024-12-11T04:49:10.7484886Z       "buildkitd-flags": "--allow-insecure-entitlement security.insecure --allow-insecure-entitlement network.host",
+2024-12-11T04:49:10.7486020Z       "buildkit": "v0.18.1",
+2024-12-11T04:49:10.7487228Z       "platforms": "linux/amd64,linux/amd64/v2,linux/amd64/v3,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6",
+2024-12-11T04:49:10.7488353Z       "features": {
+2024-12-11T04:49:10.7489093Z         "Automatically load images to the Docker Engine image store": true,
+2024-12-11T04:49:10.7489895Z         "Cache export": true,
+2024-12-11T04:49:10.7490391Z         "Docker exporter": true,
+2024-12-11T04:49:10.7491100Z         "Multi-platform build": true,
+2024-12-11T04:49:10.7491729Z         "OCI exporter": true
+2024-12-11T04:49:10.7492165Z       },
+2024-12-11T04:49:10.7492667Z       "labels": {
+2024-12-11T04:49:10.7493254Z         "org.mobyproject.buildkit.worker.executor": "oci",
+2024-12-11T04:49:10.7494015Z         "org.mobyproject.buildkit.worker.hostname": "fc3fea680d67",
+2024-12-11T04:49:10.7494890Z         "org.mobyproject.buildkit.worker.network": "host",
+2024-12-11T04:49:10.7495756Z         "org.mobyproject.buildkit.worker.oci.process-mode": "sandbox",
+2024-12-11T04:49:10.7496725Z         "org.mobyproject.buildkit.worker.selinux.enabled": "false",
+2024-12-11T04:49:10.7497711Z         "org.mobyproject.buildkit.worker.snapshotter": "overlayfs"
+2024-12-11T04:49:10.7498498Z       },
+2024-12-11T04:49:10.7498962Z       "gcPolicy": [
+2024-12-11T04:49:10.7499475Z         {
+2024-12-11T04:49:10.7499964Z           "all": false,
+2024-12-11T04:49:10.7500436Z           "filter": [
+2024-12-11T04:49:10.7501788Z             "type==source.local",
+2024-12-11T04:49:10.7502434Z             "type==exec.cachemount",
+2024-12-11T04:49:10.7503020Z             "type==source.git.checkout"
+2024-12-11T04:49:10.7503626Z           ],
+2024-12-11T04:49:10.7504090Z           "keepDuration": "48h0m0s"
+2024-12-11T04:49:10.7504597Z         },
+2024-12-11T04:49:10.7505124Z         {
+2024-12-11T04:49:10.7505581Z           "all": false,
+2024-12-11T04:49:10.7506066Z           "keepDuration": "1440h0m0s"
+2024-12-11T04:49:10.7506732Z         },
+2024-12-11T04:49:10.7507188Z         {
+2024-12-11T04:49:10.7507595Z           "all": false
+2024-12-11T04:49:10.7508178Z         },
+2024-12-11T04:49:10.7508662Z         {
+2024-12-11T04:49:10.7509041Z           "all": true
+2024-12-11T04:49:10.7509642Z         }
+2024-12-11T04:49:10.7510102Z       ]
+2024-12-11T04:49:10.7510453Z     }
+2024-12-11T04:49:10.7510980Z   ],
+2024-12-11T04:49:10.7511595Z   "name": "builder-e9df1925-1d1a-468e-884f-91156a092dfd",
+2024-12-11T04:49:10.7512226Z   "driver": "docker-container",
+2024-12-11T04:49:10.7512975Z   "lastActivity": "2024-12-11T04:49:06.000Z"
+2024-12-11T04:49:10.7513590Z }
+2024-12-11T04:49:10.7514309Z ##[endgroup]
+2024-12-11T04:49:10.9684781Z [command]/usr/bin/docker buildx build --annotation manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z --annotation manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container --annotation manifest:org.opencontainers.image.licenses=MIT --annotation manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492 --annotation manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can --annotation manifest:org.opencontainers.image.title=jekyll-in-a-can --annotation manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can --annotation manifest:org.opencontainers.image.version=latest --file ./Dockerfile --iidfile /home/runner/work/_temp/docker-actions-toolkit-rCMyhQ/build-iidfile-33c5142a84.txt --platform linux/amd64,linux/arm64 --attest type=provenance,mode=max,builder-id=https://github.com/some-natalie/jekyll-in-a-can/actions/runs/12269879788/attempts/1 --secret id=GIT_AUTH_TOKEN,src=/home/runner/work/_temp/docker-actions-toolkit-rCMyhQ/tmp-2535-EG5unSUMGjtA --tag ghcr.io/some-natalie/jekyll-in-a-can:latest --metadata-file /home/runner/work/_temp/docker-actions-toolkit-rCMyhQ/build-metadata-011629fcfa.json --push https://github.com/some-natalie/jekyll-in-a-can.git#094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:11.2266002Z #0 building with "builder-e9df1925-1d1a-468e-884f-91156a092dfd" instance using docker-container driver
+2024-12-11T04:49:11.2266534Z 
+2024-12-11T04:49:11.2266976Z #1 [internal] load git source https://github.com/some-natalie/jekyll-in-a-can.git#094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T04:49:11.2267707Z #1 0.012 Initialized empty Git repository in /var/lib/buildkit/runc-overlayfs/snapshots/snapshots/1/fs/
+2024-12-11T04:49:11.2268438Z #1 0.016 fatal: Not a valid object name 094271388ab54e135b8560900a6fb6d6345b4492^{commit}
+2024-12-11T04:49:11.2925021Z #1 0.232 From https://github.com/some-natalie/jekyll-in-a-can
+2024-12-11T04:49:11.2926237Z #1 0.232  * branch            094271388ab54e135b8560900a6fb6d6345b4492 -> FETCH_HEAD
+2024-12-11T04:49:11.4723880Z #1 DONE 0.3s
+2024-12-11T04:49:11.4724159Z 
+2024-12-11T04:49:11.4724526Z #2 [linux/amd64 internal] load metadata for cgr.dev/chainguard/ruby:latest-dev
+2024-12-11T04:49:12.5168344Z #2 ...
+2024-12-11T04:49:12.5168798Z 
+2024-12-11T04:49:12.5169084Z #3 [linux/arm64 internal] load metadata for cgr.dev/chainguard/ruby:latest-dev
+2024-12-11T04:49:12.5169621Z #3 DONE 1.2s
+2024-12-11T04:49:12.7328486Z 
+2024-12-11T04:49:12.7329132Z #2 [linux/amd64 internal] load metadata for cgr.dev/chainguard/ruby:latest-dev
+2024-12-11T04:49:12.7329685Z #2 DONE 1.2s
+2024-12-11T04:49:12.7329807Z 
+2024-12-11T04:49:12.7330511Z #4 [linux/arm64 1/8] FROM cgr.dev/chainguard/ruby:latest-dev@sha256:ecb92983e636780adaa764cdb6b1142fc7d25a3b72f02f9947d2b4992da43014
+2024-12-11T04:49:12.7332143Z #4 resolve cgr.dev/chainguard/ruby:latest-dev@sha256:ecb92983e636780adaa764cdb6b1142fc7d25a3b72f02f9947d2b4992da43014 done
+2024-12-11T04:49:12.7333362Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 2.10MB / 217.73MB 0.2s
+2024-12-11T04:49:12.8825630Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 17.83MB / 217.73MB 0.3s
+2024-12-11T04:49:13.0324802Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 33.55MB / 217.73MB 0.5s
+2024-12-11T04:49:13.1824345Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 48.23MB / 217.73MB 0.6s
+2024-12-11T04:49:13.3331741Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 66.06MB / 217.73MB 0.8s
+2024-12-11T04:49:13.6327829Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 87.03MB / 217.73MB 1.1s
+2024-12-11T04:49:13.7824504Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 102.56MB / 217.73MB 1.2s
+2024-12-11T04:49:13.9323955Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 120.59MB / 217.73MB 1.4s
+2024-12-11T04:49:14.0823629Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 136.31MB / 217.73MB 1.5s
+2024-12-11T04:49:14.2323736Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 148.90MB / 217.73MB 1.7s
+2024-12-11T04:49:14.3825968Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 164.63MB / 217.73MB 1.8s
+2024-12-11T04:49:14.5339589Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 177.21MB / 217.73MB 2.0s
+2024-12-11T04:49:14.6822172Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 192.94MB / 217.73MB 2.1s
+2024-12-11T04:49:14.8322442Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 205.52MB / 217.73MB 2.3s
+2024-12-11T04:49:15.2826663Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 217.73MB / 217.73MB 2.7s
+2024-12-11T04:49:15.4250769Z #4 sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 217.73MB / 217.73MB 2.8s done
+2024-12-11T04:49:15.5865496Z #4 extracting sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982
+2024-12-11T04:49:19.3448789Z #4 extracting sha256:4cc3a54ebdc91b668102369e525052be13e7628192514efd190a4010b4e1e982 3.9s done
+2024-12-11T04:49:19.3449859Z #4 DONE 6.8s
+2024-12-11T04:49:19.3450405Z 
+2024-12-11T04:49:19.3454263Z #5 [linux/amd64 1/8] FROM cgr.dev/chainguard/ruby:latest-dev@sha256:ecb92983e636780adaa764cdb6b1142fc7d25a3b72f02f9947d2b4992da43014
+2024-12-11T04:49:19.3455906Z #5 resolve cgr.dev/chainguard/ruby:latest-dev@sha256:ecb92983e636780adaa764cdb6b1142fc7d25a3b72f02f9947d2b4992da43014 done
+2024-12-11T04:49:19.3457342Z #5 sha256:d0ae4ef07db9efd58340af544be7abde51fdb74792645954d6f510d61f1b0dad 224.06MB / 224.06MB 3.8s done
+2024-12-11T04:49:19.3458277Z #5 extracting sha256:d0ae4ef07db9efd58340af544be7abde51fdb74792645954d6f510d61f1b0dad
+2024-12-11T04:49:20.3240625Z #5 extracting sha256:d0ae4ef07db9efd58340af544be7abde51fdb74792645954d6f510d61f1b0dad 3.9s done
+2024-12-11T04:49:20.3242120Z #5 DONE 7.8s
+2024-12-11T04:49:20.3242371Z 
+2024-12-11T04:49:20.3242686Z #6 [linux/arm64 2/8] RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+2024-12-11T04:49:22.2779333Z #6 DONE 2.9s
+2024-12-11T04:49:22.2779889Z 
+2024-12-11T04:49:22.2780606Z #7 [linux/amd64 2/8] RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+2024-12-11T04:49:22.4388334Z #7 DONE 1.9s
+2024-12-11T04:49:22.4388670Z 
+2024-12-11T04:49:22.4388906Z #8 [linux/amd64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T04:49:32.3385914Z #8 ...
+2024-12-11T04:49:32.3386349Z 
+2024-12-11T04:49:32.3387060Z #9 [linux/arm64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T04:49:33.8909294Z #9 ...
+2024-12-11T04:49:33.8909559Z 
+2024-12-11T04:49:33.8909875Z #8 [linux/amd64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T04:49:33.8910752Z #8 11.60 Successfully installed rubygems-update-3.5.23
+2024-12-11T04:49:33.8912147Z #8 11.60 Parsing documentation for rubygems-update-3.5.23
+2024-12-11T04:49:33.8912798Z #8 11.60 Installing ri documentation for rubygems-update-3.5.23
+2024-12-11T04:49:33.8913886Z #8 11.60 Done installing documentation for rubygems-update after 1 seconds
+2024-12-11T04:49:33.8914640Z #8 11.60 Parsing documentation for rubygems-update-3.5.23
+2024-12-11T04:49:33.8915306Z #8 11.60 Done installing documentation for rubygems-update after 0 seconds
+2024-12-11T04:49:33.8916060Z #8 11.60 Installing RubyGems 3.5.23
+2024-12-11T04:49:34.4766314Z #8 12.19   Successfully built RubyGem
+2024-12-11T04:49:34.4767340Z #8 12.19   Name: bundler
+2024-12-11T04:49:34.4767846Z #8 12.19   Version: 2.5.23
+2024-12-11T04:49:34.4768243Z #8 12.19   File: bundler-2.5.23.gem
+2024-12-11T04:49:34.4768797Z #8 12.19 Bundler 2.5.23 installed
+2024-12-11T04:49:34.4769260Z #8 12.19 RubyGems 3.5.23 installed
+2024-12-11T04:49:34.4769679Z #8 12.19 Regenerating binstubs
+2024-12-11T04:49:34.4770273Z #8 12.19 Regenerating plugins
+2024-12-11T04:49:34.4770766Z #8 12.19 
+2024-12-11T04:49:34.4771115Z #8 12.19 # 3.5.23 / 2024-11-05
+2024-12-11T04:49:34.4771623Z #8 12.19 
+2024-12-11T04:49:34.4771973Z #8 12.19 ## Enhancements:
+2024-12-11T04:49:34.4772325Z #8 12.19 
+2024-12-11T04:49:34.4772926Z #8 12.19 * Validate user input encoding of `gem` CLI arguments. Pull request
+2024-12-11T04:49:34.4773686Z #8 12.19   [#6471](https://github.com/rubygems/rubygems/pull/6471) by
+2024-12-11T04:49:34.4774223Z #8 12.19   deivid-rodriguez
+2024-12-11T04:49:34.4774898Z #8 12.19 * Fix `gem update --system` leaving old default bundler executables
+2024-12-11T04:49:34.4775540Z #8 12.19   around. Pull request
+2024-12-11T04:49:34.4776045Z #8 12.19   [#8172](https://github.com/rubygems/rubygems/pull/8172) by
+2024-12-11T04:49:34.4776773Z #8 12.19   deivid-rodriguez
+2024-12-11T04:49:34.4777288Z #8 12.19 * Installs bundler 2.5.23 as a default gem.
+2024-12-11T04:49:34.4777767Z #8 12.19 
+2024-12-11T04:49:34.4778236Z #8 12.19 ## Bug fixes:
+2024-12-11T04:49:34.4778665Z #8 12.19 
+2024-12-11T04:49:34.4779179Z #8 12.19 * Fix commands with 2 MFA requests when webauthn is enabled. Pull request
+2024-12-11T04:49:34.4780091Z #8 12.19   [#8174](https://github.com/rubygems/rubygems/pull/8174) by
+2024-12-11T04:49:34.4780712Z #8 12.19   deivid-rodriguez
+2024-12-11T04:49:34.4781283Z #8 12.19 * Make `--enable-load-relative` binstubs prolog work when Ruby is not
+2024-12-11T04:49:34.4782199Z #8 12.19   installed in the same directory as the binstub. Pull request
+2024-12-11T04:49:34.4782932Z #8 12.19   [#7872](https://github.com/rubygems/rubygems/pull/7872) by
+2024-12-11T04:49:34.4783490Z #8 12.19   deivid-rodriguez
+2024-12-11T04:49:34.4784031Z #8 12.19 
+2024-12-11T04:49:34.4784376Z #8 12.19 ## Performance:
+2024-12-11T04:49:34.4784718Z #8 12.19 
+2024-12-11T04:49:34.4785321Z #8 12.19 * Speed up `gem install <nonexistent-gem>` by finding alternative name
+2024-12-11T04:49:34.4785982Z #8 12.19   suggestions faster. Pull request
+2024-12-11T04:49:34.4786618Z #8 12.19   [#8084](https://github.com/rubygems/rubygems/pull/8084) by duckinator
+2024-12-11T04:49:34.4787375Z #8 12.19 
+2024-12-11T04:49:34.4787741Z #8 12.19 ## Documentation:
+2024-12-11T04:49:34.4788111Z #8 12.19 
+2024-12-11T04:49:34.4788670Z #8 12.19 * Add missing comma in documentation. Pull request
+2024-12-11T04:49:34.4789404Z #8 12.19   [#8152](https://github.com/rubygems/rubygems/pull/8152) by leoarnold
+2024-12-11T04:49:34.4790057Z #8 12.19 
+2024-12-11T04:49:34.4790504Z #8 12.19 
+2024-12-11T04:49:34.4790996Z #8 12.19 ------------------------------------------------------------------------------
+2024-12-11T04:49:34.4791618Z #8 12.19 
+2024-12-11T04:49:34.4792153Z #8 12.19 RubyGems installed the following executables:
+2024-12-11T04:49:34.4792720Z #8 12.19 	/usr/bin/gem
+2024-12-11T04:49:34.4793144Z #8 12.19 	/usr/bin/bundle
+2024-12-11T04:49:34.4793642Z #8 12.19 	/usr/bin/bundler
+2024-12-11T04:49:34.4794067Z #8 12.19 
+2024-12-11T04:49:34.6615576Z #8 12.22 RubyGems system software updated
+2024-12-11T04:49:34.6916834Z #8 12.40 Cleaning up installed gems...
+2024-12-11T04:49:34.6917790Z #8 12.40 Clean up complete
+2024-12-11T04:49:34.9026532Z #8 DONE 12.5s
+2024-12-11T04:49:34.9027166Z 
+2024-12-11T04:49:34.9027906Z #10 [linux/amd64 4/8] RUN yes | gem install jekyll bundler && gem cleanup
+2024-12-11T04:49:36.4942235Z #10 1.740 Successfully installed webrick-1.9.1
+2024-12-11T04:49:36.4944732Z #10 1.740 Successfully installed unicode-display_width-2.6.0
+2024-12-11T04:49:36.4945492Z #10 1.740 Successfully installed terminal-table-3.0.2
+2024-12-11T04:49:36.4946172Z #10 1.740 Successfully installed safe_yaml-1.0.5
+2024-12-11T04:49:36.4946895Z #10 1.740 Successfully installed rouge-4.5.1
+2024-12-11T04:49:36.4947545Z #10 1.740 Successfully installed forwardable-extended-2.6.0
+2024-12-11T04:49:36.4948235Z #10 1.740 Successfully installed pathutil-0.16.2
+2024-12-11T04:49:36.4948948Z #10 1.740 Successfully installed mercenary-0.4.0
+2024-12-11T04:49:36.4949533Z #10 1.740 Successfully installed liquid-4.0.4
+2024-12-11T04:49:36.4950151Z #10 1.740 Successfully installed rexml-3.3.9
+2024-12-11T04:49:36.4950872Z #10 1.740 Successfully installed kramdown-2.5.1
+2024-12-11T04:49:36.4951496Z #10 1.740 Successfully installed kramdown-parser-gfm-1.1.0
+2024-12-11T04:49:36.4952207Z #10 1.740 Successfully installed ffi-1.17.0-x86_64-linux-gnu
+2024-12-11T04:49:36.4953007Z #10 1.740 Successfully installed rb-inotify-0.11.1
+2024-12-11T04:49:36.4953593Z #10 1.740 Successfully installed rb-fsevent-0.11.2
+2024-12-11T04:49:36.4954227Z #10 1.740 Successfully installed listen-3.9.0
+2024-12-11T04:49:36.4954966Z #10 1.740 Successfully installed jekyll-watch-2.2.1
+2024-12-11T04:49:36.4955579Z #10 1.740 Successfully installed rake-13.2.1
+2024-12-11T04:49:36.4956227Z #10 1.740 Successfully installed google-protobuf-4.29.1-x86_64-linux
+2024-12-11T04:49:36.4957177Z #10 1.740 Successfully installed sass-embedded-1.82.0-x86_64-linux-gnu
+2024-12-11T04:49:36.4957972Z #10 1.740 Successfully installed jekyll-sass-converter-3.0.0
+2024-12-11T04:49:36.4958630Z #10 1.740 Successfully installed concurrent-ruby-1.3.4
+2024-12-11T04:49:36.4960487Z #10 1.740 PSA: I18n will be dropping support for Ruby < 3.2 in the next major release (April 2025), due to Ruby's end of life for 3.1 and below (https://endoflife.date/ruby). Please upgrade to Ruby 3.2 or newer by April 2025 to continue using future versions of this gem.
+2024-12-11T04:49:36.4962405Z #10 1.740 Successfully installed i18n-1.14.6
+2024-12-11T04:49:36.4963029Z #10 1.740 Building native extensions. This could take a while...
+2024-12-11T04:49:37.7907835Z #10 3.039 Successfully installed http_parser.rb-0.8.0
+2024-12-11T04:49:37.7909036Z #10 3.039 Building native extensions. This could take a while...
+2024-12-11T04:50:05.3249816Z #10 30.57 unknown encoding name "chunked\r\n\r\n25" for ext/ruby_http_parser/vendor/http-parser-java/tools/parse_tests.rb, skipping
+2024-12-11T04:50:08.5260583Z #10 33.77 Successfully installed eventmachine-1.2.7
+2024-12-11T04:50:08.5261550Z #10 33.77 Successfully installed em-websocket-0.5.3
+2024-12-11T04:50:08.5262282Z #10 33.77 Successfully installed colorator-1.1.0
+2024-12-11T04:50:08.5262914Z #10 33.77 Successfully installed public_suffix-6.0.1
+2024-12-11T04:50:08.5263649Z #10 33.77 Successfully installed addressable-2.8.7
+2024-12-11T04:50:08.5264318Z #10 33.77 Successfully installed jekyll-4.3.4
+2024-12-11T04:50:08.5264887Z #10 33.77 Parsing documentation for webrick-1.9.1
+2024-12-11T04:50:08.5265618Z #10 33.77 Installing ri documentation for webrick-1.9.1
+2024-12-11T04:50:08.5266387Z #10 33.77 Parsing documentation for unicode-display_width-2.6.0
+2024-12-11T04:50:08.5267150Z #10 33.77 Installing ri documentation for unicode-display_width-2.6.0
+2024-12-11T04:50:08.5267993Z #10 33.77 Parsing documentation for terminal-table-3.0.2
+2024-12-11T04:50:08.5268766Z #10 33.77 Installing ri documentation for terminal-table-3.0.2
+2024-12-11T04:50:08.5269461Z #10 33.77 Parsing documentation for safe_yaml-1.0.5
+2024-12-11T04:50:08.5270159Z #10 33.77 Installing ri documentation for safe_yaml-1.0.5
+2024-12-11T04:50:08.5271568Z #10 33.77 Parsing documentation for rouge-4.5.1
+2024-12-11T04:50:08.5272218Z #10 33.77 Installing ri documentation for rouge-4.5.1
+2024-12-11T04:50:08.5272992Z #10 33.77 Parsing documentation for forwardable-extended-2.6.0
+2024-12-11T04:50:08.5273803Z #10 33.77 Installing ri documentation for forwardable-extended-2.6.0
+2024-12-11T04:50:08.5274543Z #10 33.77 Parsing documentation for pathutil-0.16.2
+2024-12-11T04:50:08.5275275Z #10 33.77 Installing ri documentation for pathutil-0.16.2
+2024-12-11T04:50:08.5275970Z #10 33.77 Parsing documentation for mercenary-0.4.0
+2024-12-11T04:50:08.5276652Z #10 33.77 Installing ri documentation for mercenary-0.4.0
+2024-12-11T04:50:08.5277335Z #10 33.77 Parsing documentation for liquid-4.0.4
+2024-12-11T04:50:08.5278058Z #10 33.77 Installing ri documentation for liquid-4.0.4
+2024-12-11T04:50:08.5278765Z #10 33.77 Parsing documentation for rexml-3.3.9
+2024-12-11T04:50:08.5279425Z #10 33.77 Installing ri documentation for rexml-3.3.9
+2024-12-11T04:50:08.5280092Z #10 33.77 Parsing documentation for kramdown-2.5.1
+2024-12-11T04:50:08.5280801Z #10 33.77 Installing ri documentation for kramdown-2.5.1
+2024-12-11T04:50:08.5281846Z #10 33.77 Parsing documentation for kramdown-parser-gfm-1.1.0
+2024-12-11T04:50:08.5282656Z #10 33.77 Installing ri documentation for kramdown-parser-gfm-1.1.0
+2024-12-11T04:50:08.5283452Z #10 33.77 Parsing documentation for ffi-1.17.0-x86_64-linux-gnu
+2024-12-11T04:50:08.5284309Z #10 33.77 Installing ri documentation for ffi-1.17.0-x86_64-linux-gnu
+2024-12-11T04:50:08.5284992Z #10 33.77 Parsing documentation for rb-inotify-0.11.1
+2024-12-11T04:50:08.5285687Z #10 33.77 Installing ri documentation for rb-inotify-0.11.1
+2024-12-11T04:50:08.5286469Z #10 33.77 Parsing documentation for rb-fsevent-0.11.2
+2024-12-11T04:50:08.5287096Z #10 33.77 Installing ri documentation for rb-fsevent-0.11.2
+2024-12-11T04:50:08.5287783Z #10 33.77 Parsing documentation for listen-3.9.0
+2024-12-11T04:50:08.5288525Z #10 33.77 Installing ri documentation for listen-3.9.0
+2024-12-11T04:50:08.5289177Z #10 33.77 Parsing documentation for jekyll-watch-2.2.1
+2024-12-11T04:50:08.5289872Z #10 33.77 Installing ri documentation for jekyll-watch-2.2.1
+2024-12-11T04:50:08.5290631Z #10 33.77 Parsing documentation for rake-13.2.1
+2024-12-11T04:50:08.5291228Z #10 33.77 Installing ri documentation for rake-13.2.1
+2024-12-11T04:50:08.5291968Z #10 33.77 Parsing documentation for google-protobuf-4.29.1-x86_64-linux
+2024-12-11T04:50:08.5292941Z #10 33.77 Installing ri documentation for google-protobuf-4.29.1-x86_64-linux
+2024-12-11T04:50:08.5293800Z #10 33.77 Parsing documentation for sass-embedded-1.82.0-x86_64-linux-gnu
+2024-12-11T04:50:08.5294689Z #10 33.77 Installing ri documentation for sass-embedded-1.82.0-x86_64-linux-gnu
+2024-12-11T04:50:08.5295647Z #10 33.77 Parsing documentation for jekyll-sass-converter-3.0.0
+2024-12-11T04:50:08.5296473Z #10 33.77 Installing ri documentation for jekyll-sass-converter-3.0.0
+2024-12-11T04:50:08.5297201Z #10 33.77 Parsing documentation for concurrent-ruby-1.3.4
+2024-12-11T04:50:08.5298069Z #10 33.77 Installing ri documentation for concurrent-ruby-1.3.4
+2024-12-11T04:50:08.5298755Z #10 33.77 Parsing documentation for i18n-1.14.6
+2024-12-11T04:50:08.5299337Z #10 33.77 Installing ri documentation for i18n-1.14.6
+2024-12-11T04:50:08.5300127Z #10 33.77 Parsing documentation for http_parser.rb-0.8.0
+2024-12-11T04:50:08.5300858Z #10 33.77 Installing ri documentation for http_parser.rb-0.8.0
+2024-12-11T04:50:08.5301522Z #10 33.77 Parsing documentation for eventmachine-1.2.7
+2024-12-11T04:50:08.5302351Z #10 33.77 Installing ri documentation for eventmachine-1.2.7
+2024-12-11T04:50:08.5303053Z #10 33.77 Parsing documentation for em-websocket-0.5.3
+2024-12-11T04:50:08.5303696Z #10 33.77 Installing ri documentation for em-websocket-0.5.3
+2024-12-11T04:50:08.5304537Z #10 33.77 Parsing documentation for colorator-1.1.0
+2024-12-11T04:50:08.5305205Z #10 33.77 Installing ri documentation for colorator-1.1.0
+2024-12-11T04:50:08.5305838Z #10 33.77 Parsing documentation for public_suffix-6.0.1
+2024-12-11T04:50:08.5307126Z #10 33.77 Installing ri documentation for public_suffix-6.0.1
+2024-12-11T04:50:08.5307839Z #10 33.77 Parsing documentation for addressable-2.8.7
+2024-12-11T04:50:08.5308495Z #10 33.77 Installing ri documentation for addressable-2.8.7
+2024-12-11T04:50:08.5309268Z #10 33.77 Parsing documentation for jekyll-4.3.4
+2024-12-11T04:50:08.5309933Z #10 33.77 Installing ri documentation for jekyll-4.3.4
+2024-12-11T04:50:08.5312822Z #10 33.77 Done installing documentation for webrick, unicode-display_width, terminal-table, safe_yaml, rouge, forwardable-extended, pathutil, mercenary, liquid, rexml, kramdown, kramdown-parser-gfm, ffi, rb-inotify, rb-fsevent, listen, jekyll-watch, rake, google-protobuf, sass-embedded, jekyll-sass-converter, concurrent-ruby, i18n, http_parser.rb, eventmachine, em-websocket, colorator, public_suffix, addressable, jekyll after 14 seconds
+2024-12-11T04:50:08.5315827Z #10 33.77 Successfully installed bundler-2.5.23
+2024-12-11T04:50:08.5316430Z #10 33.77 Parsing documentation for bundler-2.5.23
+2024-12-11T04:50:08.5317086Z #10 33.77 Installing ri documentation for bundler-2.5.23
+2024-12-11T04:50:08.5317936Z #10 33.77 Done installing documentation for bundler after 0 seconds
+2024-12-11T04:50:08.5318561Z #10 33.77 31 gems installed
+2024-12-11T04:50:08.6576077Z #10 33.91 Cleaning up installed gems...
+2024-12-11T04:50:08.6577314Z #10 33.91 Clean up complete
+2024-12-11T04:50:08.9473114Z #10 DONE 34.2s
+2024-12-11T04:50:08.9473451Z 
+2024-12-11T04:50:08.9473949Z #9 [linux/arm64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T04:50:09.0984071Z #9 ...
+2024-12-11T04:50:09.0984336Z 
+2024-12-11T04:50:09.0984722Z #11 [linux/amd64 5/8] RUN chown -R nonroot:nonroot /usr/local/vendor
+2024-12-11T04:50:17.7990205Z #11 DONE 8.9s
+2024-12-11T04:50:17.7990485Z 
+2024-12-11T04:50:17.7990869Z #9 [linux/arm64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T04:50:17.9504898Z #9 ...
+2024-12-11T04:50:17.9505267Z 
+2024-12-11T04:50:17.9505460Z #12 [linux/amd64 6/8] WORKDIR /work
+2024-12-11T04:50:17.9506142Z #12 DONE 0.2s
+2024-12-11T04:50:17.9506341Z 
+2024-12-11T04:50:17.9506755Z #9 [linux/arm64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T04:50:18.1799450Z #9 ...
+2024-12-11T04:50:18.1799791Z 
+2024-12-11T04:50:18.1800082Z #13 [linux/amd64 7/8] COPY entrypoint.sh /entrypoint.sh
+2024-12-11T04:50:18.1800933Z #13 DONE 0.0s
+2024-12-11T04:50:18.1801188Z 
+2024-12-11T04:50:18.1801707Z #14 [linux/amd64 8/8] RUN chmod +x /entrypoint.sh
+2024-12-11T04:50:18.1802283Z #14 DONE 0.1s
+2024-12-11T04:50:18.3298055Z 
+2024-12-11T04:50:18.3298645Z #9 [linux/arm64 3/8] RUN yes | gem update --system && gem cleanup
+2024-12-11T05:16:45.2010208Z #9 1642.9 Successfully installed rubygems-update-3.5.23
+2024-12-11T05:16:45.2011194Z #9 1642.9 Parsing documentation for rubygems-update-3.5.23
+2024-12-11T05:16:45.2011975Z #9 1642.9 Installing ri documentation for rubygems-update-3.5.23
+2024-12-11T05:16:45.2012880Z #9 1642.9 Done installing documentation for rubygems-update after 107 seconds
+2024-12-11T05:16:45.2013709Z #9 1642.9 Parsing documentation for rubygems-update-3.5.23
+2024-12-11T05:16:45.2014490Z #9 1642.9 Done installing documentation for rubygems-update after 3 seconds
+2024-12-11T05:16:45.2015271Z #9 1642.9 Installing RubyGems 3.5.23
+2024-12-11T05:17:10.8060883Z #9 1668.5   Successfully built RubyGem
+2024-12-11T05:17:10.8063353Z #9 1668.5   Name: bundler
+2024-12-11T05:17:10.8064060Z #9 1668.5   Version: 2.5.23
+2024-12-11T05:17:10.8064782Z #9 1668.5   File: bundler-2.5.23.gem
+2024-12-11T05:17:10.8065273Z #9 1668.5 Bundler 2.5.23 installed
+2024-12-11T05:17:10.8065848Z #9 1668.5 RubyGems 3.5.23 installed
+2024-12-11T05:17:10.8066393Z #9 1668.5 Regenerating binstubs
+2024-12-11T05:17:10.8066828Z #9 1668.5 Regenerating plugins
+2024-12-11T05:17:10.8067387Z #9 1668.5 
+2024-12-11T05:17:10.8067813Z #9 1668.5 # 3.5.23 / 2024-11-05
+2024-12-11T05:17:10.8068200Z #9 1668.5 
+2024-12-11T05:17:10.8068685Z #9 1668.5 ## Enhancements:
+2024-12-11T05:17:10.8069141Z #9 1668.5 
+2024-12-11T05:17:10.8070138Z #9 1668.5 * Validate user input encoding of `gem` CLI arguments. Pull request
+2024-12-11T05:17:10.8071242Z #9 1668.5   [#6471](https://github.com/rubygems/rubygems/pull/6471) by
+2024-12-11T05:17:10.8071695Z #9 1668.5   deivid-rodriguez
+2024-12-11T05:17:10.8072098Z #9 1668.5 * Fix `gem update --system` leaving old default bundler executables
+2024-12-11T05:17:10.8072576Z #9 1668.5   around. Pull request
+2024-12-11T05:17:10.8072983Z #9 1668.5   [#8172](https://github.com/rubygems/rubygems/pull/8172) by
+2024-12-11T05:17:10.8073353Z #9 1668.5   deivid-rodriguez
+2024-12-11T05:17:10.8073644Z #9 1668.5 * Installs bundler 2.5.23 as a default gem.
+2024-12-11T05:17:10.8073887Z #9 1668.5 
+2024-12-11T05:17:10.8074049Z #9 1668.5 ## Bug fixes:
+2024-12-11T05:17:10.8074226Z #9 1668.5 
+2024-12-11T05:17:10.8074488Z #9 1668.5 * Fix commands with 2 MFA requests when webauthn is enabled. Pull request
+2024-12-11T05:17:10.8074898Z #9 1668.5   [#8174](https://github.com/rubygems/rubygems/pull/8174) by
+2024-12-11T05:17:10.8075190Z #9 1668.5   deivid-rodriguez
+2024-12-11T05:17:10.8075512Z #9 1668.5 * Make `--enable-load-relative` binstubs prolog work when Ruby is not
+2024-12-11T05:17:10.8075931Z #9 1668.5   installed in the same directory as the binstub. Pull request
+2024-12-11T05:17:10.8076303Z #9 1668.5   [#7872](https://github.com/rubygems/rubygems/pull/7872) by
+2024-12-11T05:17:10.8076586Z #9 1668.5   deivid-rodriguez
+2024-12-11T05:17:10.8076778Z #9 1668.5 
+2024-12-11T05:17:10.8076939Z #9 1668.5 ## Performance:
+2024-12-11T05:17:10.8077118Z #9 1668.5 
+2024-12-11T05:17:10.8077372Z #9 1668.5 * Speed up `gem install <nonexistent-gem>` by finding alternative name
+2024-12-11T05:17:10.8077717Z #9 1668.5   suggestions faster. Pull request
+2024-12-11T05:17:10.8078050Z #9 1668.5   [#8084](https://github.com/rubygems/rubygems/pull/8084) by duckinator
+2024-12-11T05:17:10.8078363Z #9 1668.5 
+2024-12-11T05:17:10.8078525Z #9 1668.5 ## Documentation:
+2024-12-11T05:17:10.8078709Z #9 1668.5 
+2024-12-11T05:17:10.8078918Z #9 1668.5 * Add missing comma in documentation. Pull request
+2024-12-11T05:17:10.8079293Z #9 1668.5   [#8152](https://github.com/rubygems/rubygems/pull/8152) by leoarnold
+2024-12-11T05:17:10.8079596Z #9 1668.5 
+2024-12-11T05:17:10.8079743Z #9 1668.5 
+2024-12-11T05:17:10.8079969Z #9 1668.5 ------------------------------------------------------------------------------
+2024-12-11T05:17:10.8080253Z #9 1668.5 
+2024-12-11T05:17:10.8080457Z #9 1668.5 RubyGems installed the following executables:
+2024-12-11T05:17:10.8080723Z #9 1668.5 	/usr/bin/gem
+2024-12-11T05:17:10.8080900Z #9 1668.5 	/usr/bin/bundle
+2024-12-11T05:17:10.8081093Z #9 1668.5 	/usr/bin/bundler
+2024-12-11T05:17:10.8081569Z #9 1668.5 
+2024-12-11T05:17:11.1398804Z #9 1668.9 RubyGems system software updated
+2024-12-11T05:17:20.1720985Z #9 1677.9 Cleaning up installed gems...
+2024-12-11T05:17:20.1721748Z #9 1677.9 Clean up complete
+2024-12-11T05:17:20.3661588Z #9 DONE 1677.9s
+2024-12-11T05:17:20.3661854Z 
+2024-12-11T05:17:20.3662178Z #15 [linux/arm64 4/8] RUN yes | gem install jekyll bundler && gem cleanup
+2024-12-11T05:18:53.5964328Z #15 93.38 Successfully installed webrick-1.9.1
+2024-12-11T05:18:53.5972224Z #15 93.38 Successfully installed unicode-display_width-2.6.0
+2024-12-11T05:18:53.5972825Z #15 93.38 Successfully installed terminal-table-3.0.2
+2024-12-11T05:18:53.5973315Z #15 93.38 Successfully installed safe_yaml-1.0.5
+2024-12-11T05:18:53.5973769Z #15 93.38 Successfully installed rouge-4.5.1
+2024-12-11T05:18:53.5974296Z #15 93.38 Successfully installed forwardable-extended-2.6.0
+2024-12-11T05:18:53.5974890Z #15 93.38 Successfully installed pathutil-0.16.2
+2024-12-11T05:18:53.5975352Z #15 93.38 Successfully installed mercenary-0.4.0
+2024-12-11T05:18:53.5975801Z #15 93.38 Successfully installed liquid-4.0.4
+2024-12-11T05:18:53.5976244Z #15 93.38 Successfully installed rexml-3.3.9
+2024-12-11T05:18:53.5976682Z #15 93.38 Successfully installed kramdown-2.5.1
+2024-12-11T05:18:53.5977190Z #15 93.38 Successfully installed kramdown-parser-gfm-1.1.0
+2024-12-11T05:18:53.5977747Z #15 93.38 Successfully installed ffi-1.17.0-aarch64-linux-gnu
+2024-12-11T05:18:53.5978817Z #15 93.38 Successfully installed rb-inotify-0.11.1
+2024-12-11T05:18:53.5979298Z #15 93.38 Successfully installed rb-fsevent-0.11.2
+2024-12-11T05:18:53.5979760Z #15 93.38 Successfully installed listen-3.9.0
+2024-12-11T05:18:53.5980210Z #15 93.38 Successfully installed jekyll-watch-2.2.1
+2024-12-11T05:18:53.5980681Z #15 93.38 Successfully installed rake-13.2.1
+2024-12-11T05:18:53.5981235Z #15 93.38 Successfully installed google-protobuf-4.29.1-aarch64-linux
+2024-12-11T05:18:53.5981926Z #15 93.38 Successfully installed sass-embedded-1.82.0-aarch64-linux-gnu
+2024-12-11T05:18:53.5982557Z #15 93.38 Successfully installed jekyll-sass-converter-3.0.0
+2024-12-11T05:18:53.5983060Z #15 93.38 Successfully installed concurrent-ruby-1.3.4
+2024-12-11T05:18:53.5984401Z #15 93.38 PSA: I18n will be dropping support for Ruby < 3.2 in the next major release (April 2025), due to Ruby's end of life for 3.1 and below (https://endoflife.date/ruby). Please upgrade to Ruby 3.2 or newer by April 2025 to continue using future versions of this gem.
+2024-12-11T05:18:53.5985710Z #15 93.38 Successfully installed i18n-1.14.6
+2024-12-11T05:18:53.5986217Z #15 93.38 Building native extensions. This could take a while...
+2024-12-11T05:19:22.1846049Z #15 122.0 Successfully installed http_parser.rb-0.8.0
+2024-12-11T05:19:22.1846686Z #15 122.0 Building native extensions. This could take a while...
+2024-12-11T05:48:29.4507938Z #15 1869.2 unknown encoding name "chunked\r\n\r\n25" for ext/ruby_http_parser/vendor/http-parser-java/tools/parse_tests.rb, skipping
+2024-12-11T05:54:24.7441604Z #15 2224.5 Successfully installed eventmachine-1.2.7
+2024-12-11T05:54:24.7442255Z #15 2224.5 Successfully installed em-websocket-0.5.3
+2024-12-11T05:54:24.7442773Z #15 2224.5 Successfully installed colorator-1.1.0
+2024-12-11T05:54:24.7443274Z #15 2224.5 Successfully installed public_suffix-6.0.1
+2024-12-11T05:54:24.7443789Z #15 2224.5 Successfully installed addressable-2.8.7
+2024-12-11T05:54:24.7444301Z #15 2224.5 Successfully installed jekyll-4.3.4
+2024-12-11T05:54:24.7444787Z #15 2224.5 Parsing documentation for webrick-1.9.1
+2024-12-11T05:54:24.7445192Z #15 2224.5 Installing ri documentation for webrick-1.9.1
+2024-12-11T05:54:24.7445568Z #15 2224.5 Parsing documentation for unicode-display_width-2.6.0
+2024-12-11T05:54:24.7445986Z #15 2224.5 Installing ri documentation for unicode-display_width-2.6.0
+2024-12-11T05:54:24.7446364Z #15 2224.5 Parsing documentation for terminal-table-3.0.2
+2024-12-11T05:54:24.7446708Z #15 2224.5 Installing ri documentation for terminal-table-3.0.2
+2024-12-11T05:54:24.7447047Z #15 2224.5 Parsing documentation for safe_yaml-1.0.5
+2024-12-11T05:54:24.7447352Z #15 2224.5 Installing ri documentation for safe_yaml-1.0.5
+2024-12-11T05:54:24.7447657Z #15 2224.5 Parsing documentation for rouge-4.5.1
+2024-12-11T05:54:24.7447945Z #15 2224.5 Installing ri documentation for rouge-4.5.1
+2024-12-11T05:54:24.7448271Z #15 2224.5 Parsing documentation for forwardable-extended-2.6.0
+2024-12-11T05:54:24.7448658Z #15 2224.5 Installing ri documentation for forwardable-extended-2.6.0
+2024-12-11T05:54:24.7449007Z #15 2224.5 Parsing documentation for pathutil-0.16.2
+2024-12-11T05:54:24.7449312Z #15 2224.5 Installing ri documentation for pathutil-0.16.2
+2024-12-11T05:54:24.7449620Z #15 2224.5 Parsing documentation for mercenary-0.4.0
+2024-12-11T05:54:24.7449919Z #15 2224.5 Installing ri documentation for mercenary-0.4.0
+2024-12-11T05:54:24.7450209Z #15 2224.5 Parsing documentation for liquid-4.0.4
+2024-12-11T05:54:24.7450502Z #15 2224.5 Installing ri documentation for liquid-4.0.4
+2024-12-11T05:54:24.7450790Z #15 2224.5 Parsing documentation for rexml-3.3.9
+2024-12-11T05:54:24.7451068Z #15 2224.5 Installing ri documentation for rexml-3.3.9
+2024-12-11T05:54:24.7451354Z #15 2224.5 Parsing documentation for kramdown-2.5.1
+2024-12-11T05:54:24.7451654Z #15 2224.5 Installing ri documentation for kramdown-2.5.1
+2024-12-11T05:54:24.7451979Z #15 2224.5 Parsing documentation for kramdown-parser-gfm-1.1.0
+2024-12-11T05:54:24.7452895Z #15 2224.5 Installing ri documentation for kramdown-parser-gfm-1.1.0
+2024-12-11T05:54:24.7453269Z #15 2224.5 Parsing documentation for ffi-1.17.0-aarch64-linux-gnu
+2024-12-11T05:54:24.7453639Z #15 2224.5 Installing ri documentation for ffi-1.17.0-aarch64-linux-gnu
+2024-12-11T05:54:24.7453984Z #15 2224.5 Parsing documentation for rb-inotify-0.11.1
+2024-12-11T05:54:24.7454296Z #15 2224.5 Installing ri documentation for rb-inotify-0.11.1
+2024-12-11T05:54:24.7454603Z #15 2224.5 Parsing documentation for rb-fsevent-0.11.2
+2024-12-11T05:54:24.7454909Z #15 2224.5 Installing ri documentation for rb-fsevent-0.11.2
+2024-12-11T05:54:24.7455221Z #15 2224.5 Parsing documentation for listen-3.9.0
+2024-12-11T05:54:24.7455508Z #15 2224.5 Installing ri documentation for listen-3.9.0
+2024-12-11T05:54:24.7455806Z #15 2224.5 Parsing documentation for jekyll-watch-2.2.1
+2024-12-11T05:54:24.7456124Z #15 2224.5 Installing ri documentation for jekyll-watch-2.2.1
+2024-12-11T05:54:24.7456424Z #15 2224.5 Parsing documentation for rake-13.2.1
+2024-12-11T05:54:24.7456718Z #15 2224.5 Installing ri documentation for rake-13.2.1
+2024-12-11T05:54:24.7457078Z #15 2224.5 Parsing documentation for google-protobuf-4.29.1-aarch64-linux
+2024-12-11T05:54:24.7457518Z #15 2224.5 Installing ri documentation for google-protobuf-4.29.1-aarch64-linux
+2024-12-11T05:54:24.7457964Z #15 2224.5 Parsing documentation for sass-embedded-1.82.0-aarch64-linux-gnu
+2024-12-11T05:54:24.7458407Z #15 2224.5 Installing ri documentation for sass-embedded-1.82.0-aarch64-linux-gnu
+2024-12-11T05:54:24.7458815Z #15 2224.5 Parsing documentation for jekyll-sass-converter-3.0.0
+2024-12-11T05:54:24.7459194Z #15 2224.5 Installing ri documentation for jekyll-sass-converter-3.0.0
+2024-12-11T05:54:24.7459552Z #15 2224.5 Parsing documentation for concurrent-ruby-1.3.4
+2024-12-11T05:54:24.7459889Z #15 2224.5 Installing ri documentation for concurrent-ruby-1.3.4
+2024-12-11T05:54:24.7460197Z #15 2224.5 Parsing documentation for i18n-1.14.6
+2024-12-11T05:54:24.7460683Z #15 2224.5 Installing ri documentation for i18n-1.14.6
+2024-12-11T05:54:24.7461106Z #15 2224.5 Parsing documentation for http_parser.rb-0.8.0
+2024-12-11T05:54:24.7461437Z #15 2224.5 Installing ri documentation for http_parser.rb-0.8.0
+2024-12-11T05:54:24.7461767Z #15 2224.5 Parsing documentation for eventmachine-1.2.7
+2024-12-11T05:54:24.7462095Z #15 2224.5 Installing ri documentation for eventmachine-1.2.7
+2024-12-11T05:54:24.7462414Z #15 2224.5 Parsing documentation for em-websocket-0.5.3
+2024-12-11T05:54:24.7462730Z #15 2224.5 Installing ri documentation for em-websocket-0.5.3
+2024-12-11T05:54:24.7463043Z #15 2224.5 Parsing documentation for colorator-1.1.0
+2024-12-11T05:54:24.7463346Z #15 2224.5 Installing ri documentation for colorator-1.1.0
+2024-12-11T05:54:24.7463663Z #15 2224.5 Parsing documentation for public_suffix-6.0.1
+2024-12-11T05:54:24.7463984Z #15 2224.5 Installing ri documentation for public_suffix-6.0.1
+2024-12-11T05:54:24.7464295Z #15 2224.5 Parsing documentation for addressable-2.8.7
+2024-12-11T05:54:24.7464613Z #15 2224.5 Installing ri documentation for addressable-2.8.7
+2024-12-11T05:54:24.7464917Z #15 2224.5 Parsing documentation for jekyll-4.3.4
+2024-12-11T05:54:24.7465199Z #15 2224.5 Installing ri documentation for jekyll-4.3.4
+2024-12-11T05:54:24.7466709Z #15 2224.5 Done installing documentation for webrick, unicode-display_width, terminal-table, safe_yaml, rouge, forwardable-extended, pathutil, mercenary, liquid, rexml, kramdown, kramdown-parser-gfm, ffi, rb-inotify, rb-fsevent, listen, jekyll-watch, rake, google-protobuf, sass-embedded, jekyll-sass-converter, concurrent-ruby, i18n, http_parser.rb, eventmachine, em-websocket, colorator, public_suffix, addressable, jekyll after 1827 seconds
+2024-12-11T05:54:24.7468204Z #15 2224.5 Successfully installed bundler-2.5.23
+2024-12-11T05:54:24.7468484Z #15 2224.5 Parsing documentation for bundler-2.5.23
+2024-12-11T05:54:24.7468779Z #15 2224.5 Installing ri documentation for bundler-2.5.23
+2024-12-11T05:54:24.7469121Z #15 2224.5 Done installing documentation for bundler after 6 seconds
+2024-12-11T05:54:24.7469672Z #15 2224.5 31 gems installed
+2024-12-11T05:54:34.2731238Z #15 2234.1 Cleaning up installed gems...
+2024-12-11T05:54:34.2731710Z #15 2234.1 Clean up complete
+2024-12-11T05:54:34.4933828Z #15 DONE 2234.1s
+2024-12-11T05:54:34.4934072Z 
+2024-12-11T05:54:34.4934376Z #16 [linux/arm64 5/8] RUN chown -R nonroot:nonroot /usr/local/vendor
+2024-12-11T05:54:43.3133774Z #16 DONE 9.0s
+2024-12-11T05:54:43.4308450Z 
+2024-12-11T05:54:43.4308847Z #17 [linux/arm64 6/8] WORKDIR /work
+2024-12-11T05:54:43.4309258Z #17 DONE 0.1s
+2024-12-11T05:54:43.5628944Z 
+2024-12-11T05:54:43.5629273Z #18 [linux/arm64 7/8] COPY entrypoint.sh /entrypoint.sh
+2024-12-11T05:54:43.5629776Z #18 DONE 0.0s
+2024-12-11T05:54:43.5629940Z 
+2024-12-11T05:54:43.5630113Z #19 [linux/arm64 8/8] RUN chmod +x /entrypoint.sh
+2024-12-11T05:54:43.5630527Z #19 DONE 0.1s
+2024-12-11T05:54:43.7158559Z 
+2024-12-11T05:54:43.7159022Z #20 exporting to image
+2024-12-11T05:54:43.7159420Z #20 exporting layers
+2024-12-11T05:54:47.8347639Z #20 exporting layers 4.3s done
+2024-12-11T05:54:48.0570701Z #20 ...
+2024-12-11T05:54:48.0570905Z 
+2024-12-11T05:54:48.0571191Z #21 [auth] some-natalie/jekyll-in-a-can:pull,push token for ghcr.io
+2024-12-11T05:54:48.0571721Z #21 DONE 0.0s
+2024-12-11T05:54:48.0571876Z 
+2024-12-11T05:54:48.0571999Z #20 exporting to image
+2024-12-11T05:54:48.0572659Z #20 exporting manifest sha256:202a6f63dc0b7465da77b4a09198c0038fd2107ad75e891e35f1b2e2a1916434 done
+2024-12-11T05:54:48.0573713Z #20 exporting config sha256:d0d12cdcb8a1b89f8d4746e764aba3580ef9605d341b113884e3263555e29e13 done
+2024-12-11T05:54:48.0574496Z #20 exporting attestation manifest sha256:533e13d20a7f07c8c1dab44044bafafa0e7a930fff8c28f828b9d4baaa1c26d7 done
+2024-12-11T05:54:48.0575267Z #20 exporting manifest sha256:47c8c27f126cb8dfb8039a6bc0a6107cd8b7546f4b9d35d08655ddbcfb4ee54d done
+2024-12-11T05:54:48.0575973Z #20 exporting config sha256:9b50f459ccd80dce5f6507f39a2fa5fdceba6a9f161b962fd074b31b2a696b08 done
+2024-12-11T05:54:48.0576790Z #20 exporting attestation manifest sha256:f3f557eebc60a008c5e907ed55f34f3bc0a8d94c9d2b82fec1f0e009e5c818ce done
+2024-12-11T05:54:48.0577567Z #20 exporting manifest list sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337 done
+2024-12-11T05:54:48.0578065Z #20 pushing layers
+2024-12-11T05:54:51.5909339Z #20 pushing layers 3.7s done
+2024-12-11T05:54:51.5910238Z #20 pushing manifest for ghcr.io/some-natalie/jekyll-in-a-can:latest@sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:53.1433296Z #20 pushing manifest for ghcr.io/some-natalie/jekyll-in-a-can:latest@sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337 1.6s done
+2024-12-11T05:54:53.1434518Z #20 DONE 9.6s
+2024-12-11T05:54:53.1718034Z 
+2024-12-11T05:54:53.1718334Z #22 resolving provenance for metadata file
+2024-12-11T05:54:53.1718801Z #22 DONE 0.0s
+2024-12-11T05:54:53.1751218Z 
+2024-12-11T05:54:53.1751908Z  [33m9 warnings found (use docker --debug to expand):
+2024-12-11T05:54:53.1752999Z [0m - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 4)
+2024-12-11T05:54:53.1754009Z  - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 5)
+2024-12-11T05:54:53.1755180Z  - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 6)
+2024-12-11T05:54:53.1756054Z  - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 8)
+2024-12-11T05:54:53.1757420Z  - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 10)
+2024-12-11T05:54:53.1758769Z  - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 16)
+2024-12-11T05:54:53.1759929Z  - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 7)
+2024-12-11T05:54:53.1761737Z  - LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format (line 9)
+2024-12-11T05:54:53.1763630Z  - UndefinedVar: Usage of undefined variable '$GEM_PATH' (line 14)
+2024-12-11T05:54:53.1815631Z ##[group]ImageID
+2024-12-11T05:54:53.1816298Z sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:53.1818620Z ##[endgroup]
+2024-12-11T05:54:53.1819197Z ##[group]Digest
+2024-12-11T05:54:53.1819732Z sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:53.1820595Z ##[endgroup]
+2024-12-11T05:54:53.1821113Z ##[group]Metadata
+2024-12-11T05:54:53.1821482Z {
+2024-12-11T05:54:53.1822405Z   "buildx.build.ref": "builder-e9df1925-1d1a-468e-884f-91156a092dfd/builder-e9df1925-1d1a-468e-884f-91156a092dfd0/1npyzrhxu4beaohlic25xh630",
+2024-12-11T05:54:53.1823501Z   "buildx.build.warnings": [
+2024-12-11T05:54:53.1823873Z     {
+2024-12-11T05:54:53.1824439Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.1825167Z       "level": 1,
+2024-12-11T05:54:53.1826660Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJFTlYga2V5PXZhbHVlIiBzaG91bGQgYmUgdXNlZCBpbnN0ZWFkIG9mIGxlZ2FjeSAiRU5WIGtleSB2YWx1ZSIgZm9ybWF0IChsaW5lIDE2KQ==",
+2024-12-11T05:54:53.1828231Z       "detail": [
+2024-12-11T05:54:53.1829027Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.1829960Z       ],
+2024-12-11T05:54:53.1830479Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.1831121Z       "sourceInfo": {
+2024-12-11T05:54:53.1831465Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.1892290Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.1928608Z         "language": "Dockerfile"
+2024-12-11T05:54:53.1928827Z       },
+2024-12-11T05:54:53.1928975Z       "range": [
+2024-12-11T05:54:53.1929137Z         {
+2024-12-11T05:54:53.1929328Z           "start": {
+2024-12-11T05:54:53.1929503Z             "line": 16
+2024-12-11T05:54:53.1929669Z           },
+2024-12-11T05:54:53.1929821Z           "end": {
+2024-12-11T05:54:53.1929983Z             "line": 16
+2024-12-11T05:54:53.1930147Z           }
+2024-12-11T05:54:53.1930291Z         }
+2024-12-11T05:54:53.1930434Z       ]
+2024-12-11T05:54:53.1930569Z     },
+2024-12-11T05:54:53.1930963Z     {
+2024-12-11T05:54:53.1931408Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.1931789Z       "level": 1,
+2024-12-11T05:54:53.1932563Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSA1KQ==",
+2024-12-11T05:54:53.1933383Z       "detail": [
+2024-12-11T05:54:53.1933820Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.1934306Z       ],
+2024-12-11T05:54:53.1934605Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.1934950Z       "sourceInfo": {
+2024-12-11T05:54:53.1935144Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.1967896Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2000224Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2000443Z       },
+2024-12-11T05:54:53.2000588Z       "range": [
+2024-12-11T05:54:53.2000744Z         {
+2024-12-11T05:54:53.2000892Z           "start": {
+2024-12-11T05:54:53.2001056Z             "line": 5
+2024-12-11T05:54:53.2001368Z           },
+2024-12-11T05:54:53.2001594Z           "end": {
+2024-12-11T05:54:53.2001836Z             "line": 5
+2024-12-11T05:54:53.2002015Z           }
+2024-12-11T05:54:53.2002164Z         }
+2024-12-11T05:54:53.2002308Z       ]
+2024-12-11T05:54:53.2002466Z     },
+2024-12-11T05:54:53.2002609Z     {
+2024-12-11T05:54:53.2002910Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2003279Z       "level": 1,
+2024-12-11T05:54:53.2004047Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSA3KQ==",
+2024-12-11T05:54:53.2004857Z       "detail": [
+2024-12-11T05:54:53.2005315Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.2005803Z       ],
+2024-12-11T05:54:53.2006075Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.2006419Z       "sourceInfo": {
+2024-12-11T05:54:53.2006612Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2039070Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2073203Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2073430Z       },
+2024-12-11T05:54:53.2073573Z       "range": [
+2024-12-11T05:54:53.2073735Z         {
+2024-12-11T05:54:53.2073884Z           "start": {
+2024-12-11T05:54:53.2074062Z             "line": 7
+2024-12-11T05:54:53.2074230Z           },
+2024-12-11T05:54:53.2074381Z           "end": {
+2024-12-11T05:54:53.2074540Z             "line": 7
+2024-12-11T05:54:53.2074706Z           }
+2024-12-11T05:54:53.2074847Z         }
+2024-12-11T05:54:53.2074991Z       ]
+2024-12-11T05:54:53.2075137Z     },
+2024-12-11T05:54:53.2075282Z     {
+2024-12-11T05:54:53.2075583Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2075956Z       "level": 1,
+2024-12-11T05:54:53.2076721Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSA4KQ==",
+2024-12-11T05:54:53.2077532Z       "detail": [
+2024-12-11T05:54:53.2077974Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.2078485Z       ],
+2024-12-11T05:54:53.2078773Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.2079121Z       "sourceInfo": {
+2024-12-11T05:54:53.2079308Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2111824Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2144449Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2144659Z       },
+2024-12-11T05:54:53.2144808Z       "range": [
+2024-12-11T05:54:53.2144966Z         {
+2024-12-11T05:54:53.2145118Z           "start": {
+2024-12-11T05:54:53.2145287Z             "line": 8
+2024-12-11T05:54:53.2145458Z           },
+2024-12-11T05:54:53.2145605Z           "end": {
+2024-12-11T05:54:53.2145765Z             "line": 8
+2024-12-11T05:54:53.2145928Z           }
+2024-12-11T05:54:53.2146068Z         }
+2024-12-11T05:54:53.2146213Z       ]
+2024-12-11T05:54:53.2146356Z     },
+2024-12-11T05:54:53.2146493Z     {
+2024-12-11T05:54:53.2146796Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2147166Z       "level": 1,
+2024-12-11T05:54:53.2147928Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSA5KQ==",
+2024-12-11T05:54:53.2148739Z       "detail": [
+2024-12-11T05:54:53.2149183Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.2149668Z       ],
+2024-12-11T05:54:53.2149942Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.2150281Z       "sourceInfo": {
+2024-12-11T05:54:53.2150459Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2183018Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2215654Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2215853Z       },
+2024-12-11T05:54:53.2215998Z       "range": [
+2024-12-11T05:54:53.2216159Z         {
+2024-12-11T05:54:53.2216303Z           "start": {
+2024-12-11T05:54:53.2216470Z             "line": 9
+2024-12-11T05:54:53.2216636Z           },
+2024-12-11T05:54:53.2216786Z           "end": {
+2024-12-11T05:54:53.2216948Z             "line": 9
+2024-12-11T05:54:53.2217108Z           }
+2024-12-11T05:54:53.2217254Z         }
+2024-12-11T05:54:53.2217397Z       ]
+2024-12-11T05:54:53.2217534Z     },
+2024-12-11T05:54:53.2217674Z     {
+2024-12-11T05:54:53.2217967Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2218331Z       "level": 1,
+2024-12-11T05:54:53.2219108Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSAxMCk=",
+2024-12-11T05:54:53.2219926Z       "detail": [
+2024-12-11T05:54:53.2220360Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.2220846Z       ],
+2024-12-11T05:54:53.2221117Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.2221448Z       "sourceInfo": {
+2024-12-11T05:54:53.2221630Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2254018Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2286690Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2286898Z       },
+2024-12-11T05:54:53.2287042Z       "range": [
+2024-12-11T05:54:53.2287197Z         {
+2024-12-11T05:54:53.2287344Z           "start": {
+2024-12-11T05:54:53.2287512Z             "line": 10
+2024-12-11T05:54:53.2287686Z           },
+2024-12-11T05:54:53.2287840Z           "end": {
+2024-12-11T05:54:53.2288003Z             "line": 10
+2024-12-11T05:54:53.2288171Z           }
+2024-12-11T05:54:53.2288316Z         }
+2024-12-11T05:54:53.2288458Z       ]
+2024-12-11T05:54:53.2288593Z     },
+2024-12-11T05:54:53.2288735Z     {
+2024-12-11T05:54:53.2289032Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2289733Z       "level": 1,
+2024-12-11T05:54:53.2290507Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSA0KQ==",
+2024-12-11T05:54:53.2291313Z       "detail": [
+2024-12-11T05:54:53.2291747Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.2292229Z       ],
+2024-12-11T05:54:53.2292530Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.2292881Z       "sourceInfo": {
+2024-12-11T05:54:53.2293068Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2325432Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2357724Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2357928Z       },
+2024-12-11T05:54:53.2358086Z       "range": [
+2024-12-11T05:54:53.2358248Z         {
+2024-12-11T05:54:53.2358390Z           "start": {
+2024-12-11T05:54:53.2358561Z             "line": 4
+2024-12-11T05:54:53.2358750Z           },
+2024-12-11T05:54:53.2358894Z           "end": {
+2024-12-11T05:54:53.2359056Z             "line": 4
+2024-12-11T05:54:53.2359215Z           }
+2024-12-11T05:54:53.2359360Z         }
+2024-12-11T05:54:53.2359502Z       ]
+2024-12-11T05:54:53.2359648Z     },
+2024-12-11T05:54:53.2359795Z     {
+2024-12-11T05:54:53.2360096Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2360455Z       "level": 1,
+2024-12-11T05:54:53.2361393Z       "short": "TGVnYWN5S2V5VmFsdWVGb3JtYXQ6ICJMQUJFTCBrZXk9dmFsdWUiIHNob3VsZCBiZSB1c2VkIGluc3RlYWQgb2YgbGVnYWN5ICJMQUJFTCBrZXkgdmFsdWUiIGZvcm1hdCAobGluZSA2KQ==",
+2024-12-11T05:54:53.2362224Z       "detail": [
+2024-12-11T05:54:53.2362662Z         "TGVnYWN5IGtleS92YWx1ZSBmb3JtYXQgd2l0aCB3aGl0ZXNwYWNlIHNlcGFyYXRvciBzaG91bGQgbm90IGJlIHVzZWQ="
+2024-12-11T05:54:53.2363144Z       ],
+2024-12-11T05:54:53.2363417Z       "url": "https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/",
+2024-12-11T05:54:53.2363758Z       "sourceInfo": {
+2024-12-11T05:54:53.2363942Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2396243Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2428864Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2429068Z       },
+2024-12-11T05:54:53.2429215Z       "range": [
+2024-12-11T05:54:53.2429373Z         {
+2024-12-11T05:54:53.2429522Z           "start": {
+2024-12-11T05:54:53.2429689Z             "line": 6
+2024-12-11T05:54:53.2429848Z           },
+2024-12-11T05:54:53.2429999Z           "end": {
+2024-12-11T05:54:53.2430167Z             "line": 6
+2024-12-11T05:54:53.2430329Z           }
+2024-12-11T05:54:53.2430476Z         }
+2024-12-11T05:54:53.2430618Z       ]
+2024-12-11T05:54:53.2430753Z     },
+2024-12-11T05:54:53.2430892Z     {
+2024-12-11T05:54:53.2431184Z       "vertex": "sha256:07198ffb8b051de3a1884abda2cf483655ad875711123fda75047ea04f0123a0",
+2024-12-11T05:54:53.2431547Z       "level": 1,
+2024-12-11T05:54:53.2431977Z       "short": "VW5kZWZpbmVkVmFyOiBVc2FnZSBvZiB1bmRlZmluZWQgdmFyaWFibGUgJyRHRU1fUEFUSCcgKGxpbmUgMTQp",
+2024-12-11T05:54:53.2432454Z       "detail": [
+2024-12-11T05:54:53.2432746Z         "VmFyaWFibGVzIHNob3VsZCBiZSBkZWZpbmVkIGJlZm9yZSB0aGVpciB1c2U="
+2024-12-11T05:54:53.2433082Z       ],
+2024-12-11T05:54:53.2433320Z       "url": "https://docs.docker.com/go/dockerfile/rule/undefined-var/",
+2024-12-11T05:54:53.2433621Z       "sourceInfo": {
+2024-12-11T05:54:53.2433804Z         "filename": "./Dockerfile",
+2024-12-11T05:54:53.2466323Z         "data": "RlJPTSBjZ3IuZGV2L2NoYWluZ3VhcmQvcnVieTpsYXRlc3QtZGV2CgojIExhYmVscyEKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSAiaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4iCkxBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS5wYXRoICJEb2NrZXJmaWxlIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudGl0bGUgIkpla3lsbCBpbiBhIENhbiIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRlc2NyaXB0aW9uICJKZWt5bGwgaW4gYSBjb250YWluZXIgZm9yIGxvY2FsIHN0YXRpYyBzaXRlIGRldmVsb3BtZW50IgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UuYXV0aG9ycyAiTmF0YWxpZSBTb21lcnNhbGwgKEBzb21lLW5hdGFsaWUpIgpMQUJFTCBvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UubGljZW5zZXMgIk1JVCIKTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLmRvY3VtZW50YXRpb24gImh0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2FuL1JFQURNRS5tZCIKCiMgRW52aXJvbm1lbnQgdmFyaWFibGUgZm9yIHN5c3RlbQpFTlYgR0VNX0hPTUU9L3Vzci9sb2NhbC92ZW5kb3IKRU5WIEdFTV9QQVRIPSR7R0VNX1BBVEh9Oi91c3IvbG9jYWwvdmVuZG9yCkVOViBQQVRIPSR7R0VNX0hPTUV9L2Jpbjoke1BBVEh9CkVOViBMQU5HIEMuVVRGLTgKCiMgVXBkYXRlIGdlbXMKVVNFUiByb290ClJVTiBlY2hvICJnZW06IC0tbm8tcmkgLS1uby1yZG9jIiA+IH4vLmdlbXJjClJVTiB5ZXMgfCBnZW0gdXBkYXRlIC0tc3lzdGVtICYmIGdlbSBjbGVhbnVwClJVTiB5ZXMgfCBnZW0gaW5zdGFsbCBqZWt5bGwgYnVuZGxlciAmJiBnZW0gY2xlYW51cApSVU4gY2hvd24gLVIgbm9ucm9vdDpub25yb290IC91c3IvbG9jYWwvdmVuZG9yCgojIFNldCB0aGUgd29ya2luZyBkaXJlY3RvcnkKV09SS0RJUiAvd29yawoKIyBDb3B5IGluIHRoZSBlbnRyeXBvaW50IHNjcmlwdApDT1BZIGVudHJ5cG9pbnQuc2ggL2VudHJ5cG9pbnQuc2gKUlVOIGNobW9kICt4IC9lbnRyeXBvaW50LnNoCgojIE5vdyBzd2l0Y2ggYmFjayB0byB0aGUgbm9uLXJvb3QgdXNlcgpVU0VSIG5vbnJvb3QKCiMgU2V0IHRoZSBlbnRyeXBvaW50IHNjcmlwdApFTlRSWVBPSU5UIFsiL2VudHJ5cG9pbnQuc2giXQoKIyBFeHBvc2UgcG9ydHMKRVhQT1NFIDM1NzI5CkVYUE9TRSA0MDAwCgojIFJ1biB0aGUgdGhpbmchCkNNRCBbImJ1bmRsZSIsICJleGVjIiwgImpla3lsbCIsICJzZXJ2ZSIsICItLWxpdmVyZWxvYWQiLCAiLS1ob3N0IiwgIjAuMC4wLjAiXQo=",
+2024-12-11T05:54:53.2499365Z         "language": "Dockerfile"
+2024-12-11T05:54:53.2499573Z       },
+2024-12-11T05:54:53.2499729Z       "range": [
+2024-12-11T05:54:53.2499886Z         {
+2024-12-11T05:54:53.2500034Z           "start": {
+2024-12-11T05:54:53.2500199Z             "line": 14
+2024-12-11T05:54:53.2500370Z           },
+2024-12-11T05:54:53.2500532Z           "end": {
+2024-12-11T05:54:53.2500690Z             "line": 14
+2024-12-11T05:54:53.2500855Z           }
+2024-12-11T05:54:53.2501001Z         }
+2024-12-11T05:54:53.2501160Z       ]
+2024-12-11T05:54:53.2501301Z     }
+2024-12-11T05:54:53.2501444Z   ],
+2024-12-11T05:54:53.2501604Z   "containerimage.descriptor": {
+2024-12-11T05:54:53.2501888Z     "mediaType": "application/vnd.oci.image.index.v1+json",
+2024-12-11T05:54:53.2502320Z     "digest": "sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337",
+2024-12-11T05:54:53.2502689Z     "size": 1609
+2024-12-11T05:54:53.2502851Z   },
+2024-12-11T05:54:53.2503200Z   "containerimage.digest": "sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337",
+2024-12-11T05:54:53.2503697Z   "image.name": "ghcr.io/some-natalie/jekyll-in-a-can:latest"
+2024-12-11T05:54:53.2503975Z }
+2024-12-11T05:54:53.2504271Z ##[endgroup]
+2024-12-11T05:54:53.2504563Z ##[group]Reference
+2024-12-11T05:54:53.2505014Z builder-e9df1925-1d1a-468e-884f-91156a092dfd/builder-e9df1925-1d1a-468e-884f-91156a092dfd0/1npyzrhxu4beaohlic25xh630
+2024-12-11T05:54:53.2505623Z ##[endgroup]
+2024-12-11T05:54:53.2506434Z ##[group]Generating GitHub annotations (9 build checks found)
+2024-12-11T05:54:53.2524746Z ##[warning]LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2532743Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2535053Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2537295Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2539479Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2541671Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2543810Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2546002Z ##[warning]LegacyKeyValueFormat: "LABEL key=value" should be used instead of legacy "LABEL key value" format
+More info: https://docs.docker.com/go/dockerfile/rule/legacy-key-value-format/
+2024-12-11T05:54:53.2548103Z ##[warning]UndefinedVar: Usage of undefined variable '$GEM_PATH'
+More info: https://docs.docker.com/go/dockerfile/rule/undefined-var/
+2024-12-11T05:54:53.2549233Z ##[endgroup]
+2024-12-11T05:54:53.2549545Z ##[group]Check build summary support
+2024-12-11T05:54:53.2549907Z Build summary supported!
+2024-12-11T05:54:53.2550216Z ##[endgroup]
+2024-12-11T05:54:53.2617740Z ##[group]Run actions/attest-build-provenance@v2
+2024-12-11T05:54:53.2618042Z with:
+2024-12-11T05:54:53.2618255Z   subject-name: ghcr.io/some-natalie/jekyll-in-a-can
+2024-12-11T05:54:53.2618699Z   subject-digest: sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:53.2619105Z   push-to-registry: true
+2024-12-11T05:54:53.2619300Z   show-summary: true
+2024-12-11T05:54:53.2619629Z   github-token: ***
+2024-12-11T05:54:53.2619805Z env:
+2024-12-11T05:54:53.2619971Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:53.2620574Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:53.2622804Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:53.2626486Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:53.2632473Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:53.2637101Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:53.2637944Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:53.2638841Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:53.2639695Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:53.2640376Z ##[endgroup]
+2024-12-11T05:54:53.2707348Z ##[group]Run actions/attest-build-provenance/predicate@36fa7d009e22618ca7cd599486979b8150596c74
+2024-12-11T05:54:53.2707946Z env:
+2024-12-11T05:54:53.2708128Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:53.2708739Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:53.2710931Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:53.2714580Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:53.2720498Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:53.2725324Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:53.2726173Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:53.2727071Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:53.2727919Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:53.2728411Z ##[endgroup]
+2024-12-11T05:54:53.5369532Z ##[group]Run actions/attest@v2.1.0
+2024-12-11T05:54:53.5369766Z with:
+2024-12-11T05:54:53.5370100Z   subject-digest: sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:53.5370550Z   subject-name: ghcr.io/some-natalie/jekyll-in-a-can
+2024-12-11T05:54:53.5370884Z   predicate-type: https://slsa.dev/provenance/v1
+2024-12-11T05:54:53.5373895Z   predicate: {"buildDefinition":{"buildType":"https://actions.github.io/buildtypes/workflow/v1","externalParameters":{"workflow":{"ref":"refs/heads/main","repository":"https://github.com/some-natalie/jekyll-in-a-can","path":".github/workflows/build.yml"}},"internalParameters":{"github":{"event_name":"schedule","repository_id":"764289767","repository_owner_id":"9995618","runner_environment":"github-hosted"}},"resolvedDependencies":[{"uri":"git+https://github.com/some-natalie/jekyll-in-a-can@refs/heads/main","digest":{"gitCommit":"094271388ab54e135b8560900a6fb6d6345b4492"}}]},"runDetails":{"builder":{"id":"https://github.com/some-natalie/jekyll-in-a-can/.github/workflows/build.yml@refs/heads/main"},"metadata":{"invocationId":"https://github.com/some-natalie/jekyll-in-a-can/actions/runs/12269879788/attempts/1"}}}
+2024-12-11T05:54:53.5376776Z   push-to-registry: true
+2024-12-11T05:54:53.5377068Z   show-summary: true
+2024-12-11T05:54:53.5377474Z   github-token: ***
+2024-12-11T05:54:53.5377686Z env:
+2024-12-11T05:54:53.5377866Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:53.5378492Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:53.5380698Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:53.5384314Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:53.5390307Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:53.5394923Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:53.5395778Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:53.5396841Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:53.5397809Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:53.5398313Z ##[endgroup]
+2024-12-11T05:54:55.6185819Z Attestation created for ghcr.io/some-natalie/jekyll-in-a-can@sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:55.6188952Z ##[group][36mAttestation signed using certificate from Public Good Sigstore instance[39m
+2024-12-11T05:54:55.6189752Z -----BEGIN CERTIFICATE-----
+2024-12-11T05:54:55.6190277Z MIIG8jCCBnigAwIBAgIUWlYtPz5S5ejpdOaZ3OxcNP1cyBQwCgYIKoZIzj0EAwMw
+2024-12-11T05:54:55.6190896Z NzEVMBMGA1UEChMMc2lnc3RvcmUuZGV2MR4wHAYDVQQDExVzaWdzdG9yZS1pbnRl
+2024-12-11T05:54:55.6191408Z cm1lZGlhdGUwHhcNMjQxMjExMDU1NDUzWhcNMjQxMjExMDYwNDUzWjAAMFkwEwYH
+2024-12-11T05:54:55.6191917Z KoZIzj0CAQYIKoZIzj0DAQcDQgAEwLrwftdPYuWd5syZ2/C7Ms8M1xHuM1ZiBtKj
+2024-12-11T05:54:55.6192372Z Wwj8V3xRK0srPSlaH+H+Ev6BEdWrAoP6rjzuEbBU7qlJz5+iwqOCBZcwggWTMA4G
+2024-12-11T05:54:55.6192836Z A1UdDwEB/wQEAwIHgDATBgNVHSUEDDAKBggrBgEFBQcDAzAdBgNVHQ4EFgQUa8q0
+2024-12-11T05:54:55.6193290Z btLstNO1sJ2fCayU4tF7DS4wHwYDVR0jBBgwFoAU39Ppz1YkEZb5qNjpKFWixi4Y
+2024-12-11T05:54:55.6193728Z ZD8waQYDVR0RAQH/BF8wXYZbaHR0cHM6Ly9naXRodWIuY29tL3NvbWUtbmF0YWxp
+2024-12-11T05:54:55.6194163Z ZS9qZWt5bGwtaW4tYS1jYW4vLmdpdGh1Yi93b3JrZmxvd3MvYnVpbGQueW1sQHJl
+2024-12-11T05:54:55.6194598Z ZnMvaGVhZHMvbWFpbjA5BgorBgEEAYO/MAEBBCtodHRwczovL3Rva2VuLmFjdGlv
+2024-12-11T05:54:55.6195053Z bnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tMBYGCisGAQQBg78wAQIECHNjaGVkdWxl
+2024-12-11T05:54:55.6195512Z MDYGCisGAQQBg78wAQMEKDA5NDI3MTM4OGFiNTRlMTM1Yjg1NjA5MDBhNmZiNmQ2
+2024-12-11T05:54:55.6195980Z MzQ1YjQ0OTIwHQYKKwYBBAGDvzABBAQPQnVpbGQgY29udGFpbmVyMCoGCisGAQQB
+2024-12-11T05:54:55.6196445Z g78wAQUEHHNvbWUtbmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4wHQYKKwYBBAGDvzAB
+2024-12-11T05:54:55.6196913Z BgQPcmVmcy9oZWFkcy9tYWluMDsGCisGAQQBg78wAQgELQwraHR0cHM6Ly90b2tl
+2024-12-11T05:54:55.6197564Z bi5hY3Rpb25zLmdpdGh1YnVzZXJjb250ZW50LmNvbTBrBgorBgEEAYO/MAEJBF0M
+2024-12-11T05:54:55.6198023Z W2h0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWluLWEtY2Fu
+2024-12-11T05:54:55.6198471Z Ly5naXRodWIvd29ya2Zsb3dzL2J1aWxkLnltbEByZWZzL2hlYWRzL21haW4wOAYK
+2024-12-11T05:54:55.6198931Z KwYBBAGDvzABCgQqDCgwOTQyNzEzODhhYjU0ZTEzNWI4NTYwOTAwYTZmYjZkNjM0
+2024-12-11T05:54:55.6199391Z NWI0NDkyMB0GCisGAQQBg78wAQsEDwwNZ2l0aHViLWhvc3RlZDA/BgorBgEEAYO/
+2024-12-11T05:54:55.6199838Z MAEMBDEML2h0dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUvamVreWxsLWlu
+2024-12-11T05:54:55.6200415Z LWEtY2FuMDgGCisGAQQBg78wAQ0EKgwoMDk0MjcxMzg4YWI1NGUxMzViODU2MDkw
+2024-12-11T05:54:55.6200948Z MGE2ZmI2ZDYzNDViNDQ5MjAfBgorBgEEAYO/MAEOBBEMD3JlZnMvaGVhZHMvbWFp
+2024-12-11T05:54:55.6201630Z bjAZBgorBgEEAYO/MAEPBAsMCTc2NDI4OTc2NzAvBgorBgEEAYO/MAEQBCEMH2h0
+2024-12-11T05:54:55.6202075Z dHBzOi8vZ2l0aHViLmNvbS9zb21lLW5hdGFsaWUwFwYKKwYBBAGDvzABEQQJDAc5
+2024-12-11T05:54:55.6202542Z OTk1NjE4MGsGCisGAQQBg78wARIEXQxbaHR0cHM6Ly9naXRodWIuY29tL3NvbWUt
+2024-12-11T05:54:55.6202995Z bmF0YWxpZS9qZWt5bGwtaW4tYS1jYW4vLmdpdGh1Yi93b3JrZmxvd3MvYnVpbGQu
+2024-12-11T05:54:55.6203440Z eW1sQHJlZnMvaGVhZHMvbWFpbjA4BgorBgEEAYO/MAETBCoMKDA5NDI3MTM4OGFi
+2024-12-11T05:54:55.6203969Z NTRlMTM1Yjg1NjA5MDBhNmZiNmQ2MzQ1YjQ0OTIwGAYKKwYBBAGDvzABFAQKDAhz
+2024-12-11T05:54:55.6204572Z Y2hlZHVsZTBjBgorBgEEAYO/MAEVBFUMU2h0dHBzOi8vZ2l0aHViLmNvbS9zb21l
+2024-12-11T05:54:55.6205042Z LW5hdGFsaWUvamVreWxsLWluLWEtY2FuL2FjdGlvbnMvcnVucy8xMjI2OTg3OTc4
+2024-12-11T05:54:55.6205613Z OC9hdHRlbXB0cy8xMBYGCisGAQQBg78wARYECAwGcHVibGljMIGJBgorBgEEAdZ5
+2024-12-11T05:54:55.6206058Z AgQCBHsEeQB3AHUA3T0wasbHETJjGR4cmWc3AqJKXrjePK3/h4pygC8p7o4AAAGT
+2024-12-11T05:54:55.6206505Z tEjbcQAABAMARjBEAiBPQj5s9VoyOjkvOK3QkarTsWmz43shUF1CEY+XL/QIogIg
+2024-12-11T05:54:55.6206958Z YfeWnmWfFvY734H7u8jOYQ+sSg1tAKpOwczKshqwsnswCgYIKoZIzj0EAwMDaAAw
+2024-12-11T05:54:55.6207462Z ZQIwXUAe9fPxHuAZIcKU3xepP/AYia7G03SUA35uErBFdx05wGF6Ql0lZ2XQauds
+2024-12-11T05:54:55.6208130Z moi4AjEAmsHlYx6e2JxMMv3Yf6AAKhIEHnZ2BXOnDMzhyUJnEQfq4+/eofWDcepj
+2024-12-11T05:54:55.6208456Z sca9fIxS
+2024-12-11T05:54:55.6208899Z -----END CERTIFICATE-----
+2024-12-11T05:54:55.6209045Z 
+2024-12-11T05:54:55.6209424Z ##[endgroup]
+2024-12-11T05:54:55.6209800Z [36mAttestation signature uploaded to Rekor transparency log[39m
+2024-12-11T05:54:55.6210171Z https://search.sigstore.dev?logIndex=154635374
+2024-12-11T05:54:55.6210494Z [36mAttestation uploaded to repository[39m
+2024-12-11T05:54:55.6210845Z https://github.com/some-natalie/jekyll-in-a-can/attestations/3789134
+2024-12-11T05:54:55.6211223Z [36mAttestation uploaded to registry[39m
+2024-12-11T05:54:55.6211706Z ghcr.io/some-natalie/jekyll-in-a-can@sha256:f32674f041f3baf2f942d7279caeadb143e2d7bc7da5a191300969c8d284d871
+2024-12-11T05:54:55.6468402Z ##[group]Run sigstore/cosign-installer@main
+2024-12-11T05:54:55.6468684Z with:
+2024-12-11T05:54:55.6468858Z   cosign-release: v2.4.1
+2024-12-11T05:54:55.6469072Z   install-dir: $HOME/.cosign
+2024-12-11T05:54:55.6469284Z   use-sudo: false
+2024-12-11T05:54:55.6469452Z env:
+2024-12-11T05:54:55.6469619Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:55.6470238Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:55.6472475Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:55.6476067Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:55.6482306Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:55.6486896Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:55.6487959Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:55.6488856Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:55.6489710Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:55.6490206Z ##[endgroup]
+2024-12-11T05:54:55.6535502Z ##[group]Run #!/bin/bash
+2024-12-11T05:54:55.6536207Z [36;1m#!/bin/bash[0m
+2024-12-11T05:54:55.6536413Z [36;1m# cosign install script[0m
+2024-12-11T05:54:55.6536663Z [36;1mshopt -s expand_aliases[0m
+2024-12-11T05:54:55.6536905Z [36;1mif [ -z "$NO_COLOR" ]; then[0m
+2024-12-11T05:54:55.6537427Z [36;1m  alias log_info="echo -e \"\033[1;32mINFO\033[0m:\""[0m
+2024-12-11T05:54:55.6537771Z [36;1m  alias log_error="echo -e \"\033[1;31mERROR\033[0m:\""[0m
+2024-12-11T05:54:55.6538051Z [36;1melse[0m
+2024-12-11T05:54:55.6538236Z [36;1m  alias log_info="echo \"INFO:\""[0m
+2024-12-11T05:54:55.6538488Z [36;1m  alias log_error="echo \"ERROR:\""[0m
+2024-12-11T05:54:55.6538711Z [36;1mfi[0m
+2024-12-11T05:54:55.6538866Z [36;1mset -e[0m
+2024-12-11T05:54:55.6539032Z [36;1m[0m
+2024-12-11T05:54:55.6539190Z [36;1mmkdir -p $HOME/.cosign[0m
+2024-12-11T05:54:55.6539395Z [36;1m[0m
+2024-12-11T05:54:55.6539554Z [36;1mif [[ v2.4.1 == "main" ]]; then[0m
+2024-12-11T05:54:55.6539893Z [36;1m  log_info "installing cosign via 'go install' from its main version"[0m
+2024-12-11T05:54:55.6540228Z [36;1m  GOBIN=$(go env GOPATH)/bin[0m
+2024-12-11T05:54:55.6540521Z [36;1m  go install github.com/sigstore/cosign/cmd/cosign@main[0m
+2024-12-11T05:54:55.6540842Z [36;1m  ln -s $GOBIN/cosign $HOME/.cosign/cosign[0m
+2024-12-11T05:54:55.6541093Z [36;1m  exit 0[0m
+2024-12-11T05:54:55.6541254Z [36;1mfi[0m
+2024-12-11T05:54:55.6541405Z [36;1m[0m
+2024-12-11T05:54:55.6541559Z [36;1mshaprog() {[0m
+2024-12-11T05:54:55.6541744Z [36;1m  case Linux in[0m
+2024-12-11T05:54:55.6541937Z [36;1m    Linux|linux)[0m
+2024-12-11T05:54:55.6542147Z [36;1m      sha256sum $1 | cut -d' ' -f1[0m
+2024-12-11T05:54:55.6542370Z [36;1m      ;;[0m
+2024-12-11T05:54:55.6542531Z [36;1m    macOS|macos)[0m
+2024-12-11T05:54:55.6542742Z [36;1m      shasum -a256 $1 | cut -d' ' -f1[0m
+2024-12-11T05:54:55.6542972Z [36;1m      ;;[0m
+2024-12-11T05:54:55.6543132Z [36;1m    Windows|windows)[0m
+2024-12-11T05:54:55.6543572Z [36;1m      powershell -command "(Get-FileHash $1 -Algorithm SHA256 | Select-Object -ExpandProperty Hash).ToLower()"[0m
+2024-12-11T05:54:55.6544012Z [36;1m      ;;[0m
+2024-12-11T05:54:55.6544168Z [36;1m    *)[0m
+2024-12-11T05:54:55.6544348Z [36;1m      log_error "unsupported OS Linux"[0m
+2024-12-11T05:54:55.6544599Z [36;1m      exit 1[0m
+2024-12-11T05:54:55.6544772Z [36;1m      ;;[0m
+2024-12-11T05:54:55.6544936Z [36;1m  esac[0m
+2024-12-11T05:54:55.6545099Z [36;1m}[0m
+2024-12-11T05:54:55.6545258Z [36;1m[0m
+2024-12-11T05:54:55.6545422Z [36;1mbootstrap_version='v2.4.1'[0m
+2024-12-11T05:54:55.6545852Z [36;1mbootstrap_linux_amd64_sha='8b24b946dd5809c6bd93de08033bcf6bc0ed7d336b7785787c080f574b89249b'[0m
+2024-12-11T05:54:55.6546466Z [36;1mbootstrap_linux_arm_sha='541fd175fae792a154fa2fa025146e3d4691e2dd97717fa9ace35677a88489e7'[0m
+2024-12-11T05:54:55.6547073Z [36;1mbootstrap_linux_arm64_sha='3b2e2e3854d0356c45fe6607047526ccd04742d20bd44afb5be91fa2a6e7cb4a'[0m
+2024-12-11T05:54:55.6547731Z [36;1mbootstrap_darwin_amd64_sha='666032ca283da92b6f7953965688fd51200fdc891a86c19e05c98b898ea0af4e'[0m
+2024-12-11T05:54:55.6548337Z [36;1mbootstrap_darwin_arm64_sha='13343856b69f70388c4fe0b986a31dde5958e444b41be22d785d3dc5e1a9cc62'[0m
+2024-12-11T05:54:55.6548949Z [36;1mbootstrap_windows_amd64_sha='8d57f8a42a981d27290c4227271fa9f0f62ca6630eb4a21d316bd6b01405b87c'[0m
+2024-12-11T05:54:55.6549390Z [36;1mcosign_executable_name=cosign[0m
+2024-12-11T05:54:55.6549618Z [36;1m[0m
+2024-12-11T05:54:55.6549788Z [36;1mtrap "popd >/dev/null" EXIT[0m
+2024-12-11T05:54:55.6550169Z [36;1m[0m
+2024-12-11T05:54:55.6550339Z [36;1mpushd $HOME/.cosign > /dev/null[0m
+2024-12-11T05:54:55.6550577Z [36;1m[0m
+2024-12-11T05:54:55.6550728Z [36;1mcase Linux in[0m
+2024-12-11T05:54:55.6550918Z [36;1m  Linux|linux)[0m
+2024-12-11T05:54:55.6551105Z [36;1m    case X64 in[0m
+2024-12-11T05:54:55.6551286Z [36;1m      X64|amd64)[0m
+2024-12-11T05:54:55.6551516Z [36;1m        bootstrap_filename='cosign-linux-amd64'[0m
+2024-12-11T05:54:55.6551824Z [36;1m        bootstrap_sha=${bootstrap_linux_amd64_sha}[0m
+2024-12-11T05:54:55.6552142Z [36;1m        desired_cosign_filename='cosign-linux-amd64'[0m
+2024-12-11T05:54:55.6552503Z [36;1m        # v0.6.0 had different filename structures from all other releases[0m
+2024-12-11T05:54:55.6552970Z [36;1m        if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6553306Z [36;1m          desired_cosign_filename='cosign_linux_amd64_0.6.0_linux_amd64'[0m
+2024-12-11T05:54:55.6553749Z [36;1m          desired_cosign_v060_signature='cosign_linux_amd64_0.6.0_linux_amd64.sig'[0m
+2024-12-11T05:54:55.6554082Z [36;1m        fi[0m
+2024-12-11T05:54:55.6554252Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6554426Z [36;1m[0m
+2024-12-11T05:54:55.6554582Z [36;1m      ARM|arm)[0m
+2024-12-11T05:54:55.6554803Z [36;1m        bootstrap_filename='cosign-linux-arm'[0m
+2024-12-11T05:54:55.6555100Z [36;1m        bootstrap_sha=${bootstrap_linux_arm_sha}[0m
+2024-12-11T05:54:55.6555407Z [36;1m        desired_cosign_filename='cosign-linux-arm'[0m
+2024-12-11T05:54:55.6555691Z [36;1m        if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6555979Z [36;1m          log_error "linux-arm build not available at v0.6.0"[0m
+2024-12-11T05:54:55.6556262Z [36;1m          exit 1[0m
+2024-12-11T05:54:55.6556447Z [36;1m        fi[0m
+2024-12-11T05:54:55.6556620Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6556777Z [36;1m[0m
+2024-12-11T05:54:55.6556932Z [36;1m      ARM64|arm64)[0m
+2024-12-11T05:54:55.6557172Z [36;1m        bootstrap_filename='cosign-linux-arm64'[0m
+2024-12-11T05:54:55.6557461Z [36;1m        bootstrap_sha=${bootstrap_linux_arm64_sha}[0m
+2024-12-11T05:54:55.6557770Z [36;1m        desired_cosign_filename='cosign-linux-arm64'[0m
+2024-12-11T05:54:55.6558054Z [36;1m        if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6558347Z [36;1m          log_error "linux-arm64 build not available at v0.6.0"[0m
+2024-12-11T05:54:55.6558628Z [36;1m          exit 1[0m
+2024-12-11T05:54:55.6558810Z [36;1m        fi[0m
+2024-12-11T05:54:55.6558973Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6559134Z [36;1m[0m
+2024-12-11T05:54:55.6559274Z [36;1m      *)[0m
+2024-12-11T05:54:55.6559475Z [36;1m        log_error "unsupported architecture X64"[0m
+2024-12-11T05:54:55.6559729Z [36;1m        exit 1[0m
+2024-12-11T05:54:55.6559906Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6560069Z [36;1m    esac[0m
+2024-12-11T05:54:55.6560226Z [36;1m    ;;[0m
+2024-12-11T05:54:55.6560384Z [36;1m[0m
+2024-12-11T05:54:55.6560531Z [36;1m  macOS|macos)[0m
+2024-12-11T05:54:55.6560714Z [36;1m    case X64 in[0m
+2024-12-11T05:54:55.6560899Z [36;1m      X64|amd64)[0m
+2024-12-11T05:54:55.6561120Z [36;1m        bootstrap_filename='cosign-darwin-amd64'[0m
+2024-12-11T05:54:55.6561746Z [36;1m        bootstrap_sha=${bootstrap_darwin_amd64_sha}[0m
+2024-12-11T05:54:55.6562063Z [36;1m        desired_cosign_filename='cosign-darwin-amd64'[0m
+2024-12-11T05:54:55.6562424Z [36;1m        # v0.6.0 had different filename structures from all other releases[0m
+2024-12-11T05:54:55.6562750Z [36;1m        if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6563067Z [36;1m          desired_cosign_filename='cosign_darwin_amd64_0.6.0_darwin_amd64'[0m
+2024-12-11T05:54:55.6563513Z [36;1m          desired_cosign_v060_signature='cosign_darwin_amd64_0.6.0_darwin_amd64.sig'[0m
+2024-12-11T05:54:55.6563856Z [36;1m        fi[0m
+2024-12-11T05:54:55.6564020Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6564177Z [36;1m[0m
+2024-12-11T05:54:55.6564499Z [36;1m      ARM64|arm64)[0m
+2024-12-11T05:54:55.6564731Z [36;1m        bootstrap_filename='cosign-darwin-arm64'[0m
+2024-12-11T05:54:55.6565023Z [36;1m        bootstrap_sha=${bootstrap_darwin_arm64_sha}[0m
+2024-12-11T05:54:55.6565331Z [36;1m        desired_cosign_filename='cosign-darwin-arm64'[0m
+2024-12-11T05:54:55.6565681Z [36;1m        # v0.6.0 had different filename structures from all other releases[0m
+2024-12-11T05:54:55.6565999Z [36;1m        if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6566311Z [36;1m          desired_cosign_filename='cosign_darwin_arm64_0.6.0_darwin_arm64'[0m
+2024-12-11T05:54:55.6566739Z [36;1m          desired_cosign_v060_signature='cosign_darwin_arm64_0.6.0_darwin_arm64.sig'[0m
+2024-12-11T05:54:55.6567079Z [36;1m        fi[0m
+2024-12-11T05:54:55.6567382Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6567545Z [36;1m[0m
+2024-12-11T05:54:55.6567692Z [36;1m      *)[0m
+2024-12-11T05:54:55.6567892Z [36;1m        log_error "unsupported architecture X64"[0m
+2024-12-11T05:54:55.6568151Z [36;1m        exit 1[0m
+2024-12-11T05:54:55.6568349Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6568508Z [36;1m    esac[0m
+2024-12-11T05:54:55.6568664Z [36;1m    ;;[0m
+2024-12-11T05:54:55.6568820Z [36;1m[0m
+2024-12-11T05:54:55.6568967Z [36;1m  Windows|windows)[0m
+2024-12-11T05:54:55.6569161Z [36;1m    case X64 in[0m
+2024-12-11T05:54:55.6569347Z [36;1m      X64|amd64)[0m
+2024-12-11T05:54:55.6569580Z [36;1m        bootstrap_filename='cosign-windows-amd64.exe'[0m
+2024-12-11T05:54:55.6569894Z [36;1m        bootstrap_sha=${bootstrap_windows_amd64_sha}[0m
+2024-12-11T05:54:55.6570224Z [36;1m        desired_cosign_filename='cosign-windows-amd64.exe'[0m
+2024-12-11T05:54:55.6570531Z [36;1m        cosign_executable_name=cosign.exe[0m
+2024-12-11T05:54:55.6570853Z [36;1m        # v0.6.0 had different filename structures from all other releases[0m
+2024-12-11T05:54:55.6571172Z [36;1m        if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6571515Z [36;1m          desired_cosign_filename='cosign_windows_amd64_0.6.0_windows_amd64.exe'[0m
+2024-12-11T05:54:55.6571993Z [36;1m          desired_cosign_v060_signature='cosign_windows_amd64_0.6.0_windows_amd64.exe.sig'[0m
+2024-12-11T05:54:55.6572351Z [36;1m        fi[0m
+2024-12-11T05:54:55.6572509Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6572673Z [36;1m      *)[0m
+2024-12-11T05:54:55.6572874Z [36;1m        log_error "unsupported architecture X64"[0m
+2024-12-11T05:54:55.6573117Z [36;1m        exit 1[0m
+2024-12-11T05:54:55.6573296Z [36;1m        ;;[0m
+2024-12-11T05:54:55.6573461Z [36;1m    esac[0m
+2024-12-11T05:54:55.6573618Z [36;1m    ;;[0m
+2024-12-11T05:54:55.6573770Z [36;1m  *)[0m
+2024-12-11T05:54:55.6573954Z [36;1m    log_error "unsupported os Linux"[0m
+2024-12-11T05:54:55.6574191Z [36;1m    exit 1[0m
+2024-12-11T05:54:55.6574353Z [36;1m    ;;[0m
+2024-12-11T05:54:55.6574509Z [36;1mesac[0m
+2024-12-11T05:54:55.6574661Z [36;1m[0m
+2024-12-11T05:54:55.6574806Z [36;1mSUDO=[0m
+2024-12-11T05:54:55.6575044Z [36;1mif [[ "false" == "true" ]] && command -v sudo >/dev/null; then[0m
+2024-12-11T05:54:55.6575345Z [36;1m  SUDO=sudo[0m
+2024-12-11T05:54:55.6575519Z [36;1mfi[0m
+2024-12-11T05:54:55.6575665Z [36;1m[0m
+2024-12-11T05:54:55.6575888Z [36;1mexpected_bootstrap_version_digest=${bootstrap_sha}[0m
+2024-12-11T05:54:55.6576750Z [36;1mlog_info "Downloading bootstrap version '${bootstrap_version}' of cosign to verify version to be installed...\n      https://github.com/sigstore/cosign/releases/download/${bootstrap_version}/${bootstrap_filename}"[0m
+2024-12-11T05:54:55.6577890Z [36;1m$SUDO curl -fsL https://github.com/sigstore/cosign/releases/download/${bootstrap_version}/${bootstrap_filename} -o ${cosign_executable_name}[0m
+2024-12-11T05:54:55.6578528Z [36;1mshaBootstrap=$(shaprog ${cosign_executable_name});[0m
+2024-12-11T05:54:55.6578910Z [36;1mif [[ $shaBootstrap != ${expected_bootstrap_version_digest} ]]; then[0m
+2024-12-11T05:54:55.6579315Z [36;1m  log_error "Unable to validate cosign version: 'v2.4.1'"[0m
+2024-12-11T05:54:55.6579728Z [36;1m  exit 1[0m
+2024-12-11T05:54:55.6579892Z [36;1mfi[0m
+2024-12-11T05:54:55.6580073Z [36;1m$SUDO chmod +x ${cosign_executable_name}[0m
+2024-12-11T05:54:55.6580317Z [36;1m[0m
+2024-12-11T05:54:55.6580591Z [36;1m# If the bootstrap and specified `cosign` releases are the same, we're done.[0m
+2024-12-11T05:54:55.6580980Z [36;1mif [[ v2.4.1 == ${bootstrap_version} ]]; then[0m
+2024-12-11T05:54:55.6581450Z [36;1m  log_info "bootstrap version successfully verified and matches requested version so nothing else to do"[0m
+2024-12-11T05:54:55.6581884Z [36;1m  exit 0[0m
+2024-12-11T05:54:55.6582042Z [36;1mfi[0m
+2024-12-11T05:54:55.6582191Z [36;1m[0m
+2024-12-11T05:54:55.6582393Z [36;1msemver='^v([0-9]+\.){0,2}(\*|[0-9]+)(-?r?c?)(\.[0-9]+)$'[0m
+2024-12-11T05:54:55.6582807Z [36;1mif [[ v2.4.1 =~ $semver ]]; then[0m
+2024-12-11T05:54:55.6583092Z [36;1m  log_info "Custom cosign version 'v2.4.1' requested"[0m
+2024-12-11T05:54:55.6583364Z [36;1melse[0m
+2024-12-11T05:54:55.6583614Z [36;1m  log_error "Unable to validate requested cosign version: 'v2.4.1'"[0m
+2024-12-11T05:54:55.6583924Z [36;1m  exit 1[0m
+2024-12-11T05:54:55.6584083Z [36;1mfi[0m
+2024-12-11T05:54:55.6584227Z [36;1m[0m
+2024-12-11T05:54:55.6584386Z [36;1m# Download custom cosign[0m
+2024-12-11T05:54:55.6585012Z [36;1mlog_info "Downloading platform-specific version 'v2.4.1' of cosign...\n      https://github.com/sigstore/cosign/releases/download/v2.4.1/${desired_cosign_filename}"[0m
+2024-12-11T05:54:55.6585915Z [36;1m$SUDO curl -fsL https://github.com/sigstore/cosign/releases/download/v2.4.1/${desired_cosign_filename} -o cosign_v2.4.1[0m
+2024-12-11T05:54:55.6586438Z [36;1mshaCustom=$(shaprog cosign_v2.4.1);[0m
+2024-12-11T05:54:55.6586662Z [36;1m[0m
+2024-12-11T05:54:55.6586848Z [36;1m# same hash means it is the same release[0m
+2024-12-11T05:54:55.6587128Z [36;1mif [[ $shaCustom != $shaBootstrap ]]; then[0m
+2024-12-11T05:54:55.6587418Z [36;1m  if [[ v2.4.1 == 'v0.6.0' && Linux == 'Linux' ]]; then[0m
+2024-12-11T05:54:55.6587748Z [36;1m    # v0.6.0's linux release has a dependency on `libpcsclite1`[0m
+2024-12-11T05:54:55.6588124Z [36;1m    log_info "Installing libpcsclite1 package if necessary..."[0m
+2024-12-11T05:54:55.6588429Z [36;1m    set +e[0m
+2024-12-11T05:54:55.6588621Z [36;1m    sudo dpkg -s libpcsclite1[0m
+2024-12-11T05:54:55.6588849Z [36;1m    if [ $? -eq 0 ]; then[0m
+2024-12-11T05:54:55.6589133Z [36;1m        log_info "libpcsclite1 package is already installed"[0m
+2024-12-11T05:54:55.6589413Z [36;1m    else[0m
+2024-12-11T05:54:55.6589686Z [36;1m         log_info "libpcsclite1 package is not installed, installing it now."[0m
+2024-12-11T05:54:55.6590045Z [36;1m         sudo apt-get update -q -q[0m
+2024-12-11T05:54:55.6590320Z [36;1m         sudo apt-get install -yq libpcsclite1[0m
+2024-12-11T05:54:55.6590570Z [36;1m    fi[0m
+2024-12-11T05:54:55.6590728Z [36;1m    set -e[0m
+2024-12-11T05:54:55.6590897Z [36;1m  fi[0m
+2024-12-11T05:54:55.6591056Z [36;1m[0m
+2024-12-11T05:54:55.6591221Z [36;1m  if [[ v2.4.1 == 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6591907Z [36;1m    log_info "Downloading detached signature for platform-specific 'v2.4.1' of cosign...\n      https://github.com/sigstore/cosign/releases/download/v2.4.1/${desired_cosign_v060_signature}"[0m
+2024-12-11T05:54:55.6592932Z [36;1m    $SUDO curl -fsL https://github.com/sigstore/cosign/releases/download/v2.4.1/${desired_cosign_v060_signature} -o ${desired_cosign_filename}.sig[0m
+2024-12-11T05:54:55.6593494Z [36;1m  else[0m
+2024-12-11T05:54:55.6594105Z [36;1m    log_info "Downloading detached signature for platform-specific 'v2.4.1' of cosign...\n      https://github.com/sigstore/cosign/releases/download/v2.4.1/${desired_cosign_filename}.sig"[0m
+2024-12-11T05:54:55.6595013Z [36;1m    $SUDO curl -fsLO https://github.com/sigstore/cosign/releases/download/v2.4.1/${desired_cosign_filename}.sig[0m
+2024-12-11T05:54:55.6595467Z [36;1m  fi[0m
+2024-12-11T05:54:55.6595622Z [36;1m[0m
+2024-12-11T05:54:55.6595906Z [36;1m  if [[ v2.4.1 < 'v0.6.0' ]]; then[0m
+2024-12-11T05:54:55.6596483Z [36;1m    log_info "Downloading cosign public key 'v2.4.1' of cosign...\n    https://raw.githubusercontent.com/sigstore/cosign/v2.4.1/.github/workflows/cosign.pub"[0m
+2024-12-11T05:54:55.6597305Z [36;1m    RELEASE_COSIGN_PUB_KEY=https://raw.githubusercontent.com/sigstore/cosign/v2.4.1/.github/workflows/cosign.pub[0m
+2024-12-11T05:54:55.6597967Z [36;1m    RELEASE_COSIGN_PUB_KEY_SHA='4aa4bd19530a4929d758a9896255aef2c82f1a3a9f4b000034c6df4307c14f9e'[0m
+2024-12-11T05:54:55.6598380Z [36;1m  else[0m
+2024-12-11T05:54:55.6598885Z [36;1m    log_info "Downloading cosign public key 'v2.4.1' of cosign...\n    https://raw.githubusercontent.com/sigstore/cosign/v2.4.1/release/release-cosign.pub"[0m
+2024-12-11T05:54:55.6599799Z [36;1m    RELEASE_COSIGN_PUB_KEY=https://raw.githubusercontent.com/sigstore/cosign/v2.4.1/release/release-cosign.pub[0m
+2024-12-11T05:54:55.6600447Z [36;1m    RELEASE_COSIGN_PUB_KEY_SHA='f4cea466e5e887a45da5031757fa1d32655d83420639dc1758749b744179f126'[0m
+2024-12-11T05:54:55.6600857Z [36;1m  fi[0m
+2024-12-11T05:54:55.6601012Z [36;1m[0m
+2024-12-11T05:54:55.6601429Z [36;1m  log_info "Verifying public key matches expected value"[0m
+2024-12-11T05:54:55.6601929Z [36;1m  $SUDO curl -fsL $RELEASE_COSIGN_PUB_KEY -o public.key[0m
+2024-12-11T05:54:55.6602244Z [36;1m  sha_fetched_key=$(shaprog public.key)[0m
+2024-12-11T05:54:55.6602564Z [36;1m  if [[ $sha_fetched_key != $RELEASE_COSIGN_PUB_KEY_SHA ]]; then[0m
+2024-12-11T05:54:55.6602972Z [36;1m    log_error "Fetched public key does not match expected digest, exiting"[0m
+2024-12-11T05:54:55.6603301Z [36;1m    exit 1[0m
+2024-12-11T05:54:55.6603475Z [36;1m  fi[0m
+2024-12-11T05:54:55.6603630Z [36;1m[0m
+2024-12-11T05:54:55.6603927Z [36;1m  log_info "Using bootstrap cosign to verify signature of desired cosign version"[0m
+2024-12-11T05:54:55.6604554Z [36;1m  ./cosign verify-blob --insecure-ignore-tlog --key public.key --signature ${desired_cosign_filename}.sig cosign_v2.4.1[0m
+2024-12-11T05:54:55.6605036Z [36;1m[0m
+2024-12-11T05:54:55.6605194Z [36;1m  $SUDO rm cosign[0m
+2024-12-11T05:54:55.6605441Z [36;1m  $SUDO mv cosign_v2.4.1 ${cosign_executable_name}[0m
+2024-12-11T05:54:55.6605731Z [36;1m  $SUDO chmod +x ${cosign_executable_name}[0m
+2024-12-11T05:54:55.6606003Z [36;1m  log_info "Installation complete!"[0m
+2024-12-11T05:54:55.6606237Z [36;1mfi[0m
+2024-12-11T05:54:55.6709243Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2024-12-11T05:54:55.6709551Z env:
+2024-12-11T05:54:55.6709741Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:55.6710359Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:55.6712549Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:55.6716216Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:55.6722812Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:55.6727607Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:55.6728472Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:55.6729391Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:55.6730258Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:55.6730758Z ##[endgroup]
+2024-12-11T05:54:55.6838866Z [1;32mINFO[0m: Downloading bootstrap version 'v2.4.1' of cosign to verify version to be installed...
+2024-12-11T05:54:55.6839484Z       https://github.com/sigstore/cosign/releases/download/v2.4.1/cosign-linux-amd64
+2024-12-11T05:54:56.5408633Z [1;32mINFO[0m: bootstrap version successfully verified and matches requested version so nothing else to do
+2024-12-11T05:54:56.5450711Z ##[group]Run echo "$HOME/.cosign" >> $GITHUB_PATH
+2024-12-11T05:54:56.5451054Z [36;1mecho "$HOME/.cosign" >> $GITHUB_PATH[0m
+2024-12-11T05:54:56.5507934Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2024-12-11T05:54:56.5508233Z env:
+2024-12-11T05:54:56.5508421Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:56.5509048Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:56.5511475Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:56.5515718Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:56.5522215Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:56.5527072Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:56.5527922Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:56.5528824Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:56.5529676Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:56.5530167Z ##[endgroup]
+2024-12-11T05:54:56.5631701Z ##[group]Run images=""
+2024-12-11T05:54:56.5631941Z [36;1mimages=""[0m
+2024-12-11T05:54:56.5632129Z [36;1mfor tag in ${TAGS}; do[0m
+2024-12-11T05:54:56.5632352Z [36;1m  images+="${tag}@${DIGEST} "[0m
+2024-12-11T05:54:56.5632577Z [36;1mdone[0m
+2024-12-11T05:54:56.5632758Z [36;1mcosign sign --yes ${images}[0m
+2024-12-11T05:54:56.5686842Z shell: /usr/bin/bash -e {0}
+2024-12-11T05:54:56.5687064Z env:
+2024-12-11T05:54:56.5687250Z   DOCKER_METADATA_OUTPUT_VERSION: latest
+2024-12-11T05:54:56.5687883Z   DOCKER_METADATA_OUTPUT_TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:56.5690116Z   DOCKER_METADATA_OUTPUT_LABELS: org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+org.opencontainers.image.licenses=MIT
+org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.title=jekyll-in-a-can
+org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+org.opencontainers.image.version=latest
+2024-12-11T05:54:56.5693737Z   DOCKER_METADATA_OUTPUT_ANNOTATIONS: manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z
+manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container
+manifest:org.opencontainers.image.licenses=MIT
+manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492
+manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.title=jekyll-in-a-can
+manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can
+manifest:org.opencontainers.image.version=latest
+2024-12-11T05:54:56.5699619Z   DOCKER_METADATA_OUTPUT_JSON: {"tags":["ghcr.io/some-natalie/jekyll-in-a-can:latest","ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492"],"labels":{"org.opencontainers.image.created":"2024-12-11T04:49:09.770Z","org.opencontainers.image.description":"🧪🥫 - it's Jekyll in a container","org.opencontainers.image.licenses":"MIT","org.opencontainers.image.revision":"094271388ab54e135b8560900a6fb6d6345b4492","org.opencontainers.image.source":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.title":"jekyll-in-a-can","org.opencontainers.image.url":"https://github.com/some-natalie/jekyll-in-a-can","org.opencontainers.image.version":"latest"},"annotations":["manifest:org.opencontainers.image.created=2024-12-11T04:49:09.770Z","manifest:org.opencontainers.image.description=🧪🥫 - it's Jekyll in a container","manifest:org.opencontainers.image.licenses=MIT","manifest:org.opencontainers.image.revision=094271388ab54e135b8560900a6fb6d6345b4492","manifest:org.opencontainers.image.source=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.title=jekyll-in-a-can","manifest:org.opencontainers.image.url=https://github.com/some-natalie/jekyll-in-a-can","manifest:org.opencontainers.image.version=latest"]}
+2024-12-11T05:54:56.5704384Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_TAGS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-tags.json
+2024-12-11T05:54:56.5705484Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_LABELS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-labels.json
+2024-12-11T05:54:56.5706391Z   DOCKER_METADATA_OUTPUT_BAKE_FILE_ANNOTATIONS: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake-annotations.json
+2024-12-11T05:54:56.5707244Z   DOCKER_METADATA_OUTPUT_BAKE_FILE: /home/runner/work/_temp/docker-actions-toolkit-6tvibd/docker-metadata-action-bake.json
+2024-12-11T05:54:56.5707873Z   DIGEST: sha256:f116b788361c98d3222d44db77bd5d66cd37f96b46a201cd1a8b7bf212ea9337
+2024-12-11T05:54:56.5708716Z   TAGS: ghcr.io/some-natalie/jekyll-in-a-can:latest
+ghcr.io/some-natalie/jekyll-in-a-can:sha-094271388ab54e135b8560900a6fb6d6345b4492
+2024-12-11T05:54:56.5709227Z ##[endgroup]
+2024-12-11T05:54:56.5978359Z Generating ephemeral keys...
+2024-12-11T05:54:56.6495549Z Retrieving signed certificate...
+2024-12-11T05:54:56.9593921Z Successfully verified SCT...
+2024-12-11T05:54:57.0576416Z 
+2024-12-11T05:54:57.0577943Z 	The sigstore service, hosted by sigstore a Series of LF Projects, LLC, is provided pursuant to the Hosted Project Tools Terms of Use, available at https://lfprojects.org/policies/hosted-project-tools-terms-of-use/.
+2024-12-11T05:54:57.0579817Z 	Note that if your submission includes personal data associated with this signed artifact, it will be part of an immutable record.
+2024-12-11T05:54:57.0581199Z 	This may include the email address associated with the account with which you authenticate your contractual Agreement.
+2024-12-11T05:54:57.0583368Z 	This information will be used for signing this artifact and will be stored in public transparency logs and cannot be removed later, and is subject to the Immutable Record notice at https://lfprojects.org/policies/hosted-project-tools-immutable-records/.
+2024-12-11T05:54:57.0584382Z 
+2024-12-11T05:54:57.0584966Z By typing 'y', you attest that (1) you are not submitting the personal data of any other person; and (2) you understand and agree to the statement and the Agreement terms at the URLs listed above.
+2024-12-11T05:54:57.3788818Z tlog entry created with index: 154635381
+2024-12-11T05:54:57.3789444Z Pushing signature to: ghcr.io/some-natalie/jekyll-in-a-can
+2024-12-11T05:54:58.6422689Z tlog entry created with index: 154635384
+2024-12-11T05:54:58.6423435Z Pushing signature to: ghcr.io/some-natalie/jekyll-in-a-can
+2024-12-11T05:54:59.5401648Z Post job cleanup.
+2024-12-11T05:54:59.7648131Z ##[group]Generating build summary
+2024-12-11T05:54:59.8464409Z exporting build record to /home/runner/work/_temp/docker-actions-toolkit-iBrGph/export
+2024-12-11T05:55:02.8530330Z [command]/usr/bin/mkfifo /home/runner/work/_temp/docker-actions-toolkit-iBrGph/buildx-in-ec36pb.fifo
+2024-12-11T05:55:02.8736785Z [command]/usr/bin/mkfifo /home/runner/work/_temp/docker-actions-toolkit-iBrGph/buildx-out-1xywx7.fifo
+2024-12-11T05:55:02.8781236Z [command]docker buildx --builder builder-e9df1925-1d1a-468e-884f-91156a092dfd dial-stdio
+2024-12-11T05:55:02.8819759Z [command]docker run --rm -i -v /home/runner/.docker/buildx/refs:/buildx-refs -v /home/runner/work/_temp/docker-actions-toolkit-iBrGph/export:/out docker.io/dockereng/export-build:latest --ref-state-dir=/buildx-refs --node=builder-e9df1925-1d1a-468e-884f-91156a092dfd/builder-e9df1925-1d1a-468e-884f-91156a092dfd0 --ref=1npyzrhxu4beaohlic25xh630 --uid=1001 --gid=127
+2024-12-11T05:55:02.8966538Z Unable to find image 'dockereng/export-build:latest' locally
+2024-12-11T05:55:03.0999557Z latest: Pulling from dockereng/export-build
+2024-12-11T05:55:03.1800481Z fa05fab17045: Pulling fs layer
+2024-12-11T05:55:03.1801539Z 3bee4e1c34fe: Pulling fs layer
+2024-12-11T05:55:03.2220267Z 3bee4e1c34fe: Verifying Checksum
+2024-12-11T05:55:03.2828891Z fa05fab17045: Download complete
+2024-12-11T05:55:03.3912468Z fa05fab17045: Pull complete
+2024-12-11T05:55:03.4983578Z 3bee4e1c34fe: Pull complete
+2024-12-11T05:55:03.5019609Z Digest: sha256:3d41f110aedbe6c439e0002646f6c31b3063bc50f43a712c9a55710a9b5ae3f7
+2024-12-11T05:55:03.5031386Z Status: Downloaded newer image for dockereng/export-build:latest
+2024-12-11T05:55:03.9613243Z Process "docker run" exited with code 0
+2024-12-11T05:55:03.9617964Z Parsing /home/runner/work/_temp/docker-actions-toolkit-iBrGph/export/summary.json
+2024-12-11T05:55:03.9621348Z Build record written to /home/runner/work/_temp/docker-actions-toolkit-iBrGph/export/some-natalie~jekyll-in-a-can~1NPYZR.dockerbuild (62.37 KB)
+2024-12-11T05:55:03.9645644Z Uploading some-natalie~jekyll-in-a-can~1NPYZR.dockerbuild to blob storage
+2024-12-11T05:55:03.9964909Z ERROR: read unix @->/run/docker.sock: use of closed network connection
+2024-12-11T05:55:03.9968337Z Process "buildx dial-stdio" was killed with signal SIGKILL
+2024-12-11T05:55:04.0588809Z Beginning upload of artifact content to blob storage
+2024-12-11T05:55:04.0691031Z Uploaded bytes 63862
+2024-12-11T05:55:04.1302468Z Finished uploading artifact content to blob storage!
+2024-12-11T05:55:04.1307593Z SHA256 hash of uploaded artifact is 8c05043089284bd3788d8072d9b82a50d018f9a815b6bbd61215d69fadd094bc
+2024-12-11T05:55:04.1309413Z Finalizing artifact upload
+2024-12-11T05:55:04.2387967Z Artifact successfully finalized (2303980376)
+2024-12-11T05:55:04.2389541Z Artifact download URL: https://github.com/some-natalie/jekyll-in-a-can/actions/runs/12269879788/artifacts/2303980376
+2024-12-11T05:55:04.2418142Z Writing summary
+2024-12-11T05:55:04.2430771Z ##[endgroup]
+2024-12-11T05:55:04.2431676Z ##[group]Removing temp folder /home/runner/work/_temp/docker-actions-toolkit-rCMyhQ
+2024-12-11T05:55:04.2441712Z ##[endgroup]
+2024-12-11T05:55:04.2442273Z ##[group]Post cache
+2024-12-11T05:55:04.2444096Z State not set
+2024-12-11T05:55:04.2444665Z ##[endgroup]
+2024-12-11T05:55:04.2575644Z Post job cleanup.
+2024-12-11T05:55:04.5350506Z [command]/usr/bin/docker logout ghcr.io
+2024-12-11T05:55:04.5480463Z Removing login credentials for ghcr.io
+2024-12-11T05:55:04.5518043Z ##[group]Post cache
+2024-12-11T05:55:04.5519701Z State not set
+2024-12-11T05:55:04.5520963Z ##[endgroup]
+2024-12-11T05:55:04.5643874Z Post job cleanup.
+2024-12-11T05:55:04.8041054Z ##[group]Removing builder
+2024-12-11T05:55:04.9032927Z [command]/usr/bin/docker buildx rm builder-e9df1925-1d1a-468e-884f-91156a092dfd
+2024-12-11T05:55:07.5602443Z builder-e9df1925-1d1a-468e-884f-91156a092dfd removed
+2024-12-11T05:55:07.5656497Z ##[endgroup]
+2024-12-11T05:55:07.5658747Z ##[group]Cleaning up certificates
+2024-12-11T05:55:07.5664780Z ##[endgroup]
+2024-12-11T05:55:07.5665505Z ##[group]Post cache
+2024-12-11T05:55:07.5667472Z State not set
+2024-12-11T05:55:07.5668207Z ##[endgroup]
+2024-12-11T05:55:07.5809876Z Post job cleanup.
+2024-12-11T05:55:07.6737305Z [command]/usr/bin/git version
+2024-12-11T05:55:07.6773009Z git version 2.47.1
+2024-12-11T05:55:07.6816212Z Temporarily overriding HOME='/home/runner/work/_temp/74a3d1a6-96ff-4da0-9e59-d3837f0590d7' before making global git config changes
+2024-12-11T05:55:07.6817875Z Adding repository directory to the temporary git global config as a safe directory
+2024-12-11T05:55:07.6822934Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/jekyll-in-a-can/jekyll-in-a-can
+2024-12-11T05:55:07.6859494Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2024-12-11T05:55:07.6892728Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2024-12-11T05:55:07.7142815Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2024-12-11T05:55:07.7165786Z http.https://github.com/.extraheader
+2024-12-11T05:55:07.7177863Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2024-12-11T05:55:07.7208739Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2024-12-11T05:55:07.7539118Z Cleaning up orphan processes

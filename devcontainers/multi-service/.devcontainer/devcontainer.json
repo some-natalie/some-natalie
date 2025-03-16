@@ -1,0 +1,36 @@
+{
+  "name": "Webhook receiver",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": ["mtxr.sqltools", "mtxr.sqltools-driver-pg"],
+      "settings": {
+        "sqltools.connections": [
+          {
+            "name": "Container database",
+            "driver": "PostgreSQL",
+            "previewLimit": 50,
+            "server": "database",
+            "port": 5432,
+            "database": "webhooks",
+            "username": "postgres",
+            "password": "mysecretpassword"
+          }
+        ]
+      }
+    }
+  },
+  "forwardPorts": [5000, 5432],
+  "portsAttributes": {
+    "5000": {
+      "label": "webhook receiver"
+    },
+    "5432": {
+      "label": "postgres"
+    }
+  },
+  "runServices": ["database", "app"],
+  "remoteUser": "nonroot"
+}

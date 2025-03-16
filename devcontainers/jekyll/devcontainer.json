@@ -1,0 +1,18 @@
+{
+  "name": "Jekyll website",
+  "build": {
+        "dockerfile": "Dockerfile",
+        "args": {}
+    },
+  "forwardPorts": [4000],
+  "portsAttributes": {
+    "4000": {
+      "label": "Website"
+    }
+  },
+  "remoteUser": "nonroot",
+  "postCreateCommand": {
+    "bundle": "bundle install --retry 5 --jobs 20"
+  },
+  "postAttachCommand": "bundle exec jekyll serve --host 0.0.0.0"
+}

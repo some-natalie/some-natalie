@@ -1,0 +1,35 @@
+services:
+  flyway:
+    image: flyway/flyway:10
+    command: migrate
+    volumes:
+      - ./sql/migrations:/flyway/sql
+      - ./sql:/flyway/conf
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: cgr.dev/chainguard/postgres:latest
+    restart: always
+    env_file:
+      - ./sql/db.env
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: devcontainer.Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - database
+      - flyway
+    volumes:
+      - .:/workspace

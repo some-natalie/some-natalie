@@ -1,0 +1,49 @@
+name: 🧚🏻‍♀️ Update profile readme
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "_posts/**.md"
+      - ".github/scripts/latest-posts.py"
+  workflow_dispatch:
+
+jobs:
+  update-posts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+        with:
+          path: website
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+        with:
+          repository: some-natalie/some-natalie
+          path: profile
+          token: ${{ secrets.WEBSITE_UPDATE }}
+      - name: Get latest 3 posts and descriptions, insert into README.md
+        shell: bash
+        run: |
+          pip3 install -r ./website/.github/scripts/requirements.txt
+          python3 ./website/.github/scripts/latest-posts.py
+      - name: Commit and push changes (if any)
+        shell: bash
+        env:
+          CI_COMMIT_MESSAGE: update profile readme with latest posts
+          CI_COMMIT_AUTHOR: github-actions[bot]
+          CI_COMMIT_EMAIL: username@users.noreply.github.com
+        run: |
+          cd profile
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "${{ env.CI_COMMIT_EMAIL }}"
+          if [[ `git status --porcelain --untracked-files=no` ]]; then
+            # Changes
+            git add README.md
+            git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+            git push
+          else
+            # No changes
+            echo "no changes to latest posts"
+            exit 0
+          fi

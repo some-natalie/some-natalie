@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Optimizing a repo for GitHub Pages](https://some-natalie.dev/blog/website-improvements):  Size, file type, and static websites built from git repositories - cleaning up my 'temporary workarounds' cut my build times and sizes by half or more.
 1. [Zero Trust is built on software](https://some-natalie.dev/blog/zero-trust-software):  From the ATARC 2025 Federal Summit ... a few lessons learned the hard way on the path to Zero Trust implementation at Federal agencies.
 1. [Kubernetes on Raspberry Pi computers](https://some-natalie.dev/blog/raspberry-pi-kubernetes):  Raspberry Pi makes for easy small Kubernetes clusters, even if we cheat a little bit by using k3s instead.
-1. [Are you done learning?](https://some-natalie.dev/blog/are-you-done-learning):  To figure out if it's time to find a new role, ask yourself 'Am I done learning here?'
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

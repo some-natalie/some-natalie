@@ -11,22 +11,36 @@ on:
 jobs:
   update-posts:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # needed to federate tokens
+      contents: read # needed to check out the website repo
+
     steps:
+      - name: Federate token from Octo STS
+        uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # v1.0.0
+        id: octo-sts
+        with:
+          scope: some-natalie/some-natalie
+          identity: update-readme
+
       - name: Checkout website repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           path: website
+
       - name: Checkout profile repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: some-natalie/some-natalie
           path: profile
-          token: ${{ secrets.WEBSITE_UPDATE }}
+          token: ${{ steps.octo-sts.outputs.token }}
+
       - name: Get latest 3 posts and descriptions, insert into README.md
         shell: bash
         run: |
           pip3 install -r ./website/.github/scripts/requirements.txt
           python3 ./website/.github/scripts/latest-posts.py
+
       - name: Commit and push changes (if any)
         shell: bash
         env:

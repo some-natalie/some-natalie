@@ -1,0 +1,34 @@
+name: Randomly fail and undo the change
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "test.txt" # the file you want to watch for changes on
+
+jobs:
+  randomly-fail:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Randomly fail
+        run: |
+          if [ "$(($RANDOM % 2))" -eq 0 ]; then
+            echo "randomly failing"
+            exit 1
+          fi
+
+  revert-change:
+    runs-on: ubuntu-latest
+    needs: [randomly-fail]
+    if: ${{ failure() }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - run: |
+          echo "Reverting ${{ github.sha }}"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git revert --no-edit ${{ github.sha }}
+          git push origin main

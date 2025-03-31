@@ -5,7 +5,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
 1. [Push commits to another repository with GitHub Actions](https://some-natalie.dev/blog/multi-repo-actions):  Breaking up my mono-repo had some unintended consequences.  Here's how to fix one of them - committing a file to a different repository than where the workflow is triggered.
-1. [Optimizing a repo for GitHub Pages](https://some-natalie.dev/blog/website-improvements):  Size, file type, and static websites built from git repositories - cleaning up my 'temporary workarounds' cut my build times and sizes by half or more.
+1. [Optimizing a repo for GitHub Pages](https://some-natalie.dev/blog/website-improvements):  Size, file type, and static websites built from git repositories - cleaning up my 'temporary workarounds' cut my build times and sizes by more than half.
 1. [Zero Trust is built on software](https://some-natalie.dev/blog/zero-trust-software):  From the ATARC 2025 Federal Summit ... a few lessons learned the hard way on the path to Zero Trust implementation at Federal agencies.
 <!-- END_SECTION:latest_posts -->
 

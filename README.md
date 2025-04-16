@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Searching for secrets in container images](https://some-natalie.dev/blog/secrets-in-layers):  How container scanners look for secrets in container images is no secret.  It's easy to DIY.  Let's go for a hunt! 🎯
 1. [Breaking up with GitHub Personal Access Tokens](https://some-natalie.dev/blog/intro-octosts):  OIDC is 🪄 pure magic 🪄 and I don't want to remember to rotate long-lived credentials anymore.
 1. [Push commits to another repository with GitHub Actions](https://some-natalie.dev/blog/multi-repo-actions):  Breaking up my mono-repo had a few unintended consequences.  Here's how to fix one of them - committing a file to a different repository than where the workflow is triggered.
-1. [Optimizing a repo for GitHub Pages](https://some-natalie.dev/blog/website-improvements):  Size, file type, and static websites built from git repositories - cleaning up my 'temporary workarounds' cut my build times and sizes by more than half.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

@@ -1,0 +1,22 @@
+name: 🔍 Malcontent analysis 🔍
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  malcontent:
+    name: Malware analysis using malcontent
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          lfs: true
+      - name: Analyze the files
+        id: malcontent
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/tmp cgr.dev/chainguard/malcontent:latest --format=markdown analyze /tmp >> $GITHUB_STEP_SUMMARY

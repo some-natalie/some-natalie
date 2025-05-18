@@ -1,0 +1,247 @@
+{
+    "Files": {
+        "/tmp/nc": {
+            "Path": "/tmp/nc",
+            "SHA256": "d338b3e24346ab0be3ad82f71784633d380c809754beacb931f6a4b64b57d5a4",
+            "Size": 171008,
+            "Syscalls": [
+                "accept",
+                "connect",
+                "pthread_create",
+                "recv",
+                "send",
+                "sendmsg",
+                "sendto"
+            ],
+            "Pledge": [
+                "inet"
+            ],
+            "Behaviors": [
+                {
+                    "Description": "uses a random number generator",
+                    "MatchStrings": [
+                        "_arc4random",
+                        "Randomize"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/anti-behavior/random_behavior.yara#random",
+                    "ID": "anti-behavior/random_behavior",
+                    "RuleName": "random"
+                },
+                {
+                    "Description": "mentions an IP and port",
+                    "MatchStrings": [
+                        "source_port",
+                        "source_ip",
+                        "sPort",
+                        "IP"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/ip.yara#ip_port_mention",
+                    "ID": "c2/addr/ip",
+                    "RuleName": "ip_port_mention"
+                },
+                {
+                    "Description": "binary contains hardcoded URL",
+                    "MatchStrings": [
+                        "http://www.apple.com/DTDs/PropertyList",
+                        "http://www.apple.com/appleca/root.crl0",
+                        "http://crl.apple.com/codesigning.crl0",
+                        "https://www.apple.com/appleca/0"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/addr/url.yara#binary_with_url",
+                    "ID": "c2/addr/url",
+                    "RuleName": "binary_with_url"
+                },
+                {
+                    "Description": "references a specific operating system",
+                    "MatchStrings": [
+                        "https://",
+                        "http://",
+                        "darwin"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/c2/tool_transfer/os.yara#os_ref",
+                    "ID": "c2/tool_transfer/os",
+                    "RuleName": "os_ref"
+                },
+                {
+                    "Description": "RC4 key scheduling algorithm",
+                    "MatchStrings": [
+                        "$cmp_e_x_256",
+                        "$cmp_r_x_256"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/crypto/rc4.yara#rc4_ksa",
+                    "RuleAuthor": "Thomas Barabosch",
+                    "ID": "crypto/rc4",
+                    "RuleName": "rc4_ksa"
+                },
+                {
+                    "Description": "get network interfaces by name or index",
+                    "MatchStrings": [
+                        "if_nametoindex",
+                        "if_indextoname"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/discover/network/interface.yara#bsd_if",
+                    "ID": "discover/network/interface",
+                    "RuleName": "bsd_if"
+                },
+                {
+                    "Description": "Uses the HTTP protocol",
+                    "MatchStrings": [
+                        "http",
+                        "HTTP"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http.yara#http",
+                    "ID": "net/http",
+                    "RuleName": "http"
+                },
+                {
+                    "Description": "makes HTTP requests",
+                    "MatchStrings": [
+                        "HTTP/1."
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/http/http-request.yara#http_request",
+                    "ID": "net/http/request",
+                    "RuleName": "http_request"
+                },
+                {
+                    "Description": "mentions an 'IP address'",
+                    "MatchStrings": [
+                        "ip_addr"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/addr.yara#ip_addr",
+                    "ID": "net/ip/addr",
+                    "RuleName": "ip_addr"
+                },
+                {
+                    "Description": "connects to an arbitrary hostname:port",
+                    "MatchStrings": [
+                        "hostname and port",
+                        "hostname] [port"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/host_port.yara#host_port_ref",
+                    "ID": "net/ip/host_port",
+                    "RuleName": "host_port_ref"
+                },
+                {
+                    "Description": "converts IP address from byte to string",
+                    "MatchStrings": [
+                        "inet_ntop"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/ip/ip-string.yara#inet_ntoa",
+                    "ReferenceURL": "https://linux.die.net/man/3/inet_ntoa",
+                    "ID": "net/ip/string",
+                    "RuleName": "inet_ntoa"
+                },
+                {
+                    "Description": "Supports SOCK5 proxies",
+                    "MatchStrings": [
+                        "CONNECT %s",
+                        "SOCKS5"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/proxy/socks5.yara#socks5",
+                    "ID": "net/proxy/socks5",
+                    "RuleName": "socks5"
+                },
+                {
+                    "Description": "Network address and service translation",
+                    "MatchStrings": [
+                        "freeaddrinfo",
+                        "getaddrinfo"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/resolve/hostport-parse.yara#getaddrinfo",
+                    "ID": "net/resolve/hostport_parse",
+                    "RuleName": "getaddrinfo"
+                },
+                {
+                    "Description": "initiate a connection on a socket",
+                    "MatchStrings": [
+                        "_connectx"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-connect.yara#_connect",
+                    "ReferenceURL": "https://linux.die.net/man/3/connect",
+                    "ID": "net/socket/connect",
+                    "RuleName": "_connect"
+                },
+                {
+                    "Description": "listen on a socket",
+                    "MatchStrings": [
+                        "socket",
+                        "listen",
+                        "accept"
+                    ],
+                    "RiskScore": 2,
+                    "RiskLevel": "MEDIUM",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-listen.yara#listen",
+                    "ID": "net/socket/listen",
+                    "RuleName": "listen"
+                },
+                {
+                    "Description": "receive a message from a socket",
+                    "MatchStrings": [
+                        "recvfrom",
+                        "recvmsg"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-receive.yara#recvmsg",
+                    "ReferenceURL": "https://linux.die.net/man/2/recvmsg",
+                    "ID": "net/socket/receive",
+                    "RuleName": "recvmsg"
+                },
+                {
+                    "Description": "send a message to a socket",
+                    "MatchStrings": [
+                        "sendmsg"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/net/socket/socket-send.yara#sendmsg",
+                    "ReferenceURL": "https://linux.die.net/man/2/sendmsg",
+                    "ID": "net/socket/send",
+                    "RuleName": "sendmsg"
+                },
+                {
+                    "Description": "creates pthreads",
+                    "MatchStrings": [
+                        "pthread_create"
+                    ],
+                    "RiskScore": 1,
+                    "RiskLevel": "LOW",
+                    "RuleURL": "https://github.com/chainguard-dev/malcontent/blob/main/rules/process/multithreaded.yara#pthread_create",
+                    "ReferenceURL": "https://man7.org/linux/man-pages/man3/pthread_create.3.html",
+                    "ID": "process/multithreaded",
+                    "RuleName": "pthread_create"
+                }
+            ],
+            "RiskScore": 2,
+            "RiskLevel": "MEDIUM"
+        }
+    }
+}

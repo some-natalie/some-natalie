@@ -35,12 +35,12 @@ title: "Repo maintenance checklist"
 - [ ] merge dependabot PRs
 - [ ] cron job still running to build RPMs
 
-### gh-org-admin-promote
+### Jekyll-in-a-can
 
-[project link](https://github.com/some-natalie/gh-org-admin-promote)
+[project link](https://github.com/some-natalie/jekyll-in-a-can)
 
-- [ ] look over open issues
 - [ ] merge dependabot PRs
+- [ ] cron job still running to build images
 
 ### skilled-teleportation
 
@@ -61,10 +61,3 @@ title: "Repo maintenance checklist"
 [project link](https://github.com/some-natalie/gitlog-to-csv)
 
 - [ ] merge dependabot PRs
-
-### Jekyll-in-a-can
-
-[project link](https://github.com/some-natalie/jekyll-in-a-can)
-
-- [ ] merge dependabot PRs
-- [ ] cron job still running to build images

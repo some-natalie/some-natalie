@@ -1,0 +1,36 @@
+name: 🗓️ Monthly check-in on repos
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 1 * * # first of the month
+
+permissions:
+  contents: read
+
+jobs:
+  maintenance_reminder:
+    name: Monthly maintenance reminder
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: get date
+        run: echo "date=$(date -u '+%B %Y')" >> $GITHUB_ENV
+
+      - name: get the issue fields from the template
+        uses: imjohnbo/extract-issue-template-fields@fcdd71b8add0dbd44221bcc368924a7722db96d2 # v1.0.3
+        id: extract
+        with:
+          path: .github/ISSUE_TEMPLATE/repo-maintenance.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: create issue
+        uses: imjohnbo/issue-bot@572eed14422c4d6ca37e870f97e7da209422f5bd # v3.4.4
+        id: create-issue
+        with:
+          title: "${{ steps.extract.outputs.title }} for ${{ env.date }}"
+          body: ${{ steps.extract.outputs.body }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -9,6 +9,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/malcontent/"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "pip"
     directory: "/devcontainers/multi-service/python/"
     schedule:

@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [A gentle introduction to container security](https://some-natalie.dev/blog/gentle-intro-container-security):  
 1. [Inspecting pull requests to understand behavior changes](https://some-natalie.dev/blog/github-actions-changes):  ... or how I learned to stop blindly merging every Dependabot PR for GitHub Actions, negating the benefit of pinning to a SHA to begin with, and love YARA rules.
 1. [Giving technical talks in sales](https://some-natalie.dev/blog/talks-in-sales):  Blurring the line between engineering and sales isn't _always_ a bad thing ... just be transparent about which side you're on at the moment. 😊
-1. [Searching for secrets in container images](https://some-natalie.dev/blog/secrets-in-layers):  How container scanners look for secrets in container images is no secret.  It's easy to DIY.  Let's go for a hunt! 🎯
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

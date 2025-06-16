@@ -4,7 +4,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
-1. [A gentle introduction to container security](https://some-natalie.dev/blog/gentle-intro-container-security):  
+1. [A gentle introduction to container security](https://some-natalie.dev/blog/gentle-intro-container-security):  Let's pull apart the key security risks at each layer of the container ecosystem ... step by step.  Don't worry, it's not too hard!
 1. [Inspecting pull requests to understand behavior changes](https://some-natalie.dev/blog/github-actions-changes):  ... or how I learned to stop blindly merging every Dependabot PR for GitHub Actions, negating the benefit of pinning to a SHA to begin with, and love YARA rules.
 1. [Giving technical talks in sales](https://some-natalie.dev/blog/talks-in-sales):  Blurring the line between engineering and sales isn't _always_ a bad thing ... just be transparent about which side you're on at the moment. 😊
 <!-- END_SECTION:latest_posts -->

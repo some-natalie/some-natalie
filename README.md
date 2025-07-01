@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Following the 'golden image' road:  best practices and pitfalls](https://some-natalie.dev/blog/golden-images):  Let's share some **hard-earned lessons in building adoption** of a 'golden image' or standardized open-source program across large, heavily-regulated industries ... and have a few laughs in the process.
 1. [What's a container, anyways?](https://some-natalie.dev/blog/whats-a-container):  Probably the most common misconception I run across in the field ... what _is_ a container, anyways?
 1. [A gentle introduction to container security](https://some-natalie.dev/blog/gentle-intro-container-security):  Let's pull apart the key security risks at each layer of the container ecosystem ... step by step.  Don't worry, it's not too hard!
-1. [Inspecting pull requests to understand behavior changes](https://some-natalie.dev/blog/github-actions-changes):  ... or how I learned to stop blindly merging every Dependabot PR for GitHub Actions, negating the benefit of pinning to a SHA to begin with, and love YARA rules.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

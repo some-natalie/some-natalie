@@ -4,7 +4,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
-1. [Signing and verifying multi-architecture containers with Sigstore](https://some-natalie.dev/blog/sigstore-multiarch):  
+1. [Signing and verifying multi-architecture containers with Sigstore](https://some-natalie.dev/blog/sigstore-multiarch):  When you run `docker pull image` it 🪄 magically 🪄 pulls the right architecture. But what about verifying it? Here's a handful of questions that I see often around this one big thing - **how Sigstore works with multi-architecture containers.**
 1. [Following the 'golden image' road:  best practices and pitfalls](https://some-natalie.dev/blog/golden-images):  Let's share some **hard-earned lessons in building adoption** of a 'golden image' or standardized open-source program across large, heavily-regulated industries ... and have a few laughs in the process.
 1. [What's a container, anyways?](https://some-natalie.dev/blog/whats-a-container):  Probably the most common misconception I run across in the field ... what _is_ a container, anyways?
 <!-- END_SECTION:latest_posts -->

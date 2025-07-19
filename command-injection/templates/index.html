@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Vulnerable Command Executor</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Command Executor</h1>
+        <div class="theme-toggle">
+          <span class="theme-toggle-label">☀️</span>
+          <div class="toggle-switch" onclick="toggleTheme()">
+            <div class="toggle-slider"></div>
+          </div>
+          <span class="theme-toggle-label">🌙</span>
+        </div>
+      </div>
+
+      <div class="warning">
+        <strong>⚠️ WARNING:</strong> This application is intentionally
+        vulnerable to command injection.
+      </div>
+
+      <form method="POST">
+        <h3>Enter a command to execute:</h3>
+        <textarea name="command" placeholder="ls -la">
+{{ command or '' }}</textarea
+        >
+        <br /><br />
+        <input type="submit" value="Execute Command" />
+      </form>
+
+      {% if output is defined %}
+      <div class="output">
+        <h3>Command Output:</h3>
+        <pre>{{ output }}</pre>
+      </div>
+      {% endif %}
+
+      <div class="examples">
+        <h3>Example Commands to Try:</h3>
+        <ul>
+          <li><code>ls -la</code> - List files</li>
+          <li><code>whoami</code> - Show current user</li>
+          <li><code>pwd</code> - Show current directory</li>
+          <li>
+            <code>cat /etc/passwd</code> - Read system file (if accessible)
+          </li>
+        </ul>
+
+        <h3>Command Injection Examples:</h3>
+        <ul>
+          <li><code>ls; whoami</code> - Execute multiple commands</li>
+          <li><code>ls && echo "Injected command"</code> - Chain commands</li>
+          <li><code>ls | grep "txt"</code> - Pipe output</li>
+          <li><code>ls; cat /etc/hosts</code> - Read sensitive files</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+  </body>
+</html>

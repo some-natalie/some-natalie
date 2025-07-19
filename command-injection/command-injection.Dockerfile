@@ -4,6 +4,8 @@ FROM python:3-slim AS builder
 
 # Copy the files in
 RUN mkdir -p /app
+COPY ./static /app/static
+COPY ./templates /app/templates
 COPY ./app.py /app
 COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app

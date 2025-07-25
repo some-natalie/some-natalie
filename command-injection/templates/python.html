@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Python Code Executor</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Python Code Executor</h1>
+        <div class="theme-toggle">
+          <span class="theme-toggle-label">☀️</span>
+          <div class="toggle-switch" onclick="toggleTheme()">
+            <div class="toggle-slider"></div>
+          </div>
+          <span class="theme-toggle-label">🌙</span>
+        </div>
+      </div>
+
+      <div class="warning">
+        <strong>⚠️ WARNING:</strong> This application executes arbitrary Python
+        code with full system access. Extremely dangerous!
+      </div>
+
+      <form method="POST">
+        <h3>Enter Python code to execute:</h3>
+        <textarea
+          name="command"
+          placeholder="print('Hello, World!')
+x = 5 + 3
+print(f'5 + 3 = {x}')"
+        >
+{{ command or '' }}</textarea
+        >
+        <br /><br />
+        <input type="submit" value="Execute Python Code" />
+      </form>
+
+      {% if output is defined %}
+      <div class="output">
+        <div class="output-header">
+          <h3>Python Output:</h3>
+          <button
+            class="copy-btn"
+            onclick="copyOutput()"
+            title="Copy output to clipboard"
+          >
+            📋 Copy
+          </button>
+        </div>
+        <pre id="command-output">{{ output }}</pre>
+      </div>
+      {% endif %}
+
+      <div class="examples">
+        <h3>Example Python Code to Try:</h3>
+        <ul>
+          <li><code>print("Hello, World!")</code> - Basic print statement</li>
+          <li><code>x = 10; print(x * 2)</code> - Variables and arithmetic</li>
+          <li><code>for i in range(5): print(i)</code> - Simple loop</li>
+          <li><code>import math; print(math.pi)</code> - Import any module</li>
+          <li>
+            <code>import os; print(os.getcwd())</code> - System operations
+          </li>
+          <li>
+            <code>open('test.txt', 'w').write('Hello')</code> - File operations
+          </li>
+          <li><code>[x**2 for x in range(10)]</code> - List comprehension</li>
+        </ul>
+
+        <h3>Multi-line Examples:</h3>
+        <ul>
+          <li>
+            <code
+              >def greet(name):<br />&nbsp;&nbsp;&nbsp;&nbsp;return f"Hello,
+              {name}!"<br />print(greet("Python"))</code
+            >
+          </li>
+          <li>
+            <code
+              >numbers = [1, 2, 3, 4, 5]<br />squared = [x**2 for x in
+              numbers]<br />print(squared)</code
+            >
+          </li>
+          <li>
+            <code
+              >try:<br />&nbsp;&nbsp;&nbsp;&nbsp;result = 10 / 0<br />except
+              ZeroDivisionError:<br />&nbsp;&nbsp;&nbsp;&nbsp;print("Cannot
+              divide by zero!")</code
+            >
+          </li>
+        </ul>
+
+        <h3>Full Python Access:</h3>
+        <p>
+          All Python built-ins, standard library modules, file system access,
+          network operations, and system commands are available. No
+          restrictions!
+        </p>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+    <script>
+      function copyOutput() {
+        const outputElement = document.getElementById("command-output");
+        const text = outputElement.textContent;
+
+        navigator.clipboard
+          .writeText(text)
+          .then(function () {
+            // Show success feedback
+            const copyBtn = document.querySelector(".copy-btn");
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = "✅ Copied!";
+            copyBtn.style.backgroundColor = "var(--success-bg)";
+
+            setTimeout(() => {
+              copyBtn.textContent = originalText;
+              copyBtn.style.backgroundColor = "";
+            }, 2000);
+          })
+          .catch(function (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            // Show success feedback
+            const copyBtn = document.querySelector(".copy-btn");
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = "✅ Copied!";
+            copyBtn.style.backgroundColor = "var(--success-bg)";
+
+            setTimeout(() => {
+              copyBtn.textContent = originalText;
+              copyBtn.style.backgroundColor = "";
+            }, 2000);
+          });
+      }
+    </script>
+  </body>
+</html>

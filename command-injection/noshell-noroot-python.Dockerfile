@@ -20,9 +20,6 @@ RUN pip3 install --no-cache-dir --target=/app -r requirements.txt
 # Run it #
 FROM cgr.dev/chainguard/python:latest AS worker
 
-# Simulate a regular container
-USER root
-
 # Tag it
 LABEL org.opencontainers.image.source="https://github.com/some-natalie/some-natalie/tree/main/command-injection"
 LABEL org.opencontainers.image.authors="Natalie Somersall (@some-natalie)"

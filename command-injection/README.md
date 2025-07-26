@@ -30,3 +30,14 @@ docker push ghcr.io/some-natalie/some-natalie/command-injection-noshell:amd64-la
 # create manifest
 crane index append -t ghcr.io/some-natalie/some-natalie/command-injection-noshell:latest -m ghcr.io/some-natalie/some-natalie/command-injection-noshell:amd64-latest -m ghcr.io/some-natalie/some-natalie/command-injection-noshell:arm64-latest
 ```
+
+```
+# build and push arm64
+docker build --platform=linux/arm64 -f noshell-noroot-python.Dockerfile -t ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:arm64-latest .
+docker push ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:arm64-latest
+# build and push amd64
+docker build --platform=linux/amd64 -f noshell-noroot-python.Dockerfile -t ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:amd64-latest .
+docker push ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:amd64-latest
+# create manifest
+crane index append -t ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:latest -m ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:amd64-latest -m ghcr.io/some-natalie/some-natalie/command-injection-noshell-noroot:arm64-latest
+```

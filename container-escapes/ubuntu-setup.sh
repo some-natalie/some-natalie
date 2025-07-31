@@ -22,8 +22,9 @@ apt-get install -y \
     ca-certificates \
     curl \
     git \
-    curl \
+    netcat-openbsd \
     openssh-server \
+    strace \
     wget \
     vim
 

@@ -1,0 +1,324 @@
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "defaultErrnoRet": 1,
+  "archMap": [
+    {
+      "architecture": "SCMP_ARCH_X86_64",
+      "subArchitectures": ["SCMP_ARCH_X86", "SCMP_ARCH_X32"]
+    },
+    {
+      "architecture": "SCMP_ARCH_AARCH64",
+      "subArchitectures": ["SCMP_ARCH_ARM"]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPS64",
+      "subArchitectures": ["SCMP_ARCH_MIPS", "SCMP_ARCH_MIPS64N32"]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPS64N32",
+      "subArchitectures": ["SCMP_ARCH_MIPS", "SCMP_ARCH_MIPS64"]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPSEL64",
+      "subArchitectures": ["SCMP_ARCH_MIPSEL", "SCMP_ARCH_MIPSEL64N32"]
+    },
+    {
+      "architecture": "SCMP_ARCH_MIPSEL64N32",
+      "subArchitectures": ["SCMP_ARCH_MIPSEL", "SCMP_ARCH_MIPSEL64"]
+    },
+    {
+      "architecture": "SCMP_ARCH_S390X",
+      "subArchitectures": ["SCMP_ARCH_S390"]
+    }
+  ],
+  "syscalls": [
+    {
+      "names": ["brk"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow memory allocation",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["clone3"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow thread creation",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["close"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow closing file descriptors",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["connect"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow socket connections",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["execve"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow program execution",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["exit_group"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow process termination",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["faccessat"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow file access checks",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["fcntl"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow file descriptor control",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["fstat"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow file status operations",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["futex"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow futex operations for threading",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["getrandom"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow random number generation",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["geteuid"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow getting effective user ID",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["getpeername"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow getting peer socket address",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["getsockname"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow getting socket address",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["getsockopt"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow getting socket options",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["ioctl"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow device control operations",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["lseek"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow file seek operations",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["mmap"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow memory mapping",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["mprotect"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow memory protection changes",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["munmap"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow memory unmapping",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["newfstatat"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow file status operations",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["openat"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow opening files",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["pipe2"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow pipe creation",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["ppoll"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow polling file descriptors",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["prlimit64"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow resource limit operations",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["read"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow reading from file descriptors",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["recvfrom"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow receiving data from sockets",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["rseq"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow restartable sequences",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["rt_sigaction"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow signal handling setup",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["rt_sigprocmask"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow signal mask operations",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["sendto"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow sending data to sockets",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["set_robust_list"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow setting robust futex list",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["set_tid_address"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow setting thread ID address",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["setsockopt"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow setting socket options",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["socket"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow socket creation",
+      "includes": {},
+      "excludes": {}
+    },
+    {
+      "names": ["write"],
+      "action": "SCMP_ACT_ALLOW",
+      "args": [],
+      "comment": "Allow writing to file descriptors",
+      "includes": {},
+      "excludes": {}
+    }
+  ]
+}

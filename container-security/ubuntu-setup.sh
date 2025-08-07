@@ -56,7 +56,8 @@ apt-get install -y \
   docker-compose-plugin
 
 # Add the current user to the docker group
-usermod -aG docker $(whoami)
+# usermod -aG docker $(whoami)
+usermod -aG docker user
 
 # Create flag
 echo "hiya, you found me at appsec village @ defcon 33!" | \

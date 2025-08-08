@@ -9,6 +9,7 @@ images=(
     "cgr.dev/chainguard/python:latest"
     "cgr.dev/chainguard/curl:latest"
     "docker.io/library/nginx:latest"
+    "ghcr.io/some-natalie/some-natalie/secret-example:latest"
     "ghcr.io/some-natalie/some-natalie/cowsay:latest"
     "ghcr.io/some-natalie/some-natalie/command-injection:latest"
     "ghcr.io/some-natalie/some-natalie/command-injection-noshell:latest"

@@ -24,6 +24,7 @@ apt-get install -y \
     git \
     netcat-openbsd \
     openssh-server \
+    podman \
     strace \
     wget \
     vim

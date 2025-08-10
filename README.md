@@ -4,7 +4,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
-1. [Container Escapes 101](https://some-natalie.dev/blog/container-escapes-workshop):  Where we're going, why we're here
+1. [Container Escapes 101](https://some-natalie.dev/blog/container-escapes-workshop):  Welcome to Container Escapes 101 at the [AppSec Village](https://www.appsecvillage.com/) at [DEF CON 33](https://defcon.org/html/defcon-33/dc-33-index.html)
 1. [Am I in a container or a microVM?](https://some-natalie.dev/blog/microvm-or-container):  Container runtimes built on 'microVMs' are becoming more common - especially for high-risk workloads.  How do you know you haven't just escaped a container only to land into a very tiny ephemeral VM?
 1. [Signing and verifying multi-architecture containers with Sigstore](https://some-natalie.dev/blog/sigstore-multiarch):  When you run `docker pull image` it 🪄 magically 🪄 pulls the right architecture. But what about verifying it? Here's a handful of questions that I see often around this one big thing - **how Sigstore works with multi-architecture containers.**
 <!-- END_SECTION:latest_posts -->

@@ -20,3 +20,7 @@ for image in "${images[@]}"; do
     echo "Pulling $image..."
     docker pull "$image"
 done
+
+# pull a few for podman too
+podman pull docker.io/library/ubuntu:24.04
+podman pull docker.io/redhat/ubi9:9.6

@@ -33,7 +33,7 @@ apt-get install -y \
 systemctl enable ssh.service
 systemctl start ssh.service
 
-# Move to passwordless sudo
+# Move to passwordless sudo (because I hate typing my password a lot during demos. totally optional!)
 sed -i 's/^%sudo\s\+ALL=(ALL:ALL)\s\+ALL/%sudo ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 
 # Add Docker's official GPG key

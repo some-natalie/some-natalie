@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Container Escapes 101 - Kernel resource sharing](https://some-natalie.dev/blog/shared-kernel):  One of the fundamental tenants of containers is that they're a process that shares a kernel's resources.  What can we learn that'd be helpful to an escape?
 1. [Container Escapes 101 - Who am I?](https://some-natalie.dev/blog/whoami):  To start our escape, let's figure out who we are _inside our container_ first.  That'll help us chart a path out.
 1. [Container Escapes 101](https://some-natalie.dev/blog/container-escapes-workshop):  Welcome to Container Escapes 101 at the [AppSec Village](https://www.appsecvillage.com/) at [DEF CON 33](https://defcon.org/html/defcon-33/dc-33-index.html)!
-1. [Am I in a container or a microVM?](https://some-natalie.dev/blog/microvm-or-container):  Container runtimes built on 'microVMs' are becoming more common - especially for high-risk workloads.  How do you know you haven't just escaped a container only to land into a very tiny ephemeral VM?
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

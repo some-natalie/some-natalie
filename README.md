@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Container Escapes 101 - seccomp in a nutshell](https://some-natalie.dev/blog/seccomp):  Seccomp doesn't have to be quite so hard ... here's what we can know from inside a container. 🕵🏻‍♀️
 1. [Container Escapes 101 - What capabilities do I have?](https://some-natalie.dev/blog/capabilities):  Capabilities define what a process is allowed to do.  Some of these are far more powerful than others, so we'll want to look for those ... all from inside our container.
 1. [Container Escapes 101 - Kernel resource sharing](https://some-natalie.dev/blog/shared-kernel):  One of the fundamental tenants of containers is that they're a process that shares a kernel's resources.  What can we learn that'd be helpful to an escape?
-1. [Container Escapes 101 - Who am I?](https://some-natalie.dev/blog/whoami):  To start our escape, let's figure out who we are _inside our container_ first.  That'll help us chart a path out.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

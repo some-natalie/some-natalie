@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Container Escapes 101 - Intro to chroot escapes](https://some-natalie.dev/blog/chroot):  In this workshop, we're going to start exploring escapes using [chroot](https://en.wikipedia.org/wiki/Chroot).  This is a great way to cross the boundary between a container's filesystem and the host's filesystem.
 1. [Container Escapes 101 - Abusing persistent file storage](https://some-natalie.dev/blog/file-storage):  In this workshop, we're going to write to the host's filesystem from inside of a container using a shared mountpoint.  This is a good tactic to gain persistence, but also to escalate privileges or exfiltrate data.
 1. [Container Escapes 101 - seccomp in a nutshell](https://some-natalie.dev/blog/seccomp):  Seccomp doesn't have to be quite so hard ... here's what we can know from inside a container. 🕵🏻‍♀️
-1. [Container Escapes 101 - What capabilities do I have?](https://some-natalie.dev/blog/capabilities):  Capabilities define what a process is allowed to do.  Some of these are far more powerful than others, so we'll want to look for those ... all from inside our container.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

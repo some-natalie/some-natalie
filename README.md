@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Container Escapes 101 - In the wild](https://some-natalie.dev/blog/container-escapes-in-the-wild):  So far, we've been SSH'd directly into our host node.  This isn't how we normally have access to escape so ... how does these tactics still work?  We're going to use the same storage-based escapes as before, but through a web UI and talk through some common ~~difficulties~~ defensive countermeasures.
 1. [Container Escapes 101 - Host memory meddling with ptrace](https://some-natalie.dev/blog/ptrace-escapes):  In this workshop, we're going to mess with the host's memory from inside a container. 😈
 1. [Container Escapes 101 - Shared sockets](https://some-natalie.dev/blog/shared-sockets):  In this workshop, we're going to use a common configuration to avoid one bad security thing (explicitly privileged containers) by implementing another only-slightly-better feature - sharing the container runtime socket.  This is another great way to launch another process, perhaps to explore more or open a tunnel back home.
-1. [Container Escapes 101 - Runtime user groups](https://some-natalie.dev/blog/docker-group):  In this workshop, we're going to use the default container runtime group to escalate our privileges on the host.  This is useful to escalate privileges by launching a privileged process even if we can't do something simpler, like use `sudo`.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

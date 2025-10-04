@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Three years of writing on the internet](https://some-natalie.dev/blog/three-years):  Lessons learned about habit after three whole years of writing blog posts!
 1. [Container host shenanigans](https://some-natalie.dev/blog/host-risks):  Let's pull apart the key security risks at each layer of the container ecosystem ... starting at the bottom, risks to our container's host.
 1. [Container Escapes 101 - In the wild](https://some-natalie.dev/blog/container-escapes-in-the-wild):  So far, we've been SSH'd directly into our host node.  This isn't how we normally have access to escape so ... how does these tactics still work?  We're going to use the same storage-based escapes as before, but through a web UI and talk through some common ~~difficulties~~ defensive countermeasures.
-1. [Container Escapes 101 - Host memory meddling with ptrace](https://some-natalie.dev/blog/ptrace-escapes):  In this workshop, we're going to mess with the host's memory from inside a container. 😈
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

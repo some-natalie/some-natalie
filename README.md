@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Using AI to open pull requests for dependency bumps](https://some-natalie.dev/blog/ai-dependency-bumps):  👻 It's spooky season, so let's do something a little scary ... give AI a teeny tiny bit of power in one of my projects.  I wrote yet another janky workaround for what Dependabot can't do today, now with 🤖 100% more AI! 🤖
 1. [End-to-end testing for custom GitHub Actions runners in Kubernetes](https://some-natalie.dev/blog/e2e-github-runner-tests):  Expanding test coverage on your actions-runner-controller images is silly easy, once it's been offloaded to ephemeral Kubernetes clusters.
 1. [Container runtime fun time!](https://some-natalie.dev/blog/runtime-funtime):  Let's pull apart the key security risks at each layer of the container ecosystem ... now let's look at the risks to our container's runtime.
-1. [Three years of writing on the internet](https://some-natalie.dev/blog/three-years):  Lessons learned about habit after three whole years of writing blog posts!
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

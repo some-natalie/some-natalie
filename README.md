@@ -15,7 +15,7 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 - **Container security** - [Container Escapes 101](https://some-natalie.dev/container-escapes-workshop/) and [a gentle intro to container security](https://some-natalie.dev/container-security)
 - **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles), self-hosted GitHub Actions runners made for humans
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
-- **Software development in highly regulated industries** ([NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final) and [800-172](https://csrc.nist.gov/pubs/sp/800/172/r3/fpd) ([CMMC](https://dodcio.defense.gov/CMMC/), DoD IL 2-6, but also ITAR and RMF and some FedRAMP and FISMA too)
+- **Software development in highly regulated industries** ([NIST 800-171](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final) and [800-172](https://csrc.nist.gov/pubs/sp/800/172/r3/fpd) ([CMMC](https://dodcio.defense.gov/CMMC/)), DoD IL 2-6, but also ITAR and RMF and some FedRAMP and FISMA too)
 - **Python** for the most part, sometimes a bit of **Go**, way more **bash** than I’ll admit to, and I’m still not sure if all that YAML counts
 - **GitHub Enterprise** - [enterprise security team](https://github.com/advanced-security/enterprise-security-team), [audit and compliance reporting](https://github.com/github/platform-samples/tree/master/sql)
 - but mostly, I work with people on all of the above! 💖

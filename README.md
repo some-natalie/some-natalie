@@ -4,9 +4,9 @@ I'm Natalie, a DevSecOps engineer and consultant experienced in developer experi
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Orchestrating chaos and containers](https://some-natalie.dev/blog/orchestration-risks):  The magic of putting your application in a container is scaling to run _even bigger_ workloads than could fit in a single machine.  **Container orchestrators have their own risks** too.  This new layer has its own permissions schema to learn and configurations to fiddle with.  Let's dive in!
 1. [Verifying Cosign signatures offline](https://some-natalie.dev/blog/cosign-disconnected):  I would like to convince you that air gaps are not scary.  Also, that offline verification of open-source software signed with Cosign is not difficult.
 1. [Using AI to open pull requests for dependency bumps](https://some-natalie.dev/blog/ai-dependency-bumps):  👻 It's spooky season, so let's do something a little scary ... give AI a teeny tiny bit of power in one of my projects.  I wrote yet another janky workaround for what Dependabot can't do today, now with 🤖 100% more AI! 🤖
-1. [End-to-end testing for custom GitHub Actions runners in Kubernetes](https://some-natalie.dev/blog/e2e-github-runner-tests):  Expanding test coverage on your actions-runner-controller images is silly easy, once it's been offloaded to ephemeral Kubernetes clusters.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

@@ -20,7 +20,7 @@ jobs:
     steps:
       # look at prior state
       - name: Checkout original code (HEAD^1)
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v4.2.2
+        uses: actions/checkout@c2d88d3ecc89a9ef08eebf45d9637801dcee7eb5 # v4.2.2
         with:
           fetch-depth: 2
           path: "prior-commit"
@@ -33,7 +33,7 @@ jobs:
 
       # look at current commit
       - name: Checkout the current code
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v4.2.2
+        uses: actions/checkout@c2d88d3ecc89a9ef08eebf45d9637801dcee7eb5 # v4.2.2
         with:
           fetch-depth: 1
           path: "current-commit"

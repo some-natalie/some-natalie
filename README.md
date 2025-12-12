@@ -1,6 +1,6 @@
 # Hi there 👋🏻
 
-I'm Natalie, a DevSecOps engineer and consultant experienced in developer experience and consolidation within a wide array of security-focused environments.  I work at the intersection of technology, people, and highly-regulated industries as a Principal Solutions Engineer for Public Sector at [Chainguard](https://chainguard.dev)!
+I'm Natalie, a DevSecOps engineer and consultant experienced in developer experience and consolidation within a wide array of security-focused environments.  I work at the intersection of technology, people, and highly-regulated industries as the Field CTO for Global Public Sector at [Chainguard](https://chainguard.dev)!
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->

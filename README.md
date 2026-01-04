@@ -4,9 +4,9 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Enterprise chargeback - can we do this?](https://some-natalie.dev/blog/chargeback-basics):  (part one of ?) Lessons learned the hard way from building and running an enterprise-wide chargeback or user-attribution billing system for tens of thousands of users.
 1. [Images have their own risks, too](https://some-natalie.dev/blog/image-risks):  You've locked down your runtime, orchestrator, and hosts.  Now how about what's actually running _inside_ of those containers?
 1. [Risks in the image registry](https://some-natalie.dev/blog/registry-risks):  All of these containers are images ... somewhere.  That 'somewhere' is a registry.  What risks can we find in our container registry?
-1. [Orchestrating chaos and containers](https://some-natalie.dev/blog/orchestration-risks):  The magic of putting your application in a container is scaling to run _even bigger_ workloads than could fit in a single machine.  **Container orchestrators have their own risks** too.  This new layer has its own permissions schema to learn and configurations to fiddle with.  Let's dive in!
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

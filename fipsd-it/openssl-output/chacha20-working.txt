@@ -1,0 +1,80 @@
+~ ᐅ openssl s_client -connect localhost:8443 -cipher ECDHE-RSA-CHACHA20-POLY1305 -tls1_2
+CONNECTED(00000005)
+depth=0 C = US, ST = VA, L = McLean, O = test, OU = test, CN = localhost
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 C = US, ST = VA, L = McLean, O = test, OU = test, CN = localhost
+verify error:num=10:certificate has expired
+notAfter=Apr  1 20:05:29 2025 GMT
+verify return:1
+depth=0 C = US, ST = VA, L = McLean, O = test, OU = test, CN = localhost
+notAfter=Apr  1 20:05:29 2025 GMT
+verify return:1
+write W BLOCK
+---
+Certificate chain
+ 0 s:/C=US/ST=VA/L=McLean/O=test/OU=test/CN=localhost
+   i:/C=US/ST=VA/L=McLean/O=test/OU=test/CN=localhost
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIDmzCCAoOgAwIBAgIUCCmZbdikk6QOoopvDEVZot2rnYowDQYJKoZIhvcNAQEL
+BQAwXTELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMQ8wDQYDVQQHDAZNY0xlYW4x
+DTALBgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxEjAQBgNVBAMMCWxvY2FsaG9z
+dDAeFw0yNDA0MDEyMDA1MjlaFw0yNTA0MDEyMDA1MjlaMF0xCzAJBgNVBAYTAlVT
+MQswCQYDVQQIDAJWQTEPMA0GA1UEBwwGTWNMZWFuMQ0wCwYDVQQKDAR0ZXN0MQ0w
+CwYDVQQLDAR0ZXN0MRIwEAYDVQQDDAlsb2NhbGhvc3QwggEiMA0GCSqGSIb3DQEB
+AQUAA4IBDwAwggEKAoIBAQCYWNVLWadGcdzafsmfpCHwJ3RFz19m89kFofdMh8dT
+xFpFLKAC9R3GiAD9afUBqXZb6MR8/PVtc3DfCJQ1fqE760phSuZhIObOisKenqAK
+NQkKk1ZnksAdsym8hySLLtnyVOkiouYqe6PRvrjyDpkASq01e2VhkQGpYkTq6BnD
+M7Qyxqcdh++FfP3yS0KMc1wHRQ3WQj+abdd9Hp2C3xZw39CptOy4WL8R0Z+SJolf
+zN0wVc91JeVQtTtGqn7+Jcu9H6qoksQZl12DAt/QA5VyR/t0nsof2wi9hhs8EZE0
+Seu48JrLNkWZAvI3WDruT66l6L557nL9xcarTtBOpdgzAgMBAAGjUzBRMB0GA1Ud
+DgQWBBTDFHJKlpaRqDfyzI5iRDw9ag/xhjAfBgNVHSMEGDAWgBTDFHJKlpaRqDfy
+zI5iRDw9ag/xhjAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCT
+Cjhy0z8mPLd2EsSX/8OXB9l+g5Nvj2GbpnwV9QRXLAzNj4bdcAqdHF91a2RCRkVj
+7/dQUFYrCOuF3cFakbqCeiPo6gG/EH/jMc9tstx66MBiGiOcS17JDDALJEVB/Hus
+6iJ10pteTvYM0NV1x9wuGKWfuV5iSKr/oHN9k+wRqPChMpyzvaOVYS7EXZxnbJbg
+wvt68HP1oANiZwtyPn16g9M4sRM0vEjEoeh17hx6BH6iVBLaKCg8EHQrPufM1xMJ
+WTCrQMgcWIhxfU7VSOw0PZCh+enJMm5ZW0Mkd4+XZ9YmMY+Pk3RQzu8G2et6/k3q
+9CKZ6WMNwQM3kQqSxR09
+-----END CERTIFICATE-----
+subject=/C=US/ST=VA/L=McLean/O=test/OU=test/CN=localhost
+issuer=/C=US/ST=VA/L=McLean/O=test/OU=test/CN=localhost
+---
+No client certificate CA names sent
+Server Temp Key: ECDH, X25519, 253 bits
+---
+SSL handshake has read 1554 bytes and written 191 bytes
+---
+New, TLSv1/SSLv3, Cipher is ECDHE-RSA-CHACHA20-POLY1305
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-CHACHA20-POLY1305
+    Session-ID: EA1BA15B3CDAA065FFCAD6BDDBBC69BE54B112A75496F4FA57513383C9524B12
+    Session-ID-ctx: 
+    Master-Key: E496F03D0B2FB4F57C33A889EB9F705B11E111176BA240D303AC25FCDA2B19AA335EDF62501D86D8E2EC5B17BFB1152C
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - a5 f1 27 b7 ca 6b 72 af-df 33 29 9b 7e 8a 5a f6   ..'..kr..3).~.Z.
+    0010 - dd 16 48 98 0e 4f 5f e6-75 66 3b 69 5f 26 e7 f9   ..H..O_.uf;i_&..
+    0020 - 77 ef 4b 0c 3b c2 0e 5f-2c 39 a2 b3 5c fd 17 4b   w.K.;.._,9..\..K
+    0030 - f2 14 09 3a b6 8b 9b 60-1e 86 bf 96 6e 00 20 55   ...:...`....n. U
+    0040 - 2d 04 bb b0 a7 f3 31 ea-f5 e3 b4 6f 5f b6 d4 0b   -.....1....o_...
+    0050 - 5b 7c b0 40 30 05 e4 f1-4a a6 8f 04 18 24 a7 37   [|.@0...J....$.7
+    0060 - ba 19 d0 00 f6 fb 10 78-bf f4 a1 18 39 35 a6 b6   .......x....95..
+    0070 - f0 92 8b a4 a2 21 01 92-f1 e9 de 4e de 37 46 dd   .....!.....N.7F.
+    0080 - 91 56 f4 db 9a 43 66 55-05 91 62 36 23 60 79 2e   .V...CfU..b6#`y.
+    0090 - f6 53 a1 1d 6f 56 0e 3c-88 09 6e 63 01 27 3d 7f   .S..oV.<..nc.'=.
+    00a0 - a5 42 fb 98 f3 48 dd f6-74 bf 6e ff dd 18 39 78   .B...H..t.n...9x
+
+    Start Time: 1769038056
+    Timeout   : 7200 (sec)
+    Verify return code: 10 (certificate has expired)
+---
+closed

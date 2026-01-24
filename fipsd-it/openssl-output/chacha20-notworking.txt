@@ -1,0 +1,25 @@
+~ ᐅ openssl s_client -connect localhost:8443 -cipher ECDHE-RSA-CHACHA20-POLY1305 -tls1_2
+CONNECTED(00000005)
+8776625216:error:1404B410:SSL routines:ST_CONNECT:sslv3 alert handshake failure:/AppleInternal/Library/BuildRoots/4~CB3jugB6tSnX80ckNuK6HENm_nS65OQWRZLWNME/Library/Caches/com.apple.xbs/Sources/libressl/libressl-3.3/ssl/tls13_lib.c:129:SSL alert number 40
+---
+no peer certificate available
+---
+No client certificate CA names sent
+---
+SSL handshake has read 7 bytes and written 106 bytes
+---
+New, (NONE), Cipher is (NONE)
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : 0000
+    Session-ID: 
+    Session-ID-ctx: 
+    Master-Key: 
+    Start Time: 1769038323
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+---

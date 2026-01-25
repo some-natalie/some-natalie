@@ -4,9 +4,9 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [There I FIPS’d it - misadventures in federal cryptography](https://some-natalie.dev/blog/fipsd-it):  From [DistrictCon: Year 1](https://www.districtcon.org/speakers), let's talk FIPS done wrong.  Here's the most common footguns I've found in the field, all made by folks who are sure they've done it right.
 1. [Enterprise chargeback - can we do this?](https://some-natalie.dev/blog/chargeback-basics):  (part one of ?) Lessons learned the hard way from building and running an enterprise-wide chargeback or user-attribution billing system for tens of thousands of users.
 1. [Images have their own risks, too](https://some-natalie.dev/blog/image-risks):  You've locked down your runtime, orchestrator, and hosts.  Now how about what's actually running _inside_ of those containers?
-1. [Risks in the image registry](https://some-natalie.dev/blog/registry-risks):  All of these containers are images ... somewhere.  That 'somewhere' is a registry.  What risks can we find in our container registry?
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

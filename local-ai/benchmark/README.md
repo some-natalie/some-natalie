@@ -8,7 +8,7 @@ shamelessly updated this <https://github.com/MinhNgyuen/llm-benchmark> to use uv
 uv run main.py \
     --verbose \
     --skip-models gpt-oss:20b llama2:latest \
-    --prompts 'Why is the sky blue?' 'Explain why there's day and night like I'm 5 years old.'
+    --prompts "Why is the sky blue?" "Explain why there's day and night like I'm 5 years old."
 ```
 
 ## example output

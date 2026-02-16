@@ -17,3 +17,7 @@ updates:
     directory: "/devcontainers/multi-service/python/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "uv"
+    directory: "/local-ai/benchmark/"
+    schedule:
+      interval: "weekly"

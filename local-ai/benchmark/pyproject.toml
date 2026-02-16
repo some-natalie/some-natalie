@@ -1,0 +1,11 @@
+[project]
+name = "benchmark"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "black>=26.1.0",
+    "ollama>=0.6.1",
+    "pydantic>=2.12.5",
+]

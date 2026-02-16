@@ -117,17 +117,17 @@ def inference_stats(model_response: OllamaResponse):
     print(f"""
 ----------------------------------------------------
         {model_response.model}
-        \tPrompt eval: {prompt_ts:.2f} t/s
-        \tResponse: {response_ts:.2f} t/s
-        \tTotal: {total_ts:.2f} t/s
+            Prompt eval: {prompt_ts:.2f} t/s
+            Response: {response_ts:.2f} t/s
+            Total: {total_ts:.2f} t/s
 
         Stats:
-        \tPrompt tokens: {model_response.prompt_eval_count}
-        \tResponse tokens: {model_response.eval_count}
-        \tModel load time: {nanosec_to_sec(model_response.load_duration):.2f}s
-        \tPrompt eval time: {nanosec_to_sec(model_response.prompt_eval_duration):.2f}s
-        \tResponse time: {nanosec_to_sec(model_response.eval_duration):.2f}s
-        \tTotal time: {nanosec_to_sec(model_response.total_duration):.2f}s
+            Prompt tokens: {model_response.prompt_eval_count}
+            Response tokens: {model_response.eval_count}
+            Model load time: {nanosec_to_sec(model_response.load_duration):.2f}s
+            Prompt eval time: {nanosec_to_sec(model_response.prompt_eval_duration):.2f}s
+            Response time: {nanosec_to_sec(model_response.eval_duration):.2f}s
+            Total time: {nanosec_to_sec(model_response.total_duration):.2f}s
 ----------------------------------------------------
         """)
 
@@ -221,7 +221,7 @@ def main():
             responses.append(response)
 
             if verbose:
-                print(f"Response: {response.message.content}")
+                print(f"\n\nResponse: {response.message.content}")
                 inference_stats(response)
         benchmarks[model_name] = responses
 

@@ -1,4 +1,5 @@
 import argparse
+from datetime import datetime
 from typing import List
 
 import ollama
@@ -7,8 +8,6 @@ from pydantic import (
     Field,
     field_validator,
 )
-
-from datetime import datetime
 
 
 class Message(BaseModel):
@@ -69,8 +68,7 @@ def run_benchmark(model_name: str, prompt: str, verbose: bool) -> OllamaResponse
         )
 
     if not last_element:
-        print("System Error: No response received from ollama")
-        return None
+        raise RuntimeError("System Error: No response received from ollama")
 
     # with open("data/ollama/ollama_res.json", "w") as outfile:
     #     outfile.write(json.dumps(last_element, indent=4))

@@ -1,6 +1,6 @@
 # Hi there 👋🏻
 
-I'm Natalie, an engineer and consultant focused on cybersecurity, developer experience, and enterprise consolidation within a wide array of high-security environments.  I work at the intersection of technology, people, and regulated industries as a Solutions Architect at [XBOW](https://xbow.com)!
+I'm Natalie, an engineer and consultant focused on cybersecurity, developer experience, and enterprise consolidation within a wide array of high-security environments.  I work at the intersection of technology, people, and regulated industries as the Public Sector Technical Leader at [XBOW](https://xbow.com)!
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
@@ -11,7 +11,7 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 💼 Day to day, I work with
 
-
+- **Artificial intelligence in offensive security**
 - **Container security** - [Container Escapes 101](https://some-natalie.dev/container-escapes-workshop/) and [a gentle intro to container security](https://some-natalie.dev/container-security)
 - **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles), self-hosted GitHub Actions runners made for humans
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)
@@ -36,7 +36,7 @@ I have an awesome life outside of tech, so while I have a few projects that I en
 
 ### 🌸 Heads up!
 
-- 🌱 I’m currently studying to sit for my [OSWE certification](https://portal.offsec.com/courses/web-300-687) and learning the ropes at a cybersecurity startup.
+- 🌱 I’m currently building Federal GTM at a cybersecurity startup.
 - 🎤 Public speaking is fun!  Check out what I've been up to [here](https://some-natalie.dev/speaking/).
 - 😄 Pronouns: she/her
 - ❓ Looking for my résumé?  It's [here](https://some-natalie.dev/resume/), but you can also find some of what I've been up to in my profile.  If you want to know about where else I've worked and went to school, you should go to [LinkedIn](https://www.linkedin.com/in/nsomersall).

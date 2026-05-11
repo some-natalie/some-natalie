@@ -21,3 +21,7 @@ updates:
     directory: "/local-ai/benchmark/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "docker-compose"
+    directory: "local-ai/open-webui"
+    schedule:
+      interval: "weekly"

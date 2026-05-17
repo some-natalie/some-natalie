@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "black==26.3.1",
+    "black==26.5.0",
     "ollama==0.6.2",
     "pydantic==2.13.4",
 ]

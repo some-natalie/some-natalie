@@ -7,7 +7,7 @@ FINDINGS_FILE="${1:?Usage: $0 <findings_file> [logs_dir]}"
 LOGS_DIR="${2:-}"
 OUTDIR="$(mktemp -d findings_report_XXXXXX)"
 KEV_URL="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
-MODEL="gpt-oss:20b"
+MODEL="laguna-xs-2.1:latest"
 OLLAMA_BASE="${OLLAMA_HOST:-http://localhost:11434}"
 
 if ! curl -sf "$OLLAMA_BASE/api/tags" > /dev/null 2>&1; then

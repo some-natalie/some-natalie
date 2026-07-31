@@ -1,6 +1,6 @@
 services:
   open-webui:
-    image: ghcr.io/open-webui/open-webui:v0.10.2
+    image: ghcr.io/open-webui/open-webui:v0.11.0
     container_name: open-webui
     restart: unless-stopped
     ports:
@@ -9,7 +9,7 @@ services:
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:?required}
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
       - RAG_EMBEDDING_ENGINE=ollama
-      - RAG_EMBEDDING_MODEL=nomic-embed-text
+      - RAG_EMBEDDING_MODEL=nomic-embed-text-v2-moe
       - VECTOR_DB=elasticsearch
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_USERNAME=elastic

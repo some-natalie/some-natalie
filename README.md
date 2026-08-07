@@ -4,9 +4,9 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Container Escapes 101](https://some-natalie.dev/blog/container-escapes-workshop):  Welcome to Container Escapes 101 at the [AppSec Village](https://www.appsecvillage.com/) at [DEF CON 34](https://defcon.org/html/defcon-34/dc-34-index.html)!
 1. [You didn't 'miss the boat' on AI in cybersecurity](https://some-natalie.dev/blog/starting-ai-cyber):  Your career is not obsolete, no matter how many vendors/influencers say so lately.  Let's set up a small homelab and a few open source tools to start using AI tools in your work, outlining all the places we still need cybersecurity expertise for these new problems that accompany this new technology along the way.
 1. [Enterprise chargeback - finding business value](https://some-natalie.dev/blog/chargeback-value):  (part three of three) Lessons learned the hard way from building and running an enterprise-wide chargeback or user-attribution billing system for tens of thousands of users.
-1. [Enterprise chargeback - a better quality of life for operations](https://some-natalie.dev/blog/chargeback-buildout):  (part two of three) Lessons learned the hard way from building and running an enterprise-wide chargeback or user-attribution billing system for tens of thousands of users.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

@@ -60,5 +60,5 @@ apt-get install -y \
 usermod -aG docker "${SUDO_USER:-$(logname)}"
 
 # Create flag
-echo "hiya, you found me at appsec village @ defcon 33!" | \
+echo "hiya, you found me at appsec village @ defcon 34!" | \
   tee -a /boot/flag.txt

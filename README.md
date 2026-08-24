@@ -4,9 +4,9 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [I guess we're all engineering managers now](https://some-natalie.dev/blog/all-managers-now):  Thoughts and feelings on returning to engineering, now with agentic AI all up in my business.
 1. [AI escapes from containers faster than me - so what?](https://some-natalie.dev/blog/escapes-ai):  Experiences on frantically patching to survive the Hot Mythos Summer before updating the workshop for all the changes of 2026.
 1. [Container Escapes 101](https://some-natalie.dev/blog/container-escapes-workshop):  Welcome to Container Escapes 101 at the [AppSec Village](https://www.appsecvillage.com/) at [DEF CON 34](https://defcon.org/html/defcon-34/dc-34-index.html)!
-1. [You didn't 'miss the boat' on AI in cybersecurity](https://some-natalie.dev/blog/starting-ai-cyber):  Your career is not obsolete, no matter how many vendors/influencers say so lately.  Let's set up a small homelab and a few open source tools to start using AI tools in your work, outlining all the places we still need cybersecurity expertise for these new problems that accompany this new technology along the way.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

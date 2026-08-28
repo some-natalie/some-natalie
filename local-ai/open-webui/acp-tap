@@ -1,0 +1,168 @@
+#!/usr/bin/python3
+"""Tee an ACP agent's stdio JSON-RPC traffic into ClickHouse.
+
+Usage: acp-tap <agent-name> <command> [args...]
+
+Fails open: if ClickHouse is unreachable the agent keeps working and rows are dropped.
+"""
+
+import base64
+import glob
+import json
+import os
+import queue
+import sqlite3
+import subprocess
+import sys
+import threading
+import urllib.parse
+import urllib.request
+from datetime import datetime
+
+BATCH_MAX = 200
+FLUSH_SECS = 1.0
+QUEUE_MAX = 20000
+TITLE_SYNC_SECS = 30
+ZED_DB_GLOB = os.path.expanduser("~/Library/Application Support/Zed/db/*/db.sqlite")
+
+_q: "queue.Queue" = queue.Queue(maxsize=QUEUE_MAX)
+_dropped = 0
+_warned = False
+_titles_fingerprint = None
+
+
+def _config():
+    cfg = {}
+    path = os.path.expanduser("~/.config/acp-tap/env")
+    try:
+        with open(path) as fh:
+            for line in fh:
+                line = line.strip()
+                if line.startswith("ACP_TAP_") and "=" in line:
+                    key, value = line.split("=", 1)
+                    cfg[key] = value
+    except OSError:
+        pass
+    cfg.update({k: v for k, v in os.environ.items() if k.startswith("ACP_TAP_")})
+    return cfg
+
+
+def _post(rows, cfg, table=None):
+    query = "INSERT INTO %s FORMAT JSONEachRow" % (table or cfg.get("ACP_TAP_TABLE", "acp.messages"))
+    url = cfg.get("ACP_TAP_URL", "http://127.0.0.1:8123/") + "?" + urllib.parse.urlencode({"query": query})
+    body = b"".join(json.dumps(r).encode() + b"\n" for r in rows)
+    req = urllib.request.Request(url, data=body, method="POST")
+    user, password = cfg.get("ACP_TAP_USER"), cfg.get("ACP_TAP_PASSWORD")
+    if user:
+        token = base64.b64encode(("%s:%s" % (user, password or "")).encode()).decode()
+        req.add_header("Authorization", "Basic " + token)
+    urllib.request.urlopen(req, timeout=10).read()
+
+
+def _shipper(cfg):
+    global _warned
+    batch = []
+    while True:
+        try:
+            row = _q.get(timeout=FLUSH_SECS)
+        except queue.Empty:
+            row = None
+        if row is not None:
+            batch.append(row)
+            if len(batch) < BATCH_MAX:
+                continue
+        if not batch:
+            continue
+        try:
+            _post(batch, cfg)
+        except Exception as err:  # telemetry must never break the agent
+            if not _warned:
+                print("acp-tap: dropping rows, ClickHouse insert failed: %s" % err, file=sys.stderr)
+                _warned = True
+        batch = []
+
+
+def _zed_titles():
+    rows = []
+    for path in glob.glob(ZED_DB_GLOB):
+        # mode=ro, not immutable=1: a freshly renamed thread lives only in the -wal.
+        conn = sqlite3.connect("file:%s?mode=ro" % path, uri=True)
+        try:
+            rows += conn.execute(
+                "SELECT session_id, coalesce(nullif(title_override, ''), title) FROM sidebar_threads"
+                " WHERE session_id IS NOT NULL AND session_id != ''"
+            ).fetchall()
+        except sqlite3.Error:
+            pass  # sibling dbs (db/0-global) have no thread table; one miss must not sink the rest
+        finally:
+            conn.close()
+    return rows
+
+
+def _title_syncer(cfg):
+    global _titles_fingerprint
+    while True:
+        try:
+            rows = _zed_titles()
+            # Only write on change, or every agent would repost every thread every interval.
+            fingerprint = hash(tuple(sorted(rows)))
+            if rows and fingerprint != _titles_fingerprint:
+                stamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+                _post([{"session_id": s, "title": t or "", "ts": stamp} for s, t in rows], cfg, "acp.zed_titles")
+                _titles_fingerprint = fingerprint
+        except Exception:  # same fail-open contract as the shipper
+            pass
+        threading.Event().wait(TITLE_SYNC_SECS)
+
+
+def _record(agent, pid, direction, line):
+    global _dropped
+    row = {
+        "ts": datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
+        "agent": agent,
+        "pid": pid,
+        "dir": direction,
+        "raw": line.decode("utf-8", "replace").rstrip("\r\n"),
+    }
+    try:
+        _q.put_nowait(row)
+    except queue.Full:
+        _dropped += 1
+
+
+def _pump(src, dst, agent, pid, direction):
+    while True:
+        line = src.readline()
+        if not line:
+            break
+        dst.write(line)
+        dst.flush()
+        _record(agent, pid, direction, line)
+    try:
+        dst.close()
+    except OSError:
+        pass
+
+
+def main():
+    if len(sys.argv) < 3:
+        print(__doc__, file=sys.stderr)
+        return 2
+    agent, cmd = sys.argv[1], sys.argv[2:]
+    child = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    cfg = _config()
+    threading.Thread(target=_shipper, args=(cfg,), daemon=True).start()
+    threading.Thread(target=_title_syncer, args=(cfg,), daemon=True).start()
+    threading.Thread(
+        target=_pump, args=(sys.stdin.buffer, child.stdin, agent, child.pid, "client"), daemon=True
+    ).start()
+    _pump(child.stdout, sys.stdout.buffer, agent, child.pid, "agent")
+    code = child.wait()
+    threading.Event().wait(FLUSH_SECS * 2)  # let the shipper flush its last batch
+    if _dropped:
+        print("acp-tap: dropped %d rows (queue full)" % _dropped, file=sys.stderr)
+    return code
+
+
+if __name__ == "__main__":
+    sys.exit(main())

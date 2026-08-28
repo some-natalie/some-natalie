@@ -1,0 +1,20 @@
+{
+  "_notes": [
+    "Tool servers are global in Open WebUI, not per-workspace, so whichever workspace ships this",
+    "file sets them for the whole instance. Posting replaces the whole list.",
+    "Capture the real shape from an instance you configured by hand, then drop _notes:",
+    "  curl -H \"Authorization: Bearer $OPEN_WEBUI_TOKEN\" http://localhost:3080/api/v1/configs/tool_servers",
+    "Each server is an OpenAPI endpoint reachable from the open-webui container, so use the compose",
+    "service name as the host, not localhost. Keep the code for these in git as its own service.",
+    "Never put a real key in here; this repo is public. Use ${VAR} and substitute before seeding."
+  ],
+  "TOOL_SERVER_CONNECTIONS": [
+    {
+      "url": "http://appsec-tools:8000",
+      "path": "openapi.json",
+      "auth_type": "bearer",
+      "key": "",
+      "config": { "enable": true }
+    }
+  ]
+}

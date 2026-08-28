@@ -1,0 +1,59 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>acp</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  main { padding: 24px 16px; max-width: 720px }
+  h1 { margin: 0 0 4px; font-size: 20px; font-weight: 400 }
+  .lede { margin: 0 0 20px; color: var(--dim); font-size: 13px }
+  .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
+  .cards a {
+    display: block; padding: 14px 16px; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--ink);
+  }
+  .cards a:hover { border-color: var(--user) }
+  .cards strong { display: block; font-weight: 400; color: var(--user); margin-bottom: 3px }
+  .cards span { color: var(--dim); font-size: 12px }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 20px 0 0; font-size: 13px }
+  dt { color: var(--dim) }
+  dd { margin: 0; font-variant-numeric: tabular-nums }
+</style>
+
+<header></header>
+<main>
+  <h1>acp tap</h1>
+  <p class="lede">Every JSON-RPC line between Zed and its ACP agents, teed into a local ClickHouse.</p>
+  <div class="cards">
+    <a href="browse.html"><strong>browse →</strong><span>Read sessions as transcripts, or drop to raw protocol messages.</span></a>
+    <a href="stats.html"><strong>stats →</strong><span>Tool call counts, per-day volume, failures and spend.</span></a>
+  </div>
+  <dl id="facts"></dl>
+</main>
+
+<script src="app.js"></script>
+<script>
+  async function load() {
+    setStatus("loading…");
+    try {
+      const rows = await query(`
+        SELECT count() AS msgs, uniqExact(session_id) AS sessions,
+               min(ts) AS from_ts, max(ts) AS to_ts, uniqExact(agent) AS agents
+        FROM acp.messages WHERE session_id != ''`);
+      const r = rows[0];
+      const dl = $("facts");
+      dl.textContent = "";
+      for (const [k, v] of [
+        ["messages", Number(r.msgs).toLocaleString()],
+        ["sessions", Number(r.sessions).toLocaleString()],
+        ["agents", Number(r.agents).toLocaleString()],
+        ["earliest", r.from_ts.slice(0, 16)],
+        ["latest", r.to_ts.slice(0, 16)],
+      ]) dl.append(el("dt", null, k), el("dd", null, v));
+      setStatus("connected");
+    } catch (e) {
+      setStatus(e.message, true);
+    }
+  }
+  mountHeader({ current: "index.html", onReload: load });
+  load();
+</script>

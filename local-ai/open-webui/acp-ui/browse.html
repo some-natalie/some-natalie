@@ -1,0 +1,166 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>acp · browse</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  body { height: 100vh; display: grid; grid-template-rows: auto 1fr }
+  main { display: grid; grid-template-columns: 340px 1fr; min-height: 0 }
+  #list { overflow: auto; border-right: 1px solid var(--line); background: var(--panel) }
+  #list div { padding: 7px 10px; border-bottom: 1px solid var(--line); cursor: pointer }
+  #list div:hover { background: var(--bg) }
+  #list div[aria-selected=true] { background: var(--bg); box-shadow: inset 3px 0 var(--user) }
+  #list b { display: block; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+  #list small { color: var(--dim); font-size: 12px }
+  #view { overflow: auto; padding: 12px }
+  .msg { border-left: 3px solid var(--line); padding: 2px 0 2px 10px; margin-bottom: 14px; white-space: pre-wrap; overflow-wrap: anywhere }
+  .msg.user { border-color: var(--user) } .msg.assistant { border-color: var(--bot) }
+  .msg.thought { border-color: var(--think); font-style: italic; color: var(--dim) }
+  .msg.tool { border-color: var(--tool) }
+  .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim) }
+  table { border-collapse: collapse; width: 100% }
+  td { border-bottom: 1px solid var(--line); padding: 3px 6px; vertical-align: top; font-size: 12px }
+  td.j { white-space: pre-wrap; overflow-wrap: anywhere }
+</style>
+
+<header></header>
+<main><div id="list"></div><div id="view" class="meta">pick a session</div></main>
+
+<script src="app.js"></script>
+<script>
+  const CAP = 200;
+
+  // Prefer the title Zed shows in its panel (acp.zed_titles, synced from Zed's sqlite by acp-tap).
+  // Fall back to the earliest user text: a live session/prompt, whose blocks may lead with a non-text
+  // resource_link, or replayed user_message_chunks for sessions resumed via session/load.
+  const SESSIONS = `
+    WITH trim(if(method = 'session/prompt',
+                 arrayStringConcat(arrayMap(b -> JSONExtractString(b,'text'),
+                                            JSONExtractArrayRaw(raw,'params','prompt'))),
+                 if(JSONExtractString(raw,'params','update','sessionUpdate') = 'user_message_chunk',
+                    JSONExtractString(raw,'params','update','content','text'), ''))) AS user_text
+    SELECT sid, agent, started, msgs, cost, ctx, bad,
+           substring(if(zed != '', zed, fallback), 1, 120) AS title
+    FROM (
+      SELECT session_id AS sid, any(agent) AS agent, min(ts) AS started, count() AS msgs,
+             argMinIf(user_text, ts, user_text != '') AS fallback,
+             max(JSONExtractFloat(raw,'params','update','cost','amount')) AS cost,
+             max(JSONExtractUInt(raw,'params','update','used')) AS ctx,
+             max(is_error) AS bad
+      FROM acp.messages WHERE session_id != '' GROUP BY sid
+    ) AS m
+    LEFT JOIN (
+      SELECT session_id, argMax(title, ts) AS zed FROM acp.zed_titles GROUP BY session_id
+    ) AS z ON z.session_id = m.sid
+    ORDER BY started DESC LIMIT ${CAP}`;
+
+  // Assistant text arrives as streamed chunks; merge consecutive ones sharing a messageId.
+  function transcript(rows) {
+    const items = [], stats = {}; let hidden = 0;
+    for (const r of rows) {
+      let m; try { m = JSON.parse(r.raw) } catch { hidden++; continue }
+      const p = m.params || {};
+      if (r.method === "session/prompt") {
+        const text = (p.prompt || []).map(b => b.text ?? `[${b.type || "block"}]`).join("");
+        items.push({ kind: "user", ts: r.ts, text });
+        continue;
+      }
+      if (r.method !== "session/update") { hidden++; continue }
+      const u = p.update || {}, k = u.sessionUpdate;
+      if (k === "agent_message_chunk" || k === "agent_thought_chunk" || k === "user_message_chunk") {
+        const kind = k === "agent_thought_chunk" ? "thought" : k === "user_message_chunk" ? "user" : "assistant";
+        const key = kind + "/" + (u.messageId || "");
+        const text = typeof u.content?.text === "string" ? u.content.text : JSON.stringify(u.content);
+        const prev = items[items.length - 1];
+        if (prev && prev.key === key) prev.text += text; else items.push({ kind, key, ts: r.ts, text });
+        continue;
+      }
+      if (k === "tool_call" || k === "tool_call_update") {
+        const id = u.toolCallId || "";
+        const prev = items.find(i => i.kind === "tool" && i.id === id);
+        if (prev) { if (u.title) prev.text = u.title; if (u.status) prev.status = u.status }
+        else items.push({ kind: "tool", id, ts: r.ts, text: u.title || id, status: u.status || "" });
+        continue;
+      }
+      if (k === "usage_update") {
+        if (u.used) stats.used = u.used;
+        if (u.size) stats.size = u.size;
+        if (u.cost?.amount) stats.cost = u.cost.amount;
+        continue;
+      }
+      hidden++;
+    }
+    return { items, hidden, stats };
+  }
+
+  async function openSession(sid, node) {
+    for (const d of $("list").children) d.setAttribute("aria-selected", d === node);
+    const view = $("view");
+    view.textContent = "loading…";
+    const rows = await query("SELECT ts, dir, method, raw FROM acp.messages WHERE session_id = {sid:String} ORDER BY ts", { sid });
+    view.textContent = "";
+    view.className = "";
+
+    if ($("raw").checked) {
+      const t = el("table");
+      for (const r of rows) {
+        const tr = t.insertRow();
+        for (const v of [r.ts, r.dir, r.method || "—"]) tr.insertCell().textContent = v;
+        const j = tr.insertCell();
+        j.className = "j";
+        j.textContent = r.raw;
+      }
+      view.append(t);
+      return;
+    }
+
+    const { items, hidden, stats } = transcript(rows);
+    const head = el("div", "meta");
+    head.textContent = [
+      sid,
+      stats.used ? `${stats.used.toLocaleString()} / ${(stats.size || 0).toLocaleString()} ctx` : "",
+      stats.cost ? money(stats.cost) : "",
+      hidden ? `${hidden} protocol messages hidden (tick “raw” to see all)` : "",
+    ].filter(Boolean).join("  ·  ");
+    view.append(head, el("hr"));
+
+    for (const it of items) {
+      const box = el("div", "msg " + it.kind);
+      const tag = it.kind + (it.status ? ` · ${it.status}` : "") + `  ${it.ts.slice(11, 19)}`;
+      box.append(el("div", "tag", tag), document.createTextNode(it.text));
+      view.append(box);
+    }
+    if (!items.length) view.append(el("div", "meta", "no conversation content in this session"));
+  }
+
+  async function load() {
+    const list = $("list");
+    list.textContent = "";
+    setStatus("loading…");
+    try {
+      const rows = await query(SESSIONS);
+      setStatus(`${rows.length} session${rows.length === 1 ? "" : "s"}` + (rows.length === CAP ? ` (latest ${CAP})` : ""));
+      for (const r of rows) {
+        const d = el("div");
+        d.append(el("b", null, r.title || "(no prompt)"));
+        const bits = [r.agent, r.started.slice(0, 16), `${r.msgs} msgs`];
+        if (Number(r.cost)) bits.push(money(r.cost));
+        if (Number(r.bad)) bits.push("errors");
+        d.append(el("small", null, bits.join(" · ")));
+        d.onclick = () => openSession(r.sid, d).catch(e => { $("view").className = "err"; $("view").textContent = e.message });
+        list.append(d);
+      }
+      if (!rows.length) list.append(el("div", "meta", "no sessions yet"));
+      list.firstElementChild?.click?.();
+    } catch (e) {
+      setStatus(e.message, true);
+    }
+  }
+
+  mountHeader({
+    current: "browse.html",
+    extraHTML: `<label><input type="checkbox" id="raw" style="width:auto"> raw</label>`,
+    onReload: load,
+  });
+  $("raw").onchange = () => document.querySelector("#list div[aria-selected=true]")?.click();
+  load();
+</script>

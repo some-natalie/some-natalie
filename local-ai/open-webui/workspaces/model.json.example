@@ -1,0 +1,31 @@
+{
+  "_notes": [
+    "Capture rather than hand-author: build one workspace model in the UI, then",
+    "  curl -H \"Authorization: Bearer $OPEN_WEBUI_TOKEN\" http://localhost:3080/api/v1/models/export",
+    "Copy your model's object into workspaces/<name>/model.json and delete _notes, user_id,",
+    "created_at, and updated_at. ModelForm accepts: id, base_model_id, name, meta, params,",
+    "access_grants, is_active. meta accepts profile_image_url, description, capabilities,",
+    "knowledge, plus extras the UI writes (toolIds), which is why capturing beats guessing.",
+    "",
+    "Then swap generated ids for placeholders so the file is portable across instances:",
+    "  knowledge collection id -> ${knowledge:<workspace name>}, inside meta.knowledge",
+    "  skill id                -> ${skill:<id from the skill's frontmatter>}",
+    "seed.py substitutes both at any depth and refuses to POST if one is left unresolved.",
+    "",
+    "Skills are not bound to a model: v0.11.0 has no skills field on a model. Every active skill",
+    "is advertised to every chat, and tags only group them in the UI. To make one the default for",
+    "a workspace, say so in params.system, or mention it as <$skill-id|Label> to force injection."
+  ],
+  "id": "grammar",
+  "name": "Grammar",
+  "base_model_id": "llama3.3:latest",
+  "params": {
+    "system": "You edit prose. Use <$copy-edit|Copy edit> for every request."
+  },
+  "meta": {
+    "description": "Copy editing and style editing against house rules.",
+    "profile_image_url": "/static/favicon.png",
+    "knowledge": ["${knowledge:grammar}"]
+  },
+  "is_active": true
+}

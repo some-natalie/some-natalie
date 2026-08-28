@@ -1,0 +1,44 @@
+/* Shared palette + chrome for the acp pages. Catppuccin Latte / Macchiato.
+   --viz-* are chart-mark tokens, stepped darker than the UI accents so they clear
+   the dark-surface lightness band; validated against --panel as the chart surface. */
+:root {
+  color-scheme: light dark;
+  --bg: #eff1f5; --panel: #e6e9ef; --ink: #4c4f69; --dim: #7c7f93;
+  --line: #ccd0da; --user: #1e66f5; --bot: #40a02b; --think: #8839ef; --tool: #df8e1d; --err: #d20f39;
+  --viz-series: #1e66f5; --viz-crit: #d20f39; --viz-track: #d5dae4;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #24273a; --panel: #1e2030; --ink: #cad3f5; --dim: #8087a2;
+    --line: #363a4f; --user: #8aadf4; --bot: #a6da95; --think: #c6a0f6; --tool: #eed49f; --err: #ed8796;
+    --viz-series: #4d82d8; --viz-crit: #d9576f; --viz-track: #2a2d42;
+  }
+}
+
+* { box-sizing: border-box }
+body {
+  margin: 0; font: 14px/1.5 Inconsolata, ui-monospace, monospace;
+  background: var(--bg); color: var(--ink);
+}
+a { color: var(--user) }
+
+/* header + credential bar, shared by every page */
+header { display: flex; gap: 8px; align-items: center; padding: 8px; border-bottom: 1px solid var(--line); flex-wrap: wrap }
+header input { font: inherit; padding: 4px 6px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 4px }
+header input[type=url] { width: 20ch } header input:not([type=url]):not([type=checkbox]) { width: 11ch }
+header .grow { flex: 1 } header label { color: var(--dim); display: flex; gap: 5px; align-items: center }
+button { font: inherit; padding: 4px 10px; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 4px; cursor: pointer }
+button:hover { border-color: var(--user) }
+button[aria-pressed=true] { border-color: var(--user); color: var(--user) }
+
+nav { display: flex; gap: 4px }
+nav a {
+  padding: 4px 10px; border: 1px solid var(--line); border-radius: 4px;
+  text-decoration: none; color: var(--ink); background: var(--panel);
+}
+nav a:hover { border-color: var(--user) }
+nav a[aria-current=page] { border-color: var(--user); color: var(--user) }
+
+.meta, .muted { color: var(--dim); font-size: 12px }
+.err { color: var(--err) }
+.tnum { font-variant-numeric: tabular-nums }

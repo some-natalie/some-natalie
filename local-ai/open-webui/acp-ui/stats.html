@@ -1,0 +1,318 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>acp · stats</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  main { padding: 16px; display: grid; gap: 16px; max-width: 1100px }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px }
+  .card h2 { margin: 0 0 2px; font-size: 13px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--dim) }
+  .card .sub { margin: 0 0 12px; color: var(--dim); font-size: 12px }
+
+  /* KPI row: one hero figure, then supporting tiles. Proportional figures on values. */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px }
+  .tile .label { color: var(--dim); font-size: 12px }
+  .tile .value { font-size: 26px; line-height: 1.15 }
+  .tile.hero .value { font-size: 52px; line-height: 1.05 }
+  .tile .foot { color: var(--dim); font-size: 12px }
+
+  /* Horizontal bars: 18px marks, 4px rounded data-end, square at the baseline. */
+  .bars { display: grid; gap: 8px }
+  .row { display: grid; grid-template-columns: 13ch 1fr auto; gap: 10px; align-items: center; cursor: default }
+  .row .rl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px }
+  .row .rt { height: 18px; display: flex; align-items: center }
+  .row .fill { height: 18px; background: var(--viz-series); border-radius: 0 4px 4px 0; min-width: 2px }
+  .row .rv { font-size: 13px; min-width: 5ch; text-align: right }
+  .row:hover .fill { filter: brightness(1.12) }
+
+  /* Columns: plot band and label band are separate rows so the axis is never clipped. */
+  .cols { display: flex; gap: 6px; align-items: flex-end; height: 150px }
+  .cols .cell { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; gap: 4px }
+  .cols .cap { font-size: 12px; color: var(--dim) }
+  .cols .bar { width: 100%; max-width: 24px; background: var(--viz-series); border-radius: 4px 4px 0 0; min-height: 2px }
+  .xaxis { display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 5px; margin-top: 0 }
+  .xaxis div { flex: 1; text-align: center; font-size: 11px; color: var(--dim) }
+
+  table { border-collapse: collapse; width: 100% }
+  th, td { border-bottom: 1px solid var(--line); padding: 4px 8px; text-align: left; font-size: 13px }
+  th { color: var(--dim); font-weight: 400; font-size: 12px }
+  td.n, th.n { text-align: right }
+  .fail { color: var(--viz-crit) }
+  .hidden { display: none }
+  #tip {
+    position: fixed; pointer-events: none; z-index: 9; opacity: 0;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
+    padding: 5px 8px; font-size: 12px; white-space: pre; transition: opacity .08s;
+  }
+  footer { padding: 0 16px 24px; max-width: 1100px; color: var(--dim); font-size: 12px }
+  footer ul { margin: 6px 0 0; padding-left: 18px }
+</style>
+
+<header></header>
+<main>
+  <section class="card"><div class="kpis" id="kpis"></div></section>
+  <section class="card">
+    <h2>Tool calls by tool</h2>
+    <p class="sub" id="sub-tools"></p>
+    <div id="c-tools"></div>
+  </section>
+  <section class="card">
+    <h2>Tool calls per day</h2>
+    <p class="sub">First observation of each call, so replays don't double-count.</p>
+    <div id="c-days"></div>
+  </section>
+  <section class="card">
+    <h2>Tool calls per session</h2>
+    <p class="sub" id="sub-sessions"></p>
+    <div id="c-sessions"></div>
+  </section>
+</main>
+<footer id="notes"></footer>
+<div id="tip"></div>
+
+<script src="app.js"></script>
+<script>
+  // One tool call = one toolCallId. Resuming a session via session/load re-emits its
+  // whole history, so raw tool_call rows overcount; min(ts) keeps the first sighting.
+  // Status only moves forward in the protocol, so rank by precedence rather than by
+  // timestamp — a replayed "pending" arrives *after* the real "completed".
+  const CALLS = `
+    WITH calls AS (
+      SELECT JSONExtractString(raw,'params','update','toolCallId') AS id,
+             max(JSONExtractString(raw,'params','update','_meta','claudeCode','toolName')) AS tool,
+             max(JSONExtractString(raw,'params','update','kind')) AS kind,
+             max(session_id) AS sid,
+             min(ts) AS first_ts,
+             max(indexOf(['pending','in_progress','completed','failed'],
+                 JSONExtractString(raw,'params','update','status'))) AS rank
+      FROM acp.messages
+      WHERE JSONExtractString(raw,'params','update','sessionUpdate') IN ('tool_call','tool_call_update')
+      GROUP BY id HAVING id != ''
+    )`;
+
+  const Q = {
+    totals: `${CALLS}
+      SELECT count() AS calls, uniqExact(sid) AS sessions, countIf(rank = 4) AS failed,
+             countIf(rank < 3) AS unfinished, min(first_ts) AS from_ts, max(first_ts) AS to_ts,
+             uniqExact(toDate(first_ts)) AS days
+      FROM calls`,
+    byTool: `${CALLS}
+      SELECT name, any(kind) AS kind, count() AS calls, countIf(rank = 4) AS failed
+      FROM (SELECT if(tool != '', tool, concat('(', kind, ')')) AS name, kind, rank FROM calls)
+      GROUP BY name ORDER BY calls DESC`,
+    byDay: `${CALLS}
+      SELECT toDate(first_ts) AS day, count() AS calls, countIf(rank = 4) AS failed
+      FROM calls GROUP BY day ORDER BY day WITH FILL STEP 1`,
+    bySession: `${CALLS}
+      SELECT c.sid AS sid, count() AS calls, countIf(c.rank = 4) AS failed,
+             min(c.first_ts) AS started, any(z.title) AS title
+      FROM calls AS c
+      LEFT JOIN (SELECT session_id, argMax(title, ts) AS title FROM acp.zed_titles GROUP BY session_id) AS z
+        ON z.session_id = c.sid
+      GROUP BY sid ORDER BY calls DESC`,
+    cost: `SELECT sum(c) AS cost FROM (
+             SELECT session_id, max(JSONExtractFloat(raw,'params','update','cost','amount')) AS c
+             FROM acp.messages
+             WHERE JSONExtractString(raw,'params','update','sessionUpdate') = 'usage_update'
+             GROUP BY session_id)`,
+  };
+
+  let tableView = false;
+
+  const tip = () => $("tip");
+  function bindTip(node, text) {
+    node.onmousemove = (e) => {
+      const t = tip();
+      t.textContent = text;
+      t.style.opacity = 1;
+      const pad = 12, w = t.offsetWidth, h = t.offsetHeight;
+      t.style.left = Math.min(e.clientX + pad, innerWidth - w - 4) + "px";
+      t.style.top = Math.max(4, Math.min(e.clientY + pad, innerHeight - h - 4)) + "px";
+    };
+    node.onmouseleave = () => { tip().style.opacity = 0 };
+  }
+
+  function tileNode({ label, value, foot, hero }) {
+    const d = el("div", "tile" + (hero ? " hero" : ""));
+    d.append(el("div", "label", label), el("div", "value", value));
+    if (foot) d.append(el("div", "foot", foot));
+    return d;
+  }
+
+  // Bars carry one hue: these categories are nominal, so length is the only encoding.
+  function hbars(rows, { name, value, failed, tipText }) {
+    const max = Math.max(...rows.map(value), 1);
+    const box = el("div", "bars");
+    for (const r of rows) {
+      const row = el("div", "row");
+      row.append(el("div", "rl", name(r)));
+      const track = el("div", "rt");
+      const fill = el("div", "fill");
+      fill.style.width = (value(r) / max * 100).toFixed(2) + "%";
+      if (failed?.(r)) fill.style.background = "var(--viz-crit)";
+      track.append(fill);
+      const v = el("div", "rv tnum", compact(value(r)));
+      row.append(track, v);
+      bindTip(row, tipText(r));
+      box.append(row);
+    }
+    return box;
+  }
+
+  function columns(rows, { label, value, tipText }) {
+    const max = Math.max(...rows.map(value), 1);
+    const wrap = el("div");
+    const plot = el("div", "cols"), axis = el("div", "xaxis");
+    for (const r of rows) {
+      const cell = el("div", "cell");
+      const n = value(r);
+      cell.append(el("div", "cap", n ? compact(n) : ""));
+      const bar = el("div", "bar");
+      bar.style.height = `calc(${(n / max * 100).toFixed(2)}% - 18px)`;
+      if (!n) bar.style.background = "var(--viz-track)";
+      cell.append(bar);
+      bindTip(cell, tipText(r));
+      plot.append(cell);
+      axis.append(el("div", null, label(r)));
+    }
+    wrap.append(plot, axis);
+    return wrap;
+  }
+
+  function tableNode(cols, rows) {
+    const t = el("table");
+    const tr = t.createTHead().insertRow();
+    for (const c of cols) {
+      const th = el("th", c.n ? "n" : null, c.h);
+      tr.append(th);
+    }
+    const tb = t.createTBody();
+    for (const r of rows) {
+      const row = tb.insertRow();
+      for (const c of cols) {
+        const td = row.insertCell();
+        td.className = [c.n ? "n tnum" : "", c.cls?.(r) || ""].filter(Boolean).join(" ");
+        td.textContent = c.v(r);
+      }
+    }
+    return t;
+  }
+
+  function render(target, chartFn, tableFn) {
+    const host = $(target);
+    host.textContent = "";
+    host.append(tableView ? tableFn() : chartFn());
+  }
+
+  let DATA = null;
+
+  function paint() {
+    const { totals, byTool, byDay, bySession, cost } = DATA;
+    const t = totals[0];
+    const total = Number(t.calls);
+    const failed = Number(t.failed);
+    const rate = total ? (failed / total * 100) : 0;
+
+    // KPIs
+    const k = $("kpis");
+    k.textContent = "";
+    k.append(
+      tileNode({ label: "Tool calls", value: total.toLocaleString(), hero: true,
+                 foot: `${t.from_ts.slice(0, 10)} → ${t.to_ts.slice(0, 10)}` }),
+      tileNode({ label: "Sessions with tool calls", value: Number(t.sessions).toLocaleString(),
+                 foot: `${(total / Math.max(Number(t.sessions), 1)).toFixed(0)} calls per session` }),
+      tileNode({ label: "Distinct tools", value: byTool.length,
+                 foot: byTool[0] ? `${byTool[0].name} leads at ${(byTool[0].calls / total * 100).toFixed(0)}%` : "" }),
+      tileNode({ label: "Failed", value: failed ? `✕ ${failed}` : "0",
+                 foot: `${rate.toFixed(1)}% of calls` }),
+      tileNode({ label: "Agent spend", value: cost[0] && Number(cost[0].cost) ? money(cost[0].cost) : "—",
+                 foot: "sum of per-session totals" }),
+    );
+    if (failed) k.querySelector(".tile:nth-child(4) .value").classList.add("fail");
+
+    // Tools
+    $("sub-tools").textContent =
+      `${byTool.length} distinct tools over ${total.toLocaleString()} calls. Tool name comes from ` +
+      `the agent's _meta.claudeCode.toolName; a bare (kind) is an agent that doesn't report one.`;
+    render("c-tools",
+      () => hbars(byTool, {
+        name: r => r.name, value: r => Number(r.calls),
+        tipText: r => `${r.name}\nkind: ${r.kind}\n${Number(r.calls).toLocaleString()} calls · ` +
+                      `${(r.calls / total * 100).toFixed(1)}%` + (Number(r.failed) ? `\n✕ ${r.failed} failed` : ""),
+      }),
+      () => tableNode([
+        { h: "tool", v: r => r.name }, { h: "kind", v: r => r.kind },
+        { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
+        { h: "share", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
+        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+      ], byTool));
+
+    // Days
+    render("c-days",
+      () => columns(byDay, {
+        label: r => r.day.slice(5), value: r => Number(r.calls),
+        tipText: r => `${r.day}\n${Number(r.calls).toLocaleString()} calls` +
+                      (Number(r.failed) ? `\n✕ ${r.failed} failed` : ""),
+      }),
+      () => tableNode([
+        { h: "day", v: r => r.day },
+        { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
+        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+      ], byDay));
+
+    // Sessions
+    $("sub-sessions").textContent = "Titled from Zed's own session titles where available.";
+    const label = r => (r.title || r.sid).slice(0, 40) || "(untitled)";
+    render("c-sessions",
+      () => hbars(bySession, {
+        name: label, value: r => Number(r.calls),
+        tipText: r => `${r.title || "(untitled)"}\n${r.sid}\nstarted ${r.started.slice(0, 16)}\n` +
+                      `${Number(r.calls).toLocaleString()} calls` + (Number(r.failed) ? `\n✕ ${r.failed} failed` : ""),
+      }),
+      () => tableNode([
+        { h: "session", v: label }, { h: "started", v: r => r.started.slice(0, 16) },
+        { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
+        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+      ], bySession));
+
+    const notes = $("notes");
+    notes.textContent = "";
+    const ul = el("ul");
+    for (const line of [
+      `Counts are distinct toolCallIds, first sighting only — session replays re-emit history and would otherwise inflate totals.`,
+      `Outcome is the highest status a call reached, not its latest: a replayed "pending" lands after the real "completed".`,
+      Number(t.unfinished) ? `${t.unfinished} call(s) currently unfinished (pending or in progress).` : "",
+      `The tap logs the session you are reading this from, so live sessions inflate their own numbers.`,
+    ].filter(Boolean)) ul.append(el("li", null, line));
+    notes.append(el("div", null, "How these numbers are built"), ul);
+  }
+
+  async function load() {
+    setStatus("loading…");
+    try {
+      const [totals, byTool, byDay, bySession, cost] = await Promise.all(
+        [Q.totals, Q.byTool, Q.byDay, Q.bySession, Q.cost].map(s => query(s)));
+      if (!totals.length || !Number(totals[0].calls)) {
+        setStatus("no tool calls recorded yet");
+        $("kpis").textContent = "";
+        return;
+      }
+      DATA = { totals, byTool, byDay, bySession, cost };
+      paint();
+      setStatus(`${Number(totals[0].calls).toLocaleString()} tool calls`);
+    } catch (e) {
+      setStatus(e.message, true);
+    }
+  }
+
+  mountHeader({
+    current: "stats.html",
+    extraHTML: `<button id="tv" aria-pressed="false">table view</button>`,
+    onReload: load,
+  });
+  $("tv").onclick = () => {
+    tableView = !tableView;
+    $("tv").setAttribute("aria-pressed", String(tableView));
+    if (DATA) paint();
+  };
+  load();
+</script>

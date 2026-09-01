@@ -24,7 +24,8 @@ a { color: var(--user) }
 
 /* header + credential bar, shared by every page */
 header { display: flex; gap: 8px; align-items: center; padding: 8px; border-bottom: 1px solid var(--line); flex-wrap: wrap }
-header input { font: inherit; padding: 4px 6px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 4px }
+header input, header select { font: inherit; padding: 4px 6px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 4px }
+header select { cursor: pointer }
 header input[type=url] { width: 20ch } header input:not([type=url]):not([type=checkbox]) { width: 11ch }
 header .grow { flex: 1 } header label { color: var(--dim); display: flex; gap: 5px; align-items: center }
 button { font: inherit; padding: 4px 10px; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 4px; cursor: pointer }
@@ -42,3 +43,49 @@ nav a[aria-current=page] { border-color: var(--user); color: var(--user) }
 .meta, .muted { color: var(--dim); font-size: 12px }
 .err { color: var(--err) }
 .tnum { font-variant-numeric: tabular-nums }
+
+/* ---- dashboard kit, shared by the chart pages (stats, bash) ---- */
+
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px }
+.card h2 { margin: 0 0 2px; font-size: 13px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--dim) }
+.card .sub { margin: 0 0 12px; color: var(--dim); font-size: 12px }
+
+/* KPI row: one hero figure, then supporting tiles. Proportional figures on values. */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px }
+.tile .label { color: var(--dim); font-size: 12px }
+.tile .value { font-size: 26px; line-height: 1.15 }
+.tile.hero .value { font-size: 52px; line-height: 1.05 }
+.tile .foot { color: var(--dim); font-size: 12px }
+
+/* Horizontal bars: 18px marks, 4px rounded data-end, square at the baseline. */
+.bars { display: grid; gap: 8px }
+.row { display: grid; grid-template-columns: 13ch 1fr auto; gap: 10px; align-items: center; cursor: default }
+.row .rl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px }
+.row .rt { height: 18px; display: flex; align-items: center }
+.row .fill { height: 18px; background: var(--viz-series); border-radius: 0 4px 4px 0; min-width: 2px }
+.row .rv { font-size: 13px; min-width: 5ch; text-align: right }
+.row:hover .fill { filter: brightness(1.12) }
+
+/* Columns: plot band and label band are separate rows so the axis is never clipped. */
+.cols { display: flex; gap: 6px; align-items: flex-end; height: 150px }
+.cols .cell { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; gap: 4px }
+.cols .cap { font-size: 12px; color: var(--dim) }
+.cols .bar { width: 100%; max-width: 24px; background: var(--viz-series); border-radius: 4px 4px 0 0; min-height: 2px }
+.xaxis { display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 5px; margin-top: 0 }
+.xaxis div { flex: 1; text-align: center; font-size: 11px; color: var(--dim) }
+
+/* Scoped to .card so browse.html's own tables keep their tighter rules. */
+.card table { border-collapse: collapse; width: 100% }
+.card th, .card td { border-bottom: 1px solid var(--line); padding: 4px 8px; text-align: left; font-size: 13px }
+.card th { color: var(--dim); font-weight: 400; font-size: 12px }
+.card td.n, .card th.n { text-align: right }
+.card td.wrap { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px }
+.fail { color: var(--viz-crit) }
+
+#tip {
+  position: fixed; pointer-events: none; z-index: 9; opacity: 0;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
+  padding: 5px 8px; font-size: 12px; white-space: pre; transition: opacity .08s;
+}
+footer { padding: 0 16px 24px; max-width: 1100px; color: var(--dim); font-size: 12px }
+footer ul { margin: 6px 0 0; padding-left: 18px }

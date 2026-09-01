@@ -51,6 +51,8 @@
     LEFT JOIN (
       SELECT session_id, argMax(title, ts) AS zed FROM acp.zed_titles GROUP BY session_id
     ) AS z ON z.session_id = m.sid
+    -- Untitled means Zed opened a thread and never prompted it: a handshake and nothing else.
+    WHERE title != ''
     ORDER BY started DESC LIMIT ${CAP}`;
 
   // Assistant text arrives as streamed chunks; merge consecutive ones sharing a messageId.
@@ -141,7 +143,7 @@
       setStatus(`${rows.length} session${rows.length === 1 ? "" : "s"}` + (rows.length === CAP ? ` (latest ${CAP})` : ""));
       for (const r of rows) {
         const d = el("div");
-        d.append(el("b", null, r.title || "(no prompt)"));
+        d.append(el("b", null, r.title));
         const bits = [r.agent, r.started.slice(0, 16), `${r.msgs} msgs`];
         if (Number(r.cost)) bits.push(money(r.cost));
         if (Number(r.bad)) bits.push("errors");

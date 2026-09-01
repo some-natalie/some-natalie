@@ -1,0 +1,200 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>acp · files</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* Dashboard kit (cards, tiles, bars, columns, tooltip) lives in app.css. */
+  main { padding: 16px; display: grid; gap: 16px; max-width: 1100px }
+</style>
+
+<header></header>
+<main>
+  <section class="card"><div class="kpis" id="kpis"></div></section>
+  <section class="card">
+    <h2>File types</h2>
+    <p class="sub" id="sub-types"></p>
+    <div id="c-types"></div>
+  </section>
+  <section class="card">
+    <h2>Where the work happened</h2>
+    <p class="sub" id="sub-proj"></p>
+    <div id="c-proj"></div>
+  </section>
+  <section class="card">
+    <h2>Most-touched files</h2>
+    <p class="sub" id="sub-files"></p>
+    <div id="c-files"></div>
+  </section>
+</main>
+<footer id="notes"></footer>
+
+<script src="app.js"></script>
+<script>
+  // Read, Edit and Write all put the target in rawInput.file_path. Same dedupe rules as
+  // everywhere else: one call = one toolCallId, first sighting only, because a session/load
+  // replay re-emits history.
+  //
+  // Type is the last dot-separated component of the basename. A file with no extension is
+  // shown under its own name (Dockerfile, acp-tap) rather than lumped into a bucket, and a
+  // pure dotfile (.env) keeps its leading dot.
+  const FILES = `
+    WITH t AS (
+      SELECT JSONExtractString(raw,'params','update','toolCallId') AS id,
+             max(JSONExtractString(raw,'params','update','_meta','claudeCode','toolName')) AS tool,
+             argMax(JSONExtractString(raw,'params','update','rawInput','file_path'),
+                    length(JSONExtractString(raw,'params','update','rawInput','file_path'))) AS path,
+             max(session_id) AS sid,
+             min(ts) AS ts
+      FROM acp.messages
+      WHERE JSONExtractString(raw,'params','update','sessionUpdate') IN ('tool_call','tool_call_update')
+      GROUP BY id HAVING id != ''
+    ),
+    f AS (
+      SELECT tool, path, sid, ts,
+             replaceOne(path, '/Users/nataliesomersall/', '~/') AS short,
+             arrayElement(splitByChar('/', path), -1) AS base,
+             splitByChar('.', arrayElement(splitByChar('/', path), -1)) AS parts,
+             if(extract(path, '/Code/([^/]+)') != '', extract(path, '/Code/([^/]+)'),
+                if(position(path, '/.claude') > 0, '(claude config)', '(elsewhere)')) AS project
+      FROM t WHERE tool IN ('Read','Edit','Write') AND path != ''
+    ),
+    files AS (
+      SELECT *, if(length(parts) > 1 AND arrayElement(parts, 1) != '', lower(arrayElement(parts, -1)),
+                   if(length(parts) > 2, lower(arrayElement(parts, -1)), base)) AS type
+      FROM f
+    )`;
+
+  const Q = {
+    totals: `${FILES}
+      SELECT count() AS touches, uniqExact(path) AS files, uniqExact(type) AS types,
+             uniqExact(project) AS projects, uniqExact(sid) AS sessions,
+             countIf(tool = 'Read') AS reads, countIf(tool = 'Edit') AS edits,
+             countIf(tool = 'Write') AS writes,
+             min(ts) AS from_ts, max(ts) AS to_ts
+      FROM files`,
+    byType: `${FILES}
+      SELECT type, count() AS touches, uniqExact(path) AS files,
+             countIf(tool = 'Read') AS reads, countIf(tool = 'Edit') AS edits,
+             countIf(tool = 'Write') AS writes
+      FROM files GROUP BY type ORDER BY touches DESC`,
+    byProject: `${FILES}
+      SELECT project, count() AS touches, uniqExact(path) AS files,
+             uniqExact(type) AS types, max(ts) AS last_ts
+      FROM files GROUP BY project ORDER BY touches DESC`,
+    topFiles: `${FILES}
+      SELECT short, type, project, count() AS touches,
+             countIf(tool = 'Read') AS reads, countIf(tool = 'Edit') AS edits,
+             countIf(tool = 'Write') AS writes, max(ts) AS last_ts
+      FROM files GROUP BY short, type, project ORDER BY touches DESC LIMIT 25`,
+  };
+
+  let DATA = null;
+  const ops = (r) => `${r.reads} read · ${r.edits} edit · ${r.writes} write`;
+
+  function paint() {
+    const { totals, byType, byProject, topFiles } = DATA;
+    const t = totals[0];
+    const touches = Number(t.touches);
+
+    const k = $("kpis");
+    k.textContent = "";
+    k.append(
+      tileNode({ label: "Files touched", value: Number(t.files).toLocaleString(), hero: true,
+                 foot: `${touches.toLocaleString()} operations · ${t.from_ts.slice(0, 10)} → ${t.to_ts.slice(0, 10)}` }),
+      tileNode({ label: "File types", value: Number(t.types).toLocaleString(),
+                 foot: byType[0] ? `${byType[0].type} leads at ${(byType[0].touches / touches * 100).toFixed(0)}%` : "" }),
+      tileNode({ label: "Edits", value: Number(t.edits).toLocaleString(),
+                 foot: `${(t.edits / Math.max(touches, 1) * 100).toFixed(0)}% of operations` }),
+      tileNode({ label: "Reads", value: Number(t.reads).toLocaleString(),
+                 foot: `${(t.reads / Math.max(touches, 1) * 100).toFixed(0)}% of operations` }),
+      tileNode({ label: "Writes", value: Number(t.writes).toLocaleString(),
+                 foot: `whole-file creates or rewrites` }),
+    );
+
+    $("sub-types").textContent =
+      `${byType.length} types over ${Number(t.files).toLocaleString()} files. ` +
+      `Bar length is total operations; hover for the read/edit/write split.`;
+    render("c-types",
+      () => hbars(byType, {
+        name: r => r.type, value: r => Number(r.touches),
+        tipText: r => `${r.type}\n${Number(r.files).toLocaleString()} file(s) · ` +
+                      `${Number(r.touches).toLocaleString()} operations\n${ops(r)}`,
+      }),
+      () => tableNode([
+        { h: "type", v: r => r.type },
+        { h: "files", n: true, v: r => Number(r.files).toLocaleString() },
+        { h: "operations", n: true, v: r => Number(r.touches).toLocaleString() },
+        { h: "read", n: true, v: r => Number(r.reads) || "" },
+        { h: "edit", n: true, v: r => Number(r.edits) || "" },
+        { h: "write", n: true, v: r => Number(r.writes) || "" },
+      ], byType));
+
+    $("sub-proj").textContent =
+      `Grouped by the directory under ~/Code. Anything outside it falls into (claude config) ` +
+      `for agent memory and settings, or (elsewhere) for /tmp and the like.`;
+    render("c-proj",
+      () => hbars(byProject, {
+        name: r => r.project, value: r => Number(r.touches),
+        tipText: r => `${r.project}\n${Number(r.files).toLocaleString()} file(s) · ` +
+                      `${Number(r.types).toLocaleString()} type(s)\n` +
+                      `${Number(r.touches).toLocaleString()} operations\nlast ${r.last_ts.slice(0, 16)}`,
+      }),
+      () => tableNode([
+        { h: "project", v: r => r.project },
+        { h: "files", n: true, v: r => Number(r.files).toLocaleString() },
+        { h: "types", n: true, v: r => Number(r.types).toLocaleString() },
+        { h: "operations", n: true, v: r => Number(r.touches).toLocaleString() },
+        { h: "last touched", v: r => r.last_ts.slice(0, 16) },
+      ], byProject));
+
+    $("sub-files").textContent = `Top ${Math.min(25, topFiles.length)} of ` +
+      `${Number(t.files).toLocaleString()} files, by number of operations.`;
+    $("c-files").textContent = "";
+    $("c-files").append(tableNode([
+      { h: "file", v: r => r.short, cls: () => "wrap" },
+      { h: "type", v: r => r.type },
+      { h: "read", n: true, v: r => Number(r.reads) || "" },
+      { h: "edit", n: true, v: r => Number(r.edits) || "" },
+      { h: "write", n: true, v: r => Number(r.writes) || "" },
+      { h: "total", n: true, v: r => Number(r.touches).toLocaleString() },
+      { h: "last touched", v: r => r.last_ts.slice(5, 16) },
+    ], topFiles));
+
+    const notes = $("notes");
+    notes.textContent = "";
+    notes.append(notesNode([
+      `Only the Read, Edit and Write tools are counted, via rawInput.file_path. Files reached through Bash — cat, sed, grep, redirects — are invisible here, so this undercounts real file activity.`,
+      `One operation = one toolCallId, first sighting only. Session replays re-emit history and would otherwise inflate every number.`,
+      `Type is the last dot-separated part of the filename, so model.json.example counts as "example" and a log named run.output counts as "output". yml and yaml are kept separate because the filenames differ.`,
+      `Files with no extension appear under their own name, which is why Dockerfile and acp-tap show up beside md and html.`,
+      `An Edit is one edit call, not one changed line — a file edited in ten passes counts ten times. A Write is a whole-file create or overwrite.`,
+      `The tap logs the session you are reading this from, so a live session inflates its own numbers.`,
+    ]));
+  }
+
+  async function load() {
+    setStatus("loading…");
+    try {
+      const [totals, byType, byProject, topFiles] = await Promise.all(
+        [Q.totals, Q.byType, Q.byProject, Q.topFiles].map(s => query(s)));
+      if (!totals.length || !Number(totals[0].touches)) {
+        setStatus("no file operations recorded yet");
+        $("kpis").textContent = "";
+        return;
+      }
+      DATA = { totals, byType, byProject, topFiles };
+      paint();
+      setStatus(`${Number(totals[0].files).toLocaleString()} files · ` +
+                `${Number(totals[0].touches).toLocaleString()} operations`);
+    } catch (e) {
+      setStatus(e.message, true);
+    }
+  }
+
+  mountHeader({
+    current: "files.html",
+    onReload: load,
+    onToggleView: () => { if (DATA) paint() },
+  });
+  load();
+</script>

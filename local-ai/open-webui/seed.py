@@ -25,6 +25,7 @@ Usage:
 
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -82,6 +83,20 @@ def resolve(obj, refs):
     if isinstance(obj, dict):
         return {k: resolve(v, refs) for k, v in obj.items()}
     return obj
+
+
+def expand_env(text, path):
+    """Substitute ${VAR} from the environment. Secrets stay out of this repo, so a
+    missing variable is fatal rather than posted literally as a credential."""
+
+    def swap(match):
+        name = match.group(1)
+        value = os.environ.get(name)
+        if value is None:
+            raise SystemExit("%s: ${%s} is not set in the environment" % (path, name))
+        return json.dumps(value)[1:-1]
+
+    return re.sub(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}", swap, text)
 
 
 def multipart(path):
@@ -184,11 +199,15 @@ def seed(name, dry):
 
     servers = os.path.join(ws, "tool-servers.json")
     if os.path.isfile(servers):
-        payload = json.load(open(servers))
+        text = open(servers).read()
         if dry:
+            payload = json.load(open(servers))
+            needed = sorted(set(re.findall(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}", text)))
             print("  tool servers: %d configured" % len(payload.get("TOOL_SERVER_CONNECTIONS", payload)))
+            if needed:
+                print("    requires env: %s" % ", ".join(needed))
         else:
-            api("/api/v1/configs/tool_servers", payload)
+            api("/api/v1/configs/tool_servers", json.loads(expand_env(text, servers)))
             print("  tool servers posted")
 
     model = os.path.join(ws, "model.json")

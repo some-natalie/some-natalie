@@ -27,32 +27,35 @@
 
 <script src="app.js"></script>
 <script>
-  const CAP = 200;
+  const CAP = 1000;
 
   // Prefer the title Zed shows in its panel (acp.zed_titles, synced from Zed's sqlite by acp-tap).
   // Fall back to the earliest user text: a live session/prompt, whose blocks may lead with a non-text
   // resource_link, or replayed user_message_chunks for sessions resumed via session/load.
+  // The search box is a literal substring match over the whole raw message, case-insensitive:
+  // no regex, so a query with . * ( ) in it means what it looks like.
   const SESSIONS = `
     WITH trim(if(method = 'session/prompt',
                  arrayStringConcat(arrayMap(b -> JSONExtractString(b,'text'),
                                             JSONExtractArrayRaw(raw,'params','prompt'))),
                  if(JSONExtractString(raw,'params','update','sessionUpdate') = 'user_message_chunk',
                     JSONExtractString(raw,'params','update','content','text'), ''))) AS user_text
-    SELECT sid, agent, started, msgs, cost, ctx, bad,
+    SELECT sid, agent, started, msgs, cost, ctx, bad, hits,
            substring(if(zed != '', zed, fallback), 1, 120) AS title
     FROM (
       SELECT session_id AS sid, any(agent) AS agent, min(ts) AS started, count() AS msgs,
              argMinIf(user_text, ts, user_text != '') AS fallback,
              max(JSONExtractFloat(raw,'params','update','cost','amount')) AS cost,
              max(JSONExtractUInt(raw,'params','update','used')) AS ctx,
-             max(is_error) AS bad
+             max(is_error) AS bad,
+             countIf(positionCaseInsensitive(raw, {q:String}) > 0) AS hits
       FROM acp.messages WHERE session_id != '' GROUP BY sid
     ) AS m
     LEFT JOIN (
       SELECT session_id, argMax(title, ts) AS zed FROM acp.zed_titles GROUP BY session_id
     ) AS z ON z.session_id = m.sid
     -- Untitled means Zed opened a thread and never prompted it: a handshake and nothing else.
-    WHERE title != ''
+    WHERE title != '' AND ({q:String} = '' OR hits > 0)
     ORDER BY started DESC LIMIT ${CAP}`;
 
   // Assistant text arrives as streamed chunks; merge consecutive ones sharing a messageId.
@@ -119,7 +122,8 @@
     const head = el("div", "meta");
     head.textContent = [
       sid,
-      stats.used ? `${stats.used.toLocaleString()} / ${(stats.size || 0).toLocaleString()} ctx` : "",
+      // Replayed sessions report `used` with no `size`: the limit then in force is not recoverable.
+      stats.used ? `${stats.used.toLocaleString()}${stats.size ? ` / ${stats.size.toLocaleString()}` : ""} ctx` : "",
       stats.cost ? money(stats.cost) : "",
       hidden ? `${hidden} protocol messages hidden (tick “raw” to see all)` : "",
     ].filter(Boolean).join("  ·  ");
@@ -138,20 +142,23 @@
     const list = $("list");
     list.textContent = "";
     setStatus("loading…");
+    const q = $("q").value;
     try {
-      const rows = await query(SESSIONS);
-      setStatus(`${rows.length} session${rows.length === 1 ? "" : "s"}` + (rows.length === CAP ? ` (latest ${CAP})` : ""));
+      const rows = await query(SESSIONS, { q });
+      setStatus(`${rows.length} session${rows.length === 1 ? "" : "s"}`
+        + (q ? ` matching “${q}”` : "") + (rows.length === CAP ? ` (latest ${CAP})` : ""));
       for (const r of rows) {
         const d = el("div");
         d.append(el("b", null, r.title));
         const bits = [r.agent, r.started.slice(0, 16), `${r.msgs} msgs`];
+        if (q) bits.push(`${r.hits} hits`);
         if (Number(r.cost)) bits.push(money(r.cost));
         if (Number(r.bad)) bits.push("errors");
         d.append(el("small", null, bits.join(" · ")));
         d.onclick = () => openSession(r.sid, d).catch(e => { $("view").className = "err"; $("view").textContent = e.message });
         list.append(d);
       }
-      if (!rows.length) list.append(el("div", "meta", "no sessions yet"));
+      if (!rows.length) list.append(el("div", "meta", q ? "no sessions contain that text" : "no sessions yet"));
       list.firstElementChild?.click?.();
     } catch (e) {
       setStatus(e.message, true);
@@ -160,9 +167,11 @@
 
   mountHeader({
     current: "browse.html",
-    extraHTML: `<label><input type="checkbox" id="raw" style="width:auto"> raw</label>`,
+    extraHTML: `<input id="q" type="search" placeholder="find text…" style="width:24ch" autocomplete="off">
+                <label><input type="checkbox" id="raw" style="width:auto"> raw</label>`,
     onReload: load,
   });
+  $("q").onchange = load;  // fires on Enter and on the clear button
   $("raw").onchange = () => document.querySelector("#list div[aria-selected=true]")?.click();
   load();
 </script>

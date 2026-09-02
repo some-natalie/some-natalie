@@ -1,0 +1,245 @@
+#!/usr/bin/python3
+"""Backfill Zed's pre-tap ACP threads into ClickHouse from Claude Code's own transcripts.
+
+Zed stores only a title for each ACP thread; the conversation itself lives in the agent's
+storage. For claude-acp that is ~/.claude/projects/<slug>/<session-id>.jsonl, keyed by the
+same session id Zed records, so old threads can be replayed as the ACP traffic the tap
+would have captured had it been running.
+
+Rows are written as agent 'claude-acp' with pid 0, which marks them as replayed:
+  ALTER TABLE acp.messages DELETE WHERE pid = 0
+undoes a run. Sessions already present in acp.messages are skipped, so this is re-runnable.
+
+Usage:
+  ./acp-backfill --self-check     assert the converter, no network, no disk
+  ./acp-backfill --dry-run        report what would be inserted
+  ./acp-backfill
+"""
+
+import base64
+import glob
+import importlib.machinery
+import importlib.util
+import json
+import os
+import sqlite3
+import sys
+import urllib.parse
+import urllib.request
+from datetime import datetime
+
+# acp-tap has no .py suffix, so import it by path rather than duplicating its config,
+# auth, and insert plumbing here.
+_spec = importlib.util.spec_from_loader(
+    "acp_tap",
+    importlib.machinery.SourceFileLoader("acp_tap", os.path.join(os.path.dirname(os.path.abspath(__file__)), "acp-tap")),
+)
+acp_tap = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(acp_tap)
+
+AGENT = "claude-acp"
+CC_GLOB = os.path.expanduser("~/.claude/projects/*/*.jsonl")
+BATCH_BYTES = 8_000_000  # tool output can run to megabytes per row; acp-tap._post waits only 10s
+
+# ACP tool kinds, matching what Zed reports on the live wire for the same tools.
+KINDS = {"Bash": "execute", "Edit": "edit", "Write": "edit", "NotebookEdit": "edit",
+         "Read": "read", "WebFetch": "fetch", "WebSearch": "fetch", "Agent": "think"}
+
+
+def _select(sql, cfg):
+    url = cfg.get("ACP_TAP_URL", "http://127.0.0.1:8123/")
+    req = urllib.request.Request(url + "?" + urllib.parse.urlencode({"default_format": "TSV"}), data=sql.encode())
+    user, password = cfg.get("ACP_TAP_USER"), cfg.get("ACP_TAP_PASSWORD")
+    if user:
+        req.add_header("Authorization", "Basic " + base64.b64encode(
+            ("%s:%s" % (user, password or "")).encode()).decode())
+    body = urllib.request.urlopen(req, timeout=30).read().decode()
+    return [line for line in body.splitlines() if line]
+
+
+def zed_acp_threads():
+    """(session_id, title) for every Zed thread belonging to the claude-acp agent."""
+    rows = []
+    for path in glob.glob(acp_tap.ZED_DB_GLOB):
+        conn = sqlite3.connect("file:%s?mode=ro" % path, uri=True)
+        try:
+            rows += conn.execute(
+                "SELECT session_id, coalesce(nullif(title_override, ''), title) FROM sidebar_threads"
+                " WHERE agent_id = ? AND session_id IS NOT NULL AND session_id != ''", (AGENT,)
+            ).fetchall()
+        except sqlite3.Error:
+            pass  # sibling dbs carry no thread table
+        finally:
+            conn.close()
+    return rows
+
+
+def _stamp(ms):
+    return datetime.fromtimestamp(ms // 1000).strftime("%Y-%m-%d %H:%M:%S") + ".%03d" % (ms % 1000)
+
+
+def _text(content):
+    """A tool_result's content is a string, or a list of blocks. rawOutput is read with
+    JSONExtractString downstream, which yields '' for anything but a JSON string."""
+    return content if isinstance(content, str) else json.dumps(content)
+
+
+def convert(sid, lines):
+    """Claude Code transcript lines -> acp.messages rows, in transcript order.
+
+    Timestamps are the transcript's own, converted from UTC to local wall time to match
+    what the tap writes, then forced strictly increasing: one Claude Code line can expand
+    to several ACP messages sharing a millisecond, and every page orders by ts alone.
+    """
+    rows, msg_id, last_ms = [], 0, 0
+
+    def emit(when, direction, payload):
+        nonlocal last_ms
+        ms = max(int(when.timestamp() * 1000), last_ms + 1)
+        last_ms = ms
+        rows.append({"ts": _stamp(ms), "agent": AGENT, "pid": 0, "dir": direction,
+                     "raw": json.dumps(payload, separators=(",", ":"))})
+
+    def update(when, upd):
+        emit(when, "agent", {"jsonrpc": "2.0", "method": "session/update",
+                             "params": {"sessionId": sid, "update": upd}})
+
+    peak_ctx, last_ctx_when = 0, None
+    for entry in lines:
+        kind = entry.get("type")
+        if kind not in ("user", "assistant"):
+            continue  # Claude Code bookkeeping (mode, attachment, ai-title...) never crossed the wire
+        when = datetime.fromisoformat(entry["timestamp"].replace("Z", "+00:00")).astimezone()
+        message = entry.get("message") or {}
+        content = message.get("content")
+        blocks = [{"type": "text", "text": content}] if isinstance(content, str) else (content or [])
+
+        if kind == "user":
+            prompt = [b for b in blocks if b.get("type") != "tool_result"
+                      and (b.get("type") != "text" or b.get("text", "").strip())]
+            if prompt:
+                msg_id += 1
+                emit(when, "client", {"jsonrpc": "2.0", "id": msg_id, "method": "session/prompt",
+                                      "params": {"sessionId": sid, "prompt": prompt}})
+            for b in blocks:
+                if b.get("type") == "tool_result":
+                    update(when, {"sessionUpdate": "tool_call_update", "toolCallId": b.get("tool_use_id", ""),
+                                  "status": "failed" if b.get("is_error") else "completed",
+                                  "rawOutput": _text(b.get("content"))})
+            continue
+
+        usage = message.get("usage") or {}
+        if usage:
+            used = (usage.get("input_tokens", 0) + usage.get("cache_read_input_tokens", 0)
+                    + usage.get("cache_creation_input_tokens", 0))
+            if used > peak_ctx:
+                peak_ctx, last_ctx_when = used, when
+        for b in blocks:
+            btype = b.get("type")
+            if btype == "text":
+                update(when, {"sessionUpdate": "agent_message_chunk", "messageId": message.get("id", ""),
+                              "content": {"type": "text", "text": b.get("text", "")}})
+            elif btype == "thinking" and b.get("thinking"):
+                # Bedrock returns thinking encrypted: signature only, no plaintext, for most
+                # of these threads. An empty thought is a blank bubble in browse, so drop it.
+                update(when, {"sessionUpdate": "agent_thought_chunk", "messageId": message.get("id", ""),
+                              "content": {"type": "text", "text": b["thinking"]}})
+            elif btype == "tool_use":
+                update(when, {"_meta": {"claudeCode": {"toolName": b.get("name", "")}},
+                              "toolCallId": b.get("id", ""), "sessionUpdate": "tool_call",
+                              "rawInput": b.get("input") or {}, "status": "pending",
+                              "title": b.get("name", ""), "kind": KINDS.get(b.get("name"), "other")})
+
+    # ponytail: `used` only, no `size`. The context limit in force at the time is not in the
+    # transcript, and no page needs it. Cost is likewise absent: pricing per model-per-turn
+    # would have to be reconstructed, so backfilled sessions report no spend.
+    if peak_ctx:
+        update(last_ctx_when, {"sessionUpdate": "usage_update", "used": peak_ctx})
+    return rows
+
+
+def self_check():
+    lines = [
+        {"type": "mode", "mode": "normal"},
+        {"type": "user", "timestamp": "2026-06-11T14:47:03.869Z", "message": {"content": "hi there"}},
+        {"type": "assistant", "timestamp": "2026-06-11T14:47:04.000Z", "message": {
+            "id": "msg_1", "usage": {"input_tokens": 10, "cache_read_input_tokens": 90},
+            "content": [{"type": "thinking", "thinking": "hmm"}, {"type": "text", "text": "ok"},
+                        {"type": "tool_use", "id": "t1", "name": "Bash", "input": {"command": "ls"}}]}},
+        {"type": "user", "timestamp": "2026-06-11T14:47:04.000Z", "message": {"content": [
+            {"type": "tool_result", "tool_use_id": "t1", "content": "a.txt", "is_error": True}]}},
+        {"type": "assistant", "timestamp": "2026-06-11T14:47:05.000Z", "message": {
+            "id": "msg_2", "content": [{"type": "thinking", "thinking": "", "signature": "enc"}]}},
+        {"type": "user", "timestamp": "2026-06-11T14:47:06.000Z", "message": {"content": [
+            {"type": "text", "text": "  "}]}},
+    ]
+    rows = convert("sid-1", lines)
+    raws = [json.loads(r["raw"]) for r in rows]
+    kinds = [r.get("method") if r.get("method") == "session/prompt"
+             else r["params"]["update"]["sessionUpdate"] for r in raws]
+    assert kinds == ["session/prompt", "agent_thought_chunk", "agent_message_chunk",
+                     "tool_call", "tool_call_update", "usage_update"], kinds
+    assert [r["ts"] for r in rows] == sorted(set(r["ts"] for r in rows)), "timestamps must strictly increase"
+    assert raws[0]["params"]["prompt"] == [{"type": "text", "text": "hi there"}]
+    assert raws[3]["params"]["update"]["rawInput"] == {"command": "ls"}
+    assert raws[3]["params"]["update"]["kind"] == "execute"
+    assert raws[4]["params"]["update"]["status"] == "failed"
+    assert raws[4]["params"]["update"]["rawOutput"] == "a.txt"
+    assert raws[5]["params"]["update"]["used"] == 100
+    assert all(r["dir"] == "agent" for r in rows[1:]) and rows[0]["dir"] == "client"
+    assert all(r["pid"] == 0 for r in rows)
+    # A list-shaped tool_result must still land as a JSON string, or rawOutput reads as empty.
+    assert isinstance(_text([{"type": "tool_reference"}]), str)
+    print("self-check ok (%d rows)" % len(rows))
+
+
+def main():
+    flags = set(sys.argv[1:])
+    if "--self-check" in flags:
+        self_check()
+        return 0
+    dry = "--dry-run" in flags
+
+    threads = zed_acp_threads()
+    if not threads:
+        raise SystemExit("no %s threads in Zed's db (%s)" % (AGENT, acp_tap.ZED_DB_GLOB))
+    transcripts = {os.path.basename(p)[:-len(".jsonl")]: p for p in glob.glob(CC_GLOB)}
+
+    cfg = acp_tap._config()
+    have = set(_select("SELECT DISTINCT session_id FROM acp.messages", cfg))
+
+    todo = [(sid, title) for sid, title in threads if sid not in have and sid in transcripts]
+    no_transcript = [sid for sid, _ in threads if sid not in have and sid not in transcripts]
+    print("%d %s threads in Zed, %d already in ClickHouse, %d to replay, %d with no transcript"
+          % (len(threads), AGENT, len(threads) - len(todo) - len(no_transcript), len(todo), len(no_transcript)))
+
+    batch, pending, total = [], 0, 0
+    for sid, title in sorted(todo):
+        with open(transcripts[sid]) as fh:
+            lines = [json.loads(line) for line in fh if line.strip()]
+        rows = convert(sid, lines)
+        total += len(rows)
+        print("  %s  %-4d rows  %s" % (sid, len(rows), (title or "")[:60]))
+        if dry:
+            continue
+        for row in rows:
+            batch.append(row)
+            pending += len(row["raw"])
+            if pending >= BATCH_BYTES:
+                acp_tap._post(batch, cfg)
+                batch, pending = [], 0
+    if batch and not dry:
+        acp_tap._post(batch, cfg)
+
+    # Titles are the tap's job and it posts every Zed thread, but backfilling with the agent
+    # closed would otherwise leave these sessions untitled, and browse.html hides those.
+    titles = [{"session_id": sid, "title": title or "", "ts": _stamp(int(datetime.now().timestamp() * 1000))}
+              for sid, title in todo]
+    if titles and not dry:
+        acp_tap._post(titles, cfg, "acp.zed_titles")
+    print("%s %d rows across %d session(s)" % ("would insert" if dry else "inserted", total, len(todo)))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,11 @@
+{
+  "TOOL_SERVER_CONNECTIONS": [
+    {
+      "url": "http://host.docker.internal:8000",
+      "path": "openapi.json",
+      "auth_type": "bearer",
+      "key": "${APPSEC_TOOLS_TOKEN}",
+      "config": { "enable": true }
+    }
+  ]
+}

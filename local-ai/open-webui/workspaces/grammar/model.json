@@ -1,0 +1,14 @@
+{
+  "id": "grammar",
+  "name": "Grammar",
+  "base_model_id": "gemma4:31b",
+  "params": {
+    "system": "You edit prose. Use <$copy-edit|Copy edit> for every request. Return the edited text and what changed, nothing else."
+  },
+  "meta": {
+    "description": "Copy editing and style editing against house rules.",
+    "profile_image_url": "/static/favicon.png",
+    "knowledge": ["${knowledge:grammar}"]
+  },
+  "is_active": true
+}

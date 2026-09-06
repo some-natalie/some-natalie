@@ -21,7 +21,7 @@ services:
         condition: service_healthy
 
   clickhouse:
-    image: clickhouse/clickhouse-server:26.7.5.10
+    image: clickhouse/clickhouse-server:26.8.2.7
     container_name: clickhouse
     restart: unless-stopped
     environment:

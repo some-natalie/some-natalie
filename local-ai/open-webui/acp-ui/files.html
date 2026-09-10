@@ -3,8 +3,8 @@
 <title>acp · files</title>
 <link rel="stylesheet" href="app.css">
 <style>
-  /* Dashboard kit (cards, tiles, bars, columns, tooltip) lives in app.css. */
-  main { padding: 16px; display: grid; gap: 16px; max-width: 1100px }
+  /* Dashboard kit (cards, tiles, donut, line, heatmap, tables, tooltip) lives in app.css. */
+  main { padding: 16px; display: grid; gap: 16px }
 </style>
 
 <header></header>
@@ -37,6 +37,34 @@
   // Type is the last dot-separated component of the basename. A file with no extension is
   // shown under its own name (Dockerfile, acp-tap) rather than lumped into a bucket, and a
   // pure dotfile (.env) keeps its leading dot.
+  //
+  // The only machine-specific values on the page. HOME is stripped to ~/ for display; the
+  // immediate subdirectories of any ROOTS entry are what "project" means here. Add a directory
+  // to ROOTS and it becomes a project source — a checkout under a root that is not listed falls
+  // into (elsewhere) instead of being counted as itself.
+  //
+  // One project name reachable under two roots is treated as one project, because that is
+  // normally the same checkout in two places. The table and tooltip name the roots involved, so a
+  // genuine collision between two unrelated directories that share a name is visible rather than
+  // silently summed.
+  const HOME = "/Users/nataliesomersall/";
+  const ROOTS = [`${HOME}Code/`, `${HOME}xfer/`];
+
+  // Longest first, so a root nested inside another root wins over its parent.
+  const ROOTS_SQL = "[" + [...ROOTS].sort((a, b) => b.length - a.length)
+    .map(r => `'${r.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'`).join(",") + "]";
+
+  // Project comes from string functions rather than extract(path, '/Code/([^/]+)') for two
+  // reasons: the regex was unanchored, so any path with a /Code/ segment anywhere matched, and
+  // it captured a bare filename when a file sits directly in a root — which is how five loose
+  // scripts became "projects". Requiring a following slash makes the segment a directory.
+  const PROJECT = `
+    multiIf(root != '' AND position(rest, '/') > 0,
+              substring(rest, 1, position(rest, '/') - 1),
+            root != '', '(loose files)',
+            position(path, '/.claude/') > 0, '(claude config)',
+            '(elsewhere)')`;
+
   const FILES = `
     WITH t AS (
       SELECT JSONExtractString(raw,'params','update','toolCallId') AS id,
@@ -51,16 +79,22 @@
     ),
     f AS (
       SELECT tool, path, sid, ts,
-             replaceOne(path, '/Users/nataliesomersall/', '~/') AS short,
+             replaceOne(path, '${HOME}', '~/') AS short,
              arrayElement(splitByChar('/', path), -1) AS base,
              splitByChar('.', arrayElement(splitByChar('/', path), -1)) AS parts,
-             if(extract(path, '/Code/([^/]+)') != '', extract(path, '/Code/([^/]+)'),
-                if(position(path, '/.claude') > 0, '(claude config)', '(elsewhere)')) AS project
+             -- The root this path lives under, '' if none. arrayFirst keeps the roots a list
+             -- rather than a chain of ifs, so adding one is a one-line edit.
+             arrayFirst(x -> startsWith(path, x), ${ROOTS_SQL}) AS root,
+             trim(TRAILING '/' FROM replaceOne(root, '${HOME}', '~/')) AS rootname,
+             -- length() server-side, not root.length in JS: ClickHouse counts bytes, JS counts
+             -- UTF-16 units, and they diverge the moment a home directory is not ASCII.
+             substring(path, length(root) + 1) AS rest
       FROM t WHERE tool IN ('Read','Edit','Write') AND path != ''
     ),
     files AS (
-      SELECT *, if(length(parts) > 1 AND arrayElement(parts, 1) != '', lower(arrayElement(parts, -1)),
-                   if(length(parts) > 2, lower(arrayElement(parts, -1)), base)) AS type
+      SELECT *, ${PROJECT} AS project,
+             if(length(parts) > 1 AND arrayElement(parts, 1) != '', lower(arrayElement(parts, -1)),
+                if(length(parts) > 2, lower(arrayElement(parts, -1)), base)) AS type
       FROM f
     )`;
 
@@ -79,8 +113,14 @@
       FROM files GROUP BY type ORDER BY touches DESC`,
     byProject: `${FILES}
       SELECT project, count() AS touches, uniqExact(path) AS files,
-             uniqExact(type) AS types, max(ts) AS last_ts
+             uniqExact(type) AS types, max(ts) AS last_ts,
+             arrayStringConcat(arraySort(groupUniqArray(rootname)), ', ') AS roots,
+             uniqExact(root) AS nroots
       FROM files GROUP BY project ORDER BY touches DESC`,
+    // toMonday so a week is a calendar week, not a rolling 7 days from whenever the data starts.
+    byProjectWeek: `${FILES}
+      SELECT project, toMonday(toDate(ts)) AS week, count() AS touches
+      FROM files GROUP BY project, week`,
     topFiles: `${FILES}
       SELECT short, type, project, count() AS touches,
              countIf(tool = 'Read') AS reads, countIf(tool = 'Edit') AS edits,
@@ -92,7 +132,7 @@
   const ops = (r) => `${r.reads} read · ${r.edits} edit · ${r.writes} write`;
 
   function paint() {
-    const { totals, byType, byProject, topFiles } = DATA;
+    const { totals, byType, byProject, byProjectWeek, topFiles } = DATA;
     const t = totals[0];
     const touches = Number(t.touches);
 
@@ -111,41 +151,105 @@
                  foot: `whole-file creates or rewrites` }),
     );
 
-    $("sub-types").textContent =
-      `${byType.length} types over ${Number(t.files).toLocaleString()} files. ` +
-      `Bar length is total operations; hover for the read/edit/write split.`;
-    render("c-types",
-      () => hbars(byType, {
-        name: r => r.type, value: r => Number(r.touches),
-        tipText: r => `${r.type}\n${Number(r.files).toLocaleString()} file(s) · ` +
-                      `${Number(r.touches).toLocaleString()} operations\n${ops(r)}`,
-      }),
-      () => tableNode([
-        { h: "type", v: r => r.type },
-        { h: "files", n: true, v: r => Number(r.files).toLocaleString() },
-        { h: "operations", n: true, v: r => Number(r.touches).toLocaleString() },
-        { h: "read", n: true, v: r => Number(r.reads) || "" },
-        { h: "edit", n: true, v: r => Number(r.edits) || "" },
-        { h: "write", n: true, v: r => Number(r.writes) || "" },
-      ], byType));
+    // Six segments is the ceiling for a ring, so the top five types get one each and the rest
+    // become one slice. The long tail is not a colour problem, it is a table.
+    const SLICES = 5;
+    const head = byType.slice(0, SLICES);
+    const tail = byType.slice(SLICES);
+    const sum = (rows, k) => rows.reduce((a, r) => a + Number(r[k]), 0);
+    const slices = tail.length
+      ? [...head, { type: `other (${tail.length} types)`, touches: sum(tail, "touches"),
+                    files: sum(tail, "files"), reads: sum(tail, "reads"),
+                    edits: sum(tail, "edits"), writes: sum(tail, "writes") }]
+      : head;
+    const typeTip = r => `${r.type}\n${Number(r.files).toLocaleString()} file(s) · ` +
+                         `${Number(r.touches).toLocaleString()} operations\n${ops(r)}`;
 
-    $("sub-proj").textContent =
-      `Grouped by the directory under ~/Code. Anything outside it falls into (claude config) ` +
-      `for agent memory and settings, or (elsewhere) for /tmp and the like.`;
-    render("c-proj",
-      () => hbars(byProject, {
-        name: r => r.project, value: r => Number(r.touches),
-        tipText: r => `${r.project}\n${Number(r.files).toLocaleString()} file(s) · ` +
-                      `${Number(r.types).toLocaleString()} type(s)\n` +
-                      `${Number(r.touches).toLocaleString()} operations\nlast ${r.last_ts.slice(0, 16)}`,
+    $("sub-types").textContent =
+      `${byType.length} types over ${Number(t.files).toLocaleString()} files, by share of ` +
+      `operations. The ring is the top ${SLICES}; every type is in the table. Hover either for ` +
+      `the read/edit/write split.`;
+    const host = $("c-types");
+    host.textContent = "";
+    const split = el("div", "split");
+    split.append(
+      donut(slices, {
+        label: r => r.type, value: r => Number(r.touches), tipText: typeTip,
+        centre: compact(touches), centreFoot: "operations",
       }),
-      () => tableNode([
-        { h: "project", v: r => r.project },
-        { h: "files", n: true, v: r => Number(r.files).toLocaleString() },
-        { h: "types", n: true, v: r => Number(r.types).toLocaleString() },
-        { h: "operations", n: true, v: r => Number(r.touches).toLocaleString() },
-        { h: "last touched", v: r => r.last_ts.slice(0, 16) },
-      ], byProject));
+      (() => {
+        const box = el("div", "scroll");
+        const rank = new Map(head.map((r, i) => [r.type, i]));
+        box.append(tableNode([
+          // The swatch ties a row to its slice; tail rows carry the "other" colour, which is the
+          // slot right after the head rather than a fixed index.
+          { h: "", v: r => {
+              const sw = el("i", "sw");
+              sw.style.background = CAT[rank.has(r.type) ? rank.get(r.type) : head.length];
+              return sw;
+            } },
+          { h: "type", v: r => r.type },
+          { h: "files", n: true, v: r => Number(r.files).toLocaleString() },
+          { h: "operations", n: true, v: r => Number(r.touches).toLocaleString() },
+          { h: "share", n: true, v: r => (r.touches / touches * 100).toFixed(1) + "%" },
+          { h: "read", n: true, v: r => Number(r.reads) || "" },
+          { h: "edit", n: true, v: r => Number(r.edits) || "" },
+          { h: "write", n: true, v: r => Number(r.writes) || "" },
+        ], byType));
+        return box;
+      })(),
+    );
+    host.append(split);
+
+    // A bar per project threw away the more interesting half of "where": one project ran for
+    // eleven weeks while several were a single afternoon, and only a time axis shows that.
+    const weeks = [...new Set(byProjectWeek.map(r => r.week))].sort();
+    const cell = new Map(byProjectWeek.map(r => [`${r.project}|${r.week}`, Number(r.touches)]));
+    const activeWeeks = r => weeks.filter(w => cell.get(`${r.project}|${w}`)).length;
+
+    const rootList = ROOTS.map(r => r.replace(HOME, "~/")).join(" and ");
+    const spans = byProject.filter(r => Number(r.nroots) > 1);
+    $("sub-proj").textContent =
+      `Grouped by the directory under ${rootList}, one row per project and one column per ` +
+      `calendar week, shaded by operations. A file sitting directly in a root is (loose files); ` +
+      `outside them, (claude config) is agent memory and settings and (elsewhere) is /tmp and ` +
+      `the like.` +
+      (spans.length ? ` ${spans.length} project(s) appear under more than one root and are ` +
+                      `counted once — the root column names them.` : "");
+    const phost = $("c-proj");
+    phost.textContent = "";
+    const psplit = el("div", "split wide");
+    psplit.append(
+      heatmap(byProject, {
+        cols: weeks,
+        row: r => r.project,
+        // Label the first column of each month; a date on all twelve does not fit.
+        colLabel: (w, i) => (i === 0 || w.slice(5, 7) !== weeks[i - 1].slice(5, 7))
+          ? MONTHS[Number(w.slice(5, 7)) - 1] : w.slice(8, 10),
+        value: (r, w) => cell.get(`${r.project}|${w}`) || 0,
+        buckets: [9, 49, 199, 499, Infinity],
+        tipText: (r, w, n) => `${r.project}${r.roots ? ` — ${r.roots}` : ""}\nweek of ${w}\n` +
+          (n ? `${n.toLocaleString()} operations` : "no activity") +
+          `\n\nall time: ${Number(r.touches).toLocaleString()} operations across ` +
+          `${activeWeeks(r)} of ${weeks.length} weeks\n` +
+          `${Number(r.files).toLocaleString()} file(s) · ${Number(r.types).toLocaleString()} type(s)` +
+          (Number(r.nroots) > 1 ? `\n\nsame name under ${r.nroots} roots, counted as one` : ""),
+      }),
+      (() => {
+        const box = el("div", "scroll");
+        box.append(tableNode([
+          { h: "project", v: r => r.project },
+          { h: "root", v: r => r.roots || "—", cls: r => Number(r.nroots) > 1 ? "fail" : "" },
+          { h: "files", n: true, v: r => Number(r.files).toLocaleString() },
+          { h: "operations", n: true, v: r => Number(r.touches).toLocaleString() },
+          { h: "share", n: true, v: r => (r.touches / touches * 100).toFixed(1) + "%" },
+          { h: "weeks active", n: true, v: r => `${activeWeeks(r)} of ${weeks.length}` },
+          { h: "last touched", v: r => r.last_ts.slice(5, 16) },
+        ], byProject));
+        return box;
+      })(),
+    );
+    phost.append(psplit);
 
     $("sub-files").textContent = `Top ${Math.min(25, topFiles.length)} of ` +
       `${Number(t.files).toLocaleString()} files, by number of operations.`;
@@ -167,6 +271,9 @@
       `One operation = one toolCallId, first sighting only. Session replays re-emit history and would otherwise inflate every number.`,
       `Type is the last dot-separated part of the filename, so model.json.example counts as "example" and a log named run.output counts as "output". yml and yaml are kept separate because the filenames differ.`,
       `Files with no extension appear under their own name, which is why Dockerfile and acp-tap show up beside md and html.`,
+      `A project is an immediate subdirectory of one of the roots — ${ROOTS.map(r => r.replace(HOME, "~/")).join(", ")} — which is the one machine-specific assumption here. HOME and ROOTS are the constants at the top of this page; adding a root is a one-line edit. A checkout under no listed root falls into (elsewhere) rather than being counted as itself.`,
+      `A project name found under two roots is counted once, on the assumption it is the same checkout in two places. The root column lists every root a project was seen under and flags the ones with more than one, so two unrelated directories that happen to share a name do not merge unnoticed.`,
+      `A git worktree is its own row rather than folding into the repo it came from: the file path records where the worktree lives, not which repository it belongs to.`,
       `An Edit is one edit call, not one changed line — a file edited in ten passes counts ten times. A Write is a whole-file create or overwrite.`,
       `The tap logs the session you are reading this from, so a live session inflates its own numbers.`,
     ]));
@@ -175,14 +282,14 @@
   async function load() {
     setStatus("loading…");
     try {
-      const [totals, byType, byProject, topFiles] = await Promise.all(
-        [Q.totals, Q.byType, Q.byProject, Q.topFiles].map(s => query(s)));
+      const [totals, byType, byProject, byProjectWeek, topFiles] = await Promise.all(
+        [Q.totals, Q.byType, Q.byProject, Q.byProjectWeek, Q.topFiles].map(s => query(s)));
       if (!totals.length || !Number(totals[0].touches)) {
         setStatus("no file operations recorded yet");
         $("kpis").textContent = "";
         return;
       }
-      DATA = { totals, byType, byProject, topFiles };
+      DATA = { totals, byType, byProject, byProjectWeek, topFiles };
       paint();
       setStatus(`${Number(totals[0].files).toLocaleString()} files · ` +
                 `${Number(totals[0].touches).toLocaleString()} operations`);
@@ -194,7 +301,6 @@
   mountHeader({
     current: "files.html",
     onReload: load,
-    onToggleView: () => { if (DATA) paint() },
   });
   load();
 </script>

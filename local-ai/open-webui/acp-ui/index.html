@@ -3,10 +3,13 @@
 <title>acp</title>
 <link rel="stylesheet" href="app.css">
 <style>
-  main { padding: 24px 16px; max-width: 720px }
+  main { padding: 24px 16px }
   h1 { margin: 0 0 4px; font-size: 20px; font-weight: 400 }
-  .lede { margin: 0 0 20px; color: var(--dim); font-size: 13px }
-  .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
+  /* Prose keeps a readable measure even though the card deck below it goes full width. */
+  .lede { margin: 0 0 20px; max-width: 80ch; color: var(--dim); font-size: 13px }
+  /* auto-fill with a ceiling, not 1fr: on a wide screen a handful of nav cards should stay
+     card-sized and add columns, not stretch to a third of the viewport each. */
+  .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 340px)) }
   .cards a {
     display: block; padding: 14px 16px; background: var(--panel);
     border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--ink);

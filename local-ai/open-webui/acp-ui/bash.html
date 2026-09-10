@@ -3,8 +3,8 @@
 <title>acp · bash</title>
 <link rel="stylesheet" href="app.css">
 <style>
-  /* Dashboard kit (cards, tiles, bars, columns, tooltip) lives in app.css. */
-  main { padding: 16px; display: grid; gap: 16px; max-width: 1100px }
+  /* Dashboard kit (cards, tiles, donut, line, heatmap, tables, tooltip) lives in app.css. */
+  main { padding: 16px; display: grid; gap: 16px }
   code { font: inherit; color: var(--tool) }
 </style>
 
@@ -12,29 +12,24 @@
 <main>
   <section class="card"><div class="kpis" id="kpis"></div></section>
   <section class="card">
+    <h2>How long calls take, and what they read back</h2>
+    <p class="sub" id="sub-dist"></p>
+    <div id="c-dist"></div>
+  </section>
+  <section class="card">
+    <h2>Context spend per day</h2>
+    <p class="sub" id="sub-spend"></p>
+    <div id="c-spend"></div>
+  </section>
+  <section class="card">
     <h2>Programs Bash invokes</h2>
     <p class="sub" id="sub-progs"></p>
     <div id="c-progs"></div>
   </section>
   <section class="card">
-    <h2>What it was doing</h2>
-    <p class="sub" id="sub-recent"></p>
-    <div id="c-recent"></div>
-  </section>
-  <section class="card">
-    <h2>Slowest calls</h2>
-    <p class="sub" id="sub-slow"></p>
-    <div id="c-slow"></div>
-  </section>
-  <section class="card">
-    <h2>Largest output</h2>
-    <p class="sub">Bytes of stdout the agent read back. This is context spend.</p>
-    <div id="c-big"></div>
-  </section>
-  <section class="card">
-    <h2>Failures</h2>
-    <p class="sub" id="sub-fail"></p>
-    <div id="c-fail"></div>
+    <h2>Notable calls</h2>
+    <p class="sub" id="sub-notable"></p>
+    <div id="c-notable"></div>
   </section>
 </main>
 <footer id="notes"></footer>
@@ -70,6 +65,36 @@
                  'function','select','coproc','export','unset','set','local','return','shift','exit',
                  'eval','trap','break','continue','time','sudo','command'`;
 
+  // Above this a duration is a replay artifact rather than a slow command. Taking the FIRST
+  // terminal row already removes most of it, but a call that never finished in its own session
+  // still picks up a status from a history re-emitted days later — two of 21,790 claimed 130 and
+  // 13 hours. Those become unknown, like the calls that have no terminal row at all, so the
+  // worst-case figure and the slowest-calls table describe commands rather than bookkeeping.
+  const MAX_SECS = 3600;
+  const RATE_MIN_CALLS = 20;  // below this a failure rate is noise, not a signal
+
+  // Ordered buckets, declared once so the SQL and the labels cannot drift apart, and so a bucket
+  // with nothing in it still renders as an empty row instead of vanishing from the distribution.
+  const DUR_BUCKETS = [
+    { label: "under 1s", max: 1 }, { label: "1 – 3s", max: 3 }, { label: "3 – 10s", max: 10 },
+    { label: "10 – 30s", max: 30 }, { label: "30s – 2m", max: 120 },
+    { label: "2 – 10m", max: 600 }, { label: "over 10m", max: Infinity },
+  ];
+  const OUT_BUCKETS = [
+    { label: "empty", max: 1 }, { label: "under 512 B", max: 512 },
+    { label: "512 B – 4 KB", max: 4096 }, { label: "4 – 32 KB", max: 32768 },
+    { label: "over 32 KB", max: Infinity },
+  ];
+  const bucketSQL = (col, buckets) =>
+    "multiIf(" + buckets.slice(0, -1).map(b => `${col} < ${b.max}, '${b.label}'`).join(", ") +
+    `, '${buckets.at(-1).label}')`;
+  // Rows come back only for buckets that matched, so fill the gaps against the declared order.
+  const fillBuckets = (buckets, rows, keys) => buckets.map(b => {
+    const hit = rows.find(r => r.bucket === b.label);
+    return Object.fromEntries([["bucket", b.label],
+      ...keys.map(k => [k, hit ? Number(hit[k]) : 0])]);
+  });
+
   const BASH = String.raw`
     WITH bash AS (
       SELECT JSONExtractString(raw,'params','update','toolCallId') AS id,
@@ -91,7 +116,8 @@
     ),
     calls AS (
       SELECT *,
-             if(ended > started, dateDiff('millisecond', started, ended) / 1000, NULL) AS secs,
+             if(ended > started, dateDiff('millisecond', started, ended) / 1000, NULL) AS secs_raw,
+             if(secs_raw <= ${MAX_SECS}, secs_raw, NULL) AS secs,
              replaceAll(replaceAll(cmd, '\n', ' ⏎ '), '\t', ' ') AS oneline,
              arrayDistinct(arrayFilter(x -> x != '' AND x NOT LIKE '-%' AND NOT match(x, '^[0-9]')
                  AND x NOT IN (${NOISE}),
@@ -110,6 +136,7 @@
       -- The distinct-program count comes from the byProg row count instead.
       SELECT count() AS calls, uniqExact(sid) AS sessions, countIf(rank = 4) AS failed,
              countIf(rank < 3) AS unfinished, count(secs) AS timed,
+             countIf(secs_raw > ${MAX_SECS}) AS overlong,
              round(avg(length(progs)), 1) AS avg_progs,
              round(median(secs), 1) AS p50, round(quantile(0.95)(secs), 1) AS p95,
              round(max(secs), 1) AS worst, sum(out_len) AS out_total, max(out_len) AS out_max,
@@ -121,33 +148,54 @@
              argMax(descr, length(descr)) AS intent
       FROM calls ARRAY JOIN progs AS prog
       GROUP BY prog ORDER BY calls DESC`,
-    recent: `${BASH}
-      SELECT started, arrayStringConcat(progs, ' ') AS progs, descr,
-             round(secs, 1) AS secs, out_len, if(rank = 4, 'failed', '') AS outcome
-      FROM calls ORDER BY started DESC LIMIT 25`,
-    slowest: `${BASH}
-      SELECT round(secs, 1) AS secs, arrayStringConcat(progs, ' ') AS progs, descr,
-             substring(oneline, 1, 120) AS cmd, out_len,
-             if(rank = 4, 'failed', 'completed') AS outcome
-      FROM calls WHERE secs IS NOT NULL ORDER BY secs DESC LIMIT 12`,
-    biggest: `${BASH}
-      SELECT out_len, arrayStringConcat(progs, ' ') AS progs, descr,
-             substring(oneline, 1, 120) AS cmd, round(secs, 1) AS secs
-      FROM calls WHERE out_len > 0 ORDER BY out_len DESC LIMIT 12`,
-    failures: `${BASH}
-      SELECT started, arrayStringConcat(progs, ' ') AS progs, substring(oneline, 1, 120) AS cmd,
-             descr, round(secs, 1) AS secs
-      FROM calls WHERE rank = 4 ORDER BY started DESC LIMIT 25`,
+    durations: `${BASH}
+      SELECT ${bucketSQL("secs", DUR_BUCKETS)} AS bucket, count() AS calls
+      FROM calls WHERE secs IS NOT NULL GROUP BY bucket`,
+    // Bytes as well as calls: the two answer different questions and they disagree sharply here.
+    outputs: `${BASH}
+      SELECT ${bucketSQL("out_len", OUT_BUCKETS)} AS bucket, count() AS calls, sum(out_len) AS bytes
+      FROM calls GROUP BY bucket`,
+    perDay: `${BASH}
+      SELECT toDate(started) AS day, sum(out_len) AS bytes, count() AS calls
+      FROM calls GROUP BY day ORDER BY day
+      WITH FILL FROM assumeNotNull((SELECT toDate(min(started)) FROM calls)) TO today() + 1 STEP 1`,
   };
 
+  // The three views were three cards with the same columns and, as it turns out, no rows in
+  // common — the top slowest, largest and failed calls are entirely different calls. So they
+  // become one card with a selector: same shape of question, and switching is a comparison
+  // rather than a re-sort. One query per view, all fetched up front, so switching is instant.
+  const NOTABLE = [
+    { key: "slowest", label: "slowest", where: "secs IS NOT NULL", order: "secs DESC", limit: 12,
+      note: t => `Timed from the call appearing to its first completed or failed update. ` +
+                 `${Number(t.timed).toLocaleString()} of ${Number(t.calls).toLocaleString()} ` +
+                 `calls are timeable.` },
+    { key: "biggest", label: "largest output", where: "out_len > 0", order: "out_len DESC", limit: 12,
+      note: () => `Bytes of stdout the agent read back, largest first. This is context spend.` },
+    { key: "failures", label: "failures", where: "rank = 4", order: "started DESC", limit: 25,
+      note: t => Number(t.failed)
+        ? `${Number(t.failed).toLocaleString()} failed call(s), newest first. A failure is the ` +
+          `tool reporting status "failed", not a non-zero exit code — the protocol carries no ` +
+          `exit status.`
+        : `No failed calls recorded.` },
+  ];
+  const notableQuery = (v) => `${BASH}
+    SELECT started, round(secs, 1) AS secs, out_len, arrayStringConcat(progs, ' ') AS progs,
+           descr, substring(oneline, 1, 120) AS cmd, if(rank = 4, 'failed', 'completed') AS outcome
+    FROM calls WHERE ${v.where} ORDER BY ${v.order} LIMIT ${v.limit}`;
+  Object.assign(Q, Object.fromEntries(NOTABLE.map(v => [v.key, notableQuery(v)])));
+
   let DATA = null;
+  let notableView = NOTABLE[0].key;   // survives a repaint
+  let progFilter = "";
   const secsText = (v) => v === null || v === undefined ? "—" : Number(v).toFixed(1) + "s";
 
   function paint() {
-    const { totals, byProg, recent, slowest, biggest, failures } = DATA;
+    const { totals, byProg, durations, outputs, perDay } = DATA;
     const t = totals[0];
     const total = Number(t.calls);
     const failed = Number(t.failed);
+    const failRate = failed / Math.max(total, 1);
 
     const k = $("kpis");
     k.textContent = "";
@@ -158,7 +206,8 @@
                  foot: `${t.avg_progs} per call` +
                        (byProg[0] ? ` · ${byProg[0].prog} in ${(byProg[0].calls / total * 100).toFixed(0)}%` : "") }),
       tileNode({ label: "Median duration", value: secsText(t.p50),
-                 foot: `p95 ${secsText(t.p95)} · worst ${secsText(t.worst)}` }),
+                 foot: `p95 ${secsText(t.p95)} · worst ${secsText(t.worst)}` +
+                       (Number(t.overlong) ? ` · ${t.overlong} over ${MAX_SECS / 3600}h discarded` : "") }),
       tileNode({ label: "Output read back", value: bytes(t.out_total),
                  foot: `largest single call ${bytes(t.out_max)}` }),
       tileNode({ label: "Failed", value: failed ? `✕ ${failed}` : "0",
@@ -166,85 +215,198 @@
     );
     if (failed) k.querySelector(".tile:nth-child(5) .value").classList.add("fail");
 
-    const TOP = 30;
-    const shown = byProg.slice(0, TOP);
-    $("sub-progs").textContent =
-      `${byProg.length} distinct programs across ${total.toLocaleString()} calls, ${t.avg_progs} per call. ` +
-      `Every program a call runs is credited, so a call appears under each one and the shares add up ` +
-      `to well over 100%.` +
-      (byProg.length > TOP
-        ? ` Chart shows the top ${TOP}; the remaining ${byProg.length - TOP} appear in table view.`
-        : "");
-    render("c-progs",
-      () => hbars(shown, {
-        name: r => r.prog, value: r => Number(r.calls),
-        failed: r => Number(r.failed) > 0 && Number(r.failed) === Number(r.calls),
-        tipText: r => `${r.prog}\nin ${Number(r.calls).toLocaleString()} calls · ` +
-                      `${(r.calls / total * 100).toFixed(1)}%\nmedian ${secsText(r.p50)} · ` +
-                      `${bytes(r.out_med)} output\n` +
-                      (Number(r.failed) ? `✕ ${r.failed} failed\n` : "") +
-                      `e.g. ${r.intent || "—"}`,
+    // Two distributions side by side. Both are ordinal, so the bars carry the shape and the
+    // numbers stay exact — the point of each is a comparison the KPI tiles cannot show:
+    // most calls finish in seconds, and most bytes arrive in the calls that are not most calls.
+    const dur = fillBuckets(DUR_BUCKETS, durations, ["calls"]);
+    const out = fillBuckets(OUT_BUCKETS, outputs, ["calls", "bytes"]);
+    const durMax = Math.max(...dur.map(r => r.calls), 1);
+    const byteMax = Math.max(...out.map(r => r.bytes), 1);
+    const timed = Number(t.timed);
+    const quick = dur.slice(0, 3).reduce((a, r) => a + r.calls, 0);
+    const heavy = out.slice(-2).reduce((a, r) => ({ c: a.c + r.calls, b: a.b + r.bytes }), { c: 0, b: 0 });
+    const totalBytes = out.reduce((a, r) => a + r.bytes, 0) || 1;
+
+    $("sub-dist").textContent =
+      `${(quick / Math.max(timed, 1) * 100).toFixed(0)}% of the ${timed.toLocaleString()} timed calls ` +
+      `finish in under ten seconds. Output is the mirror image: the ` +
+      `${(heavy.c / Math.max(total, 1) * 100).toFixed(0)}% of calls above 4 KB carry ` +
+      `${(heavy.b / totalBytes * 100).toFixed(0)}% of the bytes, which is the context they spend.`;
+    const dhost = $("c-dist");
+    dhost.textContent = "";
+    const dsplit = el("div", "split even");
+    dsplit.append(
+      (() => {
+        const wrap = el("div");
+        wrap.append(el("div", "colcap", "call duration"));
+        // Percentages summing to 100, not px: under fixed layout Chrome scales specified widths
+        // proportionally when they under-fill the table, which starved the one auto column — the
+        // bar cell came out 27px wide while a 96px label rendered at 283.
+        const tb = tableNode([
+          { h: "", w: "22%", v: r => r.bucket },
+          { h: "", w: "46%", cls: () => "bar", v: r => barCell(r.calls / durMax) },
+          { h: "calls", w: "16%", n: true, v: r => r.calls.toLocaleString() },
+          { h: "share", w: "16%", n: true,
+            v: r => (r.calls / Math.max(timed, 1) * 100).toFixed(1) + "%" },
+        ], dur);
+        tb.classList.add("fixed");
+        wrap.append(tb);
+        return wrap;
+      })(),
+      (() => {
+        const wrap = el("div");
+        wrap.append(el("div", "colcap", "output read back — bar is bytes, not calls"));
+        const tb = tableNode([
+          { h: "", w: "26%", v: r => r.bucket },
+          { h: "", w: "40%", cls: () => "bar", v: r => barCell(r.bytes / byteMax) },
+          { h: "bytes", w: "17%", n: true, v: r => bytes(r.bytes) },
+          { h: "calls", w: "17%", n: true, v: r => r.calls.toLocaleString() },
+        ], out);
+        tb.classList.add("fixed");
+        wrap.append(tb);
+        return wrap;
+      })(),
+    );
+    dhost.append(dsplit);
+
+    // Bytes, not calls: the KPI gives a total with no trend, and what matters about output is how
+    // much context it costs, which a call count does not tell you.
+    const spendTotal = perDay.reduce((a, r) => a + Number(r.bytes), 0);
+    const busiest = perDay.reduce((a, r) => Number(r.bytes) > Number(a.bytes) ? r : a, perDay[0]);
+    $("sub-spend").textContent =
+      `Bytes of stdout read back per day across ${perDay.length} days. Heaviest was ` +
+      `${busiest.day} at ${bytes(busiest.bytes)}, against a daily mean of ` +
+      `${bytes(spendTotal / Math.max(perDay.length, 1))}.`;
+    render("c-spend",
+      host => lineChart(host, perDay, {
+        x: r => r.day,
+        yFmt: bytes,
+        series: [{ name: "output", value: r => Number(r.bytes),
+                   color: "var(--viz-series)", area: true }],
+        tipText: r => `${r.day}\n${bytes(r.bytes)} read back\n` +
+                      `${Number(r.calls).toLocaleString()} call(s)`,
       }),
       () => tableNode([
-        { h: "program", v: r => r.prog },
+        { h: "day", v: r => r.day },
+        { h: "output", n: true, v: r => bytes(r.bytes) },
         { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
-        { h: "share", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
-        { h: "median", n: true, v: r => secsText(r.p50) },
-        { h: "output", n: true, v: r => bytes(r.out_med) },
-        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
-        { h: "example intent", v: r => r.intent || "—" },
-      ], byProg));
+      ], perDay));
 
-    $("sub-recent").textContent =
-      `The agent's own one-line description of each call, newest first — intent rather than syntax. ` +
-      `Every Bash call carries one.`;
-    $("c-recent").textContent = "";
-    $("c-recent").append(tableNode([
-      { h: "when", v: r => r.started.slice(5, 16) },
-      { h: "intent", v: r => r.descr || "—" },
-      { h: "programs", v: r => r.progs },
-      { h: "secs", n: true, v: r => secsText(r.secs) },
-      { h: "output", n: true, v: r => bytes(r.out_len) },
-      { h: "", v: r => r.outcome, cls: r => r.outcome ? "fail" : "" },
-    ], recent));
+    // One table with an inline bar rather than a chart plus a table behind a toggle. 644 programs
+    // is far past the count any chart reads well at, and the tail is nearly weightless — 525 of
+    // them run fewer than ten times — so the useful thing is every row reachable with the exact
+    // numbers beside it, not a truncated picture.
+    //
+    // Bars are relative to the busiest program, not to the call total: a call credits every
+    // program it runs, so the counts deliberately sum past 100% of calls.
+    const maxCalls = Math.max(...byProg.map(r => Number(r.calls)), 1);
+    const phost = $("c-progs");
 
-    $("sub-slow").textContent =
-      `Timed from the call appearing to its first completed or failed update. ` +
-      `${Number(t.timed).toLocaleString()} of ${total.toLocaleString()} calls are timeable.`;
-    $("c-slow").textContent = "";
-    $("c-slow").append(tableNode([
-      { h: "secs", n: true, v: r => secsText(r.secs) },
-      { h: "intent", v: r => r.descr || "—" },
-      { h: "programs", v: r => r.progs },
-      { h: "output", n: true, v: r => bytes(r.out_len) },
-      { h: "outcome", v: r => r.outcome, cls: r => r.outcome === "failed" ? "fail" : "" },
-      { h: "command", v: r => r.cmd, cls: () => "wrap" },
-    ], slowest));
+    // Bars stay relative to the busiest program overall, not to the filtered set, so filtering
+    // narrows the list without silently rescaling every bar under it.
+    const drawProgs = () => {
+      const q = progFilter.trim().toLowerCase();
+      const shown = q ? byProg.filter(r => r.prog.toLowerCase().includes(q)) : byProg;
+      $("sub-progs").textContent =
+        (q ? `${shown.length} of ${byProg.length} programs match "${progFilter.trim()}". `
+           : `${byProg.length} distinct programs across ${total.toLocaleString()} calls, ` +
+             `${t.avg_progs} per call, busiest first. `) +
+        `Every program a call runs is credited, so a call appears under each one and the shares ` +
+        `add up to well over 100% — bar length is relative to ${byProg[0].prog}, the busiest ` +
+        `overall, not to a total or to the filtered set.`;
+      const old = phost.querySelector(".scroll");
+      if (old) old.remove();
+      phost.append(buildProgTable(shown));
+    };
 
-    $("c-big").textContent = "";
-    $("c-big").append(tableNode([
-      { h: "output", n: true, v: r => bytes(r.out_len) },
-      { h: "intent", v: r => r.descr || "—" },
-      { h: "programs", v: r => r.progs },
-      { h: "secs", n: true, v: r => secsText(r.secs) },
-      { h: "command", v: r => r.cmd, cls: () => "wrap" },
-    ], biggest));
+    const filter = el("div", "filterbar");
+    const fin = el("input");
+    Object.assign(fin, { type: "search", placeholder: "filter programs…", value: progFilter });
+    fin.setAttribute("aria-label", "filter programs");
+    fin.oninput = () => { progFilter = fin.value; drawProgs() };
+    filter.append(fin);
+    phost.textContent = "";
+    phost.append(filter);
 
-    $("sub-fail").textContent = failed
-      ? `${failed} failed call(s). A failure is the tool reporting status "failed", not a non-zero exit code — the protocol carries no exit status.`
-      : `No failed calls recorded.`;
-    $("c-fail").textContent = "";
-    if (failures.length) {
-      $("c-fail").append(tableNode([
-        { h: "when", v: r => r.started.slice(5, 16) },
-        { h: "intent", v: r => r.descr || "—" },
-        { h: "programs", v: r => r.progs },
-        { h: "secs", n: true, v: r => secsText(r.secs) },
-        { h: "command", v: r => r.cmd, cls: () => "wrap" },
-      ], failures));
-    } else {
-      $("c-fail").append(el("p", "muted", "Nothing to show."));
+    function buildProgTable(rows) {
+      const box = el("div", "scroll");
+    // Widths are pinned left of the intent column so the bar sits against the name it belongs to
+    // and the leftover width goes to the one column that can spend it on information. Needs the
+    // fixed class: under auto layout these read as suggestions and the name column swallowed the
+    // slack, leaving a four-character program 460px from its own bar.
+    // px, not ch: these cells are 13px and box-sizing is border-box, so a ch estimate has to
+    // account for both the smaller em and 16px of padding — get it wrong under fixed layout and
+    // the ellipsis eats the number itself ("10,431" became "10,…").
+    const progTable = tableNode([
+      // 188px ≈ 28 characters. The top 30 names are all under 11, but the tail runs to 50 because
+      // the parser sometimes captures an argument (a kernel .rpm filename) as a program; sizing
+      // for the median would clip a third of the rows on the one field that identifies them.
+      { h: "program", w: "188px", v: r => r.prog },
+      { h: "", w: "170px", cls: () => "bar", v: r => barCell(Number(r.calls) / maxCalls) },
+      { h: "calls", w: "72px", n: true, v: r => Number(r.calls).toLocaleString() },
+      { h: "share", w: "62px", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
+      { h: "median", w: "72px", n: true, v: r => secsText(r.p50) },
+      { h: "output", w: "78px", n: true, v: r => bytes(r.out_med) },
+      { h: "failed", w: "66px", n: true, v: r => Number(r.failed) || "",
+        cls: r => Number(r.failed) ? "fail" : "" },
+      // Sorted by volume, the unreliable programs never rise to the top — a rate column is what
+      // surfaces them. Flagged at twice the page-wide rate, so the threshold moves with the data
+      // rather than being baked in, but only past a floor of ${RATE_MIN_CALLS} calls: one failure
+      // out of three is 33% and means nothing, and without the floor the tail flags 152 rows.
+      { h: "fail rate", w: "76px", n: true,
+        v: r => Number(r.calls) ? (r.failed / r.calls * 100).toFixed(1) + "%" : "—",
+        cls: r => Number(r.calls) >= RATE_MIN_CALLS && r.failed / r.calls >= 2 * failRate
+          ? "fail" : "" },
+      { h: "example intent", v: r => r.intent || "—" },
+    ], rows);
+      progTable.classList.add("fixed");
+      box.append(progTable);
+      return box;
     }
+    drawProgs();
+
+    const nhost = $("c-notable");
+    const drawNotable = () => {
+      const v = NOTABLE.find(x => x.key === notableView);
+      const rows = DATA[v.key];
+      $("sub-notable").textContent = v.note(t);
+      const old = nhost.querySelector("table, .muted");
+      if (old) old.remove();
+      // The sorted-on column leads, so whichever view you pick reads top-down by its own measure.
+      const lead = v.key === "biggest"
+        ? { h: "output", n: true, v: r => bytes(r.out_len) }
+        : v.key === "failures"
+          ? { h: "when", v: r => r.started.slice(5, 16) }
+          : { h: "secs", n: true, v: r => secsText(r.secs) };
+      nhost.append(rows.length
+        ? tableNode([
+            lead,
+            { h: "intent", v: r => r.descr || "—" },
+            { h: "programs", v: r => r.progs },
+            ...(v.key === "biggest" ? [{ h: "secs", n: true, v: r => secsText(r.secs) }]
+                                    : [{ h: "output", n: true, v: r => bytes(r.out_len) }]),
+            ...(v.key === "failures" ? []
+                : [{ h: "outcome", v: r => r.outcome,
+                     cls: r => r.outcome === "failed" ? "fail" : "" }]),
+            { h: "command", v: r => r.cmd, cls: () => "wrap" },
+          ], rows)
+        : el("p", "muted", "Nothing to show."));
+    };
+
+    nhost.textContent = "";
+    const picker = el("div", "filterbar");
+    const sel = el("select");
+    for (const v of NOTABLE) {
+      const o = el("option", null, v.label);
+      o.value = v.key;
+      if (v.key === notableView) o.selected = true;
+      sel.append(o);
+    }
+    sel.setAttribute("aria-label", "which notable calls");
+    sel.onchange = () => { notableView = sel.value; drawNotable() };
+    picker.append(el("span", "muted", "show"), sel);
+    nhost.append(picker);
+    drawNotable();
 
     const notes = $("notes");
     notes.textContent = "";
@@ -263,16 +425,19 @@
   async function load() {
     setStatus("loading…");
     try {
-      const [totals, byProg, recent, slowest, biggest, failures] = await Promise.all(
-        [Q.totals, Q.byProg, Q.recent, Q.slowest, Q.biggest, Q.failures].map(s => query(s)));
-      if (!totals.length || !Number(totals[0].calls)) {
+      // Keyed off Q rather than a hand-written list, so adding a query is one edit instead of
+      // four and the destructure cannot drift out of step with it.
+      const keys = Object.keys(Q);
+      const results = await Promise.all(keys.map(k => query(Q[k])));
+      const data = Object.fromEntries(keys.map((k, i) => [k, results[i]]));
+      if (!data.totals.length || !Number(data.totals[0].calls)) {
         setStatus("no Bash calls recorded yet");
         $("kpis").textContent = "";
         return;
       }
-      DATA = { totals, byProg, recent, slowest, biggest, failures };
+      DATA = data;
       paint();
-      setStatus(`${Number(totals[0].calls).toLocaleString()} Bash calls`);
+      setStatus(`${Number(data.totals[0].calls).toLocaleString()} Bash calls`);
     } catch (e) {
       setStatus(e.message, true);
     }
@@ -281,7 +446,6 @@
   mountHeader({
     current: "bash.html",
     onReload: load,
-    onToggleView: () => { if (DATA) paint() },
   });
   load();
 </script>

@@ -6,12 +6,28 @@
   --bg: #eff1f5; --panel: #e6e9ef; --ink: #4c4f69; --dim: #7c7f93;
   --line: #ccd0da; --user: #1e66f5; --bot: #40a02b; --think: #8839ef; --tool: #df8e1d; --err: #d20f39;
   --viz-series: #1e66f5; --viz-crit: #d20f39; --viz-track: #d5dae4;
+  /* Categorical slots in fixed order, from the dataviz skill's validated palette. A donut is a
+     stacked bar bent into a ring, so ring adjacency is the pairlist that matters: this order
+     passes CVD and normal-vision floors in both modes, wrap-around pair included. Assign in
+     order, never cycle, and never add a seventh — past six, a category belongs in the table. */
+  --cat-1: #2a78d6; --cat-2: #eb6834; --cat-3: #1baf7a;
+  --cat-4: #eda100; --cat-5: #e87ba4; --cat-6: #008300;
+  /* Sequential ramp for heatmap magnitude: one hue, light→dark, five steps. Starts at ramp step
+     300 rather than the palest step because anything lighter fails the 2:1 floor against the
+     panel and the lowest bucket would be invisible. */
+  --seq-1: #6da7ec; --seq-2: #3987e5; --seq-3: #256abf; --seq-4: #184f95; --seq-5: #0d366b;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #24273a; --panel: #1e2030; --ink: #cad3f5; --dim: #8087a2;
     --line: #363a4f; --user: #8aadf4; --bot: #a6da95; --think: #c6a0f6; --tool: #eed49f; --err: #ed8796;
     --viz-series: #4d82d8; --viz-crit: #d9576f; --viz-track: #2a2d42;
+    /* The same six hues stepped for the dark surface, not an automatic flip. */
+    --cat-1: #3987e5; --cat-2: #d95926; --cat-3: #199e70;
+    --cat-4: #c98500; --cat-5: #d55181; --cat-6: #008300;
+    /* Selected for the dark surface, not flipped: dim→bright, every other ramp step so the
+       lightness gaps stay above 0.06, and the dimmest still clears 2:1 against the panel. */
+    --seq-1: #1c5cab; --seq-2: #2a78d6; --seq-3: #5598e7; --seq-4: #86b6ef; --seq-5: #b7d3f6;
   }
 }
 
@@ -57,22 +73,71 @@ nav a[aria-current=page] { border-color: var(--user); color: var(--user) }
 .tile.hero .value { font-size: 52px; line-height: 1.05 }
 .tile .foot { color: var(--dim); font-size: 12px }
 
-/* Horizontal bars: 18px marks, 4px rounded data-end, square at the baseline. */
-.bars { display: grid; gap: 8px }
-.row { display: grid; grid-template-columns: 13ch 1fr auto; gap: 10px; align-items: center; cursor: default }
-.row .rl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px }
-.row .rt { height: 18px; display: flex; align-items: center }
-.row .fill { height: 18px; background: var(--viz-series); border-radius: 0 4px 4px 0; min-width: 2px }
-.row .rv { font-size: 13px; min-width: 5ch; text-align: right }
-.row:hover .fill { filter: brightness(1.12) }
+/* Time series: the svg is sized to the card in viewBox units, so it scales instead of
+   scrolling — a year of daily points fits the same box as a fortnight of them. */
+.chart { display: block; width: 100%; height: auto }
+.chart .grid { stroke: var(--line); stroke-width: 1 }
+.chart .series { fill: none; stroke-width: 1.75; stroke-linejoin: round }
+.chart .guide { stroke: var(--dim); stroke-width: 1; stroke-dasharray: 3 3 }
+.chart .hi { stroke: var(--panel); stroke-width: 1.5 }
+.chart text { font: 11px/1 Inconsolata, ui-monospace, monospace; fill: var(--dim) }
+.chart .ylab { text-anchor: end }
+.chart .xlab { text-anchor: middle }
 
-/* Columns: plot band and label band are separate rows so the axis is never clipped. */
-.cols { display: flex; gap: 6px; align-items: flex-end; height: 150px }
-.cols .cell { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; gap: 4px }
-.cols .cap { font-size: 12px; color: var(--dim) }
-.cols .bar { width: 100%; max-width: 24px; background: var(--viz-series); border-radius: 4px 4px 0 0; min-height: 2px }
-.xaxis { display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 5px; margin-top: 0 }
-.xaxis div { flex: 1; text-align: center; font-size: 11px; color: var(--dim) }
+.legend { display: flex; gap: 14px; font-size: 12px; color: var(--dim); margin-bottom: 4px }
+.legend span { display: flex; gap: 5px; align-items: center }
+.legend i { width: 10px; height: 10px; border-radius: 2px; flex: none }
+.legend.col { flex-direction: column; gap: 7px; margin: 0 }
+.legend.col > span { width: 100%; cursor: default }
+.legend.col .lb { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block }
+.legend.col .lv { color: var(--ink); display: block }
+
+/* Ring + legend stack; the caller puts the long tail in a table beside the pair. */
+.donutwrap { display: grid; gap: 14px; justify-items: center }
+.donut { width: 100%; max-width: 190px; height: auto; display: block }
+.donut text { text-anchor: middle; fill: var(--ink) }
+.donut .dc { font: 400 19px/1 Inconsolata, ui-monospace, monospace }
+.donut .dcf { font: 400 10px/1 Inconsolata, ui-monospace, monospace; fill: var(--dim) }
+.split { display: grid; grid-template-columns: minmax(210px, 260px) 1fr; gap: 26px; align-items: start }
+/* Wide variant: a heatmap needs more room for its own columns than a donut does. */
+.split.wide { grid-template-columns: minmax(420px, max-content) minmax(320px, 1fr) }
+/* Even variant: two comparable things, neither subordinate to the other. */
+.split.even { grid-template-columns: 1fr 1fr }
+.colcap { color: var(--dim); font-size: 12px; margin-bottom: 6px }
+
+/* A control that belongs to one card sits in the card, next to what it changes. */
+.filterbar { display: flex; gap: 8px; align-items: center; margin-bottom: 10px }
+.filterbar input, .filterbar select {
+  font: inherit; font-size: 13px; padding: 3px 7px; background: var(--bg); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 4px;
+}
+.filterbar input { width: 24ch }
+.filterbar input:focus, .filterbar select:focus { outline: none; border-color: var(--user) }
+.filterbar select { cursor: pointer }
+@media (max-width: 760px) { .split, .split.wide { grid-template-columns: 1fr } }
+
+/* Heatmap: a grid of cells on a regular pitch. Empty cells keep the track colour so the grid
+   still reads as a grid — an absent cell is "no work that week", which is information. */
+.heat { --heat-label: 18ch; --heat-cell: 46px; display: grid; gap: 12px; justify-items: start }
+.hgrid { display: grid; gap: 2px; align-items: center }
+.hgrid .hcol { font-size: 10px; color: var(--dim); text-align: center; white-space: nowrap; min-width: 0; overflow: hidden }
+.hgrid .hrow { font-size: 12px; padding-right: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.hgrid .hcell { height: 18px; border-radius: 2px; background: var(--viz-track); cursor: default }
+.hgrid .hcell:hover { outline: 1.5px solid var(--ink); outline-offset: 1px }
+.hkey { display: flex; gap: 12px; align-items: center; font-size: 11px; color: var(--dim); flex-wrap: wrap }
+.hkey span { display: flex; gap: 5px; align-items: center }
+.hkey i { width: 10px; height: 10px; border-radius: 2px; flex: none }
+.hkey .hklab { margin-right: 2px }
+@media (max-width: 760px) { .heat { --heat-label: 10ch } }
+
+/* A long table scrolls in place rather than adding thousands of pixels to the page. Not scoped
+   to details: the same box wraps tables that are always visible. */
+.scroll { max-height: 420px; overflow: auto }
+.scroll th { position: sticky; top: 0; background: var(--panel) }
+
+details summary { cursor: pointer; color: var(--dim); font-size: 12px; margin-top: 16px }
+details summary:hover { color: var(--user) }
+details .scroll { margin-top: 8px }
 
 /* Scoped to .card so browse.html's own tables keep their tighter rules. */
 .card table { border-collapse: collapse; width: 100% }
@@ -80,6 +145,17 @@ nav a[aria-current=page] { border-color: var(--user); color: var(--user) }
 .card th { color: var(--dim); font-weight: 400; font-size: 12px }
 .card td.n, .card th.n { text-align: right }
 .card td.wrap { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px }
+/* Fixed layout honours the per-column widths exactly instead of treating them as suggestions,
+   which is also what makes text-overflow work — so the last column truncates to whatever width
+   is left, at any window size, with the full text still in the DOM to select and copy. */
+.card table.fixed { table-layout: fixed }
+.card table.fixed td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.card td i.sw { display: block; width: 9px; height: 9px; border-radius: 2px }
+/* Inline magnitude bar. The column is pinned by the caller so lengths stay comparable. */
+.card .cbar { height: 9px; background: var(--viz-track); border-radius: 2px; overflow: hidden }
+.card .cfill { height: 9px; background: var(--viz-series); border-radius: 2px; min-width: 2px }
+.card tr:hover .cfill { filter: brightness(1.12) }
+.card th:empty, .card td:has(i.sw) { width: 9px; padding-right: 0 }
 .fail { color: var(--viz-crit) }
 
 #tip {
@@ -87,5 +163,5 @@ nav a[aria-current=page] { border-color: var(--user); color: var(--user) }
   background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
   padding: 5px 8px; font-size: 12px; white-space: pre; transition: opacity .08s;
 }
-footer { padding: 0 16px 24px; max-width: 1100px; color: var(--dim); font-size: 12px }
+footer { padding: 0 16px 24px; color: var(--dim); font-size: 12px }
 footer ul { margin: 6px 0 0; padding-left: 18px }

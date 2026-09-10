@@ -3,27 +3,27 @@
 <title>acp · stats</title>
 <link rel="stylesheet" href="app.css">
 <style>
-  /* Dashboard kit (cards, tiles, bars, columns, tooltip) lives in app.css. */
-  main { padding: 16px; display: grid; gap: 16px; max-width: 1100px }
+  /* Dashboard kit (cards, tiles, donut, line, heatmap, tables, tooltip) lives in app.css. */
+  main { padding: 16px; display: grid; gap: 16px }
 </style>
 
 <header></header>
 <main>
   <section class="card"><div class="kpis" id="kpis"></div></section>
   <section class="card">
-    <h2>Tool calls by tool</h2>
-    <p class="sub" id="sub-tools"></p>
-    <div id="c-tools"></div>
-  </section>
-  <section class="card">
     <h2>Tool calls per day</h2>
-    <p class="sub">First observation of each call, so replays don't double-count.</p>
+    <p class="sub" id="sub-days"></p>
     <div id="c-days"></div>
   </section>
   <section class="card">
-    <h2>Tool calls per session</h2>
+    <h2>Tool calls by session</h2>
     <p class="sub" id="sub-sessions"></p>
     <div id="c-sessions"></div>
+  </section>
+  <section class="card">
+    <h2>Tool calls by tool</h2>
+    <p class="sub" id="sub-tools"></p>
+    <div id="c-tools"></div>
   </section>
 </main>
 <footer id="notes"></footer>
@@ -48,6 +48,8 @@
       GROUP BY id HAVING id != ''
     )`;
 
+  const DAYS = 365;  // rolling window, the point past which the daily marks stop being readable
+
   const Q = {
     totals: `${CALLS}
       SELECT count() AS calls, uniqExact(sid) AS sessions, countIf(rank = 4) AS failed,
@@ -58,9 +60,14 @@
       SELECT name, any(kind) AS kind, count() AS calls, countIf(rank = 4) AS failed
       FROM (SELECT if(tool != '', tool, concat('(', kind, ')')) AS name, kind, rank FROM calls)
       GROUP BY name ORDER BY calls DESC`,
+    // Filled from the first day that has data, not from the window's start, so a short history
+    // doesn't render as a year of empty days. assumeNotNull: FILL FROM rejects a Nullable bound.
     byDay: `${CALLS}
       SELECT toDate(first_ts) AS day, count() AS calls, countIf(rank = 4) AS failed
-      FROM calls GROUP BY day ORDER BY day WITH FILL STEP 1`,
+      FROM calls WHERE first_ts >= today() - ${DAYS - 1}
+      GROUP BY day ORDER BY day
+      WITH FILL FROM assumeNotNull((SELECT greatest(toDate(min(first_ts)), today() - ${DAYS - 1})
+                                    FROM calls)) TO today() + 1 STEP 1`,
     bySession: `${CALLS}
       SELECT c.sid AS sid, count() AS calls, countIf(c.rank = 4) AS failed,
              min(c.first_ts) AS started, any(z.title) AS title
@@ -101,29 +108,74 @@
     );
     if (failed) k.querySelector(".tile:nth-child(4) .value").classList.add("fail");
 
-    // Tools
-    $("sub-tools").textContent =
-      `${byTool.length} distinct tools over ${total.toLocaleString()} calls. Tool name comes from ` +
-      `the agent's _meta.claudeCode.toolName; a bare (kind) is an agent that doesn't report one.`;
-    render("c-tools",
-      () => hbars(byTool, {
-        name: r => r.name, value: r => Number(r.calls),
-        tipText: r => `${r.name}\nkind: ${r.kind}\n${Number(r.calls).toLocaleString()} calls · ` +
-                      `${(r.calls / total * 100).toFixed(1)}%` + (Number(r.failed) ? `\n✕ ${r.failed} failed` : ""),
-      }),
-      () => tableNode([
-        { h: "tool", v: r => r.name }, { h: "kind", v: r => r.kind },
-        { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
-        { h: "share", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
-        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
-      ], byTool));
+    // Tools. Six segments is the ceiling for a ring, so the top five get one each and the tail
+    // becomes one slice. Colour is identity here, which means it cannot also carry failure — the
+    // failed column and the tooltip do that.
+    // Cut by share as well as rank: with one tool at 68% the fifth-place arc was 0.6%, thinner
+    // than the "other" slice beside it and too thin to read. byTool is sorted, so filtering the
+    // top five by share is the same as stopping at the first one too small to draw.
+    const SLICES = 5, MIN_SHARE = 0.015;
+    const head = byTool.slice(0, SLICES).filter(r => Number(r.calls) / total >= MIN_SHARE);
+    const tail = byTool.slice(head.length);
+    const slices = tail.length
+      ? [...head, {
+          name: `other (${tail.length} tools)`, kind: "mixed",
+          calls: tail.reduce((a, r) => a + Number(r.calls), 0),
+          failed: tail.reduce((a, r) => a + Number(r.failed), 0),
+        }]
+      : head;
+    const toolTip = r => `${r.name}\nkind: ${r.kind}\n${Number(r.calls).toLocaleString()} calls · ` +
+                         `${(r.calls / total * 100).toFixed(1)}%` +
+                         (Number(r.failed) ? `\n✕ ${r.failed} failed` : "");
 
-    // Days
+    $("sub-tools").textContent =
+      `${byTool.length} distinct tools over ${total.toLocaleString()} calls, by share. The ring is ` +
+      `the ${head.length} above ${(MIN_SHARE * 100).toFixed(1)}%; every tool is in the table. Tool ` +
+      `name comes from the agent's _meta.claudeCode.toolName, and a bare (kind) is an agent that ` +
+      `doesn't report one.`;
+    const thost = $("c-tools");
+    thost.textContent = "";
+    const tsplit = el("div", "split");
+    tsplit.append(
+      donut(slices, {
+        label: r => r.name, value: r => Number(r.calls), tipText: toolTip,
+        centre: compact(total), centreFoot: "tool calls",
+      }),
+      (() => {
+        const box = el("div", "scroll");
+        const rank = new Map(head.map((r, i) => [r.name, i]));
+        box.append(tableNode([
+          { h: "", v: r => {
+              const sw = el("i", "sw");
+              // head.length, not SLICES: the share threshold can shorten the head, and the ring
+              // gives "other" the slot right after it.
+              sw.style.background = CAT[rank.has(r.name) ? rank.get(r.name) : head.length];
+              return sw;
+            } },
+          { h: "tool", v: r => r.name }, { h: "kind", v: r => r.kind },
+          { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
+          { h: "share", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
+          { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+        ], byTool));
+        return box;
+      })(),
+    );
+    thost.append(tsplit);
+
+    // Days. Both series share one scale, so the failure line reads as the small share it is
+    // rather than being inflated onto an axis of its own.
+    $("sub-days").textContent =
+      `${byDay.length} days (rolling ${DAYS}-day window). First observation of each call, so ` +
+      `replays don't double-count. Hover for a day's counts.`;
     render("c-days",
-      () => columns(byDay, {
-        label: r => r.day.slice(5), value: r => Number(r.calls),
-        tipText: r => `${r.day}\n${Number(r.calls).toLocaleString()} calls` +
-                      (Number(r.failed) ? `\n✕ ${r.failed} failed` : ""),
+      host => lineChart(host, byDay, {
+        x: r => r.day,
+        series: [
+          { name: "tool calls", value: r => Number(r.calls), color: "var(--viz-series)", area: true },
+          { name: "failed", value: r => Number(r.failed), color: "var(--viz-crit)" },
+        ],
+        tipText: r => `${r.day}\n${Number(r.calls).toLocaleString()} calls\n` +
+                      `✕ ${Number(r.failed).toLocaleString()} failed`,
       }),
       () => tableNode([
         { h: "day", v: r => r.day },
@@ -131,20 +183,42 @@
         { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
       ], byDay));
 
-    // Sessions
-    $("sub-sessions").textContent = "Titled from Zed's own session titles where available.";
+    // Sessions. One bar per session was hundreds of rows nobody reads: what the numbers are
+    // actually asked is how lopsided the distribution is, which takes five figures and a
+    // drill-in for the cases worth naming. bySession arrives sorted by calls, descending.
     const label = r => (r.title || r.sid).slice(0, 40) || "(untitled)";
-    render("c-sessions",
-      () => hbars(bySession, {
-        name: label, value: r => Number(r.calls),
-        tipText: r => `${r.title || "(untitled)"}\n${r.sid}\nstarted ${r.started.slice(0, 16)}\n` +
-                      `${Number(r.calls).toLocaleString()} calls` + (Number(r.failed) ? `\n✕ ${r.failed} failed` : ""),
-      }),
-      () => tableNode([
-        { h: "session", v: label }, { h: "started", v: r => r.started.slice(0, 16) },
-        { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
-        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
-      ], bySession));
+    const percalls = bySession.map(r => Number(r.calls));
+    const asc = [...percalls].sort((a, b) => a - b);
+    const pctile = p => asc[Math.min(asc.length - 1, Math.floor(p * asc.length))];
+    let acc = 0, heads = 0;
+    while (acc < total / 2 && heads < percalls.length) acc += percalls[heads++];
+    const withFail = bySession.filter(r => Number(r.failed)).length;
+
+    $("sub-sessions").textContent =
+      `${bySession.length} sessions made at least one tool call. Titled from Zed's own session ` +
+      `titles where available.`;
+    const host = $("c-sessions");
+    host.textContent = "";
+    const stats = el("div", "kpis");
+    stats.append(
+      tileNode({ label: "Median session", value: pctile(0.5).toLocaleString(), foot: "tool calls" }),
+      tileNode({ label: "90th percentile", value: pctile(0.9).toLocaleString(),
+                 foot: "one session in ten is at least this busy" }),
+      tileNode({ label: "Busiest session", value: compact(percalls[0]), foot: label(bySession[0]) }),
+      tileNode({ label: "Half the calls", value: heads,
+                 foot: `sessions account for half of all ${compact(total)}` }),
+      tileNode({ label: "Sessions with a failure", value: `${(withFail / bySession.length * 100).toFixed(0)}%`,
+                 foot: `${withFail} of ${bySession.length}` }),
+    );
+    const drill = el("details");
+    const scroll = el("div", "scroll");
+    scroll.append(tableNode([
+      { h: "session", v: label }, { h: "started", v: r => r.started.slice(0, 16) },
+      { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
+      { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+    ], bySession));
+    drill.append(el("summary", null, `every session, busiest first`), scroll);
+    host.append(stats, drill);
 
     const notes = $("notes");
     notes.textContent = "";

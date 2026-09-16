@@ -4,9 +4,9 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Bumping vendored dependencies in a repository](https://some-natalie.dev/blog/bump-vendored-deps):  Another episode of jury-rigging Dependabot for the greater good when you can't _unvendor_ a dependecy.
 1. [Bumping dependencies inside Dockerfiles](https://some-natalie.dev/blog/bump-deps-in-dockerfiles):  A simple, scalable, adaptable pattern for handling hard-to-maintain dependencies
 1. [Building a yum repo in GitHub Pages](https://some-natalie.dev/blog/yum-repo-github-pages):  A very silly idea - running a yum repo with github pages and releases.
-1. [I guess we're all engineering managers now](https://some-natalie.dev/blog/all-managers-now):  Thoughts and feelings on returning to engineering, now with agentic AI all up in my business.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

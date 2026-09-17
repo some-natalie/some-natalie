@@ -11,7 +11,7 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 💼 Day to day, I work with
 
-- **Artificial intelligence in cybersecurity**
+- **Artificial intelligence in cybersecurity** - agentic workflows that triage alerts and review code for security problems, plus the less glamorous bits like isolation, ephemerality, and where a human still has to sign off.
 - **Container security** - [Container Escapes 101](https://some-natalie.dev/container-escapes-workshop/) and [a gentle intro to container security](https://some-natalie.dev/container-security)
 - **Kubernetes** - [kubernoodles](https://some-natalie.dev/kubernoodles), self-hosted GitHub Actions runners made for humans
 - **Linux** (mostly RHEL and Ubuntu these days) - [fedora-acs-override](https://github.com/some-natalie/fedora-acs-override)

@@ -93,7 +93,7 @@ services:
   # pi (and anything else OpenAI-compatible) talks to ollama through here, so the
   # traffic gets traced. pi has no exporter of its own.
   litellm:
-    image: ghcr.io/berriai/litellm:v1.101.0
+    image: ghcr.io/berriai/litellm:v1.102.0
     container_name: litellm
     restart: unless-stopped
     # Measured at ~900 MiB under load, not the ~560 MiB it idles at — 1 GiB left it at 88% and one

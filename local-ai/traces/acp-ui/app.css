@@ -163,5 +163,21 @@ details .scroll { margin-top: 8px }
   background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
   padding: 5px 8px; font-size: 12px; white-space: pre; transition: opacity .08s;
 }
+
+/* ---- secret triage, used by secrets.html ---- */
+.card tr.pick { cursor: pointer }
+.card tr.pick:hover td { background: var(--bg) }
+.card tr[aria-selected=true] td { background: var(--bg); box-shadow: inset 3px 0 var(--user) }
+.card code { font: inherit; color: var(--dim); overflow-wrap: anywhere }
+.card code.shown { color: var(--tool) }
+.val { display: inline-flex; gap: 8px; align-items: baseline }
+/* In a cell the button right-aligns so the column of them lines up; inline it just follows. */
+.card td .val { display: flex; justify-content: space-between }
+.reveal { padding: 0 5px; font-size: 11px; color: var(--dim); flex: none }
+
+/* A link out to Langfuse's own UI. Chrome next to the data, not the row's subject. */
+.card a.lf { color: var(--dim); text-decoration: none; font-size: 12px }
+.card a.lf:hover { color: var(--user); text-decoration: underline }
+
 footer { padding: 0 16px 24px; color: var(--dim); font-size: 12px }
 footer ul { margin: 6px 0 0; padding-left: 18px }

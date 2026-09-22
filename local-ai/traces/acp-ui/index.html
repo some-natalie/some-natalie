@@ -7,6 +7,8 @@
   h1 { margin: 0 0 4px; font-size: 20px; font-weight: 400 }
   /* Prose keeps a readable measure even though the card deck below it goes full width. */
   .lede { margin: 0 0 20px; max-width: 80ch; color: var(--dim); font-size: 13px }
+  /* Table names in the lede. The shared code rule is scoped to .card, so this page needs its own. */
+  .lede code { font: inherit; color: var(--ink) }
   /* auto-fill with a ceiling, not 1fr: on a wide screen a handful of nav cards should stay
      card-sized and add columns, not stretch to a third of the viewport each. */
   .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 340px)) }
@@ -24,33 +26,54 @@
 
 <header></header>
 <main>
-  <h1>acp tap</h1>
-  <p class="lede">Every JSON-RPC line between Zed and its ACP agents, teed into a local ClickHouse.</p>
+  <h1>agent traces</h1>
+  <p class="lede">Two sources in one ClickHouse. The ACP tap tees every JSON-RPC line between Zed
+    and its agents into <code>acp.messages</code>; Langfuse records the LLM side — prompts,
+    completions, tool spans, tokens and cost — in <code>default.events_full</code>. Browse reads
+    the wire; the dashboards read Langfuse.</p>
   <div class="cards">
-    <a href="browse.html"><strong>browse →</strong><span>Read sessions as transcripts, or drop to raw protocol messages.</span></a>
-    <a href="stats.html"><strong>stats →</strong><span>Tool call counts, per-day volume, failures and spend.</span></a>
+    <a href="browse.html"><strong>browse →</strong><span>Read sessions as transcripts, or drop to raw protocol messages. ACP wire.</span></a>
+    <a href="stats.html"><strong>stats →</strong><span>Tool call counts, per-day volume, failures, and model spend by token.</span></a>
+    <a href="bash.html"><strong>bash →</strong><span>Shell calls: duration, output read back, and which programs run.</span></a>
+    <a href="files.html"><strong>files →</strong><span>Which files were read, edited and written, and in which projects.</span></a>
+    <a href="secrets.html"><strong>secrets →</strong><span>Scan prompts and completions for credential material.</span></a>
   </div>
   <dl id="facts"></dl>
 </main>
 
 <script src="app.js"></script>
 <script>
+  // Facts for both sources side by side, so the landing page says what is actually recorded
+  // rather than describing only the wire. Two queries because they are different databases.
   async function load() {
     setStatus("loading…");
     try {
-      const rows = await query(`
-        SELECT count() AS msgs, uniqExact(session_id) AS sessions,
-               min(ts) AS from_ts, max(ts) AS to_ts, uniqExact(agent) AS agents
-        FROM acp.messages WHERE session_id != ''`);
-      const r = rows[0];
+      const [wire, lf] = await Promise.all([
+        query(`
+          SELECT count() AS msgs, uniqExact(session_id) AS sessions,
+                 min(ts) AS from_ts, max(ts) AS to_ts, uniqExact(agent) AS agents
+          FROM acp.messages WHERE session_id != ''`),
+        query(`
+          SELECT count() AS events, uniqExact(trace_id) AS traces,
+                 countIf(type = 'TOOL') AS tools, countIf(type = 'GENERATION') AS gens,
+                 round(sum(total_cost), 2) AS cost,
+                 min(start_time) AS from_ts, max(start_time) AS to_ts
+          FROM ${LF_TABLE} WHERE ${LF_LIVE}`),
+      ]);
+      const w = wire[0], l = lf[0];
       const dl = $("facts");
       dl.textContent = "";
       for (const [k, v] of [
-        ["messages", Number(r.msgs).toLocaleString()],
-        ["sessions", Number(r.sessions).toLocaleString()],
-        ["agents", Number(r.agents).toLocaleString()],
-        ["earliest", r.from_ts.slice(0, 16)],
-        ["latest", r.to_ts.slice(0, 16)],
+        ["acp messages", Number(w.msgs).toLocaleString()],
+        ["acp sessions", Number(w.sessions).toLocaleString()],
+        ["acp agents", Number(w.agents).toLocaleString()],
+        ["acp range", `${w.from_ts.slice(0, 10)} → ${w.to_ts.slice(0, 10)}`],
+        ["langfuse events", Number(l.events).toLocaleString()],
+        ["langfuse traces", Number(l.traces).toLocaleString()],
+        ["tool / generation spans",
+         `${Number(l.tools).toLocaleString()} / ${Number(l.gens).toLocaleString()}`],
+        ["model spend", Number(l.cost) ? money(l.cost) : "—"],
+        ["langfuse range", `${l.from_ts.slice(0, 10)} → ${l.to_ts.slice(0, 10)}`],
       ]) dl.append(el("dt", null, k), el("dd", null, v));
       setStatus("connected");
     } catch (e) {

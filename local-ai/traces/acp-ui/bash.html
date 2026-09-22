@@ -22,7 +22,7 @@
     <div id="c-spend"></div>
   </section>
   <section class="card">
-    <h2>Programs Bash invokes</h2>
+    <h2>Programs the shell invokes</h2>
     <p class="sub" id="sub-progs"></p>
     <div id="c-progs"></div>
   </section>
@@ -36,25 +36,27 @@
 
 <script src="app.js"></script>
 <script>
-  // Bash is the only 'execute' tool, but its opening tool_call carries rawInput:{} and the
-  // title "Terminal" — the command only shows up on a later tool_call_update. So collapse
-  // every row for a toolCallId and take the longest command seen.
+  // Shell calls from the Langfuse trace tables. Three things worth knowing:
   //
-  // Duration uses the FIRST completed/failed row, not the last: a session/load replay
-  // re-emits history days later, and max(ts) turned a 6-second call into 68 hours.
+  //   * A shell call is any tool event whose input carries a command. NOT a name match: 5,032 of
+  //     these have a name that is the command itself ("cd", "export", "grep"), so filtering on
+  //     name IN ('Bash','Terminal') loses a quarter of them. See app.js.
+  //   * Duration is end_time - start_time directly. Langfuse writes one span per call with both
+  //     ends on it, so there is no first-terminal-row logic and no replay to defend against.
+  //   * Output size is output_length, a column, rather than the length of a JSON field.
   //
-  // Programs are collected cumulatively: one call credits every distinct program it runs,
-  // so `sleep 30 && python3 -c '...'` counts under both sleep and python3.
+  // Programs are collected cumulatively: one call credits every distinct program it runs, so
+  // `sleep 30 && python3 -c '...'` counts under both sleep and python3.
   //
-  // Order matters, and each step exists because of a specific wrong answer. Splitting the
-  // raw text walked into quoted bodies and reported programs named "print", "select" and
-  // "password", so quoted spans are blanked first. Then whole VAR=value pairs go, or the
-  // value heads the segment and you get a program called "github.example.com". The
-  // value class stops at $( so PW=$(rg ...) still credits rg.
+  // Order matters, and each step exists because of a specific wrong answer. Splitting the raw
+  // text walks into quoted bodies and reports programs named "print", "select" and "password",
+  // so quoted spans are blanked first. Then whole VAR=value pairs go, or the value heads the
+  // segment and you get a program called "github.example.com". The value class stops at $( so
+  // PW=$(rg ...) still credits rg.
   //
   // Backslashes are doubled and quotes escaped because this lands inside a ClickHouse
-  // single-quoted string literal, which unescapes once before RE2 ever sees it. The
-  // backtick is \\x60 because a literal one cannot appear in a JS template literal.
+  // single-quoted string literal, which unescapes once before RE2 ever sees it. The backtick is
+  // \\x60 because a literal one cannot appear in a JS template literal.
   const HEREDOC = String.raw`<<[\\s\\S]*`;
   const QUOTED = String.raw`\'[^\']*\'|"[^"]*"`;
   const ASSIGN = String.raw`(^|[\\s;&|(])[A-Za-z_][A-Za-z0-9_]*=[^\\s;&|$(]*`;
@@ -65,11 +67,9 @@
                  'function','select','coproc','export','unset','set','local','return','shift','exit',
                  'eval','trap','break','continue','time','sudo','command'`;
 
-  // Above this a duration is a replay artifact rather than a slow command. Taking the FIRST
-  // terminal row already removes most of it, but a call that never finished in its own session
-  // still picks up a status from a history re-emitted days later — two of 21,790 claimed 130 and
-  // 13 hours. Those become unknown, like the calls that have no terminal row at all, so the
-  // worst-case figure and the slowest-calls table describe commands rather than bookkeeping.
+  // Above this a duration is a span left open rather than a slow command. The longest here is
+  // ~10.6 hours, which is an unclosed span, not a command — those become unknown, like calls with
+  // no end_time, so the worst-case figure and the slowest-calls table describe commands.
   const MAX_SECS = 3600;
   const RATE_MIN_CALLS = 20;  // below this a failure rate is noise, not a signal
 
@@ -95,28 +95,22 @@
       ...keys.map(k => [k, hit ? Number(hit[k]) : 0])]);
   });
 
-  const BASH = String.raw`
-    WITH bash AS (
-      SELECT JSONExtractString(raw,'params','update','toolCallId') AS id,
-             argMax(JSONExtractString(raw,'params','update','rawInput','command'),
-                    length(JSONExtractString(raw,'params','update','rawInput','command'))) AS cmd,
-             argMax(JSONExtractString(raw,'params','update','rawInput','description'),
-                    length(JSONExtractString(raw,'params','update','rawInput','description'))) AS descr,
-             max(indexOf(['pending','in_progress','completed','failed'],
-                 JSONExtractString(raw,'params','update','status'))) AS rank,
-             max(session_id) AS sid,
-             min(ts) AS started,
-             minIf(ts, JSONExtractString(raw,'params','update','status') IN ('completed','failed')) AS ended,
-             max(length(JSONExtractString(raw,'params','update','rawOutput'))) AS out_len
-      FROM acp.messages
-      WHERE JSONExtractString(raw,'params','update','sessionUpdate') IN ('tool_call','tool_call_update')
-      GROUP BY id
-      HAVING id != ''
-         AND max(JSONExtractString(raw,'params','update','_meta','claudeCode','toolName')) = 'Bash'
+  const SHELL = String.raw`
+    WITH raw_calls AS (
+      SELECT trace_id AS tid, span_id, start_time AS started,
+             JSONExtractString(input, 'command') AS cmd,
+             JSONExtractString(input, 'description') AS descr,
+             ${LF_FAILED} AS failed,
+             ${LF_STATUS} AS status,
+             output_length AS out_len,
+             service_name AS svc,
+             if(end_time IS NULL, NULL, ${LF_SECS}) AS secs_raw
+      FROM ${LF_TABLE}
+      WHERE ${LF_LIVE} AND type = 'TOOL' AND ${LF_SHELL}
+        AND JSONExtractString(input, 'command') != ''
     ),
     calls AS (
       SELECT *,
-             if(ended > started, dateDiff('millisecond', started, ended) / 1000, NULL) AS secs_raw,
              if(secs_raw <= ${MAX_SECS}, secs_raw, NULL) AS secs,
              replaceAll(replaceAll(cmd, '\n', ' ⏎ '), '\t', ' ') AS oneline,
              arrayDistinct(arrayFilter(x -> x != '' AND x NOT LIKE '-%' AND NOT match(x, '^[0-9]')
@@ -127,61 +121,60 @@
                    replaceRegexpAll(
                      replaceRegexpAll(replaceRegexpOne(cmd, '${HEREDOC}', ''), '${QUOTED}', ' '),
                      '${ASSIGN}', '\\1 '))))) AS progs
-      FROM bash
+      FROM raw_calls
     )`;
 
   const Q = {
-    totals: `${BASH}
+    totals: `${SHELL}
       -- No arrayJoin here: it would expand rows and inflate every other aggregate.
       -- The distinct-program count comes from the byProg row count instead.
-      SELECT count() AS calls, uniqExact(sid) AS sessions, countIf(rank = 4) AS failed,
-             countIf(rank < 3) AS unfinished, count(secs) AS timed,
+      SELECT count() AS calls, uniqExact(tid) AS traces, countIf(failed) AS failed,
+             countIf(status IN ('pending','in_progress')) AS unfinished, count(secs) AS timed,
              countIf(secs_raw > ${MAX_SECS}) AS overlong,
              round(avg(length(progs)), 1) AS avg_progs,
              round(median(secs), 1) AS p50, round(quantile(0.95)(secs), 1) AS p95,
              round(max(secs), 1) AS worst, sum(out_len) AS out_total, max(out_len) AS out_max,
              min(started) AS from_ts, max(started) AS to_ts
       FROM calls`,
-    byProg: `${BASH}
-      SELECT prog, count() AS calls, countIf(rank = 4) AS failed,
+    byProg: `${SHELL}
+      SELECT prog, count() AS calls, countIf(failed) AS failed,
              round(median(secs), 1) AS p50, round(median(out_len)) AS out_med,
              argMax(descr, length(descr)) AS intent
       FROM calls ARRAY JOIN progs AS prog
       GROUP BY prog ORDER BY calls DESC`,
-    durations: `${BASH}
+    durations: `${SHELL}
       SELECT ${bucketSQL("secs", DUR_BUCKETS)} AS bucket, count() AS calls
       FROM calls WHERE secs IS NOT NULL GROUP BY bucket`,
     // Bytes as well as calls: the two answer different questions and they disagree sharply here.
-    outputs: `${BASH}
+    outputs: `${SHELL}
       SELECT ${bucketSQL("out_len", OUT_BUCKETS)} AS bucket, count() AS calls, sum(out_len) AS bytes
       FROM calls GROUP BY bucket`,
-    perDay: `${BASH}
+    perDay: `${SHELL}
       SELECT toDate(started) AS day, sum(out_len) AS bytes, count() AS calls
       FROM calls GROUP BY day ORDER BY day
       WITH FILL FROM assumeNotNull((SELECT toDate(min(started)) FROM calls)) TO today() + 1 STEP 1`,
   };
 
-  // The three views were three cards with the same columns and, as it turns out, no rows in
-  // common — the top slowest, largest and failed calls are entirely different calls. So they
-  // become one card with a selector: same shape of question, and switching is a comparison
-  // rather than a re-sort. One query per view, all fetched up front, so switching is instant.
+  // The three views were three cards with the same columns and no rows in common — the top
+  // slowest, largest and failed calls are entirely different calls. So they become one card with
+  // a selector: same shape of question, and switching is a comparison rather than a re-sort.
   const NOTABLE = [
     { key: "slowest", label: "slowest", where: "secs IS NOT NULL", order: "secs DESC", limit: 12,
-      note: t => `Timed from the call appearing to its first completed or failed update. ` +
+      note: t => `Wall time from the span's start to its end. ` +
                  `${Number(t.timed).toLocaleString()} of ${Number(t.calls).toLocaleString()} ` +
-                 `calls are timeable.` },
+                 `calls have both ends recorded.` },
     { key: "biggest", label: "largest output", where: "out_len > 0", order: "out_len DESC", limit: 12,
       note: () => `Bytes of stdout the agent read back, largest first. This is context spend.` },
-    { key: "failures", label: "failures", where: "rank = 4", order: "started DESC", limit: 25,
+    { key: "failures", label: "failures", where: "failed", order: "started DESC", limit: 25,
       note: t => Number(t.failed)
-        ? `${Number(t.failed).toLocaleString()} failed call(s), newest first. A failure is the ` +
-          `tool reporting status "failed", not a non-zero exit code — the protocol carries no ` +
-          `exit status.`
+        ? `${Number(t.failed).toLocaleString()} failed call(s), newest first. A failure is the span ` +
+          `carrying level=ERROR, not a non-zero exit code — the exit status is not recorded.`
         : `No failed calls recorded.` },
   ];
-  const notableQuery = (v) => `${BASH}
+  const notableQuery = (v) => `${SHELL}
     SELECT started, round(secs, 1) AS secs, out_len, arrayStringConcat(progs, ' ') AS progs,
-           descr, substring(oneline, 1, 120) AS cmd, if(rank = 4, 'failed', 'completed') AS outcome
+           descr, substring(oneline, 1, 120) AS cmd, tid,
+           if(failed, 'failed', 'completed') AS outcome
     FROM calls WHERE ${v.where} ORDER BY ${v.order} LIMIT ${v.limit}`;
   Object.assign(Q, Object.fromEntries(NOTABLE.map(v => [v.key, notableQuery(v)])));
 
@@ -200,7 +193,7 @@
     const k = $("kpis");
     k.textContent = "";
     k.append(
-      tileNode({ label: "Bash calls", value: total.toLocaleString(), hero: true,
+      tileNode({ label: "Shell calls", value: total.toLocaleString(), hero: true,
                  foot: `${t.from_ts.slice(0, 10)} → ${t.to_ts.slice(0, 10)}` }),
       tileNode({ label: "Distinct programs", value: byProg.length.toLocaleString(),
                  foot: `${t.avg_progs} per call` +
@@ -210,7 +203,7 @@
                        (Number(t.overlong) ? ` · ${t.overlong} over ${MAX_SECS / 3600}h discarded` : "") }),
       tileNode({ label: "Output read back", value: bytes(t.out_total),
                  foot: `largest single call ${bytes(t.out_max)}` }),
-      tileNode({ label: "Failed", value: failed ? `✕ ${failed}` : "0",
+      tileNode({ label: "Failed", value: failed ? `✕ ${failed.toLocaleString()}` : "0",
                  foot: `${(failed / Math.max(total, 1) * 100).toFixed(1)}% of calls` }),
     );
     if (failed) k.querySelector(".tile:nth-child(5) .value").classList.add("fail");
@@ -240,8 +233,7 @@
         const wrap = el("div");
         wrap.append(el("div", "colcap", "call duration"));
         // Percentages summing to 100, not px: under fixed layout Chrome scales specified widths
-        // proportionally when they under-fill the table, which starved the one auto column — the
-        // bar cell came out 27px wide while a 96px label rendered at 283.
+        // proportionally when they under-fill the table, which starves the one auto column.
         const tb = tableNode([
           { h: "", w: "22%", v: r => r.bucket },
           { h: "", w: "46%", cls: () => "bar", v: r => barCell(r.calls / durMax) },
@@ -292,10 +284,9 @@
         { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
       ], perDay));
 
-    // One table with an inline bar rather than a chart plus a table behind a toggle. 644 programs
-    // is far past the count any chart reads well at, and the tail is nearly weightless — 525 of
-    // them run fewer than ten times — so the useful thing is every row reachable with the exact
-    // numbers beside it, not a truncated picture.
+    // One table with an inline bar rather than a chart plus a table behind a toggle. Hundreds of
+    // programs is far past the count any chart reads well at, and the tail is nearly weightless,
+    // so the useful thing is every row reachable with the exact numbers beside it.
     //
     // Bars are relative to the busiest program, not to the call total: a call credits every
     // program it runs, so the counts deliberately sum past 100% of calls.
@@ -330,35 +321,30 @@
 
     function buildProgTable(rows) {
       const box = el("div", "scroll");
-    // Widths are pinned left of the intent column so the bar sits against the name it belongs to
-    // and the leftover width goes to the one column that can spend it on information. Needs the
-    // fixed class: under auto layout these read as suggestions and the name column swallowed the
-    // slack, leaving a four-character program 460px from its own bar.
-    // px, not ch: these cells are 13px and box-sizing is border-box, so a ch estimate has to
-    // account for both the smaller em and 16px of padding — get it wrong under fixed layout and
-    // the ellipsis eats the number itself ("10,431" became "10,…").
-    const progTable = tableNode([
-      // 188px ≈ 28 characters. The top 30 names are all under 11, but the tail runs to 50 because
-      // the parser sometimes captures an argument (a kernel .rpm filename) as a program; sizing
-      // for the median would clip a third of the rows on the one field that identifies them.
-      { h: "program", w: "188px", v: r => r.prog },
-      { h: "", w: "170px", cls: () => "bar", v: r => barCell(Number(r.calls) / maxCalls) },
-      { h: "calls", w: "72px", n: true, v: r => Number(r.calls).toLocaleString() },
-      { h: "share", w: "62px", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
-      { h: "median", w: "72px", n: true, v: r => secsText(r.p50) },
-      { h: "output", w: "78px", n: true, v: r => bytes(r.out_med) },
-      { h: "failed", w: "66px", n: true, v: r => Number(r.failed) || "",
-        cls: r => Number(r.failed) ? "fail" : "" },
-      // Sorted by volume, the unreliable programs never rise to the top — a rate column is what
-      // surfaces them. Flagged at twice the page-wide rate, so the threshold moves with the data
-      // rather than being baked in, but only past a floor of ${RATE_MIN_CALLS} calls: one failure
-      // out of three is 33% and means nothing, and without the floor the tail flags 152 rows.
-      { h: "fail rate", w: "76px", n: true,
-        v: r => Number(r.calls) ? (r.failed / r.calls * 100).toFixed(1) + "%" : "—",
-        cls: r => Number(r.calls) >= RATE_MIN_CALLS && r.failed / r.calls >= 2 * failRate
-          ? "fail" : "" },
-      { h: "example intent", v: r => r.intent || "—" },
-    ], rows);
+      // Widths are pinned left of the intent column so the bar sits against the name it belongs
+      // to and the leftover width goes to the one column that can spend it on information. Needs
+      // the fixed class: under auto layout these read as suggestions and the name column swallows
+      // the slack. px, not ch: these cells are 13px with border-box padding, so a ch estimate
+      // has to account for both the smaller em and 16px of padding.
+      const progTable = tableNode([
+        { h: "program", w: "188px", v: r => r.prog },
+        { h: "", w: "170px", cls: () => "bar", v: r => barCell(Number(r.calls) / maxCalls) },
+        { h: "calls", w: "72px", n: true, v: r => Number(r.calls).toLocaleString() },
+        { h: "share", w: "62px", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
+        { h: "median", w: "72px", n: true, v: r => secsText(r.p50) },
+        { h: "output", w: "78px", n: true, v: r => bytes(r.out_med) },
+        { h: "failed", w: "66px", n: true, v: r => Number(r.failed) || "",
+          cls: r => Number(r.failed) ? "fail" : "" },
+        // Sorted by volume, the unreliable programs never rise to the top — a rate column is what
+        // surfaces them. Flagged at twice the page-wide rate, so the threshold moves with the data
+        // rather than being baked in, but only past a floor of ${RATE_MIN_CALLS} calls: one
+        // failure out of three is 33% and means nothing.
+        { h: "fail rate", w: "76px", n: true,
+          v: r => Number(r.calls) ? (r.failed / r.calls * 100).toFixed(1) + "%" : "—",
+          cls: r => Number(r.calls) >= RATE_MIN_CALLS && r.failed / r.calls >= 2 * failRate
+            ? "fail" : "" },
+        { h: "example intent", v: r => r.intent || "—" },
+      ], rows);
       progTable.classList.add("fixed");
       box.append(progTable);
       return box;
@@ -388,6 +374,7 @@
             ...(v.key === "failures" ? []
                 : [{ h: "outcome", v: r => r.outcome,
                      cls: r => r.outcome === "failed" ? "fail" : "" }]),
+            { h: "trace", v: r => lfTrace(r.tid) },
             { h: "command", v: r => r.cmd, cls: () => "wrap" },
           ], rows)
         : el("p", "muted", "Nothing to show."));
@@ -411,33 +398,37 @@
     const notes = $("notes");
     notes.textContent = "";
     notes.append(notesNode([
-      `One call = one toolCallId, first sighting only. Session replays re-emit history and would otherwise inflate every number here.`,
-      `The command lives on a tool_call_update, not the opening tool_call — that one carries an empty rawInput and the title "Terminal".`,
+      `A shell call is any tool event whose input carries a command — that is the test, not the event name. Langfuse's name field is the command itself on 5,032 of these rows (cd, export, grep, "git push 2>&1 | tail -2"), so matching on Bash or Terminal by name would drop a quarter of them.`,
+      `One row is one call. Langfuse writes each span once with both timestamps on it, so there is no replay to defend against and no need to hunt for a call's first terminal row — the duration is simply end minus start.`,
       `Programs are read off the command text cumulatively: quoted spans and heredoc bodies are blanked, VAR=value pairs dropped, then the remainder is split on ; && || | $( and newlines and the head of each piece is taken. A call is credited once per distinct program, so per-program counts overlap and do not sum to the call total.`,
       `Because quoted spans are blanked, an interpreter's payload is not inspected: python3 -c '...' counts as python3, and whatever it runs inside is invisible here.`,
       `Median duration and output are per call involving that program, not per program — a slow call with six programs is counted slow under all six.`,
-      `${(total - Number(t.timed)).toLocaleString()} call(s) have no measurable duration: they are known only from a replay, which states the final status without a pending phase.`,
-      `Output size is the length of rawOutput, which is stdout as a single string. There is no exit code in the protocol, so "failed" means the tool reported that status.`,
-      `The tap logs the session you are reading this from, so a live session inflates its own numbers.`,
+      Number(t.calls) - Number(t.timed) > 0
+        ? `${(Number(t.calls) - Number(t.timed)).toLocaleString()} call(s) have no usable duration: either the span has no end time or it exceeded ${MAX_SECS / 3600}h, which is a span left open rather than a slow command.`
+        : "",
+      `Output size is output_length, the bytes of stdout the agent read back. There is no exit code in the trace, so "failed" means the span carried level=ERROR.`,
+      out.at(-1).calls === 0
+        ? `Nothing lands in the largest output bucket: shell output here tops out near 30 KB, while other tool spans in the same table reach 640 KB. The bucket is kept so the scale does not silently change shape when a bigger call does arrive.`
+        : "",
+      `This traces the sessions you run through Zed and litellm, so a live session inflates its own numbers.`,
     ]));
   }
 
   async function load() {
     setStatus("loading…");
     try {
-      // Keyed off Q rather than a hand-written list, so adding a query is one edit instead of
-      // four and the destructure cannot drift out of step with it.
-      const keys = Object.keys(Q);
-      const results = await Promise.all(keys.map(k => query(Q[k])));
-      const data = Object.fromEntries(keys.map((k, i) => [k, results[i]]));
-      if (!data.totals.length || !Number(data.totals[0].calls)) {
-        setStatus("no Bash calls recorded yet");
+      const keys = ["totals", "byProg", "durations", "outputs", "perDay",
+                    ...NOTABLE.map(v => v.key)];
+      const rows = await Promise.all(keys.map(k => query(Q[k])));
+      DATA = Object.fromEntries(keys.map((k, i) => [k, rows[i]]));
+      if (!DATA.totals.length || !Number(DATA.totals[0].calls)) {
+        setStatus("no shell calls recorded yet");
         $("kpis").textContent = "";
         return;
       }
-      DATA = data;
       paint();
-      setStatus(`${Number(data.totals[0].calls).toLocaleString()} Bash calls`);
+      setStatus(`${Number(DATA.totals[0].calls).toLocaleString()} shell calls · ` +
+                `${DATA.byProg.length} programs`);
     } catch (e) {
       setStatus(e.message, true);
     }
@@ -446,6 +437,7 @@
   mountHeader({
     current: "bash.html",
     onReload: load,
+    onToggleView: () => { if (DATA) paint() },
   });
   load();
 </script>

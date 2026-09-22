@@ -1,0 +1,412 @@
+#!/usr/bin/python3
+"""Replay ACP traffic from ClickHouse into Langfuse as OTLP traces.
+
+One Langfuse trace per ACP session, named after the Zed thread title. Inside it, one
+generation per prompt turn (input, assembled agent reply, token usage from the turn's
+result) with that turn's tool calls as child spans. The 390k session/update
+notifications collapse into those spans rather than becoming spans of their own.
+
+A prompt's result carries neither params.sessionId nor result.sessionId, so acp.messages
+materializes an empty session_id for it and a plain session_id filter drops the half of
+each turn that holds stopReason and token usage. Those replies are pulled back in by
+(pid, JSON-RPC id): ids are UUIDs on recent agents but small integers on older ones, so
+the pid keeps same-numbered ids from other connections out.
+
+Trace and span ids are derived from session and tool call ids, so Langfuse upserts on
+re-run instead of duplicating. To undo a run, delete the traces in the Langfuse UI.
+
+Langfuse keys come from the sibling .env unless LANGFUSE_PUBLIC_KEY / LANGFUSE_SECRET_KEY
+/ LANGFUSE_HOST are set. ClickHouse comes from ~/.config/acp-tap/env, same as acp-tap.
+
+Usage:
+  ./acp-langfuse --self-check          assert the converter, no network, no disk
+  ./acp-langfuse --dry-run             report what would be sent
+  ./acp-langfuse --session <id>        one session, useful for eyeballing in the UI
+  ./acp-langfuse
+"""
+
+import base64
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+
+# acp-tap has no .py suffix, so import it by path rather than duplicating its config plumbing.
+_spec = importlib.util.spec_from_loader(
+    "acp_tap",
+    importlib.machinery.SourceFileLoader("acp_tap", os.path.join(_HERE, "acp-tap")),
+)
+acp_tap = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(acp_tap)
+
+FIELD_CAP = 100_000  # tool output runs to megabytes; Langfuse drops observations over 2MB
+BATCH_SPANS = 300
+BATCH_BYTES = 3_000_000
+
+
+def _clickhouse(sql):
+    """Run a query, yielding one parsed row per JSONEachRow line."""
+    cfg = acp_tap._config()
+    url = cfg.get("ACP_TAP_URL", "http://127.0.0.1:8123/")
+    req = urllib.request.Request(
+        url + "?" + urllib.parse.urlencode({"default_format": "JSONEachRow"}), data=sql.encode()
+    )
+    user, password = cfg.get("ACP_TAP_USER"), cfg.get("ACP_TAP_PASSWORD")
+    if user:
+        req.add_header(
+            "Authorization",
+            "Basic " + base64.b64encode(("%s:%s" % (user, password or "")).encode()).decode(),
+        )
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        for line in resp:
+            line = line.strip()
+            if line:
+                yield json.loads(line)
+
+
+def _langfuse_auth():
+    public, secret = os.environ.get("LANGFUSE_PUBLIC_KEY"), os.environ.get("LANGFUSE_SECRET_KEY")
+    if not (public and secret):
+        env = {}
+        try:
+            with open(os.path.join(_HERE, ".env")) as fh:
+                for line in fh:
+                    if line.startswith("LANGFUSE_INIT_PROJECT_") and "=" in line:
+                        key, value = line.strip().split("=", 1)
+                        env[key] = value
+        except OSError:
+            pass
+        public = public or env.get("LANGFUSE_INIT_PROJECT_PUBLIC_KEY")
+        secret = secret or env.get("LANGFUSE_INIT_PROJECT_SECRET_KEY")
+    if not (public and secret):
+        sys.exit("no Langfuse keys: set LANGFUSE_PUBLIC_KEY and LANGFUSE_SECRET_KEY")
+    host = os.environ.get("LANGFUSE_HOST", "http://127.0.0.1:3000").rstrip("/")
+    return host + "/api/public/otel/v1/traces", base64.b64encode(
+        ("%s:%s" % (public, secret)).encode()
+    ).decode()
+
+
+def _id(*parts, length=32):
+    return hashlib.sha256(":".join(parts).encode()).hexdigest()[:length]
+
+
+def _clip(value):
+    if not isinstance(value, str):
+        value = json.dumps(value, ensure_ascii=False)
+    return value if len(value) <= FIELD_CAP else value[:FIELD_CAP] + "…[clipped]"
+
+
+def _attrs(pairs):
+    out = []
+    for key, value in pairs.items():
+        if value is None:
+            continue
+        if isinstance(value, bool):
+            out.append({"key": key, "value": {"boolValue": value}})
+        elif isinstance(value, int):
+            out.append({"key": key, "value": {"intValue": str(value)}})
+        elif isinstance(value, list):
+            out.append({"key": key, "value": {"arrayValue": {"values": [{"stringValue": str(v)} for v in value]}}})
+        else:
+            out.append({"key": key, "value": {"stringValue": _clip(value)}})
+    return out
+
+
+def _span(trace_id, span_id, name, start_ms, end_ms, attrs, parent=None, error=None):
+    span = {
+        "traceId": trace_id,
+        "spanId": span_id,
+        "name": name,
+        "kind": 1,
+        "startTimeUnixNano": str(int(start_ms) * 1_000_000),
+        "endTimeUnixNano": str(int(end_ms) * 1_000_000),
+        "attributes": _attrs(attrs),
+    }
+    if parent:
+        span["parentSpanId"] = parent
+    if error:
+        span["status"] = {"code": 2, "message": _clip(error)[:400]}
+    return span
+
+
+def session_spans(session_id, title, rows):
+    """Convert one session's wire messages into OTLP spans, innermost last.
+
+    Rows are ts-ordered and may include replies whose session_id is empty; only rows
+    tagged with this session set the trace's own start and end.
+    """
+    trace_id = _id("acp", session_id)
+    root_id = _id("acp", session_id, "root", length=16)
+    spans, turn, tools, turn_n = [], None, {}, 0
+    tagged = [row["ms"] for row in rows if row.get("session_id") == session_id] or [
+        row["ms"] for row in rows
+    ] or [0]
+    first_ms, last_ms = min(tagged), max(tagged)
+
+    def close_turn(end_ms, result=None):
+        if turn is None:
+            return
+        usage = (result or {}).get("usage") or {}
+        spans.append(
+            _span(
+                trace_id,
+                turn["span_id"],
+                "prompt",
+                turn["start_ms"],
+                end_ms,
+                {
+                    "langfuse.observation.type": "generation",
+                    "langfuse.observation.input": turn["prompt"] or "",
+                    "langfuse.observation.output": "".join(turn["reply"]),
+                    "langfuse.observation.metadata.stop_reason": (result or {}).get("stopReason"),
+                    "langfuse.observation.metadata.thinking": "".join(turn["thinking"]) or None,
+                    "langfuse.observation.usage_details": json.dumps(
+                        {
+                            "input": usage.get("inputTokens", 0),
+                            "output": usage.get("outputTokens", 0),
+                            "cache_read_input_tokens": usage.get("cachedReadTokens", 0),
+                            "cache_creation_input_tokens": usage.get("cachedWriteTokens", 0),
+                            "total": usage.get("totalTokens", 0),
+                        }
+                    )
+                    if usage
+                    else None,
+                },
+                parent=root_id,
+            )
+        )
+
+    for row in rows:
+        msg = json.loads(row["raw"])
+        method, params = msg.get("method"), msg.get("params") or {}
+        if method == "session/prompt":
+            close_turn(row["ms"])
+            turn_n += 1
+            turn = {
+                "span_id": _id("acp", session_id, "turn", str(turn_n), length=16),
+                "start_ms": row["ms"],
+                "prompt": "".join(
+                    part.get("text", "") for part in params.get("prompt", []) if isinstance(part, dict)
+                ),
+                "reply": [],
+                "thinking": [],
+                "req_id": json.dumps(msg.get("id")),
+                "pid": row.get("pid"),
+            }
+        elif method == "session/update":
+            update = params.get("update") or {}
+            kind = update.get("sessionUpdate")
+            if kind == "agent_message_chunk" and turn:
+                turn["reply"].append((update.get("content") or {}).get("text", ""))
+            elif kind == "agent_thought_chunk" and turn:
+                turn["thinking"].append((update.get("content") or {}).get("text", ""))
+            elif kind == "tool_call":
+                call_id = update.get("toolCallId") or _id(session_id, str(row["ms"]), length=16)
+                tools[call_id] = {
+                    "span_id": _id("acp", session_id, "tool", call_id, length=16),
+                    "name": update.get("title") or update.get("kind") or "tool",
+                    "start_ms": row["ms"],
+                    "end_ms": row["ms"],
+                    "input": update.get("rawInput"),
+                    "output": None,
+                    "status": update.get("status"),
+                    "parent": turn["span_id"] if turn else root_id,
+                }
+            elif kind == "tool_call_update":
+                call = tools.get(update.get("toolCallId"))
+                if call:
+                    call["end_ms"] = row["ms"]
+                    call["status"] = update.get("status") or call["status"]
+                    if update.get("rawOutput") is not None:
+                        call["output"] = update["rawOutput"]
+        elif (
+            "result" in msg
+            and turn
+            and json.dumps(msg.get("id")) == turn["req_id"]
+            and row.get("pid") == turn["pid"]
+        ):
+            close_turn(row["ms"], msg["result"])
+            last_ms = max(last_ms, row["ms"])
+            turn = None
+
+    close_turn(last_ms)
+    for call in tools.values():
+        failed = call["status"] == "failed"
+        spans.append(
+            _span(
+                trace_id,
+                call["span_id"],
+                call["name"],
+                call["start_ms"],
+                call["end_ms"],
+                {
+                    "langfuse.observation.type": "tool",
+                    "langfuse.observation.input": call["input"],
+                    "langfuse.observation.output": call["output"],
+                    "langfuse.observation.level": "ERROR" if failed else None,
+                    "langfuse.observation.metadata.status": call["status"],
+                },
+                parent=call["parent"],
+                error="tool call failed" if failed else None,
+            )
+        )
+    spans.insert(
+        0,
+        _span(
+            trace_id,
+            root_id,
+            title or ("acp " + session_id[:8]),
+            first_ms,
+            last_ms,
+            {
+                "langfuse.observation.type": "agent",
+                "langfuse.trace.name": title or ("acp " + session_id[:8]),
+                "session.id": session_id,
+                "user.id": rows[0]["agent"] if rows else "acp",
+                "langfuse.trace.tags": ["zed", "acp"],
+                "langfuse.trace.metadata.wire_messages": len(rows),
+            },
+        ),
+    )
+    return spans
+
+
+def _post(endpoint, auth, spans):
+    payload = json.dumps(
+        {
+            "resourceSpans": [
+                {
+                    "resource": {"attributes": _attrs({"service.name": "zed-acp"})},
+                    "scopeSpans": [{"scope": {"name": "acp-langfuse"}, "spans": spans}],
+                }
+            ]
+        }
+    ).encode()
+    req = urllib.request.Request(endpoint, data=payload)
+    req.add_header("Content-Type", "application/json")
+    req.add_header("Authorization", "Basic " + auth)
+    req.add_header("x-langfuse-ingestion-version", "4")
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            return resp.status
+    except urllib.error.HTTPError as err:
+        sys.exit("langfuse rejected %d spans: HTTP %s %s" % (len(spans), err.code, err.read()[:300]))
+
+
+def _self_check():
+    def row(ms, body, session="s1", pid=100):
+        return {"ms": ms, "agent": "claude-acp", "pid": pid, "session_id": session, "raw": json.dumps(body)}
+
+    def update(**fields):
+        return {"method": "session/update", "params": {"sessionId": "s1", "update": fields}}
+
+    rows = [
+        row(1000, {"id": 1, "method": "session/prompt",
+                   "params": {"sessionId": "s1", "prompt": [{"type": "text", "text": "hi"}]}}),
+        row(1100, update(sessionUpdate="tool_call", toolCallId="t1", title="Read",
+                         rawInput={"file_path": "/tmp/x"}, status="pending")),
+        row(1200, update(sessionUpdate="tool_call_update", toolCallId="t1", status="completed",
+                         rawOutput="file body")),
+        row(1300, update(sessionUpdate="agent_message_chunk", content={"type": "text", "text": "hello "})),
+        row(1400, update(sessionUpdate="agent_message_chunk", content={"type": "text", "text": "there"})),
+        # the reply carries no sessionId, so it arrives tagged with an empty session
+        row(1500, {"id": 1, "result": {"stopReason": "end_turn",
+                                       "usage": {"inputTokens": 3, "outputTokens": 5, "totalTokens": 8}}},
+            session=""),
+    ]
+    spans = session_spans("s1", "My thread", rows)
+    root, turn, tool = spans[0], spans[1], spans[2]
+    attrs = lambda span: {a["key"]: list(a["value"].values())[0] for a in span["attributes"]}
+
+    assert [s["name"] for s in spans] == ["My thread", "prompt", "Read"], spans
+    assert root["startTimeUnixNano"] == "1000000000" and root["endTimeUnixNano"] == "1500000000"
+    assert turn["parentSpanId"] == root["spanId"] and tool["parentSpanId"] == turn["spanId"]
+    assert attrs(turn)["langfuse.observation.output"] == "hello there"
+    assert attrs(turn)["langfuse.observation.input"] == "hi"
+    assert json.loads(attrs(turn)["langfuse.observation.usage_details"])["total"] == 8
+    assert attrs(turn)["langfuse.observation.metadata.stop_reason"] == "end_turn"
+    assert attrs(tool)["langfuse.observation.output"] == "file body"
+    assert tool["endTimeUnixNano"] == "1200000000"
+    assert attrs(root)["session.id"] == "s1"
+    # the untagged reply closes the turn and extends the trace past the last tagged row
+    assert turn["endTimeUnixNano"] == "1500000000"
+
+    # same id from another connection must not close this turn
+    other_pid = list(rows)
+    other_pid[5] = dict(rows[5], pid=999)
+    assert attrs(session_spans("s1", "t", other_pid)[1]).get("langfuse.observation.metadata.stop_reason") is None
+
+    # a turn with no matching result still closes, and tool calls outside a turn hang off the root
+    orphan = session_spans("s2", None, [rows[1], rows[2]])
+    assert orphan[0]["name"] == "acp s2" and orphan[1]["parentSpanId"] == orphan[0]["spanId"], orphan
+    assert len(session_spans("s3", None, [rows[0]])) == 2
+
+    # deterministic ids, so re-runs upsert rather than duplicate
+    assert session_spans("s1", "My thread", rows)[1]["spanId"] == turn["spanId"]
+    print("self-check ok")
+
+
+def main():
+    args = sys.argv[1:]
+    if "--self-check" in args:
+        return _self_check()
+    dry_run = "--dry-run" in args
+    only = args[args.index("--session") + 1] if "--session" in args else None
+
+    titles = {
+        row["session_id"]: row["title"]
+        for row in _clickhouse(
+            "SELECT session_id, argMax(title, ts) AS title FROM acp.zed_titles GROUP BY session_id"
+        )
+    }
+    where = "session_id != ''" + (" AND session_id = '%s'" % only.replace("'", "") if only else "")
+    sessions = [
+        row["session_id"]
+        for row in _clickhouse(
+            "SELECT session_id, min(ts) AS first FROM acp.messages WHERE %s GROUP BY session_id ORDER BY first"
+            % where
+        )
+    ]
+    endpoint, auth = (None, None) if dry_run else _langfuse_auth()
+
+    batch, batch_bytes, sent = [], 0, 0
+    for n, session_id in enumerate(sessions, 1):
+        safe = session_id.replace("'", "")
+        rows = list(
+            _clickhouse(
+                "SELECT toUnixTimestamp64Milli(ts) AS ms, agent, pid, session_id, raw FROM acp.messages "
+                "WHERE session_id = '{sid}' OR (session_id = '' AND dir = 'agent' "
+                "  AND pid IN (SELECT pid FROM acp.messages WHERE session_id = '{sid}') "
+                "  AND msg_id IN (SELECT msg_id FROM acp.messages "
+                "                 WHERE session_id = '{sid}' AND dir = 'client' AND msg_id != '')) "
+                "ORDER BY ts".format(sid=safe)
+            )
+        )
+        spans = session_spans(session_id, titles.get(session_id), rows)
+        print("%4d/%d %s  %5d messages -> %3d spans  %s"
+              % (n, len(sessions), session_id[:8], len(rows), len(spans), titles.get(session_id, "")[:48]))
+        if dry_run:
+            sent += len(spans)
+            continue
+        for span in spans:
+            batch.append(span)
+            batch_bytes += len(json.dumps(span))
+            if len(batch) >= BATCH_SPANS or batch_bytes >= BATCH_BYTES:
+                _post(endpoint, auth, batch)
+                sent += len(batch)
+                batch, batch_bytes = [], 0
+    if batch:
+        _post(endpoint, auth, batch)
+        sent += len(batch)
+    print("%s %d spans across %d sessions" % ("would send" if dry_run else "sent", sent, len(sessions)))
+
+
+if __name__ == "__main__":
+    main()

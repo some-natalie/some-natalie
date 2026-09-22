@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- Per-query memory limits for the acp profile.
+
+     Why this file exists: the container's cgroup limit stops ClickHouse sizing its budget off total
+     host RAM, but on its own it only moves the wall. A single unbounded query can still claim the
+     whole server budget and be killed at the limit, which is the "(total) memory limit exceeded ...
+     selected to stop by OvercommitTracker" failure — the tracker picks a victim, and it is not
+     necessarily the query that caused the pressure.
+
+     The numbers come from system.query_log, not from taste. The 99th percentile of every query
+     these dashboards issue is 140 MiB; the one exception was the secrets scan, which unrolled 32
+     regexes into a single extractAll over 1.8 GiB of prompt text and needed ~5 GiB. That scan is
+     now chunked in the page (SCAN_CHUNK in secrets.html), so it runs in batches of 12 patterns and
+     peaks well under this ceiling instead of setting it.
+
+     2 GiB is therefore a generous ceiling on a runaway rather than a number anything needs, and it
+     leaves room for two heavy queries at once inside the container's 4 GiB.
+
+     One trap worth naming: max_memory_usage_for_user applies across a page's concurrent panels, so
+     setting it *below* max_memory_usage makes it the real limit and the single heaviest query can
+     never run. It has to stay above.  -->
+<clickhouse>
+    <profiles>
+        <default>
+            <max_memory_usage>2000000000</max_memory_usage>
+            <!-- Above max_memory_usage, per the trap above: a page fires several panels at once. -->
+            <max_memory_usage_for_user>3000000000</max_memory_usage_for_user>
+
+            <!-- Spill rather than die, for the operators that can: GROUP BY and ORDER BY. Set below
+                 the per-query cap so the spill starts while there is headroom to merge what was
+                 written out. This cannot rescue extractAll(), which materialises its matches — that
+                 is why the scan is chunked in the page instead of relying on spilling here. -->
+            <max_bytes_before_external_group_by>1000000000</max_bytes_before_external_group_by>
+            <max_bytes_before_external_sort>1000000000</max_bytes_before_external_sort>
+
+            <!-- Wait briefly for another query to finish instead of being killed the instant the
+                 ceiling is touched. -->
+            <memory_usage_overcommit_max_wait_microseconds>2000000</memory_usage_overcommit_max_wait_microseconds>
+        </default>
+    </profiles>
+</clickhouse>

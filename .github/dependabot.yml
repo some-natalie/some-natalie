@@ -22,6 +22,14 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "docker-compose"
-    directory: "local-ai/open-webui"
+    directory: "/local-ai/open-webui/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "docker-compose"
+    directory: "/local-ai/traces/"
+    schedule:
+      interval: "weekly"
+    groups:
+      traces-stack:
+        patterns:
+          - "*"

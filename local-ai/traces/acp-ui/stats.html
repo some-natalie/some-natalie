@@ -16,9 +16,14 @@
     <div id="c-days"></div>
   </section>
   <section class="card">
-    <h2>Tool calls by session</h2>
-    <p class="sub" id="sub-sessions"></p>
-    <div id="c-sessions"></div>
+    <h2>Model spend</h2>
+    <p class="sub" id="sub-models"></p>
+    <div id="c-models"></div>
+  </section>
+  <section class="card">
+    <h2>Tool calls by trace</h2>
+    <p class="sub" id="sub-traces"></p>
+    <div id="c-traces"></div>
   </section>
   <section class="card">
     <h2>Tool calls by tool</h2>
@@ -30,109 +35,109 @@
 
 <script src="app.js"></script>
 <script>
-  // One tool call = one toolCallId. Resuming a session via session/load re-emits its
-  // whole history, so raw tool_call rows overcount; min(ts) keeps the first sighting.
-  // Status only moves forward in the protocol, so rank by precedence rather than by
-  // timestamp — a replayed "pending" arrives *after* the real "completed".
-  const CALLS = `
-    WITH calls AS (
-      SELECT JSONExtractString(raw,'params','update','toolCallId') AS id,
-             max(JSONExtractString(raw,'params','update','_meta','claudeCode','toolName')) AS tool,
-             max(JSONExtractString(raw,'params','update','kind')) AS kind,
-             max(session_id) AS sid,
-             min(ts) AS first_ts,
-             max(indexOf(['pending','in_progress','completed','failed'],
-                 JSONExtractString(raw,'params','update','status'))) AS rank
-      FROM acp.messages
-      WHERE JSONExtractString(raw,'params','update','sessionUpdate') IN ('tool_call','tool_call_update')
-      GROUP BY id HAVING id != ''
-    )`;
+  // Tool-call volume, failures and model spend, from the Langfuse trace tables. Two things to
+  // know, both detailed in app.js: one row is one call (Langfuse writes each span once, so
+  // there is nothing to de-duplicate), and there is no session id, so a trace is the unit of work.
+  //
+  // The tool name needs recovering rather than reading. `name` carries the command or path
+  // appended on a third of the rows, so the family comes from the input payload and the label
+  // from the first token — "Edit some-natalie/.../app.css" is an Edit, and "git push 2>&1" is a
+  // shell call whose name happens to be its own command.
+  const TOOL = `
+    multiIf(${LF_SHELL}, 'shell',
+            ${LF_FILE}, splitByChar(' ', name)[1],
+            splitByChar(' ', name)[1])`;
 
   const DAYS = 365;  // rolling window, the point past which the daily marks stop being readable
 
+  const CALLS = lfCalls({ extra: `${TOOL} AS tool` });
+
   const Q = {
     totals: `${CALLS}
-      SELECT count() AS calls, uniqExact(sid) AS sessions, countIf(rank = 4) AS failed,
-             countIf(rank < 3) AS unfinished, min(first_ts) AS from_ts, max(first_ts) AS to_ts,
-             uniqExact(toDate(first_ts)) AS days
+      SELECT count() AS calls, uniqExact(tid) AS traces, countIf(failed) AS failed,
+             countIf(status IN ('pending','in_progress')) AS unfinished,
+             min(started) AS from_ts, max(started) AS to_ts,
+             uniqExact(toDate(started)) AS days
       FROM calls`,
     byTool: `${CALLS}
-      SELECT name, any(kind) AS kind, count() AS calls, countIf(rank = 4) AS failed
-      FROM (SELECT if(tool != '', tool, concat('(', kind, ')')) AS name, kind, rank FROM calls)
-      GROUP BY name ORDER BY calls DESC`,
-    // Filled from the first day that has data, not from the window's start, so a short history
-    // doesn't render as a year of empty days. assumeNotNull: FILL FROM rejects a Nullable bound.
+      SELECT tool AS name, count() AS calls, countIf(failed) AS failed,
+             uniqExact(tid) AS traces
+      FROM calls GROUP BY name ORDER BY calls DESC`,
+    // Filled from the first day with data, not the window's start, so a short history doesn't
+    // render as a year of empty days. assumeNotNull: FILL FROM rejects a Nullable bound.
     byDay: `${CALLS}
-      SELECT toDate(first_ts) AS day, count() AS calls, countIf(rank = 4) AS failed
-      FROM calls WHERE first_ts >= today() - ${DAYS - 1}
+      SELECT toDate(started) AS day, count() AS calls, countIf(failed) AS failed
+      FROM calls WHERE started >= today() - ${DAYS - 1}
       GROUP BY day ORDER BY day
-      WITH FILL FROM assumeNotNull((SELECT greatest(toDate(min(first_ts)), today() - ${DAYS - 1})
+      WITH FILL FROM assumeNotNull((SELECT greatest(toDate(min(started)), today() - ${DAYS - 1})
                                     FROM calls)) TO today() + 1 STEP 1`,
-    bySession: `${CALLS}
-      SELECT c.sid AS sid, count() AS calls, countIf(c.rank = 4) AS failed,
-             min(c.first_ts) AS started, any(z.title) AS title
-      FROM calls AS c
-      LEFT JOIN (SELECT session_id, argMax(title, ts) AS title FROM acp.zed_titles GROUP BY session_id) AS z
-        ON z.session_id = c.sid
-      GROUP BY sid ORDER BY calls DESC`,
-    cost: `SELECT sum(c) AS cost FROM (
-             SELECT session_id, max(JSONExtractFloat(raw,'params','update','cost','amount')) AS c
-             FROM acp.messages
-             WHERE JSONExtractString(raw,'params','update','sessionUpdate') = 'usage_update'
-             GROUP BY session_id)`,
+    byTrace: `${CALLS}
+      SELECT tid, count() AS calls, countIf(failed) AS failed, min(started) AS started,
+             any(svc) AS svc
+      FROM calls GROUP BY tid ORDER BY calls DESC`,
+    // Cost and tokens are only on GENERATION events, so this is its own query rather than a
+    // column on the tool rollup. Real token accounting, unlike the ACP tap's per-session total.
+    spend: `
+      SELECT if(provided_model_name = '', '(unnamed)', provided_model_name) AS model,
+             count() AS gens, round(sum(total_cost), 4) AS cost,
+             sum(usage_details['input']) AS tok_in, sum(usage_details['output']) AS tok_out,
+             uniqExact(trace_id) AS traces, max(start_time) AS last_ts
+      FROM ${LF_TABLE}
+      WHERE ${LF_LIVE} AND type = 'GENERATION'
+      GROUP BY model ORDER BY cost DESC, gens DESC`,
   };
 
   let DATA = null;
 
   function paint() {
-    const { totals, byTool, byDay, bySession, cost } = DATA;
+    const { totals, byTool, byDay, byTrace, spend } = DATA;
     const t = totals[0];
     const total = Number(t.calls);
     const failed = Number(t.failed);
-    const rate = total ? (failed / total * 100) : 0;
+    const cost = spend.reduce((a, r) => a + Number(r.cost), 0);
+    const tokIn = spend.reduce((a, r) => a + Number(r.tok_in), 0);
+    const tokOut = spend.reduce((a, r) => a + Number(r.tok_out), 0);
 
-    // KPIs
     const k = $("kpis");
     k.textContent = "";
     k.append(
       tileNode({ label: "Tool calls", value: total.toLocaleString(), hero: true,
                  foot: `${t.from_ts.slice(0, 10)} → ${t.to_ts.slice(0, 10)}` }),
-      tileNode({ label: "Sessions with tool calls", value: Number(t.sessions).toLocaleString(),
-                 foot: `${(total / Math.max(Number(t.sessions), 1)).toFixed(0)} calls per session` }),
+      tileNode({ label: "Traces with tool calls", value: Number(t.traces).toLocaleString(),
+                 foot: `${(total / Math.max(Number(t.traces), 1)).toFixed(0)} calls per trace` }),
       tileNode({ label: "Distinct tools", value: byTool.length,
                  foot: byTool[0] ? `${byTool[0].name} leads at ${(byTool[0].calls / total * 100).toFixed(0)}%` : "" }),
-      tileNode({ label: "Failed", value: failed ? `✕ ${failed}` : "0",
-                 foot: `${rate.toFixed(1)}% of calls` }),
-      tileNode({ label: "Agent spend", value: cost[0] && Number(cost[0].cost) ? money(cost[0].cost) : "—",
-                 foot: "sum of per-session totals" }),
+      tileNode({ label: "Failed", value: failed ? `✕ ${failed.toLocaleString()}` : "0",
+                 foot: `${(failed / Math.max(total, 1) * 100).toFixed(1)}% of calls` }),
+      tileNode({ label: "Model spend", value: cost ? money(cost) : "—",
+                 foot: `${compact(tokIn + tokOut)} tokens over ` +
+                       `${spend.reduce((a, r) => a + Number(r.gens), 0).toLocaleString()} generations` }),
     );
     if (failed) k.querySelector(".tile:nth-child(4) .value").classList.add("fail");
 
     // Tools. Six segments is the ceiling for a ring, so the top five get one each and the tail
     // becomes one slice. Colour is identity here, which means it cannot also carry failure — the
     // failed column and the tooltip do that.
-    // Cut by share as well as rank: with one tool at 68% the fifth-place arc was 0.6%, thinner
-    // than the "other" slice beside it and too thin to read. byTool is sorted, so filtering the
-    // top five by share is the same as stopping at the first one too small to draw.
+    // Cut by share as well as rank: with one tool dominating, a fifth-place arc can come out
+    // thinner than the "other" slice beside it and too thin to read.
     const SLICES = 5, MIN_SHARE = 0.015;
     const head = byTool.slice(0, SLICES).filter(r => Number(r.calls) / total >= MIN_SHARE);
     const tail = byTool.slice(head.length);
     const slices = tail.length
       ? [...head, {
-          name: `other (${tail.length} tools)`, kind: "mixed",
+          name: `other (${tail.length} tools)`,
           calls: tail.reduce((a, r) => a + Number(r.calls), 0),
           failed: tail.reduce((a, r) => a + Number(r.failed), 0),
         }]
       : head;
-    const toolTip = r => `${r.name}\nkind: ${r.kind}\n${Number(r.calls).toLocaleString()} calls · ` +
+    const toolTip = r => `${r.name}\n${Number(r.calls).toLocaleString()} calls · ` +
                          `${(r.calls / total * 100).toFixed(1)}%` +
                          (Number(r.failed) ? `\n✕ ${r.failed} failed` : "");
 
     $("sub-tools").textContent =
       `${byTool.length} distinct tools over ${total.toLocaleString()} calls, by share. The ring is ` +
-      `the ${head.length} above ${(MIN_SHARE * 100).toFixed(1)}%; every tool is in the table. Tool ` +
-      `name comes from the agent's _meta.claudeCode.toolName, and a bare (kind) is an agent that ` +
-      `doesn't report one.`;
+      `the ${head.length} above ${(MIN_SHARE * 100).toFixed(1)}%; every tool is in the table. ` +
+      `Shell calls are grouped as "shell" because their event name is often the command itself.`;
     const thost = $("c-tools");
     thost.textContent = "";
     const tsplit = el("div", "split");
@@ -152,9 +157,10 @@
               sw.style.background = CAT[rank.has(r.name) ? rank.get(r.name) : head.length];
               return sw;
             } },
-          { h: "tool", v: r => r.name }, { h: "kind", v: r => r.kind },
+          { h: "tool", v: r => r.name },
           { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
           { h: "share", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
+          { h: "traces", n: true, v: r => Number(r.traces).toLocaleString() },
           { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
         ], byTool));
         return box;
@@ -165,8 +171,8 @@
     // Days. Both series share one scale, so the failure line reads as the small share it is
     // rather than being inflated onto an axis of its own.
     $("sub-days").textContent =
-      `${byDay.length} days (rolling ${DAYS}-day window). First observation of each call, so ` +
-      `replays don't double-count. Hover for a day's counts.`;
+      `${byDay.length} days (rolling ${DAYS}-day window). One row per call — Langfuse writes each ` +
+      `span once, so nothing needs de-duplicating. Hover for a day's counts.`;
     render("c-days",
       host => lineChart(host, byDay, {
         x: r => r.day,
@@ -183,64 +189,95 @@
         { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
       ], byDay));
 
-    // Sessions. One bar per session was hundreds of rows nobody reads: what the numbers are
-    // actually asked is how lopsided the distribution is, which takes five figures and a
-    // drill-in for the cases worth naming. bySession arrives sorted by calls, descending.
-    const label = r => (r.title || r.sid).slice(0, 40) || "(untitled)";
-    const percalls = bySession.map(r => Number(r.calls));
+    // Spend is the card the ACP page cannot have: it had one opaque per-session number, while
+    // Langfuse carries per-generation token counts and priced cost.
+    const priced = spend.filter(r => Number(r.cost) > 0);
+    $("sub-models").textContent = cost
+      ? `${spend.length} model(s) across ${spend.reduce((a, r) => a + Number(r.gens), 0).toLocaleString()} ` +
+        `generation events. ${priced.length} of them are priced — a local ollama model costs nothing ` +
+        `to run, so a zero here means free, not missing. Input and output tokens are counted ` +
+        `separately because they are not priced the same.`
+      : `No generation events carry cost or token counts yet.`;
+    $("c-models").textContent = "";
+    $("c-models").append((() => {
+      const box = el("div", "scroll");
+      box.append(tableNode([
+        { h: "model", v: r => r.model },
+        { h: "generations", n: true, v: r => Number(r.gens).toLocaleString() },
+        { h: "traces", n: true, v: r => Number(r.traces).toLocaleString() },
+        { h: "tokens in", n: true, v: r => compact(r.tok_in) },
+        { h: "tokens out", n: true, v: r => compact(r.tok_out) },
+        { h: "cost", n: true, v: r => Number(r.cost) ? money(r.cost) : "—" },
+        { h: "share", n: true, v: r => cost ? (r.cost / cost * 100).toFixed(1) + "%" : "—" },
+        { h: "last seen", v: r => r.last_ts.slice(0, 16) },
+      ], spend));
+      return box;
+    })());
+
+    // Traces. One bar per trace was hundreds of rows nobody reads: what the numbers are actually
+    // asked is how lopsided the distribution is, which takes five figures and a drill-in for the
+    // cases worth naming. byTrace arrives sorted by calls, descending.
+    const percalls = byTrace.map(r => Number(r.calls));
     const asc = [...percalls].sort((a, b) => a - b);
     const pctile = p => asc[Math.min(asc.length - 1, Math.floor(p * asc.length))];
     let acc = 0, heads = 0;
     while (acc < total / 2 && heads < percalls.length) acc += percalls[heads++];
-    const withFail = bySession.filter(r => Number(r.failed)).length;
+    const withFail = byTrace.filter(r => Number(r.failed)).length;
 
-    $("sub-sessions").textContent =
-      `${bySession.length} sessions made at least one tool call. Titled from Zed's own session ` +
-      `titles where available.`;
-    const host = $("c-sessions");
+    $("sub-traces").textContent =
+      `${byTrace.length} traces made at least one tool call. A trace is one request and its spans; ` +
+      `there is no session id on these events, so it is the only unit of work available.`;
+    const host = $("c-traces");
     host.textContent = "";
     const stats = el("div", "kpis");
     stats.append(
-      tileNode({ label: "Median session", value: pctile(0.5).toLocaleString(), foot: "tool calls" }),
+      tileNode({ label: "Median trace", value: pctile(0.5).toLocaleString(), foot: "tool calls" }),
       tileNode({ label: "90th percentile", value: pctile(0.9).toLocaleString(),
-                 foot: "one session in ten is at least this busy" }),
-      tileNode({ label: "Busiest session", value: compact(percalls[0]), foot: label(bySession[0]) }),
+                 foot: "one trace in ten is at least this busy" }),
+      tileNode({ label: "Busiest trace", value: compact(percalls[0]),
+                 foot: byTrace[0].tid.slice(0, 12) }),
       tileNode({ label: "Half the calls", value: heads,
-                 foot: `sessions account for half of all ${compact(total)}` }),
-      tileNode({ label: "Sessions with a failure", value: `${(withFail / bySession.length * 100).toFixed(0)}%`,
-                 foot: `${withFail} of ${bySession.length}` }),
+                 foot: `traces account for half of all ${compact(total)}` }),
+      tileNode({ label: "Traces with a failure",
+                 value: `${(withFail / Math.max(byTrace.length, 1) * 100).toFixed(0)}%`,
+                 foot: `${withFail} of ${byTrace.length}` }),
     );
     const drill = el("details");
     const scroll = el("div", "scroll");
     scroll.append(tableNode([
-      { h: "session", v: label }, { h: "started", v: r => r.started.slice(0, 16) },
+      { h: "trace", v: r => lfTrace(r.tid) },
+      { h: "from", v: r => r.svc || "—" },
+      { h: "started", v: r => r.started.slice(0, 16) },
       { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
       { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
-    ], bySession));
-    drill.append(el("summary", null, `every session, busiest first`), scroll);
+    ], byTrace));
+    drill.append(el("summary", null, `every trace, busiest first`), scroll);
     host.append(stats, drill);
 
     const notes = $("notes");
     notes.textContent = "";
     notes.append(notesNode([
-      `Counts are distinct toolCallIds, first sighting only — session replays re-emit history and would otherwise inflate totals.`,
-      `Outcome is the highest status a call reached, not its latest: a replayed "pending" lands after the real "completed".`,
-      Number(t.unfinished) ? `${t.unfinished} call(s) currently unfinished (pending or in progress).` : "",
-      `The tap logs the session you are reading this from, so live sessions inflate their own numbers.`,
+      `One row is one call. Langfuse writes each span once and span_id is unique, so there is no replay to de-duplicate and no need to rank by status to find a call's real outcome.`,
+      `The tool name is recovered, not read. Langfuse's name field carries the command or file path appended to it on a third of these rows ("Edit some-natalie/.../app.css"), giving 5,854 distinct values. Shell calls are identified by their input carrying a command and grouped as "shell", because 5,032 of them have a name that is the command itself — cd, export, grep. Everything else takes the first token of the name.`,
+      `A failure is level=ERROR, which Langfuse also records as status "failed". Pending and in-progress calls are counted as unfinished, not failed.`,
+      Number(t.unfinished) ? `${Number(t.unfinished).toLocaleString()} call(s) never reached a terminal status.` : "",
+      `Counted per trace, not per session: session_id is empty on every tool event here, so a per-session number would be meaningless.`,
+      `Cost and tokens come from generation events only — tool spans carry neither. A model with zero cost is a local one, not a gap in the data.`,
+      `This traces the sessions you run through Zed and litellm, so a live session inflates its own numbers.`,
     ]));
   }
 
   async function load() {
     setStatus("loading…");
     try {
-      const [totals, byTool, byDay, bySession, cost] = await Promise.all(
-        [Q.totals, Q.byTool, Q.byDay, Q.bySession, Q.cost].map(s => query(s)));
+      const [totals, byTool, byDay, byTrace, spend] = await Promise.all(
+        [Q.totals, Q.byTool, Q.byDay, Q.byTrace, Q.spend].map(s => query(s)));
       if (!totals.length || !Number(totals[0].calls)) {
         setStatus("no tool calls recorded yet");
         $("kpis").textContent = "";
         return;
       }
-      DATA = { totals, byTool, byDay, bySession, cost };
+      DATA = { totals, byTool, byDay, byTrace, spend };
       paint();
       setStatus(`${Number(totals[0].calls).toLocaleString()} tool calls`);
     } catch (e) {

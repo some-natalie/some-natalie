@@ -1,0 +1,66 @@
+model_list:
+  # Bedrock. Everything installation-specific — account, SSO profile, VPC endpoint, inference
+  # profile ARNs — comes from the environment so this file can be committed as-is. Set them in
+  # .env (which is gitignored); see the AWS block at the bottom of .env.example.
+  #
+  # aws_profile_name is set explicitly because that auth path is the one litellm leaves out of
+  # its credential cache, so botocore's own refreshable SSO credentials do the expiry handling
+  # per request.
+  #
+  # model: names the foundation model so litellm takes the converse route and prices the call;
+  # model_id: is the application-inference-profile ARN actually invoked. Drop model_id entirely
+  # if you invoke foundation models directly rather than through an inference profile.
+  #
+  # Both spellings of each tier are registered because Claude Code puts the 1M-context flag in
+  # the model string itself, not just the anthropic-beta header. A `[1m]` session asks for
+  # "claude-sonnet-5[1m]" verbatim, and an unregistered name 400s — including for the sonnet call
+  # behind tool-permission checks, which takes the whole CLI down.
+  - model_name: claude-opus-5[1m]
+    litellm_params: &opus
+      <<: &bedrock
+        aws_profile_name: os.environ/AWS_PROFILE
+        aws_region_name: os.environ/AWS_REGION
+        aws_bedrock_runtime_endpoint: os.environ/AWS_BEDROCK_RUNTIME_ENDPOINT
+      model: bedrock/converse/us.anthropic.claude-opus-5
+      model_id: os.environ/BEDROCK_PROFILE_OPUS
+  - model_name: claude-opus-5
+    litellm_params: *opus
+
+  - model_name: claude-sonnet-5[1m]
+    litellm_params: &sonnet
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-sonnet-5
+      model_id: os.environ/BEDROCK_PROFILE_SONNET
+  - model_name: claude-sonnet-5
+    litellm_params: *sonnet
+
+  # no [1m] twin: haiku 4.5 has no 1M-context variant to ask for
+  - model_name: claude-haiku-4-5
+    litellm_params:
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-haiku-4-5-20251001-v1:0
+      model_id: os.environ/BEDROCK_PROFILE_HAIKU
+
+  # Local ollama, reached on the host rather than in the compose network.
+  - model_name: laguna-xs-2.1
+    litellm_params:
+      model: ollama_chat/laguna-xs-2.1:latest
+      api_base: os.environ/OLLAMA_BASE
+  - model_name: gemma4:31b
+    litellm_params:
+      model: ollama_chat/gemma4:31b
+      api_base: os.environ/OLLAMA_BASE
+  - model_name: granite4.1:30b
+    litellm_params:
+      model: ollama_chat/granite4.1:30b
+      api_base: os.environ/OLLAMA_BASE
+  - model_name: nemotron3:33b
+    litellm_params:
+      model: ollama_chat/nemotron3:33b
+      api_base: os.environ/OLLAMA_BASE
+
+litellm_settings:
+  callbacks: ["langfuse_otel"]
+  drop_params: true
+  # 33B models on a laptop are slow; the default 600s cuts long agent turns off
+  request_timeout: 1800

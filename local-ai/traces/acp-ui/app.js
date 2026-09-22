@@ -14,6 +14,64 @@ const PAGES = [["index.html", "home"], ["browse.html", "browse"],
                ["stats.html", "stats"], ["bash.html", "bash"], ["files.html", "files"],
                ["secrets.html", "secrets"]];
 
+// ---- langfuse source, shared by the dashboard pages ----
+// Langfuse 4.x keeps every span in events_full. Notes that cost real debugging time:
+//
+//   * events_core is the same rows with input/output truncated, and traces/observations are the
+//     empty pre-4.x tables. Only events_full has the whole payload.
+//   * span_id is unique and nothing is double-written, so none of the ACP pages' replay dedup
+//     (min(ts), rank-by-status) is needed here. One row is one call.
+//   * `name` is not a tool name. It frequently carries the command or path appended — "Edit
+//     some-natalie/.../app.css", "git push 2>&1 | tail -2" — which is 5,854 distinct values, and
+//     5,032 shell calls have a name that IS the command ("cd", "export", "grep"). Filtering on
+//     it drops a quarter of the shell calls, so tools are identified by their input payload
+//     instead: LF_SHELL for a command, LF_FILE for a file path. The two never overlap.
+//   * session_id is empty on every TOOL row, so trace_id is the only grouping key available.
+//   * is_deleted = 0 because the table is a ReplacingMergeTree with soft deletes.
+const LF_TABLE = "default.events_full";
+const LF_LIVE = "is_deleted = 0";
+const LF_SHELL = "JSONHas(input, 'command')";
+const LF_FILE = "JSONHas(input, 'file_path')";
+
+// Failure is level='ERROR', which Langfuse mirrors into the metadata `status` key as "failed".
+// Unfinished calls carry status pending/in_progress and are not failures.
+const LF_FAILED = "level = 'ERROR'";
+const LF_STATUS = "metadata_values[indexOf(metadata_names, 'status')]";
+
+// Duration in seconds. end_time is populated on every TOOL row, but the longest is ~10.6 hours —
+// a call whose span was left open, not a slow command — so the caller caps it.
+const LF_SECS = "dateDiff('millisecond', start_time, end_time) / 1000";
+
+// Every TOOL call, with the fields the dashboard pages actually read. `extra` adds page-specific
+// columns; `where` narrows to the tool family.
+const lfCalls = ({ where, extra = "" }) => `
+  WITH calls AS (
+    SELECT trace_id AS tid, span_id, start_time AS started, name AS label,
+           ${LF_SECS} AS secs_raw,
+           ${LF_FAILED} AS failed,
+           ${LF_STATUS} AS status,
+           output_length AS out_len,
+           input, output,
+           service_name AS svc, environment AS env
+           ${extra ? "," + extra : ""}
+    FROM ${LF_TABLE}
+    WHERE ${LF_LIVE} AND type = 'TOOL'${where ? ` AND ${where}` : ""}
+  )`;
+
+// A trace id as a link into Langfuse's own UI, so a row on these pages can be opened as the
+// full request. The project is hardcoded because this compose file initialises exactly one.
+const LANGFUSE_URL = "http://127.0.0.1:3000";
+function lfTrace(tid, text) {
+  if (!tid) return "—";
+  const a = el("a", "lf", text || tid.slice(0, 8));
+  a.href = `${LANGFUSE_URL}/project/pi/traces/${encodeURIComponent(tid)}`;
+  a.target = "_blank";
+  a.rel = "noreferrer";
+  a.title = "open this trace in Langfuse";
+  return a;
+}
+
+
 // Favicon as an emoji in an SVG data URI: no binary asset, no extra request, and set here
 // so every page inherits it. encodeURIComponent keeps the markup data-URI safe.
 document.head.append(Object.assign(document.createElement("link"), {
@@ -92,7 +150,18 @@ function setStatus(text, bad = false) {
 }
 
 const money = (n) => "$" + Number(n).toFixed(n < 10 ? 4 : 2);
-const compact = (n) => Number(n) >= 10000 ? (Number(n) / 1000).toFixed(1) + "K" : Number(n).toLocaleString();
+// Short form for a figure in a tile or a centre label, where the exact number is in the table
+// beside it. Steps through K/M/B rather than stopping at K: token counts run to tens of millions,
+// and capping at thousands rendered 49.9M as "49898.0K", which is longer than the digits it
+// replaced and unreadable besides. Under 10,000 the full number is short enough to print.
+const compact = (n) => {
+  const v = Number(n);
+  const abs = Math.abs(v);
+  if (abs < 10000) return v.toLocaleString();
+  for (const [limit, div, suffix] of [[1e6, 1e3, "K"], [1e9, 1e6, "M"], [Infinity, 1e9, "B"]]) {
+    if (abs < limit) return (v / div).toFixed(1) + suffix;
+  }
+};
 const bytes = (n) => {
   const v = Number(n);
   if (v < 1024) return v + " B";
@@ -409,3 +478,240 @@ function notesNode(lines) {
   wrap.append(el("div", null, "How these numbers are built"), ul);
   return wrap;
 }
+
+// ---- secret triage, used by secrets.html ----
+// The scan is built from a source descriptor naming the table and which of its columns hold the
+// text, the grouping id and the timestamp, so it is not tied to one schema. The heuristics below
+// are the subtle part: they decide whether a regex match actually holds credential material.
+//
+// Matching runs server-side through multiMatchAllIndices, which ClickHouse evaluates with
+// vectorscan in one pass, so 1400+ regexes over the whole table stay subsecond. The generator
+// already dropped the patterns ClickHouse rejects as too slow.
+
+const chEsc = (s) => s.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+const arrayLit = (pats) => "[" + pats.map((p) => "'" + chEsc(p.regex) + "'").join(",") + "]";
+
+// Grouping is on the untruncated value so distinctness stays exact, but only the first
+// VALUE_MAX characters come back; `len` exposes the over-match.
+const VALUE_MAX = 200, VALUE_LIMIT = 2000;
+const CONTEXT_PAD = 32, CONTEXT_LEN = 220;
+
+// Secrets, not promises of secrets. Two rules, both cheap, both about the value rather than the
+// rule that found it:
+//   * a match with no credential material in it. github_token(=| :) captures the assignment and
+//     stops, so it can never hold a secret; aws_secret_access_key is a variable name. Material
+//     means a 16+ run from a credential charset that mixes digits with letters, or is long hex
+//     or base64 — the shapes a generated credential actually takes.
+//   * an Actions pin. If the material is exactly 40 hex and no credential word sits with it, it
+//     is a pinned action or a git object, not a classic PAT.
+const RUN = /[A-Za-z0-9+/=_-]{16,}/g;
+const KEY_HEADER = /BEGIN [A-Z0-9 ]*(PRIVATE KEY|PGP)/i;
+// 40 hex is a git SHA and also the shape of a pre-ghp_ classic PAT, so something has to break
+// the tie. Enumerating SHA contexts does not converge — action pins, `100644 <sha>` from
+// ls-tree, "bump X from <sha>", ?ref=, version→SHA maps — so the test is inverted: a bare 40
+// hex is a SHA unless a credential word sits in the match with it. Only the rule that requires
+// "github" near 40 hex produces these, so nothing else is affected: ghp_ tokens, AKIA keys and
+// key headers all take other shapes.
+const HEX40 = /\b[0-9a-f]{40}\b/;
+const CRED_WORD = /(token|secret|password|passwd|api[_-]?key|apikey|auth|credential)/i;
+const material = (s) => (s.match(RUN) || [])
+  .filter((r) => (/[0-9]/.test(r) && /[A-Za-z]/.test(r)) || /^[0-9a-f]{32,}$/i.test(r))
+  .sort((a, b) => b.length - a.length)[0] || "";
+
+function noiseReason(r) {
+  // A -----BEGIN PRIVATE KEY----- line carries no material itself; the key body is the bytes
+  // right after it, which is exactly the leak. Never filter these.
+  if (KEY_HEADER.test(r.val)) return null;
+  if (!material(r.val)) return "no credential material";
+  if (HEX40.test(r.val) && !CRED_WORD.test(r.val)) return "git SHA, not a PAT";
+  return null;
+}
+
+// Enough to recognise AKIAIO••••••LE as AWS's documentation key, not enough to use. Below 20
+// characters a head and tail would show more of the value than it hid, so mask the lot; every
+// credential shape worth previewing (AWS keys, GitHub tokens) is longer than that anyway.
+const mask = (s) => s.length < 20 ? "•".repeat(8) : s.slice(0, 6) + "••••••" + s.slice(-2);
+
+// Masked until asked. Hover would reveal every value the cursor crossed on its way down the
+// table, so it takes a click, and the click does not select the row.
+function revealNode(full, placeholder) {
+  const wrap = el("span", "val");
+  const code = el("code", null, placeholder);
+  const btn = el("button", "reveal", "reveal");
+  let shown = false;
+  btn.onclick = (e) => {
+    e.stopPropagation();
+    shown = !shown;
+    code.textContent = shown ? full : placeholder;
+    code.classList.toggle("shown", shown);
+    btn.textContent = shown ? "hide" : "reveal";
+  };
+  wrap.append(code, btn);
+  return wrap;
+}
+
+const valueCell = (r) =>
+  revealNode(r.val + (Number(r.len) > VALUE_MAX ? "…" : ""), mask(r.val));
+
+// A source names the table, the SQL expression holding the scannable text, the id whose distinct
+// count is the "how many conversations" number, and the timestamp. `where` is an extra predicate
+// (langfuse soft-deletes rows; the acp table has nothing to exclude).
+//
+// One row per (message, matching pattern). arrayJoin over the index list turns the per-row match
+// array into countable rows.
+const hitsQuery = (src, pats) => `
+  SELECT idx, count() AS hits, uniqExact(gid) AS groups,
+         min(ts) AS first_ts, max(ts) AS last_ts
+  FROM (
+    SELECT arrayJoin(multiMatchAllIndices(${src.text}, ${arrayLit(pats)})) AS idx,
+           ${src.group} AS gid, ${src.ts} AS ts
+    FROM ${src.table}${src.where ? ` WHERE ${src.where}` : ""}
+  )
+  GROUP BY idx ORDER BY hits DESC`;
+
+// The counts above are per pattern, which overstates the problem: one token pasted into 400
+// shell commands is one secret to rotate, not 400 findings. So group by the extracted value.
+//
+// Four traps in here:
+//   * extract/extractAll return the first capture GROUP, not the whole match, so a pattern
+//     like (AKIA|ASIA)[A-Z0-9]{16} yielded just "AKIA". Wrapping the whole regex in a group
+//     makes group 1 the full match.
+//   * the needle must be a literal, so the patterns are unrolled into an array of
+//     (index, matches) tuples rather than indexed dynamically.
+//   * ORDER BY must not name the `val` alias. Sorting on a computed expression over the
+//     GROUP BY key sends the plan optimizer past its 10,000-optimization ceiling and the
+//     query dies with TOO_MANY_QUERY_PLAN_OPTIMIZATIONS. Ordering by hits alone is fine.
+//   * some upstream regexes end in .+ (AWS ARN does) and greedily eat the rest of the line.
+const valuesQuery = (src, pats) => `
+  SELECT idx, substring(v, 1, ${VALUE_MAX}) AS val, length(v) AS len, count() AS hits,
+         uniqExact(gid) AS groups, min(ts) AS first_ts, max(ts) AS last_ts
+  FROM (
+    SELECT gid, ts, pair.1 AS idx, arrayJoin(pair.2) AS v
+    FROM (
+      SELECT gid, ts, arrayJoin([${pats.map((p, i) =>
+        `tuple(toUInt16(${i + 1}), extractAll(txt, '(${chEsc(p.regex)})'))`).join(",")}]) AS pair
+      FROM (
+        SELECT ${src.group} AS gid, ${src.ts} AS ts, ${src.text} AS txt
+        FROM ${src.table}
+        WHERE ${src.where ? `${src.where} AND ` : ""}multiMatchAny(${src.text}, ${arrayLit(pats)})
+      )
+    )
+  )
+  WHERE v != '' GROUP BY idx, v ORDER BY hits DESC LIMIT ${VALUE_LIMIT}`;
+
+// Every message a given value appears in, plus the text around it. The context matters because
+// plenty of upstream rules match the *name* of a credential rather than its value — github_token
+// is literally github[_-]?token(=| =|:| :) — so the match itself holds no secret and the thing
+// worth reading is whatever follows it.
+//
+// toInt64 before subtracting: position() returns UInt64, so pos - CONTEXT_PAD underflows to a
+// vast number for a match near the start of the line, and substring then returns nothing.
+const placedQuery = (src) => `
+  SELECT ${src.ts} AS ts, ${src.detail}
+         substring(${src.text},
+                   greatest(toInt64(position(${src.text}, {val:String})) - ${CONTEXT_PAD}, 1),
+                   ${CONTEXT_LEN}) AS context
+  FROM ${src.table}
+  WHERE ${src.where ? `${src.where} AND ` : ""}position(${src.text}, {val:String}) > 0
+  ORDER BY ts DESC LIMIT 60`;
+
+// Run the two-phase scan: match to find which patterns fire, then extract values from only those.
+//
+// Extraction is chunked, and that is not a tuning knob — it is what keeps the page working. Each
+// unrolled extractAll() independently evaluates the text expression, so N patterns in one query
+// cost N passes over the concatenated prompt+completion column. Against ~1.8 GiB of text, the
+// whole matched set in one query peaked at 5.2 GiB and was killed.
+//
+// 4 is measured against the real query, which also carries the grouping id and both timestamps
+// through the arrayJoin — those columns are duplicated per match and they cost more than the
+// values do. A simplified test that dropped them survived chunks of 12; the real shape needs 6,
+// and 4 leaves margin for the text column to keep growing.
+//
+// Chunking is exact, not approximate: the output was compared against per-pattern uncapped ground
+// truth and both found the same 188-189 distinct (pattern, value) pairs. The alternative tried
+// first — capping the text with substring() — silently lost matches, because 370 rows are larger
+// than 1 MiB and the furthest real match sat 2.13 MiB into a row. Truncation loses credentials, so
+// it was rejected; batching costs a few seconds and loses nothing.
+//
+// The per-chunk pattern index has to be shifted back to its position in `matched`, or every value
+// is attributed to the wrong rule.
+const SCAN_CHUNK = 4;
+
+async function runScan(src, active, onStatus = () => {}) {
+  onStatus(`scanning with ${active.length.toLocaleString()} patterns…`);
+  const hits = await query(hitsQuery(src, active));
+  const matched = hits.map((r) => active[Number(r.idx) - 1]).filter(Boolean);
+
+  const values = [];
+  for (let at = 0; at < matched.length; at += SCAN_CHUNK) {
+    const part = matched.slice(at, at + SCAN_CHUNK);
+    const done = Math.min(at + part.length, matched.length);
+    onStatus(`extracting values — ${done} of ${matched.length} matched pattern(s)…`);
+    for (const r of await query(valuesQuery(src, part))) {
+      const p = part[Number(r.idx) - 1];
+      if (p) values.push({ ...r, idx: at + Number(r.idx), p });
+    }
+  }
+  // Each chunk applied its own LIMIT, so the union can exceed it and is no longer ordered.
+  // Sort by the same key and re-apply the cap, so the page still shows the busiest values first
+  // and its "capped at N" note stays true.
+  values.sort((a, b) => Number(b.hits) - Number(a.hits));
+  return {
+    values: values.slice(0, VALUE_LIMIT),
+    patterns: hits.map((r) => ({ ...r, p: active[Number(r.idx) - 1] })).filter((r) => r.p),
+  };
+}
+
+// Split the scanned values on the noise heuristics, keeping the reason so filtered rows stay
+// auditable rather than silently dropped.
+function triage(values) {
+  const kept = [], filtered = [];
+  for (const r of values) {
+    const why = noiseReason(r);
+    (why ? filtered : kept).push(why ? { ...r, why } : r);
+  }
+  return { kept, filtered };
+}
+
+// A re-scan invalidates the selection, so the drill-in has to go with it. Without this the panel
+// keeps showing the previous value's occurrences under the new filter, which reads as a result
+// for a row that is no longer in the table — and after a filter change it can name a service or
+// event type the filter just excluded.
+function clearDetail(prompt) {
+  $("c-detail").textContent = "";
+  $("sub-detail").textContent = prompt;
+}
+
+// The notes every page using this scanner owes its reader: what the patterns are, what a match
+// does and does not mean, and what the masking is worth. `groupWord` is what the grouping id
+// counts (a trace, for the langfuse source); `extra` is appended per page.
+function scanNotes(DB, { groupWord, extra = [] }) {
+  return [
+    `Patterns come from ${DB._source} (${DB._license}). ${DB.upstream_count} upstream rules; ` +
+    `${DB.patterns.length} are usable here. ${DB.dropped_expensive.length} were dropped because ` +
+    `ClickHouse rejects them as too slow for vectorscan, and ${DB.dropped_invalid.length} would not compile.`,
+    `The secret/identifier label is added by update-secret-patterns.py, not by upstream. Upstream ` +
+    `confidence rates match certainty, not sensitivity — an AWS ARN rates high and is not a credential. ` +
+    `Ambiguous rules are labelled secret, so a Slack webhook URL counts as one even though it is a URL.`,
+    `Every match is a candidate, not a finding. Regex detection has no way to tell a live key from an ` +
+    `example in documentation, and short high-entropy rules match ordinary text.`,
+    `Some upstream rules match the name of a credential, not the credential — github_token is ` +
+    `github[_-]?token(=| =|:| :), so its "value" is the assignment itself and the token is whatever ` +
+    `follows. That is why the drill-in carries ${CONTEXT_LEN} characters of surrounding text.`,
+    `Two filters cut the promises from the secrets, and both are listed under the table rather than ` +
+    `dropped. "No credential material" means the match holds no 16-character run that mixes digits ` +
+    `with letters or reads as long hex or base64 — a keyword or a variable name. "git SHA" means a ` +
+    `bare 40 hex with no credential word beside it: identical in shape to a pre-ghp_ classic PAT, ` +
+    `but in this data it is an Actions pin, a git object, or a version map. A private-key header is ` +
+    `never filtered, because there the material is the bytes that follow it.`,
+    `Counts are of distinct values, not matches: a token pasted into four hundred ${groupWord}s is ` +
+    `one secret to rotate. Occurrences count every appearance, so the two numbers differ, and both ` +
+    `only see the first ${VALUE_MAX} characters of a match.`,
+    `Values arrive masked to a 6-character head and 2-character tail — enough to recognise a false ` +
+    `positive, since AKIAIO••••••LE is AWS's documentation key. Reveal shows the full text for one ` +
+    `value at a time, on click. The length is always unmasked, because a four-thousand-character ` +
+    `"match" is how you spot a greedy rule like AWS ARN, whose regex ends in .+`,
+    ...extra,
+  ];
+}
+

@@ -1,0 +1,238 @@
+# Agent tracing: ACP wire traffic in ClickHouse, LLM traffic in Langfuse.
+#
+# ClickHouse holds both, in separate databases: `acp` for what acp-tap tees off Zed's
+# stdio, `default` for Langfuse's own event tables. Langfuse needs postgres, redis, and
+# minio besides, none of which ClickHouse can stand in for.
+#
+# Off-box: langfuse-web (3000), acp-ui (8081), minio (9090). ClickHouse publishes 8123 for
+# acp-tap and friends running on the host. Everything else stays on the compose network.
+x-langfuse-env: &langfuse-env
+  DATABASE_URL: postgresql://postgres:${LANGFUSE_POSTGRES_PASSWORD:?required}@langfuse-postgres:5432/postgres
+  SALT: ${LANGFUSE_SALT:?required}
+  ENCRYPTION_KEY: ${LANGFUSE_ENCRYPTION_KEY:?required}
+  TELEMETRY_ENABLED: "false"
+  CLICKHOUSE_URL: http://clickhouse:8123
+  CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+  CLICKHOUSE_USER: acp
+  CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:?required}
+  CLICKHOUSE_CLUSTER_ENABLED: "false"
+  REDIS_HOST: langfuse-redis
+  REDIS_PORT: "6379"
+  REDIS_AUTH: ${LANGFUSE_REDIS_PASSWORD:?required}
+  LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+  LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://langfuse-minio:9000
+  LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+  LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?required}
+  LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+  LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+  LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://langfuse-minio:9000
+  LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+  LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?required}
+  LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:26.9.1.1629
+    container_name: clickhouse
+    restart: unless-stopped
+    # 4 GiB, and having a cgroup limit at all is the point: without one ClickHouse sizes its own
+    # budget from total host RAM (0.9 * whatever the Docker VM has), so the ceiling silently
+    # followed however large the VM happened to be — a query died at a 6.61 GiB cap one day and
+    # would have had ~14 GiB the next. This VM also carries k8s runners, elasticsearch and
+    # open-webui, so "90% of the machine" was never really available.
+    #
+    # 4 GiB against an idle ~800 MiB: the 99th percentile query on these dashboards uses 140 MiB.
+    # The one query that ever needed gigabytes was the secrets scan, and that is fixed in the page
+    # by chunking the extraction rather than by buying it more memory here.
+    mem_limit: 4g
+    environment:
+      - CLICKHOUSE_USER=acp
+      - CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD:?required}
+    volumes:
+      - ~/.local-ai/clickhouse:/var/lib/clickhouse
+      - ./clickhouse-init.sql:/docker-entrypoint-initdb.d/acp.sql:ro
+      # Per-query caps and spill-to-disk. Without these a big GROUP BY either fits in RAM or is
+      # killed outright, and an unbounded query can take the whole server's budget with it.
+      - ./clickhouse-limits.xml:/etc/clickhouse-server/users.d/limits.xml:ro
+    ports:
+      - "127.0.0.1:8123:8123"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'clickhouse-client --user "$$CLICKHOUSE_USER" --password "$$CLICKHOUSE_PASSWORD" --query "SELECT 1"',
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  acp-ui:
+    image: cgr.dev/chainguard/nginx:latest
+    container_name: acp-ui
+    restart: unless-stopped
+    # nginx serving six static pages. 64m ran at 73% once the worker cached them; 128m is still
+    # trivial and leaves room for the secret-patterns.json (222 KB) to grow.
+    mem_limit: 128m
+    volumes:
+      - ./acp-ui:/usr/share/nginx/html:ro
+      # Stock config minus the caching: these pages are edited and reloaded constantly, and
+      # without Cache-Control a browser serves a stale app.js against fresh HTML.
+      - ./acp-ui-nginx.conf:/etc/nginx/conf.d/nginx.default.conf:ro
+    ports:
+      - "127.0.0.1:8081:8080"
+
+  # pi (and anything else OpenAI-compatible) talks to ollama through here, so the
+  # traffic gets traced. pi has no exporter of its own.
+  litellm:
+    image: ghcr.io/berriai/litellm:v1.101.0
+    container_name: litellm
+    restart: unless-stopped
+    # Measured at ~900 MiB under load, not the ~560 MiB it idles at — 1 GiB left it at 88% and one
+    # OOM kill away from dropping traces. 2 GiB: streaming requests plus the boto3/SSO machinery.
+    mem_limit: 2g
+    command: ["--config=/app/config.yaml", "--port", "4000"]
+    # as me, not root: botocore rewrites the SSO token cache on refresh, and root-owned
+    # cache files would then break the host's own aws cli. Defaults to the usual first-user
+    # ids on macOS; override in .env if `id -u` / `id -g` say otherwise.
+    user: "${HOST_UID:-501}:${HOST_GID:-20}"
+    ports:
+      - "127.0.0.1:4141:4000"
+    environment:
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:?required}
+      - LANGFUSE_HOST=http://langfuse-web:3000
+      - LANGFUSE_PUBLIC_KEY=${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:?required}
+      - LANGFUSE_SECRET_KEY=${LANGFUSE_INIT_PROJECT_SECRET_KEY:?required}
+      # botocore looks for the sso cache under $HOME/.aws, which is not overridable by
+      # the AWS_*_FILE variables, so HOME has to point at the mount
+      - HOME=/aws-home
+      # Bedrock wiring. All installation-specific, all read by litellm-config.yaml via
+      # os.environ/ so the config file itself carries no account details. Unset these and the
+      # bedrock models simply fail to authenticate; the ollama ones keep working.
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_PROFILE=${AWS_PROFILE:-}
+      - AWS_BEDROCK_RUNTIME_ENDPOINT=${AWS_BEDROCK_RUNTIME_ENDPOINT:-}
+      - BEDROCK_PROFILE_OPUS=${BEDROCK_PROFILE_OPUS:-}
+      - BEDROCK_PROFILE_SONNET=${BEDROCK_PROFILE_SONNET:-}
+      - BEDROCK_PROFILE_HAIKU=${BEDROCK_PROFILE_HAIKU:-}
+      - OLLAMA_BASE=${OLLAMA_BASE:-http://host.docker.internal:11434}
+    volumes:
+      - ./litellm-config.yaml:/app/config.yaml:ro
+      # just the profile definitions and the SSO caches, not ~/.aws wholesale: this leaves
+      # ~/.aws/credentials (long-lived keys for every other profile) out of the container.
+      # sso/ is read-write on purpose, a read-only mount turns token refresh into a hard failure
+      - ~/.aws/config:/aws-home/.aws/config:ro
+      - ~/.aws/sso:/aws-home/.aws/sso
+
+  langfuse-web:
+    image: langfuse/langfuse:4.38.0
+    container_name: langfuse-web
+    restart: unless-stopped
+    # Next.js server, ~800 MiB idle. 2 GiB: the UI renders trace payloads that can be MBs each.
+    mem_limit: 2g
+    ports:
+      - "3000:3000"
+    environment:
+      <<: *langfuse-env
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:?required}
+      # browser-facing, so the published minio port, not the internal one
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://localhost:9090
+      LANGFUSE_S3_MEDIA_UPLOAD_INTERNAL_ENDPOINT: http://langfuse-minio:9000
+      LANGFUSE_INIT_ORG_ID: local
+      LANGFUSE_INIT_ORG_NAME: local
+      LANGFUSE_INIT_PROJECT_ID: pi
+      LANGFUSE_INIT_PROJECT_NAME: pi
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:?required}
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_INIT_PROJECT_SECRET_KEY:?required}
+      LANGFUSE_INIT_USER_EMAIL: ${LANGFUSE_INIT_USER_EMAIL:?required}
+      LANGFUSE_INIT_USER_NAME: ${LANGFUSE_INIT_USER_NAME:-local}
+      LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_INIT_USER_PASSWORD:?required}
+    depends_on: &langfuse-deps
+      clickhouse:
+        condition: service_healthy
+      langfuse-postgres:
+        condition: service_healthy
+      langfuse-redis:
+        condition: service_healthy
+      langfuse-minio:
+        condition: service_healthy
+
+  langfuse-worker:
+    image: langfuse/langfuse-worker:4.38.0
+    container_name: langfuse-worker
+    restart: unless-stopped
+    # ~690 MiB idle. 2 GiB — this one does the ingestion batching and S3 blob writes.
+    mem_limit: 2g
+    environment:
+      <<: *langfuse-env
+    depends_on: *langfuse-deps
+
+  langfuse-postgres:
+    image: postgres:17
+    container_name: langfuse-postgres
+    restart: unless-stopped
+    # Only metadata (users, projects, keys); the trace volume lives in ClickHouse.
+    mem_limit: 1g
+    environment:
+      - POSTGRES_PASSWORD=${LANGFUSE_POSTGRES_PASSWORD:?required}
+      - TZ=UTC
+      - PGTZ=UTC
+    volumes:
+      - ~/.local-ai/langfuse-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  langfuse-redis:
+    image: redis:7
+    container_name: langfuse-redis
+    restart: unless-stopped
+    # Ingestion queue only. The redis maxmemory below is what actually bounds the data; this is a
+    # backstop so a queue backlog cannot grow into the host's RAM.
+    mem_limit: 512m
+    # ponytail: no volume, it is only the ingestion queue. Add one if a restart
+    # mid-flush ever drops traces worth keeping.
+    command: --requirepass ${LANGFUSE_REDIS_PASSWORD:?required} --maxmemory-policy noeviction
+    environment:
+      - REDISCLI_AUTH=${LANGFUSE_REDIS_PASSWORD:?required}
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  langfuse-minio:
+    image: cgr.dev/chainguard/minio:latest
+    container_name: langfuse-minio
+    restart: unless-stopped
+    # Object store for event blobs — streams to disk rather than buffering in memory.
+    mem_limit: 512m
+    entrypoint: sh
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:?required}
+    volumes:
+      - ~/.local-ai/langfuse-minio:/data
+    ports:
+      - "9090:9000"
+      - "127.0.0.1:9091:9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 10s

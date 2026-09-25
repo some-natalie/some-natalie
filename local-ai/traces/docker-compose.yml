@@ -107,7 +107,7 @@ services:
   # pi (and anything else OpenAI-compatible) talks to ollama through here, so the
   # traffic gets traced. pi has no exporter of its own.
   litellm:
-    image: ghcr.io/berriai/litellm:v1.102.0
+    image: ghcr.io/berriai/litellm:v1.102.1
     container_name: litellm
     restart: unless-stopped
     # Measured at ~900 MiB under load, not the ~560 MiB it idles at — 1 GiB left it at 88% and one
@@ -151,7 +151,7 @@ services:
       - ~/.aws/sso:/aws-home/.aws/sso
 
   langfuse-web:
-    image: langfuse/langfuse:4.38.0
+    image: langfuse/langfuse:4.41.0
     container_name: langfuse-web
     restart: unless-stopped
     # Next.js server, ~800 MiB idle. 2 GiB: the UI renders trace payloads that can be MBs each.
@@ -185,7 +185,7 @@ services:
         condition: service_healthy
 
   langfuse-worker:
-    image: langfuse/langfuse-worker:4.38.0
+    image: langfuse/langfuse-worker:4.41.0
     container_name: langfuse-worker
     restart: unless-stopped
     # ~690 MiB idle. 2 GiB — this one does the ingestion batching and S3 blob writes.
@@ -214,7 +214,7 @@ services:
       start_period: 30s
 
   langfuse-redis:
-    image: redis:7
+    image: redis:8
     container_name: langfuse-redis
     restart: unless-stopped
     # Ingestion queue only. The redis maxmemory below is what actually bounds the data; this is a

@@ -43,6 +43,12 @@
   // appended on a third of the rows, so the family comes from the input payload and the label
   // from the first token — "Edit some-natalie/.../app.css" is an Edit, and "git push 2>&1" is a
   // shell call whose name happens to be its own command.
+  //
+  // TWO ERAS, unioned. The zed-acp tap wrote a TOOL span per call and stopped on 2026-09-18; every
+  // call since is a row in a GENERATION span's tool_calls array, written by litellm. Reading only
+  // TOOL rows is why this page showed nothing after that date — not a gap in the data, a gap in the
+  // query. See lfGenCalls in app.js. The eras disagree on what is knowable: litellm never sees the
+  // tool run, so its calls have no outcome, which is why `failed` is nullable below rather than 0.
   const TOOL = `
     multiIf(${LF_SHELL}, 'shell',
             ${LF_FILE}, splitByChar(' ', name)[1],
@@ -50,31 +56,60 @@
 
   const DAYS = 365;  // rolling window, the point past which the daily marks stop being readable
 
-  const CALLS = lfCalls({ extra: `${TOOL} AS tool` });
+  // One call per row across both eras, with the columns that exist in both. `failed` is
+  // Nullable(UInt8): NULL means "this era does not record outcomes", which countIf would silently
+  // read as a success. `known` carries that distinction into the aggregates.
+  const CALLS = `
+    WITH era_tool AS (
+      SELECT trace_id AS tid, start_time AS started,
+             ${TOOL} AS tool,
+             toNullable(toUInt8(${LF_FAILED})) AS fail_flag,
+             ${LF_STATUS} AS status,
+             service_name AS svc, 'tool span' AS era
+      FROM ${LF_TABLE}
+      ${LF_PREWHERE}
+    ),
+    era_gen AS (
+      SELECT tid, started,
+             multiIf(${LF_GEN_SHELL}, 'shell', tool = '', '(unnamed)', tool) AS tool,
+             CAST(NULL, 'Nullable(UInt8)') AS fail_flag,
+             '' AS status,
+             svc, 'model turn' AS era
+      FROM (${lfGenSelect()})
+    ),
+    calls AS (SELECT * FROM era_tool UNION ALL SELECT * FROM era_gen)`;
 
   const Q = {
     totals: `${CALLS}
-      SELECT count() AS calls, uniqExact(tid) AS traces, countIf(failed) AS failed,
+      SELECT count() AS calls, uniqExact(tid) AS traces, countIf(fail_flag = 1) AS failed,
+             count(fail_flag) AS known,
              countIf(status IN ('pending','in_progress')) AS unfinished,
              min(started) AS from_ts, max(started) AS to_ts,
              uniqExact(toDate(started)) AS days
       FROM calls`,
     byTool: `${CALLS}
-      SELECT tool AS name, count() AS calls, countIf(failed) AS failed,
-             uniqExact(tid) AS traces
+      SELECT tool AS name, count() AS calls, countIf(fail_flag = 1) AS failed,
+             count(fail_flag) AS known, uniqExact(tid) AS traces
       FROM calls GROUP BY name ORDER BY calls DESC`,
     // Filled from the first day with data, not the window's start, so a short history doesn't
     // render as a year of empty days. assumeNotNull: FILL FROM rejects a Nullable bound.
     byDay: `${CALLS}
-      SELECT toDate(started) AS day, count() AS calls, countIf(failed) AS failed
+      SELECT toDate(started) AS day, count() AS calls, countIf(fail_flag = 1) AS failed,
+             count(fail_flag) AS known
       FROM calls WHERE started >= today() - ${DAYS - 1}
       GROUP BY day ORDER BY day
       WITH FILL FROM assumeNotNull((SELECT greatest(toDate(min(started)), today() - ${DAYS - 1})
                                     FROM calls)) TO today() + 1 STEP 1`,
     byTrace: `${CALLS}
-      SELECT tid, count() AS calls, countIf(failed) AS failed, min(started) AS started,
-             any(svc) AS svc
+      SELECT tid, count() AS calls, countIf(fail_flag = 1) AS failed, count(fail_flag) AS known,
+             min(started) AS started, any(svc) AS svc, any(era) AS era
       FROM calls GROUP BY tid ORDER BY calls DESC`,
+    // How much of the history records outcomes at all, so the failure figures can say what they
+    // are a share OF rather than implying the whole range.
+    eras: `${CALLS}
+      SELECT era, count() AS calls, min(started) AS from_ts, max(started) AS to_ts,
+             uniqExact(tid) AS traces
+      FROM calls GROUP BY era ORDER BY from_ts`,
     // Cost and tokens are only on GENERATION events, so this is its own query rather than a
     // column on the tool rollup. Real token accounting, unlike the ACP tap's per-session total.
     spend: `
@@ -83,20 +118,24 @@
              sum(usage_details['input']) AS tok_in, sum(usage_details['output']) AS tok_out,
              uniqExact(trace_id) AS traces, max(start_time) AS last_ts
       FROM ${LF_TABLE}
-      WHERE ${LF_LIVE} AND type = 'GENERATION'
+      PREWHERE ${LF_LIVE} AND type = 'GENERATION'
       GROUP BY model ORDER BY cost DESC, gens DESC`,
   };
 
   let DATA = null;
 
   function paint() {
-    const { totals, byTool, byDay, byTrace, spend } = DATA;
+    const { totals, byTool, byDay, byTrace, eras, spend } = DATA;
     const t = totals[0];
     const total = Number(t.calls);
     const failed = Number(t.failed);
+    // Calls whose outcome is recorded at all. Only the tool-span era has one, so a failure rate
+    // against `total` would quietly dilute itself every time litellm writes another call.
+    const known = Number(t.known);
     const cost = spend.reduce((a, r) => a + Number(r.cost), 0);
     const tokIn = spend.reduce((a, r) => a + Number(r.tok_in), 0);
     const tokOut = spend.reduce((a, r) => a + Number(r.tok_out), 0);
+    const pct = (n, d) => (n / Math.max(d, 1) * 100).toFixed(1) + "%";
 
     const k = $("kpis");
     k.textContent = "";
@@ -108,7 +147,7 @@
       tileNode({ label: "Distinct tools", value: byTool.length,
                  foot: byTool[0] ? `${byTool[0].name} leads at ${(byTool[0].calls / total * 100).toFixed(0)}%` : "" }),
       tileNode({ label: "Failed", value: failed ? `✕ ${failed.toLocaleString()}` : "0",
-                 foot: `${(failed / Math.max(total, 1) * 100).toFixed(1)}% of calls` }),
+                 foot: `${pct(failed, known)} of the ${compact(known)} calls with a recorded outcome` }),
       tileNode({ label: "Model spend", value: cost ? money(cost) : "—",
                  foot: `${compact(tokIn + tokOut)} tokens over ` +
                        `${spend.reduce((a, r) => a + Number(r.gens), 0).toLocaleString()} generations` }),
@@ -128,11 +167,13 @@
           name: `other (${tail.length} tools)`,
           calls: tail.reduce((a, r) => a + Number(r.calls), 0),
           failed: tail.reduce((a, r) => a + Number(r.failed), 0),
+          known: tail.reduce((a, r) => a + Number(r.known), 0),
         }]
       : head;
     const toolTip = r => `${r.name}\n${Number(r.calls).toLocaleString()} calls · ` +
                          `${(r.calls / total * 100).toFixed(1)}%` +
-                         (Number(r.failed) ? `\n✕ ${r.failed} failed` : "");
+                         (Number(r.failed) ? `\n✕ ${r.failed} failed of ${Number(r.known)} known`
+                                           : Number(r.known) ? "" : `\nno outcomes recorded`);
 
     $("sub-tools").textContent =
       `${byTool.length} distinct tools over ${total.toLocaleString()} calls, by share. The ring is ` +
@@ -161,7 +202,11 @@
           { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
           { h: "share", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
           { h: "traces", n: true, v: r => Number(r.traces).toLocaleString() },
-          { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+          // "—" rather than a blank when nothing about this tool's outcomes is recorded: a blank
+          // in a failure column reads as zero failures, which is a claim the data cannot make.
+          { h: "failed", n: true,
+            v: r => Number(r.known) ? (Number(r.failed) || "") : "—",
+            cls: r => Number(r.failed) ? "fail" : "" },
         ], byTool));
         return box;
       })(),
@@ -170,23 +215,36 @@
 
     // Days. Both series share one scale, so the failure line reads as the small share it is
     // rather than being inflated onto an axis of its own.
+    //
+    // The failure line is drawn only across days that record outcomes. Continuing it at zero
+    // through the litellm era would draw "nothing failed" over a stretch where nothing was
+    // measured — the one reading the data cannot support. null breaks the line instead.
+    const lastKnownDay = byDay.filter(r => Number(r.known)).at(-1)?.day;
     $("sub-days").textContent =
-      `${byDay.length} days (rolling ${DAYS}-day window). One row per call — Langfuse writes each ` +
-      `span once, so nothing needs de-duplicating. Hover for a day's counts.`;
+      `${byDay.length} days (rolling ${DAYS}-day window). One row per call. ` +
+      (lastKnownDay
+        ? `The failure line stops at ${lastKnownDay}, the last day whose calls record an outcome — ` +
+          `litellm sees the model asking for a tool, never the tool running. `
+        : "") +
+      `Hover for a day's counts.`;
     render("c-days",
       host => lineChart(host, byDay, {
         x: r => r.day,
         series: [
           { name: "tool calls", value: r => Number(r.calls), color: "var(--viz-series)", area: true },
-          { name: "failed", value: r => Number(r.failed), color: "var(--viz-crit)" },
+          { name: "failed", value: r => Number(r.known) ? Number(r.failed) : null,
+            color: "var(--viz-crit)" },
         ],
         tipText: r => `${r.day}\n${Number(r.calls).toLocaleString()} calls\n` +
-                      `✕ ${Number(r.failed).toLocaleString()} failed`,
+                      (Number(r.known) ? `✕ ${Number(r.failed).toLocaleString()} failed`
+                                       : `outcome not recorded`),
       }),
       () => tableNode([
         { h: "day", v: r => r.day },
         { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
-        { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+        { h: "failed", n: true,
+          v: r => Number(r.known) ? (Number(r.failed) || "") : "—",
+          cls: r => Number(r.failed) ? "fail" : "" },
       ], byDay));
 
     // Spend is the card the ACP page cannot have: it had one opaque per-session number, while
@@ -222,11 +280,17 @@
     const pctile = p => asc[Math.min(asc.length - 1, Math.floor(p * asc.length))];
     let acc = 0, heads = 0;
     while (acc < total / 2 && heads < percalls.length) acc += percalls[heads++];
-    const withFail = byTrace.filter(r => Number(r.failed)).length;
+    // Both counted over traces that record outcomes, so the percentage has a denominator that
+    // means something. Over every trace it would fall as litellm writes more, which would read as
+    // reliability improving when it is only measurement stopping.
+    const rated = byTrace.filter(r => Number(r.known));
+    const withFail = rated.filter(r => Number(r.failed)).length;
 
     $("sub-traces").textContent =
       `${byTrace.length} traces made at least one tool call. A trace is one request and its spans; ` +
-      `there is no session id on these events, so it is the only unit of work available.`;
+      `there is no session id on these events, so it is the only unit of work available. ` +
+      `The litellm era splits work much finer — one trace per model turn rather than per session — ` +
+      `so its traces carry far fewer calls each and the distribution below mixes both shapes.`;
     const host = $("c-traces");
     host.textContent = "";
     const stats = el("div", "kpis");
@@ -239,8 +303,9 @@
       tileNode({ label: "Half the calls", value: heads,
                  foot: `traces account for half of all ${compact(total)}` }),
       tileNode({ label: "Traces with a failure",
-                 value: `${(withFail / Math.max(byTrace.length, 1) * 100).toFixed(0)}%`,
-                 foot: `${withFail} of ${byTrace.length}` }),
+                 value: rated.length
+                   ? `${(withFail / rated.length * 100).toFixed(0)}%` : "—",
+                 foot: `${withFail} of the ${rated.length} traces with recorded outcomes` }),
     );
     const drill = el("details");
     const scroll = el("div", "scroll");
@@ -249,19 +314,40 @@
       { h: "from", v: r => r.svc || "—" },
       { h: "started", v: r => r.started.slice(0, 16) },
       { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
-      { h: "failed", n: true, v: r => Number(r.failed) || "", cls: r => Number(r.failed) ? "fail" : "" },
+      { h: "failed", n: true,
+        v: r => Number(r.known) ? (Number(r.failed) || "") : "—",
+        cls: r => Number(r.failed) ? "fail" : "" },
     ], byTrace));
     drill.append(el("summary", null, `every trace, busiest first`), scroll);
     host.append(stats, drill);
 
+    // What each era can and cannot answer, stated as a table rather than buried in a footnote:
+    // this page's failure figures cover only the first of them, and the join is the whole reason
+    // the numbers after 2026-09-18 look different in kind.
+    const eraBox = el("div", "scroll");
+    eraBox.append(tableNode([
+      { h: "era", v: r => r.era },
+      { h: "range", v: r => `${r.from_ts.slice(0, 10)} → ${r.to_ts.slice(0, 10)}` },
+      { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
+      { h: "traces", n: true, v: r => Number(r.traces).toLocaleString() },
+      { h: "records outcome", v: r => r.era === "tool span" ? "yes" : "no" },
+      { h: "records duration / output", v: r => r.era === "tool span" ? "yes" : "no" },
+    ], eras));
+    const eraWrap = el("details");
+    eraWrap.append(el("summary", null, "where these calls come from, and what each source records"),
+                   eraBox);
+    host.append(eraWrap);
+
     const notes = $("notes");
     notes.textContent = "";
     notes.append(notesNode([
-      `One row is one call. Langfuse writes each span once and span_id is unique, so there is no replay to de-duplicate and no need to rank by status to find a call's real outcome.`,
-      `The tool name is recovered, not read. Langfuse's name field carries the command or file path appended to it on a third of these rows ("Edit some-natalie/.../app.css"), giving 5,854 distinct values. Shell calls are identified by their input carrying a command and grouped as "shell", because 5,032 of them have a name that is the command itself — cd, export, grep. Everything else takes the first token of the name.`,
+      `Two sources, unioned. Until 2026-09-18 a tool call was its own TOOL span, written by the zed-acp tap, carrying duration, output size and outcome. Since litellm became the path, the only record is a row in the tool_calls array of the GENERATION span for the model turn that requested it. Reading only TOOL spans is why this page appeared to stop on the 18th.`,
+      `The litellm era records that a tool was CALLED, not what happened next: litellm sees the model's request and never the tool running, so duration, output size and success are absent — not zero. Failure counts and rates on this page are shares of the ${compact(known)} calls that record an outcome, which is the tool-span era only. A "—" in a failed column means unmeasured.`,
+      `A trace means something different in each era. The tap opened one per Zed session, so those traces run to hundreds of calls; litellm opens one per model turn, so a busy session becomes many small traces. Trace counts are therefore not comparable across the join.`,
+      `One row is one call. Langfuse writes each span once and span_id is unique, so there is no replay to de-duplicate, and the tool_calls array is part of that single write.`,
+      `The tool name is recovered, not read. On TOOL spans, Langfuse's name field carries the command or file path appended to it ("Edit some-natalie/.../app.css"), and shell calls are identified by their input carrying a command because thousands have a name that is the command itself — cd, export, grep. On litellm rows the name is "litellm_request" on every one, so the name comes from tool_call_names and the family from the call's own arguments.`,
       `A failure is level=ERROR, which Langfuse also records as status "failed". Pending and in-progress calls are counted as unfinished, not failed.`,
       Number(t.unfinished) ? `${Number(t.unfinished).toLocaleString()} call(s) never reached a terminal status.` : "",
-      `Counted per trace, not per session: session_id is empty on every tool event here, so a per-session number would be meaningless.`,
       `Cost and tokens come from generation events only — tool spans carry neither. A model with zero cost is a local one, not a gap in the data.`,
       `This traces the sessions you run through Zed and litellm, so a live session inflates its own numbers.`,
     ]));
@@ -270,14 +356,14 @@
   async function load() {
     setStatus("loading…");
     try {
-      const [totals, byTool, byDay, byTrace, spend] = await Promise.all(
-        [Q.totals, Q.byTool, Q.byDay, Q.byTrace, Q.spend].map(s => query(s)));
+      const [totals, byTool, byDay, byTrace, eras, spend] = await Promise.all(
+        [Q.totals, Q.byTool, Q.byDay, Q.byTrace, Q.eras, Q.spend].map(s => query(s)));
       if (!totals.length || !Number(totals[0].calls)) {
         setStatus("no tool calls recorded yet");
         $("kpis").textContent = "";
         return;
       }
-      DATA = { totals, byTool, byDay, byTrace, spend };
+      DATA = { totals, byTool, byDay, byTrace, eras, spend };
       paint();
       setStatus(`${Number(totals[0].calls).toLocaleString()} tool calls`);
     } catch (e) {

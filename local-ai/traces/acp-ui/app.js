@@ -33,6 +33,23 @@ const LF_LIVE = "is_deleted = 0";
 const LF_SHELL = "JSONHas(input, 'command')";
 const LF_FILE = "JSONHas(input, 'file_path')";
 
+// Cheap columns first, in an explicit PREWHERE. This is the difference between a 40 MiB query and
+// a 1.02 GiB one, and it is not an optimisation — it is what stops these pages killing the server.
+//
+// Since litellm started writing to this table, `input` holds whole conversations: GENERATION rows
+// average 989 KB each and 5.85 GB of the table's 5.88 GB of input text is theirs. Any predicate
+// touching input — JSONHas, position, JSONExtractString — decompresses that column for every row
+// the planner has not already excluded. Left to itself ClickHouse folds is_deleted/type into the
+// same PREWHERE step as the JSON probe and reads all 870 MiB regardless, so the type filter has to
+// be a separate, earlier stage. Measured: `type='TOOL'` alone reads 53 KiB; with JSONHas in the
+// same WHERE, 870 MiB and 1.02 GiB resident, which is over half the 2 GiB per-query ceiling. Five
+// panels loading at once then blow the 3 GiB per-user ceiling and the OvercommitTracker kills a
+// query that may not even be the greedy one.
+//
+// ponytail: PREWHERE placement, not a rewrite. If input grows another order of magnitude, the
+// fix is a materialized has_command/has_file_path column so the JSON is never touched at scan time.
+const LF_PREWHERE = `PREWHERE ${LF_LIVE} AND type = 'TOOL'`;
+
 // Failure is level='ERROR', which Langfuse mirrors into the metadata `status` key as "failed".
 // Unfinished calls carry status pending/in_progress and are not failures.
 const LF_FAILED = "level = 'ERROR'";
@@ -43,7 +60,8 @@ const LF_STATUS = "metadata_values[indexOf(metadata_names, 'status')]";
 const LF_SECS = "dateDiff('millisecond', start_time, end_time) / 1000";
 
 // Every TOOL call, with the fields the dashboard pages actually read. `extra` adds page-specific
-// columns; `where` narrows to the tool family.
+// columns; `where` narrows to the tool family — and lands in WHERE, after the PREWHERE above has
+// already cut the row set down, because every tool-family predicate reads `input`.
 const lfCalls = ({ where, extra = "" }) => `
   WITH calls AS (
     SELECT trace_id AS tid, span_id, start_time AS started, name AS label,
@@ -55,8 +73,51 @@ const lfCalls = ({ where, extra = "" }) => `
            service_name AS svc, environment AS env
            ${extra ? "," + extra : ""}
     FROM ${LF_TABLE}
-    WHERE ${LF_LIVE} AND type = 'TOOL'${where ? ` AND ${where}` : ""}
+    ${LF_PREWHERE}${where ? `\n    WHERE ${where}` : ""}
   )`;
+
+// ---- litellm-era tool calls ----
+// The zed-acp tap wrote one TOOL span per tool call, with its duration, output size and outcome.
+// Those rows stop at 2026-09-18: since litellm became the path, the only record of a tool call is
+// the GENERATION row for the model turn that asked for it. So a tool call is now a row in that
+// span's `tool_calls` array, and the two eras have to be unioned rather than one replacing the
+// other — the TOOL rows are still the only place per-call duration and output exist.
+//
+// tool_calls and tool_call_names are real columns (Langfuse parses them out of the completion), so
+// this costs ~5 MiB rather than the 870 MiB a scan of `input` would. arrayZip is safe here:
+// verified 0 rows out of 4,157 have mismatched array lengths.
+//
+// What this era CANNOT carry, because litellm only sees the LLM exchange and never the tool
+// running: duration, output size, and success or failure of the call itself. A GENERATION row's
+// level=ERROR is the model request failing, not the tool. Pages must show these as unknown rather
+// than as zero — a 0 ms call that returned 0 bytes is a different claim from "not recorded".
+const LF_GEN_PREWHERE = `PREWHERE ${LF_LIVE} AND type = 'GENERATION' AND notEmpty(tool_calls)`;
+// The bare SELECT, so a page that needs these rows inside its own CTE or a UNION can nest it
+// without unwrapping a WITH clause. lfGenCalls() is the same thing as a named CTE.
+const lfGenSelect = ({ extra = "" } = {}) => `
+    SELECT trace_id AS tid, span_id, start_time AS started,
+           session_id AS sid, service_name AS svc, environment AS env,
+           tc.2 AS tool,
+           JSONExtractString(tc.1, 'arguments') AS args,
+           JSONExtractString(tc.1, 'id') AS call_id
+           ${extra ? "," + extra : ""}
+    FROM ${LF_TABLE}
+    ARRAY JOIN arrayZip(tool_calls, tool_call_names) AS tc
+    ${LF_GEN_PREWHERE}`;
+const lfGenCalls = (opts = {}) => `
+  WITH gen_calls AS (${lfGenSelect(opts)}
+  )`;
+// The tool family, read off the parsed arguments rather than off `name` (which is "litellm_request"
+// on every one of these rows). Same payload test as LF_SHELL/LF_FILE, one level down.
+//
+// Two spellings of the file argument, because two different tool sets reach litellm: Claude Code
+// sends file_path, and Zed's own built-in tools (the lowercase read/write/edit the local ollama
+// models drive) send path. Checking only file_path silently drops all 47 of the latter, which is
+// the same class of mistake as filtering tools by `name`.
+const LF_GEN_SHELL = "JSONHas(args, 'command')";
+const LF_GEN_FILE = "(JSONHas(args, 'file_path') OR JSONHas(args, 'path'))";
+const LF_GEN_PATH =
+  "if(JSONHas(args, 'file_path'), JSONExtractString(args, 'file_path'), JSONExtractString(args, 'path'))";
 
 // A trace id as a link into Langfuse's own UI, so a row on these pages can be opened as the
 // full request. The project is hardcoded because this compose file initialises exactly one.
@@ -115,9 +176,16 @@ function mountHeader({ current, extraHTML = "", onReload, onToggleView }) {
     <span class="meta" id="status"></span>`;
   restoreCreds();
   if (onReload) {
-    $("go").onclick = onReload;
+    // The reload button is the "ignore the cache" control. freshOnce is cleared by the reload
+    // itself once its queries are issued, so only that round bypasses and a filter change
+    // afterwards is warm again.
+    const reload = () => {
+      freshOnce = true;
+      return Promise.resolve(onReload()).finally(() => { freshOnce = false });
+    };
+    $("go").onclick = reload;
     for (const id of ["url", "user", "pass"]) {
-      $(id).addEventListener("keydown", (e) => e.key === "Enter" && onReload());
+      $(id).addEventListener("keydown", (e) => e.key === "Enter" && reload());
     }
   }
   if (onToggleView) {
@@ -129,10 +197,76 @@ function mountHeader({ current, extraHTML = "", onReload, onToggleView }) {
   }
 }
 
-async function query(sql, params = {}) {
+// ClickHouse's own query cache, rather than a cache in here. The secrets scan is the same
+// aggregation over the same 3.3 GiB of text every time the page is opened or a filter is nudged,
+// and it costs ~24s and ~300 GiB of reads to answer identically. Measured on this data: the hits
+// phase goes 4.9s -> 3ms and each extraction chunk 2.8s -> 0.03s, same rows out.
+//
+// Three settings, all required:
+//   * nondeterministic_function_handling='save' — ClickHouse classes multiMatchAllIndices as
+//     nondeterministic and, by default, ERRORS OUT rather than silently skipping the cache. It is
+//     deterministic for our purposes: same text, same patterns, same indices.
+//   * min_query_duration — a cache entry is only worth an eviction slot if the query was slow.
+//     The filter-options and freshness queries answer in ~30ms and must not displace a scan.
+//   * ttl — the table is live (it grew by 200 rows while this was being measured), so entries
+//     have to expire on their own. 15 minutes: long enough to cover a filter-fiddling session,
+//     short enough that a forgotten tab is not reading yesterday's answer.
+// Entries cap at 1 MiB each; the largest real scan result is 44 KiB, so nothing is refused.
+const CACHE_TTL = 900, CACHE_MIN_MS = 500;
+
+// Set by the reload button for exactly one round of queries. A reload that served a cached answer
+// would be a lie — it is the one control whose whole job is "ask the server again".
+let freshOnce = false;
+
+// Read-bypass, not cache-off: a reload still *stores* its result, so the next page load is warm.
+const cacheParams = (fresh) => ({
+  use_query_cache: "1",
+  query_cache_ttl: String(CACHE_TTL),
+  query_cache_nondeterministic_function_handling: "save",
+  query_cache_min_query_duration: String(CACHE_MIN_MS),
+  ...(fresh ? { enable_reads_from_query_cache: "0" } : {}),
+});
+
+// Rows per read block, for the queries that read input/output. This is a memory setting, not a
+// speed one, and it exists because a block is sized in ROWS while these rows are sized in
+// MEGABYTES.
+//
+// ClickHouse reads 8192 rows per block by default. That was fine when a row was ~575 bytes; since
+// litellm started writing whole conversations here, `input` runs to 7.75 MiB on a single row and
+// 386 rows are over 4 MiB. One default block of the fat ones is a 2 GiB allocation, which is what
+// "attempt to allocate chunk of 2.00 GiB, maximum 1.86 GiB (while reading column input)" is —
+// the kill happens in the COLUMN READ, before extractAll ever runs, so neither chunking the
+// patterns (SCAN_CHUNK) nor a PREWHERE can prevent it. Only a smaller block can.
+//
+// Measured on the real failing query, same rows out every time:
+//   8192 (default) → killed, 2.00 GiB chunk      1024 → 1.30 GiB peak (only 1.3x under the cap)
+//   2048           → killed, 2.00 GiB chunk       256 → 622 MiB peak, 2.6s
+// 256 is the knee: 128 and 64 save nothing more (617/603 MiB) and every value from 64 to 4096 runs
+// in the same ~2.6s, so the small block costs no time. The heaviest actual 256-row window in this
+// table is 781 MiB of text, which is the 622 MiB peak plus overhead — i.e. this is sized against
+// the real data, not a guess, and leaves ~3x headroom under the 1.86 GiB per-query ceiling.
+//
+// ponytail: a block-size cap, not a schema change. If rows keep growing, the durable fix is to stop
+// storing whole conversations in a column these pages scan — or scan events_core and accept the
+// truncation. Revisit when max(length(input)) passes ~30 MiB, where 256 rows again approaches 2 GiB.
+const SCAN_BLOCK_ROWS = 256;
+const textScanParams = () => ({ max_block_size: String(SCAN_BLOCK_ROWS) });
+
+// `textScan` marks a query that reads the input/output columns in bulk, so it gets the small-block
+// treatment above. It is opt-in rather than global because the dashboard pages' aggregates read
+// narrow columns and benefit from full-size blocks.
+async function query(sql, params = {}, { cache = false, textScan = false } = {}) {
   const u = new URL($("url").value);
   u.searchParams.set("default_format", "JSON");
   for (const [k, v] of Object.entries(params)) u.searchParams.set("param_" + k, v);
+  // Parameterized queries key on the param values too, so the drill-in caches per secret rather
+  // than serving the first value's rows for every other one.
+  if (cache) {
+    for (const [k, v] of Object.entries(cacheParams(freshOnce))) u.searchParams.set(k, v);
+  }
+  if (textScan) {
+    for (const [k, v] of Object.entries(textScanParams())) u.searchParams.set(k, v);
+  }
   const res = await fetch(u, {
     method: "POST", body: sql,
     headers: { "x-clickhouse-user": $("user").value, "x-clickhouse-key": $("pass").value },
@@ -234,7 +368,12 @@ function lineChart(host, rows, { x, series, tipText, yFmt = compact }) {
   const W = Math.max(host.clientWidth, 320), H = 210;
   const padL = 46, padR = 12, padT = 12, padB = 20;
   const plotW = W - padL - padR, plotH = H - padT - padB;
-  const max = niceMax(Math.max(...series.flatMap((s) => rows.map(s.value)), 1));
+  // A series value of null means "not measured here", which is not the same as zero and must not
+  // be drawn as a point on the floor. Nulls are excluded from the scale and break the line into
+  // separate runs, so a gap in the data reads as a gap.
+  const defined = (v) => v !== null && v !== undefined && Number.isFinite(Number(v));
+  const max = niceMax(Math.max(
+    ...series.flatMap((s) => rows.map(s.value).filter(defined).map(Number)), 1));
   const step = rows.length > 1 ? plotW / (rows.length - 1) : 0;
   const px = (i) => padL + i * step;
   const py = (v) => padT + plotH - (v / max) * plotH;
@@ -254,22 +393,36 @@ function lineChart(host, rows, { x, series, tipText, yFmt = compact }) {
     svg.append(t);
   }
   for (const s of series) {
-    const pts = rows.map((r, i) => `${px(i).toFixed(1)},${py(s.value(r)).toFixed(1)}`).join(" L");
-    if (s.area) {
-      const a = svgEl("path", { d: `M${padL},${py(0)} L${pts} L${px(rows.length - 1)},${py(0)} Z` });
-      a.style.fill = s.color;
-      a.style.fillOpacity = 0.14;
-      svg.append(a);
-    }
-    const p = svgEl("path", { class: "series", d: `M${pts}` });
-    p.style.stroke = s.color;
-    svg.append(p);
-    if (step >= 9) {
-      rows.forEach((r, i) => {
-        const c = svgEl("circle", { cx: px(i), cy: py(s.value(r)), r: 2.5 });
-        c.style.fill = s.color;
-        svg.append(c);
-      });
+    // Contiguous runs of defined points. One path per run, so a null leaves a hole rather than a
+    // line dropping to the axis and climbing back out.
+    const runs = [];
+    rows.forEach((r, i) => {
+      const v = s.value(r);
+      if (!defined(v)) { runs.push(null); return; }
+      const pt = `${px(i).toFixed(1)},${py(Number(v)).toFixed(1)}`;
+      if (runs.at(-1) && Array.isArray(runs.at(-1))) runs.at(-1).push({ i, pt });
+      else runs.push([{ i, pt }]);
+    });
+    for (const run of runs.filter(Array.isArray)) {
+      const pts = run.map((p) => p.pt).join(" L");
+      if (s.area) {
+        const a = svgEl("path", { d: `M${px(run[0].i)},${py(0)} L${pts} ` +
+                                     `L${px(run.at(-1).i)},${py(0)} Z` });
+        a.style.fill = s.color;
+        a.style.fillOpacity = 0.14;
+        svg.append(a);
+      }
+      // A single point has no line to draw, so it gets a dot regardless of the step threshold.
+      const p = svgEl("path", { class: "series", d: `M${pts}` });
+      p.style.stroke = s.color;
+      svg.append(p);
+      if (step >= 9 || run.length === 1) {
+        for (const { i } of run) {
+          const c = svgEl("circle", { cx: px(i), cy: py(Number(s.value(rows[i]))), r: 2.5 });
+          c.style.fill = s.color;
+          svg.append(c);
+        }
+      }
     }
   }
 
@@ -293,8 +446,12 @@ function lineChart(host, rows, { x, series, tipText, yFmt = compact }) {
     for (const a of ["x1", "x2"]) guide.setAttribute(a, px(i));
     guide.setAttribute("opacity", 1);
     dots.forEach((c, k) => {
+      const v = series[k].value(rows[i]);
+      // Hidden, not parked at zero: a hover dot on the axis would assert a measurement that the
+      // null says was never taken.
+      if (!defined(v)) { c.setAttribute("opacity", 0); return; }
       c.setAttribute("cx", px(i));
-      c.setAttribute("cy", py(series[k].value(rows[i])));
+      c.setAttribute("cy", py(Number(v)));
       c.setAttribute("opacity", 1);
     });
   });
@@ -622,10 +779,19 @@ const placedQuery = (src) => `
 // cost N passes over the concatenated prompt+completion column. Against ~1.8 GiB of text, the
 // whole matched set in one query peaked at 5.2 GiB and was killed.
 //
-// 4 is measured against the real query, which also carries the grouping id and both timestamps
-// through the arrayJoin — those columns are duplicated per match and they cost more than the
-// values do. A simplified test that dropped them survived chunks of 12; the real shape needs 6,
-// and 4 leaves margin for the text column to keep growing.
+// There are TWO independent memory limits in play here, and they need different fixes:
+//   * reading the text column — bounded by SCAN_BLOCK_ROWS (max_block_size). A default 8192-row
+//     block of million-byte rows is a 2 GiB allocation and dies before extractAll runs at all.
+//   * materialising the matches — bounded by this chunk size. A broad pattern
+//     (github[_-]?token(=| =|:| :)) matches tens of thousands of rows, and each match carries the
+//     grouping id and both timestamps through the arrayJoin.
+// Fixing only one leaves the other to kill the query, which is why both are set.
+//
+// 2, down from 4: with the table at 7.2 GiB of text, the heaviest 4-pattern chunk peaked at
+// 1.19 GiB against the 1.86 GiB per-query ceiling — under the limit but only 1.5x under it, on a
+// table that grows every session. Measured on that same chunk, split: 2 patterns peaks at 843 MiB
+// and 1 at 868 MiB, so 2 is where the curve flattens — going to 1 buys nothing and doubles the
+// round trips. Total scan time is unchanged (~47s) because the work is the same passes either way.
 //
 // Chunking is exact, not approximate: the output was compared against per-pattern uncapped ground
 // truth and both found the same 188-189 distinct (pattern, value) pairs. The alternative tried
@@ -635,11 +801,11 @@ const placedQuery = (src) => `
 //
 // The per-chunk pattern index has to be shifted back to its position in `matched`, or every value
 // is attributed to the wrong rule.
-const SCAN_CHUNK = 4;
+const SCAN_CHUNK = 2;
 
 async function runScan(src, active, onStatus = () => {}) {
   onStatus(`scanning with ${active.length.toLocaleString()} patterns…`);
-  const hits = await query(hitsQuery(src, active));
+  const hits = await query(hitsQuery(src, active), {}, { cache: true, textScan: true });
   const matched = hits.map((r) => active[Number(r.idx) - 1]).filter(Boolean);
 
   const values = [];
@@ -647,7 +813,9 @@ async function runScan(src, active, onStatus = () => {}) {
     const part = matched.slice(at, at + SCAN_CHUNK);
     const done = Math.min(at + part.length, matched.length);
     onStatus(`extracting values — ${done} of ${matched.length} matched pattern(s)…`);
-    for (const r of await query(valuesQuery(src, part))) {
+    // Cached per chunk, so a filter change that reuses most of the same patterns only pays for
+    // the chunks whose pattern set actually differs.
+    for (const r of await query(valuesQuery(src, part), {}, { cache: true, textScan: true })) {
       const p = part[Number(r.idx) - 1];
       if (p) values.push({ ...r, idx: at + Number(r.idx), p });
     }
@@ -711,6 +879,10 @@ function scanNotes(DB, { groupWord, extra = [] }) {
     `positive, since AKIAIO••••••LE is AWS's documentation key. Reveal shows the full text for one ` +
     `value at a time, on click. The length is always unmasked, because a four-thousand-character ` +
     `"match" is how you spot a greedy rule like AWS ARN, whose regex ends in .+`,
+    `Results are served from ClickHouse's query cache for up to ${CACHE_TTL / 60} minutes, because ` +
+    `the scan reads gigabytes of text to return the same few hundred rows. So a secret that arrived ` +
+    `in the last few minutes may not be listed yet — press reload, which bypasses the cache on ` +
+    `purpose, before concluding this data is clean.`,
     ...extra,
   ];
 }

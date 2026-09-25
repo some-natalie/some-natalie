@@ -33,6 +33,20 @@ x-langfuse-env: &langfuse-env
   LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?required}
   LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
   LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+  # Langfuse SSRF-checks every LLM connection base URL and rejects both the hostname
+  # `localhost`/`host.docker.internal` and anything resolving into 127/8, 10/8, 172.16/12 or
+  # 192.168/16 — which is every address on this compose network. Whitelisting the host is
+  # checked ahead of both the hostname patterns and the IP CIDRs, so this one entry is enough
+  # to let the playground and evaluators reach litellm at http://litellm:4000/v1.
+  #
+  # The connection itself is created in the UI (Settings -> LLM Connections) and lives in
+  # postgres, not here. It carries an explicit custom_models list, so a model added to
+  # litellm-config.yaml does NOT show up in the playground until that list is updated too —
+  # either by editing the connection or, equivalently:
+  #   docker exec -e PGPASSWORD=$LANGFUSE_POSTGRES_PASSWORD langfuse-postgres psql -U postgres \
+  #     -c "update llm_api_keys set custom_models = custom_models || '{new-model}' \
+  #         where provider = 'litellm' and 'new-model' <> all(custom_models);"
+  LANGFUSE_LLM_CONNECTION_WHITELISTED_HOST: litellm
 
 services:
   clickhouse:
@@ -93,7 +107,7 @@ services:
   # pi (and anything else OpenAI-compatible) talks to ollama through here, so the
   # traffic gets traced. pi has no exporter of its own.
   litellm:
-    image: ghcr.io/berriai/litellm:v1.101.0
+    image: ghcr.io/berriai/litellm:v1.102.0
     container_name: litellm
     restart: unless-stopped
     # Measured at ~900 MiB under load, not the ~560 MiB it idles at — 1 GiB left it at 88% and one
@@ -120,9 +134,13 @@ services:
       - AWS_REGION=${AWS_REGION:-us-east-1}
       - AWS_PROFILE=${AWS_PROFILE:-}
       - AWS_BEDROCK_RUNTIME_ENDPOINT=${AWS_BEDROCK_RUNTIME_ENDPOINT:-}
+      - BEDROCK_PROFILE_OPUS_5_5=${BEDROCK_PROFILE_OPUS_5_5:-}
       - BEDROCK_PROFILE_OPUS=${BEDROCK_PROFILE_OPUS:-}
       - BEDROCK_PROFILE_SONNET=${BEDROCK_PROFILE_SONNET:-}
       - BEDROCK_PROFILE_HAIKU=${BEDROCK_PROFILE_HAIKU:-}
+      - BEDROCK_PROFILE_GPT6_ASTRA=${BEDROCK_PROFILE_GPT6_ASTRA:-}
+      - BEDROCK_PROFILE_GPT6_SOL=${BEDROCK_PROFILE_GPT6_SOL:-}
+      - BEDROCK_PROFILE_GPT6_LUNA=${BEDROCK_PROFILE_GPT6_LUNA:-}
       - OLLAMA_BASE=${OLLAMA_BASE:-http://host.docker.internal:11434}
     volumes:
       - ./litellm-config.yaml:/app/config.yaml:ro

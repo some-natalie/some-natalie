@@ -65,8 +65,13 @@
     FROM (
       SELECT splitByChar('/', JSONExtractString(input, 'file_path')) AS parts
       FROM ${LF_TABLE}
-      WHERE ${LF_LIVE} AND type = 'TOOL' AND ${LF_FILE}
+      ${LF_PREWHERE}
+      WHERE ${LF_FILE}
         AND match(JSONExtractString(input, 'file_path'), '^/(Users|home)/[^/]+/')
+      UNION ALL
+      SELECT splitByChar('/', ${LF_GEN_PATH}) AS parts
+      FROM (${lfGenSelect()})
+      WHERE ${LF_GEN_FILE} AND match(${LF_GEN_PATH}, '^/(Users|home)/[^/]+/')
     )
     GROUP BY home ORDER BY n DESC LIMIT 1`;
 
@@ -84,19 +89,34 @@
   // has been appended to it. Anything else carrying a file_path (a rename, a subagent's own
   // wrapper) lands in `other` rather than being silently dropped.
   //
+  // Two eras, unioned, for the reason set out in app.js: TOOL spans stop on 2026-09-18 and every
+  // file operation since is a row in a GENERATION span's tool_calls array. What this page counts —
+  // which files, which projects, which operation — is present in both, so the union is clean. The
+  // one column that is not is the outcome, which litellm never sees; `failed` is therefore Nullable
+  // and NULL means unrecorded, not succeeded.
+  //
+  // The litellm era spells the argument two ways: Claude Code sends file_path, Zed's own
+  // lowercase read/write/edit tools send path. LF_GEN_PATH takes whichever is there.
+  //
   // A function, not a constant: HOME and ROOTS are only known once load() has asked the data for
   // them, so the SQL cannot be built at parse time.
   const FILES = () => `
     WITH t AS (
       SELECT splitByChar(' ', name)[1] AS tool,
              JSONExtractString(input, 'file_path') AS path,
-             trace_id AS tid, start_time AS ts, ${LF_FAILED} AS failed
+             trace_id AS tid, start_time AS ts,
+             toNullable(toUInt8(${LF_FAILED})) AS fail_flag
       FROM ${LF_TABLE}
-      WHERE ${LF_LIVE} AND type = 'TOOL' AND ${LF_FILE}
-        AND JSONExtractString(input, 'file_path') != ''
+      ${LF_PREWHERE}
+      WHERE ${LF_FILE} AND JSONExtractString(input, 'file_path') != ''
+      UNION ALL
+      SELECT tool, ${LF_GEN_PATH} AS path, tid, started AS ts,
+             CAST(NULL, 'Nullable(UInt8)') AS fail_flag
+      FROM (${lfGenSelect()})
+      WHERE ${LF_GEN_FILE} AND ${LF_GEN_PATH} != ''
     ),
     f AS (
-      SELECT tool, path, tid, ts, failed,
+      SELECT tool, path, tid, ts, fail_flag,
              replaceOne(path, '${chEsc(HOME)}', '~/') AS short,
              arrayElement(splitByChar('/', path), -1) AS base,
              splitByChar('.', arrayElement(splitByChar('/', path), -1)) AS parts,
@@ -111,7 +131,11 @@
     ),
     files AS (
       SELECT *, ${PROJECT} AS project,
-             if(tool IN ('Read','Edit','Write'), tool, 'other') AS op,
+             -- Case-folded: Zed's own tools are lowercase (read/write/edit) where Claude Code's
+             -- are capitalised, and matching only the capitalised spelling would file every local
+             -- model's file operation under "other".
+             multiIf(lower(tool) = 'read', 'Read', lower(tool) = 'edit', 'Edit',
+                     lower(tool) = 'write', 'Write', 'other') AS op,
              if(length(parts) > 1 AND arrayElement(parts, 1) != '', lower(arrayElement(parts, -1)),
                 if(length(parts) > 2, lower(arrayElement(parts, -1)), base)) AS type
       FROM f
@@ -123,12 +147,15 @@
 
   const OPS = `countIf(op = 'Read') AS reads, countIf(op = 'Edit') AS edits,
                countIf(op = 'Write') AS writes, countIf(op = 'other') AS others`;
+  // Failures, plus how many operations record an outcome at all — only the tool-span era does, so
+  // a rate against every touch would fall as litellm writes more and read as things improving.
+  const FAILS = `countIf(fail_flag = 1) AS failed, count(fail_flag) AS rated`;
 
   // Also functions now, for the same reason FILES is.
   const Q = {
     totals: () => `${FILES()}
       SELECT count() AS touches, uniqExact(path) AS files, uniqExact(type) AS types,
-             uniqExact(project) AS projects, uniqExact(tid) AS traces, countIf(failed) AS failed,
+             uniqExact(project) AS projects, uniqExact(tid) AS traces, ${FAILS},
              ${OPS}, min(ts) AS from_ts, max(ts) AS to_ts
       FROM files`,
     byType: () => `${FILES()}
@@ -136,7 +163,7 @@
       FROM files GROUP BY type ORDER BY touches DESC`,
     byProject: () => `${FILES()}
       SELECT project, count() AS touches, uniqExact(path) AS files,
-             uniqExact(type) AS types, max(ts) AS last_ts, countIf(failed) AS failed,
+             uniqExact(type) AS types, max(ts) AS last_ts, ${FAILS},
              arrayStringConcat(arraySort(groupUniqArray(rootname)), ', ') AS roots,
              uniqExact(root) AS nroots
       FROM files GROUP BY project ORDER BY touches DESC`,
@@ -303,7 +330,11 @@
       `A project name found under two roots is counted once, on the assumption it is the same checkout in two places. The root column lists every root a project was seen under and flags the ones with more than one, so two unrelated directories that happen to share a name do not merge unnoticed.`,
       `A git worktree is its own row rather than folding into the repo it came from: the file path records where the worktree lives, not which repository it belongs to.`,
       `An Edit is one edit call, not one changed line — a file edited in ten passes counts ten times. A Write is a whole-file create or overwrite.`,
-      Number(t.failed) ? `${Number(t.failed).toLocaleString()} of these operations failed (level=ERROR) and are still counted as operations — an attempted edit is still a touch.` : "",
+      `Two sources, unioned. Until 2026-09-18 each file operation was its own TOOL span; since litellm became the path, it is a row in the tool_calls array of the model turn that requested it. Which file, which project and which operation are recorded in both. The outcome is not: litellm never sees the tool run, so only ${Number(t.rated).toLocaleString()} of ${Number(t.touches).toLocaleString()} operations record whether they succeeded.`,
+      `The litellm era spells the path argument two ways — Claude Code sends file_path, Zed's built-in read/write/edit send path — and names its tools in lowercase. Both spellings and both cases are counted, otherwise every local model's file work would vanish or land in "other".`,
+      Number(t.failed)
+        ? `${Number(t.failed).toLocaleString()} of the ${Number(t.rated).toLocaleString()} operations with a recorded outcome failed (level=ERROR) and are still counted as operations — an attempted edit is still a touch.`
+        : "",
     ]));
   }
 

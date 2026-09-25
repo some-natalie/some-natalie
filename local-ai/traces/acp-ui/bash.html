@@ -95,20 +95,43 @@
       ...keys.map(k => [k, hit ? Number(hit[k]) : 0])]);
   });
 
+  // Both eras of shell call, unioned. Until 2026-09-18 each was its own TOOL span; since litellm
+  // became the path, a shell call is a row in a GENERATION span's tool_calls array (see
+  // lfGenCalls in app.js). The command text is present in both, so the program analysis — which is
+  // what this page is for — spans the whole history.
+  //
+  // What the litellm era cannot supply, because litellm sees the request and never the run:
+  // secs, out_len, failed. All three are Nullable here rather than 0, so an unmeasured call is
+  // excluded from a median instead of dragging it toward zero, and `countIf(failed = 1)` cannot
+  // read "not recorded" as "succeeded". `descr` is the exception — the model writes it when it
+  // asks, so it survives the join.
   const SHELL = String.raw`
     WITH raw_calls AS (
       SELECT trace_id AS tid, span_id, start_time AS started,
              JSONExtractString(input, 'command') AS cmd,
              JSONExtractString(input, 'description') AS descr,
-             ${LF_FAILED} AS failed,
+             toNullable(toUInt8(${LF_FAILED})) AS fail_flag,
              ${LF_STATUS} AS status,
-             output_length AS out_len,
-             service_name AS svc,
+             toNullable(output_length) AS out_len,
+             service_name AS svc, 'tool span' AS era,
              if(end_time IS NULL, NULL, ${LF_SECS}) AS secs_raw
       FROM ${LF_TABLE}
-      WHERE ${LF_LIVE} AND type = 'TOOL' AND ${LF_SHELL}
-        AND JSONExtractString(input, 'command') != ''
+      ${LF_PREWHERE}
+      WHERE ${LF_SHELL} AND JSONExtractString(input, 'command') != ''
     ),
+    gen_calls AS (
+      SELECT tid, span_id, started,
+             JSONExtractString(args, 'command') AS cmd,
+             JSONExtractString(args, 'description') AS descr,
+             CAST(NULL, 'Nullable(UInt8)') AS fail_flag,
+             '' AS status,
+             CAST(NULL, 'Nullable(UInt64)') AS out_len,
+             svc, 'model turn' AS era,
+             CAST(NULL, 'Nullable(Float64)') AS secs_raw
+      FROM (${lfGenSelect()})
+      WHERE ${LF_GEN_SHELL} AND JSONExtractString(args, 'command') != ''
+    ),
+    all_calls AS (SELECT * FROM raw_calls UNION ALL SELECT * FROM gen_calls),
     calls AS (
       SELECT *,
              if(secs_raw <= ${MAX_SECS}, secs_raw, NULL) AS secs,
@@ -121,24 +144,27 @@
                    replaceRegexpAll(
                      replaceRegexpAll(replaceRegexpOne(cmd, '${HEREDOC}', ''), '${QUOTED}', ' '),
                      '${ASSIGN}', '\\1 '))))) AS progs
-      FROM raw_calls
+      FROM all_calls
     )`;
 
   const Q = {
     totals: `${SHELL}
       -- No arrayJoin here: it would expand rows and inflate every other aggregate.
       -- The distinct-program count comes from the byProg row count instead.
-      SELECT count() AS calls, uniqExact(tid) AS traces, countIf(failed) AS failed,
+      SELECT count() AS calls, uniqExact(tid) AS traces, countIf(fail_flag = 1) AS failed,
+             count(fail_flag) AS rated,
              countIf(status IN ('pending','in_progress')) AS unfinished, count(secs) AS timed,
              countIf(secs_raw > ${MAX_SECS}) AS overlong,
              round(avg(length(progs)), 1) AS avg_progs,
              round(median(secs), 1) AS p50, round(quantile(0.95)(secs), 1) AS p95,
              round(max(secs), 1) AS worst, sum(out_len) AS out_total, max(out_len) AS out_max,
+             count(out_len) AS sized,
              min(started) AS from_ts, max(started) AS to_ts
       FROM calls`,
     byProg: `${SHELL}
-      SELECT prog, count() AS calls, countIf(failed) AS failed,
+      SELECT prog, count() AS calls, countIf(fail_flag = 1) AS failed, count(fail_flag) AS rated,
              round(median(secs), 1) AS p50, round(median(out_len)) AS out_med,
+             count(secs) AS timed, count(out_len) AS sized,
              argMax(descr, length(descr)) AS intent
       FROM calls ARRAY JOIN progs AS prog
       GROUP BY prog ORDER BY calls DESC`,
@@ -148,9 +174,12 @@
     // Bytes as well as calls: the two answer different questions and they disagree sharply here.
     outputs: `${SHELL}
       SELECT ${bucketSQL("out_len", OUT_BUCKETS)} AS bucket, count() AS calls, sum(out_len) AS bytes
-      FROM calls GROUP BY bucket`,
+      FROM calls WHERE out_len IS NOT NULL GROUP BY bucket`,
+    // Calls always; bytes only from the era that records them, so the spend line breaks rather
+    // than flatlining to zero over the litellm range.
     perDay: `${SHELL}
-      SELECT toDate(started) AS day, sum(out_len) AS bytes, count() AS calls
+      SELECT toDate(started) AS day, sum(out_len) AS bytes, count() AS calls,
+             count(out_len) AS sized
       FROM calls GROUP BY day ORDER BY day
       WITH FILL FROM assumeNotNull((SELECT toDate(min(started)) FROM calls)) TO today() + 1 STEP 1`,
   };
@@ -158,23 +187,30 @@
   // The three views were three cards with the same columns and no rows in common — the top
   // slowest, largest and failed calls are entirely different calls. So they become one card with
   // a selector: same shape of question, and switching is a comparison rather than a re-sort.
+  //
+  // All three can only draw on the tool-span era, and their WHERE clauses say so implicitly: a
+  // litellm call has NULL secs, NULL out_len and NULL failed, so it matches none of them. The
+  // notes make that explicit rather than leaving the reader to wonder where this week went.
   const NOTABLE = [
     { key: "slowest", label: "slowest", where: "secs IS NOT NULL", order: "secs DESC", limit: 12,
       note: t => `Wall time from the span's start to its end. ` +
                  `${Number(t.timed).toLocaleString()} of ${Number(t.calls).toLocaleString()} ` +
-                 `calls have both ends recorded.` },
+                 `calls have both ends recorded — only the tool-span era does.` },
     { key: "biggest", label: "largest output", where: "out_len > 0", order: "out_len DESC", limit: 12,
-      note: () => `Bytes of stdout the agent read back, largest first. This is context spend.` },
-    { key: "failures", label: "failures", where: "failed", order: "started DESC", limit: 25,
+      note: t => `Bytes of stdout the agent read back, largest first. This is context spend, and ` +
+                 `it is knowable for the ${Number(t.sized).toLocaleString()} calls whose span ` +
+                 `recorded an output size.` },
+    { key: "failures", label: "failures", where: "fail_flag = 1", order: "started DESC", limit: 25,
       note: t => Number(t.failed)
-        ? `${Number(t.failed).toLocaleString()} failed call(s), newest first. A failure is the span ` +
-          `carrying level=ERROR, not a non-zero exit code — the exit status is not recorded.`
+        ? `${Number(t.failed).toLocaleString()} failed call(s) out of the ` +
+          `${Number(t.rated).toLocaleString()} with a recorded outcome, newest first. A failure is ` +
+          `the span carrying level=ERROR, not a non-zero exit code — the exit status is not recorded.`
         : `No failed calls recorded.` },
   ];
   const notableQuery = (v) => `${SHELL}
     SELECT started, round(secs, 1) AS secs, out_len, arrayStringConcat(progs, ' ') AS progs,
            descr, substring(oneline, 1, 120) AS cmd, tid,
-           if(failed, 'failed', 'completed') AS outcome
+           multiIf(fail_flag IS NULL, 'not recorded', fail_flag = 1, 'failed', 'completed') AS outcome
     FROM calls WHERE ${v.where} ORDER BY ${v.order} LIMIT ${v.limit}`;
   Object.assign(Q, Object.fromEntries(NOTABLE.map(v => [v.key, notableQuery(v)])));
 
@@ -188,7 +224,14 @@
     const t = totals[0];
     const total = Number(t.calls);
     const failed = Number(t.failed);
-    const failRate = failed / Math.max(total, 1);
+    // Denominators for the three things only the tool-span era measures. Each figure is a share of
+    // the calls that recorded it, not of every call — otherwise every litellm session would make
+    // the shell look faster, quieter and more reliable than it is.
+    const rated = Number(t.rated);
+    const timed = Number(t.timed);
+    const sized = Number(t.sized);
+    const failRate = failed / Math.max(rated, 1);
+    const unmeasured = total - rated;
 
     const k = $("kpis");
     k.textContent = "";
@@ -200,11 +243,12 @@
                        (byProg[0] ? ` · ${byProg[0].prog} in ${(byProg[0].calls / total * 100).toFixed(0)}%` : "") }),
       tileNode({ label: "Median duration", value: secsText(t.p50),
                  foot: `p95 ${secsText(t.p95)} · worst ${secsText(t.worst)}` +
-                       (Number(t.overlong) ? ` · ${t.overlong} over ${MAX_SECS / 3600}h discarded` : "") }),
+                       (Number(t.overlong) ? ` · ${t.overlong} over ${MAX_SECS / 3600}h discarded` : "") +
+                       ` · over ${compact(timed)} timed calls` }),
       tileNode({ label: "Output read back", value: bytes(t.out_total),
-                 foot: `largest single call ${bytes(t.out_max)}` }),
+                 foot: `largest single call ${bytes(t.out_max)} · over ${compact(sized)} measured calls` }),
       tileNode({ label: "Failed", value: failed ? `✕ ${failed.toLocaleString()}` : "0",
-                 foot: `${(failed / Math.max(total, 1) * 100).toFixed(1)}% of calls` }),
+                 foot: `${(failRate * 100).toFixed(1)}% of the ${compact(rated)} calls with an outcome` }),
     );
     if (failed) k.querySelector(".tile:nth-child(5) .value").classList.add("fail");
 
@@ -215,16 +259,22 @@
     const out = fillBuckets(OUT_BUCKETS, outputs, ["calls", "bytes"]);
     const durMax = Math.max(...dur.map(r => r.calls), 1);
     const byteMax = Math.max(...out.map(r => r.bytes), 1);
-    const timed = Number(t.timed);
     const quick = dur.slice(0, 3).reduce((a, r) => a + r.calls, 0);
     const heavy = out.slice(-2).reduce((a, r) => ({ c: a.c + r.calls, b: a.b + r.bytes }), { c: 0, b: 0 });
     const totalBytes = out.reduce((a, r) => a + r.bytes, 0) || 1;
 
+    // Shares against `timed` and `sized`, the calls each distribution actually contains — not
+    // against every call, which would report the litellm era as a bucket that is missing.
     $("sub-dist").textContent =
       `${(quick / Math.max(timed, 1) * 100).toFixed(0)}% of the ${timed.toLocaleString()} timed calls ` +
       `finish in under ten seconds. Output is the mirror image: the ` +
-      `${(heavy.c / Math.max(total, 1) * 100).toFixed(0)}% of calls above 4 KB carry ` +
-      `${(heavy.b / totalBytes * 100).toFixed(0)}% of the bytes, which is the context they spend.`;
+      `${(heavy.c / Math.max(sized, 1) * 100).toFixed(0)}% of measured calls above 4 KB carry ` +
+      `${(heavy.b / totalBytes * 100).toFixed(0)}% of the bytes, which is the context they spend.` +
+      (unmeasured > 0
+        ? ` Both cover the ${compact(rated)} calls written as their own tool span; the ` +
+          `${compact(unmeasured)} calls since litellm took over carry a command but no timing or ` +
+          `output size, so they are absent from both distributions rather than sitting in a zero bucket.`
+        : "");
     const dhost = $("c-dist");
     dhost.textContent = "";
     const dsplit = el("div", "split even");
@@ -263,24 +313,38 @@
 
     // Bytes, not calls: the KPI gives a total with no trend, and what matters about output is how
     // much context it costs, which a call count does not tell you.
-    const spendTotal = perDay.reduce((a, r) => a + Number(r.bytes), 0);
-    const busiest = perDay.reduce((a, r) => Number(r.bytes) > Number(a.bytes) ? r : a, perDay[0]);
+    //
+    // A day with calls but no recorded output size is null, not zero — Number(null) is 0, which
+    // would draw the litellm era as a run of days that read nothing back. Measured days only, for
+    // the mean as well as the line, so the average is not divided by days it has no data for.
+    const measured = perDay.filter(r => Number(r.sized));
+    const spendTotal = measured.reduce((a, r) => a + Number(r.bytes), 0);
+    const busiest = measured.reduce((a, r) => Number(r.bytes) > Number(a.bytes) ? r : a,
+                                   measured[0] ?? perDay[0]);
+    const goneQuiet = perDay.filter(r => Number(r.calls) && !Number(r.sized)).length;
     $("sub-spend").textContent =
-      `Bytes of stdout read back per day across ${perDay.length} days. Heaviest was ` +
+      `Bytes of stdout read back per day. Heaviest was ` +
       `${busiest.day} at ${bytes(busiest.bytes)}, against a daily mean of ` +
-      `${bytes(spendTotal / Math.max(perDay.length, 1))}.`;
+      `${bytes(spendTotal / Math.max(measured.length, 1))} over the ${measured.length} days that ` +
+      `record output sizes.` +
+      (goneQuiet
+        ? ` The line stops where the tool spans do: ${goneQuiet} later day(s) still have shell ` +
+          `calls, but litellm does not record what they read back, so the series breaks rather ` +
+          `than reporting zero bytes.`
+        : "");
     render("c-spend",
       host => lineChart(host, perDay, {
         x: r => r.day,
         yFmt: bytes,
-        series: [{ name: "output", value: r => Number(r.bytes),
+        series: [{ name: "output", value: r => Number(r.sized) ? Number(r.bytes) : null,
                    color: "var(--viz-series)", area: true }],
-        tipText: r => `${r.day}\n${bytes(r.bytes)} read back\n` +
+        tipText: r => `${r.day}\n` +
+                      (Number(r.sized) ? `${bytes(r.bytes)} read back\n` : `output size not recorded\n`) +
                       `${Number(r.calls).toLocaleString()} call(s)`,
       }),
       () => tableNode([
         { h: "day", v: r => r.day },
-        { h: "output", n: true, v: r => bytes(r.bytes) },
+        { h: "output", n: true, v: r => Number(r.sized) ? bytes(r.bytes) : "—" },
         { h: "calls", n: true, v: r => Number(r.calls).toLocaleString() },
       ], perDay));
 
@@ -331,17 +395,21 @@
         { h: "", w: "170px", cls: () => "bar", v: r => barCell(Number(r.calls) / maxCalls) },
         { h: "calls", w: "72px", n: true, v: r => Number(r.calls).toLocaleString() },
         { h: "share", w: "62px", n: true, v: r => (r.calls / total * 100).toFixed(1) + "%" },
-        { h: "median", w: "72px", n: true, v: r => secsText(r.p50) },
-        { h: "output", w: "78px", n: true, v: r => bytes(r.out_med) },
-        { h: "failed", w: "66px", n: true, v: r => Number(r.failed) || "",
+        // These three are medians and counts over the subset of this program's calls that recorded
+        // the measure, so a program seen only since litellm shows "—" rather than 0s / 0 B / 0
+        // failures, each of which would be a measurement this page never took.
+        { h: "median", w: "72px", n: true, v: r => Number(r.timed) ? secsText(r.p50) : "—" },
+        { h: "output", w: "78px", n: true, v: r => Number(r.sized) ? bytes(r.out_med) : "—" },
+        { h: "failed", w: "66px", n: true,
+          v: r => Number(r.rated) ? (Number(r.failed) || "") : "—",
           cls: r => Number(r.failed) ? "fail" : "" },
         // Sorted by volume, the unreliable programs never rise to the top — a rate column is what
         // surfaces them. Flagged at twice the page-wide rate, so the threshold moves with the data
-        // rather than being baked in, but only past a floor of ${RATE_MIN_CALLS} calls: one
-        // failure out of three is 33% and means nothing.
+        // rather than being baked in, but only past a floor of ${RATE_MIN_CALLS} calls with a
+        // recorded outcome: one failure out of three is 33% and means nothing.
         { h: "fail rate", w: "76px", n: true,
-          v: r => Number(r.calls) ? (r.failed / r.calls * 100).toFixed(1) + "%" : "—",
-          cls: r => Number(r.calls) >= RATE_MIN_CALLS && r.failed / r.calls >= 2 * failRate
+          v: r => Number(r.rated) ? (r.failed / r.rated * 100).toFixed(1) + "%" : "—",
+          cls: r => Number(r.rated) >= RATE_MIN_CALLS && r.failed / r.rated >= 2 * failRate
             ? "fail" : "" },
         { h: "example intent", v: r => r.intent || "—" },
       ], rows);
@@ -359,8 +427,11 @@
       const old = nhost.querySelector("table, .muted");
       if (old) old.remove();
       // The sorted-on column leads, so whichever view you pick reads top-down by its own measure.
+      // bytesText/secsText both print "—" for a null, which every row in these three views has for
+      // at most one column: all three filter to the tool-span era by construction.
+      const bytesText = (v2) => v2 === null || v2 === undefined ? "—" : bytes(v2);
       const lead = v.key === "biggest"
-        ? { h: "output", n: true, v: r => bytes(r.out_len) }
+        ? { h: "output", n: true, v: r => bytesText(r.out_len) }
         : v.key === "failures"
           ? { h: "when", v: r => r.started.slice(5, 16) }
           : { h: "secs", n: true, v: r => secsText(r.secs) };
@@ -370,7 +441,7 @@
             { h: "intent", v: r => r.descr || "—" },
             { h: "programs", v: r => r.progs },
             ...(v.key === "biggest" ? [{ h: "secs", n: true, v: r => secsText(r.secs) }]
-                                    : [{ h: "output", n: true, v: r => bytes(r.out_len) }]),
+                                    : [{ h: "output", n: true, v: r => bytesText(r.out_len) }]),
             ...(v.key === "failures" ? []
                 : [{ h: "outcome", v: r => r.outcome,
                      cls: r => r.outcome === "failed" ? "fail" : "" }]),
@@ -398,13 +469,15 @@
     const notes = $("notes");
     notes.textContent = "";
     notes.append(notesNode([
-      `A shell call is any tool event whose input carries a command — that is the test, not the event name. Langfuse's name field is the command itself on 5,032 of these rows (cd, export, grep, "git push 2>&1 | tail -2"), so matching on Bash or Terminal by name would drop a quarter of them.`,
+      `Two sources, unioned. Until 2026-09-18 every shell call was its own TOOL span written by the zed-acp tap, carrying duration, output size and outcome. Since litellm became the path, a shell call is a row in the tool_calls array of the GENERATION span for the model turn that asked for it. Both carry the command text, so the program analysis covers the whole history.`,
+      `The litellm era records the request, not the run: it has the command and often the model's stated intent, but no duration, no output size and no outcome, because litellm never sees the tool execute. Of ${Number(t.calls).toLocaleString()} shell calls, ${Number(t.rated).toLocaleString()} record an outcome and ${Number(t.sized).toLocaleString()} an output size. Every median, share and rate on this page is against the subset that recorded the measure, and a "—" means unmeasured rather than zero.`,
+      `A shell call is any event whose payload carries a command — that is the test, not the event name. On TOOL spans, Langfuse's name field is the command itself on 5,032 rows (cd, export, grep, "git push 2>&1 | tail -2"), so matching on Bash or Terminal by name would drop a quarter of them; on litellm rows the name is "litellm_request" on every one, so the payload is the only test that works for both.`,
       `One row is one call. Langfuse writes each span once with both timestamps on it, so there is no replay to defend against and no need to hunt for a call's first terminal row — the duration is simply end minus start.`,
       `Programs are read off the command text cumulatively: quoted spans and heredoc bodies are blanked, VAR=value pairs dropped, then the remainder is split on ; && || | $( and newlines and the head of each piece is taken. A call is credited once per distinct program, so per-program counts overlap and do not sum to the call total.`,
       `Because quoted spans are blanked, an interpreter's payload is not inspected: python3 -c '...' counts as python3, and whatever it runs inside is invisible here.`,
       `Median duration and output are per call involving that program, not per program — a slow call with six programs is counted slow under all six.`,
-      Number(t.calls) - Number(t.timed) > 0
-        ? `${(Number(t.calls) - Number(t.timed)).toLocaleString()} call(s) have no usable duration: either the span has no end time or it exceeded ${MAX_SECS / 3600}h, which is a span left open rather than a slow command.`
+      Number(t.rated) - Number(t.timed) > 0
+        ? `${(Number(t.rated) - Number(t.timed)).toLocaleString()} call(s) from the tool-span era have no usable duration: either the span has no end time or it exceeded ${MAX_SECS / 3600}h, which is a span left open rather than a slow command.`
         : "",
       `Output size is output_length, the bytes of stdout the agent read back. There is no exit code in the trace, so "failed" means the span carried level=ERROR.`,
       out.at(-1).calls === 0

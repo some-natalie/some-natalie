@@ -134,9 +134,12 @@ assert.equal(compact(-1e6), "-1.0M", "negatives keep their sign and unit");
 
 // ---- langfuse source: the shape the llm-* stats/bash/files pages depend on ----
 const {
-  lfCalls, LF_TABLE, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS,
+  lfCalls, LF_TABLE, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS, LF_PREWHERE,
+  lfGenCalls, lfGenSelect, LF_GEN_SHELL, LF_GEN_FILE, LF_GEN_PATH, LF_GEN_PREWHERE,
 } = new Function(readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
-  return { lfCalls, LF_TABLE, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS };`)();
+  return { lfCalls, LF_TABLE, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS,
+           LF_PREWHERE, lfGenCalls, lfGenSelect, LF_GEN_SHELL, LF_GEN_FILE, LF_GEN_PATH,
+           LF_GEN_PREWHERE };`)();
 
 // Tools must be identified by the input payload, never by the event name: Langfuse's `name`
 // carries the command or path appended to it, and 5,032 shell calls have a name that IS the
@@ -172,15 +175,170 @@ assert.ok(LF_STATUS.includes("metadata_names"), "status reads the metadata map")
 assert.ok(LF_SECS.includes("/ 1000") && LF_SECS.includes("millisecond"),
           "duration is milliseconds converted to seconds");
 
+// ---- the PREWHERE that keeps these pages from killing the server ----
+// This is the memory bug, and it is a placement bug, not a predicate bug. `input` holds whole
+// conversations since litellm started writing here (GENERATION rows average ~1 MB; 5.85 of the
+// table's 5.88 GB of input text is theirs), so any predicate touching input decompresses the column
+// for every row not already excluded. Measured on the real table: `type='TOOL'` alone reads 53 KiB;
+// the same count with JSONHas(input,…) in the same WHERE reads 870 MiB and holds 1.02 GiB — over
+// half the 2 GiB per-query ceiling, and five concurrent panels then trip the 3 GiB per-user one.
+// The cheap columns must therefore be in an earlier PREWHERE stage than the JSON probe.
+assert.ok(/^\s*PREWHERE\b/.test(LF_PREWHERE), "LF_PREWHERE is a PREWHERE clause");
+assert.ok(LF_PREWHERE.includes("type = 'TOOL'") && LF_PREWHERE.includes(LF_LIVE),
+          "the cheap columns are what get promoted");
+// The whole point: no input-reading predicate may ride along in the PREWHERE, or it is evaluated
+// in the same pass and the 870 MiB comes back.
+assert.ok(!/\binput\b/.test(LF_PREWHERE),
+          "LF_PREWHERE must not touch input — that is the 1 GiB regression");
+// lfCalls must put its tool-family predicate in WHERE, after the PREWHERE stage.
+{
+  const sql = lfCalls({ where: LF_SHELL });
+  const pre = sql.indexOf("PREWHERE"), where = sql.indexOf("WHERE", sql.indexOf("PREWHERE") + 8);
+  assert.ok(pre > 0, "lfCalls uses PREWHERE");
+  assert.ok(where > pre, "the input predicate lands in a WHERE after the PREWHERE");
+  assert.ok(sql.slice(pre, where).indexOf("input") === -1,
+            "nothing between PREWHERE and WHERE reads input");
+}
+// Every page that reads tool spans must go through the PREWHERE. A page hand-rolling
+// "WHERE is_deleted = 0 AND type = 'TOOL' AND JSONHas(...)" is exactly the shape that was killed.
+for (const page of ["bash.html", "files.html", "stats.html"]) {
+  const src = readFileSync(new URL("./" + page, import.meta.url), "utf8");
+  assert.ok(!/WHERE\s+\$\{LF_LIVE\}\s+AND\s+type\s*=\s*'TOOL'\s+AND\s+\$\{LF_(SHELL|FILE)\}/.test(src),
+            `${page} must not filter tool spans and input in one WHERE — use LF_PREWHERE`);
+}
+
+// ---- the litellm era: tool calls that are not TOOL spans ----
+// The zed-acp tap stopped writing TOOL spans on 2026-09-18. Every tool call since is a row in a
+// GENERATION span's tool_calls array, so a page reading only TOOL rows goes blank after that date —
+// which is what happened to stats.html. These are real columns, so reading them costs ~5 MiB
+// against the 870 MiB an input scan would.
+assert.ok(LF_GEN_PREWHERE.includes("type = 'GENERATION'"), "gen calls come from GENERATION spans");
+assert.ok(LF_GEN_PREWHERE.includes("notEmpty(tool_calls)"), "only spans that requested a tool");
+assert.ok(!/\binput\b/.test(LF_GEN_PREWHERE), "the gen source must not scan input either");
+
+const gen = lfGenCalls();
+assert.ok(gen.includes("arrayZip(tool_calls, tool_call_names)"),
+          "call and name are zipped, so a tool's name stays with its arguments");
+assert.ok(gen.includes("ARRAY JOIN"), "one row out per tool call, not per model turn");
+assert.ok(!/undefined|NaN/.test(gen), "no undefined interpolation");
+for (const alias of ["AS tid", "AS started", "AS tool", "AS args", "AS svc"]) {
+  assert.ok(gen.includes(alias), `lfGenCalls exposes ${alias}`);
+}
+// lfGenSelect is the same query without the CTE wrapper, so a page can nest it in a UNION. If it
+// carried its own WITH, every union that embeds it would be a syntax error.
+assert.ok(!/\bWITH\b/.test(lfGenSelect()), "lfGenSelect is a bare SELECT, nestable in a UNION");
+assert.ok(lfGenCalls().includes("WITH gen_calls AS"), "lfGenCalls is the named-CTE form");
+assert.ok(lfGenSelect({ extra: "1 AS probe" }).includes("1 AS probe"), "extra columns are appended");
+assert.ok(!/,\s*FROM/.test(lfGenSelect()), "no dangling comma without extras");
+
+// The family test reads the parsed arguments, not `name` — which is "litellm_request" on every one
+// of these rows, so a name-based filter would match nothing at all here.
+assert.ok(LF_GEN_SHELL.includes("args"), "gen shell detection reads the arguments payload");
+for (const probe of [LF_GEN_SHELL, LF_GEN_FILE]) {
+  assert.ok(!/\bname\b/.test(probe), "gen tool detection must not read the name column");
+}
+// Two spellings of the path argument, because two tool sets reach litellm: Claude Code sends
+// file_path, Zed's built-in lowercase read/write/edit send path. Checking only file_path drops the
+// latter entirely — the same class of bug as filtering tools by name.
+assert.ok(LF_GEN_FILE.includes("file_path") && LF_GEN_FILE.includes("'path'"),
+          "both spellings of the path argument are recognised");
+assert.ok(LF_GEN_PATH.includes("file_path") && LF_GEN_PATH.includes("'path'"),
+          "LF_GEN_PATH reads whichever spelling is present");
+
+// Both pages that count tool calls must actually union the two eras, or they go blank after the
+// 18th again. The union is the fix; asserting on it is what stops a later edit quietly undoing it.
+for (const page of ["stats.html", "bash.html", "files.html"]) {
+  const src = readFileSync(new URL("./" + page, import.meta.url), "utf8");
+  assert.ok(/UNION ALL/.test(src), `${page} unions the tool-span and litellm eras`);
+  assert.ok(/lfGenSelect\(\)/.test(src), `${page} sources litellm calls from the shared builder`);
+}
+
+// ---- unmeasured is not zero ----
+// litellm sees the model asking for a tool and never the tool running, so its calls have no
+// duration, no output size and no outcome. Those must be NULL rather than 0: a nullable column is
+// excluded from a median and from count(), whereas a 0 drags the median toward zero and
+// countIf(failed) silently reads "not recorded" as "succeeded".
+for (const page of ["stats.html", "bash.html", "files.html"]) {
+  const src = readFileSync(new URL("./" + page, import.meta.url), "utf8");
+  assert.ok(/CAST\(NULL, 'Nullable\(UInt8\)'\) AS fail_flag/.test(src),
+            `${page} marks the unmeasured era's outcome NULL, not 0`);
+  // countIf(fail_flag) on a Nullable would count NULLs as false and report them as successes; the
+  // explicit "= 1" is what keeps unmeasured out of the failure count.
+  assert.ok(!/countIf\(fail_flag\)/.test(src),
+            `${page} must compare fail_flag explicitly, not coerce a Nullable to a predicate`);
+  // And the denominator has to travel with the numerator, or the rate is a share of everything.
+  assert.ok(/count\(fail_flag\) AS (known|rated)/.test(src),
+            `${page} carries a denominator for the calls that record an outcome`);
+}
+// bash.html's duration and output are the other two unmeasurables, and the page's medians and
+// byte totals are only honest if they are nullable too.
+{
+  const src = readFileSync(new URL("./bash.html", import.meta.url), "utf8");
+  assert.ok(/CAST\(NULL, 'Nullable\(Float64\)'\) AS secs_raw/.test(src),
+            "bash.html marks unmeasured duration NULL");
+  assert.ok(/CAST\(NULL, 'Nullable\(UInt64\)'\) AS out_len/.test(src),
+            "bash.html marks unmeasured output size NULL");
+  // A null out_len summed into a byte bucket would report the litellm era as an "empty" bucket.
+  assert.ok(/WHERE out_len IS NOT NULL GROUP BY bucket/.test(src),
+            "the output distribution excludes calls with no recorded size");
+}
+
 // ---- chunked extraction: the thing that keeps the secrets scan inside the memory limit ----
 const { SCAN_CHUNK, VALUE_LIMIT: VLIM } = new Function(
   readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
   return { SCAN_CHUNK, VALUE_LIMIT };`)();
 // Every unrolled extractAll re-reads the text column, so the batch has to stay small. 6 was the
 // largest that survived the real query shape (which also carries gid + both timestamps through
-// the arrayJoin); anything above that peaked over 1.9 GiB and was killed.
-assert.ok(SCAN_CHUNK >= 1 && SCAN_CHUNK <= 6,
-          `SCAN_CHUNK must stay in 1..6, got ${SCAN_CHUNK} — above 6 the scan is killed`);
+// the arrayJoin); anything above that peaked over 1.9 GiB and was killed. Lowered to 2 once the
+// table reached 7.2 GiB of text: 4 still ran but peaked at 1.19 GiB against the 1.86 GiB ceiling,
+// and 2 brings the same chunk to 843 MiB for no extra wall-clock.
+assert.ok(SCAN_CHUNK >= 1 && SCAN_CHUNK <= 4,
+          `SCAN_CHUNK must stay in 1..4, got ${SCAN_CHUNK} — above 4 the scan runs too close ` +
+          `to the per-query memory ceiling on a table this size`);
+
+// ---- the read-block cap: the OTHER memory limit, and the one SCAN_CHUNK cannot fix ----
+// A block is sized in ROWS, these rows are sized in MEGABYTES. At the 8192-row default, one block
+// of litellm's million-byte rows is a 2 GiB allocation and the query dies inside the column read —
+// "(while reading column input)" — before extractAll is ever evaluated. So chunking the patterns
+// cannot prevent it and neither can a PREWHERE; only a smaller block can.
+{
+  const { SCAN_BLOCK_ROWS, textScanParams } = new Function(
+    readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
+    return { SCAN_BLOCK_ROWS, textScanParams };`)();
+  // 8192 is the ClickHouse default and the value that fails; 2048 failed too. 256 measured 622 MiB
+  // on the query that was dying, and below 256 buys nothing (128 → 617 MiB, 64 → 603 MiB).
+  assert.ok(SCAN_BLOCK_ROWS >= 32 && SCAN_BLOCK_ROWS <= 1024,
+            `SCAN_BLOCK_ROWS must stay in 32..1024, got ${SCAN_BLOCK_ROWS} — 2048 and up are killed ` +
+            `by a 2 GiB read chunk`);
+  // The setting has to reach ClickHouse as max_block_size, as a string (URL params are strings).
+  const p = textScanParams();
+  assert.equal(p.max_block_size, String(SCAN_BLOCK_ROWS),
+               "textScanParams sends the block cap as max_block_size");
+  assert.ok(Object.values(p).every((v) => typeof v === "string"),
+            "query params must be strings to survive URLSearchParams");
+}
+
+// Every query that reads input/output in bulk must opt into the small block, or it is the one that
+// gets killed. These are the four: both scan phases in app.js, and the model attribution and
+// per-value drill-in in secrets.html.
+{
+  const appSrc = readFileSync(new URL("./app.js", import.meta.url), "utf8");
+  for (const q of ["hitsQuery(src, active)", "valuesQuery(src, part)"]) {
+    const call = appSrc.slice(appSrc.indexOf(q));
+    assert.ok(/^[^;]*textScan:\s*true/.test(call),
+              `${q} must be issued with textScan: true — it reads the text column`);
+  }
+  const secSrc = readFileSync(new URL("./secrets.html", import.meta.url), "utf8");
+  for (const q of ["modelsQuery(part)", "placedQuery(src())"]) {
+    const call = secSrc.slice(secSrc.indexOf(q));
+    assert.ok(/^[\s\S]{0,160}?textScan:\s*true/.test(call),
+              `${q} must be issued with textScan: true — it reads the text column`);
+  }
+  // The filter-options query reads only LowCardinality columns; giving it a 256-row block would
+  // make a ~30ms query needlessly chatty for no memory benefit.
+  assert.ok(!/service_name AS v FROM \$\{TABLE\}[\s\S]{0,400}?textScan:\s*true/.test(secSrc),
+            "the filter-options query must not ask for the small block — it reads no text");
+}
 
 // A chunk's pattern index is 1-based within its own batch, so it must be shifted by the batch
 // offset to address `matched`. Without the shift every value is attributed to the wrong rule.
@@ -263,6 +421,116 @@ assert.ok(SCAN_CHUNK >= 1 && SCAN_CHUNK <= 6,
   // and is therefore valid either way, which is why asserting on `p` alone misses this.
   assert.ok(Math.max(...values.map((r) => Number(r.idx))) > kit.SCAN_CHUNK,
             "global indices run past SCAN_CHUNK, so the per-chunk offset was applied");
+}
+
+// ---- query cache: the settings that make it work, and the reload that must bypass it ----
+// All three settings are load-bearing. Without 'save' ClickHouse ERRORS on the scan rather than
+// skipping the cache (multiMatchAllIndices is classed nondeterministic), so a missing one breaks
+// the page outright rather than just slowing it down.
+{
+  const { cacheParams, CACHE_TTL, CACHE_MIN_MS } = new Function(
+    readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
+    return { cacheParams, CACHE_TTL, CACHE_MIN_MS };`)();
+
+  const warm = cacheParams(false), fresh = cacheParams(true);
+  assert.equal(warm.use_query_cache, "1");
+  assert.equal(warm.query_cache_nondeterministic_function_handling, "save",
+               "without 'save' ClickHouse errors on multiMatchAllIndices instead of caching");
+  // A live table plus an unbounded TTL means a forgotten tab reports yesterday's secrets.
+  assert.ok(Number(warm.query_cache_ttl) > 0 && Number(warm.query_cache_ttl) <= 3600,
+            "entries must expire: the source table is still being written to");
+  // Cheap queries (filter options, ~30ms) must not evict a scan result from a 1024-entry cache.
+  assert.ok(Number(warm.query_cache_min_query_duration) > 0,
+            "only slow queries earn a cache slot");
+
+  // Reload bypasses READS but still STORES, so the next page load is warm. cache=0 would throw
+  // both away and make every reload cost the next visitor a cold scan too.
+  assert.equal(fresh.enable_reads_from_query_cache, "0", "reload must not read from the cache");
+  assert.equal(fresh.use_query_cache, "1", "reload still repopulates the cache");
+  assert.equal(warm.enable_reads_from_query_cache, undefined,
+               "a normal load reads from the cache");
+  assert.equal(Number(CACHE_TTL), Number(warm.query_cache_ttl));
+  assert.equal(Number(CACHE_MIN_MS), Number(warm.query_cache_min_query_duration));
+}
+
+// The staleness caveat has to reach the reader: a cached security scan that looks live is the one
+// way this optimisation could mislead someone into thinking nothing leaked.
+{
+  const { scanNotes } = new Function(readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
+    return { scanNotes };`)();
+  const notes = scanNotes(
+    { _source: "s", _license: "l", upstream_count: 1, patterns: [{}],
+      dropped_expensive: [], dropped_invalid: [] },
+    { groupWord: "trace" }).join(" ");
+  assert.ok(/cache/i.test(notes), "the notes disclose that results may be cached");
+  assert.ok(/reload/i.test(notes), "the notes say how to force a fresh scan");
+}
+
+// ---- lineChart: a null is a gap, not a point on the floor ----
+// The pages now hand lineChart null for days the litellm era does not measure. Number(null) is 0,
+// so without explicit handling the chart draws a line diving to the axis and climbing back out —
+// which reads as "nothing failed" / "nothing was read back" over a stretch where nothing was
+// measured. Checked by counting the SVG paths: a gap in the middle must split the series in two.
+{
+  const svg = () => {
+    const node = {
+      tag: "svg", children: [], style: {}, attrs: {},
+      setAttribute(k, v) { this.attrs[k] = v },
+      getAttribute(k) { return this.attrs[k] },
+      append(...kids) { this.children.push(...kids) },
+      addEventListener() {},
+      getBoundingClientRect: () => ({ left: 0, width: 400 }),
+      querySelector: () => null,
+      get clientWidth() { return 400 },
+    };
+    return node;
+  };
+  const made = [];
+  globalThis.document = {
+    head: { append() {} }, body: { append() {} },
+    createElement: (tag) => { const n = svg(); n.tag = tag; n.classList = { add() {}, toggle() {} };
+                              Object.defineProperty(n, "textContent", { set() {}, get: () => "" });
+                              return n },
+    createElementNS: (_ns, tag) => { const n = svg(); n.tag = tag; made.push(n); return n },
+    getElementById: () => null, querySelector: () => null,
+  };
+  const { lineChart } = new Function(
+    readFileSync(new URL("./app.js", import.meta.url), "utf8") + "\nreturn { lineChart };")();
+
+  const paths = () => made.filter((n) => n.tag === "path" && n.attrs.class === "series");
+  const host = { clientWidth: 400 };
+
+  made.length = 0;
+  lineChart(host, [{ d: "2026-09-01", v: 5 }, { d: "2026-09-02", v: 7 },
+                   { d: "2026-09-03", v: 6 }],
+            { x: (r) => r.d, series: [{ name: "s", value: (r) => r.v, color: "red" }],
+              tipText: () => "" });
+  assert.equal(paths().length, 1, "an unbroken series is one path");
+
+  made.length = 0;
+  lineChart(host, [{ d: "2026-09-01", v: 5 }, { d: "2026-09-02", v: null },
+                   { d: "2026-09-03", v: 6 }],
+            { x: (r) => r.d, series: [{ name: "s", value: (r) => r.v, color: "red" }],
+              tipText: () => "" });
+  assert.equal(paths().length, 2, "a null splits the series into two runs, leaving a visible gap");
+
+  // The null must not reach the path data as a zero either — a 0 y-coordinate for the middle point
+  // would be the exact false claim, even if the line happened to be split.
+  made.length = 0;
+  lineChart(host, [{ d: "2026-09-01", v: 100 }, { d: "2026-09-02", v: null }],
+            { x: (r) => r.d, series: [{ name: "s", value: (r) => r.v, color: "red" }],
+              tipText: () => "" });
+  assert.equal(paths().length, 1, "a trailing null ends the series rather than extending it");
+  // And the scale must ignore nulls: with max computed over [100, null] a coerced 0 is harmless,
+  // but over [null] Math.max would yield NaN and every coordinate would be NaN.
+  made.length = 0;
+  lineChart(host, [{ d: "2026-09-01", v: null }, { d: "2026-09-02", v: null }],
+            { x: (r) => r.d, series: [{ name: "s", value: (r) => r.v, color: "red" }],
+              tipText: () => "" });
+  assert.equal(paths().length, 0, "an entirely unmeasured series draws nothing");
+  for (const n of made) {
+    assert.ok(!/NaN/.test(JSON.stringify(n.attrs)), "no NaN coordinates reach the SVG");
+  }
 }
 
 console.log("ok — all query checks passed");

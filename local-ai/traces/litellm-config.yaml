@@ -15,12 +15,20 @@ model_list:
   # the model string itself, not just the anthropic-beta header. A `[1m]` session asks for
   # "claude-sonnet-5[1m]" verbatim, and an unregistered name 400s — including for the sonnet call
   # behind tool-permission checks, which takes the whole CLI down.
-  - model_name: claude-opus-5[1m]
-    litellm_params: &opus
+  - model_name: claude-opus-5-5[1m]
+    litellm_params: &opus_5_5
       <<: &bedrock
         aws_profile_name: os.environ/AWS_PROFILE
         aws_region_name: os.environ/AWS_REGION
         aws_bedrock_runtime_endpoint: os.environ/AWS_BEDROCK_RUNTIME_ENDPOINT
+      model: bedrock/converse/us.anthropic.claude-opus-5-5
+      model_id: os.environ/BEDROCK_PROFILE_OPUS_5_5
+  - model_name: claude-opus-5-5
+    litellm_params: *opus_5_5
+
+  - model_name: claude-opus-5[1m]
+    litellm_params: &opus
+      <<: *bedrock
       model: bedrock/converse/us.anthropic.claude-opus-5
       model_id: os.environ/BEDROCK_PROFILE_OPUS
   - model_name: claude-opus-5
@@ -40,6 +48,33 @@ model_list:
       <<: *bedrock
       model: bedrock/converse/us.anthropic.claude-haiku-4-5-20251001-v1:0
       model_id: os.environ/BEDROCK_PROFILE_HAIKU
+
+  # OpenAI GPT-6 on Bedrock, for comparing against the Claude tiers in the Langfuse playground.
+  # Claude Code cannot reach these — it speaks the Anthropic API and ANTHROPIC_DEFAULT_*_MODEL
+  # cannot name a non-Claude model — but litellm presents them on the OpenAI-compatible route
+  # like everything else here, so the playground and evaluators can.
+  #
+  # bedrock/converse/, not bedrock/, and not an openai/ prefix: on Bedrock an application
+  # inference profile is only accepted by the Converse API. The OpenAI-style Responses and Chat
+  # Completions routes reject the profile ARN, which loses charge-number attribution.
+  #
+  # Blank BEDROCK_PROFILE_GPT6_* leaves these entries authenticating against nothing while the
+  # Claude and ollama models keep working — same failure mode as the rest of the bedrock block.
+  - model_name: gpt-6-astra
+    litellm_params:
+      <<: *bedrock
+      model: bedrock/converse/us.openai.gpt-6-astra
+      model_id: os.environ/BEDROCK_PROFILE_GPT6_ASTRA
+  - model_name: gpt-6-sol
+    litellm_params:
+      <<: *bedrock
+      model: bedrock/converse/us.openai.gpt-6-sol
+      model_id: os.environ/BEDROCK_PROFILE_GPT6_SOL
+  - model_name: gpt-6-luna
+    litellm_params:
+      <<: *bedrock
+      model: bedrock/converse/us.openai.gpt-6-luna
+      model_id: os.environ/BEDROCK_PROFILE_GPT6_LUNA
 
   # Local ollama, reached on the host rather than in the compose network.
   - model_name: laguna-xs-2.1

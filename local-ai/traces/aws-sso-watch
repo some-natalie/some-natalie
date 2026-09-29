@@ -1,0 +1,165 @@
+#!/usr/bin/env bash
+# Open the AWS SSO login tab before litellm starts failing on it.
+#
+# The sso_guard hook inside litellm makes an expired session legible (a 403 naming the login
+# command instead of a retried 500), but something still has to actually run the login, and the
+# container cannot: it has no aws cli and no way to reach a browser. This runs on the host,
+# checks how much life the cached SSO token has left, and runs `aws sso login` — which opens the
+# tab itself — while there is still time to finish before anything breaks.
+#
+# Install as a launchd agent with --install; see the heredoc at the bottom for the interval.
+set -euo pipefail
+
+LABEL="com.some-natalie.aws-sso-watch"
+PLIST="$HOME/Library/LaunchAgents/${LABEL}.plist"
+LOG="$HOME/Library/Logs/${LABEL}.log"
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+ENV_FILE="$(dirname "$SELF")/.env"
+
+notify() {
+  # A dialog rather than a notification: a banner is easy to miss, and a login tab opening with
+  # no explanation is worse than no tab at all.
+  /usr/bin/osascript -e "display notification \"$1\" with title \"AWS SSO\"" >/dev/null 2>&1 || true
+}
+
+log() { printf '%s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$*"; }
+
+# AWS_PROFILE comes from the same .env litellm reads, so the watcher and the proxy can never
+# disagree about which profile matters. Absent file or absent key both yield empty rather than
+# failing: an ollama-only install has no profile to watch and must no-op, not crash-loop under
+# launchd. Hence the `|| true` — `pipefail` would otherwise turn grep's no-match exit into a
+# fatal error for the whole script.
+profile_from_env() {
+  [ -f "$ENV_FILE" ] || return 0
+  local line
+  line="$(grep -E '^AWS_PROFILE=' "$ENV_FILE" | tail -1 || true)"
+  printf '%s' "${line#AWS_PROFILE=}" | tr -d '"'"'"' \r'
+}
+
+# Whether the credential chain currently resolves for this profile.
+#
+# `aws configure export-credentials` walks the same chain botocore uses inside litellm, so a
+# profile this call resolves is one the proxy can authenticate with, and a profile it cannot is
+# exactly the state that produces the 403 from sso_guard.
+#
+# This is the whole test, deliberately. The tempting alternative — read the Expiration field and
+# renew some minutes ahead of it — renews against the wrong clock: that timestamp is the derived
+# role credential's (hours, refreshed from the SSO token with no browser involved), not the SSO
+# token's. Acting on it would open a login tab on every role-credential rollover, including the
+# overwhelmingly common case where the SSO session behind it is perfectly healthy. Only an
+# expired SSO token makes the chain fail outright, so failure is the one signal that actually
+# means "a human has to visit a browser".
+#
+# The cost is detection rather than prediction: up to one poll interval of broken bedrock calls.
+# sso_guard covers that window by making those calls fail loudly and instantly instead of
+# retrying, so nothing spins silently while this catches up.
+chain_resolves() {
+  aws configure export-credentials --profile "$1" >/dev/null 2>&1
+}
+
+check() {
+  local profile
+  profile="${AWS_PROFILE:-$(profile_from_env)}"
+  if [ -z "$profile" ]; then
+    log "no AWS_PROFILE set in $ENV_FILE or environment; nothing to watch"
+    return 0
+  fi
+
+  if chain_resolves "$profile"; then
+    log "profile $profile ok"
+    return 0
+  fi
+
+  log "profile $profile cannot resolve credentials, logging in"
+  notify "Opening a login tab for $profile."
+  # Opens the browser tab itself. --no-browser would defeat the entire point of this script.
+  if aws sso login --profile "$profile" >>"$LOG" 2>&1; then
+    log "login completed for $profile"
+    notify "Signed in. Bedrock models are available again."
+  else
+    # Left to the next poll rather than retried in a loop: a login fails mainly because nobody
+    # was at the keyboard, and stacking browser tabs does not help with that.
+    log "login FAILED for $profile"
+    notify "Login did not complete. Run: aws sso login --profile $profile"
+  fi
+}
+
+install_agent() {
+  mkdir -p "$(dirname "$PLIST")" "$(dirname "$LOG")"
+  cat >"$PLIST" <<PLIST_EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>${LABEL}</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>${SELF}</string>
+  </array>
+  <!-- Every 10 minutes against a 30-minute renewal window: a missed poll (laptop asleep,
+       which is most of them) still leaves two more chances before the token lapses. -->
+  <key>StartInterval</key><integer>600</integer>
+  <!-- Deliberately NOT RunAtLoad: that would pop a browser tab at every login. -->
+  <key>StandardOutPath</key><string>${LOG}</string>
+  <key>StandardErrorPath</key><string>${LOG}</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <!-- launchd agents get a minimal PATH that omits homebrew, where aws and jq live. -->
+    <key>PATH</key><string>/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+</dict>
+</plist>
+PLIST_EOF
+  launchctl unload "$PLIST" 2>/dev/null || true
+  launchctl load "$PLIST"
+  echo "installed ${LABEL} (polls every 10m, logs to ${LOG})"
+}
+
+uninstall_agent() {
+  launchctl unload "$PLIST" 2>/dev/null || true
+  rm -f "$PLIST"
+  echo "removed ${LABEL}"
+}
+
+case "${1:-check}" in
+check) check ;;
+--install) install_agent ;;
+--uninstall) uninstall_agent ;;
+--selfcheck)
+  # The one branch worth pinning: profile discovery reads the same .env litellm does, including
+  # the ollama-only case where there is no profile and the watcher must no-op rather than
+  # crash-loop under launchd. The credential check is a single aws call against real state and
+  # `check` opens a browser tab by design, so neither is exercised here.
+  tmp="$(mktemp -d)"
+  trap 'rm -rf "$tmp"' EXIT
+
+  printf 'LITELLM_MASTER_KEY=sk-x\nAWS_PROFILE=some-profile\nAWS_REGION=us-east-1\n' >"$tmp/.env"
+  ENV_FILE="$tmp/.env"
+  got="$(profile_from_env)"
+  [ "$got" = "some-profile" ] || {
+    echo "FAIL: expected 'some-profile' from .env, got '$got'" >&2
+    exit 1
+  }
+
+  printf 'LITELLM_MASTER_KEY=sk-x\n' >"$tmp/.env"
+  got="$(profile_from_env)"
+  [ -z "$got" ] || {
+    echo "FAIL: a .env without AWS_PROFILE must yield empty, got '$got'" >&2
+    exit 1
+  }
+
+  ENV_FILE="$tmp/nonexistent"
+  got="$(profile_from_env)"
+  [ -z "$got" ] || {
+    echo "FAIL: a missing .env must yield empty, got '$got'" >&2
+    exit 1
+  }
+
+  echo "aws-sso-watch: ok"
+  ;;
+*)
+  echo "usage: $(basename "$0") [check|--install|--uninstall|--selfcheck]" >&2
+  exit 64
+  ;;
+esac

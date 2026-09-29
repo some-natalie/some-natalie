@@ -95,7 +95,11 @@ model_list:
       api_base: os.environ/OLLAMA_BASE
 
 litellm_settings:
-  callbacks: ["langfuse_otel"]
+  # sso_guard rejects bedrock requests with a 403 naming the `aws sso login` command when the
+  # SSO token has lapsed. Without it botocore's TokenRetrievalError becomes a 500, and Claude
+  # Code retries 500s — so an expired session showed up as a silent spinner in the editor and a
+  # wall of Error rows in Langfuse rather than as anything actionable. ollama is not gated.
+  callbacks: ["langfuse_otel", "sso_guard.sso_guard_instance"]
   drop_params: true
   # 33B models on a laptop are slow; the default 600s cuts long agent turns off
   request_timeout: 1800

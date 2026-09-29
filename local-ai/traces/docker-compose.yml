@@ -50,7 +50,7 @@ x-langfuse-env: &langfuse-env
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:26.9.2.8
+    image: clickhouse/clickhouse-server:26.9.3.38
     container_name: clickhouse
     restart: unless-stopped
     mem_limit: 4g

@@ -50,7 +50,7 @@ x-langfuse-env: &langfuse-env
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:26.9.1.1629
+    image: clickhouse/clickhouse-server:26.9.2.8
     container_name: clickhouse
     restart: unless-stopped
     # 4 GiB, and having a cgroup limit at all is the point: without one ClickHouse sizes its own
@@ -107,7 +107,7 @@ services:
   # pi (and anything else OpenAI-compatible) talks to ollama through here, so the
   # traffic gets traced. pi has no exporter of its own.
   litellm:
-    image: ghcr.io/berriai/litellm:v1.102.1
+    image: ghcr.io/berriai/litellm:v1.103.0
     container_name: litellm
     restart: unless-stopped
     # Measured at ~900 MiB under load, not the ~560 MiB it idles at — 1 GiB left it at 88% and one
@@ -154,7 +154,7 @@ services:
       - ~/.aws/sso:/aws-home/.aws/sso
 
   langfuse-web:
-    image: langfuse/langfuse:4.41.0
+    image: langfuse/langfuse:4.46.0
     container_name: langfuse-web
     restart: unless-stopped
     # Next.js server, ~800 MiB idle. 2 GiB: the UI renders trace payloads that can be MBs each.
@@ -188,7 +188,7 @@ services:
         condition: service_healthy
 
   langfuse-worker:
-    image: langfuse/langfuse-worker:4.41.0
+    image: langfuse/langfuse-worker:4.46.0
     container_name: langfuse-worker
     restart: unless-stopped
     # ~690 MiB idle. 2 GiB — this one does the ingestion batching and S3 blob writes.
@@ -198,7 +198,7 @@ services:
     depends_on: *langfuse-deps
 
   langfuse-postgres:
-    image: postgres:17
+    image: postgres:18
     container_name: langfuse-postgres
     restart: unless-stopped
     # Only metadata (users, projects, keys); the trace volume lives in ClickHouse.

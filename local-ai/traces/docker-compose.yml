@@ -82,7 +82,7 @@ services:
     image: cgr.dev/chainguard/nginx:latest
     container_name: acp-ui
     restart: unless-stopped
-    # nginx serving six static pages. 64m ran at 73% once the worker cached them; 128m is still
+    # nginx serving eight static pages. 64m ran at 73% once the worker cached them; 128m is still
     # trivial and leaves room for the secret-patterns.json (222 KB) to grow.
     mem_limit: 128m
     volumes:

@@ -1,0 +1,324 @@
+#!/usr/bin/env python3
+"""Backfill Pi sessions from ~/.pi/agent/sessions into ClickHouse as ACP wire traffic.
+
+Pi sessions are stored as JSONL files in ~/.pi/agent/sessions/. Each file contains
+a series of entries with types: session, model_change, thinking_level_change, message.
+
+Rows are written as agent 'pi-acp' with pid 0, which marks them as replayed:
+  ALTER TABLE acp.messages DELETE WHERE pid = 0 AND agent = 'pi-acp'
+undoes a run. Sessions already present in acp.messages are skipped, so this is re-runnable.
+
+Usage:
+  ./pi-backfill --dry-run        report what would be inserted
+  ./pi-backfill
+"""
+
+import base64
+import glob
+import json
+import os
+import sys
+import urllib.parse
+import urllib.request
+from datetime import datetime
+
+PI_SESSION_GLOB = os.path.expanduser("~/.pi/agent/sessions/**/*.jsonl")
+AGENT = "pi-acp"
+
+
+def _config():
+    cfg = {}
+    path = os.path.expanduser("~/.config/acp-tap/env")
+    try:
+        with open(path) as fh:
+            for line in fh:
+                line = line.strip()
+                if line.startswith("ACP_TAP_") and "=" in line:
+                    key, value = line.split("=", 1)
+                    cfg[key] = value
+    except OSError:
+        pass
+    cfg.update({k: v for k, v in os.environ.items() if k.startswith("ACP_TAP_")})
+    return cfg
+
+
+def _post(rows, cfg, table=None):
+    query = "INSERT INTO %s FORMAT JSONEachRow" % (table or cfg.get("ACP_TAP_TABLE", "acp.messages"))
+    url = cfg.get("ACP_TAP_URL", "http://127.0.0.1:8123/") + "?" + urllib.parse.urlencode({"query": query})
+    body = b"".join(json.dumps(r).encode() + b"\n" for r in rows)
+    req = urllib.request.Request(url, data=body, method="POST")
+    user, password = cfg.get("ACP_TAP_USER"), cfg.get("ACP_TAP_PASSWORD")
+    if user:
+        token = base64.b64encode(("%s:%s" % (user, password or "")).encode()).decode()
+        req.add_header("Authorization", "Basic " + token)
+    urllib.request.urlopen(req, timeout=10).read()
+
+
+def _select(sql, cfg):
+    url = cfg.get("ACP_TAP_URL", "http://127.0.0.1:8123/")
+    req = urllib.request.Request(url + "?" + urllib.parse.urlencode({"default_format": "TSV"}), data=sql.encode())
+    user, password = cfg.get("ACP_TAP_USER"), cfg.get("ACP_TAP_PASSWORD")
+    if user:
+        req.add_header("Authorization", "Basic " + base64.b64encode(("%s:%s" % (user, password or "")).encode()).decode())
+    body = urllib.request.urlopen(req, timeout=30).read().decode()
+    return [line for line in body.splitlines() if line]
+
+
+def convert(session_id, lines, title):
+    """Convert Pi session lines to acp.messages rows."""
+    rows = []
+    msg_id = 0
+    last_ms = 0
+    current_tool_call = None
+
+    def _stamp(ms):
+        return datetime.fromtimestamp(ms / 1000).strftime("%Y-%m-%d %H:%M:%S") + ".%03d" % (ms % 1000)
+
+    def _emit(when_ms, direction, payload):
+        nonlocal last_ms
+        ms = max(int(when_ms), last_ms + 1)
+        last_ms = ms
+        rows.append({
+            "ts": _stamp(ms),
+            "agent": AGENT,
+            "pid": 0,
+            "dir": direction,
+            "raw": json.dumps(payload, separators=(",", ":"))
+        })
+
+    def _update(when_ms, upd):
+        _emit(when_ms, "agent", {"jsonrpc": "2.0", "method": "session/update",
+                                 "params": {"sessionId": session_id, "update": upd}})
+
+    # Track the last assistant message timestamp for close_turn
+    last_assistant_ts = 0
+    last_prompt_ts = 0
+    last_user_block = None
+
+    for entry in lines:
+        entry_type = entry.get("type")
+
+        # Handle session metadata
+        if entry_type == "session":
+            # First entry is always the session root
+            continue
+
+        if entry_type == "model_change":
+            # Track model changes if needed
+            continue
+
+        if entry_type == "thinking_level_change":
+            # Track thinking level if needed
+            continue
+
+        if entry_type != "message":
+            continue
+
+        message = entry.get("message") or {}
+        ts = entry.get("timestamp")
+        if not ts:
+            continue
+
+        # Convert ISO timestamp to milliseconds
+        when_ms = int(datetime.fromisoformat(ts.replace("Z", "+00:00")).timestamp() * 1000)
+
+        role = message.get("role")
+        content = message.get("content") or []
+
+        if role == "user":
+            # User message becomes a session/prompt
+            prompt_blocks = []
+            for block in content:
+                if block.get("type") == "text" and block.get("text", "").strip():
+                    prompt_blocks.append({"type": "text", "text": block["text"]})
+                elif block.get("type") == "resource_link":
+                    prompt_blocks.append({"type": "text", "text": f"\n{block.get('url', '')}\n"})
+
+            if prompt_blocks:
+                msg_id += 1
+                _emit(when_ms, "client", {
+                    "jsonrpc": "2.0",
+                    "id": msg_id,
+                    "method": "session/prompt",
+                    "params": {"sessionId": session_id, "prompt": prompt_blocks}
+                })
+                last_prompt_ts = when_ms
+                last_user_block = content[0] if content else None
+
+            # Handle tool results from user (responses to tool calls)
+            for block in content:
+                if block.get("type") == "tool_result":
+                    tool_call_id = block.get("toolCallId", "")
+                    if tool_call_id and current_tool_call and current_tool_call.get("id") == tool_call_id:
+                        # This is a response to a tool call we tracked
+                        result_content = block.get("content", [])
+                        result_text = ""
+                        if isinstance(result_content, str):
+                            result_text = result_content
+                        elif isinstance(result_content, list):
+                            for item in result_content:
+                                if item.get("type") == "text":
+                                    result_text += item.get("text", "")
+                        _update(when_ms, {
+                            "sessionUpdate": "tool_call_update",
+                            "toolCallId": tool_call_id,
+                            "status": "completed" if not block.get("isError") else "failed",
+                            "rawOutput": result_text
+                        })
+                        current_tool_call = None
+
+        elif role == "assistant":
+            # Assistant message with thinking and/or tool calls
+            for block in content:
+                if block.get("type") == "thinking" and block.get("thinking"):
+                    # Thinking block - send as agent_thought_chunk
+                    _update(when_ms, {
+                        "sessionUpdate": "agent_thought_chunk",
+                        "messageId": message.get("id", ""),
+                        "content": {"type": "text", "text": block["thinking"]}
+                    })
+                elif block.get("type") == "toolCall":
+                    # Tool call - send as tool_call
+                    tool_call_id = block.get("id", "")
+                    current_tool_call = {
+                        "id": tool_call_id,
+                        "name": block.get("name", ""),
+                        "inputs": block.get("arguments", {})
+                    }
+                    # Map Pi tool names to ACP kinds
+                    tool_name = block.get("name", "")
+                    kinds = {
+                        "Bash": "execute",
+                        "Edit": "edit",
+                        "Write": "edit",
+                        "NotebookEdit": "edit",
+                        "Read": "read",
+                        "WebFetch": "fetch",
+                        "WebSearch": "fetch",
+                        "Agent": "think"
+                    }
+                    _update(when_ms, {
+                        "sessionUpdate": "tool_call",
+                        "toolCallId": tool_call_id,
+                        "title": tool_name,
+                        "kind": kinds.get(tool_name, "other"),
+                        "rawInput": block.get("arguments", {}),
+                        "status": "pending"
+                    })
+                elif block.get("type") == "text":
+                    # Text response - send as agent_message_chunk
+                    _update(when_ms, {
+                        "sessionUpdate": "agent_message_chunk",
+                        "messageId": message.get("id", ""),
+                        "content": {"type": "text", "text": block.get("text", "")}
+                    })
+
+            # Track last assistant timestamp for session end
+            last_assistant_ts = when_ms
+
+    # Send prompt row for the session (to connect threads)
+    if last_prompt_ts > 0:
+        # Add a closing session/prompt to complete the turn
+        pass
+
+    # Sync Zed titles for these sessions
+    return rows
+
+
+def get_zed_title(session_id):
+    """Get the title for a session from Zed's database."""
+    # We'll handle this in main() by fetching from zed_titles table
+    return None
+
+
+def main():
+    dry_run = "--dry-run" in sys.argv
+
+    cfg = _config()
+
+    # Check which sessions already exist
+    existing = set(_select("SELECT session_id FROM acp.messages WHERE agent = 'pi-acp'", cfg))
+
+    # Get all pi-acp sessions from Zed
+    zed_sessions = {}
+    try:
+        for path in glob.glob(os.path.expanduser("~/Library/Application Support/Zed/db/*/db.sqlite")):
+            import sqlite3
+            conn = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+            try:
+                for row in conn.execute(
+                    "SELECT session_id, title FROM sidebar_threads WHERE agent_id = 'pi-acp' AND session_id IS NOT NULL"
+                ):
+                    zed_sessions[row[0]] = row[1]
+            except sqlite3.Error:
+                pass
+            finally:
+                conn.close()
+    except Exception as e:
+        print(f"Error reading Zed db: {e}", file=sys.stderr)
+
+    # Find all pi session files
+    session_files = glob.glob(PI_SESSION_GLOB, recursive=True)
+
+    todo = []
+    total_rows = 0
+
+    for filepath in session_files:
+        # Extract session ID from filename
+        basename = os.path.basename(filepath)
+        # Filename format: TIMESTAMP_SESSIONID.jsonl
+        parts = basename.replace(".jsonl", "").split("_", 1)
+        if len(parts) < 2:
+            continue
+        session_id = parts[1]
+
+        if session_id in existing:
+            continue
+
+        # Check if this session is in Zed
+        title = zed_sessions.get(session_id, "")
+
+        # Read the session file
+        with open(filepath) as f:
+            lines = [json.loads(line) for line in f if line.strip()]
+
+        rows = convert(session_id, lines, title)
+        total_rows += len(rows)
+        todo.append((session_id, title, rows))
+
+    print(f"Found {len(todo)} pi sessions to process")
+    print(f"Total rows: {total_rows}")
+
+    batch = []
+    sent = 0
+
+    for session_id, title, rows in todo:
+        print(f"  {session_id[:8]} - {title[:48] if title else 'untitled'} - {len(rows)} rows")
+        if dry_run:
+            sent += len(rows)
+            continue
+
+        for row in rows:
+            batch.append(row)
+            if len(batch) >= 300:
+                _post(batch, cfg)
+                sent += len(batch)
+                batch = []
+
+    if batch:
+        _post(batch, cfg)
+        sent += len(batch)
+
+    if not dry_run:
+        # Also sync titles to zed_titles table
+        titles = [{"session_id": s, "title": t, "ts": datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]}
+                  for s, t, _ in todo]
+        if titles:
+            _post(titles, cfg, "acp.zed_titles")
+
+    print("%s %d rows across %d session(s)" % ("would insert" if dry_run else "inserted", sent, len(todo)))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

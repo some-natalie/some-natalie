@@ -187,7 +187,12 @@ services:
     depends_on: *langfuse-deps
 
   langfuse-postgres:
-    image: cgr.dev/chainguard/postgres:latest
+    # Pinned by digest, not :latest — this one has a volume, and $PGDATA/PG_VERSION says 18.
+    # A pull that crossed into PG 19 would leave the postmaster refusing to start against
+    # incompatible data files, with no automatic pg_upgrade. Chainguard's free tier publishes
+    # no major-version tags (`:18` 404s), so a digest is the only way to hold the major.
+    # To move majors deliberately: pg_dumpall, bump the digest, trash the volume, restore.
+    image: cgr.dev/chainguard/postgres@sha256:ccb5cde67f0b0d701f842598610c1865e4f8cfda870156908b17d5a6bc11e652 # 18.6
     container_name: langfuse-postgres
     restart: unless-stopped
     # Only metadata (users, projects, keys); the trace volume lives in ClickHouse.
@@ -206,15 +211,18 @@ services:
       start_period: 30s
 
   langfuse-redis:
+    # :latest is fine here, unlike postgres — no volume, so a major bump costs an empty queue.
     image: cgr.dev/chainguard/redis:latest
     container_name: langfuse-redis
     restart: unless-stopped
-    # Ingestion queue only. The redis maxmemory below is what actually bounds the data; this is a
-    # backstop so a queue backlog cannot grow into the host's RAM.
+    # Ingestion queue only. maxmemory below is what bounds the data; mem_limit is the backstop
+    # so a queue backlog cannot grow into the host's RAM. maxmemory has to stay under mem_limit:
+    # with noeviction, hitting maxmemory rejects writes (the worker retries), while hitting
+    # mem_limit is an OOM kill that drops the whole queue.
     mem_limit: 512m
     # ponytail: no volume, it is only the ingestion queue. Add one if a restart
     # mid-flush ever drops traces worth keeping.
-    command: --requirepass ${LANGFUSE_REDIS_PASSWORD:?required} --maxmemory-policy noeviction
+    command: --requirepass ${LANGFUSE_REDIS_PASSWORD:?required} --maxmemory 384mb --maxmemory-policy noeviction
     environment:
       - REDISCLI_AUTH=${LANGFUSE_REDIS_PASSWORD:?required}
     healthcheck:

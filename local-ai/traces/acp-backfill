@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Backfill Zed's pre-tap ACP threads into ClickHouse from Claude Code's own transcripts.
 
 Zed stores only a title for each ACP thread; the conversation itself lives in the agent's

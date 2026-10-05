@@ -19,8 +19,14 @@ const PAGES = [["index.html", "home"], ["browse.html", "browse"],
 //
 //   * events_core is the same rows with input/output truncated, and traces/observations are the
 //     empty pre-4.x tables. Only events_full has the whole payload.
-//   * span_id is unique and nothing is double-written, so none of the ACP pages' replay dedup
-//     (min(ts), rank-by-status) is needed here. One row is one call.
+//   * span_id is NOT unique. The acp-langfuse replay re-sends the same derived ids and Langfuse
+//     appends rather than overwrites, so 41,072 of 124,573 live rows are a second copy of a span
+//     that already existed. The aggregate pages read LF_TABLE, which carries FINAL, or every
+//     count reads ~1.8x high.
+//   * LF_TABLE_RAW is the same table without FINAL, for the secrets scan only. Reconciling parts
+//     while decompressing gigabytes of prompt text peaks at 1.60 GiB against the 1.86 GiB
+//     per-query ceiling, and that scan groups by the extracted secret value — a token in two
+//     copies of one row is still one token to rotate, so it does not need FINAL.
 //   * `name` is not a tool name. It frequently carries the command or path appended — "Edit
 //     some-natalie/.../app.css", "git push 2>&1 | tail -2" — which is 5,854 distinct values, and
 //     5,032 shell calls have a name that IS the command ("cd", "export", "grep"). Filtering on
@@ -28,7 +34,8 @@ const PAGES = [["index.html", "home"], ["browse.html", "browse"],
 //     instead: LF_SHELL for a command, LF_FILE for a file path. The two never overlap.
 //   * session_id is empty on every TOOL row, so trace_id is the only grouping key available.
 //   * is_deleted = 0 because the table is a ReplacingMergeTree with soft deletes.
-const LF_TABLE = "default.events_full";
+const LF_TABLE_RAW = "default.events_full";
+const LF_TABLE = `${LF_TABLE_RAW} FINAL`;
 const LF_LIVE = "is_deleted = 0";
 const LF_SHELL = "JSONHas(input, 'command')";
 const LF_FILE = "JSONHas(input, 'file_path')";

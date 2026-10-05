@@ -6,8 +6,11 @@ services:
     ports:
       - "3080:8080"
     environment:
-      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:?required}
+      - ENABLE_OLLAMA_API=false
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - ENABLE_OPENAI_API=true
+      - OPENAI_API_BASE_URLS=http://host.docker.internal:4141/v1
+      - OPENAI_API_KEYS=${LITELLM_MASTER_KEY:?required}
       - RAG_EMBEDDING_ENGINE=ollama
       - RAG_EMBEDDING_MODEL=nomic-embed-text-v2-moe
       - VECTOR_DB=elasticsearch

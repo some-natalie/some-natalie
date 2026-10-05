@@ -134,11 +134,12 @@ assert.equal(compact(-1e6), "-1.0M", "negatives keep their sign and unit");
 
 // ---- langfuse source: the shape the llm-* stats/bash/files pages depend on ----
 const {
-  lfCalls, LF_TABLE, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS, LF_PREWHERE,
+  lfCalls, LF_TABLE, LF_TABLE_RAW, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS,
+  LF_PREWHERE,
   lfGenCalls, lfGenSelect, LF_GEN_SHELL, LF_GEN_FILE, LF_GEN_PATH, LF_GEN_PREWHERE,
 } = new Function(readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
-  return { lfCalls, LF_TABLE, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS, LF_SECS,
-           LF_PREWHERE, lfGenCalls, lfGenSelect, LF_GEN_SHELL, LF_GEN_FILE, LF_GEN_PATH,
+  return { lfCalls, LF_TABLE, LF_TABLE_RAW, LF_LIVE, LF_SHELL, LF_FILE, LF_FAILED, LF_STATUS,
+           LF_SECS, LF_PREWHERE, lfGenCalls, lfGenSelect, LF_GEN_SHELL, LF_GEN_FILE, LF_GEN_PATH,
            LF_GEN_PREWHERE };`)();
 
 // Tools must be identified by the input payload, never by the event name: Langfuse's `name`
@@ -151,7 +152,18 @@ for (const probe of [LF_SHELL, LF_FILE]) {
 }
 
 // events_full, not events_core (truncated input/output) and not traces/observations (empty).
-assert.equal(LF_TABLE, "default.events_full");
+assert.equal(LF_TABLE_RAW, "default.events_full");
+// FINAL on the shared name, because span_id stopped being unique when acp-langfuse was re-run:
+// a replay re-sends the same derived ids and Langfuse appends rather than overwrites, so 37,825
+// TOOL spans exist twice and an un-reconciled count reads ~1.8x high.
+assert.equal(LF_TABLE, "default.events_full FINAL");
+// The two must stay distinct names. Blanket FINAL is not safe here: on the secrets scan it peaks
+// at 1.60 GiB against a 1.86 GiB ceiling, so that page deliberately keeps the raw table.
+assert.notEqual(LF_TABLE, LF_TABLE_RAW, "the raw table is a separate name, not an alias");
+assert.ok(!LF_TABLE_RAW.includes("FINAL"), "the raw name must not carry FINAL");
+// Order matters in ClickHouse: FROM <table> FINAL PREWHERE ..., never PREWHERE before FINAL.
+assert.ok(`FROM ${LF_TABLE} ${LF_PREWHERE}`.includes("events_full FINAL PREWHERE"),
+          "FINAL precedes PREWHERE");
 // Soft deletes must be excluded, or deleted rows reappear in every count.
 assert.ok(/is_deleted\s*=\s*0/.test(LF_LIVE), "live rows exclude soft-deleted");
 
@@ -174,6 +186,30 @@ assert.ok(LF_STATUS.includes("metadata_names"), "status reads the metadata map")
 // Duration must be seconds, so the page's MAX_SECS cap and bucket edges mean what they say.
 assert.ok(LF_SECS.includes("/ 1000") && LF_SECS.includes("millisecond"),
           "duration is milliseconds converted to seconds");
+
+// ---- which pages read the table with FINAL, and which deliberately do not ----
+// A page picking the wrong one of these fails silently and in opposite directions: the aggregate
+// pages would over-count ~1.8x, and the secrets scan would creep toward the memory ceiling and get
+// killed. Both are worth pinning to the source text.
+{
+  const read = (f) => readFileSync(new URL("./" + f, import.meta.url), "utf8");
+
+  // The aggregate pages must go through LF_TABLE, which carries FINAL.
+  for (const page of ["stats.html", "cost.html", "errors.html", "bash.html", "files.html"]) {
+    const src = read(page);
+    assert.ok(src.includes("${LF_TABLE}"), `${page} reads the table through LF_TABLE`);
+    assert.ok(!src.includes("LF_TABLE_RAW"),
+              `${page} must not opt out of FINAL — its counts would run high`);
+  }
+
+  // The secrets scan is the documented exception, and it must say so rather than look like a slip.
+  const secrets = read("secrets.html");
+  assert.ok(/const TABLE = LF_TABLE_RAW/.test(secrets),
+            "the secrets scan reads the raw table: FINAL peaks at 1.60 GiB there");
+  assert.ok(/1\.60 GiB|1\.86 GiB/.test(secrets),
+            "the secrets scan states the measured reason it skips FINAL");
+}
+
 
 // ---- the PREWHERE that keeps these pages from killing the server ----
 // This is the memory bug, and it is a placement bug, not a predicate bug. `input` holds whole
@@ -531,6 +567,65 @@ assert.ok(SCAN_CHUNK >= 1 && SCAN_CHUNK <= 4,
   for (const n of made) {
     assert.ok(!/NaN/.test(JSON.stringify(n.attrs)), "no NaN coordinates reach the SVG");
   }
+}
+
+// ---- metadata accessors: where the error cause and the token split actually live ----
+// These are the whole basis of errors.html and cost.html, and both encode a fact about this data
+// that is easy to get wrong in the opposite direction.
+{
+  const { LF_META, LF_ERR_TYPE, LF_ERR_MSG, LF_GEN_ONLY, LF_CTX, LF_TOK_FRESH, LF_TOK_CACHED } =
+    new Function(readFileSync(new URL("./app.js", import.meta.url), "utf8") + `
+      return { LF_META, LF_ERR_TYPE, LF_ERR_MSG, LF_GEN_ONLY, LF_CTX,
+               LF_TOK_FRESH, LF_TOK_CACHED };`)();
+
+  // metadata is parallel arrays, not a map: indexOf/arrayElement, never a ['key'] subscript.
+  assert.equal(LF_META("a.b"), "metadata_values[indexOf(metadata_names, 'a.b')]");
+  assert.ok(/indexOf\(metadata_names/.test(LF_ERR_TYPE), "error type reads the metadata arrays");
+  assert.ok(LF_ERR_TYPE.includes("attributes.error.type"));
+  assert.ok(LF_ERR_MSG.includes("attributes.error.message"));
+  // The cause is NOT status_message: it is empty on all 695 failed generation rows, so a page
+  // reading it reports a count and no cause. This assertion is the regression guard on that.
+  assert.ok(!LF_ERR_TYPE.includes("status_message"),
+            "the failure cause comes from metadata, not from the empty status_message column");
+
+  // Cached input is ADDITIVE to fresh input. Context must be their SUM — a ratio of one to the
+  // other yields 1,743% on this data, which is how the bug announces itself.
+  assert.ok(LF_CTX.includes(LF_TOK_FRESH) && LF_CTX.includes(LF_TOK_CACHED),
+            "context is fresh plus cached input");
+  assert.ok(LF_CTX.includes("+"), "context ADDS the two token counts");
+  assert.ok(!/\/\s*usage_details/.test(LF_CTX),
+            "context must not divide cached by fresh — they are not a subset relationship");
+
+  // The generation-only PREWHERE must stay off `input`. That column averages ~989 KB per row on
+  // these events, and touching it at scan time is the 40 MiB -> 1.02 GiB difference app.js
+  // documents at LF_PREWHERE.
+  assert.ok(LF_GEN_ONLY.startsWith("PREWHERE"), "cheap columns filter in a PREWHERE");
+  assert.ok(LF_GEN_ONLY.includes("type = 'GENERATION'") && LF_GEN_ONLY.includes("is_deleted = 0"));
+  assert.ok(!/JSONHas|\binput\b/.test(LF_GEN_ONLY),
+            "the generation filter must not touch the input column");
+}
+
+// ---- xMarks: a categorical axis is not a date axis ----
+// The context-growth chart's x values are turn buckets. Before this was handled, every one of them
+// came back as an empty label (slice(5) of "11–25") with a stray "0" — an axis with no readable
+// marks at all, which is worse than no axis.
+{
+  const { xMarks } = new Function(readFileSync(new URL("./app.js", import.meta.url), "utf8") +
+                                  "\nreturn { xMarks };")();
+  const buckets = ["1–5", "6–10", "11–25", "26–50", "51–100", "100+"];
+  const marks = xMarks(buckets);
+  assert.equal(marks.length, buckets.length, "every categorical bucket gets a mark");
+  assert.deepEqual(marks.map((m) => m.text), buckets, "a non-date label passes through verbatim");
+  assert.ok(marks.every((m) => m.text !== ""), "no categorical mark is blank");
+
+  // Dates must keep their existing behaviour: month-day inside three weeks, and thinned beyond it.
+  const days = (n) => Array.from({ length: n }, (_, i) =>
+    new Date(Date.UTC(2026, 0, 1 + i)).toISOString().slice(0, 10));
+  assert.equal(xMarks(days(10)).length, 10, "ten days are all labelled");
+  assert.equal(xMarks(days(10))[0].text, "01-01", "a date mark is month-day");
+  assert.ok(xMarks(days(200)).length < 200, "two hundred days are thinned, not all labelled");
+  assert.ok(xMarks(days(200)).every((m) => /^[a-z]{3}$/.test(m.text)),
+            "a long span labels months");
 }
 
 console.log("ok — all query checks passed");

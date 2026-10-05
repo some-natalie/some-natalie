@@ -1,0 +1,545 @@
+#!/usr/bin/python3
+"""Seed Langfuse dashboards for the agent traces in this stack.
+
+Three dashboards, built from what the data actually supports:
+
+  agent cost        spend by model and by session, cache share, token mix
+  agent errors      why model requests fail, which routes are dead
+  agent activity    tool calls, latency, throughput
+
+Why this writes to Postgres instead of calling an API: Langfuse has no public dashboards
+endpoint (/api/public/dashboards is 404 on 4.46). Dashboards and their widgets are rows in
+langfuse-postgres — `dashboards` holds the grid layout, `dashboard_widgets` holds one row
+per panel — and the UI reads them straight from there. So seeding is an upsert into two
+tables, which is also why it is idempotent: ids are derived from the widget key, so a
+re-run updates in place rather than stacking duplicates.
+
+What the widget rows may contain is NOT free-form. Each one is a query the UI builds
+through Langfuse's own query layer, so only its declared dimensions and measures exist,
+and the three constraints that shaped every panel here are:
+
+  * view=OBSERVATIONS only. The `traces` view does not exist in v4 events-only mode, which
+    this deployment runs — a widget using it fails at render with an opaque error.
+  * metadata is a FILTER, not a dimension. The failure cause lives in
+    metadata.attributes.error.type, and there is no way to group by it, so an error panel
+    is one widget per cause with a `stringObject` filter rather than a single breakdown.
+  * a high-cardinality dimension (sessionId, id, traceId) needs a row_limit in
+    chart_config. The UI derives the matching `orderBy` itself from the first metric
+    (buildWidgetOrderBy), so chart_config carrying row_limit is the whole requirement, but
+    without it the query is rejected.
+
+Every query below was run against /api/public/v2/metrics before being written, which is
+what --verify re-runs. The DB and the API disagree on one field name: the row stores
+`agg`, the API takes `aggregation`.
+
+Usage:
+  ./langfuse-dashboards --self-check    assert the builders, no network, no disk
+  ./langfuse-dashboards --verify        run every widget's query through the API, write nothing
+  ./langfuse-dashboards --dry-run       print the SQL that would run
+  ./langfuse-dashboards                 upsert the dashboards
+  ./langfuse-dashboards --delete        remove them
+"""
+
+import base64
+import datetime
+import json
+import os
+import subprocess
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+
+PROJECT_ID = "pi"  # this compose file initialises exactly one project
+POSTGRES_CONTAINER = "langfuse-postgres"
+
+# Ids are derived, not random: "acp-cost-by-model" every run, so a second run updates the
+# same row. A uuid here would mean every run added another copy of every panel.
+ID_PREFIX = "acp"
+
+
+# ---- widget builders ----
+# A widget is a view, a breakdown, a measure and a chart type. These wrappers exist so a
+# panel reads as one line and the awkward parts — chart_config needing row_limit for the
+# high-cardinality breakdowns, `agg` vs `aggregation` — are in one place rather than
+# repeated twenty times.
+
+
+def widget(key, name, description, chart, measure, agg, dimensions=(), filters=(), row_limit=None):
+    """One dashboard panel. `key` becomes the row id, so it must be stable across runs."""
+    config = {"type": chart}
+    if row_limit is not None:
+        config["row_limit"] = row_limit
+    return {
+        "key": key,
+        "id": "%s-%s" % (ID_PREFIX, key),
+        "name": name,
+        "description": description,
+        "view": "OBSERVATIONS",
+        "chart_type": chart,
+        # The row stores `agg`; the metrics API calls the same field `aggregation`.
+        "metrics": [{"measure": measure, "agg": agg}],
+        "dimensions": [{"field": f} for f in dimensions],
+        "filters": list(filters),
+        "chart_config": config,
+    }
+
+
+# A failed request is level=ERROR on a GENERATION row. Reused by every error panel.
+ERROR_ONLY = {"type": "stringOptions", "column": "level", "operator": "any of", "value": ["ERROR"]}
+
+
+def error_cause(key, name, etype, note):
+    """A panel counting one error cause, broken down by model.
+
+    The cause cannot be a dimension — metadata is filter-only — so each cause gets its own
+    widget with a `contains` filter on attributes.error.type. Breaking down by model is
+    what makes it useful: it shows whether a cause is one broken route or everything.
+    """
+    return widget(
+        key, name, note, "HORIZONTAL_BAR", "count", "count",
+        dimensions=["providedModelName"],
+        filters=[
+            ERROR_ONLY,
+            {"type": "stringObject", "column": "metadata",
+             "key": "attributes.error.type", "operator": "contains", "value": etype},
+        ],
+        row_limit=20,
+    )
+
+
+# ---- the dashboards ----
+# Layout is a 12-column grid; x_size/y_size are in grid cells. Panels are ordered so the
+# headline number is top-left, where a dashboard is actually read.
+
+COST_WIDGETS = [
+    widget("cost-total", "Total spend",
+           "Summed cost of every model request in the window.",
+           "NUMBER", "totalCost", "sum", row_limit=100),
+    widget("cost-by-model", "Spend by model",
+           "Which models carry the bill. Opus against Sonnet is the ratio worth watching: "
+           "same work, an order of magnitude apart in price.",
+           "PIE", "totalCost", "sum", dimensions=["providedModelName"], row_limit=100),
+    widget("cost-over-time", "Spend per day",
+           "Daily cost by model. A step change here is either a new model or a change in "
+           "how much context each turn carries.",
+           "BAR_TIME_SERIES", "totalCost", "sum", dimensions=["providedModelName"]),
+    # sessionId is high-cardinality, hence row_limit. This is the panel the model-level
+    # numbers cannot give you: one conversation cost $927 while the median cost about $5.
+    widget("cost-by-session", "Dearest sessions",
+           "Cost per conversation, which is the unit a bill is actually run up in — a trace "
+           "is one model turn, so trace costs are per-turn and much smaller.",
+           "HORIZONTAL_BAR", "totalCost", "sum", dimensions=["sessionId"], row_limit=20),
+    # usageType splits input/input_cached_tokens/output. Cached input is ADDITIVE to input,
+    # not a subset: summed over this data input is 90.6M and cached 1.57B, so a "hit rate"
+    # of cached/input reads 1,743%. This panel shows the three as what they are, side by
+    # side, rather than inviting that division.
+    widget("cost-token-mix", "Token mix",
+           "Input, cached input and output as separate totals. Cached input is ADDITIONAL "
+           "to the fresh input count, not a subset of it, so context per turn is the two "
+           "added together and a cached/fresh ratio is meaningless.",
+           "PIE", "usageByType", "sum", dimensions=["usageType"], row_limit=100),
+    widget("cost-per-model-call", "Cost per request",
+           "Mean cost of one request, by model. Separates an expensive model from a "
+           "model that is merely called a lot.",
+           "HORIZONTAL_BAR", "totalCost", "avg", dimensions=["providedModelName"],
+           row_limit=20),
+]
+
+ERROR_WIDGETS = [
+    widget("err-total", "Failed requests",
+           "Model requests that never completed. A tool failing is counted separately.",
+           "NUMBER", "count", "count", filters=[ERROR_ONLY], row_limit=100),
+    widget("err-over-time", "Failures per day",
+           "Daily failure count. Compare against the spend chart: failures cost nothing, "
+           "so a day with many is a day of wasted waiting rather than wasted money.",
+           "BAR_TIME_SERIES", "count", "count", filters=[ERROR_ONLY]),
+    # Every model, not only the failing ones, because the finding is the all-or-nothing
+    # split: five converse/* routes are 100% errors and have never once succeeded.
+    widget("err-by-model", "Failures by model",
+           "A route that only ever appears here has never completed a request — that is a "
+           "name in litellm-config.yaml that does not resolve, not a model problem.",
+           "HORIZONTAL_BAR", "count", "count", dimensions=["providedModelName"],
+           filters=[ERROR_ONLY], row_limit=20),
+    widget("err-requests-by-model", "Requests by model",
+           "Total requests per model, to read the failure counts beside. 454 failures out "
+           "of 454 attempts and 454 out of 45,000 are the same count and different findings.",
+           "HORIZONTAL_BAR", "count", "count", dimensions=["providedModelName"],
+           row_limit=20),
+    error_cause("err-sso", "Expired SSO tokens", "APIConnectionError",
+                "litellm could not retrieve a token from SSO. The single largest cause here, "
+                "and it is an auth problem on this box — see aws-sso-watch and sso_guard.py."),
+    error_cause("err-unavailable", "Unreachable endpoint", "ServiceUnavailableError",
+                "Bedrock could not be reached, generally a VPC endpoint refusing "
+                "connections. Second largest cause, and also infrastructure."),
+    error_cause("err-denied", "Access denied", "PermissionDeniedError",
+                "Bedrock refused the model: IAM policy or a missing Marketplace "
+                "subscription. Unlike the two above, this one does not clear on its own."),
+    widget("err-sessions", "Sessions hit by failures",
+           "Which conversations carried failures. A session appearing here spent time it "
+           "has nothing to show for.",
+           "HORIZONTAL_BAR", "count", "count", dimensions=["sessionId"],
+           filters=[ERROR_ONLY], row_limit=20),
+]
+
+ACTIVITY_WIDGETS = [
+    widget("act-requests", "Model requests",
+           "Every generation in the window, failed ones included.",
+           "NUMBER", "count", "count", row_limit=100),
+    # calledToolNames is the clean column. The `name` field is NOT a tool name — it carries
+    # the command or path appended ("Edit some-natalie/.../app.css") and thousands of shell
+    # calls have a name that IS the command, which is why app.js recovers tool identity from
+    # the input payload instead. Langfuse parses this array out of the completion, so here
+    # it is already correct.
+    widget("act-tools", "Tool calls by tool",
+           "From the parsed tool_call_names, not from the event name — that field carries "
+           "the command or file path appended and is useless as a tool identity.",
+           "HORIZONTAL_BAR", "toolCallInvocations", "sum", dimensions=["calledToolNames"],
+           row_limit=20),
+    widget("act-tools-over-time", "Tool calls per day",
+           "Daily tool invocations, by tool.",
+           "BAR_TIME_SERIES", "toolCallInvocations", "sum", dimensions=["calledToolNames"]),
+    widget("act-latency", "Latency p95 by model",
+           "95th percentile wall time per request. A local model sitting far above the "
+           "hosted ones is the expected shape, not a fault.",
+           "HORIZONTAL_BAR", "latency", "p95", dimensions=["providedModelName"],
+           row_limit=20),
+    widget("act-latency-over-time", "Latency p95 per day",
+           "p95 latency by day and model, for spotting a provider degrading.",
+           "LINE_TIME_SERIES", "latency", "p95", dimensions=["providedModelName"]),
+    widget("act-tokens-out", "Output tokens by model",
+           "Completion tokens produced. Unlike input, this is not inflated by cache reads.",
+           "HORIZONTAL_BAR", "outputTokens", "sum", dimensions=["providedModelName"],
+           row_limit=20),
+    widget("act-throughput", "Output tokens per second",
+           "Mean generation throughput by model.",
+           "HORIZONTAL_BAR", "outputTokensPerSecond", "avg", dimensions=["providedModelName"],
+           row_limit=20),
+    widget("act-tool-defs", "Tool definitions per request",
+           "How many tool schemas are sent with each request. They are re-sent every turn, "
+           "so a long tool list is a standing cost on every single call.",
+           "HORIZONTAL_BAR", "toolDefinitions", "avg", dimensions=["providedModelName"],
+           row_limit=20),
+]
+
+DASHBOARDS = [
+    {
+        "key": "cost",
+        "name": "agent cost",
+        "description": "Spend by model and by session, token mix, and cost per request. "
+                       "Cached input is additional to fresh input, never a subset.",
+        "widgets": COST_WIDGETS,
+    },
+    {
+        "key": "errors",
+        "name": "agent errors",
+        "description": "Why model requests fail. The cause comes from metadata "
+                       "(attributes.error.type) because status_message is empty on almost "
+                       "every failed row.",
+        "widgets": ERROR_WIDGETS,
+    },
+    {
+        "key": "activity",
+        "name": "agent activity",
+        "description": "Request volume, tool calls, latency and throughput.",
+        "widgets": ACTIVITY_WIDGETS,
+    },
+]
+
+
+def layout(widgets):
+    """Place widgets on the 12-column grid.
+
+    A NUMBER tile is a small square; everything else takes half the width. Rows are filled
+    left to right and wrap at 12 columns, which keeps this a function of the widget list
+    rather than a hand-maintained table of coordinates that drifts when a panel is added.
+    """
+    placed, x, y, row_height = [], 0, 0, 0
+    for w in widgets:
+        is_tile = w["chart_type"] == "NUMBER"
+        xs, ys = (3, 3) if is_tile else (6, 5)
+        if x + xs > 12:
+            x, y = 0, y + row_height
+            row_height = 0
+        placed.append({
+            "id": w["id"], "type": "widget", "widgetId": w["id"],
+            "x": x, "y": y, "x_size": xs, "y_size": ys,
+        })
+        x += xs
+        row_height = max(row_height, ys)
+    return {"widgets": placed}
+
+
+# ---- sql ----
+# Parameters go through a $1..$n list rather than string formatting: these values include
+# descriptions with apostrophes, and a quote in a panel description should not be able to
+# end a SQL literal.
+
+
+def sql_statements(dashboards):
+    """The upserts, as (sql, params) pairs."""
+    out = []
+    for dash in dashboards:
+        for w in dash["widgets"]:
+            out.append((
+                """
+                INSERT INTO dashboard_widgets
+                  (id, project_id, name, description, view, dimensions, metrics, filters,
+                   chart_type, chart_config, created_at, updated_at)
+                VALUES ($1, $2, $3, $4, $5::"DashboardWidgetViews", $6::jsonb, $7::jsonb,
+                        $8::jsonb, $9::"DashboardWidgetChartType", $10::jsonb,
+                        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                ON CONFLICT (id) DO UPDATE SET
+                  name = EXCLUDED.name, description = EXCLUDED.description,
+                  view = EXCLUDED.view, dimensions = EXCLUDED.dimensions,
+                  metrics = EXCLUDED.metrics, filters = EXCLUDED.filters,
+                  chart_type = EXCLUDED.chart_type, chart_config = EXCLUDED.chart_config,
+                  updated_at = CURRENT_TIMESTAMP
+                """,
+                [w["id"], PROJECT_ID, w["name"], w["description"], w["view"],
+                 json.dumps(w["dimensions"]), json.dumps(w["metrics"]),
+                 json.dumps(w["filters"]), w["chart_type"], json.dumps(w["chart_config"])],
+            ))
+        out.append((
+            """
+            INSERT INTO dashboards
+              (id, project_id, name, description, definition, filters, created_at, updated_at)
+            VALUES ($1, $2, $3, $4, $5::jsonb, '[]'::jsonb,
+                    CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            ON CONFLICT (id) DO UPDATE SET
+              name = EXCLUDED.name, description = EXCLUDED.description,
+              definition = EXCLUDED.definition, updated_at = CURRENT_TIMESTAMP
+            """,
+            ["%s-%s" % (ID_PREFIX, dash["key"]), PROJECT_ID, dash["name"],
+             dash["description"], json.dumps(layout(dash["widgets"]))],
+        ))
+    return out
+
+
+def delete_statements(dashboards):
+    ids = ["%s-%s" % (ID_PREFIX, d["key"]) for d in dashboards]
+    widget_ids = [w["id"] for d in dashboards for w in d["widgets"]]
+    return [
+        ("DELETE FROM dashboards WHERE id = ANY($1::text[])", ["{%s}" % ",".join(ids)]),
+        ("DELETE FROM dashboard_widgets WHERE id = ANY($1::text[])",
+         ["{%s}" % ",".join(widget_ids)]),
+    ]
+
+
+def _psql(sql, params):
+    """Run one statement in the Postgres container."""
+    password = _env("LANGFUSE_POSTGRES_PASSWORD")
+    # check=False because the returncode is handled below: psql's own stderr names the
+    # column or constraint that failed, which is more use than a CalledProcessError.
+    proc = subprocess.run(
+        ["docker", "exec", "-e", "PGPASSWORD=" + password, POSTGRES_CONTAINER,
+         "psql", "-U", "postgres", "-v", "ON_ERROR_STOP=1", "-q",
+         "-c", _inline(sql, params)],
+        capture_output=True, text=True, check=False)
+    if proc.returncode:
+        sys.exit("psql failed: %s" % (proc.stderr.strip() or proc.stdout.strip()))
+    return proc.stdout
+
+
+def _quote(value):
+    """A Postgres string literal. Doubling the quote is the escape."""
+    return "'" + str(value).replace("'", "''") + "'"
+
+
+def _inline(sql, params):
+    """Substitute $1..$n with quoted literals.
+
+    psql's own -v variables are not SQL parameters — they interpolate before parsing, so
+    they offer no quoting — and passing a statement over -c is the only shape that works
+    through `docker exec`. So quoting happens here, highest index first so $10 is not
+    rewritten as $1 followed by a literal 0.
+    """
+    for i in range(len(params), 0, -1):
+        sql = sql.replace("$%d" % i, _quote(params[i - 1]))
+    return sql
+
+
+def _env(name):
+    value = os.environ.get(name)
+    if value:
+        return value
+    try:
+        with open(os.path.join(_HERE, ".env")) as fh:
+            for line in fh:
+                line = line.strip()
+                if line.startswith(name + "="):
+                    return line.split("=", 1)[1]
+    except OSError:
+        pass
+    sys.exit("%s is not set and not in %s/.env" % (name, _HERE))
+
+
+# ---- verification ----
+# Every widget is a query, and a widget whose query the server rejects renders as an error
+# in the UI with no hint as to which field was wrong. So each one is run before it is
+# written. This is also the regression check for the three constraints in the docstring:
+# the traces view, metadata-as-dimension, and a missing row_limit all fail here first.
+
+
+def query_for(w, days=14):
+    """The metrics-API query a widget turns into.
+
+    Mirrors the UI's own mapping: `agg` becomes `aggregation`, and a breakdown chart with a
+    row_limit gets the orderBy the UI derives from the first metric (buildWidgetOrderBy).
+    """
+    now = datetime.datetime.now(datetime.timezone.utc)
+    metrics = [{"measure": m["measure"], "aggregation": m["agg"]} for m in w["metrics"]]
+    query = {
+        "view": w["view"].lower(),
+        "dimensions": w["dimensions"],
+        "metrics": metrics,
+        "filters": w["filters"],
+        "timeDimension": ({"granularity": "day"} if w["chart_type"].endswith("TIME_SERIES")
+                          else None),
+        "fromTimestamp": (now - datetime.timedelta(days=days)).isoformat(),
+        "toTimestamp": now.isoformat(),
+    }
+    row_limit = w["chart_config"].get("row_limit")
+    if row_limit is not None:
+        query["config"] = {"type": w["chart_type"], "row_limit": row_limit}
+        # Only a breakdown needs the top-N ordering; a NUMBER tile has no dimension to rank.
+        if w["dimensions"] and not w["chart_type"].endswith("TIME_SERIES"):
+            query["orderBy"] = [{"field": "%s_%s" % (metrics[0]["aggregation"],
+                                                     metrics[0]["measure"]),
+                                 "direction": "desc"}]
+    return query
+
+
+def verify(dashboards):
+    host = os.environ.get("LANGFUSE_HOST", "http://127.0.0.1:3000").rstrip("/")
+    auth = base64.b64encode(
+        ("%s:%s" % (_env("LANGFUSE_INIT_PROJECT_PUBLIC_KEY"),
+                    _env("LANGFUSE_INIT_PROJECT_SECRET_KEY"))).encode()).decode()
+    bad = 0
+    for dash in dashboards:
+        print("\n%s" % dash["name"])
+        for w in dash["widgets"]:
+            url = "%s/api/public/v2/metrics?%s" % (
+                host, urllib.parse.urlencode({"query": json.dumps(query_for(w))}))
+            request = urllib.request.Request(url, headers={"Authorization": "Basic " + auth})
+            try:
+                with urllib.request.urlopen(request, timeout=60) as response:
+                    rows = json.load(response).get("data", [])
+                # A valid query returning nothing is still worth flagging: it means the panel
+                # renders empty, which in this data usually means a measure that is only
+                # populated on rows the filter excludes.
+                note = "%d rows" % len(rows) if rows else "NO ROWS"
+                print("  ok    %-26s %s" % (w["key"], note))
+            except urllib.error.HTTPError as exc:
+                detail = exc.read().decode()[:200]
+                print("  FAIL  %-26s %s" % (w["key"], detail))
+                bad += 1
+    print("\n%d widget(s) rejected" % bad)
+    return 1 if bad else 0
+
+
+# ---- self-check ----
+
+
+def _self_check():
+    # Every id is unique and stable, which is what makes a re-run an update.
+    ids = [w["id"] for d in DASHBOARDS for w in d["widgets"]]
+    assert len(ids) == len(set(ids)), "widget ids must be unique"
+    assert all(i.startswith(ID_PREFIX + "-") for i in ids)
+
+    # The three hard constraints this deployment imposes, as assertions rather than prose.
+    for dash in DASHBOARDS:
+        for w in dash["widgets"]:
+            assert w["view"] == "OBSERVATIONS", (
+                "%s: the traces view does not exist in events-only mode" % w["key"])
+            assert all(d["field"] != "metadata" for d in w["dimensions"]), (
+                "%s: metadata is filter-only, never a dimension" % w["key"])
+            # A high-cardinality breakdown without a row_limit is rejected at query time.
+            if any(d["field"] in ("sessionId", "id", "traceId") for d in w["dimensions"]):
+                assert w["chart_config"].get("row_limit"), (
+                    "%s: a high-cardinality dimension needs a row_limit" % w["key"])
+
+    # The DB column is `agg`; only the API translation says `aggregation`.
+    assert all("agg" in m for d in DASHBOARDS for w in d["widgets"] for m in w["metrics"])
+    q = query_for(COST_WIDGETS[1])
+    assert q["metrics"][0]["aggregation"] == "sum", "the API wants `aggregation`"
+    assert "agg" not in q["metrics"][0]
+    assert q["view"] == "observations", "the API view name is lowercase"
+
+    # A breakdown with a row_limit gets the orderBy the UI would derive; a NUMBER tile,
+    # having no dimension to rank, must not.
+    assert query_for(COST_WIDGETS[3])["orderBy"] == [
+        {"field": "sum_totalCost", "direction": "desc"}]
+    assert "orderBy" not in query_for(COST_WIDGETS[0])
+    # A time series is ordered by time, so it takes a granularity and no top-N.
+    ts = query_for(COST_WIDGETS[2])
+    assert ts["timeDimension"] == {"granularity": "day"} and "orderBy" not in ts
+
+    # Layout: nothing overflows the 12-column grid and no two panels overlap.
+    for dash in DASHBOARDS:
+        cells = set()
+        for p in layout(dash["widgets"])["widgets"]:
+            assert p["x"] + p["x_size"] <= 12, "%s overflows the grid" % p["widgetId"]
+            for cx in range(p["x"], p["x"] + p["x_size"]):
+                for cy in range(p["y"], p["y"] + p["y_size"]):
+                    assert (cx, cy) not in cells, "%s overlaps another panel" % p["widgetId"]
+                    cells.add((cx, cy))
+        # Every widget is placed, or a panel exists that nothing renders.
+        assert len(layout(dash["widgets"])["widgets"]) == len(dash["widgets"])
+
+    # Quoting: an apostrophe in a description must not end the literal. Every real
+    # description goes through this, and one of them contains "does not".
+    assert _quote("it's") == "'it''s'"
+    assert _inline("SELECT $1", ["o'brien"]) == "SELECT 'o''brien'"
+    # $10 must substitute before $1, or it becomes the first param followed by a "0".
+    ten = _inline("$1 $10", ["a", "b", "c", "d", "e", "f", "g", "h", "i", "TENTH"])
+    assert ten == "'a' 'TENTH'", ten
+
+    # Error panels must actually filter to errors, or they count every request. The one
+    # exception is deliberate: err-requests-by-model is the DENOMINATOR panel, there so the
+    # failure counts beside it can be read as a rate, and filtering it to errors would make
+    # it a duplicate of err-by-model.
+    DENOMINATOR = {"err-requests-by-model"}
+    for w in ERROR_WIDGETS:
+        if w["key"] in DENOMINATOR:
+            assert not any(f.get("column") == "level" for f in w["filters"]), (
+                "%s is the denominator panel and must NOT filter to errors" % w["key"])
+            continue
+        assert any(f.get("column") == "level" for f in w["filters"]), (
+            "%s claims to be an error panel but does not filter on level" % w["key"])
+
+    print("self-check ok — %d widgets across %d dashboards"
+          % (len(ids), len(DASHBOARDS)))
+
+
+def main():
+    args = sys.argv[1:]
+    if "--self-check" in args:
+        return _self_check()
+    if "--verify" in args:
+        return sys.exit(verify(DASHBOARDS))
+
+    statements = delete_statements(DASHBOARDS) if "--delete" in args \
+        else sql_statements(DASHBOARDS)
+    if "--dry-run" in args:
+        for sql, params in statements:
+            print(_inline(" ".join(sql.split()), params) + ";")
+        print("\n-- %d statement(s), nothing run" % len(statements))
+        return
+
+    for sql, params in statements:
+        _psql(sql, params)
+    if "--delete" in args:
+        print("deleted %d dashboard(s) and their widgets" % len(DASHBOARDS))
+    else:
+        for dash in DASHBOARDS:
+            print("%-16s %2d widgets  %s/project/%s/dashboards/%s-%s"
+                  % (dash["name"], len(dash["widgets"]),
+                     os.environ.get("LANGFUSE_HOST", "http://127.0.0.1:3000").rstrip("/"),
+                     PROJECT_ID, ID_PREFIX, dash["key"]))
+
+
+if __name__ == "__main__":
+    main()

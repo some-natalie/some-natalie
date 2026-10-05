@@ -1,0 +1,341 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>acp · cost</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* Dashboard kit (cards, tiles, donut, line, tables, tooltip) lives in app.css. */
+  main { padding: 16px; display: grid; gap: 16px }
+</style>
+
+<header></header>
+<main>
+  <section class="card"><div class="kpis" id="kpis"></div></section>
+  <section class="card">
+    <h2>Where the money goes</h2>
+    <p class="sub" id="sub-models"></p>
+    <div id="c-models"></div>
+  </section>
+  <section class="card">
+    <h2>Spend per day</h2>
+    <p class="sub" id="sub-days"></p>
+    <div id="c-days"></div>
+  </section>
+  <section class="card">
+    <h2>Most expensive sessions</h2>
+    <p class="sub" id="sub-sessions"></p>
+    <div id="c-sessions"></div>
+  </section>
+  <section class="card">
+    <h2>Context growth</h2>
+    <p class="sub" id="sub-ctx"></p>
+    <div id="c-ctx"></div>
+  </section>
+</main>
+<footer id="notes"></footer>
+
+<script src="app.js"></script>
+<script>
+  // Cost per session, which is the unit a bill is actually incurred in — stats.html reports spend
+  // per MODEL, and a model total cannot tell you that one conversation cost $927 while the median
+  // cost $5. Sessions exist on GENERATION rows (13,247 of them carry a session_id) even though
+  // they are empty on every TOOL row, so this is the one page that can group by conversation.
+  //
+  // The trap this page is built around: input_cached_tokens is ADDITIVE to input, not a subset.
+  // Summed over the history, input is 90.6M and input_cached_tokens is 1.57B — so the obvious
+  // "cache hit rate = cached / input" gives 1,743%, and the real denominator is the two added
+  // together. LF_CTX in app.js is that sum, and every context figure here reads off it.
+
+  const DAYS = 90;
+
+  // Session rollup. Sessions with no id are excluded rather than bucketed: they are 4,057 rows
+  // holding $0.05 total, so they would add a meaningless "(no session)" row at the top of a
+  // leaderboard sorted by cost. The note under the table states the exclusion.
+  const SESSIONS = `
+    WITH sess AS (
+      SELECT session_id AS sid, count() AS gens,
+             sum(total_cost) AS usd,
+             sum(${LF_CTX}) AS ctx,
+             sum(usage_details['output']) AS tok_out,
+             min(start_time) AS from_ts, max(start_time) AS to_ts,
+             countIf(${LF_FAILED}) AS errs,
+             uniqExact(if(provided_model_name = '', '(unnamed)', provided_model_name)) AS models,
+             argMax(if(provided_model_name = '', '(unnamed)', provided_model_name),
+                    total_cost) AS top_model
+      FROM ${LF_TABLE}
+      ${LF_GEN_ONLY}
+      WHERE session_id != ''
+      GROUP BY sid
+    )`;
+
+  const Q = {
+    totals: `
+      SELECT count() AS gens, round(sum(total_cost), 4) AS usd,
+             uniqExactIf(session_id, session_id != '') AS sessions,
+             countIf(session_id = '') AS orphan_gens,
+             round(sumIf(total_cost, session_id = ''), 4) AS orphan_usd,
+             sum(${LF_TOK_FRESH}) AS fresh, sum(${LF_TOK_CACHED}) AS cached,
+             sum(usage_details['output']) AS tok_out,
+             min(start_time) AS from_ts, max(start_time) AS to_ts
+      FROM ${LF_TABLE} ${LF_GEN_ONLY}`,
+    // Cached and fresh input kept apart, because they are the whole story of why a 1.6-billion-token
+    // model bill is only $2,379: the cache serves ~95% of it at a fraction of the price.
+    byModel: `
+      SELECT if(provided_model_name = '', '(unnamed)', provided_model_name) AS model,
+             count() AS gens, round(sum(total_cost), 4) AS usd,
+             sum(${LF_TOK_FRESH}) AS fresh, sum(${LF_TOK_CACHED}) AS cached,
+             sum(usage_details['output']) AS tok_out,
+             uniqExactIf(session_id, session_id != '') AS sessions,
+             round(avg(total_cost), 6) AS per_call
+      FROM ${LF_TABLE} ${LF_GEN_ONLY}
+      GROUP BY model ORDER BY usd DESC, gens DESC`,
+    byDay: `
+      SELECT toDate(start_time) AS day, round(sum(total_cost), 4) AS usd, count() AS gens,
+             sum(${LF_CTX}) AS ctx
+      FROM ${LF_TABLE} ${LF_GEN_ONLY}
+      WHERE start_time >= today() - ${DAYS - 1}
+      GROUP BY day ORDER BY day
+      WITH FILL FROM assumeNotNull((SELECT greatest(toDate(min(start_time)), today() - ${DAYS - 1})
+                                    FROM ${LF_TABLE} ${LF_GEN_ONLY})) TO today() + 1 STEP 1`,
+    sessions: `${SESSIONS}
+      SELECT * FROM sess ORDER BY usd DESC`,
+    // Context by turn number within a session, bucketed. Raw turn numbers run past 1,000 and the
+    // per-turn average gets noisy in the tail where only a handful of sessions reach; buckets keep
+    // every turn in the picture while staying readable.
+    //
+    // row_number over start_time is the turn index. Rows with no context are excluded — a failed
+    // request records no tokens, and counting it as a 0-token turn would drag the curve down.
+    ctx: `
+      SELECT bucket, count() AS turns, round(avg(ctx)) AS avg_ctx,
+             round(quantile(0.9)(ctx)) AS p90_ctx, max(ctx) AS max_ctx, min(turn) AS ord
+      FROM (
+        SELECT multiIf(turn <= 5, '1–5', turn <= 10, '6–10', turn <= 25, '11–25',
+                       turn <= 50, '26–50', turn <= 100, '51–100', '100+') AS bucket,
+               turn, ctx
+        FROM (
+          SELECT row_number() OVER (PARTITION BY session_id ORDER BY start_time) AS turn,
+                 ${LF_CTX} AS ctx
+          FROM ${LF_TABLE}
+          ${LF_GEN_ONLY}
+          WHERE session_id != ''
+        )
+        WHERE ctx > 0
+      )
+      GROUP BY bucket ORDER BY ord`,
+  };
+
+  let DATA = null;
+
+  function paint() {
+    const { totals, byModel, byDay, sessions, ctx } = DATA;
+    const t = totals[0];
+    const usd = Number(t.usd);
+    const fresh = Number(t.fresh), cached = Number(t.cached);
+    const context = fresh + cached;
+    const pct = (n, d) => (n / Math.max(d, 1) * 100).toFixed(1) + "%";
+
+    const costs = sessions.map(r => Number(r.usd)).sort((a, b) => a - b);
+    const pctile = p => costs.length ? costs[Math.min(costs.length - 1, Math.floor(p * costs.length))] : 0;
+    // Which models carry the spend. The opus/sonnet ratio is the actionable number: same work,
+    // an order of magnitude apart in price.
+    const priced = byModel.filter(r => Number(r.usd) > 0);
+    const lead = priced[0];
+
+    const k = $("kpis");
+    k.textContent = "";
+    k.append(
+      tileNode({ label: "Total spend", value: usd ? money(usd) : "—", hero: true,
+                 foot: `${Number(t.gens).toLocaleString()} model requests · ` +
+                       `${t.from_ts.slice(0, 10)} → ${t.to_ts.slice(0, 10)}` }),
+      tileNode({ label: "Median session", value: costs.length ? money(pctile(0.5)) : "—",
+                 foot: `p90 ${money(pctile(0.9))} · worst ${money(costs.at(-1) || 0)}` }),
+      tileNode({ label: "Priciest model", value: lead ? money(lead.usd) : "—",
+                 foot: lead ? `${lead.model} — ${pct(Number(lead.usd), usd)} of all spend` : "" }),
+      tileNode({ label: "Context served from cache", value: context ? pct(cached, context) : "—",
+                 foot: `${compact(cached)} of ${compact(context)} input tokens were cache reads` }),
+      tileNode({ label: "Sessions", value: Number(t.sessions).toLocaleString(),
+                 foot: `${money(usd / Math.max(Number(t.sessions), 1))} average` }),
+    );
+
+    // Models. Ring for the share of spend, table for the token detail that explains it.
+    const SLICES = 5, MIN_SHARE = 0.015;
+    const head = priced.slice(0, SLICES).filter(r => Number(r.usd) / Math.max(usd, 1) >= MIN_SHARE);
+    const tail = priced.slice(head.length);
+    const slices = tail.length
+      ? [...head, { model: `other (${tail.length} models)`,
+                    usd: tail.reduce((a, r) => a + Number(r.usd), 0) }]
+      : head;
+
+    $("sub-models").textContent = usd
+      ? `${byModel.length} model names, ${priced.length} of them priced — a local model costs ` +
+        `nothing to run, so a zero is free rather than missing. Input is split into fresh and ` +
+        `cached because cached reads are a fraction of the price, and they are ` +
+        `${pct(cached, context)} of all context here.`
+      : `No generation events carry cost yet.`;
+    const mhost = $("c-models");
+    mhost.textContent = "";
+    const msplit = el("div", "split");
+    msplit.append(
+      donut(slices, {
+        label: r => r.model, value: r => Number(r.usd),
+        tipText: r => `${r.model}\n${money(r.usd)} · ${pct(Number(r.usd), usd)}`,
+        centre: money(usd), centreFoot: "total spend",
+      }),
+      (() => {
+        const box = el("div", "scroll");
+        const rank = new Map(head.map((r, i) => [r.model, i]));
+        box.append(tableNode([
+          { h: "", v: r => {
+              const sw = el("i", "sw");
+              const i = rank.has(r.model) ? rank.get(r.model) : head.length;
+              sw.style.background = Number(r.usd) ? CAT[i] : "var(--viz-track)";
+              return sw;
+            } },
+          { h: "model", v: r => r.model },
+          { h: "requests", n: true, v: r => Number(r.gens).toLocaleString() },
+          { h: "fresh in", n: true, v: r => compact(r.fresh) },
+          { h: "cached in", n: true, v: r => compact(r.cached) },
+          { h: "out", n: true, v: r => compact(r.tok_out) },
+          { h: "cost", n: true, v: r => Number(r.usd) ? money(r.usd) : "—" },
+          { h: "per call", n: true, v: r => Number(r.per_call) ? money(r.per_call) : "—" },
+          { h: "share", n: true, v: r => usd ? pct(Number(r.usd), usd) : "—" },
+        ], byModel));
+        return box;
+      })(),
+    );
+    mhost.append(msplit);
+
+    // Days. Cost alone, on its own scale: putting request counts on the same axis as dollars
+    // would be two units sharing one y, which is a chart that cannot be read.
+    $("sub-days").textContent =
+      `${byDay.length} days (rolling ${DAYS}-day window). Cost only — request counts live on ` +
+      `the stats page, and dollars and counts do not share an axis. Hover for a day's figures.`;
+    render("c-days",
+      host => lineChart(host, byDay, {
+        x: r => r.day,
+        yFmt: v => "$" + (v >= 100 ? v.toFixed(0) : v.toFixed(2)),
+        series: [{ name: "spend", value: r => Number(r.usd), color: "var(--viz-series)",
+                   area: true }],
+        tipText: r => `${r.day}\n${money(r.usd)}\n${Number(r.gens).toLocaleString()} requests · ` +
+                      `${compact(r.ctx)} context tokens`,
+      }),
+      () => tableNode([
+        { h: "day", v: r => r.day },
+        { h: "spend", n: true, v: r => Number(r.usd) ? money(r.usd) : "—" },
+        { h: "requests", n: true, v: r => Number(r.gens).toLocaleString() },
+        { h: "context", n: true, v: r => compact(r.ctx) },
+      ], byDay));
+
+    // Sessions. The distribution first, because the shape is the finding — the median session is
+    // cheap and the tail is where the bill is — then every session, dearest first.
+    let acc = 0, heads = 0;
+    for (const c of [...costs].reverse()) { if (acc >= usd / 2) break; acc += c; heads++ }
+
+    $("sub-sessions").textContent =
+      `${sessions.length} sessions with a cost. A session is one conversation, which is the unit ` +
+      `a bill is actually run up in — unlike a trace, which litellm opens per model turn. ` +
+      `${Number(t.orphan_gens).toLocaleString()} requests carry no session id and are left out; ` +
+      `they hold ${money(Number(t.orphan_usd))} between them.`;
+    const shost = $("c-sessions");
+    shost.textContent = "";
+    const stats = el("div", "kpis");
+    stats.append(
+      tileNode({ label: "Median session", value: money(pctile(0.5)), foot: "half cost less" }),
+      tileNode({ label: "90th percentile", value: money(pctile(0.9)),
+                 foot: "one session in ten costs at least this" }),
+      tileNode({ label: "Dearest session", value: money(costs.at(-1) || 0),
+                 foot: sessions[0] ? `${Number(sessions[0].gens).toLocaleString()} requests` : "" }),
+      tileNode({ label: "Half the spend", value: heads,
+                 foot: `session(s) account for half of all ${money(usd)}` }),
+    );
+    const drill = el("details");
+    const scroll = el("div", "scroll");
+    scroll.append(tableNode([
+      { h: "session", v: r => lfSession(r.sid) },
+      { h: "started", v: r => r.from_ts.slice(0, 16) },
+      { h: "mins", n: true,
+        v: r => Math.round((new Date(r.to_ts + "Z") - new Date(r.from_ts + "Z")) / 60000)
+                  .toLocaleString() },
+      { h: "requests", n: true, v: r => Number(r.gens).toLocaleString() },
+      { h: "context", n: true, v: r => compact(r.ctx) },
+      { h: "out", n: true, v: r => compact(r.tok_out) },
+      { h: "mostly", v: r => r.top_model },
+      { h: "failed", n: true, v: r => Number(r.errs) || "",
+        cls: r => Number(r.errs) ? "fail" : "" },
+      { h: "cost", n: true, v: r => money(r.usd) },
+      { h: "", w: "14%", v: r => barCell(Number(r.usd) / Math.max(costs.at(-1) || 1, 1)) },
+    ], sessions));
+    drill.append(el("summary", null, "every session, dearest first"), scroll);
+    shost.append(stats, drill);
+
+    // Context growth. The question this answers is whether compaction is holding: if the curve
+    // went linear in the turn count, something stopped trimming history.
+    const first = ctx[0], last = ctx.at(-1);
+    $("sub-ctx").textContent =
+      `Average context per turn, by how deep into a session the turn is. Context is fresh input ` +
+      `plus cached input — cached tokens are additional to the fresh count, not a subset of it, ` +
+      `so the two have to be added to get what a turn was actually billed for. ` +
+      (first && last
+        ? `From ${compact(first.avg_ctx)} in the first few turns to ${compact(last.avg_ctx)} ` +
+          `past turn 100: growth, but far short of the ${(Number(last.ord) / Number(first.ord)).toFixed(0)}× ` +
+          `the turn count rose, which is compaction doing its job.`
+        : "");
+    render("c-ctx",
+      host => lineChart(host, ctx, {
+        x: r => r.bucket,
+        series: [
+          { name: "average", value: r => Number(r.avg_ctx), color: "var(--viz-series)", area: true },
+          { name: "90th percentile", value: r => Number(r.p90_ctx), color: "var(--cat-2)" },
+        ],
+        tipText: r => `turns ${r.bucket}\n${compact(r.avg_ctx)} average context\n` +
+                      `${compact(r.p90_ctx)} at p90 · ${compact(r.max_ctx)} worst\n` +
+                      `${Number(r.turns).toLocaleString()} turns`,
+      }),
+      () => tableNode([
+        { h: "turns", v: r => r.bucket },
+        { h: "count", n: true, v: r => Number(r.turns).toLocaleString() },
+        { h: "avg context", n: true, v: r => compact(r.avg_ctx) },
+        { h: "p90", n: true, v: r => compact(r.p90_ctx) },
+        { h: "worst", n: true, v: r => compact(r.max_ctx) },
+      ], ctx));
+
+    const notes = $("notes");
+    notes.textContent = "";
+    notes.append(notesNode([
+      `Cost and tokens exist only on GENERATION rows. Tool spans carry neither, so nothing on this page counts tool calls — the stats page does that.`,
+      `Cached input is ADDITIVE to fresh input, not a subset. Over this history fresh input is ${compact(fresh)} tokens and cached input ${compact(cached)}, so dividing one by the other yields a "hit rate" over 1,700%. The context a turn was billed for is the two added together, which is what the context figures and the growth curve use.`,
+      `A cache read is far cheaper than a fresh token, which is the only reason ${compact(context)} tokens of context cost ${money(usd)} rather than an order of magnitude more. The fresh and cached columns are kept apart in the model table for that reason.`,
+      `A session is one conversation; a trace is one model turn. litellm opens a trace per request, so trace-level costs on the stats page are per-turn and cannot be compared with the session figures here. ${Number(t.orphan_gens).toLocaleString()} requests have no session id at all and are excluded from the leaderboard — they total ${money(Number(t.orphan_usd))}.`,
+      `Failed requests cost nothing and are counted in the session table's failed column, not in its cost. A session with failures spent time it has nothing to show for; the errors page breaks down why.`,
+      `The context curve excludes turns that recorded no tokens. A failed request reports zero input, and counting it as a zero-token turn would pull the average down for a turn that never happened.`,
+      `Turn buckets are uneven on purpose: turn numbers run past a thousand, and a per-turn average in the tail is a handful of sessions wide. Each bucket's turn count is in the table so a thin bucket is visible as thin.`,
+      `Prices are whatever Langfuse had configured when the request was recorded. A model repriced later does not restate its old rows, so a long history is a sum of several price lists.`,
+      `A live session inflates its own numbers, this page included.`,
+    ]));
+  }
+
+  async function load() {
+    setStatus("loading…");
+    try {
+      const [totals, byModel, byDay, sessions, ctx] = await Promise.all(
+        [Q.totals, Q.byModel, Q.byDay, Q.sessions, Q.ctx].map(s => query(s, {}, { cache: true })));
+      if (!totals.length || !Number(totals[0].gens)) {
+        setStatus("no model requests recorded yet");
+        $("kpis").textContent = "";
+        return;
+      }
+      DATA = { totals, byModel, byDay, sessions, ctx };
+      paint();
+      setStatus(`${money(Number(totals[0].usd))} over ` +
+                `${Number(totals[0].sessions).toLocaleString()} sessions`);
+    } catch (e) {
+      setStatus(e.message, true);
+    }
+  }
+
+  mountHeader({
+    current: "cost.html",
+    onReload: load,
+    onToggleView: () => { if (DATA) paint() },
+  });
+  load();
+</script>

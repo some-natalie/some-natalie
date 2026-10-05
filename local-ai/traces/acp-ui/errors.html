@@ -1,0 +1,308 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>acp · errors</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  /* Dashboard kit (cards, tiles, donut, line, tables, tooltip) lives in app.css. */
+  main { padding: 16px; display: grid; gap: 16px }
+  /* An error message is the one cell on these pages worth reading in full, so it wraps rather
+     than being clipped to a column width. */
+  .msg { white-space: pre-wrap; word-break: break-word; max-width: 90ch }
+</style>
+
+<header></header>
+<main>
+  <section class="card"><div class="kpis" id="kpis"></div></section>
+  <section class="card">
+    <h2>What is actually failing</h2>
+    <p class="sub" id="sub-types"></p>
+    <div id="c-types"></div>
+  </section>
+  <section class="card">
+    <h2>Failures per day</h2>
+    <p class="sub" id="sub-days"></p>
+    <div id="c-days"></div>
+  </section>
+  <section class="card">
+    <h2>Error rate by model</h2>
+    <p class="sub" id="sub-models"></p>
+    <div id="c-models"></div>
+  </section>
+  <section class="card">
+    <h2>Distinct messages</h2>
+    <p class="sub" id="sub-msgs"></p>
+    <div id="c-msgs"></div>
+  </section>
+</main>
+<footer id="notes"></footer>
+
+<script src="app.js"></script>
+<script>
+  // Why this page exists: stats.html can tell you 695 model requests failed and nothing else,
+  // because `level` only says "something failed" and `status_message` is EMPTY on every one of them.
+  // The cause is in the metadata arrays the litellm OTEL exporter writes — attributes.error.type
+  // and attributes.error.message — and splitting on it turns one useless number into a work queue:
+  // 488 expired SSO tokens, 164 refusals from a dead VPC endpoint, 9 denied models. Three
+  // problems, three different fixes, none of them a model problem.
+  //
+  // GENERATION rows only. A TOOL span's level=ERROR is a tool failing, which stats.html already
+  // covers; these are the model requests that never completed, and they are the ones that carry
+  // error attributes at all.
+
+  // The message carries per-occurrence detail — profile names, endpoint ids, expiry timestamps —
+  // so grouping on it raw gives near one row per variant. Two normalisations, both measured on this
+  // data (695 failures, 25 distinct raw messages):
+  //   * first line only. 489 of these messages carry a Python traceback, and the frames differ by
+  //     line number and venv path for what is the same failure. Keeping the whole text splits
+  //     groups on the traceback rather than on the cause; the first line is the cause.
+  //   * collapse long hex runs and 4+ digit numbers to N, so "profile BAHSSO_799139197983_..." and
+  //     its siblings are one shape rather than one each.
+  // Together: 25 raw messages -> 21 shapes. The sample column still shows one real first line.
+  const SHAPE =
+    `replaceRegexpAll(splitByChar('\\n', emsg)[1], '[0-9a-f]{8,}|[0-9]{4,}', 'N')`;
+
+  const DAYS = 90;  // these rows start on 2026-09-19; a year of mostly-empty days reads as noise
+
+  const ERRS = `
+    WITH errs AS (
+      SELECT ${LF_ERR_TYPE} AS etype,
+             ${LF_ERR_MSG} AS emsg,
+             if(provided_model_name = '', '(unnamed)', provided_model_name) AS model,
+             start_time AS started, trace_id AS tid, session_id AS sid,
+             ${LF_META("attributes.error.code")} AS code
+      FROM ${LF_TABLE}
+      ${LF_GEN_ONLY}
+      WHERE ${LF_FAILED}
+    )`;
+
+  const Q = {
+    // Both numbers in one pass: a failure count is meaningless without the total it is a share of,
+    // and two queries over the same window can disagree if a request lands between them.
+    totals: `
+      SELECT count() AS gens, countIf(${LF_FAILED}) AS errs,
+             uniqExactIf(session_id, ${LF_FAILED} AND session_id != '') AS sessions,
+             min(start_time) AS from_ts, max(start_time) AS to_ts
+      FROM ${LF_TABLE} ${LF_GEN_ONLY}`,
+    byType: `${ERRS}
+      SELECT if(etype = '', '(unlabelled)', etype) AS etype, count() AS errs,
+             uniqExact(model) AS models, min(started) AS from_ts, max(started) AS to_ts,
+             any(code) AS code
+      FROM errs GROUP BY etype ORDER BY errs DESC`,
+    // Failures against the day's total, so a spike in failures during a busy day is not read as
+    // the same thing as a spike on a quiet one.
+    byDay: `
+      SELECT toDate(start_time) AS day, count() AS gens, countIf(${LF_FAILED}) AS errs
+      FROM ${LF_TABLE} ${LF_GEN_ONLY}
+      WHERE start_time >= today() - ${DAYS - 1}
+      GROUP BY day ORDER BY day
+      WITH FILL FROM assumeNotNull((SELECT greatest(toDate(min(start_time)), today() - ${DAYS - 1})
+                                    FROM ${LF_TABLE} ${LF_GEN_ONLY})) TO today() + 1 STEP 1`,
+    // Every model, not just the failing ones: a route that is 100% errors only reads as broken
+    // next to one that is 0.4%, and the all-or-nothing split is the finding here.
+    byModel: `
+      SELECT if(provided_model_name = '', '(unnamed)', provided_model_name) AS model,
+             count() AS gens, countIf(${LF_FAILED}) AS errs,
+             round(sum(total_cost), 4) AS cost
+      FROM ${LF_TABLE} ${LF_GEN_ONLY}
+      GROUP BY model ORDER BY errs DESC, gens DESC`,
+    // `sample` is the first line too, so the cell shows the cause rather than 40 lines of
+    // traceback pushing every other column off the card. The trace link reaches the full text.
+    byMsg: `${ERRS}
+      SELECT if(etype = '', '(unlabelled)', etype) AS etype,
+             ${SHAPE} AS shape, count() AS errs,
+             any(splitByChar('\\n', emsg)[1]) AS sample, uniqExact(model) AS models,
+             min(started) AS from_ts, max(started) AS to_ts, any(tid) AS tid
+      FROM errs GROUP BY etype, shape ORDER BY errs DESC`,
+  };
+
+  let DATA = null;
+
+  function paint() {
+    const { totals, byType, byDay, byModel, byMsg } = DATA;
+    const t = totals[0];
+    const gens = Number(t.gens), errs = Number(t.errs);
+    const pct = (n, d) => (n / Math.max(d, 1) * 100).toFixed(1) + "%";
+    // Routes that have never once succeeded. This is the strongest signal on the page: a model
+    // nobody can use is a config bug, not an outage, and it stays broken until someone looks.
+    const dead = byModel.filter(r => Number(r.errs) === Number(r.gens) && Number(r.gens) > 1);
+    const deadErrs = dead.reduce((a, r) => a + Number(r.errs), 0);
+    const top = byType[0];
+
+    const k = $("kpis");
+    k.textContent = "";
+    k.append(
+      tileNode({ label: "Failed requests", value: errs.toLocaleString(), hero: true,
+                 foot: `${pct(errs, gens)} of ${compact(gens)} model requests` }),
+      tileNode({ label: "Leading cause",
+                 value: top ? top.etype.replace(/Error$/, "") : "—",
+                 foot: top ? `${Number(top.errs).toLocaleString()} of them — ` +
+                             `${pct(Number(top.errs), errs)} of all failures` : "" }),
+      tileNode({ label: "Distinct causes", value: byType.length,
+                 foot: `${byMsg.length} distinct message shapes` }),
+      tileNode({ label: "Dead routes", value: dead.length || "0",
+                 foot: dead.length
+                   ? `${compact(deadErrs)} failures from models that never once succeeded`
+                   : "every model has completed at least one request" }),
+      tileNode({ label: "Sessions hit", value: Number(t.sessions).toLocaleString(),
+                 foot: "conversations with at least one failed request" }),
+    );
+    for (const i of [1, 4]) k.querySelector(`.tile:nth-child(${i}) .value`)?.classList.add("fail");
+
+    // Causes. Same ring-plus-table split as stats.html, and the same reason: colour is identity,
+    // and the share is in the legend so it is never carried by hue alone.
+    const SLICES = 5, MIN_SHARE = 0.015;
+    const head = byType.slice(0, SLICES).filter(r => Number(r.errs) / errs >= MIN_SHARE);
+    const tail = byType.slice(head.length);
+    const slices = tail.length
+      ? [...head, { etype: `other (${tail.length} causes)`,
+                    errs: tail.reduce((a, r) => a + Number(r.errs), 0) }]
+      : head;
+
+    $("sub-types").textContent =
+      `${byType.length} distinct error types over ${errs.toLocaleString()} failed requests. ` +
+      `The type comes from the metadata key attributes.error.type — Langfuse's own ` +
+      `status_message is empty on almost every one of these rows, which is why the stats page ` +
+      `can only count them.`;
+    const thost = $("c-types");
+    thost.textContent = "";
+    const tsplit = el("div", "split");
+    tsplit.append(
+      donut(slices, {
+        label: r => r.etype, value: r => Number(r.errs),
+        tipText: r => `${r.etype}\n${Number(r.errs).toLocaleString()} failures · ` +
+                      `${pct(Number(r.errs), errs)}`,
+        centre: compact(errs), centreFoot: "failures",
+      }),
+      (() => {
+        const box = el("div", "scroll");
+        const rank = new Map(head.map((r, i) => [r.etype, i]));
+        box.append(tableNode([
+          { h: "", v: r => {
+              const sw = el("i", "sw");
+              sw.style.background = CAT[rank.has(r.etype) ? rank.get(r.etype) : head.length];
+              return sw;
+            } },
+          { h: "cause", v: r => r.etype },
+          { h: "http", n: true, v: r => r.code || "—" },
+          { h: "failures", n: true, v: r => Number(r.errs).toLocaleString() },
+          { h: "share", n: true, v: r => pct(Number(r.errs), errs) },
+          { h: "models", n: true, v: r => Number(r.models).toLocaleString() },
+          { h: "last seen", v: r => r.to_ts.slice(0, 16) },
+        ], byType));
+        return box;
+      })(),
+    );
+    thost.append(tsplit);
+
+    // Days. Total and failures on one scale, so a bad day reads as a share of its own volume.
+    $("sub-days").textContent =
+      `${byDay.length} days (rolling ${DAYS}-day window). Both series share one axis, so the ` +
+      `failure line is readable as the share of traffic it actually is. Hover for a day's counts.`;
+    render("c-days",
+      host => lineChart(host, byDay, {
+        x: r => r.day,
+        series: [
+          { name: "requests", value: r => Number(r.gens), color: "var(--viz-series)", area: true },
+          { name: "failed", value: r => Number(r.errs), color: "var(--viz-crit)" },
+        ],
+        tipText: r => `${r.day}\n${Number(r.gens).toLocaleString()} requests\n` +
+                      `✕ ${Number(r.errs).toLocaleString()} failed` +
+                      (Number(r.gens) ? ` · ${pct(Number(r.errs), Number(r.gens))}` : ""),
+      }),
+      () => tableNode([
+        { h: "day", v: r => r.day },
+        { h: "requests", n: true, v: r => Number(r.gens).toLocaleString() },
+        { h: "failed", n: true, v: r => Number(r.errs) || "",
+          cls: r => Number(r.errs) ? "fail" : "" },
+        { h: "rate", n: true, v: r => Number(r.gens) ? pct(Number(r.errs), Number(r.gens)) : "—" },
+      ], byDay));
+
+    // Models. The bar is the error RATE, not the count: 454 failures out of 454 attempts and 454
+    // out of 45,000 are the same count and completely different findings.
+    $("sub-models").textContent =
+      `${byModel.length} model names, by failure count. The bar is each model's error rate, ` +
+      `measured against its own requests. ` +
+      (dead.length
+        ? `${dead.length} route(s) have never completed a single request — ` +
+          `${dead.map(r => r.model).join(", ")} — which is a routing or credentials problem in ` +
+          `litellm-config.yaml rather than anything the models did.`
+        : "");
+    $("c-models").textContent = "";
+    $("c-models").append((() => {
+      const box = el("div", "scroll");
+      box.append(tableNode([
+        { h: "model", v: r => r.model },
+        { h: "requests", n: true, v: r => Number(r.gens).toLocaleString() },
+        { h: "failed", n: true, v: r => Number(r.errs) || "",
+          cls: r => Number(r.errs) ? "fail" : "" },
+        { h: "rate", n: true, v: r => pct(Number(r.errs), Number(r.gens)),
+          cls: r => Number(r.errs) === Number(r.gens) && Number(r.gens) > 1 ? "fail" : "" },
+        { h: "", w: "22%", v: r => barCell(Number(r.errs) / Math.max(Number(r.gens), 1)) },
+        { h: "cost", n: true, v: r => Number(r.cost) ? money(r.cost) : "—" },
+      ], byModel));
+      return box;
+    })());
+
+    // Messages. The actual text, because "ServiceUnavailableError" does not tell you WHICH host
+    // is unreachable and the fix depends entirely on that.
+    $("sub-msgs").textContent =
+      `${byMsg.length} distinct message shapes. Grouping is on the message's FIRST LINE with long ` +
+      `hex runs and 4-digit-plus numbers collapsed to "N" — most of these carry a Python ` +
+      `traceback whose frames differ by line number for what is one failure, and the account id, ` +
+      `endpoint or expiry timestamp differs per occurrence. The sample column is one real first ` +
+      `line, unmodified.`;
+    $("c-msgs").textContent = "";
+    $("c-msgs").append((() => {
+      const box = el("div", "scroll");
+      box.append(tableNode([
+        { h: "cause", v: r => r.etype },
+        { h: "failures", n: true, v: r => Number(r.errs).toLocaleString() },
+        { h: "models", n: true, v: r => Number(r.models).toLocaleString() },
+        { h: "first", v: r => r.from_ts.slice(0, 16) },
+        { h: "last", v: r => r.to_ts.slice(0, 16) },
+        { h: "trace", v: r => lfTrace(r.tid) },
+        { h: "sample message", w: "45%",
+          v: r => el("div", "msg", r.sample || "(empty)") },
+      ], byMsg));
+      return box;
+    })());
+
+    const notes = $("notes");
+    notes.textContent = "";
+    notes.append(notesNode([
+      `These are model requests that failed, not tool calls. A GENERATION row with level=ERROR is litellm reporting that the call to the provider did not complete; a TOOL row with level=ERROR is a tool that ran and failed, which the stats page covers. The two are counted separately on purpose.`,
+      `The cause is read from metadata, not from Langfuse's own fields. status_message is empty on almost every one of these rows and level only distinguishes ERROR from DEFAULT, so the type and message come from the attributes.error.* keys the litellm OTEL exporter writes. Without them this page could only report a count.`,
+      `Message shapes are normalised before grouping: runs of 8+ hex characters and numbers of 4+ digits become "N", so the same failure carrying a different account id, VPC endpoint or expiry timestamp groups as one shape rather than one row per occurrence. The sample column is a real unmodified message from that group.`,
+      `Error rate is per model, against that model's own requests. A route showing 100% has never completed a request in this window — it is a name in litellm-config.yaml that does not resolve to a working deployment, or one whose credentials are refused, and it costs nothing because nothing ran.`,
+      `A failed request still consumed the time it waited. It carries no cost and no output tokens, so it is invisible on the cost page — look here for work that was attempted and thrown away.`,
+      `Counts cover whatever the window holds, which is every generation row Langfuse has, not a fixed period. The daily chart is the last ${DAYS} days; the tiles and tables are the whole history.`,
+      `A live session inflates its own numbers, including this page: an SSO token that expires while you read it shows up as a fresh APIConnectionError.`,
+    ]));
+  }
+
+  async function load() {
+    setStatus("loading…");
+    try {
+      const [totals, byType, byDay, byModel, byMsg] = await Promise.all(
+        [Q.totals, Q.byType, Q.byDay, Q.byModel, Q.byMsg].map(s => query(s, {}, { cache: true })));
+      if (!totals.length || !Number(totals[0].gens)) {
+        setStatus("no model requests recorded yet");
+        $("kpis").textContent = "";
+        return;
+      }
+      DATA = { totals, byType, byDay, byModel, byMsg };
+      paint();
+      const errs = Number(totals[0].errs);
+      setStatus(errs ? `${errs.toLocaleString()} failed requests` : "no failures recorded");
+    } catch (e) {
+      setStatus(e.message, true);
+    }
+  }
+
+  mountHeader({
+    current: "errors.html",
+    onReload: load,
+    onToggleView: () => { if (DATA) paint() },
+  });
+  load();
+</script>

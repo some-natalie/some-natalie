@@ -11,6 +11,14 @@ on:
         description: 'Artifact name in GHCR (e.g., my-llama-model)'
         required: true
         type: string
+      runner:
+        description: 'Publishing runner (macos-26 supports MLX; Ubuntu requires a Linux-compatible model)'
+        required: true
+        type: choice
+        default: ubuntu-latest
+        options:
+          - macos-26
+          - ubuntu-latest
 
 permissions:
   contents: read
@@ -21,7 +29,7 @@ env:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     timeout-minutes: 180
     defaults:
       run:
@@ -60,7 +68,27 @@ jobs:
 
       - name: Install Ollama
         run: |
-          curl -fsSL https://ollama.com/install.sh | sudo bash
+          case "$RUNNER_OS" in
+            macOS)
+              OLLAMA_RUNTIME="$RUNNER_TEMP/ollama-runtime"
+              mkdir -p "$OLLAMA_RUNTIME"
+              curl -fsSL --retry 3 \
+                https://github.com/ollama/ollama/releases/latest/download/ollama-darwin.tgz \
+                --output "$RUNNER_TEMP/ollama-darwin.tgz"
+              # Keep the executable and MLX libraries together in their release layout.
+              tar -xzf "$RUNNER_TEMP/ollama-darwin.tgz" -C "$OLLAMA_RUNTIME"
+              test -x "$OLLAMA_RUNTIME/ollama"
+              test -n "$(find "$OLLAMA_RUNTIME" -name libmlxc.dylib -print -quit)"
+              printf '%s\n' "$OLLAMA_RUNTIME" >> "$GITHUB_PATH"
+              ;;
+            Linux)
+              curl -fsSL https://ollama.com/install.sh | sudo bash
+              ;;
+            *)
+              echo "Unsupported runner OS: $RUNNER_OS" >&2
+              exit 1
+              ;;
+          esac
 
       - name: Start Ollama
         run: |
@@ -130,5 +158,6 @@ jobs:
             printf "Model: \`%s\`\n" "$MODEL_NAME"
             printf "OCI: \`%s\`\n" "$OCI_REF"
             printf "Download: \`oras pull %s -o ./model-artifact\`\n" "$OCI_REF"
-            printf 'The model bundle is shared by ARM64 and x86-64 Ollama runtimes.\n'
+            printf "Publisher: \`%s/%s\`\n" "$RUNNER_OS" "$RUNNER_ARCH"
+            printf 'The target must support the selected model format and runtime (including MLX when required).\n'
           } >> "$GITHUB_STEP_SUMMARY"

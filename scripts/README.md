@@ -44,9 +44,15 @@ The main workflow is in `.github/workflows/ollama-model-publish.yaml`.
    `artifact_name` (e.g., `my-llama-model`). Cloud-only models cannot run offline.
    The artifact name must be a single repository component, not a path or tag;
    the workflow normalizes it to lowercase.
+3. Choose the publishing `runner`:
+   - `macos-26` (default): macOS ARM64 with the full official Ollama runtime,
+     including MLX libraries. Use this for MLX models such as `embeddinggemma-2`.
+   - `ubuntu-latest`: Linux x86-64 for models supported by Ollama on Linux.
+     This option cannot pull models that require an unavailable MLX runtime.
 
 The workflow will:
-- Install Ollama using `curl -fsSL https://ollama.com/install.sh | sudo bash`
+- Install the full official macOS Ollama archive, or use the Linux installer,
+  according to the selected runner
 - Start an isolated Ollama server with a runner-owned store
 - Pull and verify the model using native `ollama pull` and `ollama show`
 - Export all blobs and manifests, preserving their native directory structure
@@ -61,12 +67,18 @@ Models download directly into the bundle to avoid a second copy of large
 weight files on the GitHub-hosted runner. Available runner disk space still
 limits which model tags can be published.
 
-### Architecture portability
+### Runtime compatibility
 
-Ollama's model files are not CPU-specific container images. One complete pull
-of a model tag provides the same model data for ARM64 and x86-64 targets; there
-is no separate CPU-platform variant to download. This does not download every
-model size, quantization, or tag. Publish those separately if needed.
+Conventional GGUF model files can generally be shared by ARM64 and x86-64
+targets with compatible Ollama runtimes. Some models use runtime-specific
+formats instead. For example, `embeddinggemma-2` currently requires MLX support;
+publishing it on macOS does not make it usable by an Ollama target without that
+support.
+
+Native `ollama pull` checks the publisher's runtime compatibility and retrieves
+the selected supported model variant. This workflow does not mirror every
+runtime variant, model size, quantization, or tag. Publish those separately
+on a compatible runner if needed.
 
 The bundle does **not** include Ollama executables or GPU libraries. Install
 an Ollama runtime compatible with each target's OS, CPU, hardware, and model

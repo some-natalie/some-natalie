@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import signal
 import subprocess
+import tarfile
 import tempfile
 import textwrap
 import unittest
@@ -31,10 +32,17 @@ with open(os.environ["TEST_CALLS"], "a") as log:
     log.write(json.dumps([command, *args]) + "\\n")
 
 if command == "curl":
+    if "--output" in args:
+        destination = args[args.index("--output") + 1]
+        shutil.copyfile(os.environ["TEST_DARWIN_ARCHIVE"], destination)
+        sys.exit(0)
     ready_file = os.environ.get("TEST_READY_FILE")
     sys.exit(1 if os.environ.get("TEST_CURL_FAIL") or
              (ready_file and not Path(ready_file).exists()) else 0)
 if command == "sleep":
+    sys.exit(0)
+if command == "sudo":
+    sys.stdin.read()
     sys.exit(0)
 if command == "ollama":
     if args[0] == os.environ.get("TEST_OLLAMA_FAIL"):
@@ -97,7 +105,7 @@ class OllamaPublishTests(unittest.TestCase):
         self.directory = Path(self.temporary.name)
         self.bin = self.directory / "bin"
         self.bin.mkdir()
-        for command in ("ollama", "oras", "curl", "sleep"):
+        for command in ("ollama", "oras", "curl", "sleep", "sudo"):
             executable = self.bin / command
             executable.write_text(MOCK_COMMAND)
             executable.chmod(0o755)
@@ -126,8 +134,11 @@ class OllamaPublishTests(unittest.TestCase):
             GHCR_TOKEN="test-token",
             GITHUB_WORKSPACE=str(ROOT),
             GITHUB_ENV=str(self.directory / "github.env"),
+            GITHUB_PATH=str(self.directory / "github.path"),
             GITHUB_STEP_SUMMARY=str(self.directory / "summary.md"),
             RUNNER_TEMP=str(self.runner),
+            RUNNER_OS="macOS",
+            RUNNER_ARCH="ARM64",
             OLLAMA_MODELS=str(self.directory / "target store"),
             OLLAMA_HOST="127.0.0.1:11435",
         )
@@ -175,6 +186,62 @@ class OllamaPublishTests(unittest.TestCase):
             key, value = line.split("=", 1)
             self.environment[key] = value
 
+    def darwin_archive(self, include_mlx=True):
+        payload = self.directory / "darwin payload"
+        payload.mkdir()
+        executable = payload / "ollama"
+        executable.write_text(MOCK_COMMAND)
+        executable.chmod(0o755)
+        if include_mlx:
+            for variant in ("mlx_metal_v3", "mlx_metal_v4"):
+                library = payload / variant / "libmlxc.dylib"
+                library.parent.mkdir()
+                library.write_bytes(b"mock MLX library")
+        archive = self.directory / "darwin.tgz"
+        with tarfile.open(archive, "w:gz") as package:
+            for path in payload.iterdir():
+                package.add(path, arcname=path.name)
+        self.environment["TEST_DARWIN_ARCHIVE"] = str(archive)
+
+    def test_runner_is_selectable_with_macos_default(self):
+        workflow = WORKFLOW.read_text()
+        self.assertIn("type: choice\n        default: macos-26", workflow)
+        self.assertIn("          - macos-26\n          - ubuntu-latest", workflow)
+        self.assertIn("runs-on: ${{ inputs.runner }}", workflow)
+
+    def test_macos_install_preserves_mlx_libraries_and_sets_path(self):
+        self.darwin_archive()
+        result = self.step("Install Ollama")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        runtime = self.runner / "ollama-runtime"
+        self.assertTrue(os.access(runtime / "ollama", os.X_OK))
+        for variant in ("mlx_metal_v3", "mlx_metal_v4"):
+            self.assertEqual((runtime / variant / "libmlxc.dylib").read_bytes(),
+                             b"mock MLX library")
+        self.assertEqual(Path(self.environment["GITHUB_PATH"]).read_text(),
+                         str(runtime) + "\n")
+        self.assertFalse(any(call[0] == "sudo" for call in self.calls()))
+
+    def test_macos_install_rejects_archive_without_mlx(self):
+        self.darwin_archive(include_mlx=False)
+        self.assertNotEqual(self.step("Install Ollama").returncode, 0)
+        self.assertFalse(Path(self.environment["GITHUB_PATH"]).exists())
+
+    def test_linux_install_uses_linux_installer(self):
+        self.environment.update(RUNNER_OS="Linux", RUNNER_ARCH="X64")
+        result = self.step("Install Ollama")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(["curl", "-fsSL", "https://ollama.com/install.sh"], self.calls())
+        self.assertIn(["sudo", "bash"], self.calls())
+        self.assertFalse(Path(self.environment["GITHUB_PATH"]).exists())
+
+    def test_install_rejects_unsupported_runner(self):
+        self.environment["RUNNER_OS"] = "Windows"
+        result = self.step("Install Ollama")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Unsupported runner OS", result.stderr)
+        self.assertEqual(self.calls(), [])
+
     def test_native_publish_uses_one_complete_artifact(self):
         self.prepare()
         self.assertEqual(self.environment["OLLAMA_MODELS"],
@@ -201,6 +268,9 @@ class OllamaPublishTests(unittest.TestCase):
                           if path.is_file()})
         summary = Path(self.environment["GITHUB_STEP_SUMMARY"]).read_text()
         self.assertIn(self.environment["OCI_REF"], summary)
+        self.assertIn("macOS/ARM64", summary)
+        self.assertIn("including MLX when required", summary)
+        self.assertNotIn("shared by ARM64 and x86-64", summary)
 
     def test_dispatch_inputs_are_validated_without_shell_evaluation(self):
         sentinel = self.directory / "injected"

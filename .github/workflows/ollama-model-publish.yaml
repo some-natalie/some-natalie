@@ -8,7 +8,7 @@
 # 4. Provides a disconnected setup script for offline use
 # =============================================================================
 
-name: Publish Ollama Model to GitHub Packages
+name: 🦙 Publish Ollama Model to GitHub Packages
 
 on:
   workflow_dispatch:

@@ -37,46 +37,37 @@ jobs:
 
       - name: Install Ollama
         run: |
-          echo "Installing Ollama..."
           curl -fsSL https://ollama.com/install.sh | sudo bash
-          echo "Ollama version:"
-          ollama --version || echo "Install completed"
+
+      - name: Install ollama-dl
+        run: pip3 install ollama-dl
 
       - name: Start Ollama
         run: |
-          echo "Starting Ollama..."
           ollama serve &
-          
-          echo "Waiting for Ollama API..."
           for i in {1..100}; do
             if curl -sf http://localhost:11434/api/version > /dev/null 2>&1; then
               echo "Ollama is ready!"
-              curl -s http://localhost:11434/api/version
               exit 0
             fi
-            echo "Waiting... ($i/100)"
             sleep 3
           done
-          
-          echo "ERROR: Ollama failed to start"
           exit 1
 
-      - name: Pull model (GGUF file)
+      - name: Pull model with ollama-dl
         run: |
           MODEL="${{ github.event.inputs.model_name }}"
-          echo "Pulling model: $MODEL"
-          ollama pull "$MODEL"
+          ollama-dl "$MODEL" --output-dir /tmp/models || ollama pull "$MODEL" || true
 
-      - name: Verify pull
+      - name: Register model
         run: |
-          echo "Installed models:"
-          ollama list || true
           MODEL="${{ github.event.inputs.model_name }}"
-          if ollama list | grep -q "$MODEL"; then
-            echo "Model successfully pulled: $MODEL"
-          else
-            echo "WARNING: Model may need verification"
+          mkdir -p /root/.ollama/models/blobs
+          mkdir -p /root/.ollama/models/manifests
+          if ls /tmp/models/*.gguf 1>/dev/null 2>&1; then
+            cp /tmp/models/*.gguf /root/.ollama/models/blobs/ 2>/dev/null || true
           fi
+          ollama list || true
 
       - name: Prepare artifact
         run: |
@@ -85,30 +76,21 @@ jobs:
 
       - name: Export model files
         run: |
-          set -euo pipefail
           OLLAMA_MODELS="/root/.ollama/models"
           ARTIFACT="${GITHUB_WORKSPACE}/artifact"
-          
-          echo "Ollama models location: $OLLAMA_MODELS"
-          ls -la "$OLLAMA_MODELS" 2>/dev/null || echo "Ollama models dir not found"
-          
-          # Copy blobs (the GGUF file and other model data)
           if [ -d "$OLLAMA_MODELS/blobs" ]; then
-            mkdir -p "${ARTIFACT}/ollama-blobs"
-            cp -r "$OLLAMA_MODELS/blobs"/* "${ARTIFACT}/ollama-blobs/" 2>/dev/null || true
-            echo "Copied blobs"
+            cp -r "$OLLAMA_MODELS/blobs" "$ARTIFACT/" || true
           fi
-          
-          # Copy manifests
           if [ -d "$OLLAMA_MODELS/manifests" ]; then
-            mkdir -p "${ARTIFACT}/ollama-manifests"
-            cp -r "$OLLAMA_MODELS/manifests"/* "${ARTIFACT}/ollama-manifests/" 2>/dev/null || true
-            echo "Copied manifests"
+            cp -r "$OLLAMA_MODELS/manifests" "$ARTIFACT/" || true
           fi
-          
-          # Add metadata
-          echo "model=${{ github.event.inputs.model_name }}" > "${ARTIFACT}/info.txt"
-          echo "artifact=${{ github.event.inputs.artifact_name }}" >> "${ARTIFACT}/info.txt"
+          echo "model=${{ github.event.inputs.model_name }}" > "$ARTIFACT/info.txt"
+
+      - name: Verify pull
+        run: |
+          echo "Models:"
+          ollama list || true
+          ollama show "${{ github.event.inputs.model_name }}" || true
 
       - name: Add disconnected script
         run: |
@@ -117,8 +99,6 @@ jobs:
 
       - name: Install ORAS
         uses: oras-project/setup-oras@v2
-        with:
-          oras-version: v1.2.1
 
       - name: Push to GHCR
         run: |
@@ -126,15 +106,9 @@ jobs:
           OCI_NAME="${{ github.event.inputs.artifact_name }}"
           OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${OCI_NAME}:latest"
           
-          echo "Pushing to: $OCI_REF"
+          echo "${{ secrets.GITHUB_TOKEN }}" | oras login "${{ env.REGISTRY }}" -u "${{ github.actor }}" --password-stdin
           
-          echo "${{ secrets.GITHUB_TOKEN }}" | oras login "${{ env.REGISTRY }}" \
-            -u "${{ github.actor }}" --password-stdin
-          
-          echo "Files being pushed:"
-          find "${ARTIFACT}" -type f
-          
-          for f in $(find "${ARTIFACT}" -type f); do
+          find "${ARTIFACT}" -type f | while read f; do
             REL="${f#${ARTIFACT}/}"
             oras push "${OCI_REF}" "${REL}=${f}" \
               --annotation "model.source=ollama" \
@@ -152,5 +126,5 @@ jobs:
         run: |
           OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ github.event.inputs.artifact_name }}:latest"
           echo "## Published" >> $GITHUB_STEP_SUMMARY
-          echo "- Model: \`${{ github.event.inputs.model_name }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- OCI: \`${OCI_REF}\`" >> $GITHUB_STEP_SUMMARY
+          echo "Model: \`${{ github.event.inputs.model_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "OCI: \`${OCI_REF}\`" >> $GITHUB_STEP_SUMMARY

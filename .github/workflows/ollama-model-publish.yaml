@@ -1,24 +1,14 @@
-# =============================================================================
-# GitHub Action: Publish Ollama Model to GitHub Packages (GHCR)
-# =============================================================================
-# This workflow:
-# 1. Pulls a model from the Ollama registry using ollama pull
-# 2. Exports model files from ollama's model store
-# 3. Pushes the model to GHCR as an OCI artifact
-# 4. Provides a disconnected setup script for offline use
-# =============================================================================
-
-name: 🦙 Publish Ollama Model to GitHub Packages
+name: 🦙 Publish Ollama Model to GHCR
 
 on:
   workflow_dispatch:
     inputs:
       model_name:
-        description: 'Ollama model to publish (e.g., llama3.2:latest)'
+        description: 'Model to publish (e.g., llama3.2:latest)'
         required: true
         type: string
       artifact_name:
-        description: 'Name for the artifact in GHCR'
+        description: 'Artifact name in GHCR'
         required: true
         type: string
 
@@ -33,6 +23,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 180
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,79 +36,103 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Ollama
-        uses: ollama/ollama-action@v1
-        with:
-          version: latest
+        run: |
+          # Download and install Ollama
+          ARCH=$(uname -m)
+          case "$ARCH" in
+            x86_64) ARCH=amd64 ;;
+            aarch64) ARCH=arm64 ;;
+          esac
+
+          TARBALL=ollama-linux-$ARCH.tar.gz
+          curl -fsSLO "https://ollama.com/download/$TARBALL"
+          sudo tar -C /usr -xzf "$TARBALL"
+          rm "$TARBALL"
+
+          # Setup user
+          sudo useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama 2>/dev/null || true
+          sudo usermod -a -G ollama "$(whoami)"
 
       - name: Start Ollama
         run: |
+          # Start Ollama server in background
           ollama serve &
-          sleep 5
-          curl -sf http://localhost:11434/api/version || exit 1
+          sleep 8
+
+          # Wait for API to be ready
+          for i in {1..30}; do
+            if curl -sf http://localhost:11434/api/version > /dev/null 2>&1; then
+              echo "Ollama is ready"
+              exit 0
+            fi
+            echo "Waiting... ($i)"
+            sleep 2
+          done
+
+          echo "ERROR: Ollama failed to start"
+          exit 1
 
       - name: Pull model
         run: ollama pull "${{ github.event.inputs.model_name }}"
 
-      - name: Prepare artifact directory
+      - name: Prepare artifact
         run: |
           mkdir -p "${GITHUB_WORKSPACE}/artifact"
-          echo "ARTIFACT=${GITHUB_WORKSPACE}/artifact" >> $GITHUB_ENV
 
       - name: Export model files
         run: |
           set -euo pipefail
           OLLAMA_MODELS="/root/.ollama/models"
-          
-          if [ -d "${OLLAMA_MODELS}/blobs" ]; then
-            cp -r "${OLLAMA_MODELS}/blobs" "${ARTIFACT}/ollama-blobs/"
-          fi
-          
-          if [ -d "${OLLAMA_MODELS}/manifests" ]; then
-            cp -r "${OLLAMA_MODELS}/manifests" "${ARTIFACT}/ollama-manifests/"
-          fi
-          
-          echo "model=${{ github.event.inputs.model_name }}" > "${ARTIFACT}/info.txt"
 
-      - name: Add disconnected setup script
+          # Copy blobs
+          if [ -d "${OLLAMA_MODELS}/blobs" ]; then
+            mkdir -p "${GITHUB_WORKSPACE}/artifact/ollama-blobs"
+            cp -r "${OLLAMA_MODELS}/blobs" "${GITHUB_WORKSPACE}/artifact/ollama-blobs/" 2>/dev/null || true
+          fi
+
+          # Copy manifests
+          if [ -d "${OLLAMA_MODELS}/manifests" ]; then
+            mkdir -p "${GITHUB_WORKSPACE}/artifact/ollama-manifests"
+            cp -r "${OLLAMA_MODELS}/manifests" "${GITHUB_WORKSPACE}/artifact/ollama-manifests/" 2>/dev/null || true
+          fi
+
+          # Add metadata
+          echo "model=${{ github.event.inputs.model_name }}" > "${GITHUB_WORKSPACE}/artifact/info.txt"
+
+      - name: Add disconnected script
         run: |
-          cp "${GITHUB_WORKSPACE}/scripts/disconnected-setup.sh" "${ARTIFACT}/disconnected-setup.sh"
-          chmod +x "${ARTIFACT}/disconnected-setup.sh"
+          cp "${GITHUB_WORKSPACE}/scripts/disconnected-setup.sh" "${GITHUB_WORKSPACE}/artifact/disconnected-setup.sh"
+          chmod +x "${GITHUB_WORKSPACE}/artifact/disconnected-setup.sh"
+
+      - name: Install ORAS
+        uses: oras-project/setup-oras@v2
+
+      - name: Push to GHCR
+        run: |
+          ARTIFACT="${GITHUB_WORKSPACE}/artifact"
+          OCI_NAME="${{ github.event.inputs.artifact_name }}"
+
+          OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${OCI_NAME}:latest"
+
+          echo "${{ secrets.GITHUB_TOKEN }}" | oras login "${{ env.REGISTRY }}" \
+            -u "${{ github.actor }}" --password-stdin
+
+          for f in $(find "${ARTIFACT}" -type f); do
+            REL="${f#${ARTIFACT}/}"
+            oras push "${OCI_REF}" "${REL}=${f}" \
+              --annotation "model.source=ollama" \
+              --annotation "model.name=${{ github.event.inputs.model_name }}" || true
+          done
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ollama-${{ github.event.inputs.artifact_name }}
           path: ${{ env.ARTIFACT }}
-          retention-days: 90
-
-      - name: Push to GHCR
-        uses: oras-project/setup-oras@v2
-
-      - name: Publish to GHCR
-        run: |
-          OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ github.event.inputs.artifact_name }}:latest"
-          ARTIFACT="${{ env.ARTIFACT }}"
-          
-          echo "${{ secrets.GITHUB_TOKEN }}" | oras login ghcr.io -u "${{ github.actor }}" --password-stdin
-          
-          for file in $(find "${ARTIFACT}" -type f); do
-            REL="${file#${ARTIFACT}/}"
-            oras push "${OCI_REF}" "${REL}=${file}" \
-              --annotation "model.source=ollama" \
-              --annotation "model.name=${{ github.event.inputs.model_name }}" || true
-          done
-          
-          echo "Published: ${OCI_REF}"
+          retention-days: 30
 
       - name: Summary
         run: |
           OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ github.event.inputs.artifact_name }}:latest"
-          echo "## Model Published Successfully" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
           echo "Model: \`${{ github.event.inputs.model_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "OCI: \`${OCI_REF}\`" >> $GITHUB_STEP_SUMMARY
-
-      - name: Verify artifact
-        run: |
-          OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ github.event.inputs.artifact_name }}:latest"
-          oras manifest fetch "${OCI_REF}" || echo "Check GHCR for artifact"

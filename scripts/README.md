@@ -4,28 +4,6 @@ This directory contains scripts for publishing Ollama models to GitHub Packages 
 
 ## Scripts
 
-### `ollama-model-publish.sh`
-
-A standalone script to publish Ollama models to GHCR.
-
-**Usage:**
-```bash
-./ollama-model-publish.sh <model-name> <artifact-name>
-```
-
-**Environment Variables:**
-- `GITHUB_TOKEN` or `GHCR_TOKEN` - Authentication token for GHCR
-- `GITHUB_REPOSITORY` - Repository name (owner/repo format)
-- `GITHUB_ACTOR` - GitHub username (defaults to $USER)
-- `OLLAMA_MODELS` - Path to ollama models directory
-
-**Example:**
-```bash
-export GITHUB_TOKEN=ghp_...
-export GITHUB_REPOSITORY=myorg/myrepo
-./ollama-model-publish.sh llama3.2:latest my-llama-model
-```
-
 ### `disconnected-setup.sh`
 
 A script to load a published model on a disconnected system.
@@ -48,34 +26,35 @@ cd model-artifact
 MODEL_ARTIFACT_NAME=my-model ./disconnected-setup.sh
 ```
 
-## Complete Workflow
+## GitHub Actions Workflow
+
+The main workflow is in `.github/workflows/ollama-model-publish.yaml`.
 
 ### Publishing a Model
 
-1. Run the publish script with the required environment variables:
-   ```bash
-   ./ollama-model-publish.sh llama3.2:latest my-llama-model
-   ```
+1. Go to Actions → "Publish Ollama Model to GHCR" → Run Workflow
+2. Provide `model_name` (e.g., `llama3.2:latest`) and `artifact_name` (e.g., `my-llama-model`)
 
-2. The script will:
-   - Start Ollama if needed
-   - Pull the model
-   - Export the model files
-   - Push to GHCR
+The workflow will:
+- Install Ollama using `curl -fsSL https://ollama.com/install.sh | sudo bash`
+- Start Ollama and wait for it to be ready
+- Pull the model from Ollama's registry
+- Export the model files (blobs and manifests)
+- Push to GHCR as an OCI artifact
+- Upload the artifact for download
 
 ### Using on a Disconnected System
 
-1. Download the artifact (requires network access):
+1. Download the artifact:
    ```bash
    oras pull ghcr.io/owner/repo/my-llama-model:latest -o ./model-artifact
    ```
 
-2. Transfer to the disconnected system (USB, SCP, etc.)
+2. Transfer to the disconnected system
 
 3. Run the setup script:
    ```bash
-   cd model-artifact
-   MODEL_ARTIFACT_NAME=my-llama-model ./disconnected-setup.sh
+   MODEL_ARTIFACT_DIR=./model-artifact MODEL_ARTIFACT_NAME=my-llama-model ./disconnected-setup.sh
    ```
 
 4. Use the model:
@@ -85,6 +64,6 @@ MODEL_ARTIFACT_NAME=my-model ./disconnected-setup.sh
 
 ## Requirements
 
-- Ollama installed on both source and target systems
-- `oras` installed for OCI operations (or Docker)
-- GitHub token with `write:packages` permission
+- Ollama installed on target system
+- `oras` for OCI operations
+- GitHub token with `packages: write` permission (in the workflow)

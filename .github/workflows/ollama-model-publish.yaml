@@ -38,23 +38,19 @@ jobs:
       - name: Install Ollama
         run: |
           echo "Installing Ollama..."
-          ARCH=$(uname -m)
-          case "$ARCH" in x86_64) ARCH=amd64 ;; esac
-          curl -fsSL https://ollama.com/download/ollama-linux-$ARCH.tar.gz -o /tmp/ollama.tar.gz
-          sudo tar -C /usr -xzf /tmp/ollama.tar.gz
-          rm /tmp/ollama.tar.gz
-          echo "Ollama installed successfully"
+          curl -fsSL https://ollama.com/install.sh | sudo bash
+          echo "Ollama version:"
+          ollama --version || echo "Install completed"
 
       - name: Start Ollama
         run: |
           echo "Starting Ollama..."
           ollama serve &
           
-          # Wait for Ollama to be ready
-          echo "Waiting for Ollama API to be ready..."
+          echo "Waiting for Ollama API..."
           for i in {1..100}; do
             if curl -sf http://localhost:11434/api/version > /dev/null 2>&1; then
-              echo "Ollama API is ready"
+              echo "Ollama is ready!"
               curl -s http://localhost:11434/api/version
               exit 0
             fi
@@ -65,91 +61,54 @@ jobs:
           echo "ERROR: Ollama failed to start"
           exit 1
 
-      - name: Pull model
+      - name: Pull model (GGUF file)
         run: |
           MODEL="${{ github.event.inputs.model_name }}"
           echo "Pulling model: $MODEL"
-          
-          # Show current models
-          echo "Current models:"
+          ollama pull "$MODEL"
+
+      - name: Verify pull
+        run: |
+          echo "Installed models:"
           ollama list || true
-          
-          # Always pull the GGUF file - this is the actual model
-          echo "Pulling model file..."
-          timeout 300 ollama pull "$MODEL" || {
-            echo "WARNING: Pull may need retry or model may not exist"
-          }
-          
-          # Verify the pull
-          echo ""
-          echo "After pull - models:"
-          ollama list
-          
-          # Check if model exists
-          if ! ollama list | grep -q "$MODEL"; then
-            echo "Model not found in list, trying ollama show"
-            ollama show "$MODEL" 2>&1 || echo "Model inspection failed"
+          MODEL="${{ github.event.inputs.model_name }}"
+          if ollama list | grep -q "$MODEL"; then
+            echo "Model successfully pulled: $MODEL"
+          else
+            echo "WARNING: Model may need verification"
           fi
-          
-          echo "Model pull step completed"
 
       - name: Prepare artifact
         run: |
           mkdir -p "${GITHUB_WORKSPACE}/artifact"
           echo "ARTIFACT=${GITHUB_WORKSPACE}/artifact" >> $GITHUB_ENV
 
-      - name: Verify and export model files
+      - name: Export model files
         run: |
           set -euo pipefail
           OLLAMA_MODELS="/root/.ollama/models"
           ARTIFACT="${GITHUB_WORKSPACE}/artifact"
-          MODEL="${{ github.event.inputs.model_name }}"
           
-          echo "=== Verifying Ollama store ==="
-          echo "Ollama models directory: $OLLAMA_MODELS"
-          ls -la "$OLLAMA_MODELS/" || echo "Directory not accessible"
+          echo "Ollama models location: $OLLAMA_MODELS"
+          ls -la "$OLLAMA_MODELS" 2>/dev/null || echo "Ollama models dir not found"
           
-          # List blobs directory
-          echo ""
-          echo "=== Blobs in store ==="
-          if [ -d "$OLLAMA_MODELS/blobs" ]; then
-            echo "Blobs directory exists"
-            ls -la "$OLLAMA_MODELS/blobs/" | head -5 || true
-            BLOB_COUNT=$(find "$OLLAMA_MODELS/blobs" -type f 2>/dev/null | wc -l | tr -d ' ')
-            echo "Total blobs: $BLOB_COUNT"
-          fi
-          
-          # List manifests directory
-          echo ""
-          echo "=== Manifests in store ==="
-          if [ -d "$OLLAMA_MODELS/manifests" ]; then
-            echo "Manifests directory exists"
-            find "$OLLAMA_MODELS/manifests" -type f | head -5 || true
-          fi
-          
-          # Copy blobs for artifact
-          echo ""
-          echo "=== Copying to artifact ==="
+          # Copy blobs (the GGUF file and other model data)
           if [ -d "$OLLAMA_MODELS/blobs" ]; then
             mkdir -p "${ARTIFACT}/ollama-blobs"
             cp -r "$OLLAMA_MODELS/blobs"/* "${ARTIFACT}/ollama-blobs/" 2>/dev/null || true
+            echo "Copied blobs"
           fi
           
-          # Copy manifests for artifact
+          # Copy manifests
           if [ -d "$OLLAMA_MODELS/manifests" ]; then
             mkdir -p "${ARTIFACT}/ollama-manifests"
             cp -r "$OLLAMA_MODELS/manifests"/* "${ARTIFACT}/ollama-manifests/" 2>/dev/null || true
+            echo "Copied manifests"
           fi
           
           # Add metadata
-          cat > "${ARTIFACT}/info.txt" << EOF
-          model=${MODEL}
-          artifact=${{ github.event.inputs.artifact_name }}
-          exported=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          EOF
-          
-          echo "Artifact contents:"
-          ls -la "${ARTIFACT}/" || true
+          echo "model=${{ github.event.inputs.model_name }}" > "${ARTIFACT}/info.txt"
+          echo "artifact=${{ github.event.inputs.artifact_name }}" >> "${ARTIFACT}/info.txt"
 
       - name: Add disconnected script
         run: |
@@ -172,18 +131,15 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | oras login "${{ env.REGISTRY }}" \
             -u "${{ github.actor }}" --password-stdin
           
-          echo "Files to push:"
+          echo "Files being pushed:"
           find "${ARTIFACT}" -type f
           
           for f in $(find "${ARTIFACT}" -type f); do
             REL="${f#${ARTIFACT}/}"
-            echo "Pushing: $REL"
             oras push "${OCI_REF}" "${REL}=${f}" \
               --annotation "model.source=ollama" \
               --annotation "model.name=${{ github.event.inputs.model_name }}" || true
           done
-          
-          echo "Published: $OCI_REF"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

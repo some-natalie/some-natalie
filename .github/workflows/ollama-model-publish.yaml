@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       artifact_name:
-        description: 'Artifact name in GHCR'
+        description: 'Artifact name in GHCR (e.g., my-llama-model)'
         required: true
         type: string
 
@@ -23,108 +23,112 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    defaults:
+      run:
+        shell: bash
+    env:
+      MODEL_NAME: ${{ inputs.model_name }}
+      ARTIFACT_NAME: ${{ inputs.artifact_name }}
+      # Use a separate port and store from any service started by the installer.
+      OLLAMA_HOST: 127.0.0.1:11435
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare artifact
+        run: |
+          if [[ ! "$MODEL_NAME" =~ ^[a-zA-Z0-9][a-zA-Z0-9._:/-]*$ ]]; then
+            echo "Invalid Ollama model name" >&2
+            exit 1
+          fi
+          OCI_NAME=$(printf '%s' "$ARTIFACT_NAME" | tr '[:upper:]' '[:lower:]')
+          if [[ ! "$OCI_NAME" =~ ^[a-z0-9]+(([._]|__|-+)[a-z0-9]+)*$ ]]; then
+            echo "Artifact name must be a single GHCR repository component" >&2
+            exit 1
+          fi
+          REPOSITORY=$(printf '%s' "$GITHUB_REPOSITORY" | tr '[:upper:]' '[:lower:]')
+          ARTIFACT="$RUNNER_TEMP/model-artifact"
+          # Download directly into the bundle instead of duplicating large blobs.
+          OLLAMA_MODELS="$ARTIFACT"
+          {
+            printf 'OCI_REF=%s/%s/%s:latest\n' "$REGISTRY" "$REPOSITORY" "$OCI_NAME"
+            printf 'ARTIFACT=%s\n' "$ARTIFACT"
+            printf 'OLLAMA_MODELS=%s\n' "$OLLAMA_MODELS"
+          } >> "$GITHUB_ENV"
+          mkdir -p "$ARTIFACT" "$OLLAMA_MODELS"
 
       - name: Install Ollama
         run: |
           curl -fsSL https://ollama.com/install.sh | sudo bash
 
-      - name: Install ollama-dl
-        run: pip3 install ollama-dl
-
       - name: Start Ollama
         run: |
-          ollama serve &
-          for i in {1..100}; do
-            if curl -sf http://localhost:11434/api/version > /dev/null 2>&1; then
+          ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &
+          OLLAMA_PID=$!
+          for _ in {1..100}; do
+            if curl -fsS --connect-timeout 2 --max-time 5 "http://${OLLAMA_HOST}/api/version" > /dev/null 2>&1; then
               echo "Ollama is ready!"
               exit 0
             fi
+            if ! kill -0 "$OLLAMA_PID" 2>/dev/null; then
+              break
+            fi
             sleep 3
           done
+          cat "$RUNNER_TEMP/ollama.log" >&2
+          echo "Ollama failed to become ready" >&2
           exit 1
 
-      - name: Pull model with ollama-dl
+      - name: Pull and verify model
         run: |
-          MODEL="${{ github.event.inputs.model_name }}"
-          ollama-dl "$MODEL" --output-dir /tmp/models || ollama pull "$MODEL" || true
-
-      - name: Register model
-        run: |
-          MODEL="${{ github.event.inputs.model_name }}"
-          mkdir -p /root/.ollama/models/blobs
-          mkdir -p /root/.ollama/models/manifests
-          if ls /tmp/models/*.gguf 1>/dev/null 2>&1; then
-            cp /tmp/models/*.gguf /root/.ollama/models/blobs/ 2>/dev/null || true
-          fi
-          ollama list || true
-
-      - name: Prepare artifact
-        run: |
-          mkdir -p "${GITHUB_WORKSPACE}/artifact"
-          echo "ARTIFACT=${GITHUB_WORKSPACE}/artifact" >> $GITHUB_ENV
+          ollama pull "$MODEL_NAME"
+          ollama show "$MODEL_NAME"
+          ollama list
 
       - name: Export model files
         run: |
-          OLLAMA_MODELS="/root/.ollama/models"
-          ARTIFACT="${GITHUB_WORKSPACE}/artifact"
-          if [ -d "$OLLAMA_MODELS/blobs" ]; then
-            cp -r "$OLLAMA_MODELS/blobs" "$ARTIFACT/" || true
-          fi
-          if [ -d "$OLLAMA_MODELS/manifests" ]; then
-            cp -r "$OLLAMA_MODELS/manifests" "$ARTIFACT/" || true
-          fi
-          echo "model=${{ github.event.inputs.model_name }}" > "$ARTIFACT/info.txt"
-
-      - name: Verify pull
-        run: |
-          echo "Models:"
-          ollama list || true
-          ollama show "${{ github.event.inputs.model_name }}" || true
+          test -n "$(find "$OLLAMA_MODELS/blobs" -type f -print -quit)"
+          test -n "$(find "$OLLAMA_MODELS/manifests" -type f -print -quit)"
+          printf 'model=%s\n' "$MODEL_NAME" > "$ARTIFACT/info.txt"
 
       - name: Add disconnected script
         run: |
-          cp "${GITHUB_WORKSPACE}/scripts/disconnected-setup.sh" "${GITHUB_WORKSPACE}/artifact/disconnected-setup.sh"
-          chmod +x "${GITHUB_WORKSPACE}/artifact/disconnected-setup.sh"
+          cp "${GITHUB_WORKSPACE}/scripts/disconnected-setup.sh" "$ARTIFACT/disconnected-setup.sh"
+          chmod +x "$ARTIFACT/disconnected-setup.sh"
 
       - name: Install ORAS
         uses: oras-project/setup-oras@v2
 
       - name: Push to GHCR
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ARTIFACT="${GITHUB_WORKSPACE}/artifact"
-          OCI_NAME="${{ github.event.inputs.artifact_name }}"
-          OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${OCI_NAME}:latest"
-          
-          echo "${{ secrets.GITHUB_TOKEN }}" | oras login "${{ env.REGISTRY }}" -u "${{ github.actor }}" --password-stdin
-          
-          find "${ARTIFACT}" -type f | while read f; do
-            REL="${f#${ARTIFACT}/}"
-            oras push "${OCI_REF}" "${REL}=${f}" \
-              --annotation "model.source=ollama" \
-              --annotation "model.name=${{ github.event.inputs.model_name }}" || true
-          done
+          printf '%s' "$GHCR_TOKEN" | oras login "$REGISTRY" -u "$GITHUB_ACTOR" --password-stdin
+          cd "$ARTIFACT"
+          files=()
+          while IFS= read -r -d '' file; do
+            files+=("${file}:application/octet-stream")
+          done < <(find . -type f -print0)
+          oras push "$OCI_REF" "${files[@]}" \
+            --artifact-type application/vnd.ollama.model.v1 \
+            --annotation "model.source=ollama" \
+            --annotation "model.name=$MODEL_NAME"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ollama-${{ github.event.inputs.artifact_name }}
           path: ${{ env.ARTIFACT }}
+          compression-level: 0
           retention-days: 30
 
       - name: Summary
         run: |
-          OCI_REF="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ github.event.inputs.artifact_name }}:latest"
-          echo "## Published" >> $GITHUB_STEP_SUMMARY
-          echo "Model: \`${{ github.event.inputs.model_name }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "OCI: \`${OCI_REF}\`" >> $GITHUB_STEP_SUMMARY
+          {
+            printf '## Published\n'
+            printf "Model: \`%s\`\n" "$MODEL_NAME"
+            printf "OCI: \`%s\`\n" "$OCI_REF"
+            printf "Download: \`oras pull %s -o ./model-artifact\`\n" "$OCI_REF"
+            printf 'The model bundle is shared by ARM64 and x86-64 Ollama runtimes.\n'
+          } >> "$GITHUB_STEP_SUMMARY"

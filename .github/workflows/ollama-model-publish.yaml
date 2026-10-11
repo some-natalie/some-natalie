@@ -38,20 +38,7 @@ jobs:
       - name: Install Ollama
         run: |
           # Download and install Ollama
-          ARCH=$(uname -m)
-          case "$ARCH" in
-            x86_64) ARCH=amd64 ;;
-            aarch64) ARCH=arm64 ;;
-          esac
-
-          TARBALL=ollama-linux-$ARCH.tar.gz
-          curl -fsSLO "https://ollama.com/download/$TARBALL"
-          sudo tar -C /usr -xzf "$TARBALL"
-          rm "$TARBALL"
-
-          # Setup user
-          sudo useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama 2>/dev/null || true
-          sudo usermod -a -G ollama "$(whoami)"
+          curl -fsSL https://ollama.com/install.sh | sudo bash
 
       - name: Start Ollama
         run: |

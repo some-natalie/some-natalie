@@ -45,9 +45,9 @@ The main workflow is in `.github/workflows/ollama-model-publish.yaml`.
    The artifact name must be a single repository component, not a path or tag;
    the workflow normalizes it to lowercase.
 3. Choose the publishing `runner`:
-   - `macos-26` (default): macOS ARM64 with the full official Ollama runtime,
+   - `macos-26`: macOS ARM64 with the full official Ollama runtime,
      including MLX libraries. Use this for MLX models such as `embeddinggemma-2`.
-   - `ubuntu-latest`: Linux x86-64 for models supported by Ollama on Linux.
+   - `ubuntu-latest` (default): Linux x86-64 for models supported by Ollama on Linux.
      This option cannot pull models that require an unavailable MLX runtime.
 
 The workflow will:

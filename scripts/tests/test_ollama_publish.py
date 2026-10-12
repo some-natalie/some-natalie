@@ -203,9 +203,9 @@ class OllamaPublishTests(unittest.TestCase):
                 package.add(path, arcname=path.name)
         self.environment["TEST_DARWIN_ARCHIVE"] = str(archive)
 
-    def test_runner_is_selectable_with_macos_default(self):
+    def test_runner_is_selectable_with_linux_default(self):
         workflow = WORKFLOW.read_text()
-        self.assertIn("type: choice\n        default: macos-26", workflow)
+        self.assertIn("type: choice\n        default: ubuntu-latest", workflow)
         self.assertIn("          - macos-26\n          - ubuntu-latest", workflow)
         self.assertIn("runs-on: ${{ inputs.runner }}", workflow)
 

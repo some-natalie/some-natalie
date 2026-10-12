@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import List
 
 import ollama
+from ollama._types import ResponseError
 from pydantic import (
     BaseModel,
     Field,
@@ -39,8 +40,20 @@ class OllamaResponse(BaseModel):
 
 
 def run_benchmark(model_name: str, prompt: str, verbose: bool) -> OllamaResponse:
+    """Run a benchmark for a single model and prompt.
 
+    Args:
+        model_name: Name of the Ollama model to benchmark.
+        prompt: The prompt to evaluate.
+        verbose: Whether to stream the response.
+
+    Returns:
+        OllamaResponse with inference statistics.
+    """
     last_element = None
+
+    # Use repeat_penalty to prevent token repetition issues
+    generation_options = {"repeat_penalty": 1.5}
 
     if verbose:
         stream = ollama.chat(
@@ -51,6 +64,7 @@ def run_benchmark(model_name: str, prompt: str, verbose: bool) -> OllamaResponse
                     "content": prompt,
                 },
             ],
+            options=generation_options,
             stream=True,
         )
         for chunk in stream:
@@ -65,6 +79,7 @@ def run_benchmark(model_name: str, prompt: str, verbose: bool) -> OllamaResponse
                     "content": prompt,
                 },
             ],
+            options=generation_options,
         )
 
     if not last_element:
@@ -209,22 +224,38 @@ def main():
 
     model_names = get_benchmark_models(skip_models)
     benchmarks = {}
+    failed_models = []
 
     for model_name in model_names:
         responses: List[OllamaResponse] = []
+        model_failed = False
         for prompt in prompts:
             if verbose:
                 print(f"\n\nBenchmarking: {model_name}\nPrompt: {prompt}")
-            response = run_benchmark(model_name, prompt, verbose=verbose)
-            responses.append(response)
+            try:
+                response = run_benchmark(model_name, prompt, verbose=verbose)
+                responses.append(response)
 
-            if verbose:
-                print(f"\n\nResponse: {response.message.content}")
-                inference_stats(response)
-        benchmarks[model_name] = responses
+                if verbose:
+                    print(f"\n\nResponse: {response.message.content}")
+                    inference_stats(response)
+            except ResponseError as e:
+                # Handle Ollama API errors (e.g., token repeat limit reached)
+                print(f"\nError with model {model_name}: {e}")
+                print(f"Skipping model {model_name} for this run.\n")
+                failed_models.append(model_name)
+                model_failed = True
+                break
+
+        if not model_failed:
+            benchmarks[model_name] = responses
 
     for model_name, responses in benchmarks.items():
         average_stats(responses)
+
+    if failed_models:
+        print(f"\nModels that failed: {failed_models}")
+        print("Consider adding them to --skip-models for future runs.")
 
 
 if __name__ == "__main__":

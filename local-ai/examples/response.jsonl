@@ -1,0 +1,1051 @@
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:26.790819Z","response":"","thinking":"\n*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:26.867638Z","response":"","thinking":"   Topic","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:26.905714Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:26.943852Z","response":"","thinking":" Linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:26.981933Z","response":"","thinking":" List","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.020082Z","response":"","thinking":" data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.0582Z","response":"","thinking":" structure","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.09624Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.172479Z","response":"","thinking":"\n*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.248691Z","response":"","thinking":"   Target","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.286901Z","response":"","thinking":" Audience","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.325215Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.401519Z","response":"","thinking":" 1","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.439689Z","response":"","thinking":"0","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.477882Z","response":"","thinking":"-","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.515946Z","response":"","thinking":"year","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.553964Z","response":"","thinking":"-","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.592253Z","response":"","thinking":"old","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.630407Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.668436Z","response":"","thinking":"needs","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.70657Z","response":"","thinking":" simple","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.7449Z","response":"","thinking":" language","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.78334Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.822218Z","response":"","thinking":" relatable","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.860485Z","response":"","thinking":" analogies","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.898675Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.936922Z","response":"","thinking":" no","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:27.975147Z","response":"","thinking":" jargon","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.013416Z","response":"","thinking":" without","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.051482Z","response":"","thinking":" explanation","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.089717Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.127984Z","response":"","thinking":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.166138Z","response":"","thinking":" engaging","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.204647Z","response":"","thinking":" examples","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.242799Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.319011Z","response":"","thinking":"\n*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.39577Z","response":"","thinking":"   Goal","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.4339Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.471999Z","response":"","thinking":" Explain","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.510104Z","response":"","thinking":" what","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.54816Z","response":"","thinking":" it","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.586445Z","response":"","thinking":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.624766Z","response":"","thinking":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.663267Z","response":"","thinking":" how","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.701396Z","response":"","thinking":" it","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.73951Z","response":"","thinking":" works","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.777803Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.892571Z","response":"","thinking":"\n\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:28.96895Z","response":"","thinking":"   A","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.007134Z","response":"","thinking":" linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.045179Z","response":"","thinking":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.083216Z","response":"","thinking":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.121324Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.159475Z","response":"","thinking":" sequence","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.197614Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.236006Z","response":"","thinking":" elements","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.274333Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.3894Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.466086Z","response":"","thinking":"   Each","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.504332Z","response":"","thinking":" element","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.542702Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.581133Z","response":"","thinking":"node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.619417Z","response":"","thinking":")","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.657646Z","response":"","thinking":" contains","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.695925Z","response":"","thinking":" data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.734298Z","response":"","thinking":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.772713Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.811226Z","response":"","thinking":" reference","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.84997Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.888366Z","response":"","thinking":"pointer","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.926443Z","response":"","thinking":")","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:29.964501Z","response":"","thinking":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.002762Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.041018Z","response":"","thinking":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.079374Z","response":"","thinking":" element","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.117802Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.232593Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.309251Z","response":"","thinking":"   It","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.347565Z","response":"","thinking":"'","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.385866Z","response":"","thinking":"s","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.424302Z","response":"","thinking":" linear","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.462635Z","response":"","thinking":" but","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.501336Z","response":"","thinking":" not","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.539673Z","response":"","thinking":" stored","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.577914Z","response":"","thinking":" cont","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.616233Z","response":"","thinking":"iguously","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.654529Z","response":"","thinking":" in","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.692941Z","response":"","thinking":" memory","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.731094Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.769264Z","response":"","thinking":"unlike","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.807218Z","response":"","thinking":" an","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.84545Z","response":"","thinking":" array","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.883842Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:30.998295Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.074649Z","response":"","thinking":"   It","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.112791Z","response":"","thinking":" has","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.150938Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.189109Z","response":"","thinking":" start","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.22719Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.265198Z","response":"","thinking":"head","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.303361Z","response":"","thinking":")","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.341776Z","response":"","thinking":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.379991Z","response":"","thinking":" an","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.418116Z","response":"","thinking":" end","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.456323Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.494363Z","response":"","thinking":"tail","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.532487Z","response":"","thinking":"/","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.570559Z","response":"","thinking":"null","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.608844Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.723353Z","response":"","thinking":"\n\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.80074Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.839361Z","response":"","thinking":"Idea","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.91602Z","response":"","thinking":" 1","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.954095Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:31.992414Z","response":"","thinking":" A","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.030536Z","response":"","thinking":" train","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.068783Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.106984Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.145144Z","response":"","thinking":"Good","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.183205Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.221693Z","response":"","thinking":" but","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.259902Z","response":"","thinking":" trains","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.298209Z","response":"","thinking":" are","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.336475Z","response":"","thinking":" usually","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.374741Z","response":"","thinking":" fixed","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.41297Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.451285Z","response":"","thinking":" However","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.489689Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.528195Z","response":"","thinking":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.566371Z","response":"","thinking":" can","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.604799Z","response":"","thinking":" add","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.643406Z","response":"","thinking":" cars","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.682113Z","response":"","thinking":".)","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.797892Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.874984Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.913605Z","response":"","thinking":"Idea","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:32.990889Z","response":"","thinking":" 2","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.029571Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.068092Z","response":"","thinking":" A","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.106522Z","response":"","thinking":" scavenger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.145424Z","response":"","thinking":" hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.183997Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.222868Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.261552Z","response":"","thinking":"Perfect","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.300229Z","response":"","thinking":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.338943Z","response":"","thinking":" You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.377701Z","response":"","thinking":" find","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.416873Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.45591Z","response":"","thinking":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.494985Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.533972Z","response":"","thinking":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.573133Z","response":"","thinking":" that","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.611955Z","response":"","thinking":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.650603Z","response":"","thinking":" tells","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.689742Z","response":"","thinking":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.728602Z","response":"","thinking":" where","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.767877Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.806627Z","response":"","thinking":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.845337Z","response":"","thinking":" one","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.884394Z","response":"","thinking":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:33.922832Z","response":"","thinking":".)","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.038989Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.116136Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.154924Z","response":"","thinking":"Idea","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.232562Z","response":"","thinking":" 3","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.271295Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.309648Z","response":"","thinking":" A","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.348338Z","response":"","thinking":" chain","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.387115Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.426026Z","response":"","thinking":" people","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.464805Z","response":"","thinking":" holding","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.503151Z","response":"","thinking":" hands","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.541898Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.58284Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.623599Z","response":"","thinking":"Simple","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.66371Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.704096Z","response":"","thinking":" visual","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.771116Z","response":"","thinking":".)","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.894035Z","response":"","thinking":"\n\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:34.974216Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.013096Z","response":"","thinking":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.052261Z","response":"","thinking":" Anal","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.091253Z","response":"","thinking":"ogy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.130588Z","response":"","thinking":":*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.170135Z","response":"","thinking":" Sc","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.210074Z","response":"","thinking":"av","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.249699Z","response":"","thinking":"enger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.288843Z","response":"","thinking":" Hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.329975Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.448105Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.526657Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.565473Z","response":"","thinking":"Concept","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.64437Z","response":"","thinking":" 1","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.68591Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.72728Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.769889Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.812181Z","response":"","thinking":"Node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.853253Z","response":"","thinking":"\".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.893998Z","response":"","thinking":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.933527Z","response":"","thinking":" In","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:35.972894Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.012008Z","response":"","thinking":" scavenger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.051055Z","response":"","thinking":" hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.090113Z","response":"","thinking":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.129237Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.168318Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.20733Z","response":"","thinking":"node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.246323Z","response":"","thinking":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.285302Z","response":"","thinking":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.323946Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.362943Z","response":"","thinking":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.401791Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.440777Z","response":"","thinking":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.47982Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.596771Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.674664Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.713755Z","response":"","thinking":"Concept","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.794885Z","response":"","thinking":" 2","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.833835Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.87308Z","response":"","thinking":" Data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.912985Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.952968Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:36.992215Z","response":"","thinking":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.031111Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.0699Z","response":"","thinking":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.108621Z","response":"","thinking":" has","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.147677Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.186301Z","response":"","thinking":" prize","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.225112Z","response":"","thinking":" or","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.263783Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.302458Z","response":"","thinking":" message","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.34133Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.380284Z","response":"","thinking":"the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.41911Z","response":"","thinking":" data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.457857Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.574302Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.652188Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.690975Z","response":"","thinking":"Concept","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.769529Z","response":"","thinking":" 3","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.808924Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.847735Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.886677Z","response":"","thinking":" Link","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.925722Z","response":"","thinking":"/","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:37.964543Z","response":"","thinking":"Pointer","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.003549Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.042457Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.081611Z","response":"","thinking":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.120779Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.159714Z","response":"","thinking":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.198754Z","response":"","thinking":" also","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.237925Z","response":"","thinking":" tells","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.276678Z","response":"","thinking":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.315378Z","response":"","thinking":" where","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.354528Z","response":"","thinking":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.393601Z","response":"","thinking":" go","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.43206Z","response":"","thinking":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.470554Z","response":"","thinking":" find","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.509354Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.547843Z","response":"","thinking":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.588479Z","response":"","thinking":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.627993Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.666898Z","response":"","thinking":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.705906Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.744953Z","response":"","thinking":"the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.783791Z","response":"","thinking":" link","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.822733Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:38.93867Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.015415Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.053657Z","response":"","thinking":"Concept","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.130313Z","response":"","thinking":" 4","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.168747Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.207072Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.245374Z","response":"","thinking":" Head","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.28376Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.322286Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.360728Z","response":"","thinking":" first","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.399174Z","response":"","thinking":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.4377Z","response":"","thinking":" given","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.476468Z","response":"","thinking":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.515465Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.553883Z","response":"","thinking":" player","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.592531Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.708229Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.785469Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.824476Z","response":"","thinking":"Concept","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.902367Z","response":"","thinking":" 5","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.941739Z","response":"","thinking":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:39.980709Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.020313Z","response":"","thinking":" End","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.06195Z","response":"","thinking":".*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.101909Z","response":"","thinking":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.141605Z","response":"","thinking":" last","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.181159Z","response":"","thinking":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.22072Z","response":"","thinking":" that","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.259993Z","response":"","thinking":" says","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.299346Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.338688Z","response":"","thinking":"You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.377855Z","response":"","thinking":"'","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.417024Z","response":"","thinking":"ve","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.45623Z","response":"","thinking":" reached","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.495568Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.534733Z","response":"","thinking":" end","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.573813Z","response":"","thinking":"!\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.613182Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.652627Z","response":"","thinking":"Null","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.692073Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.810338Z","response":"","thinking":"\n\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.889241Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.928718Z","response":"","thinking":"Introduction","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:40.968304Z","response":"","thinking":":*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.007704Z","response":"","thinking":" Start","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.047092Z","response":"","thinking":" with","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.086349Z","response":"","thinking":" something","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.125416Z","response":"","thinking":" they","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.164406Z","response":"","thinking":" know","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.203641Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.24283Z","response":"","thinking":"like","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.282224Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.32129Z","response":"","thinking":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.360585Z","response":"","thinking":")","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.399776Z","response":"","thinking":" but","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.438748Z","response":"","thinking":" show","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.477879Z","response":"","thinking":" why","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.517026Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.556519Z","response":"","thinking":" linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.596082Z","response":"","thinking":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.635309Z","response":"","thinking":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.674699Z","response":"","thinking":" different","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.714002Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.832194Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.911166Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.95081Z","response":"","thinking":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:41.990491Z","response":"","thinking":" Anal","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.029869Z","response":"","thinking":"ogy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.069782Z","response":"","thinking":":*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.110799Z","response":"","thinking":" Describe","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.151446Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.191518Z","response":"","thinking":" scavenger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.231529Z","response":"","thinking":" hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.272473Z","response":"","thinking":" clearly","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.311999Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.429668Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.508733Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.548071Z","response":"","thinking":"Key","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.587685Z","response":"","thinking":" Terms","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.627033Z","response":"","thinking":":*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.666363Z","response":"","thinking":" Introduce","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.705699Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.744525Z","response":"","thinking":"Node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.783562Z","response":"","thinking":",\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.823148Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.862642Z","response":"","thinking":"Data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.90277Z","response":"","thinking":",\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.942954Z","response":"","thinking":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:42.983282Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.023183Z","response":"","thinking":"Next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.062961Z","response":"","thinking":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.102786Z","response":"","thinking":" using","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.142139Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.181898Z","response":"","thinking":" analogy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.221662Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.340082Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.419349Z","response":"","thinking":"   *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.459391Z","response":"","thinking":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.499327Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.539025Z","response":"","thinking":"Why","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.578617Z","response":"","thinking":"\":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.619106Z","response":"","thinking":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.659263Z","response":"","thinking":" Why","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.699162Z","response":"","thinking":" use","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.740009Z","response":"","thinking":" this","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.778797Z","response":"","thinking":" instead","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.818701Z","response":"","thinking":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.858853Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.899052Z","response":"","thinking":" regular","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.938987Z","response":"","thinking":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:43.979572Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.019969Z","response":"","thinking":"like","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.060514Z","response":"","thinking":" an","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.100383Z","response":"","thinking":" array","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.140539Z","response":"","thinking":")?","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.180593Z","response":"","thinking":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.220668Z","response":"","thinking":"Adding","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.260677Z","response":"","thinking":"/","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.300761Z","response":"","thinking":"removing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.34098Z","response":"","thinking":" things","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.380578Z","response":"","thinking":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.42027Z","response":"","thinking":" easier","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.459675Z","response":"","thinking":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.499045Z","response":"","thinking":" Use","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.538557Z","response":"","thinking":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.578346Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.618279Z","response":"","thinking":"cutting","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.65802Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.697727Z","response":"","thinking":" chain","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.737544Z","response":"","thinking":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.777272Z","response":"","thinking":" or","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.81704Z","response":"","thinking":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.856397Z","response":"","thinking":"insert","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.895969Z","response":"","thinking":"ing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.93589Z","response":"","thinking":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:44.976139Z","response":"","thinking":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.016129Z","response":"","thinking":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.056035Z","response":"","thinking":" idea","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.097522Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.22284Z","response":"","thinking":"\n\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.307121Z","response":"","thinking":"   Keep","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.349085Z","response":"","thinking":" it","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.39102Z","response":"","thinking":" light","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.435039Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.561502Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.644446Z","response":"","thinking":"   Use","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.685051Z","response":"","thinking":" bold","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.72555Z","response":"","thinking":"ing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.766014Z","response":"","thinking":" for","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.806133Z","response":"","thinking":" key","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.846454Z","response":"","thinking":" terms","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:45.886858Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.008344Z","response":"","thinking":"\n    *","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.089203Z","response":"","thinking":"   Use","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.129873Z","response":"","thinking":" emojis","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.170074Z","response":"","thinking":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.209981Z","response":"","thinking":" make","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.249947Z","response":"","thinking":" it","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.289435Z","response":"","thinking":" visually","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.329683Z","response":"","thinking":" appealing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.369839Z","response":"","thinking":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.449903Z","response":"Imagine","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.489973Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.530238Z","response":" are","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.570476Z","response":" playing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.610714Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.65137Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.691463Z","response":"Sc","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.731929Z","response":"av","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.772227Z","response":"enger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.813272Z","response":" Hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.853942Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.894527Z","response":" with","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.935002Z","response":" your","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:46.975443Z","response":" friends","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.016237Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.057136Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.097339Z","response":"In","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.137558Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.17763Z","response":" normal","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.218092Z","response":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.258723Z","response":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.298553Z","response":"like","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.338218Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.377664Z","response":" shopping","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.417048Z","response":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.456339Z","response":"),","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.495833Z","response":" everything","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.535304Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.575172Z","response":" written","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.614562Z","response":" on","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.654093Z","response":" one","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.693353Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.732455Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.771615Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.810896Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.850137Z","response":" You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.889374Z","response":" can","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.928841Z","response":" see","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:47.968327Z","response":" everything","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.008126Z","response":" at","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.04794Z","response":" once","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.087522Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.127024Z","response":" But","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.166335Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.205305Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.244635Z","response":"Linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.284209Z","response":" List","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.32316Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.362583Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.402303Z","response":" different","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.441238Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.480176Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.519113Z","response":"###","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.558114Z","response":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.597388Z","response":" Sc","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.637794Z","response":"av","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.675627Z","response":"enger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.714607Z","response":" Hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.753671Z","response":" Example","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.792623Z","response":" ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.831974Z","response":"🔍","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.871054Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.910041Z","response":"Imagine","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.94896Z","response":" I","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:48.988129Z","response":" give","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.027657Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.067118Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.106177Z","response":" small","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.145701Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.185437Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.224607Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.263856Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.302969Z","response":" It","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.342243Z","response":" says","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.381462Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.421102Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.461119Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.500533Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.539828Z","response":"Your","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.579247Z","response":" first","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.618904Z","response":" prize","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.658911Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.698392Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.737833Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.777321Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.816713Z","response":" candy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.855988Z","response":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.895454Z","response":" Now","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.93513Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:49.97465Z","response":" go","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.014158Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.053767Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.09323Z","response":" Big","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.132924Z","response":" Oak","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.172394Z","response":" Tree","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.211849Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.251663Z","response":" find","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.291624Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.331166Z","response":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.37088Z","response":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.410912Z","response":".\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.450902Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.490766Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.530896Z","response":"You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.57084Z","response":" go","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.610885Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.651461Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.691425Z","response":" Big","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.731589Z","response":" Oak","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.771402Z","response":" Tree","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.811519Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.851821Z","response":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.892264Z","response":" there","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.932832Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:50.973413Z","response":" find","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.013838Z","response":" another","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.053385Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.092996Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.132711Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.172464Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.21219Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.251967Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.291673Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.331312Z","response":"Your","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.371005Z","response":" second","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.410491Z","response":" prize","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.450368Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.490003Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.529576Z","response":" cool","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.569343Z","response":" sticker","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.609827Z","response":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.65046Z","response":" Now","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.690439Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.730713Z","response":" go","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.770519Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.810443Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.850403Z","response":" Red","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.890406Z","response":" Mail","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.930328Z","response":"box","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:51.970361Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.01075Z","response":" find","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.051161Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.091563Z","response":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.13221Z","response":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.172664Z","response":".\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.212872Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.253534Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.294541Z","response":"Then","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.335028Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.375101Z","response":" go","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.416773Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.458769Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.501126Z","response":" Red","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.542573Z","response":" Mail","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.584463Z","response":"box","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.624552Z","response":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.665217Z","response":" find","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.705927Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.746687Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.788376Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.829261Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.86923Z","response":"Your","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.909379Z","response":" third","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.949432Z","response":" prize","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:52.989428Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.029322Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.069219Z","response":" gold","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.109347Z","response":" coin","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.151574Z","response":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.194132Z","response":" This","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.236252Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.277967Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.320311Z","response":" end","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.360752Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.401057Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.441465Z","response":" hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.481556Z","response":".\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.521536Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.562026Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.602488Z","response":"***","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.642977Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.682889Z","response":"###","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.722778Z","response":" How","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.762982Z","response":" this","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.805422Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.847509Z","response":" like","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.887227Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.926943Z","response":" Linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:53.966597Z","response":" List","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.00646Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.047388Z","response":"In","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.088488Z","response":" computer","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.130443Z","response":" talk","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.17154Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.211944Z","response":" each","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.25324Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.293691Z","response":" those","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.334403Z","response":" pieces","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.37512Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.415809Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.45657Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.496921Z","response":" called","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.537456Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.578042Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.618438Z","response":"Node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.6594Z","response":"**.","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.699215Z","response":" ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.739224Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.77935Z","response":"A","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.819411Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.859614Z","response":"Node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.899993Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.940159Z","response":" has","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:54.980594Z","response":" two","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.021199Z","response":" parts","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.061562Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.101848Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.142438Z","response":"1","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.18247Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.224806Z","response":"  ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.266999Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.307739Z","response":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.349513Z","response":" Data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.391128Z","response":":**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.433282Z","response":" This","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.475789Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.518349Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.560667Z","response":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.602548Z","response":"prize","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.642639Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.684285Z","response":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.732171Z","response":"the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.774246Z","response":" candy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.816329Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.858784Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.900749Z","response":" sticker","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.942953Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:55.982926Z","response":" or","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.022608Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.062982Z","response":" coin","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.104788Z","response":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.144996Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.187326Z","response":"2","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.229701Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.271838Z","response":"  ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.314135Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.35619Z","response":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.39749Z","response":" Pointer","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.437577Z","response":":**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.478857Z","response":" This","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.52095Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.563283Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.604718Z","response":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.645192Z","response":"cl","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.686585Z","response":"ue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.727781Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.768681Z","response":" that","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.808964Z","response":" tells","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.849439Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.890732Z","response":" where","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.931823Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:56.972417Z","response":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.01363Z","response":" node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.054336Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.095669Z","response":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.136991Z","response":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.178845Z","response":" Oak","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.220755Z","response":" Tree","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.261543Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.302467Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.343719Z","response":" Mail","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.384765Z","response":"box","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.426543Z","response":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.46806Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.51058Z","response":"Here","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.553145Z","response":" are","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.595341Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.635539Z","response":" few","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.675736Z","response":" more","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.717715Z","response":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.760113Z","response":"grown","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.801567Z","response":"-","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.842054Z","response":"up","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.882208Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.922596Z","response":" words","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:57.963123Z","response":" explained","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.004476Z","response":" simply","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.045803Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.086605Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.128029Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.169393Z","response":"   ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.211141Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.253131Z","response":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.29506Z","response":" Head","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.336565Z","response":":**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.3779Z","response":" This","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.419872Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.461764Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.503703Z","response":" very","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.544398Z","response":" first","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.585867Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.626675Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.668014Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.709836Z","response":" I","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.751245Z","response":" handed","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.792665Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.83443Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.875759Z","response":" If","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.918001Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:58.960891Z","response":" lose","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.00349Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.044814Z","response":" Head","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.085464Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.126979Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.169702Z","response":" can","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.211348Z","response":"'","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.253165Z","response":"t","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.294668Z","response":" start","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.335741Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.376262Z","response":" game","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.416446Z","response":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.456708Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.496925Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.537174Z","response":"   ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.577554Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.617614Z","response":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.657891Z","response":" Tail","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.699668Z","response":":**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.742253Z","response":" This","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.784804Z","response":" is","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.82721Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.867773Z","response":" last","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.908512Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.949253Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:04:59.990353Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.031028Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.071651Z","response":" It","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.112169Z","response":" doesn","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.152809Z","response":"’","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.193084Z","response":"t","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.233629Z","response":" have","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.274131Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.31547Z","response":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.359063Z","response":" pointing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.401943Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.445834Z","response":" another","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.487753Z","response":" location","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.529113Z","response":";","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.569937Z","response":" it","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.611536Z","response":" just","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.652297Z","response":" says","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.693349Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.733683Z","response":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.774494Z","response":"The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.816469Z","response":" End","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.857253Z","response":"!\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.898461Z","response":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.939253Z","response":"In","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:00.980432Z","response":" coding","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.021997Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.063262Z","response":" we","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.105035Z","response":" call","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.147565Z","response":" this","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.189894Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.232467Z","response":"Null","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.275154Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.375892Z","response":").","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.418423Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.460706Z","response":"###","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.50301Z","response":" Why","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.545496Z","response":" not","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.588423Z","response":" just","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.629797Z","response":" use","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.670987Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.712537Z","response":" regular","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.753311Z","response":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.794306Z","response":"?","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.835782Z","response":" ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.877715Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.919698Z","response":"You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:01.962121Z","response":" might","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.00425Z","response":" wonder","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.046462Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.088258Z","response":" *\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.130574Z","response":"Why","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.172514Z","response":" not","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.214865Z","response":" just","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.256718Z","response":" write","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.297817Z","response":" all","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.339546Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.381421Z","response":" prizes","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.423484Z","response":" on","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.465663Z","response":" one","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.507669Z","response":" page","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.550058Z","response":"?\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.592164Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.633895Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.675917Z","response":"Well","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.717474Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.758577Z","response":" imagine","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.799642Z","response":" if","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.841103Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.882783Z","response":" wanted","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.92554Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:02.96701Z","response":" add","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.008554Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.049485Z","response":" new","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.090774Z","response":" prize","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.132719Z","response":" in","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.174346Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.215723Z","response":" middle","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.256747Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.297327Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.338512Z","response":" hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.379378Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.420088Z","response":" ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.460864Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.501594Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.542315Z","response":"With","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.58315Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.624051Z","response":" regular","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.664938Z","response":" list","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.706144Z","response":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.747009Z","response":"like","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.787661Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.828367Z","response":" row","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.869248Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.909839Z","response":" lockers","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.950911Z","response":"):","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:03.991963Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.03285Z","response":" If","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.074175Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.115426Z","response":" want","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.157292Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.198323Z","response":" put","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.239573Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.280582Z","response":" new","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.323082Z","response":" locker","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.365221Z","response":" in","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.406215Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.447684Z","response":" middle","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.489568Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.53167Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.573688Z","response":" have","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.615505Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.657505Z","response":" push","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.698827Z","response":" all","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.741781Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.783159Z","response":" other","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.824229Z","response":" lockers","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.865171Z","response":" down","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.907832Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.949934Z","response":" hallway","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:04.992341Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.034708Z","response":" make","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.076981Z","response":" room","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.120036Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.161908Z","response":" That","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.203817Z","response":"'","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.246272Z","response":"s","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.288672Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.331188Z","response":" lot","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.372896Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.414999Z","response":" work","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.457404Z","response":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.499118Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.541835Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.583983Z","response":"With","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.626079Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.667723Z","response":" Linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.710568Z","response":" List","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.753098Z","response":" (","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.79492Z","response":"the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.836007Z","response":" scavenger","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.876647Z","response":" hunt","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.918983Z","response":"):","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:05.960782Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.003399Z","response":" You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.046381Z","response":" just","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.08945Z","response":" have","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.132023Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.174483Z","response":" change","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.216476Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.259116Z","response":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.301582Z","response":" on","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.343695Z","response":" one","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.385527Z","response":" piece","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.431109Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.473691Z","response":" paper","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.5161Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.558791Z","response":" ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.60085Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.642241Z","response":"If","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.683786Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.724227Z","response":" want","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.764675Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.805131Z","response":" add","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.845655Z","response":" a","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.886177Z","response":" \"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.926806Z","response":"Toy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:06.967695Z","response":" Car","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.008274Z","response":"\"","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.049095Z","response":" between","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.090171Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.131575Z","response":" Candy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.173683Z","response":" and","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.214318Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.256777Z","response":" Sticker","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.299351Z","response":",","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.342258Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.383956Z","response":" just","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.42693Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.469039Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.512089Z","response":"1","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.555296Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.598428Z","response":" Change","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.641343Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.684458Z","response":" Candy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.727034Z","response":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.769351Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.810668Z","response":" point","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.853897Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.895523Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.938568Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:07.979722Z","response":"Toy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.020607Z","response":" Car","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.061456Z","response":"**.","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.101854Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.144022Z","response":"2","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.185938Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.228803Z","response":" Make","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.26988Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.312754Z","response":" Toy","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.355267Z","response":" Car","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.396848Z","response":" clue","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.437934Z","response":" point","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.478934Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.519511Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.560906Z","response":" **","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.602232Z","response":"St","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.643658Z","response":"icker","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.686936Z","response":"**.","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.728738Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.76951Z","response":"You","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.810669Z","response":" didn","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.851967Z","response":"'","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.894265Z","response":"t","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.939482Z","response":" have","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:08.984105Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.025745Z","response":" move","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.068387Z","response":" any","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.111403Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.153614Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.195499Z","response":" other","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.237307Z","response":" prizes","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.27983Z","response":";","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.323532Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.366869Z","response":" just","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.410173Z","response":" changed","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.453327Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.496811Z","response":" directions","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.540862Z","response":"!","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.585115Z","response":"\n\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.628515Z","response":"###","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.672136Z","response":" Summary","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.715755Z","response":" for","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.758293Z","response":" your","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.801653Z","response":" brain","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.845256Z","response":":","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.888879Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.93254Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:09.975278Z","response":"   ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.018715Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.062683Z","response":"Linked","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.106525Z","response":" List","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.149808Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.193239Z","response":" =","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.236594Z","response":" A","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.279395Z","response":" chain","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.322412Z","response":" of","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.365327Z","response":" clues","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.408238Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.450809Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.493116Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.535358Z","response":"   ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.578596Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.621155Z","response":"Node","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.663316Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.705268Z","response":" =","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.747202Z","response":" One","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.790132Z","response":" link","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.832486Z","response":" in","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.874801Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.916761Z","response":" chain","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:10.958884Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.001126Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.043854Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.086131Z","response":"   ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.128266Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.170503Z","response":"Data","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.212964Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.255436Z","response":" =","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.298398Z","response":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.34149Z","response":" stuff","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.384678Z","response":" you","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.428049Z","response":"'","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.472272Z","response":"re","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.51605Z","response":" storing","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.559559Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.602828Z","response":"\n","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.64621Z","response":"*","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.690229Z","response":"   ","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.733115Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.776835Z","response":"Pointer","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.820617Z","response":"**","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.864555Z","response":" =","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.907874Z","response":" The","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.951307Z","response":" direction","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:11.994674Z","response":" to","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:12.039424Z","response":" the","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:12.082104Z","response":" next","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:12.125049Z","response":" link","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:12.167613Z","response":".","done":false}
+{"model":"gemma4:31b","created_at":"2026-10-12T18:05:12.210796Z","response":"","done":true,"done_reason":"stop","context":[2,105,9731,107,98,107,106,107,105,2364,107,70351,496,12809,1694,1262,3904,1133,564,1006,236743,236770,236771,1518,2255,607,614,2591,106,107,105,4368,107,100,45518,108,236829,139,47589,236787,23877,4361,1262,3904,236761,107,236829,139,10206,112427,236787,236743,236770,236771,236772,3704,236772,947,568,91180,3606,5192,236764,120904,186193,236764,951,127481,2180,15569,236764,532,21964,8698,769,107,236829,139,35559,236787,42085,1144,625,563,532,1217,625,4146,236761,108,140,236829,139,236776,12809,1694,563,496,7501,529,4820,236761,107,140,236829,139,7795,3408,568,5335,236768,6097,1262,532,496,5577,568,29977,236768,531,506,2148,3408,236761,107,140,236829,139,1509,236789,236751,6373,840,711,11628,798,152957,528,6571,568,164984,614,3499,769,107,140,236829,139,1509,815,496,1502,568,2834,236768,532,614,1345,568,14170,236786,6455,769,108,140,236829,139,236829,132340,236743,236770,236787,562,2519,9603,568,11947,236764,840,24310,659,4781,6530,236761,3153,236764,611,740,1138,9371,2907,107,140,236829,139,236829,132340,236743,236778,236787,562,145383,26367,9603,568,54133,236888,1599,1586,496,43996,236764,532,600,43996,12630,611,1298,506,2148,886,563,2907,107,140,236829,139,236829,132340,236743,236800,236787,562,7797,529,1331,7046,4916,9603,568,22575,236764,7426,2907,108,140,236829,139,236829,818,8257,9161,149681,2991,737,10394,35605,236761,107,140,236829,139,236829,32258,236743,236770,236787,669,623,4740,3056,236829,799,496,145383,26367,236764,496,623,5335,236775,563,496,6347,529,3627,236761,107,140,236829,139,236829,32258,236743,236778,236787,5774,9603,669,6347,529,3627,815,496,22068,653,496,3618,568,1437,1262,769,107,140,236829,139,236829,32258,236743,236800,236787,669,10297,236786,16556,9603,669,6347,529,3627,992,12630,611,1298,531,817,531,1586,506,2148,6347,529,3627,568,1437,3205,769,107,140,236829,139,236829,32258,236743,236812,236787,669,10901,9603,669,1171,43996,2238,531,506,4155,236761,107,140,236829,139,236829,32258,236743,236810,236787,669,8006,9603,669,1774,43996,600,3189,623,3048,236789,560,8452,506,1345,9332,568,9647,769,108,140,236829,139,236829,22660,149681,9187,607,2613,901,1281,568,5282,496,1694,236768,840,1407,3217,496,12809,1694,563,1607,236761,107,140,236829,139,236829,818,8257,9161,149681,54234,506,145383,26367,8207,236761,107,140,236829,139,236829,3503,30234,149681,148683,623,4740,2098,623,2100,2098,532,623,9272,236775,1699,506,46836,236761,107,140,236829,139,236829,818,623,11355,1083,236829,8922,1161,672,5205,529,496,4841,1694,568,5282,614,3499,20625,568,51613,236786,219656,2432,563,8722,769,6890,506,623,65657,496,7797,236775,653,623,9397,522,496,43996,236775,4317,236761,108,140,236829,139,27252,625,2214,236761,107,140,236829,139,10896,16627,522,573,2307,3755,236761,107,140,236829,139,10896,111730,531,1386,625,40878,35745,236761,101,70895,611,659,5662,496,5213,3900,737,10394,35605,1018,607,822,4690,236761,108,902,496,3867,1694,568,5282,496,10294,1694,779,4326,563,5267,580,886,6347,529,3627,236761,1599,740,1460,4326,657,3622,236761,2024,496,5213,31661,4361,1018,563,1607,236761,108,10354,669,2991,737,10394,35605,14691,236743,246533,108,70895,564,2583,611,496,1944,6347,529,3627,236761,1030,3189,236787,107,1018,236775,11069,1171,22068,563,496,6347,529,29495,236888,4224,236764,817,531,506,9516,20690,18041,531,1586,506,2148,43996,1781,1018,108,3048,817,531,506,9516,20690,18041,236764,532,993,611,1586,2264,6347,529,3627,236787,107,1018,236775,11069,1855,22068,563,496,5427,21088,236888,4224,236764,817,531,506,4855,23296,2566,531,1586,506,2148,43996,1781,1018,108,11407,611,817,531,506,4855,23296,2566,532,1586,236787,107,1018,236775,11069,4168,22068,563,496,5122,14864,236888,1174,563,506,1345,529,506,26367,1781,1018,108,13513,108,10354,2088,672,563,1133,496,23877,4361,108,902,5194,2910,236764,1546,529,1724,9097,529,3627,563,2760,496,5213,4740,84750,236743,108,236776,5213,4740,1018,815,1156,4688,236787,107,236770,236761,138,1018,818,5774,53121,1174,563,506,623,155759,236775,568,1437,29495,236764,506,21088,236764,653,506,14864,769,107,236778,236761,138,1018,818,77802,53121,1174,563,506,623,738,687,236775,600,12630,611,1298,506,2148,5349,563,568,818,20690,18041,236764,506,23296,2566,769,108,8291,659,496,2321,919,623,50599,236772,1048,236775,4171,9696,5181,236787,108,236829,139,1018,818,10901,53121,1174,563,506,1401,1171,6347,529,3627,564,26249,611,236761,1637,611,10382,506,10901,236764,611,740,236789,236745,1502,506,2290,236888,107,236829,139,1018,818,54482,53121,1174,563,506,1774,6347,529,3627,236761,1030,4038,236858,236745,735,496,43996,21561,531,2264,4563,236793,625,1164,3189,236764,623,818,8006,9332,568,902,20446,236764,692,2246,672,5213,9647,1018,769,108,10354,8922,711,1164,1161,496,4841,1694,236881,236743,108,3048,2473,5601,236787,165996,11355,711,1164,4903,784,506,39020,580,886,3104,7462,236829,108,13086,236764,14011,768,611,5048,531,1138,496,861,22068,528,506,6029,529,506,26367,236761,236743,108,1018,3497,496,4841,1694,568,5282,496,2050,529,147765,1473,1018,1637,611,1461,531,2247,496,861,57455,528,506,6029,236764,611,735,531,7671,784,506,1032,147765,1679,506,65537,531,1386,2978,236761,2981,236789,236751,496,2606,529,981,236888,108,1018,3497,496,23877,4361,568,1437,145383,26367,1473,1018,1599,1164,735,531,2352,506,43996,580,886,6347,529,3627,236761,236743,107,2859,611,1461,531,1138,496,623,65585,3331,236775,1534,506,70076,532,506,137976,236764,611,1164,236787,107,236770,236761,14376,506,70076,43996,531,1523,531,506,5213,65585,3331,84750,107,236778,236761,9996,506,22540,3331,43996,1523,531,506,5213,894,13077,84750,108,3048,3782,236789,236745,735,531,2827,1027,529,506,1032,39020,236793,611,1164,6692,506,15232,236888,108,10354,25252,573,822,7875,236787,107,236829,139,1018,31661,4361,1018,578,562,7797,529,57314,236761,107,236829,139,1018,4740,1018,578,3656,3205,528,506,7797,236761,107,236829,139,1018,2100,1018,578,669,7305,611,236789,500,34359,236761,107,236829,139,1018,16556,1018,578,669,5281,531,506,2148,3205,236761],"total_duration":45694159542,"load_duration":11229458,"prompt_eval_count":33,"prompt_eval_cached_count":28,"prompt_eval_duration":118660000,"eval_count":1129,"eval_duration":45536286000}

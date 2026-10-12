@@ -27,27 +27,64 @@ model_list:
     litellm_params: *opus_5_5
 
   - model_name: claude-opus-5[1m]
-    litellm_params: &opus
+    litellm_params: &opus_5
       <<: *bedrock
       model: bedrock/converse/us.anthropic.claude-opus-5
-      model_id: os.environ/BEDROCK_PROFILE_OPUS
+      model_id: os.environ/BEDROCK_PROFILE_OPUS_5
   - model_name: claude-opus-5
-    litellm_params: *opus
+    litellm_params: *opus_5
+
+  - model_name: claude-opus-4-8[1m]
+    litellm_params: &opus_4_8
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-opus-4-8
+      model_id: os.environ/BEDROCK_PROFILE_OPUS_4_8
+  - model_name: claude-opus-4-8
+    litellm_params: *opus_4_8
+
+  - model_name: claude-opus-4-7[1m]
+    litellm_params: &opus_4_7
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-opus-4-7
+      model_id: os.environ/BEDROCK_PROFILE_OPUS_4_7
+  - model_name: claude-opus-4-7
+    litellm_params: *opus_4_7
+
+  - model_name: claude-sonnet-5-5[1m]
+    litellm_params: &sonnet_5_5
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-sonnet-5-5
+      model_id: os.environ/BEDROCK_PROFILE_SONNET_5_5
+  - model_name: claude-sonnet-5-5
+    litellm_params: *sonnet_5_5
 
   - model_name: claude-sonnet-5[1m]
-    litellm_params: &sonnet
+    litellm_params: &sonnet_5
       <<: *bedrock
       model: bedrock/converse/us.anthropic.claude-sonnet-5
-      model_id: os.environ/BEDROCK_PROFILE_SONNET
+      model_id: os.environ/BEDROCK_PROFILE_SONNET_5
   - model_name: claude-sonnet-5
-    litellm_params: *sonnet
+    litellm_params: *sonnet_5
 
-  # no [1m] twin: haiku 4.5 has no 1M-context variant to ask for
+  - model_name: claude-sonnet-4-6[1m]
+    litellm_params: &sonnet_4_6
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-sonnet-4-6
+      model_id: os.environ/BEDROCK_PROFILE_SONNET_4_6
+  - model_name: claude-sonnet-4-6
+    litellm_params: *sonnet_4_6
+
+  # no [1m] twins: no 1M-context haiku variant to ask for in either generation
+  - model_name: claude-haiku-5-5
+    litellm_params:
+      <<: *bedrock
+      model: bedrock/converse/us.anthropic.claude-haiku-5-5
+      model_id: os.environ/BEDROCK_PROFILE_HAIKU_5_5
   - model_name: claude-haiku-4-5
     litellm_params:
       <<: *bedrock
       model: bedrock/converse/us.anthropic.claude-haiku-4-5-20251001-v1:0
-      model_id: os.environ/BEDROCK_PROFILE_HAIKU
+      model_id: os.environ/BEDROCK_PROFILE_HAIKU_4_5
 
   # OpenAI GPT-6 on Bedrock, for comparing against the Claude tiers in the Langfuse playground.
   # Claude Code cannot reach these — it speaks the Anthropic API and ANTHROPIC_DEFAULT_*_MODEL

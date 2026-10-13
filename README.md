@@ -4,9 +4,9 @@ I'm Natalie, an engineer and consultant focused on cybersecurity, developer expe
 
 ### 📝 I write about tech, what I'm working on, and what I'm playing with on [my blog](https://some-natalie.dev).  Here's what I've been up to lately:
 <!-- START_SECTION:latest_posts -->
+1. [Running large language models locally ... simply](https://some-natalie.dev/blog/local-llms):  You don't _own_ it until it's local.  My local AI stack that works without much fiddling and getting _that_ into it, allowing me to focus on building more than operating.
 1. [Four years of writing on the internet](https://some-natalie.dev/blog/four-years):  Four years in, I wrote the least and built the most.  Some thoughts on that trade.
 1. [Reviewing slop and asking for better feedback](https://some-natalie.dev/blog/slop-reviews):  Let's talk about how to ask for feedback on your AI slop without ruining your relationships.  No judgement ... well, not _much_ judgement anyways.
-1. [Bumping vendored dependencies in a repository](https://some-natalie.dev/blog/bump-vendored-deps):  Another episode of jury-rigging Dependabot for the greater good when you can't _unvendor_ a dependecy.
 <!-- END_SECTION:latest_posts -->
 
 ### 💼 Day to day, I work with

@@ -7,5 +7,5 @@ requires-python = ">=3.14"
 dependencies = [
     "black==26.10.0",
     "ollama==0.6.3",
-    "pydantic==2.13.5",
+    "pydantic==2.14.1",
 ]

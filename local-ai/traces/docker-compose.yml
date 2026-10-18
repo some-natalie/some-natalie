@@ -50,7 +50,7 @@ x-langfuse-env: &langfuse-env
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:26.9.12.8
+    image: clickhouse/clickhouse-server:26.9.19.9
     container_name: clickhouse
     restart: unless-stopped
     mem_limit: 4g
@@ -96,7 +96,7 @@ services:
   # pi (and anything else OpenAI-compatible) talks to ollama through here, so the
   # traffic gets traced. pi has no exporter of its own.
   litellm:
-    image: ghcr.io/berriai/litellm:v1.104.2
+    image: ghcr.io/berriai/litellm:v1.106.0
     container_name: litellm
     restart: unless-stopped
     # Measured at ~900 MiB under load, not the ~560 MiB it idles at — 1 GiB left it at 88% and one
@@ -148,7 +148,7 @@ services:
       - ~/.aws/sso:/aws-home/.aws/sso
 
   langfuse-web:
-    image: langfuse/langfuse:4.54.0
+    image: langfuse/langfuse:4.59.0
     container_name: langfuse-web
     restart: unless-stopped
     # Next.js server, ~800 MiB idle. 2 GiB: the UI renders trace payloads that can be MBs each.
@@ -182,7 +182,7 @@ services:
         condition: service_healthy
 
   langfuse-worker:
-    image: langfuse/langfuse-worker:4.54.0
+    image: langfuse/langfuse-worker:4.59.0
     container_name: langfuse-worker
     restart: unless-stopped
     # ~690 MiB idle. 2 GiB — this one does the ingestion batching and S3 blob writes.
@@ -197,7 +197,7 @@ services:
     # incompatible data files, with no automatic pg_upgrade. Chainguard's free tier publishes
     # no major-version tags (`:18` 404s), so a digest is the only way to hold the major.
     # To move majors deliberately: pg_dumpall, bump the digest, trash the volume, restore.
-    image: cgr.dev/chainguard/postgres@sha256:1a417cf464d938b1b1182411416401215af7fbc88395d9b90f7c805e96d639a7 # 18.6
+    image: cgr.dev/chainguard/postgres@sha256:96e59e1ce135958248c762d9e50b2786fd4f6e18910becbab25a247ddfdbeb13 # 18.6
     container_name: langfuse-postgres
     restart: unless-stopped
     # Only metadata (users, projects, keys); the trace volume lives in ClickHouse.

@@ -136,6 +136,10 @@ services:
       - BEDROCK_PROFILE_GPT6_SOL=${BEDROCK_PROFILE_GPT6_SOL:-}
       - BEDROCK_PROFILE_GPT6_LUNA=${BEDROCK_PROFILE_GPT6_LUNA:-}
       - OLLAMA_BASE=${OLLAMA_BASE:-http://host.docker.internal:11434}
+      # AI gateway. One static key for both routes, so these need no SSO mount or sso_guard.
+      - AIGW_API_KEY=${AIGW_API_KEY:-}
+      - AIGW_ANTHROPIC_BASE=${AIGW_ANTHROPIC_BASE:-}
+      - AIGW_OPENAI_BASE=${AIGW_OPENAI_BASE:-}
     volumes:
       - ./litellm-config.yaml:/app/config.yaml:ro
       # Resolved relative to the config file's own directory, so it has to land next to

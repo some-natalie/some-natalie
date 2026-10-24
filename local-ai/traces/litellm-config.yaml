@@ -113,6 +113,36 @@ model_list:
       model: bedrock/converse/us.openai.gpt-6-luna
       model_id: os.environ/BEDROCK_PROFILE_GPT6_LUNA
 
+  # Yet another AI Gateway.  This example carries a static API token or key
+  # instead of SSO credentials, so they are the only models here that survive a lapsed AWS
+  # session — and the only ones that need the VPN, since the gateway host resolves nowhere else.
+  # No model_id: the gateway bills by key, so there is no inference profile to attribute to.
+  #
+  # anthropic/ and openai/ prefixes, not bedrock/: the gateway re-exposes these as plain
+  # Anthropic Messages and OpenAI routes, and api_base points litellm at it rather than at the
+  # vendor. Claude Code can reach the fable entries; it cannot reach gpt-5.6-sol.
+  - model_name: claude-fable-5
+    litellm_params: &aigw_anthropic_fable_5
+      model: anthropic/bedrock:anthropic:anthropic.claude-fable-5
+      api_base: os.environ/AIGW_ANTHROPIC_BASE
+      api_key: os.environ/AIGW_API_KEY
+  - model_name: claude-fable-5[1m]
+    litellm_params: *aigw_anthropic_fable_5
+
+  - model_name: claude-fable-5-1
+    litellm_params: &aigw_anthropic_fable_5_1
+      model: anthropic/bedrock:anthropic:anthropic.claude-fable-5-1
+      api_base: os.environ/AIGW_ANTHROPIC_BASE
+      api_key: os.environ/AIGW_API_KEY
+  - model_name: claude-fable-5-1[1m]
+    litellm_params: *aigw_anthropic_fable_5_1
+
+  - model_name: gpt-5.6-sol
+    litellm_params:
+      model: openai/bedrockmantle:openai:openai.gpt-5.6-sol
+      api_base: os.environ/AIGW_OPENAI_BASE
+      api_key: os.environ/AIGW_API_KEY
+
   # Local ollama, reached on the host rather than in the compose network.
   - model_name: laguna-xs-2.1
     litellm_params:

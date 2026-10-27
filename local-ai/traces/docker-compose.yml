@@ -79,7 +79,7 @@ services:
       start_period: 30s
 
   acp-ui:
-    image: cgr.dev/chainguard/nginx:latest
+    image: cgr.dev/chainguard/nginx@sha256:0b4de0f60ae2295fdc852564d178b5473109baf9fc826fa5eb38a59f930e218e # 1.31.8
     container_name: acp-ui
     restart: unless-stopped
     # nginx serving eight static pages. 64m ran at 73% once the worker cached them; 128m is still
@@ -134,6 +134,7 @@ services:
       - BEDROCK_PROFILE_HAIKU_4_5=${BEDROCK_PROFILE_HAIKU_4_5:-}
       - BEDROCK_PROFILE_GPT6_ASTRA=${BEDROCK_PROFILE_GPT6_ASTRA:-}
       - BEDROCK_PROFILE_GPT6_SOL=${BEDROCK_PROFILE_GPT6_SOL:-}
+      - BEDROCK_PROFILE_GPT6_1_SOL=${BEDROCK_PROFILE_GPT6_1_SOL:-}
       - BEDROCK_PROFILE_GPT6_LUNA=${BEDROCK_PROFILE_GPT6_LUNA:-}
       - OLLAMA_BASE=${OLLAMA_BASE:-http://host.docker.internal:11434}
       # AI gateway. One static key for both routes, so these need no SSO mount or sso_guard.
@@ -220,8 +221,9 @@ services:
       start_period: 30s
 
   langfuse-redis:
-    # :latest is fine here, unlike postgres — no volume, so a major bump costs an empty queue.
-    image: cgr.dev/chainguard/redis:latest
+    # No volume, unlike postgres — a major bump costs an empty queue, so the digest is here for
+    # reproducibility, not to hold a major. Bump it freely.
+    image: cgr.dev/chainguard/redis@sha256:5d928bad6eb7c03bbd3e1d4a4392b43db224e4d97a1b7929903d7cd8fe7a1fb9 # 8.10.3
     container_name: langfuse-redis
     restart: unless-stopped
     # Ingestion queue only. maxmemory below is what bounds the data; mem_limit is the backstop
@@ -242,7 +244,7 @@ services:
       start_period: 10s
 
   langfuse-minio:
-    image: cgr.dev/chainguard/minio:latest
+    image: cgr.dev/chainguard/minio@sha256:113218d9c3d1030eb74b91facc799365d06b6a427a3b842b168163ddd07113fe # RELEASE.2026-10-23T20-06-51Z
     container_name: langfuse-minio
     restart: unless-stopped
     # Object store for event blobs — streams to disk rather than buffering in memory.

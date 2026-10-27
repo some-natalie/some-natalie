@@ -107,6 +107,11 @@ model_list:
       <<: *bedrock
       model: bedrock/converse/us.openai.gpt-6-sol
       model_id: os.environ/BEDROCK_PROFILE_GPT6_SOL
+  - model_name: gpt-6.1-sol
+    litellm_params:
+      <<: *bedrock
+      model: bedrock/converse/us.openai.gpt-6.1-sol
+      model_id: os.environ/BEDROCK_PROFILE_GPT6_1_SOL
   - model_name: gpt-6-luna
     litellm_params:
       <<: *bedrock

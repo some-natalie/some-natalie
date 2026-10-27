@@ -12,7 +12,7 @@ services:
       - OPENAI_API_BASE_URLS=http://host.docker.internal:4141/v1
       - OPENAI_API_KEYS=${LITELLM_MASTER_KEY:?required}
       - RAG_EMBEDDING_ENGINE=ollama
-      - RAG_EMBEDDING_MODEL=nomic-embed-text-v2-moe
+      - RAG_EMBEDDING_MODEL=embeddinggemma-2
       - VECTOR_DB=elasticsearch
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_USERNAME=elastic

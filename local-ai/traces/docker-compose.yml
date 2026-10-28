@@ -111,6 +111,7 @@ services:
       - "127.0.0.1:4141:4000"
     environment:
       - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:?required}
+      - LITELLM_LOG=ERROR
       - LANGFUSE_HOST=http://langfuse-web:3000
       - LANGFUSE_PUBLIC_KEY=${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:?required}
       - LANGFUSE_SECRET_KEY=${LANGFUSE_INIT_PROJECT_SECRET_KEY:?required}
